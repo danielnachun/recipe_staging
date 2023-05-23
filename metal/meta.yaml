@@ -1,0 +1,39 @@
+{% set name = "metal" %}
+{% set version = "2020-05-05" %}
+{% set version_under = version.replace("-", "_") %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version_under }}
+
+source:
+   url: https://github.com/statgen/METAL/archive/refs/tags/{{ version }}.tar.gz
+   sha256: 0ffa2419ca2ab43766e7e6e8c97822c8ce1f5b6233fb5f992d1b1be1955fede7
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - cmake
+    - make
+  host:
+    - zlib
+  run:
+    - libzlib
+
+test:
+  commands:
+    - test -f $PREFIX/bin/metal
+
+about:
+  home: https://github.com/statgen/METAL
+  license: BSD-3-Clause
+  license_file: LICENSE.twister
+  summary: Tool for the meta-analysis of genome-wide association studies
+  dev_url: https://github.com/statgen/METAL
+
+extra:
+  recipe-maintainers:
+    - danielnachun

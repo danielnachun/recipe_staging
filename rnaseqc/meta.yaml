@@ -1,0 +1,41 @@
+{% set name = "rnaseqc" %}
+{% set version = "2.4.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/getzlab/{{ name }}/releases/download/v{{ version }}/{{ name }}.v{{ version }}.full_source.tar.gz
+  sha256: b214151408696430aead56921b255e2b09efe5f6087a68446deae399227a1303
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - make
+  host:
+    - bzip2
+    - xz
+    - zlib
+    - boost-cpp
+  run:
+    - boost-cpp
+
+test:
+  commands:
+    - test -f $PREFIX/bin/rnaseqc
+
+about:
+  home: https://github.com/getzlab/rnaseqc
+  license: BSD-3-Clause
+  license_file: rnaseqc/LICENSE
+  summary: Efficient RNA-seq quality control and quantification for large cohorts
+  dev_url: https://github.com/getzlab/rnaseqc
+
+extra:
+  recipe-maintainers:
+    - danielnachun

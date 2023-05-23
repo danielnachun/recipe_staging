@@ -1,0 +1,58 @@
+{% set name = "gtex-pipeline-rnaseq" %}
+{% set version = "gtex_v8" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  git_url: https://github.com/broadinstitute/gtex-pipeline
+  git_rev: bed31e12a48b25db8b111252e2136b31c64c9e82
+
+build:
+  number: 0
+
+requirements:
+  run:
+    - pytables
+    - numpy
+    - pandas
+    - scipy
+    - pyarrow
+    - pybigwig
+    - matplotlib
+    - seaborn
+    #- bedtools
+    #- kent-tools
+    #- picard 
+    #- samtools 
+    #- rnaseqc 
+    #- rsem 
+    #- star 
+
+test:
+   commands:
+    - python3 ${PREFIX}/bin/aggregate_rnaseqc_metrics.py -h
+    - python3 ${PREFIX}/bin/aggregate_rsem_results.py -h
+    - python3 ${PREFIX}/bin/bam2coverage.py -h
+    - python3 ${PREFIX}/bin/combine_GCTs.py -h
+    - python3 ${PREFIX}/bin/mpileup.py -h
+    - python3 ${PREFIX}/bin/process_star_junctions.py -h
+    - python3 ${PREFIX}/bin/run_MarkDuplicates.py -h
+    - test -f ${PREFIX}/bin/run_RSEM.py
+    - python3 ${PREFIX}/bin/run_STAR.py -h
+    - python3 ${PREFIX}/bin/run_SamToFastq.py -h
+    - python3 ${PREFIX}/bin/run_rnaseqc.py -h
+    - test -f ${PREFIX}/bin/run_bamsync.sh
+
+about:
+  home: https://github.com/broadinstitute/gtex-pipeline
+  license: OTHER
+  license_family: OTHER
+  summary: GTEx & TOPMed data production and analysis pipelines - RNA-seq component
+  doc_url: 
+  dev_url: 
+
+extra:
+  recipe-maintainers:
+    - danielnachun

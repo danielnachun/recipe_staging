@@ -1,0 +1,58 @@
+{% set version = "2.1" %}
+
+package:
+  name: r-flashpcar
+  version: {{ version|replace("-", "_") }}
+
+source:
+  git_url: https://github.com/gabraham/flashpca
+  git_rev: b8044f13607a072125828547684fde8b081d6191
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+    - r-abind
+    - r-bh
+    - r-ggplot2
+    - r-rcpp
+    - r-rcppeigen
+    - r-rspectra
+  host:
+    - r-base=4.2.3
+    - r-abind
+    - r-bh
+    - r-ggplot2
+    - r-rcpp
+    - r-rcppeigen
+    - r-rspectra
+  run:
+    - r-base>=4.2
+    - r-abind
+    - r-bh
+    - r-ggplot2
+    - r-rcpp
+    - r-rcppeigen
+    - r-rspectra
+
+test:
+  commands:
+    - $R -e "library('flashpcaR')"           # [not win]
+    - "\"%R%\" -e \"library('flashpcaR')\""  # [win]
+
+about:
+  home: https://github.com/gabraham/flashpca
+  license: GPL-3.0-or-later
+  license_family: GPL
+  license_file: LICENSE
+  summary: Fast Principal Component Analysis of Large-Scale Genome-Wide Data
+
+extra:
+  recipe-maintainers:
+    - danielnachun

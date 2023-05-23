@@ -1,0 +1,49 @@
+{% set version = "0.2.35" %}
+
+package:
+  name: r-flashier
+  version: {{ version|replace("-", "_") }}
+
+source:
+  git_url: https://github.com/willwerscheid/flashier
+  git_rev: 2d2ec1093a7f04e35fd0ae37cb067770bf0c01fe
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+    - r-ebnm
+    - r-irlba
+    - r-softimpute
+  host:
+    - r-base=4.2.3
+    - r-ebnm
+    - r-irlba
+    - r-softimpute
+  run:
+    - r-base>=4.2
+    - r-ebnm
+    - r-irlba
+    - r-softimpute
+
+test:
+  commands:
+    - $R -e "library('flashier')"           # [not win]
+    - "\"%R%\" -e \"library('flashier')\""  # [win]
+
+about:
+  home: https://github.com/willwerscheid/flashier
+  license: OTHER
+  license_family: OTHER
+  license_file: LICENSE
+  summary: A faster and angrier package for EBMF 
+
+extra:
+  recipe-maintainers:
+    - danielnachun

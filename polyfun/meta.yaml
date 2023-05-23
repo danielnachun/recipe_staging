@@ -1,0 +1,58 @@
+{% set name = "polyfun" %}
+{% set version = "1.0" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  git_url: https://github.com/omerwe/polyfun
+  git_rev: de889bde9ce3d46326fc5ea568b623450f349569
+
+build:
+  number: 0
+
+requirements:
+  run:
+    - bgen==1.2.10
+    - bitarray
+    - dask
+    - deprecated
+    - finemap
+    - networkx
+    - numpy
+    - packaging
+    - pandas
+    - pandas-plink
+    - pip
+    - pyarrow>=3.0
+    - python
+    - r-ckmeans.1d.dp
+    - r-expm
+    - r-lattice
+    - r-matrixstats
+    - r-susier==0.11.92
+    - r-stringi
+    - r-wavethresh
+    - rpy2>=3.5.9
+    - scikit-learn
+    - scipy
+    - tqdm
+    - xarray
+
+test:
+   commands:
+    - python3 ${PREFIX}/bin/test_polyfun.py
+
+about:
+  home: https://github.com/omerwe/polyfun
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: PolyFun (POLYgenic FUNctionally-informed fine-mapping)
+  doc_url: 
+  dev_url: 
+
+extra:
+  recipe-maintainers:
+    - danielnachun

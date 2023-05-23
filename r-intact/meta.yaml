@@ -1,0 +1,44 @@
+{% set version = "0.1.0" %}
+{% set name = "intact" %}
+
+package:
+  name: r-{{ name }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/jokamoto97/INTACT
+  git_rev: 06cffcf1fef44b70347af7e3ef5bd0a6b547c5e2
+
+build:
+  number: 0
+  skip: true # [win]
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.2.2
+    - r-bdsmatrix
+    - r-numderiv
+    - r-squarem
+  run:
+    - r-base>=4.2
+    - r-bdsmatrix
+    - r-numderiv
+    - r-squarem
+
+test:
+  commands:
+    - $R -e "library('INTACT')"           # [not win]
+
+about:
+  home: https://github.com/jokamoto97/INTACT
+  license: None
+  summary: Integrate TWAS and colocalization analysis for gene set enrichment
+
+extra:
+  recipe-maintainers:
+    - danielnachun

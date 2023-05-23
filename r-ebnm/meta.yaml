@@ -1,0 +1,106 @@
+{% set version = '1.0-9' %}
+
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
+
+package:
+  name: r-ebnm
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url:
+    - {{ cran_mirror }}/src/contrib/ebnm_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/ebnm/ebnm_{{ version }}.tar.gz
+  sha256: f870291e0c53ec82e4c44de9c77022da4b94d72c887bf9ac54dfe0caa877ff47
+
+build:
+  merge_build_host: True  # [win]
+  # If this is a new build for the same version, increment the build number.
+  number: 0
+  # no skip
+
+  # This is required to make R link correctly on Linux.
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+# Suggests: testthat, numDeriv, REBayes
+requirements:
+  build:
+    - {{ posix }}zip               # [win]
+
+  host:
+    - r-base=4.2.3
+    - r-ashr
+    - r-deconvolver
+    - r-dplyr
+    - r-ggplot2
+    - r-horseshoe
+    - r-magrittr
+    - r-mixsqp
+    - r-rlang
+    - r-truncnorm
+    - r-trust
+
+  run:
+    - r-base>4.2
+    - r-ashr
+    - r-deconvolver
+    - r-dplyr
+    - r-ggplot2
+    - r-horseshoe
+    - r-magrittr
+    - r-mixsqp
+    - r-rlang
+    - r-truncnorm
+    - r-trust
+
+test:
+  commands:
+    # You can put additional test commands to be run here.
+    - $R -e "library('ebnm')"           # [not win]
+    - "\"%R%\" -e \"library('ebnm')\""  # [win]
+
+  # You can also put a file called run_test.py, run_test.sh, or run_test.bat
+  # in the recipe that will be run at test time.
+
+  # requires:
+    # Put any additional test requirements here.
+
+about:
+  home: https://github.com/stephenslab/ebnm
+  license: GPL-3
+  summary: Provides simple, fast, and stable functions to fit the normal means model using empirical
+    Bayes. For available models and details, see function ebnm(). A comprehensive introduction
+    to the package is provided by Willwerscheid and Stephens (2021) <arXiv:2110.00152>.
+  license_family: GPL3
+  license_file:
+    - '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3'
+
+# The original CRAN metadata for this package was:
+
+# Package: ebnm
+# Encoding: UTF-8
+# Type: Package
+# Version: 1.0-9
+# Date: 2022-03-02
+# Title: Solve the Empirical Bayes Normal Means Problem
+# Authors@R: c(person("Willwerscheid", "Jason", role = "aut"), person("Stephens", "Matthew", role = "aut"), person("Carbonetto", "Peter", role = c("aut", "cre"), email = "peter.carbonetto@gmail.com"), person("Goldstein", "Andrew", role = "ctb"))
+# URL: https://github.com/stephenslab/ebnm
+# BugReports: https://github.com/stephenslab/ebnm/issues
+# Description: Provides simple, fast, and stable functions to fit the normal means model using empirical Bayes. For available models and details, see function ebnm(). A comprehensive introduction to the package is provided by Willwerscheid and Stephens (2021) <arXiv:2110.00152>.
+# License: GPL (>= 3)
+# NeedsCompilation: no
+# Depends: R (>= 3.3.0)
+# Imports: stats, methods, ashr, mixsqp, truncnorm, trust, horseshoe, deconvolveR, magrittr, rlang, dplyr, ggplot2
+# Suggests: testthat, numDeriv, REBayes
+# RoxygenNote: 7.1.2
+# Packaged: 2022-03-03 03:49:45 UTC; pcarbo
+# Author: Willwerscheid Jason [aut], Stephens Matthew [aut], Carbonetto Peter [aut, cre], Goldstein Andrew [ctb]
+# Maintainer: Carbonetto Peter <peter.carbonetto@gmail.com>
+# Repository: CRAN
+# Date/Publication: 2022-03-08 20:10:02 UTC
+
+# See
+# https://docs.conda.io/projects/conda-build for
+# more information about meta.yaml

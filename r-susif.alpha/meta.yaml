@@ -1,0 +1,61 @@
+{% set version = "0.1.212" %}
+
+package:
+  name: r-susif.alpha
+  version: {{ version|replace("-", "_") }}
+
+source:
+  git_url: https://github.com/stephenslab/susif.alpha
+  git_rev: dd4df3668d2ca59dd34a52b6c1b426054a998fbd
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+    - r-ashr
+    - r-wavethresh
+    - r-mixsqp
+    - r-matrixstats
+    - r-ggplot2
+    - r-gridextra
+    - r-laplacesdemon
+  host:
+    - r-base=4.2.3
+    - r-ashr
+    - r-wavethresh
+    - r-mixsqp
+    - r-matrixstats
+    - r-ggplot2
+    - r-gridextra
+    - r-laplacesdemon
+  run:
+    - r-base>=4.2
+    - r-ashr
+    - r-wavethresh
+    - r-mixsqp
+    - r-matrixstats
+    - r-ggplot2
+    - r-gridextra
+    - r-laplacesdemon
+
+test:
+  commands:
+    - $R -e "library('susiF.alpha')"           # [not win]
+    - "\"%R%\" -e \"library('susiF.alpha')\""  # [win]
+
+about:
+  home: https://github.com/stephenslab/susif.alpha
+  license: GPL-3.0-or-later
+  license_family: GPL
+  license_file: LICENSE
+  summary: Draft package for "Sum of Single Functions" method.
+
+extra:
+  recipe-maintainers:
+    - danielnachun

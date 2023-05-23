@@ -1,0 +1,47 @@
+{% set name = "apex" %}
+{% set version = "0.2_alpha" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/corbinq/{{ name }}
+  git_rev: 63b605e00766141693a69eee6d630ad8ec3b9de0
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - {{ compiler('c') }}
+    - binutils
+    - curl
+    - krb5
+    - make
+    - boost
+    - eigen
+    - shrinkwrap
+    - spectralib==0.9.0
+    - taywee-args
+  host:
+    - htslib
+    - xz
+    - zlib
+  run:
+    - htslib
+    - _openmp_mutex
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/corbinq/{{ name }}
+  license: OTHER
+  summary: Toolkit for QTL mapping and meta-analysis.
+
+extra:
+  recipe-maintainers:
+    - danielnachun

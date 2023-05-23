@@ -1,0 +1,44 @@
+{% set name = "liftover" %}
+{% set version = "1.1.16" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: fc1c92ef3279b61a2ccfd8c3cdb9cb4829b11a0f9356d15097c611fc0064fd0f
+
+build:
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
+    - cython
+    - python
+    - zlib
+  run:
+    - cython
+    - python
+    - urllib3
+
+test:
+  imports:
+    - liftover
+
+about:
+  home: https://github.com/jeremymcrae/liftover
+  license: MIT
+  license_family: MIT
+  license_file: 
+  summary: Package for converting between genome build coordinates
+  doc_url: 
+  dev_url: 
+
+extra:
+  recipe-maintainers:
+    - danielnachun

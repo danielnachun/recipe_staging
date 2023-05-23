@@ -1,0 +1,46 @@
+{% set name = "bgen" %}
+{% set version = "1.2.10" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: 10acc957670f5d05b58922d4b922496a8cc333414b3c07923bf113c4684e2964
+
+build:
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - gcc
+  host:
+    - cython
+    - packaging
+    - pip
+    - python
+    - zlib
+  run:
+    - cython
+    - python
+
+test:
+  imports:
+    - bgen
+
+about:
+  home: https://github.com/jeremymcrae/bgen
+  license: MIT
+  license_family: MIT
+  license_file: 
+  summary: Package for loading data from bgen files
+  doc_url: 
+  dev_url: 
+
+extra:
+  recipe-maintainers:
+    - danielnachun

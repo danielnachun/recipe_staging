@@ -1,0 +1,66 @@
+{% set name = "cugg" %}
+{% set version = "0.0.17" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: bbb776842c25b93ce51528925ea43c22f8fc025667ea05474e14fc2d5af3e487
+
+build:
+  number: 0
+  entry_points:
+    - nbdev_build_lib=nbdev.cli:nbdev_build_lib
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - bgen-reader
+    - biopython
+    - dask
+    - liftover
+    - numpy
+    - packaging
+    - pandas
+    - pandas-plink ==2.2.5
+    - pip
+    - pybgen
+    - python
+    - scipy
+    - pytorch
+  run:
+    - bgen-reader
+    - biopython
+    - dask
+    - liftover
+    - nbdev =0.2.40
+    - numpy
+    - packaging
+    - pandas
+    - pandas-plink ==2.2.5
+    - pip
+    - pybgen
+    - python
+    - scipy
+    - pytorch
+
+test:
+  imports:
+    - cugg
+  commands:
+    - nbdev_build_lib --help
+
+about:
+  home: "https://github.com/changebio/cugg/tree/master/"
+  license: Apache Software
+  license_family: APACHE
+  license_file: 
+  summary: "Modules for LD computing, liftover and region extraction"
+  doc_url: 
+  dev_url: 
+
+extra:
+  recipe-maintainers:
+    - danielnachun

@@ -1,0 +1,115 @@
+{% set version = "0.2.9" %}
+
+package:
+  name: r-leafcutter
+  version: {{ version|replace("-", "_") }}
+
+source:
+  git_url: https://github.com/davidaknowles/leafcutter
+  git_rev: 4b24a3c32b9eae7c91f63af80543abf168777285
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+    - bioconductor-dirichletmultinomial
+    - r-bh
+    - r-domc
+    - r-dplyr
+    - r-dt
+    - r-foreach
+    - r-ggplot2
+    - r-gridextra
+    - r-gtable
+    - r-hmisc
+    - r-intervals
+    - r-magrittr
+    - r-optparse
+    - r-r.utils
+    - r-rcpp
+    - r-rcppeigen
+    - r-reshape2
+    - r-rstan
+    - r-rstantools
+    - r-shiny
+    - r-shinycssloaders
+    - r-shinyjs
+    - r-stanheaders
+    - r-stringr
+    - r-tailrank
+  host:
+    - r-base=4.2.3
+    - bioconductor-dirichletmultinomial
+    - r-bh
+    - r-domc
+    - r-dplyr
+    - r-dt
+    - r-foreach
+    - r-ggplot2
+    - r-gridextra
+    - r-gtable
+    - r-hmisc
+    - r-intervals
+    - r-magrittr
+    - r-optparse
+    - r-r.utils
+    - r-rcpp
+    - r-rcppeigen
+    - r-reshape2
+    - r-rstan
+    - r-rstantools
+    - r-shiny
+    - r-shinycssloaders
+    - r-shinyjs
+    - r-stanheaders
+    - r-stringr
+    - r-tailrank
+  run:
+    - r-base>=4.2
+    - bioconductor-dirichletmultinomial
+    - r-bh
+    - r-domc
+    - r-dplyr
+    - r-dt
+    - r-foreach
+    - r-ggplot2
+    - r-gridextra
+    - r-gtable
+    - r-hmisc
+    - r-intervals
+    - r-magrittr
+    - r-optparse
+    - r-r.utils
+    - r-rcpp
+    - r-rcppeigen
+    - r-reshape2
+    - r-rstan
+    - r-rstantools
+    - r-shiny
+    - r-shinycssloaders
+    - r-shinyjs
+    - r-stanheaders
+    - r-stringr
+    - r-tailrank
+
+test:
+  commands:
+    - $R -e "library('leafcutter')"           # [not win]
+    - "\"%R%\" -e \"library('leafcutter')\""  # [win]
+
+about:
+  home: https://github.com/davidaknowles/leafcutter
+  license: GPL-3.0-or-later
+  license_family: GPL
+  license_file: LICENSE
+  summary: Alternative Splicing Quantification, Differential Splicing, Outlier Splicing Detection, and Splicing QTL Mapping
+
+extra:
+  recipe-maintainers:
+    - danielnachun

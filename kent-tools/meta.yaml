@@ -1,0 +1,50 @@
+{% set name = "kent-tools" %}
+{% set version = "438" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/ucscGenomeBrowser/kent/archive/refs/tags/v{{ version }}_base.tar.gz
+  sha256: faeaf46551eae87f4be8f6be4d1ddaa93c1ef6d52419f6a44a4759507f0d672b
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - libpng
+    - mariadb
+    - make
+    - rsync
+    - zlib
+  host:
+    - libpng
+    - mariadb
+    - openssl
+    - util-linux #[linux]
+    - zlib
+  run:
+    - libpng
+    - mariadb
+    - openssl
+    - util-linux #[linux]
+    - libzlib
+
+test:
+  commands:
+    - test -f $PREFIX/bin/bigWigToBedGraph # [not win]
+
+about:
+  home: https://genome.ucsc.edu/
+  license: MIT
+  license_file: LICENSE
+  summary: Utilities for the UCSC Genome Browser
+  dev_url: https://genome.ucsc.edu/
+
+extra:
+  recipe-maintainers:
+    - danielnachun

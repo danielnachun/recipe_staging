@@ -1,0 +1,40 @@
+{% set name = "dap-g" %}
+{% set version = "1.0.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/xqwen/dap
+  git_rev: 875ba40b7b28d6972fb94e6d2fb352ce1aaa92a7
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - make
+    - gxx
+  host:
+    - blas
+    - gsl
+  run:
+    - _openmp_mutex
+    - libopenblas
+    - perl
+
+test:
+  commands:
+    - test -f $PREFIX/bin/dap-g
+    - test -f $PREFIX/bin/ptwas_builder
+
+about:
+  home: https://github.com/xqwen/dap
+  license: AGPL-3.0-or-later
+  summary: Suite of statistical methods to perform genetic association analysis integrating genomic annotations
+
+extra:
+  recipe-maintainers:
+    - danielnachun

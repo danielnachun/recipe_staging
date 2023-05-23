@@ -1,0 +1,55 @@
+{% set version = "0.6-8" %}
+
+package:
+  name: r-flashr
+  version: {{ version|replace("-", "_") }}
+
+source:
+  git_url: https://github.com/stephenslab/flashr
+  git_rev: cbaf810aadc8499a9b5625b36cd0382cc22c711d
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+    - r-ashr
+    - r-ggplot2
+    - r-reshape2
+    - r-softimpute
+    - r-stringi=1.7.12
+  host:
+    - r-base=4.2.3
+    - r-ashr
+    - r-ggplot2
+    - r-reshape2
+    - r-softimpute
+    - r-stringi=1.7.12
+  run:
+    - r-base>=4.2
+    - r-ashr
+    - r-ggplot2
+    - r-reshape2
+    - r-softimpute
+    - r-stringi=1.7.12
+
+test:
+  commands:
+    - $R -e "library('flashr')"           # [not win]
+    - "\"%R%\" -e \"library('flashr')\""  # [win]
+
+about:
+  home: https://github.com/stephenslab/flashr
+  license: BSD-3-clause
+  license_family: BSD
+  license_file: LICENSE
+  summary: Empirical Bayes Matrix Factorization
+
+extra:
+  recipe-maintainers:
+    - danielnachun

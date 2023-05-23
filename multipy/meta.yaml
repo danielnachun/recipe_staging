@@ -1,0 +1,40 @@
+{% set name = "multipy" %}
+{% set version = "0.16" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  git_url: https://github.com/puolival/multipy
+  sha256: ef9d2e2ffd6a7e079e29268dfbd59e630dd346b4
+
+build:
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - numpy
+    - matplotlib
+    - python
+  run:
+    - numpy
+    - matplotlib
+    - python
+
+test:
+  imports:
+    - multipy
+
+about:
+  home: https://github.com/puolival/multipy
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE
+  summary: "Multiple hypothesis testing in Python"
+  dev_url: https://github.com/puolival/multipy
+
+extra:
+  recipe-maintainers:
+    - danielnachun
