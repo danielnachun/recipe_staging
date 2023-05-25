@@ -1,0 +1,47 @@
+name: Upload conda packages to anaconda.org
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    env:
+      ANACONDA_API_TOKEN: ${{ secrets.ANACONDA_API_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Environment variables
+        shell: bash
+        run: |
+          ARTIFACTS_SHA=$(git rev-parse HEAD)
+          BUILD_ARTIFACTS=BuildArtifacts_${ARTIFACTS_SHA}
+          echo "ARTIFACTS_DIR=$ARTIFACTS_DIR" >> $GITHUB_ENV
+
+      - name: Download packages
+        uses: dawid66/action-download-artifact@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          workflow: conda_mambabuild.yml
+          name: ${{ env.BUILD_ARTIFACTS }}
+          path: artifacts
+
+      - name: Set up container with Anaconda client
+        run: |
+          docker run --rm --detach \
+            --name ${{github.sha}} \
+            --workdir /home/conda/packages \
+            --volume $(pwd)/artifacts:/home/conda/artifacts \
+            condaforge/mambaforge \
+            sleep inf
+
+      - name: Install boa
+        run: docker exec ${{github.sha}} mamba install --yes --quiet anaconda-client
+
+      - name: Upload packages
+        run: |
+          docker exec -e ANACONDA_API_TOKEN=${ANACONDA_API_TOKEN} \
+            ${{github.sha}} \
+            /usr/bin/env bash -c "anaconda upload --force /home/conda/artifacts/*.tar.bz2"
