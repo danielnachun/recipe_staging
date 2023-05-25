@@ -3,8 +3,8 @@ name: Build conda package with conda mambabuild
 on:
   pull_request:
     paths:
-      - */build.sh
-      - */meta.yaml
+      - '*/build.sh'
+      - '*/meta.yaml'
 
 jobs:
   build:
@@ -30,7 +30,6 @@ jobs:
 
       - name: Start Docker container
         run: |
-          mkdir conda-packages
           docker run --rm --detach \
             --name ${{github.sha}} \
             --workdir /home/conda/recipes \
@@ -54,6 +53,7 @@ jobs:
         shell: bash
         run: |
           mkdir artifacts
+          ls -la
           find conda-packages/linux-64 -name *.tar.bz2 -exec cp {} artifacts \;
           find conda-packages/noarch -name *.tar.bz2 -exec cp {} artifacts \;
 
