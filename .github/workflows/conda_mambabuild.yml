@@ -53,12 +53,11 @@ jobs:
         shell: bash
         run: |
           mkdir artifacts
-          ls -la
           find conda-packages/linux-64 -name *.tar.bz2 -exec cp {} artifacts \;
           find conda-packages/noarch -name *.tar.bz2 -exec cp {} artifacts \;
 
       - name: Upload packages to GitHub Actions
         uses: actions/upload-artifact@v3
         with:
-          name: Artifacts_${{ env.ARTIFACTS_SHA }}
+          name: Artifacts_${{env.ARTIFACTS_SHA}}
           path: artifacts/*.tar.bz2
