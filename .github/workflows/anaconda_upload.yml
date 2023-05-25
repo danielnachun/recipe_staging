@@ -21,7 +21,7 @@ jobs:
           echo "ARTIFACTS_DIR=$ARTIFACTS_DIR" >> $GITHUB_ENV
 
       - name: Download packages
-        uses: dawid66/action-download-artifact@v2
+        uses: dawidd6/action-download-artifact@v2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           workflow: conda_mambabuild.yml
