@@ -3,6 +3,9 @@ name: Upload conda packages to anaconda.org
 on:
   pull_request:
     types: [closed]
+    paths:
+      - '*/build.sh'
+      - '*/meta.yaml'
 
 jobs:
   upload:
@@ -17,8 +20,8 @@ jobs:
         shell: bash
         run: |
           ARTIFACTS_SHA=$(git rev-parse HEAD)
-          BUILD_ARTIFACTS=BuildArtifacts_${ARTIFACTS_SHA}
-          echo "ARTIFACTS_DIR=$ARTIFACTS_DIR" >> $GITHUB_ENV
+          BUILD_ARTIFACTS=Artifacts_${ARTIFACTS_SHA}
+          echo "BUILD_ARTIFACTS=$BUILD_ARTIFACTS" >> $GITHUB_ENV
 
       - name: Download packages
         uses: dawidd6/action-download-artifact@v2
