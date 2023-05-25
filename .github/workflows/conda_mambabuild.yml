@@ -19,8 +19,8 @@ jobs:
         shell: bash
         run: |
           ARTIFACTS_SHA=$(git rev-parse HEAD)
-          BUILD_ARTIFACTS=BuildArtifacts_${ARTIFACTS_SHA}
-          echo "ARTIFACTS_DIR=$ARTIFACTS_DIR" >> $GITHUB_ENV
+          #BUILD_ARTIFACTS=BuildArtifacts_${ARTIFACTS_SHA}
+          echo "ARTIFACTS_SHA=$ARTIFACTS_SHA" >> $GITHUB_ENV
 
       - name: Get changed directories
         id: changed-directories
