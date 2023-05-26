@@ -28,7 +28,7 @@ jobs:
           dir_names_exclude_root: true
 
       - name: Start Docker container
-        if: steps.changed-directories.any_changed
+        if: steps.changed-directories.any_changed == 'true'
         run: |
           docker run --rm --detach \
             --name ${{github.sha}} \
@@ -38,18 +38,18 @@ jobs:
             sleep inf
 
       - name: Install boa
-        if: steps.changed-directories.any_changed
+        if: steps.changed-directories.any_changed == 'true'
         run: docker exec ${{github.sha}} mamba install --yes --quiet boa
 
       - name: Copy recipes
-        if: steps.changed-directories.any_changed
+        if: steps.changed-directories.any_changed == 'true'
         run: |
           for dir in ${{ steps.changed-directories.outputs.all_changed_files }}; do
             docker cp $dir ${{github.sha}}:/home/conda/recipes
           done
 
       - name: Build conda package
-        if: steps.changed-directories.any_changed
+        if: steps.changed-directories.any_changed == 'true'
         shell: bash
         run: |
           readarray -t conda_channels < .github/conda_channels
@@ -57,7 +57,7 @@ jobs:
           docker exec ${{github.sha}} conda mambabuild ${channel_flags} --output-folder /home/conda/packages .
 
       - name: Move all packages to artifacts directory
-        if: steps.changed-directories.any_changed
+        if: steps.changed-directories.any_changed == 'true'
         shell: bash
         run: |
           mkdir artifacts
@@ -65,7 +65,7 @@ jobs:
           find conda-packages/noarch -name *.tar.bz2 -exec cp {} artifacts \;
 
       - name: Upload packages to GitHub Actions
-        if: steps.changed-directories.any_changed
+        if: steps.changed-directories.any_changed == 'true'
         uses: actions/upload-artifact@v3
         with:
           name: Artifacts_${{env.ARTIFACTS_SHA}}
