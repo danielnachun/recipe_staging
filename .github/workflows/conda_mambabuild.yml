@@ -19,7 +19,6 @@ jobs:
         shell: bash
         run: |
           ARTIFACTS_SHA=$(git rev-parse HEAD)
-          #BUILD_ARTIFACTS=BuildArtifacts_${ARTIFACTS_SHA}
           echo "ARTIFACTS_SHA=$ARTIFACTS_SHA" >> $GITHUB_ENV
 
       - name: Get changed directories
@@ -47,7 +46,11 @@ jobs:
           done
 
       - name: Build conda package
-        run: docker exec ${{github.sha}} conda mambabuild -c dnachun -c conda-forge -c bioconda -c nodefaults --output-folder /home/conda/packages .
+        shell: bash
+        run: |
+          readarray -t conda_channels < .github/conda_channels
+          channel_flags=$(printf -- '-c %s ' ${conda_channels[@]})
+          docker exec ${{github.sha}} conda mambabuild ${channel_flags} --output-folder /home/conda/packages .
 
       - name: Move all packages to artifacts directory
         shell: bash
