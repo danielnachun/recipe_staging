@@ -18,7 +18,7 @@ jobs:
       - name: Environment Variables
         shell: bash
         run: |
-          ARTIFACTS_SHA=$(git rev-parse HEAD)
+          ARTIFACTS_SHA=${{ github.event.pull_request.head.sha }}
           echo "ARTIFACTS_SHA=$ARTIFACTS_SHA" >> $GITHUB_ENV
 
       - name: Get changed directories
