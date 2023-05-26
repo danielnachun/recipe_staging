@@ -32,7 +32,7 @@ jobs:
           if_no_artifact_found: warn
 
       - name: Set up container with Anaconda client
-        if: steps.download-packages.artifact_found
+        if: steps.download-packages.outputs.artifact_found == 'true'
         run: |
           docker run --rm --detach \
             --name ${{github.sha}} \
@@ -42,11 +42,11 @@ jobs:
             sleep inf
 
       - name: Install boa
-        if: steps.download-packages.artifact_found
+        if: steps.download-packages.outputs.artifact_found == 'true'
         run: docker exec ${{github.sha}} mamba install --yes --quiet anaconda-client
 
       - name: Upload packages
-        if: steps.download-packages.artifact_found
+        if: steps.download-packages.outputs.artifact_found == 'true'
         run: |
           docker exec -e ANACONDA_API_TOKEN=${ANACONDA_API_TOKEN} \
             ${{github.sha}} \
