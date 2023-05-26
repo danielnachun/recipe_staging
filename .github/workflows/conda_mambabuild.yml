@@ -3,8 +3,8 @@ name: Build conda package with conda mambabuild
 on:
   pull_request:
     paths:
-      - */build.sh
-      - */meta.yaml
+      - '*/build.sh'
+      - '*/meta.yaml'
 
 jobs:
   build:
@@ -19,8 +19,7 @@ jobs:
         shell: bash
         run: |
           ARTIFACTS_SHA=$(git rev-parse HEAD)
-          BUILD_ARTIFACTS=BuildArtifacts_${ARTIFACTS_SHA}
-          echo "ARTIFACTS_DIR=$ARTIFACTS_DIR" >> $GITHUB_ENV
+          echo "ARTIFACTS_SHA=$ARTIFACTS_SHA" >> $GITHUB_ENV
 
       - name: Get changed directories
         id: changed-directories
@@ -30,7 +29,6 @@ jobs:
 
       - name: Start Docker container
         run: |
-          mkdir conda-packages
           docker run --rm --detach \
             --name ${{github.sha}} \
             --workdir /home/conda/recipes \
@@ -48,7 +46,11 @@ jobs:
           done
 
       - name: Build conda package
-        run: docker exec ${{github.sha}} conda mambabuild -c dnachun -c conda-forge -c bioconda -c nodefaults --output-folder /home/conda/packages .
+        shell: bash
+        run: |
+          readarray -t conda_channels < .github/conda_channels
+          channel_flags=$(printf -- '-c %s ' ${conda_channels[@]})
+          docker exec ${{github.sha}} conda mambabuild ${channel_flags} --output-folder /home/conda/packages .
 
       - name: Move all packages to artifacts directory
         shell: bash
@@ -60,5 +62,5 @@ jobs:
       - name: Upload packages to GitHub Actions
         uses: actions/upload-artifact@v3
         with:
-          name: Artifacts_${{ env.ARTIFACTS_SHA }}
+          name: Artifacts_${{env.ARTIFACTS_SHA}}
           path: artifacts/*.tar.bz2
