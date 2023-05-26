@@ -17,7 +17,7 @@ jobs:
       - name: Environment variables
         shell: bash
         run: |
-          ARTIFACTS_SHA=$(git rev-parse HEAD)
+          ARTIFACTS_SHA=${{ github.event.pull_request.head.sha }}
           BUILD_ARTIFACTS=Artifacts_${ARTIFACTS_SHA}
           echo "BUILD_ARTIFACTS=$BUILD_ARTIFACTS" >> $GITHUB_ENV
 
