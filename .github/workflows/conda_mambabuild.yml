@@ -26,7 +26,6 @@ jobs:
         uses: tj-actions/changed-files@v35
         with: 
           dir_names_exclude_root: true
-          files_ignore: .github/*
 
       - name: Start Docker container
         if: steps.changed-directories.any_changed
