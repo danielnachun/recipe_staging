@@ -37,6 +37,7 @@ jobs:
         uses: tj-actions/changed-files@v36
         with: 
           base_sha: ${{ steps.last_successful_commit_pull_request.outputs.base }}
+          dir_names: true
           dir_names_exclude_root: true
           files: |
             */build.sh
@@ -52,9 +53,11 @@ jobs:
             condaforge/mambaforge \
             sleep inf
 
-      - name: Install boa
+      - name: Install boa and configure channels
         if: steps.changed-directories.outputs.any_changed == 'true'
-        run: docker exec ${{github.sha}} mamba install --yes --quiet boa
+        run: |
+          docker exec ${{github.sha}} mamba install --yes --quiet boa
+          docker exec ${{github.sha}} conda config --append bioconda
 
       - name: Copy recipes
         if: steps.changed-directories.outputs.any_changed == 'true'
@@ -67,9 +70,7 @@ jobs:
         if: steps.changed-directories.outputs.any_changed == 'true'
         shell: bash
         run: |
-          readarray -t conda_channels < .github/conda_channels
-          channel_flags=$(printf -- '-c %s ' ${conda_channels[@]})
-          docker exec ${{github.sha}} conda mambabuild ${channel_flags} --output-folder /home/conda/packages .
+          docker exec ${{github.sha}} conda mambabuild --output-folder /home/conda/packages .
 
       - name: Move all packages to artifacts directory
         if: steps.changed-directories.outputs.any_changed == 'true'
