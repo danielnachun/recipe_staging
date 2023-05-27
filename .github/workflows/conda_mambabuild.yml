@@ -1,4 +1,4 @@
-name: Build conda package with conda mambabuild
+name: Build conda package with conda mambabuild (test change)
 
 on:
   pull_request:
