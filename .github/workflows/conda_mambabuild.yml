@@ -25,6 +25,7 @@ jobs:
         id: changed-directories
         uses: tj-actions/changed-files@v36
         with: 
+          since_last_remote_commit: true
           dir_names_exclude_root: true
           files: |
             */build.sh
