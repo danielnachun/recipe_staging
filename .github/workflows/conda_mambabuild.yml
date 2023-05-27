@@ -1,4 +1,4 @@
-name: Build conda package with conda mambabuild (test change)
+name: Build conda package with conda mambabuild
 
 on:
   pull_request:
@@ -14,6 +14,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Environment Variables
         shell: bash
