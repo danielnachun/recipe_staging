@@ -1,10 +1,6 @@
 name: Build conda package with conda mambabuild (test)
 
 on:
-  push:
-    paths:
-      - '*/build.sh'
-      - '*/meta.yaml'
   pull_request:
     paths:
       - '*/build.sh'
@@ -27,11 +23,20 @@ jobs:
           ARTIFACTS_SHA=${{ github.event.pull_request.head.sha }}
           echo "ARTIFACTS_SHA=$ARTIFACTS_SHA" >> $GITHUB_ENV
 
+      - name: Get branch name
+        id: branch-name
+        uses: tj-actions/branch-names@v5
+
+      - uses: nrwl/nx-set-shas@v3
+        id: last_successful_commit_pull_request
+        with:
+          main-branch-name: ${{ steps.branch-name.outputs.base_ref_branch }} 
+
       - name: Get changed directories
         id: changed-directories
         uses: tj-actions/changed-files@v36
         with: 
-          since_last_remote_commit: true
+          base_sha: ${{ steps.last_successful_commit_pull_request.outputs.base }}
           dir_names_exclude_root: true
           files: |
             */build.sh
