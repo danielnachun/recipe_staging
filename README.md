@@ -15,3 +15,9 @@ Make a fork of this repository.
 You will need to set up a personal Anaconda channel and add an API key for the channel to the repository secrets.  See the [wiki](https://github.com/danielnachun/recipe_staging/wiki/Creating-and-adding-an-Anaconda-API-token-to-the-repository-secrets) for a step-by-step walkthrough.
 
 You will also want to modify the [default channels configuration](https://github.com/danielnachun/recipe_staging/blob/main/.github/conda_channels) to use whatever channels you want.  The order of the channels in this config file determines their precedence for dependency resolution - `mamba` will search for the dependency in the channels in the order they are given in the file.  You should usually leave the last 3 channels as `conda-forge`, `bioconda` and `nodefaults` in that order so that any custom channels you add before them are checked first, that `bioconda` is checked after `conda-forge`, and the legacy `defaults` channels are ignored.
+
+## Adding new packages
+
+To add a new package, clone the repository locally and create a new branch.  Each package recipe should be in its own folder with a `meta.yaml`, and when needed, a `build.sh` script.  Some complex recipes may use multiple shell scripts.
+
+Push the branch to the repository and open a pull request from it.  Once the pull request has been opened, the `conda_mambabuild` workflow will attempt to build the recipes using the `mambaforge` docker image.  If the recipes build successfully, you can merge the pull request to trigger the `anaconda_upload` workflow, which will upload the conda packages to your personal channel.  This is the step that requiers the `ANACONDA_API_TOKEN` secret.
