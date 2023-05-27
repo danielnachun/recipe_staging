@@ -1,6 +1,10 @@
 name: Build conda package with conda mambabuild
 
 on:
+  push:
+    paths:
+      - '*/build.sh'
+      - '*/meta.yaml'
   pull_request:
     paths:
       - '*/build.sh'
