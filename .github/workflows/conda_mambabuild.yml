@@ -57,7 +57,7 @@ jobs:
         if: steps.changed-directories.outputs.any_changed == 'true'
         run: |
           docker exec ${{github.sha}} mamba install --yes --quiet boa
-          docker exec ${{github.sha}} conda config --append bioconda
+          docker exec ${{github.sha}} conda config --append channels bioconda
 
       - name: Copy recipes
         if: steps.changed-directories.outputs.any_changed == 'true'
