@@ -13,11 +13,12 @@ jobs:
       fail-fast: false
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout pull request branch
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      - name: Environment Variables
+      - name: Set environment variables
         shell: bash
         run: |
           ARTIFACTS_SHA=${{ github.event.pull_request.head.sha }}
@@ -27,7 +28,8 @@ jobs:
         id: branch-name
         uses: tj-actions/branch-names@v5
 
-      - uses: nrwl/nx-set-shas@v3
+      - name: Get SHA of last commit to main branch
+        uses: nrwl/nx-set-shas@v3
         id: last_successful_commit_pull_request
         with:
           main-branch-name: ${{ steps.branch-name.outputs.base_ref_branch }} 
@@ -37,6 +39,7 @@ jobs:
         uses: tj-actions/changed-files@v36
         with: 
           base_sha: ${{ steps.last_successful_commit_pull_request.outputs.base }}
+          dir_names: true
           dir_names_exclude_root: true
           files: |
             */build.sh
@@ -52,24 +55,32 @@ jobs:
             condaforge/mambaforge \
             sleep inf
 
-      - name: Install boa
+      - name: Install boa and configure channels
         if: steps.changed-directories.outputs.any_changed == 'true'
-        run: docker exec ${{github.sha}} mamba install --yes --quiet boa
+        run: |
+          docker exec ${{github.sha}} mamba install --yes --quiet boa; \
+            conda config --append channels bioconda; \
+            conda config --append channels nodefaults
 
-      - name: Copy recipes
+          if [ -f .github/custom_channels ]; then
+            readarray -t conda_channels < .github/custom_channels
+            for channel in ${conda_channels[@]}; do
+              docker exec ${{github.sha}} conda config --prepend channels ${channel}
+            done
+          fi
+
+      - name: Copy recipes to container
         if: steps.changed-directories.outputs.any_changed == 'true'
         run: |
           for dir in ${{ steps.changed-directories.outputs.all_changed_files }}; do
-            docker cp $dir ${{github.sha}}:/home/conda/recipes
+            docker cp ${dir} ${{github.sha}}:/home/conda/recipes
           done
 
       - name: Build conda package
         if: steps.changed-directories.outputs.any_changed == 'true'
         shell: bash
         run: |
-          readarray -t conda_channels < .github/conda_channels
-          channel_flags=$(printf -- '-c %s ' ${conda_channels[@]})
-          docker exec ${{github.sha}} conda mambabuild ${channel_flags} --output-folder /home/conda/packages .
+          docker exec ${{github.sha}} conda mambabuild --output-folder /home/conda/packages .
 
       - name: Move all packages to artifacts directory
         if: steps.changed-directories.outputs.any_changed == 'true'
