@@ -14,20 +14,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Environment variables
-        shell: bash
-        run: |
-          ARTIFACTS_SHA=${{ github.event.pull_request.head.sha }}
-          BUILD_ARTIFACTS=Artifacts_${ARTIFACTS_SHA}
-          echo "BUILD_ARTIFACTS=$BUILD_ARTIFACTS" >> $GITHUB_ENV
-
       - name: Download packages
         id: download-packages
         uses: dawidd6/action-download-artifact@v2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           workflow: conda_mambabuild.yml
-          name: ${{ env.BUILD_ARTIFACTS }}
+          name: packages_${{ github.event.pull_request.head.sha }}
           path: artifacts
           if_no_artifact_found: warn
 
