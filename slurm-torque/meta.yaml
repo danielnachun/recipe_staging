@@ -1,0 +1,41 @@
+{% set version = "22.05.4" %}
+
+package:
+  name: slurm
+  version:  {{ version }}
+
+source:
+  url: https://download.schedmd.com/slurm/slurm-{{ version }}.tar.bz2
+  sha256: 868b7f5eb8501b8b52f602253b122ce52fab8b33d1199acce6ba09fd9c2f1945
+
+build:
+  skip: True  # [not linux]
+  number: 1
+
+requirements:
+  run:
+    - perl
+
+test:
+  commands:
+    - test -f $PREFIX/bin/generate_pbs_nodefile.pl
+    - test -f $PREFIX/bin/mpiexec.pl
+    - test -f $PREFIX/bin/pbsnodes.pl
+    - test -f $PREFIX/bin/qalter.pl
+    - test -f $PREFIX/bin/qdel.pl
+    - test -f $PREFIX/bin/qhold.pl
+    - test -f $PREFIX/bin/qrerun.pl
+    - test -f $PREFIX/bin/qrls.pl
+    - test -f $PREFIX/bin/qstat.pl
+    - test -f $PREFIX/bin/qsub.pl
+
+about:
+  home: https://slurm.schedmd.com/
+  summary: 'PBS/Torque interface for SLURM'
+  license: GPL-2.0-only
+  license_family: GPL2
+  license_file: COPYING
+
+extra:
+  recipe-maintainers:
+    - danielnachun
