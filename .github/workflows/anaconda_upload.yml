@@ -41,7 +41,7 @@ jobs:
             condaforge/mambaforge \
             sleep inf
 
-      - name: Install boa
+      - name: Install anaconda-client
         if: steps.download-packages.outputs.found_artifact == 'true'
         run: docker exec ${{github.sha}} mamba install --yes --quiet anaconda-client
 
