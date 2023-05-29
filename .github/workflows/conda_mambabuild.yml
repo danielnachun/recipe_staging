@@ -70,11 +70,7 @@ jobs:
           image: conda_mambabuild
 
       - name: Build conda package
-        container: 
-          image: conda_mambabuild
-          volumes: 
-            - conda-packages:/home/conda/packages
-        run: conda mambabuild --output-folder /home/conda/packages .
+        run: docker run --volume $(pwd)/conda-packages:/home/conda/packages conda_mambabuild conda mambabuild --output-folder /home/conda/packages .
 
       - name: Move all packages to artifacts directory
         run: |
