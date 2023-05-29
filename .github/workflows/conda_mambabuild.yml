@@ -64,7 +64,7 @@ jobs:
           [ -f .github/custom_channels ] && cp .github/custom_channels container_build
 
       - name: Build container
-        uses: redhat-actions/buildah-build
+        uses: redhat-actions/buildah-build@v2
         with:
           containerfiles: container_build/Containerfile
           image: conda_mambabuild
