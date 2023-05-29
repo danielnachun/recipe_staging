@@ -49,41 +49,34 @@ jobs:
       fail-fast: false
 
     steps:
-      - name: Start Docker container
-        run: |
-          docker run --rm --detach \
-            --name ${{github.sha}} \
-            --workdir /home/conda/recipes \
-            --volume $(pwd)/conda-packages:/home/conda/packages \
-            condaforge/mambaforge \
-            sleep inf
+      - name: Checkout pull request branch
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-      - name: Install boa and configure channels
+      - name: Copy files to temp folder
         run: |
-          docker exec ${{github.sha}} mamba install --yes --quiet boa; \
-            conda config --append channels bioconda; \
-            conda config --append channels nodefaults
-
-          if [ -f .github/custom_channels ]; then
-            readarray -t conda_channels < .github/custom_channels
-            for channel in ${conda_channels[@]}; do
-              docker exec ${{github.sha}} conda config --prepend channels ${channel}
-            done
-          fi
-
-      - name: Copy recipes to container
-        run: |
+          mkdir -p container_build/recipes
           for dir in ${{ github.events.setup.outputs.all_changed_files }}; do
-            docker cp ${dir} ${{github.sha}}:/home/conda/recipes
+            cp ${dir} container_build/recipes
           done
+          cp .resources/conda_mambabuild.cf container_build/Containerfile
+          [ -f .github/custom_channels ] && cp .github/custom_channels container_build
+
+      - name: Build container
+        uses: redhat-actions/buildah-build
+        with:
+          containerfiles: container_build/Containerfile
+          image: conda_mambabuild
 
       - name: Build conda package
-        shell: bash
-        run: |
-          docker exec ${{github.sha}} conda mambabuild --output-folder /home/conda/packages .
+        container: 
+          image: conda_mambabuild
+          volumes: 
+            - conda-packages:/home/conda/packages
+        run: conda mambabuild --output-folder /home/conda/packages .
 
       - name: Move all packages to artifacts directory
-        shell: bash
         run: |
           mkdir artifacts
           find conda-packages/linux-64 -name *.tar.bz2 -exec cp {} artifacts \;
