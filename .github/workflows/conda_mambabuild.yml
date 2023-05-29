@@ -7,22 +7,19 @@ on:
       - '*/meta.yaml'
 
 jobs:
-  build:
+  setup:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
+    outputs:
+      changed_directories: ${{ steps.changed-directories.outputs.all_changed_files }}
+      any_changed: ${{ steps.changed-directories.outputs.any_changed }}
 
     steps:
       - name: Checkout pull request branch
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
-      - name: Set environment variables
-        shell: bash
-        run: |
-          ARTIFACTS_SHA=${{ github.event.pull_request.head.sha }}
-          echo "ARTIFACTS_SHA=$ARTIFACTS_SHA" >> $GITHUB_ENV
 
       - name: Get branch name
         id: branch-name
@@ -45,54 +42,57 @@ jobs:
             */build.sh
             */meta.yaml
 
-      - name: Start Docker container
-        if: steps.changed-directories.outputs.any_changed == 'true'
-        run: |
-          docker run --rm --detach \
-            --name ${{github.sha}} \
-            --workdir /home/conda/recipes \
-            --volume $(pwd)/conda-packages:/home/conda/packages \
-            condaforge/mambaforge \
-            sleep inf
+  build_packages:
+    needs: setup
+    if: needs.setup.outputs.any_changed == 'true'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
 
-      - name: Install boa and configure channels
-        if: steps.changed-directories.outputs.any_changed == 'true'
-        run: |
-          docker exec ${{github.sha}} mamba install --yes --quiet boa; \
-            conda config --append channels bioconda; \
-            conda config --append channels nodefaults
+    steps:
+      - name: Checkout pull request branch
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-          if [ -f .github/custom_channels ]; then
-            readarray -t conda_channels < .github/custom_channels
+      - name: Setup micromamba
+        uses: mamba-org/setup-micromamba@v1
+        with:
+          create-args: boa conda-verify
+          init-shell: bash
+
+      - name: Set up working directories
+        run: |
+          mkdir /tmp/recipes
+          mkdir /tmp/packages
+          for dir in ${{ needs.setup.outputs.changed_directories }}; do
+            cp -r ${dir} /tmp/recipes
+          done
+
+      - name: Set up channels
+        shell: bash
+        run: |
+          conda config --append channels bioconda
+          conda config --append channels nodefaults
+          if [ -f .custom_channels ]; then
+            readarray -t conda_channels < .custom_channels
             for channel in ${conda_channels[@]}; do
-              docker exec ${{github.sha}} conda config --prepend channels ${channel}
+              conda config --prepend channels ${channel}
             done
           fi
 
-      - name: Copy recipes to container
-        if: steps.changed-directories.outputs.any_changed == 'true'
-        run: |
-          for dir in ${{ steps.changed-directories.outputs.all_changed_files }}; do
-            docker cp ${dir} ${{github.sha}}:/home/conda/recipes
-          done
-
       - name: Build conda package
-        if: steps.changed-directories.outputs.any_changed == 'true'
         shell: bash
-        run: |
-          docker exec ${{github.sha}} conda mambabuild --output-folder /home/conda/packages .
+        run: conda mambabuild --output-folder /tmp/packages /tmp/recipes
 
       - name: Move all packages to artifacts directory
-        if: steps.changed-directories.outputs.any_changed == 'true'
-        shell: bash
         run: |
-          mkdir artifacts
-          find conda-packages/linux-64 -name *.tar.bz2 -exec cp {} artifacts \;
-          find conda-packages/noarch -name *.tar.bz2 -exec cp {} artifacts \;
+          mkdir /tmp/artifacts
+          find /tmp/packages/linux-64 -name *.tar.bz2 -exec cp {} /tmp/artifacts \;
+          find /tmp/packages/noarch -name *.tar.bz2 -exec cp {} /tmp/artifacts \;
 
       - name: Upload packages to GitHub Actions
-        if: steps.changed-directories.outputs.any_changed == 'true'
         uses: actions/upload-artifact@v3
         with:
-          name: Artifacts_${{env.ARTIFACTS_SHA}}
-          path: artifacts/*.tar.bz2
+          name: packages_${{github.event.pull_request.head.sha}}
+          path: /tmp/artifacts/*.tar.bz2
