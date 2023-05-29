@@ -43,6 +43,7 @@ jobs:
             */meta.yaml
 
   build_packages:
+    needs: setup
     if: github.events.setup.outputs.any_changed == 'true'
     runs-on: ubuntu-latest
     strategy:
