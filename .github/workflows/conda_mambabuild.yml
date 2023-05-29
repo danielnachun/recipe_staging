@@ -54,7 +54,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Copy files to temp folder
+      - name: Copy files to container_build folder
         run: |
           mkdir -p container_build/recipes
           for dir in ${{ github.events.setup.outputs.all_changed_files }}; do
