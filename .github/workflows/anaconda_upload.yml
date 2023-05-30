@@ -28,7 +28,7 @@ jobs:
         if: steps.download-packages.outputs.found_artifact == 'true'
         uses: mamba-org/setup-micromamba@v1
         with:
-          environment_name: anaconda-client
+          environment-name: anaconda-client
           create-args: anaconda-client
           generate-run-shell: true
 
