@@ -68,6 +68,7 @@ jobs:
         uses: redhat-actions/buildah-build@v2
         with:
           context: container_build
+          containerfiles: container_build/Containerfile
           image: conda_mambabuild
 
       - name: Build conda package
