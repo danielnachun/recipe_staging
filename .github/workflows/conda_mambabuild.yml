@@ -60,7 +60,7 @@ jobs:
         with:
           environment-name: boa
           create-args: boa conda-verify
-          init-shell: bash
+          generate-run-shell: true
 
       - name: Set up working directories
         run: |
@@ -71,7 +71,7 @@ jobs:
           done
 
       - name: Set up channels
-        shell: bash
+        shell: micromamba-shell {0}
         run: |
           conda config --append channels bioconda
           conda config --append channels nodefaults
@@ -83,7 +83,7 @@ jobs:
           fi
 
       - name: Build conda package
-        shell: bash
+        shell: micromamba-shell {0}
         run: conda mambabuild --output-folder /tmp/packages /tmp/recipes
 
       - name: Move all packages to artifacts directory
