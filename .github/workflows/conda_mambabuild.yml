@@ -75,6 +75,7 @@ jobs:
         run: |
           podman run \
             --volume $(pwd)/conda-packages:/home/conda/packages \
+            --workdir /home/conda/recipes \
             conda_mambabuild \
             conda mambabuild --output-folder /home/conda/packages .
 
