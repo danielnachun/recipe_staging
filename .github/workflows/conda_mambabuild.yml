@@ -63,7 +63,7 @@ jobs:
             cp -r ${dir} container_build/recipes
           done
           [ -f .github/custom_channels ] && cp .github/custom_channels container_build
-          ls container_build
+          ls container_build/recipes
 
       - name: Build container
         uses: redhat-actions/buildah-build@v2
