@@ -73,9 +73,9 @@ jobs:
 
       - name: Build conda package
         run: |
+          podman run conda_mambabuild /home/conda/recipes
           podman run \
             --volume $(pwd)/conda-packages:/home/conda/packages \
-            --workdir /home/conda/recipes \
             conda_mambabuild \
             conda mambabuild --output-folder /home/conda/packages .
 
