@@ -73,6 +73,7 @@ jobs:
 
       - name: Build conda package
         run: |
+          podman run conda_mambabuild ls /home/conda/recipes
           podman run \
             --volume $(pwd)/conda-packages:/home/conda/packages \
             conda_mambabuild \
