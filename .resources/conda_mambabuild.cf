@@ -1,4 +1,5 @@
 FROM condaforge/mambaforge
+SHELL ["/bin/bash", "-c"]
 
 RUN mamba install --yes --quiet boa
 RUN conda config --append channels bioconda
