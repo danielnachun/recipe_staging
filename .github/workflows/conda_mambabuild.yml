@@ -44,7 +44,7 @@ jobs:
 
   build_packages:
     needs: setup
-    #if: github.events.setup.outputs.any_changed == 'true'
+    if: needs.setup.outputs.any_changed == 'true'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -59,7 +59,7 @@ jobs:
         run: |
           mkdir -p container_build/recipes
           mkdir -p conda-packages
-          for dir in ${{ github.events.setup.outputs.all_changed_files }}; do
+          for dir in ${{ needs.setup.outputs.all_changed_files }}; do
             cp ${dir} container_build/recipes
           done
           [ -f .github/custom_channels ] && cp .github/custom_channels container_build
@@ -73,7 +73,6 @@ jobs:
 
       - name: Build conda package
         run: |
-          podman run conda_mambabuild ls /home/conda/recipes
           podman run \
             --volume $(pwd)/conda-packages:/home/conda/packages \
             conda_mambabuild \
