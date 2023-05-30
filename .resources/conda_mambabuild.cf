@@ -5,7 +5,8 @@ RUN mamba install --yes --quiet boa
 RUN conda config --append channels bioconda
 RUN conda config --append channels nodefaults
 
-COPY recipes custom_channels* /home/conda/
+COPY recipes /home/conda/recipes
+COPY custom_channels* /home/conda/
 RUN if [ -f /home/conda/custom_channels ]; then \
         readarray -t conda_channels < /home/conda/custom_channels; \
         for channel in ${conda_channels[@]}; do \
