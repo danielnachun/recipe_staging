@@ -58,7 +58,7 @@ jobs:
       - name: Setup micromamba
         uses: mamba-org/setup-micromamba@v1
         with:
-          environment-name: base
+          environment-name: boa
           create-args: boa conda-verify
           init-shell: bash
 
