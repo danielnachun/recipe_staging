@@ -55,17 +55,12 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Debug
-        run: |
-          echo "any_changed: ${{ needs.setup.outputs.any_changed }}"
-          echo "changed_directories: ${{ needs.setup.outputs.changed_directories }}"
-
       - name: Set up working directories
         run: |
           mkdir -p container_build/recipes
           mkdir -p conda-packages
           for dir in ${{ needs.setup.outputs.changed_directories }}; do
-            cp ${dir} container_build/recipes
+            cp -r ${dir} container_build/recipes
           done
           [ -f .github/custom_channels ] && cp .github/custom_channels container_build
 
