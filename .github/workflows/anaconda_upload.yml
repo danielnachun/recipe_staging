@@ -28,10 +28,11 @@ jobs:
         if: steps.download-packages.outputs.found_artifact == 'true'
         uses: mamba-org/setup-micromamba@v1
         with:
+          environment_name: anaconda-client
           create-args: anaconda-client
-          init-shell: bash
+          generate-run-shell: true
 
       - name: Upload packages
         if: steps.download-packages.outputs.found_artifact == 'true'
-        shell: bash
+        shell: micromamba-shell {0}
         run: anaconda upload --force /tmp/artifacts/*.tar.bz2
