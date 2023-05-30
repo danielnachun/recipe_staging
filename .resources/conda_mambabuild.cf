@@ -7,10 +7,10 @@ RUN conda config --append channels nodefaults
 RUN mkdir -p /home/conda
 COPY recipes custom_channels* /home/conda
 RUN if $[ -f /home/conda/custom_channels ]; then \
-        readarray -t conda_channels < /home/conda/custom_channels \
+        readarray -t conda_channels < /home/conda/custom_channels; \
         for channel in ${conda_channels[@]}; do \
-            conda config --prepend channels ${channel} \
-        done \
+            conda config --prepend channels ${channel}; \
+        done; \
     fi
 
 WORKDIR /home/conda/recipes
