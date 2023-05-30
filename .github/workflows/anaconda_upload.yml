@@ -14,40 +14,25 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Environment variables
-        shell: bash
-        run: |
-          ARTIFACTS_SHA=${{ github.event.pull_request.head.sha }}
-          BUILD_ARTIFACTS=Artifacts_${ARTIFACTS_SHA}
-          echo "BUILD_ARTIFACTS=$BUILD_ARTIFACTS" >> $GITHUB_ENV
-
       - name: Download packages
         id: download-packages
         uses: dawidd6/action-download-artifact@v2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           workflow: conda_mambabuild.yml
-          name: ${{ env.BUILD_ARTIFACTS }}
-          path: artifacts
+          name: packages_${{ github.event.pull_request.head.sha }}
+          path: /tmp/artifacts
           if_no_artifact_found: warn
 
-      - name: Set up container with Anaconda client
+      - name: Setup micromamba
         if: steps.download-packages.outputs.found_artifact == 'true'
-        run: |
-          docker run --rm --detach \
-            --name ${{github.sha}} \
-            --workdir /home/conda/packages \
-            --volume $(pwd)/artifacts:/home/conda/artifacts \
-            condaforge/mambaforge \
-            sleep inf
-
-      - name: Install anaconda-client
-        if: steps.download-packages.outputs.found_artifact == 'true'
-        run: docker exec ${{github.sha}} mamba install --yes --quiet anaconda-client
+        uses: mamba-org/setup-micromamba@v1
+        with:
+          environment_name: anaconda-client
+          create-args: anaconda-client
+          generate-run-shell: true
 
       - name: Upload packages
         if: steps.download-packages.outputs.found_artifact == 'true'
-        run: |
-          docker exec -e ANACONDA_API_TOKEN=${ANACONDA_API_TOKEN} \
-            ${{github.sha}} \
-            /usr/bin/env bash -c "anaconda upload --force /home/conda/artifacts/*.tar.bz2"
+        shell: micromamba-shell {0}
+        run: anaconda upload --force /tmp/artifacts/*.tar.bz2
