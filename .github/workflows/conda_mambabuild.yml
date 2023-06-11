@@ -69,6 +69,7 @@ jobs:
       - name: Build and export docker containers
         uses: docker/build-push-action@v4
         with:
+          load: true
           file: .github/mambaforge_container.df
           tags: conda_mambabuild:latest
 
