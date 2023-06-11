@@ -1,0 +1,89 @@
+name: Build conda package with conda mambabuild
+
+on:
+  pull_request:
+    paths:
+      - '*/build.sh'
+      - '*/meta.yaml'
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    outputs:
+      changed_directories: ${{ steps.changed-directories.outputs.all_changed_files }}
+      any_changed: ${{ steps.changed-directories.outputs.any_changed }}
+
+    steps:
+      - name: Checkout pull request branch
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Get branch name
+        id: branch-name
+        uses: tj-actions/branch-names@v7
+
+      - name: Get SHA of last commit to main branch
+        uses: nrwl/nx-set-shas@v3
+        id: last_successful_commit_pull_request
+        with:
+          main-branch-name: ${{ steps.branch-name.outputs.base_ref_branch }} 
+
+      - name: Get changed directories
+        id: changed-directories
+        uses: tj-actions/changed-files@v36
+        with: 
+          base_sha: ${{ steps.last_successful_commit_pull_request.outputs.base }}
+          dir_names: true
+          dir_names_exclude_root: true
+          files: |
+            */build.sh
+            */meta.yaml
+
+  build_packages:
+    needs: setup
+    if: needs.setup.outputs.any_changed == 'true'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+
+    steps:
+      - name: Checkout pull request branch
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up working directories
+        run: |
+          mkdir /tmp/recipes
+          mkdir /tmp/packages
+          for dir in ${{ needs.setup.outputs.changed_directories }}; do
+            cp -r ${dir} /tmp/recipes
+          done
+
+      - name: Setup up docker buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build and export docker containers
+        uses: docker/build-push-action@v4
+        with:
+          load: true
+          file: .github/mambaforge_container.df
+          tags: conda_mambabuild:latest
+
+      - name: Build conda package
+        run: docker run --rm --volume /tmp:/tmp conda_mambabuild conda mambabuild --output-folder /tmp/packages /tmp/recipes
+
+      - name: Move all packages to artifacts directory
+        run: |
+          mkdir /tmp/artifacts
+          find /tmp/packages/linux-64 -name *.tar.bz2 -exec cp {} /tmp/artifacts \;
+          find /tmp/packages/noarch -name *.tar.bz2 -exec cp {} /tmp/artifacts \;
+
+      - name: Upload packages to GitHub Actions
+        uses: actions/upload-artifact@v3
+        with:
+          name: packages_${{github.event.pull_request.head.sha}}_linux-64
+          path: /tmp/artifacts/*.tar.bz2
