@@ -76,7 +76,7 @@ jobs:
           conda config --append channels bioconda
           conda config --append channels nodefaults
           if [ -f .custom_channels ]; then
-            xargs --replace=% conda config --prepend channels % < .custom_channels
+            xargs -I % conda config --prepend channels % < .custom_channels
           fi
 
       - name: Build conda package
