@@ -9,7 +9,7 @@ jobs:
     if: github.event.pull_request.merged == true 
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: fasle
+      fail-fast: false
       matrix:
         platform: ["linux-64", "osx-64"]
     env:
