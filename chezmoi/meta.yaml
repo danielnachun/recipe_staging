@@ -1,0 +1,33 @@
+{% set name = "chezmoi" %}
+{% set version = "2.34.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/twpayne/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: d81bb3a9f4632ab27422c05bb243692f1d55e33cae2c55c691f7f0b9248f46cf
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://chezmoi.io
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: Manage your dotfiles across multiple diverse machines, securely
+  dev_url: https://github.com/twpayne/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
