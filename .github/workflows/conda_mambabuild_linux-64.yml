@@ -85,5 +85,5 @@ jobs:
       - name: Upload packages to GitHub Actions
         uses: actions/upload-artifact@v3
         with:
-          name: packages_${{github.event.pull_request.head.sha}}
+          name: packages_${{github.event.pull_request.head.sha}}_linux-64
           path: /tmp/artifacts/*.tar.bz2
