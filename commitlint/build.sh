@@ -10,5 +10,5 @@ npm install -ddd \
     --prefix=${PREFIX}/libexec/${PKG_NAME} \
     ${PKG_NAME}-${PKG_VERSION}.tgz
 
-install -Dd ${PREFIX}/bin
+mkdir -p ${PREFIX}/bin
 ln -sf ${PREFIX}/libexec/${PKG_NAME}/bin/${PKG_NAME} ${PREFIX}/bin
