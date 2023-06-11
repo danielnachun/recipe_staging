@@ -55,13 +55,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup micromamba
-        uses: mamba-org/setup-micromamba@v1
-        with:
-          environment-name: boa
-          create-args: boa conda-verify
-          generate-run-shell: true
-
       - name: Set up working directories
         run: |
           mkdir /tmp/recipes
@@ -70,21 +63,17 @@ jobs:
             cp -r ${dir} /tmp/recipes
           done
 
-      - name: Set up channels
-        shell: micromamba-shell {0}
-        run: |
-          conda config --append channels bioconda
-          conda config --append channels nodefaults
-          if [ -f .custom_channels ]; then
-            readarray -t conda_channels < .custom_channels
-            for channel in ${conda_channels[@]}; do
-              conda config --prepend channels ${channel}
-            done
-          fi
+      - name: Setup up docker buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build and export docker containers
+        uses: docker/build-push-action@v4
+        with:
+          file: .github/mambaforge_container.df
+          tags: conda_mambabuild:latest
 
       - name: Build conda package
-        shell: micromamba-shell {0}
-        run: conda mambabuild --output-folder /tmp/packages /tmp/recipes
+        run: docker run --rm --volume /tmp:/tmp conda_mambabuild conda mambabuild --output-folder /tmp/packages /tmp/recipes
 
       - name: Move all packages to artifacts directory
         run: |
