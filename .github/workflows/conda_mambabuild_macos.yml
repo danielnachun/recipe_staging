@@ -67,7 +67,7 @@ jobs:
           mkdir /tmp/recipes
           mkdir /tmp/packages
           for dir in ${{ needs.setup.outputs.changed_directories }}; do
-            cp -r ${dir} /tmp/recipes
+            cp --recursive ${dir} /tmp/recipes
           done
 
       - name: Set up channels
@@ -76,10 +76,7 @@ jobs:
           conda config --append channels bioconda
           conda config --append channels nodefaults
           if [ -f .custom_channels ]; then
-            conda_channels="${(@f)}$(< .custom_channels)"
-            for channel in ${conda_channels[@]}; do
-              conda config --prepend channels ${channel}
-            done
+            xargs --replace=% conda config --prepend channels % < .custom_channels
           fi
 
       - name: Build conda package
