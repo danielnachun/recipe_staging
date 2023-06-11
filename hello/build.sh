@@ -2,7 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-if [[ "${target_platform}" == darwin-* ]]; then
+if [[ "${target_platform}" == osx-* ]]; then
     LDFLAGS="-liconv"
 fi
 
