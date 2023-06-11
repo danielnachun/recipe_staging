@@ -8,19 +8,23 @@ jobs:
   upload:
     if: github.event.pull_request.merged == true 
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: fasle
+      matrix:
+        platform: ["linux-64", "osx-64"]
     env:
       ANACONDA_API_TOKEN: ${{ secrets.ANACONDA_API_TOKEN }}
 
     steps:
       - uses: actions/checkout@v3
 
-      - name: Download packages
+      - name: Download packages 
         id: download-packages
         uses: dawidd6/action-download-artifact@v2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          workflow: conda_mambabuild.yml
-          name: packages_${{ github.event.pull_request.head.sha }}
+          workflow: conda_mambabuild_${{ matrix.platform }}.yml
+          name: packages_${{ github.event.pull_request.head.sha }}_${{ matrix.platform }}
           path: /tmp/artifacts
           if_no_artifact_found: warn
 
