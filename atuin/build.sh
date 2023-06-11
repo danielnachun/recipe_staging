@@ -9,7 +9,9 @@ cargo-bundle-licenses \
 export SODIUM_USE_PKG_CONFIG=1
 cargo install --locked --root "${PREFIX}" --path atuin
 
-install -Dd ${PREFIX}/etc/bash_completion.d ${PREFIX}/share/fish/vendor_completions.d ${PREFIX}/share/zsh/site-functions
+mkdir -p ${PREFIX}/etc/bash_completion.d/_atuin
+mkdir -p ${PREFIX}/share/fish/vendor_completions.d/atuin 
+mkdir -p ${PREFIX}/share/zsh/site-functions/atuin
 atuin gen-completion --shell bash --out-dir ${PREFIX}/etc/bash_completion.d/atuin
 atuin gen-completion --shell zsh --out-dir ${PREFIX}/share/zsh/site-functions/_atuin
 atuin gen-completion --shell fish --out-dir ${PREFIX}/share/fish/vendor_completions.d/atuin.fish
