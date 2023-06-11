@@ -1,0 +1,39 @@
+{% set name = "angle-grinder" %}
+{% set version = "0.19.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/rcoh/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 3a5637bbd3ef3fc2f8164a1af90b8894f79c1b2adb89a874f1f3c5a56006e18b
+
+build:
+  number: 0
+  skip: true  # [win]
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+    - make
+
+test:
+  commands:
+    - agrind --help
+
+about:
+  home: https://github.com/rcoh/{{ name }}
+  license: MIT
+  license_family: MIT
+  license_file: 
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Slice and dice log files on the command-line
+  dev_url: https://github.com/rcoh/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
