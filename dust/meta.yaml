@@ -1,0 +1,38 @@
+{% set name = "dust" %}
+{% set version = "0.8.6" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/bootandy/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: feede818e814011207c5bfeaf06dd9fc95825c59ab70942aa9b9314791c5d6b6
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}              # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/bootandy/{{ name }}
+  license: Apache 2.0
+  license_family: APACHE
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: More intuitive version of du in rust
+  dev_url: https://github.com/bootandy/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
