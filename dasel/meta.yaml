@@ -1,0 +1,33 @@
+{% set name = "dasel" %}
+{% set version = "2.3.4" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/TomWright/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 7c9a2f41d02f4d1717dcf0d9fb4b977308da89c074d2abcf064adf00980e5d0d
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/TomWright/{{ name }}
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: JSON, YAML, TOML, XML, and CSV query and modification tool
+  dev_url: https://github.com/TomWright/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
