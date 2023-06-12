@@ -1,0 +1,42 @@
+{% set name = "dtrx" %}
+{% set version = "8.5.3" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: eec67869b85068fac8406f5018d781aee5b55422f3b7698bfea43468b2cec67c
+
+build:
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - bzip2
+    - p7zip
+    - pip
+    - python
+    - unzip
+    - xz
+  run:
+    - bzip2
+    - p7zip
+    - python
+    - unzip
+    - xz
+
+about:
+  home: The package home page
+  license: "GNU General Public (GPL)"
+  license_family: LGPL
+  license_file: 
+  summary: "Script to intelligently extract multiple archive types"
+  doc_url: 
+  dev_url: 
+
+extra:
+  recipe-maintainers:
+    - danielnachun
