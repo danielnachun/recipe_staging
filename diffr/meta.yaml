@@ -1,0 +1,37 @@
+{% set name = "diffr" %}
+{% set version = "0.1.4" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/mookid/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 2613b57778df4466a20349ef10b9e022d0017b4aee9a47fb07e78779f444f8cb
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/mookid/{{ name }}
+  license: MIT
+  license_family: MIT
+  license_file:
+    - LICENSE.txt
+    - THIRDPARTY.yml
+  summary: LCS based diff highlighting tool to ease code review from your terminal
+  dev_url: https://github.com/mookid/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
