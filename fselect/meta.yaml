@@ -1,0 +1,37 @@
+{% set name = "fselect" %}
+{% set version = "0.8.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/jhspetersson/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: 2b8e8b40ef490663239f3a24f9383fd5b832530e96513d58755b688b507d876e
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/jhspetersson/{{ name }}
+  license: MIT
+  license_family: MIT
+  license_file:
+    - LICENSE-MIT
+    - THIRDPARTY.yml
+  summary: Find files with SQL-like queries
+  dev_url: https://github.com/jhspetersson/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
