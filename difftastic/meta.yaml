@@ -1,0 +1,38 @@
+{% set name = "difftastic" %}
+{% set version = "0.47.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/Wilfred/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
+  sha256: ebbc0840da679573ea4f6a4fb5198b422550e8b6d3bb46cdcf019b777d08ea60
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - difft --help
+
+about:
+  home: https://github.com/Wilfred/{{ name }}
+  license: MIT
+  license_family: MIT
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Diff that understands syntax
+  dev_url: https://github.com/Wilfred/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
