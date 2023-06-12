@@ -1,0 +1,37 @@
+{% set name = "fblog" %}
+{% set version = "4.4.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/brocode/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 5ac8beb5885359744f84fccd6d941d682842ed32ee0e229dc8edd2b183ce0667
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/brocode/{{ name }}
+  license: WTFPL
+  license_family: OTHER
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Small command-line JSON log viewer
+  dev_url: https://github.com/brocode/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
