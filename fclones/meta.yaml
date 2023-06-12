@@ -1,0 +1,37 @@
+{% set name = "fclones" %}
+{% set version = "0.31.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/pkolaczk/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 9c006cfd23f09315fb2cfedf6c4204986d39560b30f02f782b531f13b3df82e5
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/pkolaczk/{{ name }}
+  license: MIT
+  license_family: MIT
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Efficient Duplicate File Finder
+  dev_url: https://github.com/pkolaczk/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
