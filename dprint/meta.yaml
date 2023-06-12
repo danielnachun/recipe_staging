@@ -1,0 +1,37 @@
+{% set name = "dprint" %}
+{% set version = "0.34.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/{{ name }}/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: df67b9fcdfb1ad429737e321b2e6263e68301725948862df1b315f3cad8ede1f
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://{{ name }}.dev
+  license: MIT
+  license_family: MIT
+  license_file: 
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Pluggable and configurable code formatting platform written in Rust
+  dev_url: https://github.com/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
