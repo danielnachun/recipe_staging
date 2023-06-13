@@ -1,0 +1,37 @@
+{% set name = "git-cliff" %}
+{% set version = "1.2.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/orhun/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 10db6fd8fe777f384de2e00336b1cb664095a2f068526f8ace4e7944a7ada270
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/orhun/{{ name }}
+  license: GPL v3 or later
+  license_family: GPL
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Highly customizable changelog generator
+  dev_url: https://github.com/orhun/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
