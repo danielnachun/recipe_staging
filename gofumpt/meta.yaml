@@ -1,0 +1,32 @@
+{% set name = "gofumpt" %}
+{% set version = "0.5.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/mvdan/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: ba1fd89dd5a36a5443c879cd084b5626d3f8704000ec53c0d1cf5276af2bfa86
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/mvdan/{{ name }}
+  license: BSD 3 Clause
+  license_family: BSD
+  summary: Stricter gofmt
+  dev_url: https://github.com/mvdan/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
