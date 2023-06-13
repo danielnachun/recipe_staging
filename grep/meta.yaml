@@ -1,0 +1,38 @@
+{% set name = "grep" %}
+{% set version = "3.11" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://ftp.gnu.org/gnu/grep/grep-{{ version }}.tar.xz
+  sha256: 1db2aedde89d0dea42b16d9528f894c8d15dae4e190b59aecc78f5a951276eab
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+    - pcre2
+  host:
+    - pcre2
+  run:
+    - pcre2
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://www.gnu.org/software/{{ name }}
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  summary: GNU grep, egrep and fgrep
+  dev_url: https://savannah.gnu.org/projects/{{ name }}/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
