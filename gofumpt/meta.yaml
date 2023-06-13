@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/mvdan/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: ba1fd89dd5a36a5443c879cd084b5626d3f8704000ec53c0d1cf5276af2bfa86
+  sha256: e27f04b8b5619747ebfb955699d6895c1e4c7c5e4478507ca4e2d8b658b8b51c
 
 build:
   number: 0
