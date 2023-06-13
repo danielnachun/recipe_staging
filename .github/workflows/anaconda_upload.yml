@@ -26,6 +26,7 @@ jobs:
           workflow: conda_mambabuild_${{ matrix.platform }}.yml
           name: packages_${{ github.event.pull_request.head.sha }}_${{ matrix.platform }}
           path: /tmp/artifacts
+          search_artifacts: true
           if_no_artifact_found: warn
 
       - name: Setup micromamba
