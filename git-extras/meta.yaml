@@ -1,0 +1,37 @@
+{% set name = "git-extras" %}
+{% set version = "7.0.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/tj/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: 3adcbc247d6cb78dc58cace22e9ad789cd6f5061522516660dfb59cc6ec08def
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - make
+  host:
+    - util-linux #[linux]
+  run:
+    - util-linux #[linux]
+
+test:
+  commands:
+    - test -f ${PREFIX}/bin/git-root
+
+about:
+  home: https://github.com/tj/{{ name }}
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: Small git utilities
+  dev_url: https://github.com/tj/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
