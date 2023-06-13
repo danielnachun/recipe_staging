@@ -1,0 +1,40 @@
+{% set name = "global" %}
+{% set version = "6.6.10" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://ftp.gnu.org/gnu/global/global-{{ version }}.tar.gz
+  sha256: 2dd1e6a945e93c01390fb941a4e694f4c71bbd7569d64149c04e927bbf4dcce8
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - libtool
+    - make
+  host:
+    - ncurses
+    - sqlite
+  run:
+    - universal-ctags
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://www.gnu.org/software/{{ name }}
+  license: GPLv3 or later
+  license_family: GPL
+  license_file: LICENSE
+  summary: Source code tag system
+  dev_url: https://www.gnu.org/software/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
