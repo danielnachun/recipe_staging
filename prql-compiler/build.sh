@@ -10,7 +10,7 @@ cargo-bundle-licenses \
 cargo install --locked --root ${PREFIX} --path prql-compiler/prqlc
 
 # strip debug symbols
-"$STRIP" "$PREFIX/bin/${PKG_NAME}"
+"$STRIP" "$PREFIX/bin/prqlc"
 
 # remove extra build file
 rm -f "${PREFIX}/.crates.toml"
