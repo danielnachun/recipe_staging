@@ -1,0 +1,44 @@
+{% set name = "starship" %}
+{% set version = "1.15.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/starship/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: e525476cf93d3a06332abf9e02415d4789fac6f28e4b7d98db7d83da08231828
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+    - cmake
+    - make
+    - sysroot_linux-64=2.17  #[linux]
+  host:
+    - dbus #[not win]
+    - zlib
+  run:
+    - dbus #[not win]
+    - libzlib
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://starship.rs
+  license: ISC
+  license_family: OTHER
+  license_file: LICENSE
+  summary: Cross-shell prompt for astronauts
+  dev_url: https://github.com/{{ name }}/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
