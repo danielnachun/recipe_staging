@@ -1,5 +1,5 @@
 {% set name = "rust-analyzer" %}
-{% set version = "2023-06-05" %}
+{% set version = "2023_06_05" %}
 {% set version_dash = version.replace("_", "-") %}
 
 package:
