@@ -1,0 +1,33 @@
+{% set name = "moar" %}
+{% set version = "1.15.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/walles/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 45374ead069d9aa797b329a633241e3de07625242d951be49dbdd959c6c60153
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/walles/{{ name }}
+  license: BSD 2 clause
+  license_family: BSD
+  license_file: LICENSE
+  summary: Nice to use pager for humans
+  dev_url: https://github.com/walles/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
