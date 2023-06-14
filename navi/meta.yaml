@@ -1,0 +1,40 @@
+{% set name = "navi" %}
+{% set version = "2.22.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/denisidoro/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: a728ad6b6e18abe27ca2190983bedca719e46462007e61bedbc50fc9d15b89a5
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+  host:
+    - zlib
+  run:
+    - fzf
+    - libzlib
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/denisidoro/{{ name }}
+  license: Apache 2.0
+  license_family: Apache
+  license_file: LICENSE
+  summary: Interactive cheatsheet tool for the command-line
+  dev_url: https://github.com/denisidoro/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
