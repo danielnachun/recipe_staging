@@ -1,0 +1,35 @@
+{% set name = "zellij" %}
+{% set version = "0.36.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/zellij-org/{{ name }}/archive/v{{ version}}.tar.gz
+  sha256: df64fa143c10f3c7c3e53befeb6ab3b8f08c220f3cf6331cfc6faa2aa779b6b1
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://zellij.dev
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE.md
+  summary: Pluggable terminal workspace, with terminal multiplexer as the base feature
+  dev_url: https://github.com/{{ name }}-org/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
