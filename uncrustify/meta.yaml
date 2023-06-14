@@ -1,0 +1,36 @@
+{% set name = "uncrustify" %}
+{% set version = "0.77.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  - url: https://github.com/{{ name }}/{{ name }}/archive/{{ name }}-{{ version }}.tar.gz
+    sha256: 414bbc9f7860eb18a53074f9af14ed04638a633b2216a73f2629291300d37c1b
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - cmake
+    - ninja
+    - python
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://uncrustify.sourceforge.io
+  license: GPL v2 or later
+  license_family: GPL
+  license_file: COPYING
+  summary: Source code beautifier
+  dev_url: https://github.com/{{ name }}/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
