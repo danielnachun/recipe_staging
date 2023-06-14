@@ -1,0 +1,42 @@
+{% set name = "nushell" %}
+{% set version = "0.81.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/{{ name }}/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: 7618f98c0ad7d824e8899351c394e77df1ca72f440a80f854b215a7a581fa2be
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+  host:
+    - openssl
+    - zlib
+    - xorg-libx11 #[linux]
+    - xorg-libxcb #[linux]
+  run:
+    - openssl
+
+test:
+  commands:
+    - nu --version
+
+about:
+  home: https://www.nushell.sh
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: Modern shell for the GitHub era
+  dev_url: https://github.com/{{ name }}/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
