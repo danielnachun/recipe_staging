@@ -18,6 +18,7 @@ requirements:
     - {{ compiler('c') }}
     - cargo-bundle-licenses
     - make
+    - pkg-config
   host:
     - curl
     - git
