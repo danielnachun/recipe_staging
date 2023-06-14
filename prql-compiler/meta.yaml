@@ -20,7 +20,7 @@ requirements:
 
 test:
   commands:
-    - {{ name }} --help
+    - prqlc --help
 
 about:
   home: https://prql-lang.org
