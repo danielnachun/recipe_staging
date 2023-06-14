@@ -1,0 +1,36 @@
+{% set name = "rust-analyzer" %}
+{% set version = "2023-06-05" %}
+{% set version_dash = version.replace("_", "-") %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/rust-lang/{{ name }}.git
+  git_rev: {{ version_dash }}
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://rust-analyzer.github.io/
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE-MIT
+  summary: Experimental Rust compiler front-end for IDEs
+  dev_url: https://github.com/rust-lang/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
