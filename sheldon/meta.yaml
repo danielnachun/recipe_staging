@@ -1,0 +1,44 @@
+{% set name = "sheldon" %}
+{% set version = "0.7.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/rossmacarthur/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: cf8844dce853156d076a6956733420ad7a9365e16a928e419b11de8bc634fc67
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+    - pkg-config
+  host:
+    - curl
+    - openssl
+    - zlib
+  run:
+    - libcurl
+    - libzlib
+    - openssl
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://sheldon.cli.rs
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE-MIT
+  summary: Fast, configurable, shell plugin manager
+  dev_url: https://github.com/rossmacarthur/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
