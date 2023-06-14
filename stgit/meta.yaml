@@ -1,0 +1,44 @@
+{% set name = "stgit" %}
+{% set version = "2.3.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/stacked-git/{{ name }}/releases/download/v{{ version }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 365aee4f6b301568e991901022fe0d908768840e7070efbb04512bd6fd9d5523
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+    - make
+  host:
+    - curl
+    - git
+    - zlib
+  run:
+    - libcurl
+    - git
+    - libzlib
+
+test:
+  commands:
+    - stg --help
+
+about:
+  home: https://stacked-git.github.io
+  license: GPL v2 only
+  license_family: GPL
+  license_file: COPYING
+  summary: Manage Git commits as a stack of patches
+  dev_url: https://github.com/stacked-git/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
