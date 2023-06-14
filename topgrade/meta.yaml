@@ -1,0 +1,35 @@
+{% set name = "topgrade" %}
+{% set version = "11.0.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/topgrade-rs/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 29cd1d870dafbfa46d07c4056ba229a98755660a2e37804f12e1507fdde7d237
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/topgrade-rs/{{ name }}
+  license: GPL v3 or later
+  license_family: GPL
+  license_file: LICENSE
+  summary: Upgrade all the things
+  dev_url: https://github.com/topgrade-rs/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
