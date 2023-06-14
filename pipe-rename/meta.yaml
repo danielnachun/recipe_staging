@@ -1,0 +1,34 @@
+{% set name = "pipe-rename" %}
+{% set version = "1.6.4" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/marcusbuffett/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
+  sha256: f1ab9aff5a381b397916e3ffdd9d496785c2b015a6f244445eba569a31fbada0
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - renamer --help
+
+about:
+  home: https://github.com/marcusbuffett/{{ name }}
+  license: MIT
+  license_family: MIT
+  summary: Rename your files using your favorite text editor
+  dev_url: https://github.com/marcusbuffett/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
