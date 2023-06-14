@@ -1,0 +1,35 @@
+{% set name = "yaml-language-server" %}
+{% set version = "1.13.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://registry.npmjs.org/yaml-language-server/-/{{ name }}-{{ version }}.tgz
+  sha256: 814b90421009b951319daee5bdad4c7084ffbddcfd4ad6b2de8e5aa92c138b87
+
+build:
+  number: 0
+
+requirements:
+  build:
+  host:
+    - nodejs
+  run:
+    - nodejs
+
+test:
+  commands:
+    - test -f ${PREFIX}/bin/{{ name }}
+
+about:
+  home: https://github.com/redhat-developer/{{ name }}
+  license: MIT
+  license_family: MIT
+  summary: Language Server for Yaml Files
+  dev_url: https://github.com/redhat-developer/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
