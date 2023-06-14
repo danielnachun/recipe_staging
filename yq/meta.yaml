@@ -1,0 +1,34 @@
+{% set name = "go-yq" %}
+{% set version = "4.34.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/mikefarah/yq/archive/v{{ version }}.tar.gz
+  sha256: 69ff6f8bbb5f9eff5ccb537597740d24200db201b2709e442ae5effdbcb8ff9d
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+    - pandoc
+
+test:
+  commands:
+    - yq --help
+
+about:
+  home: https://github.com/mikefarah/{{ name }}
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: Process YAML, JSON, XML, CSV and properties documents from the CLI
+  dev_url: https://github.com/mikefarah/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
