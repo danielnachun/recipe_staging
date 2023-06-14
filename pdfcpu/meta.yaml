@@ -1,0 +1,33 @@
+{% set name = "pdfcpu" %}
+{% set version = "0.4.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/pdfcpu/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 597421ef2df28a7d85ff1d1d04a9be3c3128d53e08ecc675461809d0a3dc9ef8
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - {{ name }} help
+
+about:
+  home: https://github.com/pdfcpu/{{ name }}
+  license: Apache 2.0
+  license_family: Apache
+  license_file: LICENSE.txt
+  summary: PDF processor written in Go
+  dev_url: https://github.com/pdfcpu/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
