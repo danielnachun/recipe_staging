@@ -1,0 +1,33 @@
+{% set name = "murex" %}
+{% set version = "4.1.7300" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/lmorg/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: a04e01a2b0d7c70e8dd5e671dccd5009646d0a4276556fca790add3d7d7853ec
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - {{ name }} -v
+
+about:
+  home: https://murex.rocks
+  license: GPL v2 only
+  license_family: GPL
+  license_file: LICENSE
+  summary: Bash-like shell designed for greater command-line productivity and safer scripts
+  dev_url: https://github.com/lmorg/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
