@@ -1,0 +1,35 @@
+{% set name = "tagref" %}
+{% set version = "1.8.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/stepchowfun/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 72c5b78619561b22b7079a1d6286a27f9c0dcb258f2da53367a1a886070234b3
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/stepchowfun/{{ name }}
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE.md
+  summary: Refer to other locations in your codebase
+  dev_url: https://github.com/stepchowfun/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
