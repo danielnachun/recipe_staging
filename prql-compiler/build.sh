@@ -7,7 +7,7 @@ cargo-bundle-licenses \
     --output THIRDPARTY.yml
 
 # build statically linked binary with Rust
-cargo install --locked --root ${PREFIX} --path prql-compiler
+cargo install --locked --root ${PREFIX} --path prql-compiler/prqlc
 
 # strip debug symbols
 "$STRIP" "$PREFIX/bin/${PKG_NAME}"
