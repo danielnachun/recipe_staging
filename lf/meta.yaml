@@ -1,0 +1,33 @@
+{% set name = "lf" %}
+{% set version = "r30" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/gokcehan/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: 6f8bc88797710926867a74f3ef68e408e05758bb399266d2841bf0d341d4c146
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://godoc.org/github.com/gokcehan/{{ name }}
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: Terminal file manager
+  dev_url: https://github.com/gokcehan/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
