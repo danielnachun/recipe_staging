@@ -1,0 +1,36 @@
+{% set name = "less" %}
+{% set version = "633" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://www.greenwoodsoftware.com/less/less-{{ version }}.tar.gz 
+  sha256: 09a8bf5acd15f5d6e665da063f834d4639a2b9f02cbef1fa6c389feb8d512079
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+  host:
+    - ncurses
+    - pcre2
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://www.greenwoodsoftware.com/less/index.html
+  license: GPL-3.0-or-later
+  license_file: LICENSE
+  summary: Pager program similar to more
+  dev_url: https://github.com/gwsw/less
+
+extra:
+  recipe-maintainers:
+    - danielnachun
