@@ -1,0 +1,41 @@
+{% set name = "pspg" %}
+{% set version = "5.7.7" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/okbob/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: 2f31ab6dbcd879ad1f6a804d2026296aae830db7a6f4577fdb2a4f18fc89ee8e
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+  host:
+    - libpq
+    - ncurses
+    - readline
+  run: 
+    - libpq
+    - ncurses
+    - readline
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/okbob/{{ name }}
+  license: BSD-2-Clause
+  license_file: LICENSE
+  summary: Unix pager optimized for psql
+  dev_url: https://github.com/okbob/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
