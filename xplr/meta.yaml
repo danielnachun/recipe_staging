@@ -1,0 +1,36 @@
+{% set name = "xplr" %}
+{% set version = "0.21.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/sayanarijit/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: de433dfe87e903d3eaff4a8e55416609534cfe4a5ef86c0065d7bc405f353090
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+    - make #[not win]
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/sayanarijit/{{ name }}
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: Hackable, minimal, fast TUI file explorer
+  dev_url: https://github.com/sayanarijit/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
