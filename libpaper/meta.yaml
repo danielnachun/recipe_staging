@@ -1,0 +1,33 @@
+{% set name = "libpaper" %}
+{% set version = "2.1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/rrthomas/{{ name }}/releases/download/v{{ version }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 474e9575e1235a0d8e3661f072de0193bab6ea1023363772f698a2cc39d640cf
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - help2man
+    - make
+
+test:
+  commands:
+    - test -f ${PREFIX}/lib/libpaper${SHLIB_EXT}
+
+about:
+  home: https://github.com/rrthomas/{{ name }}
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  summary: Any-to-PostScript filter
+
+extra:
+  recipe-maintainers:
+    - danielnachun
