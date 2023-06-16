@@ -24,7 +24,7 @@ test:
 
 about:
   home: https://github.com/rrthomas/{{ name }}
-  license: GPL-3.0-or-later
+  license: LGPL-2.1-or-later
   license_file: COPYING
   summary: Any-to-PostScript filter
 
