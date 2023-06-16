@@ -1,0 +1,41 @@
+{% set name = "hello" %}
+{% set version = "4.15.4" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://ftp.gnu.org/gnu/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 4a063f84ba89d86be14a6704ca35fd130083b572f1376b439a1b79b67b206dd7
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+    - pkg-config
+  host:
+    - bdw-gc
+    - libpaper
+    - gperf
+  run:
+    - bdw-gc
+    - libpaper
+    - gperf
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://www.gnu.org/software/a2ps/
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  summary: Any-to-PostScript filter
+
+extra:
+  recipe-maintainers:
+    - danielnachun
