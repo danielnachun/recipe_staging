@@ -1,4 +1,4 @@
-{% set name = "hello" %}
+{% set name = "a2ps" %}
 {% set version = "4.15.4" %}
 
 package:
