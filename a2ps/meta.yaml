@@ -28,7 +28,7 @@ requirements:
 
 test:
   commands:
-    - {{ name }} --help
+    - {{ name }} --version
 
 about:
   home: https://www.gnu.org/software/a2ps/
