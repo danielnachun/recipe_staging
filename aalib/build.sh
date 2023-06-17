@@ -2,6 +2,8 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+CFLAGS="-Wno-implicit-int -Wno-implicit-function-declaration"
+
 ./configure --disable-debug \
     --disable-dependency-tracking \
     --prefix=${PREFIX} \
