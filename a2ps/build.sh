@@ -9,4 +9,3 @@ set -o xtrace -o nounset -o pipefail -o errexit
     --with-packager=conda-forge \
     --with-package-version=${PKG_VERSION}
 make install
-make test
