@@ -1,0 +1,41 @@
+{% set name = "aamath" %}
+{% set version = "0.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: http://fuse.superglue.se/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 9843f4588695e2cd55ce5d8f58921d4f255e0e65ed9569e1dcddf3f68f77b631
+  patches:
+    - 0.3.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - bison
+    - flex
+    - make
+  host:
+    - readline
+  run:
+    - readline
+
+test:
+  commands:
+    - aamath < ${PREFIX}/share/{{ name }}/testcases
+
+about:
+  home: http://fuse.superglue.se/aamath
+  license: GPL-2.0-only
+  license_file: COPYING
+  summary: Renders mathematical expressions as ASCII art
+
+extra:
+  recipe-maintainers:
+    - danielnachun
