@@ -21,6 +21,7 @@ requirements:
     - bison
     - flex
     - make
+    - readline
   host:
     - readline
   run:
