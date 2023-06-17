@@ -4,7 +4,7 @@ set -o xtrace -o nounset -o pipefail -o errexit
 
 ln -sf ${BUILD_PREFIX}/bin/flex ${BUILD_PREFIX}/bin/lex
 
-make CXX="${CXX}" CFLAGS="${CFLAGS}" LD="${CXX}" LFLAGS="${LDFLAGS}"
+make CXX="${CXX}" CFLAGS="${CFLAGS}" LD="${CXX}" LFLAGS="${LDFLAGS}" LIBS="-lreadline -lncurses"
 mkdir -p ${PREFIX}/bin
 mkdir -p ${PREFIX}/share/man/man1
 mkdir -p ${PREFIX}/share/aamath
