@@ -9,5 +9,5 @@ CFLAGS="-fPIC -std=gnu89"
     --prefix=${PREFIX} \
     --enable-shared \
     --mandir=${PREFIX}/share/man
-make install
-make test
+make install AR=${AR}
+make test AR=${AR}
