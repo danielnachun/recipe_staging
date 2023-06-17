@@ -21,12 +21,9 @@ requirements:
     - bison
     - flex
     - make
-    - readline
   host:
-    - ncurses
     - readline
   run:
-    - ncurses
     - readline
 
 test:
