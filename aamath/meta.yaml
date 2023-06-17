@@ -23,8 +23,10 @@ requirements:
     - make
     - readline
   host:
+    - ncurses
     - readline
   run:
+    - ncurses
     - readline
 
 test:
