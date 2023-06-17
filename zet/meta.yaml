@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/yarrow/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
+  url: https://github.com/yarrow/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
   sha256: 792a1a1de73bf4145ccaa71f8e6bb34b62e690270a432c4de4d8639e1a741b5b
 
 build:
