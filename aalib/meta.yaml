@@ -1,0 +1,34 @@
+{% set name = "aalib" %}
+{% set version = "1.4rc5" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://downloads.sourceforge.net/project/aa-project/aa-lib/{{ version }}/{{ name }}-{{ version }}.tar.gz
+  sha256: fbddda9230cf6ee2a4f5706b4b11e2190ae45f5eda1f0409dc4f99b35e0a70ee
+  patches:
+    - 1.4rc5.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+
+test:
+  commands:
+    - aainfo -width 100 -height 50 
+
+about:
+  home: https://aa-project.sourceforge.io/aalib/
+  license: GPL-2.0-or-later
+  license_file: COPYING
+  summary: Portable ASCII art graphics library
+
+extra:
+  recipe-maintainers:
+    - danielnachun
