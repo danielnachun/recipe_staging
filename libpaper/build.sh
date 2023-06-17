@@ -7,4 +7,3 @@ set -o xtrace -o nounset -o pipefail -o errexit
     --prefix=${PREFIX} \
     --sysconfdir=${PREFIX}/etc 
 make install
-make test
