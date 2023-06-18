@@ -1,0 +1,41 @@
+{% set name = "abook" %}
+{% set version = "0.6.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://{{ name }}.sourceforge.io/devel/{{ name }}-{{ version }}.tar.gz
+  sha256: f0a90df8694fb34685ecdd45d97db28b88046c15c95e7b0700596028bd8bc0f9
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - autoconf
+    - automake
+    - {{ compiler('c') }}
+    - make
+    - sed
+  host:
+    - gettext
+    - readline
+  run:
+    - gettext
+    - readline
+
+test:
+  commands:
+    - abook --formats 
+
+about:
+  home: https://abook.sourceforge.io/
+  license: GPL-3.0-or-later AND GPL-2.0-or-later AND GPL-2.0-only AND X11
+  license_file: COPYING
+  summary: Address book with mutt support
+
+extra:
+  recipe-maintainers:
+    - danielnachun
