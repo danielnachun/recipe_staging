@@ -1,0 +1,32 @@
+{% set name = "abduco" %}
+{% set version = "0.6" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/martanne/{{ name }}/releases/download/v{{ version }}/{{ name }}-{{ version }}.tar.gz
+  sha256: c90909e13fa95770b5afc3b59f311b3d3d2fdfae23f9569fa4f96a3e192a35f4
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+
+test:
+  commands:
+    - abduco -v 
+
+about:
+  home: https://www.brain-dump.org/projects/abduco
+  license: ISC
+  license_file: LICENSE
+  summary: "Provides session management: i.e. separate programs from terminals"
+
+extra:
+  recipe-maintainers:
+    - danielnachun
