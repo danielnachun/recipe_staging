@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/abhimanyu/{{ name }}/archive/v{{ version }}.tar.gz
+  url: https://github.com/abhimanyu003/{{ name }}/archive/v{{ version }}.tar.gz
   sha256: b69a76f837b6cc1c34c72ace16670360577b123ccc17872a95af07178e69fbe7
 
 build:
@@ -21,11 +21,11 @@ test:
     - sttr --help
 
 about:
-  home: https://github.com/abhimanyu/{{ name }}
+  home: https://github.com/abhimanyu003/{{ name }}
   license_family: MIT
   license_file: LICENSE
   summary: cross-platform, cli app to perform various operations on string
-  dev_url: https://github.com/abhimanyu/{{ name }}
+  dev_url: https://github.com/abhimanyu003/{{ name }}
 
 extra:
   recipe-maintainers:
