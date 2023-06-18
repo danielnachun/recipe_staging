@@ -25,7 +25,7 @@ about:
   home: https://www.brain-dump.org/projects/abduco
   license: ISC
   license_file: LICENSE
-  summary: Provides session management: i.e. separate programs from terminals
+  summary: "Provides session management: i.e. separate programs from terminals"
 
 extra:
   recipe-maintainers:
