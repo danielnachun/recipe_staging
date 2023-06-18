@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/abhimanyu003/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: b69a76f837b6cc1c34c72ace16670360577b123ccc17872a95af07178e69fbe7
+  sha256: 89a031b02e976b4119c294723d121e31c1916b482dd367ffa6819bcab9b4c8f9
 
 build:
   number: 0
