@@ -1,0 +1,44 @@
+{% set name = "glyr" %}
+{% set version = "1.0.10" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/sahib/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: 77e8da60221c8d27612e4a36482069f26f8ed74a1b2768ebc373c8144ca806e8
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - cmake
+    - make
+    - pkg-config
+  host:
+    - curl
+    - gettext
+    - glib
+    - sqlite
+  run:
+    - libcurl
+    - gettext
+    - glib
+    - sqlite
+
+test:
+  commands:
+    - test -f ${PREFIX}/bin/glyrc
+
+about:
+  home: https://github.com/sahib/glyr
+  license: LGPL-3.0-or-later
+  license_file: COPYING
+  summary: Music related metadata search engine with command-line interface and C API
+
+extra:
+  recipe-maintainers:
+    - danielnachun

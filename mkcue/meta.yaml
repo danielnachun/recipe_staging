@@ -1,0 +1,33 @@
+{% set name = "mkcue" %}
+{% set version = "1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://deb.debian.org/debian/pool/main/m/{{ name }}/{{ name }}_{{ version }}.orig.tar.gz
+  sha256: 2aaf57da4d0f2e24329d5e952e90ec182d4aa82e4b2e025283e42370f9494867
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - make
+
+test:
+  commands:
+    - test -f ${PREFIX}/bin/mkcue
+
+about:
+  home: https://packages.debian.org/sid/mkcue
+  license: LGPL-2.1-or-later
+  license_file: COPYING
+  summary: Generate a CUE sheet from a CD
+
+extra:
+  recipe-maintainers:
+    - danielnachun
