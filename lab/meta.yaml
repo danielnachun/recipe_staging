@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/ackerr/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: b69a76f837b6cc1c34c72ace16670360577b123ccc17872a95af07178e69fbe7
+  sha256: 8b254ed2ff33fceaf5430667ba2667baaa2bdb8629e107d5afd1adc7e4403f6b
 
 build:
   number: 0
