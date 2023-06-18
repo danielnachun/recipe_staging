@@ -2,7 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-sed -i "s/inline int/int/g" database.c
+sed -i 's/inline int/int/g' database.c
 
 autoreconf --force --install --verbose
 ./configure --disable-debug \
