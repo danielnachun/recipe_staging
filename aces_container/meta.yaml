@@ -20,7 +20,7 @@ requirements:
 
 test:
   commands:
-    - test -f ${PREFIX}/lib/libAcesContainer{{SH_LIBEXT}}
+    - test -f ${PREFIX}/lib/libAcesContainer${SHLIB_EXT}
 
 about:
   home: https://github.com/ampas/{{ name }}
