@@ -21,6 +21,7 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - make
     - pkg-config
 
   # Run exports are used now
