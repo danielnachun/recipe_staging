@@ -1,0 +1,32 @@
+{% set name = "abcmidi" %}
+{% set version = "2023.05.30" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://ifdo.ca/~seymour/runabc/abcMIDI-{{ version }}.zip
+  sha256: cc72918e44d1ca5fb9759f56cf697437873840e4401d8536b517932c6dc4a8b2
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+
+test:
+  commands:
+    - abc2midi --help 
+
+about:
+  home: https://ifdo.ca/~seymour/runabc/top.html
+  license: GPL-2.0-or-later
+  license_file: doc/gpl.txt
+  summary: Converts abc music notation files to MIDI files
+
+extra:
+  recipe-maintainers:
+    - danielnachun
