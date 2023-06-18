@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/leesavide/{{ name }}/archive/v{{ name }}.tar.gz
+  url: https://github.com/leesavide/{{ name }}/archive/v{{ version }}.tar.gz
   sha256: 5b39ca08cd5e0d1992071b0be9eb77304489823824570236c4df4dc0f8b33aab
 
 build:
