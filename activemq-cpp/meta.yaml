@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://www.apache.org/dyn/closer.lua?path=activemq/{{ name }}/{{ version }}/{{ name }}-library-{{ version }}-src.tar.bz2
+  url: https://dlcdn.apache.org/activemq/{{ name }}/{{ version }}/{{ name }}-library-{{ version }}-src.tar.bz2
   sha256: 6bd794818ae5b5567dbdaeb30f0508cc7d03808a4b04e0d24695b2501ba70c15
 
 build:
