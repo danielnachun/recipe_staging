@@ -1,0 +1,33 @@
+{% set name = "lab" %}
+{% set version = "0.4.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/ackerr/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: b69a76f837b6cc1c34c72ace16670360577b123ccc17872a95af07178e69fbe7
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/ackerr/{{ name }}
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: A command-line tool for gitlab
+  home: https://github.com/ackerr/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
