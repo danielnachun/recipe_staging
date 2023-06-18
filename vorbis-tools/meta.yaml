@@ -1,0 +1,50 @@
+{% set name = "vorbis-tools" %}
+{% set version = "1.4.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://downloads.xiph.org/releases/vorbis/{{ name }}-{{ version }}.tar.gz
+  sha256: db7774ec2bf2c939b139452183669be84fda5774d6400fc57fde37f77624f0b0
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - autoconf
+    - automake
+    - libtool
+    - make
+    - pkg-config
+  host:
+    - curl
+    - libflac
+    - libao
+    - libiconv #[osx]
+    - libogg
+    - libvorbis
+  run:
+    - libcurl
+    - libflac
+    - libao
+    - libiconv #[osx]
+    - libogg
+    - libvorbis
+
+test:
+  commands:
+    - oggenc --help
+
+about:
+  home: https://github.com/xiph/vorbis-tools
+  license: GPL-2.0-or-later
+  license_file: COPYING
+  summary: Ogg Vorbis CODEC tools
+
+extra:
+  recipe-maintainers:
+    - danielnachun

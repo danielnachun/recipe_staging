@@ -1,0 +1,53 @@
+{% set name = "abcde" %}
+{% set version = "2.9.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://abcde.einval.com/download/{{ name }}-{{ version }}.tar.gz
+  sha256: 046cd0bba78dd4bbdcbcf82fe625865c60df35a005482de13a6699c5a3b83124
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - make
+  host:
+    - cdrtools
+    - eyed3
+    - libflac
+    - glyr
+    - lame
+    - libdiscid
+    - mkcue
+    - perl-musicbrainz-discid
+    - perl-webservice-musicbrainz
+    - vorbis-tools
+  run:
+    - cdrtools
+    - eyed3
+    - libflac
+    - glyr
+    - lame
+    - libdiscid
+    - mkcue
+    - perl-musicbrainz-discid
+    - perl-webservice-musicbrainz
+    - vorbis-tools
+
+test:
+  commands:
+    - abcde -v 
+
+about:
+  home: https://abcde.einval.com
+  license: GPL-2.0-or-later
+  license_file: COPYING
+  summary: Better CD Encoder
+
+extra:
+  recipe-maintainers:
+    - danielnachun

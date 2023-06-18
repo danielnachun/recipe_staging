@@ -1,0 +1,32 @@
+{% set name = "smake" %}
+{% set version = "1.2.5" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://downloads.sourceforge.net/project/s-make/{{ name }}-{{ version }}.tar.bz2
+  sha256: 27566aa731a400c791cd95361cc755288b44ff659fa879933d4ea35d052259d4
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+
+test:
+  commands:
+    - {{ name }} -version
+
+about:
+  home: https://s-make.sourceforge.io/
+  license: GPL-2.0-only
+  license_file: COPYING
+  summary: Portable make program with automake features
+
+extra:
+  recipe-maintainers:
+    - danielnachun

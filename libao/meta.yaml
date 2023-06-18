@@ -1,0 +1,36 @@
+{% set name = "libao" %}
+{% set version = "1.2.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/xiph/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: df8a6d0e238feeccb26a783e778716fb41a801536fe7b6fce068e313c0e2bf4d
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - autoconf
+    - automake
+    - libtool
+    - make
+    - pkg-config
+
+test:
+  commands:
+    - test -f ${PREFIX}/lib/libao${SHLIB_EXT}
+
+about:
+  home: https://www.xiph.org/ao
+  license: GPL-2.0-or-later
+  license_file: COPYING
+  summary: Cross-platform Audio Library
+
+extra:
+  recipe-maintainers:
+    - danielnachun

@@ -1,0 +1,51 @@
+{% set name = "eyed3" %}
+{% set version = "0.9.7" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/eyeD3/eyeD3-{{ version }}.tar.gz"
+  sha256: 93b18e9393376a45114f9409d7cca119fb6f4f9a37d4b697b500af48b4c5cf0f
+
+build:
+  number: 0
+  entry_points:
+    - eyeD3 = eyed3.main:_main
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - deprecation >=2.1.0,<3.0.0
+    - filetype >=1.0.7,<2.0.0
+    - pip
+    - poetry
+    - python
+  run:
+    - deprecation >=2.1.0,<3.0.0
+    - filetype >=1.0.7,<2.0.0
+    - python
+
+test:
+  imports:
+    - eyed3
+    - eyed3.id3
+    - eyed3.mp3
+    - eyed3.plugins
+    - eyed3.utils
+  commands:
+    - eyeD3 --help
+
+about:
+  home: "https://eyeD3.nicfit.net/"
+  license: "GNU General Public License v3 (GPLv3) or GNU General Public v3 or later (GPLv3+)"
+  license_family: GPL3
+  license_file: 
+  summary: "Python audio data toolkit (ID3 and MP3)"
+  doc_url: 
+  dev_url: 
+
+extra:
+  recipe-maintainers:
+    - your-github-id-here
