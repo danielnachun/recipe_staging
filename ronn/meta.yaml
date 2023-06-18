@@ -1,0 +1,33 @@
+{% set name = "ronn" %}
+{% set version = "0.7.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/rtomayko/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: 808aa6668f636ce03abba99c53c2005cef559a5099f6b40bf2c7aad8e273acb4
+
+build:
+  number: 0
+
+requirements:
+  host:
+    - ruby
+  run:
+    - ruby
+
+test:
+  commands:
+    - ronn --help 
+
+about:
+  home: https://rtomayko.github.io/ronn
+  license: MIT
+  license_file: COPYING
+  summary: Builds manuals - the opposite of roff
+
+extra:
+  recipe-maintainers:
+    - danielnachun
