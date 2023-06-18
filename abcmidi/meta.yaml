@@ -19,7 +19,7 @@ requirements:
 
 test:
   commands:
-    - abc2midi --help 
+    - abc2midi -h 
 
 about:
   home: https://ifdo.ca/~seymour/runabc/top.html
