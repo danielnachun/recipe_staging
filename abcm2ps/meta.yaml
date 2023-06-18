@@ -20,7 +20,7 @@ requirements:
 
 test:
   commands:
-    - abcm2ps --help 
+    - abcm2ps -h
 
 about:
   home: https://www.gnu.org/software/hello/
