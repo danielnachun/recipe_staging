@@ -1,0 +1,33 @@
+{% set name = "act" %}
+{% set version = "0.2.46" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/nektos/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: ca3f27316b0a0cf0f86203124d685dc13da090577ad459f3cd61840a66f2bcde
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/nektos/{{ name }}
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: Run your GitHub Actions locally
+  dev_url: https://github.com/nektos/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
