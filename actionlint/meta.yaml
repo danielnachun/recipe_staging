@@ -1,13 +1,13 @@
-{% set name = "archiver" %}
-{% set version = "3.5.1" %}
+{% set name = "actionlint" %}
+{% set version = "1.6.25" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/mholt/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: b69a76f837b6cc1c34c72ace16670360577b123ccc17872a95af07178e69fbe7
+  url: https://github.com/rhysd/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 0dc8b31c8541a719486b5678e6f0401c8c13ce7baf79013570f3799f380c1dc1
 
 build:
   number: 0
@@ -15,21 +15,18 @@ build:
 requirements:
   build:
     - go
-  host:
-  run:
 
 test:
   commands:
-    - arc --help #[not win]
-    - arc.exe --help #[win]
+    - {{ name }} --help
 
 about:
-  home: https://github.com/mholt/archiver
+  home: https://github.com/rhysd/{{ name }}
   license: MIT
   license_family: MIT
   license_file: LICENSE
-  summary: Cross-platform, multi-format archive utility
-  dev_url: https://github.com/mholt/archiver
+  summary: Static checker for GitHub Actions workflow files
+  dev_url: https://github.com/rhysd/{{ name }}
 
 extra:
   recipe-maintainers:
