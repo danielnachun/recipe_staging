@@ -3,7 +3,7 @@
 set -o xtrace -o nounset -o pipefail -o errexit
 
 rm -rf lib*/*_p.mk
-smake INS_BASE=${PREFIX} INS_RBASE=${PREFIX} CFLAGS="-Wno-implicit-function-declaration -Wno-implicit-int" install
+smake INS_BASE=${PREFIX} INS_RBASE=${PREFIX} CFLAGS="-Wno-implicit-function-declaration -Wno-implicit-int" CC=${CC} AR=${AR} install
  
 rm -rf ${PREFIX}/include/schily \
     ${PREFIX}/lib/libschily.a \
