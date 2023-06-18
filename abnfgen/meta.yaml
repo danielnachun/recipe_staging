@@ -1,0 +1,32 @@
+{% set name = "abnfgen" %}
+{% set version = "0.21" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://www.quut.com/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 5bf784e6010b4b67e38fa18632b7e2b221c1a7a43a0907be0379a4909f5e536e
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+
+test:
+  commands:
+    - abnfgen -h 
+
+about:
+  home: https://www.quut.com/abnfgen/
+  license: OTHER
+  license_file: COPYING
+  summary: Quickly generate random documents that match an ABFN grammar
+
+extra:
+  recipe-maintainers:
+    - danielnachun
