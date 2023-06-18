@@ -15,6 +15,7 @@ build:
 requirements:
   build:
     - make
+    - sed
   host:
     - cdrtools
     - eyed3
