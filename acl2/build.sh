@@ -9,6 +9,8 @@ make LISP=${PREFIX}/bin/sbcl ACL2_PAR=p ACL2=${SRC_DIR}/saved_acl2p USE_QUICKLIS
 
 mkdir -p ${PREFIX}/libexec/acl2
 mkdir -p ${PREFIX}/bin
+
+cp -r * ${PREFIX}/libexec/acl2
 cat << EOF > ${PREFIX}/bin/acl2
     #!/bin/sh
     export ACL2_SYSTEM_BOOKS='${PREFIX}/libexec/acl2/books'
