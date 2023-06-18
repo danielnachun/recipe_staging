@@ -19,7 +19,7 @@ requirements:
 
 test:
   commands:
-    - abnfgen -h 
+    - test -f ${PREFIX}/bin/abnfgen
 
 about:
   home: https://www.quut.com/abnfgen/
