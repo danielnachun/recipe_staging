@@ -1,4 +1,4 @@
-name: Build conda package with conda mambabuild
+name: linux-64 
 
 on:
   pull_request:
@@ -58,7 +58,7 @@ jobs:
       - name: Set up working directories
         run: |
           mkdir /tmp/recipes
-          mkdir /tmp/packages
+          mkdir /tmp/conda-bld
           for dir in ${{ needs.setup.outputs.changed_directories }}; do
             cp -r ${dir} /tmp/recipes
           done
@@ -74,16 +74,10 @@ jobs:
           tags: conda_mambabuild:latest
 
       - name: Build conda package
-        run: docker run --rm --volume /tmp:/tmp conda_mambabuild conda mambabuild --output-folder /tmp/packages /tmp/recipes
+        run: docker run --rm --volume /tmp:/tmp conda_mambabuild conda mambabuild --output-folder /tmp/conda-bld /tmp/recipes
 
-      - name: Move all packages to artifacts directory
-        run: |
-          mkdir /tmp/artifacts
-          find /tmp/packages/linux-64 -name *.tar.bz2 -exec cp {} /tmp/artifacts \;
-          find /tmp/packages/noarch -name *.tar.bz2 -exec cp {} /tmp/artifacts \;
-
-      - name: Upload packages to GitHub Actions
+      - name: Upload artifacts to GitHub Actions
         uses: actions/upload-artifact@v3
         with:
-          name: packages_${{github.event.pull_request.head.sha}}_linux-64
-          path: /tmp/artifacts/*.tar.bz2
+          name: conda-bld_${{github.event.pull_request.head.sha}}_linux-64
+          path: /tmp/conda-bld
