@@ -1,0 +1,35 @@
+{% set name = "acpica" %}
+{% set version = "20230331" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://acpica.org/sites/{{ name }}/files/{{ name }}-unix-{{ version }}.tar.gz
+  sha256: 0c5d695d605aaa61709f3c63f57a1a99b8902291723998446b0813b57ac310e2
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - binutils
+    - bison
+    - flex
+    - m4
+    - make
+
+test:
+  commands:
+    - acpihelp -u 
+
+about:
+  home: https://www.acpica.org
+  license: Intel-ACPI OR GPL-2.0-only OR BSD-3-Clause
+  summary: Program providing model for GNU coding standards and practices
+
+extra:
+  recipe-maintainers:
+    - danielnachun
