@@ -77,7 +77,6 @@ jobs:
         run: docker run --rm --volume /tmp:/tmp conda_mambabuild conda mambabuild --output-folder /tmp/conda-bld /tmp/recipes
 
       - name: Upload artifacts to GitHub Actions
-        if: '!cancelled()'
         uses: actions/upload-artifact@v3
         with:
           name: conda-bld_${{github.event.pull_request.head.sha}}_linux-64
