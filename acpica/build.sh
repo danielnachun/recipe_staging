@@ -2,5 +2,10 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-make PREFIX=${PREFIX} OPT_CFLAGS="-Wno-dangling-pointer"
-make PREFIX=${PREFIX} OPT_CFLAGS="-Wno-dangling-pointer" install
+declare -a OPT_CFLAGS
+if [[ $target_platform =~ .*linux.* ]]; then
+    OPT_CFLAGS="-Wno-dangling-pointer"
+fi
+
+make PREFIX=${PREFIX} OPT_CFLAGS="${OPT_CFLAGS}"
+make PREFIX=${PREFIX} install
