@@ -24,8 +24,8 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           workflow: conda_mambabuild_${{ matrix.platform }}.yml
-          name: packages_${{ github.event.pull_request.head.sha }}_${{ matrix.platform }}
-          path: /tmp/artifacts
+          name: conda-bld_${{ github.event.pull_request.head.sha }}_${{ matrix.platform }}
+          path: /tmp/conda-bld
           search_artifacts: true
           if_no_artifact_found: warn
 
@@ -40,4 +40,7 @@ jobs:
       - name: Upload packages
         if: steps.download-packages.outputs.found_artifact == 'true'
         shell: micromamba-shell {0}
-        run: anaconda upload --force /tmp/artifacts/*.tar.bz2
+        run: |
+          anaconda upload --force /tmp/conda-bld/${{ matrix.platform }}/*.tar.bz2
+          anaconda upload --force /tmp/conda-bld/noarch/*.tar.bz2
+
