@@ -9,7 +9,7 @@ mkdir -p ${PREFIX}/share/man/man7
 
 cat << EOF > ${PREFIX}/bin/ronn
     #!/bin/sh
-    GEM_HOME="${PREFIX}/libexec/ronn" exec "${PREFIX}/libexec/ronn/bin" "$@"
+    GEM_HOME="${PREFIX}/libexec/ronn" exec "${PREFIX}/libexec/ronn/bin/ronn" "$@"
 EOF
 
 install -m 644 man/ronn.1 ${PREFIX}/share/man/man1/ronn.1
