@@ -1,0 +1,40 @@
+{% set name = "activemq-cpp" %}
+{% set version = "3.9.5" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://dlcdn.apache.org/activemq/{{ name }}/{{ version }}/{{ name }}-library-{{ version }}-src.tar.bz2
+  sha256: 6bd794818ae5b5567dbdaeb30f0508cc7d03808a4b04e0d24695b2501ba70c15
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - make
+    - pkg-config
+  host:
+    - apr
+    - openssl
+  run:
+    - apr
+    - openssl
+
+test:
+  commands:
+    - activemqcpp-config --version 
+
+about:
+  home: https://activemq.apache.org/components/cms
+  license: Apache-2.0
+  license_file: LICENSE.txt
+  summary: C++ API for message brokers such as Apache ActiveMQ
+
+extra:
+  recipe-maintainers:
+    - danielnachun
