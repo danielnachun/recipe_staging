@@ -2,7 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-declare -a OPT_CFLAGS
+OPT_CFLAGS=""
 if [[ $target_platform =~ .*linux.* ]]; then
     OPT_CFLAGS="-Wno-dangling-pointer"
 fi
