@@ -1,4 +1,4 @@
-name: Build conda package with conda mambabuild (macOS)
+name: osx-64
 
 on:
   pull_request:
@@ -65,7 +65,7 @@ jobs:
       - name: Set up working directories
         run: |
           mkdir /tmp/recipes
-          mkdir /tmp/packages
+          mkdir /tmp/conda-bld
           for dir in ${{ needs.setup.outputs.changed_directories }}; do
             cp -R ${dir} /tmp/recipes
           done
@@ -79,18 +79,12 @@ jobs:
             xargs -I % conda config --prepend channels % < .custom_channels
           fi
 
-      - name: Build conda package
+      - name: Build conda packages
         shell: micromamba-shell {0}
-        run: conda mambabuild --output-folder /tmp/packages /tmp/recipes
-
-      - name: Move all packages to artifacts directory
-        run: |
-          mkdir /tmp/artifacts
-          find /tmp/packages/osx-64 -name *.tar.bz2 -exec cp {} /tmp/artifacts \;
-          find /tmp/packages/noarch -name *.tar.bz2 -exec cp {} /tmp/artifacts \;
+        run: conda mambabuild --output-folder /tmp/conda-bld /tmp/recipes
 
       - name: Upload packages to GitHub Actions
         uses: actions/upload-artifact@v3
         with:
           name: packages_${{github.event.pull_request.head.sha}}_osx-64
-          path: /tmp/artifacts/*.tar.bz2
+          path: /tmp/conda-bld
