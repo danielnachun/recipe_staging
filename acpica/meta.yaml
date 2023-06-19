@@ -15,6 +15,7 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - binutils
     - bison
     - flex
     - m4
@@ -22,7 +23,7 @@ requirements:
 
 test:
   commands:
-    - aciphelp -u 
+    - acpihelp -u 
 
 about:
   home: https://www.acpica.org
