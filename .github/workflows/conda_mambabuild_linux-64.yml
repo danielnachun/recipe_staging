@@ -73,7 +73,7 @@ jobs:
           file: .github/mambaforge_container.df
           tags: conda_mambabuild:latest
 
-      - name: Build conda package
+      - name: Build conda packages
         run: docker run --rm --volume /tmp:/tmp conda_mambabuild conda mambabuild --output-folder /tmp/conda-bld /tmp/recipes
 
       - name: Upload artifacts to GitHub Actions
