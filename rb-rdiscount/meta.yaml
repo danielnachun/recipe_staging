@@ -22,12 +22,8 @@ requirements:
     - {{ compiler('c') }}
     - make
   host:
-    - jemalloc
-    - gmp
     - ruby
   run:
-    - jemalloc
-    - gmp
     - ruby
 
 test:
