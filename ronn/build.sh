@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 export GEM_HOME=${PREFIX}/libexec/ronn
-gem build ronn.gemspec
-gem install ronn-${PKG_VERSION}.gem
+gem install -N -l -V --ignore-dependencies ronn-${PKG_VERSION}.gem
 mkdir -p ${PREFIX}/bin
 mkdir -p ${PREFIX}/share/man/man1
 mkdir -p ${PREFIX}/share/man/man7

@@ -17,8 +17,14 @@ requirements:
     - {{ compiler('c') }}
     - make
   host:
+    - rb-hpricot
+    - rb-mustance
+    - rb-rdiscount
     - ruby
   run:
+    - rb-hpricot
+    - rb-mustance
+    - rb-rdiscount
     - ruby
 
 test:
