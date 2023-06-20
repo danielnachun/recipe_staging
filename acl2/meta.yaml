@@ -16,9 +16,9 @@ requirements:
   build:
     - make
   host:
-    - sbcl
+    - local::sbcl
   run:
-    - sbcl
+    - local::sbcl
 
 test:
   commands:
