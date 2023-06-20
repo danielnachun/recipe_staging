@@ -73,9 +73,9 @@ jobs:
       - name: Set up channels
         shell: micromamba-shell {0}
         run: |
-          conda config --append channels bioconda
-          conda config --append channels nodefaults
-          xargs -I % conda config --prepend channels % < .custom_channels
+          conda config --system --append channels bioconda
+          conda config --system --append channels nodefaults
+          xargs -I % conda config --system --prepend channels % < .custom_channels
           conda config --show-sources
 
       - name: Build conda packages
