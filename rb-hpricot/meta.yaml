@@ -1,0 +1,38 @@
+{% set gem_name = "hpricot" %}
+{% set name = "rb-hpricot" %}
+{% set version = "0.8.6" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://rubygems.org/downloads/{{ gem_name }}-{{ version }}.gem
+  sha256: dfe8f4b3414ba8377d7626030f3aa605caadee9de87cffbeadf8a50359eac8ca
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies {{ gem_name }}-{{ version }}.gem
+    - gem unpack {{ gem_name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby
+  run:
+    - ruby
+
+test:
+  commands:
+    - ruby -r {{ gem_name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/hpricot
+  license: MIT
+  summary: a swift, liberal HTML parser with a fantastic library
+  dev_url: https://github.com/hpricot/hpricot
+
+extra:
+  recipe-maintainers:
+    - danielnachun
