@@ -19,7 +19,7 @@ EOF
 
 cat << EOF > ${PREFIX}/bin/ronn
 #!/bin/sh
- exec "${PREFIX}/libexec/ronn/bin/ronn" "$@"
+exec "${PREFIX}/libexec/ronn/bin/ronn" "$@"
 EOF
 
 install -m 644 man/ronn.1 ${PREFIX}/share/man/man1/ronn.1
