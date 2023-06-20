@@ -15,7 +15,7 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
-    - ecl
+    - local::ecl
     - make
   host:
     - zstd
