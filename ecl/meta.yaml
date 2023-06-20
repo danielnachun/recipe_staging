@@ -1,0 +1,57 @@
+{% set version = "21.2.1" %}
+{% set name = "ecl" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://common-lisp.net/project/ecl/static/files/release/{{ name }}-{{ version }}.tgz
+  sha256: b15a75dcf84b8f62e68720ccab1393f9611c078fcd3afdd639a1086cad010900
+  patches:
+    # from https://github.com/sagemath/sage/blob/master/build/pkgs/ecl/patches/write_error.patch
+    - write_error.patch
+    - fixnum.patch
+
+build:
+  number: 2
+  skip: true  # [win]
+
+requirements:
+  build:
+    - gnuconfig  # [unix]
+    - {{ compiler('c') }}
+    - libtool
+    - make
+    - texinfo
+    - sed
+    - ecl  # [build_platform != target_platform]
+  host:
+    - gmp
+    - readline
+    - bdw-gc
+  run:
+    - gmp
+    - readline
+    - {{ pin_compatible('bdw-gc') }}
+
+test:
+  commands:
+    - test -f ${PREFIX}/include/{{ name }}/{{ name }}.h
+    - test -f ${PREFIX}/lib/lib{{ name }}.dylib  # [osx]
+    - test -f ${PREFIX}/lib/lib{{ name }}.so     # [linux]
+    - ecl --version
+
+about:
+  home: https://common-lisp.net/project/ecl
+  license: GPL-2.0-or-later
+  license_file: COPYING
+  summary: ECL (Embeddable Common-Lisp) is an interpreter of the Common-Lisp language.
+  doc_url: https://common-lisp.net/project/ecl/static/ecldoc/
+  dev_url: https://gitlab.com/embeddable-common-lisp/ecl
+
+extra:
+  recipe-maintainers:
+    - isuruf
+    - embray
+    - saraedum
