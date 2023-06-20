@@ -16,6 +16,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - ecl
+    - make
   host:
     - zstd
   run:
