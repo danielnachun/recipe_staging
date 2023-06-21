@@ -26,7 +26,7 @@ about:
   home: https://github.com/rhysd/{{ name }}
   license: MIT
   license_family: MIT
-  license_file: LICENSE
+  license_file: LICENSE.txt
   summary: Static checker for GitHub Actions workflow files
   dev_url: https://github.com/rhysd/{{ name }}
 
