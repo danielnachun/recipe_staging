@@ -19,10 +19,12 @@ requirements:
     - pkg-config
   host:
     - bdw-gc
+    - file
     - libpaper
     - gperf
   run:
     - bdw-gc
+    - file
     - libpaper
     - gperf
 
