@@ -18,7 +18,7 @@ requirements:
 
 test:
   commands:
-    - {{ name }} -h
+    - test -f ${PREFIX}/bin/{{ name }}
 
 about:
   home: https://github.com/tulir/{{ name }}
