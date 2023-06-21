@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/rhysd/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 0dc8b31c8541a719486b5678e6f0401c8c13ce7baf79013570f3799f380c1dc1
+  sha256: 7592aaddc49146b15a9822e97d90d917a1bd8ca33a4fb71cd98ef8c8c06eb3cf
 
 build:
   number: 0
