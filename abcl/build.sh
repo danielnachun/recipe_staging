@@ -2,7 +2,6 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-#export JAVA_HOME=${PREFIX}
 ant abcl.properties.autoconfigure.openjdk.8
 ant
 
