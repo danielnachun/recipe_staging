@@ -24,5 +24,5 @@ EOF
 
 cat << EOF > ${PREFIX}/etc/etc/conda/deactivate.d
 #!/bin/sh
-deactivate JAVA_HOME
+unset JAVA_HOME
 EOF
