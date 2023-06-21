@@ -30,7 +30,7 @@ test:
 about:
   home: https://github.com/hanslub42/{{ name }}
   license: GPL-2.0-or-later
-  summary: Readline wrapper: adds readline support to tools that lack it
+  summary: "Readline wrapper: adds readline support to tools that lack it"
   dev_url: https://github.com/hanslub42/{{ name }}
 
 extra:
