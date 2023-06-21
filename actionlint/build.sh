@@ -6,5 +6,5 @@ export CGO_ENABLED=0
 export LDFLAGS="-s -w -X github.com/rhysd/actionlint.version=${PKG_VERSION}"
 go build -buildmode=pie -trimpath -o=${PREFIX}/bin/${PKG_NAME} -ldflags="${LDFLAGS}" ./cmd/${PKG_NAME}
 ronn man/actionlint.1.ronn
-mkdip -p ${PREFIX}/share/man/man1
+mkdir -p ${PREFIX}/share/man/man1
 install -m man/actionlint.1 ${PREFIX}/share/man/man1
