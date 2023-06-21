@@ -24,7 +24,8 @@ requirements:
 
 test:
   commands:
-    - {{ name }} --load <(echo "(print \"conda-forge\")\n(quit)")
+    - echo -e '(print "Hello, world!")\n(quit)' > /tmp/test.lisp
+    - {{ name }} --load /tmp/test.lisp
 
 about:
   home: https://abcl.org

@@ -2,6 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+export JAVA_HOME=${PREFIX}
 ant abcl.properties.autoconfigure.openjdk.8
 ant
 
@@ -14,7 +15,7 @@ install -m 644 dist/abcl-contrib.jar ${PREFIX}/libexec/abcl
 
 cat << EOF > ${PREFIX}/bin/abcl
 #!/bin/sh
-exec rlwrap java -cp ${PREFIX}/libxec/abcl/abcl.jar:"\$CLASSPATH" org.armedbear.lisp.Main "\$@"
+exec rlwrap java -cp ${PREFIX}/libexec/abcl/abcl.jar:"\$CLASSPATH" org.armedbear.lisp.Main "\$@"
 EOF
 
 cat << EOF > ${PREFIX}/etc/conda/activate.d/activate_abcl.sh
