@@ -1,0 +1,40 @@
+{% set name = "rlwrap" %}
+{% set version = "0.46.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/hanslub42/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
+  sha256: c537e8a53df36f1f996601d776203478ad56fab1d67b3c1a63057badb0851cec
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - autoconf
+    - automake
+    - make
+  host:
+    - ncurses
+    - readline
+  run:
+    - ncurses
+    - readline
+
+test:
+  commands:
+    - {{ name }} --version
+
+about:
+  home: https://github.com/hanslub42/{{ name }}
+  license: GPL-2.0-or-later
+  summary: "Readline wrapper: adds readline support to tools that lack it"
+  dev_url: https://github.com/hanslub42/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
