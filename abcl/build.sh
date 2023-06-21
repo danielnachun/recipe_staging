@@ -17,12 +17,12 @@ cat << EOF > ${PREFIX}/bin/abcl
 exec rlwrap java -cp ${PREFIX}/libxec/abcl/abcl.jar:"\$CLASSPATH" org.armedbear.lisp.Main "\$@"
 EOF
 
-cat << EOF > ${PREFIX}/etc/conda/activate.d
+cat << EOF > ${PREFIX}/etc/conda/activate.d/activate_abcl.sh
 #!/bin/sh
 export JAVA_HOME=${PREFIX}
 EOF
 
-cat << EOF > ${PREFIX}/etc/conda/deactivate.d
+cat << EOF > ${PREFIX}/etc/conda/deactivate.d/deactivate_abcl.sh
 #!/bin/sh
 unset JAVA_HOME
 EOF
