@@ -29,7 +29,7 @@ test:
 about:
   home: https://abcl.org
   license: GPL-2.0-or-later
-  summary: Armed Bear Common Lisp: a full implementation of Common Lisp
+  summary: "Armed Bear Common Lisp: a full implementation of Common Lisp"
 
 extra:
   recipe-maintainers:
