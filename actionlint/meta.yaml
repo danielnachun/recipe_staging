@@ -1,0 +1,35 @@
+{% set name = "actionlint" %}
+{% set version = "1.6.25" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/rhysd/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 7592aaddc49146b15a9822e97d90d917a1bd8ca33a4fb71cd98ef8c8c06eb3cf
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+    - groff
+    - ronn
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/rhysd/{{ name }}
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE.txt
+  summary: Static checker for GitHub Actions workflow files
+  dev_url: https://github.com/rhysd/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun

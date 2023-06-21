@@ -1,0 +1,38 @@
+{% set gem_name = "mustache" %}
+{% set name = "rb-mustache" %}
+{% set version = "1.1.1" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://rubygems.org/downloads/{{ gem_name }}-{{ version }}.gem
+  sha256: 90891fdd50b53919ca334c8c1031eada1215e78d226d5795e523d6123a2717d0
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies {{ gem_name }}-{{ version }}.gem
+    - gem unpack {{ gem_name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby
+  run:
+    - ruby
+
+test:
+  commands:
+    - ruby -r {{ gem_name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/mustache
+  license: MIT
+  summary: framework-agnostic way to render logic-free views
+  dev_url: https://github.com/mustache/mustache
+
+extra:
+  recipe-maintainers:
+    - danielnachun
