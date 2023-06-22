@@ -19,6 +19,7 @@ requirements:
     - ant
     - make
     - openjdk >=11,<12
+    - sed
     - cunit  #[linux]
     - libiconv #[linux]
     - ncurses  #[linux]

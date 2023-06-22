@@ -5,9 +5,9 @@ set -o xtrace -o nounset -o pipefail -o errexit
 export JAVA_HOME=${BUILD_PREFIX}/lib/jvm
 
 if [[ $target_platform =~ .*osx.* ]]; then
-    gsed -i "s?\$(ISYSROOT)?-isysroot ${CONDA_BUILD_SYSROOT} -I${JAVA_HOME}/include -I${BUILD_PREFIX}/lib/jvm/include/darwin?g" src/c/Makefile-macosx-universal-64.make
-    gsed -i "s?\$(ARCHPPC)??g" src/c/Makefile-macosx-universal-64.make
-    gsed -i "s?-liconv?-L${CONDA_BUILD_SYSROOT}/usr/lib -liconv?g" src/c/Makefile-macosx-universal-64.make
+    sed -i "s?\$(ISYSROOT)?-isysroot ${CONDA_BUILD_SYSROOT} -I${JAVA_HOME}/include -I${BUILD_PREFIX}/lib/jvm/include/darwin?g" src/c/Makefile-macosx-universal-64.make
+    sed -i "s?\$(ARCHPPC)??g" src/c/Makefile-macosx-universal-64.make
+    sed -i "s?-liconv?-L${CONDA_BUILD_SYSROOT}/usr/lib -liconv?g" src/c/Makefile-macosx-universal-64.make
 else
     sed -i "s?-L/usr/local/lib? -I${BUILD_PREFIX}/include -L${BUILD_PREFIX}/lib -liconv?g" src/c/Makefile-linux-x86-64.make
 fi
