@@ -1,0 +1,33 @@
+{% set name = "aescrypt" %}
+{% set version = "0.7" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://aescrypt.sourceforge.io/{{ name }}-{{ version }}.tar.gz
+  sha256: 7b17656cbbd76700d313a1c36824a197dfb776cadcbf3a748da5ee3d0791b92d
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+    - sed
+
+test:
+  commands:
+    - test -f ${PREFIX}/bin/aescrypt
+
+about:
+  home: https://aescrypt.sourceforge.io
+  license: BSD-4-Clause
+  license_file: LICENSE
+  summary: Program for encryption/decryption
+
+extra:
+  recipe-maintainers:
+    - danielnachun
