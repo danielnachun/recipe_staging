@@ -20,7 +20,7 @@ requirements:
 
 test:
   commands:
-    - {{ name }} --version
+    - test -f ${PREFIX}/lib/libinio${SHLIB_EXT}
 
 about:
   home: https://adplug.github.io/libbinio/
