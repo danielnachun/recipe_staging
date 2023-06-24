@@ -28,8 +28,10 @@ requirements:
     - openssl
     - readline
     - python
+    - zlib
   run:
     - libcurl
+    - libzlib
     - expat
     - openssl
     - readline
