@@ -20,7 +20,8 @@ requirements:
 
 test:
   commands:
-    - {{ name }} --help
+    - tunnelto --help
+    - tunnelto_server --help
 
 about:
   home: https://github.com/agrinman/{{ name }}

@@ -7,10 +7,12 @@ cargo-bundle-licenses \
     --output THIRDPARTY.yml
 
 # build statically linked binary with Rust
-cargo install --locked --root ${PREFIX} --bin tunnelto --path . 
+cargo install --locked --root ${PREFIX} --path tunnelto
+cargo install --locked --root ${PREFIX} --path tunnelto_server
 
 # strip debug symbols
-"$STRIP" "$PREFIX/bin/${PKG_NAME}"
+"$STRIP" "$PREFIX/bin/tunnelto"
+"$STRIP" "$PREFIX/bin/tunnelto_server"
 
 # remove extra build file
 rm -f "${PREFIX}/.crates.toml"
