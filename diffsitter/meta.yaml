@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/afnanenayet/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 29cd1d870dafbfa46d07c4056ba229a98755660a2e37804f12e1507fdde7d237
+  sha256: e511ee2ca54dcb3a352e3bc788d600e14b9d97c9c1c701b6b55f9b36385b9550
 
 build:
   number: 0
@@ -16,6 +16,7 @@ requirements:
   build:
     - {{ compiler('rust') }}
     - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - cargo-bundle-licenses
 
 test:
