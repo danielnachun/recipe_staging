@@ -2,6 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+autoreconf --force --verbose --install
 ./configure --disable-silent \
     --disable-debug \
     --disable-dependency-tracking \
