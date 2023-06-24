@@ -24,6 +24,7 @@ test:
 about:
   home: https://aescrypt.sourceforge.io
   license: BSD-4-Clause
+  license_file: LICENSE
   summary: Program for encryption/decryption
 
 extra:
