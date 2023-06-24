@@ -23,7 +23,6 @@ test:
 about:
   home: https://github.com/FiloSottile/{{ name }}
   license: BSD-3-Clause
-  license_family: BSD-3-Clause
   license_file: LICENSE
   summary: Simple, modern, secure file encryption
   home: https://github.com/FiloSottile/{{ name }}
