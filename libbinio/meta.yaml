@@ -20,7 +20,8 @@ requirements:
 
 test:
   commands:
-    - test -f ${PREFIX}/lib/libinio${SHLIB_EXT}
+    - test -f ${PREFIX}/lib/libinio.*${SHLIB_EXT}  #[osx]
+    - test -f ${PREFIX}/lib/libinio${SHLIB_EXT}.*  #[linux]
 
 about:
   home: https://adplug.github.io/libbinio/
