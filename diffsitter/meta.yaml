@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/afnanenayet/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: e511ee2ca54dcb3a352e3bc788d600e14b9d97c9c1c701b6b55f9b36385b9550
+  git_url: https://github.com/afnanenayet/{{ name }}.git
+  git_rev: {{ version }}
 
 build:
   number: 0
