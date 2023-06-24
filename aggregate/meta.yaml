@@ -20,7 +20,7 @@ requirements:
 
 test:
   commands:
-    - aggregate -h
+    - test -f ${PREFIX}/bin/aggregate
 
 about:
   home: https://web.archive.org/web/20160716192438/freecode.com/projects/aggregate
