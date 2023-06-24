@@ -35,7 +35,7 @@ test:
 about:
   home: https://www.advancemame.it/comp-readme.html
   license: GPL-3.0-only
-  license_family: COPYING
+  license_file: COPYING
   summary: Recompression utilities for .PNG, .MNG, .ZIP, and .GZ files
   dev_url: https://github.com/amadvance/{{ name }}
 
