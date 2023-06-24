@@ -16,6 +16,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - make
+    - gcc  #[linux]
 
 test:
   commands:

@@ -2,6 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+export CFLAGS="-Wno-implicit-function-declaration"
 make DESTDIR=${PREFIX}
 mkdir -p ${PREFIX}/bin
 mkdir -p ${PREFIX}/share/man/man1
