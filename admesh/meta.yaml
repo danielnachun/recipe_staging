@@ -1,0 +1,31 @@
+{% set name = "admesh" %}
+{% set version = "0.98.5" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/admesh/{{ name }}/releases/download/v0.98.5/{{ name }}-0.98.5.tar.gz
+  sha256: 0d7994bfa587c4e958b2ac7c7d2fb90dfb6c5463d32513ada169cf710a438535
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/admesh/{{ name }}
+  license: GPL-2.0-or-later
+  summary: Processes triangulated solid meshes
+
+extra:
+  recipe-maintainers:
+    - danielnachun
