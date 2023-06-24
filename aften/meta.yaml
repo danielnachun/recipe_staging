@@ -8,6 +8,8 @@ package:
 source:
   url: https://downloads.sourceforge.net/project/{{ name }}/{{ name }}/{{ version }}/{{ name }}-{{ version }}.tar.bz2
   sha256: 87cc847233bb92fbd5bed49e2cdd6932bb58504aeaefbfd20ecfbeb9532f0c0a
+  patches:
+    - aarch64_fix.patch
 
 build:
   number: 0
