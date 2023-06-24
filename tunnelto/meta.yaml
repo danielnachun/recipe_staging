@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/agrinman/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 29cd1d870dafbfa46d07c4056ba229a98755660a2e37804f12e1507fdde7d237
+  sha256: 100a8364d8fa4ac66e20f34b781c7b3fcee852eaa1e2ee29a05d40e4178269d2
 
 build:
   number: 0
