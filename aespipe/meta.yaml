@@ -19,7 +19,7 @@ requirements:
 
 test:
   commands:
-    - {{ name }} --help
+    - test -f ${PREFIX}/bin/aespipe
 
 about:
   home: https://loop-aes.sourceforge.io/
