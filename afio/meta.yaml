@@ -20,7 +20,7 @@ requirements:
 
 test:
   commands:
-    - afio -h
+    - test -f ${PREFIX}/bin/afio
 
 about:
   home: https://github.com/kholtman/{{ name }}
