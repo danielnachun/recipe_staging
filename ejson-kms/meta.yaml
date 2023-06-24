@@ -1,0 +1,32 @@
+{% set name = "ejson-kms" %}
+{% set version = "4.3.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/adrienkohlbecker/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: b7422dced1392e7262383c3da3750ad88f8b4a506e281c1a73b41ebf5b2463c9
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/ejson-kms/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: ejson-kms is a utility for managing a collection of secrets in source control using AWS KMS
+  dev_url: https://github.com/ejson-kms/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
