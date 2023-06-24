@@ -1,0 +1,32 @@
+{% set name = "age" %}
+{% set version = "1.1.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/FiloSottile/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: f1f3dbade631976701cd295aa89308681318d73118f5673cced13f127a91178c
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/FiloSottile/{{ name }}
+  license: BSD-3-Clause
+  license_file: LICENSE
+  summary: Simple, modern, secure file encryption
+  home: https://github.com/FiloSottile/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
