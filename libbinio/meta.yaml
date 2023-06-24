@@ -1,0 +1,31 @@
+{% set name = "libbinio" %}
+{% set version = "1.5" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/adplug/{{ name }}/releases/download/{{ name }}-{{ version }}/{{ name }}-{{ version }}.tar.bz2
+  sha256: 398b2468e7838d2274d1f62dbc112e7e043433812f7ae63ef29f5cb31dc6defd
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+
+test:
+  commands:
+    - {{ name }} --version
+
+about:
+  home: https://adplug.github.io/libbinio/
+  license: LGPL-2.1-or-later
+  summary: Binary I/O stream class library
+
+extra:
+  recipe-maintainers:
+    - danielnachun
