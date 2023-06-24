@@ -24,6 +24,7 @@ test:
 about:
   home: https://github.com/admesh/{{ name }}
   license: GPL-2.0-or-later
+  license_file: COPYING
   summary: Processes triangulated solid meshes
 
 extra:
