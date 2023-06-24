@@ -1,0 +1,33 @@
+{% set name = "agedu" %}
+{% set version = "20211129.8cd63c5" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://www.chiark.greenend.org.uk/~sgtatham/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: ceaee592ef21b8cbb254aa7e9c5d22cefab24535e137618a4d0af591eba8339f
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - cmake
+    - make
+
+test:
+  commands:
+    - {{ name }} -s .
+
+about:
+  home: https://www.chiark.greenend.org.uk/~sgtatham/{{ name }}
+  license: MIT
+  license_file: LICENCE
+  summary: Unix utility for tracking down wasted disk space
+
+extra:
+  recipe-maintainers:
+    - danielnachun
