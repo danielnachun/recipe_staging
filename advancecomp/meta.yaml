@@ -15,6 +15,7 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - autoconf
     - automake
     - libtool
@@ -34,7 +35,9 @@ test:
 about:
   home: https://www.advancemame.it/comp-readme.html
   license: GPL-3.0-only
+  license_family: COPYING
   summary: Recompression utilities for .PNG, .MNG, .ZIP, and .GZ files
+  dev_url: https://github.com/amadvance/{{ name }}
 
 extra:
   recipe-maintainers:
