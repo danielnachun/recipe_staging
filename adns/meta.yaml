@@ -1,0 +1,34 @@
+{% set name = "adns" %}
+{% set version = "1.6.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://www.chiark.greenend.org.uk/~ian/adns/ftp/adns-1.6.0.tar.gz
+  sha256: fb427265a981e033d1548f2b117cc021073dc8be2eaf2c45fd64ab7b00ed20de
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - m4
+    - make
+    - sysroot_linux-64=2.17
+
+test:
+  commands:
+    - adnsheloex --version
+
+about:
+  home: https://www.chiark.greenend.org.uk/~ian/adns/
+  license: GPL-3.0-or-later AND LGPL-2.0-or-later
+  license_file: COPYING
+  summary: C/C++ resolver library and DNS resolver utilities
+
+extra:
+  recipe-maintainers:
+    - danielnachun
