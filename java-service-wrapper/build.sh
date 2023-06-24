@@ -15,6 +15,7 @@ fi
 ant -Dbits=64 -Djavac.target.version=1.6
 
 mkdir -p ${PREFIX}/bin
+mkdir -p ${PREFIX}/lib
 cp -r lib/* ${PREFIX}/lib
 cp -r bin/* ${PREFIX}/bin
 
