@@ -20,7 +20,7 @@ requirements:
 
 test:
   commands:
-    - test -f "${PREFIX}/lib/libbinio.1.${SHLIB_EXT}"  #[osx]
+    - test -f "${PREFIX}/lib/libbinio.1${SHLIB_EXT}"  #[osx]
     - test -f "${PREFIX}/lib/libbinio${SHLIB_EXT}.1.0.0"  #[linux]
 
 about:
