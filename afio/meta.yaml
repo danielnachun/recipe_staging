@@ -1,0 +1,31 @@
+{% set name = "afio" %}
+{% set version = "2.5.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/kholtman/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: c64ca14109df547e25702c9f3a9ca877881cd4bf38dcbe90fbd09c8d294f42b9
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+
+test:
+  commands:
+    - afio -h
+
+about:
+  home: https://github.com/kholtman/{{ name }}
+  license: OTHER
+  summary: Creates cpio-format archives
+
+extra:
+  recipe-maintainers:
+    - danielnachun
