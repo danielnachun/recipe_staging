@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/adrienkohlbecker/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: b69a76f837b6cc1c34c72ace16670360577b123ccc17872a95af07178e69fbe7
+  sha256: b7422dced1392e7262383c3da3750ad88f8b4a506e281c1a73b41ebf5b2463c9
 
 build:
   number: 0
