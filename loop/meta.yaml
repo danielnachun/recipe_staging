@@ -1,0 +1,32 @@
+{% set name = "loop" %}
+{% set version = "0.14.8" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/adrianliechti/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: b69a76f837b6cc1c34c72ace16670360577b123ccc17872a95af07178e69fbe7
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/adrianliechti/{{ name }}
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Seamless Development on Kubernetes
+  dev_url: https://github.com/adrianliechti/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
