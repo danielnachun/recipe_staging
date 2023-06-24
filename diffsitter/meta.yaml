@@ -1,0 +1,35 @@
+{% set name = "diffsitter" %}
+{% set version = "0.8.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/afnanenayet/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 29cd1d870dafbfa46d07c4056ba229a98755660a2e37804f12e1507fdde7d237
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/afnanenayet/{{ name }}
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: A tree-sitter based AST difftool to get meaningful semantic diffs
+  home: https://github.com/afnanenayet/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
