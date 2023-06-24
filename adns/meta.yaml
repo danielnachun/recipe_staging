@@ -17,6 +17,7 @@ requirements:
     - {{ compiler('c') }}
     - m4
     - make
+    - sysroot_linux-64=2.17
 
 test:
   commands:
