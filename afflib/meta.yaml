@@ -1,0 +1,55 @@
+{% set name = "afflib" %}
+{% set version = "3.7.20" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/sshock/AFFLIBv3/archive/v{{ version }}.tar.gz
+  sha256: 7264d705ff53185f0847c69abdfce072779c0b907257e087a6372c7608108f65
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - autoconf
+    - automake
+    - libtool
+    - make
+    - pkg-config
+    - sed
+  host:
+    - curl
+    - cython
+    - expat
+    - openssl
+    - readline
+    - python
+    - zlib
+  run:
+    - libcurl
+    - libzlib
+    - expat
+    - openssl
+    - readline
+    - python
+
+test:
+  commands:
+    - affcat -h
+  imports:
+    - pyaff
+
+about:
+  home: https://github.com/sshock/AFFLIBv3
+  license: BSD-4-Clause
+  license_file: COPYING
+  summary: Advanced Forensic Format
+
+extra:
+  recipe-maintainers:
+    - danielnachun
