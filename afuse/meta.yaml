@@ -1,0 +1,38 @@
+{% set name = "afuse" %}
+{% set version = "0.5.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/pcarrier/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: c6e0555a65d42d3782e0734198bbebd22486386e29cb00047bc43c3eb726dca8
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+    - pkg-config
+  host:
+    - libfuse <3
+  run:
+    - libfuse <3
+
+test:
+  commands:
+    - afuse --version
+
+about:
+  home: https://github.com/pcarrier/{{ name }}
+  license: GPL-2.0-or-later
+  license_file: COPYING
+  summary: Automounting file system implemented in userspace with FUSE
+  home: https://github.com/pcarrier/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
