@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/pcarrier/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: c6e0555a65d42d3782e0734198bbebd22486386e29cb00047bc43c3eb726dca8
+  sha256: 87284e3f7973f5a61eea4a37880512c01f0b8bf1d37a8988447efbe806ec3414
 
 build:
   number: 0
