@@ -2,6 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+export CFLAGS="-Wno-implicit-int"
 ./configure --disable-silent \
     --disable-debug \
     --disable-dependency-tracking \
