@@ -1,0 +1,32 @@
+{% set name = "aespipe" %}
+{% set version = "2.4f" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://loop-aes.sourceforge.io/{{ name }}/{{ name }}-v{{ version }}.tar.bz2
+  sha256: b135e1659f58dc9be5e3c88923cd03d2a936096ab8cd7f2b3af4cb7a844cef96
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+
+test:
+  commands:
+    - test -f ${PREFIX}/bin/aespipe
+
+about:
+  home: https://loop-aes.sourceforge.io/
+  license: BSD-3-Clause
+  license_file: README
+  summary: AES encryption or decryption for pipes
+
+extra:
+  recipe-maintainers:
+    - danielnachun
