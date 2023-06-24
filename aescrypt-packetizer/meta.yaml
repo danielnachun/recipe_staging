@@ -1,0 +1,32 @@
+{% set name = "aescrypt-packetizer" %}
+{% set version = "3.16" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://www.aescrypt.com/download/v3/linux/aescrypt-{{ version }}.tgz
+  sha256: e2e192d0b45eab9748efe59e97b656cc55f1faeb595a2f77ab84d44b0ec084d2
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - gcc  #[linux]
+    - make
+
+test:
+  commands:
+    - aescrypt --help
+
+about:
+  home: https://www.aescrypt.com
+  license: GPL-2.0-or-later
+  summary: Encrypt and decrypt using 256-bit AES encryption
+
+extra:
+  recipe-maintainers:
+    - danielnachun
