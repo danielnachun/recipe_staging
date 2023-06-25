@@ -26,7 +26,7 @@ requirements:
 
 test:
   commands:
-    - adplugdb --help
+    - adplugdb -h
 
 about:
   home: https://adplug.github.io
