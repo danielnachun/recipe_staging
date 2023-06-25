@@ -16,6 +16,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - go
+  host:
     - libpcap
 
 test:
