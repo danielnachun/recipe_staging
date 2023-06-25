@@ -1,0 +1,41 @@
+{% set name = "tunnelto" %}
+{% set version = "0.1.18" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/agrinman/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
+  sha256: 100a8364d8fa4ac66e20f34b781c7b3fcee852eaa1e2ee29a05d40e4178269d2
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+    - openssl <3
+    - pkg-config
+  host:
+    - openssl <3
+  run:
+    - openssl <3
+
+test:
+  commands:
+    - test -f ${PREFIX}/bin/tunnelto
+    - test -f ${PREFIX}/bin/tunnelto_server
+
+about:
+  home: https://github.com/agrinman/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: Expose your local web server to the internet with a public URL.
+  dev_url: https://github.com/agrinman/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
