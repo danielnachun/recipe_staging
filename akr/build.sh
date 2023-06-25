@@ -7,6 +7,7 @@ cargo-bundle-licenses \
     --output THIRDPARTY.yml
 
 # build statically linked binary with Rust
+export SODIUM_USE_PKG_CONFIG=1
 cargo install --locked --root ${PREFIX} --path crates/kr
 
 # strip debug symbols

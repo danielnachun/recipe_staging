@@ -17,8 +17,11 @@ requirements:
     - {{ compiler('rust') }}
     - {{ compiler('c') }}
     - cargo-bundle-licenses
+    - file
+    - make
     - pkg-config
   host:
+    - libsodium
     - openssl
 
 test:
