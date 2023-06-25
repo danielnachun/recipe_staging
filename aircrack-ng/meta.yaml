@@ -1,0 +1,52 @@
+{% set name = "aircrack-ng" %}
+{% set version = "1.7" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://download.aircrack-ng.org/{{ name }}-{{ version }}.tar.gz
+  sha256: 05a704e3c8f7792a17315080a21214a4448fd2452c1b0dd5226a3a55f90b58c3
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - autoconf
+    - automake
+    - libtool
+    - make
+    - pkg-config
+    - sed
+  host:
+    - libpcap
+    - openssl
+    - pcre
+    - sqlite
+    - zlib
+  run:
+    - libpcap
+    - openssl
+    - pcre
+    - sqlite
+    - libzlib
+
+test:
+  commands:
+    - aircrack-ng --help
+
+about:
+  home: https://aircrack-ng.org/
+  license: GPL-3.0-or-later AND BSD-3-Clause AND OpenSSL
+  license_file: 
+    - LICENSE
+    - LICENSE.OpenSSL
+  summary: Next-generation aircrack with lots of new features
+
+extra:
+  recipe-maintainers:
+    - danielnachun
