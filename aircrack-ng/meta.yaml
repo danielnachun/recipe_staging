@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://download.aircrack-ng.org/{{ name }}-{{ verison }}.tar.gz
+  url: https://download.aircrack-ng.org/{{ name }}-{{ version }}.tar.gz
   sha256: 05a704e3c8f7792a17315080a21214a4448fd2452c1b0dd5226a3a55f90b58c3
 
 build:
