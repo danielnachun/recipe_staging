@@ -6,7 +6,7 @@ package:
   version: "{{ version }}"
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/Airshare/Airshare/Airshare-{{ version }}.tar.gz
   sha256: 138976933bcf2c0bc99f18901242544919e9fafe43735b4f83b19d4ae5964be7
 
 build:
