@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/akamai/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 29cd1d870dafbfa46d07c4056ba229a98755660a2e37804f12e1507fdde7d237
+  sha256: a9b80baaf56c74da2a6b014678edf6f3b8e2408e7e27f93a80249e91890c8371
 
 build:
   number: 0
