@@ -1,0 +1,33 @@
+{% set name = "ahcpd" %}
+{% set version = "0.53" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://www.irif.fr/~jch/software/files/ahcpd-0.53.tar.gz
+  sha256: a4622e817d2b2a9b878653f085585bd57f3838cc546cca6028d3b73ffcac0d52
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+    - sed
+
+test:
+  commands:
+    - test -f ${PREFIX}/bin/ahcpd
+
+about:
+  home: https://www.irif.fr/~jch/software/ahcp/
+  license: MIT
+  license_file: LICENCE
+  summary: Autoconfiguration protocol for IPv6 and IPv6/IPv4 networks
+
+extra:
+  recipe-maintainers:
+    - danielnachun
