@@ -24,10 +24,12 @@ requirements:
     - libgcrypt
     - libgpg-error
     - pcre2
+    - zlib
   run:
     - libcurl
     - libgcrypt
     - libgpg-error
+    - libzlib
     - pcre2
 
 test:
