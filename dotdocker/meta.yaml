@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://registry.npmjs.org/{{ name }}/-/{{ name }}-{{ version }}.tgz
-  sha256: acfe9c75fa26074fd56ce55147ac8b0b3dfcf1ce71d42e16f493062d1bbb7488
+  sha256: 801d452b8838ed2b7066cbdb86647af06ffa17510075d6c776a6f3d9ba847603
 
 build:
   number: 0
