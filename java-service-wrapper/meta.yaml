@@ -1,0 +1,39 @@
+{% set name = "java-service-wrapper" %}
+{% set main_version = "3.5.54" %}
+{% set version = main_version ~ "_20230512" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://downloads.sourceforge.net/project/wrapper/wrapper_src/Wrapper_{{ version }}/wrapper_{{ main_version }}_src.tar.gz
+  sha256: b75ea2d56aaf0eaaf8279b0395d79493af8303237fea858657a78c139ca3fa2e
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - ant
+    - make
+    - openjdk >=11,<12
+    - sed
+    - cunit  #[linux]
+    - libiconv #[linux]
+    - ncurses  #[linux]
+    - gcc  #[linux]
+
+test:
+  commands:
+    - test -f ${PREFIX}/bin/testwrapper
+
+about:
+  home: https://wrapper.tanukisoftware.com/
+  license: GPL-2.0-only
+  summary: "Simplify the deployment, launch and monitoring of Java applications"
+
+extra:
+  recipe-maintainers:
+    - danielnachun

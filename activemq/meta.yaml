@@ -1,0 +1,35 @@
+{% set name = "activemq" %}
+{% set version = "5.18.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://archive.apache.org/dist/{{ name }}/{{ version }}/apache-{{ name }}-{{ version }}-bin.tar.gz
+  sha256: fedd7bde9af5babaeb072bf7aeb2065d9021c26163ded639c87a32d673795472
+
+build:
+  number: 0
+
+requirements:
+  host:
+    - java-service-wrapper
+    - openjdk
+  run:
+    - java-service-wrapper
+    - openjdk
+
+test:
+  commands:
+    - activemq browse -h
+
+about:
+  home: https://wrapper.tanukisoftware.com/
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: "Apache ActiveMQ: powerful open source messaging server"
+
+extra:
+  recipe-maintainers:
+    - danielnachun
