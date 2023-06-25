@@ -17,6 +17,8 @@ requirements:
     - {{ compiler('rust') }}
     - {{ compiler('c') }}
     - cargo-bundle-licenses
+    - openssl
+    - pkg-config
 
 test:
   commands:
