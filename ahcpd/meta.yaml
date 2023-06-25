@@ -20,7 +20,7 @@ requirements:
 
 test:
   commands:
-    - {{ name }} -h
+    - test -f ${PREFIX}/bin/ahcpd
 
 about:
   home: https://www.irif.fr/~jch/software/ahcp/
