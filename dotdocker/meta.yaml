@@ -1,0 +1,33 @@
+{% set name = "dotdocker" %}
+{% set version = "1.5.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://registry.npmjs.org/{{ name }}/-/{{ name }}-{{ version }}.tgz
+  sha256: 801d452b8838ed2b7066cbdb86647af06ffa17510075d6c776a6f3d9ba847603
+
+build:
+  number: 0
+
+requirements:
+  host:
+    - nodejs
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/aj-may/{{ name }}
+  license: MIT
+  summary: A utility to help setup a docker development environment with host based routing
+  dev_url: https://github.com/aj-may/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
