@@ -1,0 +1,32 @@
+{% set name = "airy" %}
+{% set version = "0.53.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/airyhq/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
+  sha256: dede29ab87c9827bec32d89add6931958d0a558bc961e882dcadbddac982b3c8
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/airyhq/{{ name }}
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Open Source App Framework to build streaming apps with real-time data
+  dev_url: https://github.com/airyhq/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
