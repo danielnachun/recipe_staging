@@ -11,5 +11,5 @@ export CFLAGS="-DHAVE_STRNSTR"
     --with-curl \
     --with-zlib \
     --prefix=${PREFIX} \
-    --sysconfdir=${PREFXI}/etc
+    --sysconfdir=${PREFIX}/etc
 make install
