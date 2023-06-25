@@ -1,0 +1,40 @@
+{% set name = "akr" %}
+{% set version = "1.1.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/akamai/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
+  sha256: a9b80baaf56c74da2a6b014678edf6f3b8e2408e7e27f93a80249e91890c8371
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+    - file
+    - make
+    - pkg-config
+  host:
+    - libsodium
+    - openssl
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/akr/{{ name }}
+  license: OTHER
+  license_file: LICENSE
+  summary: Akamai Krypton CLI and SSH Agent (v2)
+  dev_url: https://github.com/akr/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
