@@ -1,0 +1,39 @@
+{% set name = "adplug" %}
+{% set version = "2.3.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/adplug/{{ name }}/releases/download/{{ name }}-{{ version }}/{{ name }}-{{ version }}.tar.bz2
+  sha256: a0f3c1b18fb49dea7ac3e8f820e091a663afa5410d3443612bf416cff29fa928
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - make
+    - pkg-config
+    - texinfo
+  host:
+    - libbinio
+  run:
+    - libbinio
+
+test:
+  commands:
+    - adplugdb -h
+
+about:
+  home: https://adplug.github.io
+  license: LGPL-2.1-or-later
+  license_file: COPYING
+  summary: Free, hardware independent AdLib sound player library
+
+extra:
+  recipe-maintainers:
+    - danielnachun
