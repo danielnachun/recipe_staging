@@ -1,0 +1,48 @@
+{% set name = "aide" %}
+{% set version = "0.18.4" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/aide/{{ name }}/releases/download/v{{ version }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 4f7e2c7f49f3ca25fdafad6170390a4d8c8334af17bbd48ad34dbd6dde4ee757
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - bison
+    - flex
+    - make
+    - pkg-config
+  host:
+    - curl
+    - libgcrypt
+    - libgpg-error
+    - pcre2
+    - zlib
+  run:
+    - libcurl
+    - libgcrypt
+    - libgpg-error
+    - libzlib
+    - pcre2
+
+test:
+  commands:
+    - aide -h
+
+about:
+  home: https://aide.github.io
+  license: GPL-2.0-or-later
+  license_file: COPYING
+  summary: File and directory integrity checker
+  dev_url: https://github.com/aide/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
