@@ -26,11 +26,13 @@ requirements:
     - openssl
     - pcre
     - sqlite
+    - zlib
   run:
     - libpcap
     - openssl
     - pcre
     - sqlite
+    - libzlib
 
 test:
   commands:
