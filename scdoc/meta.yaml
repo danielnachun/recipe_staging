@@ -19,7 +19,7 @@ requirements:
 
 test:
   commands:
-    - {{ name }} --help
+    - test -f ${PREFIX}/bin/{{ name }}
 
 about:
   home: https://sr.ht/~sircmpwn/{{ name }}
