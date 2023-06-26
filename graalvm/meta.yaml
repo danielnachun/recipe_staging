@@ -1,0 +1,33 @@
+{% set name = "graalvm" %}
+{% set version = "8.14.14" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/leesavide/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 5b39ca08cd5e0d1992071b0be9eb77304489823824570236c4df4dc0f8b33aab
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+    - pkg-config
+
+test:
+  commands:
+    - abcm2ps -h
+
+about:
+  home: https://www.gnu.org/software/hello/
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  summary: ABC music notation software
+
+extra:
+  recipe-maintainers:
+    - danielnachun
