@@ -1,0 +1,40 @@
+{% set name = "powershell" %}
+{% set version = "7.3.4" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/PowerShell/PowerShell/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 9503c21c767b49634aefbe5b48ec3dcde5b56a0703a2196f7d967d091c745d55
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - dotnet
+    - libpsl-native
+  host:
+    - lttng-ust  # [linux]
+    - openssl <3
+  run:
+    - dotnet
+    - lttng-ust  # [linux]
+    - openssl <3
+
+test:
+  commands:
+    - pwsh --help
+
+about:
+  home: https://github.com/PowerShell/PowerShell
+  license: MIT
+  license_file: LICENSE.txt
+  summary: PowerShell for every system!
+  dev_rul: https://github.com/PowerShell/PowerShell
+
+extra:
+  recipe-maintainers:
+    - danielnachun
