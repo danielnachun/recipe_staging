@@ -1,0 +1,38 @@
+{% set name = "checkstyle" %}
+{% set version = "10.12.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/checkstyle/{{ name }}/archive/{{ name }}-{{ version }}.tar.gz
+  sha256: da94998bd793efb64965259b90225cccf81abeaa0dbd707a7d201aa86060c7aa
+  folder: checkstyle
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - maven
+    - openjdk
+  run:
+    - openjdk
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/checkstyle/{{ name }}
+  license: LGPL-2.1-or-later AND Apache-2.0
+  license_file: 
+    - checkstyle/LICENSE
+    - checkstyle/LICENSE.apache20
+  summary: Checkstyle is a development tool to help programmers write Java code that adheres to a coding standard
+  dev_url: https://github.com/checkstyle/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
