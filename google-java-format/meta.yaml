@@ -16,7 +16,7 @@ requirements:
   build:
     - maven
     - openjdk >=11,<12
-  host:
+  run:
     - openjdk
 
 test:
