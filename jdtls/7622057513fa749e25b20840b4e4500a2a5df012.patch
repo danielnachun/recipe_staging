@@ -1,0 +1,420 @@
+From 7622057513fa749e25b20840b4e4500a2a5df012 Mon Sep 17 00:00:00 2001
+From: Jessica He <jhe@redhat.com>
+Date: Wed, 10 May 2023 17:00:55 -0400
+Subject: [PATCH] Add quickfix to convert lambda block to expression
+
+Signed-off-by: Jessica He <jhe@redhat.com>
+---
+ .../internal/cleanup/CleanUpRegistry.java     |   1 +
+ .../LambdaExpressionAndMethodRefCleanUp.java  |  57 +++++++++
+ .../cleanup/LambdaExpressionCleanup.java      |   2 +-
+ .../proposals/IProposalRelevance.java         |   1 +
+ .../text/correction/QuickAssistProcessor.java |  38 +++++-
+ .../core/internal/cleanup/CleanUpsTest.java   |   5 +-
+ ...> ConvertMethodReferenceToLambdaTest.java} |  12 +-
+ .../correction/LambdaQuickFixTest.java        | 120 ++++++++++++++++++
+ .../handlers/CodeActionHandlerTest.java       |   2 +-
+ 9 files changed, 226 insertions(+), 12 deletions(-)
+ create mode 100644 org.eclipse.jdt.ls.core/src/org/eclipse/jdt/ls/core/internal/cleanup/LambdaExpressionAndMethodRefCleanUp.java
+ rename org.eclipse.jdt.ls.tests/src/org/eclipse/jdt/ls/core/internal/correction/{ConvertMethodReferenceToLambaTest.java => ConvertMethodReferenceToLambdaTest.java} (91%)
+ create mode 100644 org.eclipse.jdt.ls.tests/src/org/eclipse/jdt/ls/core/internal/correction/LambdaQuickFixTest.java
+
+diff --git a/org.eclipse.jdt.ls.core/src/org/eclipse/jdt/ls/core/internal/cleanup/CleanUpRegistry.java b/org.eclipse.jdt.ls.core/src/org/eclipse/jdt/ls/core/internal/cleanup/CleanUpRegistry.java
+index a500e91dd4..86b43e2022 100644
+--- a/org.eclipse.jdt.ls.core/src/org/eclipse/jdt/ls/core/internal/cleanup/CleanUpRegistry.java
++++ b/org.eclipse.jdt.ls.core/src/org/eclipse/jdt/ls/core/internal/cleanup/CleanUpRegistry.java
+@@ -50,6 +50,7 @@ public CleanUpRegistry() {
+ 		cleanUpsList.add(new InstanceofPatternMatch());
+ 		cleanUpsList.add(new LambdaExpressionCleanup());
+ 		cleanUpsList.add(new TryWithResourceCleanUp());
++		cleanUpsList.add(new LambdaExpressionAndMethodRefCleanUp());
+ 
+ 		// Store in a Map so that they can be accessed by ID quickly
+ 		cleanUps = new HashMap<>();
+diff --git a/org.eclipse.jdt.ls.core/src/org/eclipse/jdt/ls/core/internal/cleanup/LambdaExpressionAndMethodRefCleanUp.java b/org.eclipse.jdt.ls.core/src/org/eclipse/jdt/ls/core/internal/cleanup/LambdaExpressionAndMethodRefCleanUp.java
+new file mode 100644
+index 0000000000..21ed7b9233
+--- /dev/null
++++ b/org.eclipse.jdt.ls.core/src/org/eclipse/jdt/ls/core/internal/cleanup/LambdaExpressionAndMethodRefCleanUp.java
+@@ -0,0 +1,57 @@
++/*******************************************************************************
++ * Copyright (c) 2023 Red Hat Inc. and others.
++ * All rights reserved. This program and the accompanying materials
++ * are made available under the terms of the Eclipse Public License 2.0
++ * which accompanies this distribution, and is available at
++ * http://www.eclipse.org/legal/epl-2.0
++ *
++ * SPDX-License-Identifier: EPL-2.0
++ *
++ * Contributors:
++ *     Red Hat Inc. - initial API and implementation
++ *******************************************************************************/
++package org.eclipse.jdt.ls.core.internal.cleanup;
++
++import java.util.Collections;
++import java.util.List;
++
++import org.eclipse.core.runtime.CoreException;
++import org.eclipse.jdt.core.dom.CompilationUnit;
++import org.eclipse.jdt.core.manipulation.CleanUpContextCore;
++import org.eclipse.jdt.core.manipulation.ICleanUpFixCore;
++import org.eclipse.jdt.internal.corext.fix.LambdaExpressionAndMethodRefFixCore;
++
++/**
++ * Represents a cleanup that does several actions to clean up lambda expression
++ */
++public class LambdaExpressionAndMethodRefCleanUp implements ISimpleCleanUp {
++
++	/* (non-Javadoc)
++	 * @see org.eclipse.jdt.ls.core.internal.cleanup.ISimpleCleanUp#getIdentifier()
++	 */
++	@Override
++	public String getIdentifier() {
++		return "lambdaExpression";
++	}
++
++	/* (non-Javadoc)
++	 * @see org.eclipse.jdt.ls.core.internal.cleanup.ISimpleCleanUp#createFix(org.eclipse.jdt.core.manipulation.CleanUpContextCore)
++	 */
++	@Override
++	public ICleanUpFixCore createFix(CleanUpContextCore context) throws CoreException {
++		CompilationUnit unit = context.getAST();
++		if (unit == null) {
++			return null;
++		}
++		return LambdaExpressionAndMethodRefFixCore.createCleanUp(unit);
++	}
++
++	/* (non-Javadoc)
++	 * @see org.eclipse.jdt.ls.core.internal.cleanup.ISimpleCleanUp#getRequiredCompilerMarkers()
++	 */
++	@Override
++	public List<String> getRequiredCompilerMarkers() {
++		return Collections.emptyList();
++	}
++
++}
+diff --git a/org.eclipse.jdt.ls.core/src/org/eclipse/jdt/ls/core/internal/cleanup/LambdaExpressionCleanup.java b/org.eclipse.jdt.ls.core/src/org/eclipse/jdt/ls/core/internal/cleanup/LambdaExpressionCleanup.java
+index 02fe3629ff..4f402b1d60 100644
+--- a/org.eclipse.jdt.ls.core/src/org/eclipse/jdt/ls/core/internal/cleanup/LambdaExpressionCleanup.java
++++ b/org.eclipse.jdt.ls.core/src/org/eclipse/jdt/ls/core/internal/cleanup/LambdaExpressionCleanup.java
+@@ -31,7 +31,7 @@ public class LambdaExpressionCleanup implements ISimpleCleanUp {
+ 	 */
+ 	@Override
+ 	public String getIdentifier() {
+-		return "lambdaExpression";
++		return "lambdaExpressionFromAnonymousClass";
+ 	}
+ 
+ 	/* (non-Javadoc)
+diff --git a/org.eclipse.jdt.ls.core/src/org/eclipse/jdt/ls/core/internal/corrections/proposals/IProposalRelevance.java b/org.eclipse.jdt.ls.core/src/org/eclipse/jdt/ls/core/internal/corrections/proposals/IProposalRelevance.java
+index c1f5fa28e8..71cc0147c3 100644
+--- a/org.eclipse.jdt.ls.core/src/org/eclipse/jdt/ls/core/internal/corrections/proposals/IProposalRelevance.java
++++ b/org.eclipse.jdt.ls.core/src/org/eclipse/jdt/ls/core/internal/corrections/proposals/IProposalRelevance.java
+@@ -285,6 +285,7 @@ public interface IProposalRelevance {
+ 	public static final int INSERT_INFERRED_TYPE_ARGUMENTS_ERROR= 1;
+ 	public static final int RETURN_ALLOCATED_OBJECT_VOID= 1;
+ 	public static final int CONVERT_TO_IF_RETURN= 1;
++	public static final int LAMBDA_EXPRESSION_AND_METHOD_REF_CLEANUP = 1;
+ 
+ 	public static final int CONVERT_TO_MESSAGE_FORMAT= 0;
+ 	public static final int COPY_ANNOTATION_JAR= 0;
+diff --git a/org.eclipse.jdt.ls.core/src/org/eclipse/jdt/ls/core/internal/text/correction/QuickAssistProcessor.java b/org.eclipse.jdt.ls.core/src/org/eclipse/jdt/ls/core/internal/text/correction/QuickAssistProcessor.java
+index f24c08c227..5b2c2a36aa 100644
+--- a/org.eclipse.jdt.ls.core/src/org/eclipse/jdt/ls/core/internal/text/correction/QuickAssistProcessor.java
++++ b/org.eclipse.jdt.ls.core/src/org/eclipse/jdt/ls/core/internal/text/correction/QuickAssistProcessor.java
+@@ -28,6 +28,7 @@
+ import java.util.Collections;
+ import java.util.Iterator;
+ import java.util.List;
++import java.util.stream.Collectors;
+ 
+ import org.eclipse.core.runtime.CoreException;
+ import org.eclipse.core.runtime.NullProgressMonitor;
+@@ -112,7 +113,9 @@
+ import org.eclipse.jdt.internal.corext.dom.JdtASTMatcher;
+ import org.eclipse.jdt.internal.corext.dom.ScopeAnalyzer;
+ import org.eclipse.jdt.internal.corext.dom.Selection;
++import org.eclipse.jdt.internal.corext.fix.FixMessages;
+ import org.eclipse.jdt.internal.corext.fix.IProposableFix;
++import org.eclipse.jdt.internal.corext.fix.LambdaExpressionAndMethodRefFixCore;
+ import org.eclipse.jdt.internal.corext.fix.LinkedProposalModelCore;
+ import org.eclipse.jdt.internal.corext.fix.StringConcatToTextBlockFixCore;
+ import org.eclipse.jdt.internal.corext.fix.SwitchExpressionsFixCore;
+@@ -199,6 +202,7 @@ public List<ChangeCorrectionProposal> getAssists(CodeActionParams params, IInvoc
+ 				//				getChangeLambdaBodyToExpressionProposal(context, coveringNode, resultingCollections);
+ 				//				getAddInferredLambdaParameterTypes(context, coveringNode, resultingCollections);
+ 			getExtractMethodFromLambdaProposal(context, coveringNode, problemsAtLocation, resultingCollections);
++			getConvertLambdaExpressionAndMethodRefCleanUpProposal(context, coveringNode, resultingCollections);
+ 			getConvertMethodReferenceToLambdaProposal(context, coveringNode, resultingCollections);
+ 			getConvertLambdaToMethodReferenceProposal(context, coveringNode, resultingCollections);
+ 				//				getFixParenthesesInLambdaExpression(context, coveringNode, resultingCollections);
+@@ -255,6 +259,32 @@ private static boolean getExtractMethodFromLambdaProposal(IInvocationContext con
+ 		return false;
+ 	}
+ 
++	private static boolean getConvertLambdaExpressionAndMethodRefCleanUpProposal(IInvocationContext context, ASTNode coveringNode, Collection<ChangeCorrectionProposal> proposals) throws CoreException {
++		if (coveringNode instanceof Block && coveringNode.getLocationInParent() == LambdaExpression.BODY_PROPERTY) {
++			return false;
++		}
++		ASTNode node = ASTNodes.getFirstAncestorOrNull(coveringNode, LambdaExpression.class, BodyDeclaration.class);
++		if (!(node instanceof LambdaExpression)) {
++			return false;
++		}
++
++		IProposableFix fix = LambdaExpressionAndMethodRefFixCore.createLambdaExpressionAndMethodRefFix(node);
++		if (fix == null) {
++			return false;
++		}
++
++		// add correction proposal
++		try {
++			CompilationUnitChange change = fix.createChange(null);
++			ChangeCorrectionProposal proposal = new ChangeCorrectionProposal(fix.getDisplayString(), JavaCodeActionKind.QUICK_ASSIST, change, IProposalRelevance.LAMBDA_EXPRESSION_AND_METHOD_REF_CLEANUP);
++			proposals.add(proposal);
++			return true;
++		} catch (CoreException e) {
++			// ignore
++		}
++		return true;
++	}
++
+ 	private static boolean getAssignParamToFieldProposals(IInvocationContext context, ASTNode node, Collection<ChangeCorrectionProposal> resultingCollections) {
+ 		node = ASTNodes.getNormalizedNode(node);
+ 		ASTNode parent = node.getParent();
+@@ -863,7 +893,7 @@ private static boolean getConvertMethodReferenceToLambdaProposal(IInvocationCont
+ 
+ 		// add proposal
+ 		String label = CorrectionMessages.QuickAssistProcessor_convert_to_lambda_expression;
+-		LinkedCorrectionProposal proposal = new LinkedCorrectionProposal(label, CodeActionKind.QuickFix, context.getCompilationUnit(), rewrite, IProposalRelevance.CONVERT_METHOD_REFERENCE_TO_LAMBDA);
++		LinkedCorrectionProposal proposal = new LinkedCorrectionProposal(label, JavaCodeActionKind.QUICK_ASSIST, context.getCompilationUnit(), rewrite, IProposalRelevance.CONVERT_METHOD_REFERENCE_TO_LAMBDA);
+ 		proposal.setLinkedProposalModel(linkedProposalModel);
+ 		proposal.setEndPosition(rewrite.track(lambda));
+ 		resultingCollections.add(proposal);
+@@ -871,6 +901,10 @@ private static boolean getConvertMethodReferenceToLambdaProposal(IInvocationCont
+ 	}
+ 
+ 	private static boolean getConvertLambdaToMethodReferenceProposal(IInvocationContext context, ASTNode coveringNode, Collection<ChangeCorrectionProposal> resultingCollections) {
++		// Don't calculate if lambda expression clean up quick assist exists
++		if (!resultingCollections.stream().filter(proposal -> proposal.getName().equals(FixMessages.LambdaExpressionAndMethodRefFix_clean_up_expression_msg)).collect(Collectors.toList()).isEmpty()) {
++			return false;
++		}
+ 		LambdaExpression lambda;
+ 		if (coveringNode instanceof LambdaExpression lambdaExpr) {
+ 			lambda = lambdaExpr;
+@@ -1090,7 +1124,7 @@ private static boolean getConvertLambdaToMethodReferenceProposal(IInvocationCont
+ 
+ 		// add correction proposal
+ 		String label = CorrectionMessages.QuickAssistProcessor_convert_to_method_reference;
+-		ASTRewriteCorrectionProposal proposal = new ASTRewriteCorrectionProposal(label, CodeActionKind.QuickFix, context.getCompilationUnit(), rewrite, IProposalRelevance.CONVERT_TO_METHOD_REFERENCE);
++		ASTRewriteCorrectionProposal proposal = new ASTRewriteCorrectionProposal(label, JavaCodeActionKind.QUICK_ASSIST, context.getCompilationUnit(), rewrite, IProposalRelevance.CONVERT_TO_METHOD_REFERENCE);
+ 		if (importRewrite != null) {
+ 			proposal.setImportRewrite(importRewrite);
+ 		}
+diff --git a/org.eclipse.jdt.ls.tests/src/org/eclipse/jdt/ls/core/internal/cleanup/CleanUpsTest.java b/org.eclipse.jdt.ls.tests/src/org/eclipse/jdt/ls/core/internal/cleanup/CleanUpsTest.java
+index 783a718292..03256e8d4c 100644
+--- a/org.eclipse.jdt.ls.tests/src/org/eclipse/jdt/ls/core/internal/cleanup/CleanUpsTest.java
++++ b/org.eclipse.jdt.ls.tests/src/org/eclipse/jdt/ls/core/internal/cleanup/CleanUpsTest.java
+@@ -446,7 +446,7 @@ public void testLambdaExpression() throws Exception {
+ 
+ 		ICompilationUnit unit = pack1.createCompilationUnit("LambdaExpression.java", contents, false, monitor);
+ 		String uri = unit.getUnderlyingResource().getLocationURI().toString();
+-		List<TextEdit> textEdits = registry.getEditsForAllActiveCleanUps(new TextDocumentIdentifier(uri), Arrays.asList("lambdaExpression"), monitor);
++		List<TextEdit> textEdits = registry.getEditsForAllActiveCleanUps(new TextDocumentIdentifier(uri), Arrays.asList("lambdaExpressionFromAnonymousClass"), monitor);
+ 		String actual = TextEditUtil.apply(unit, textEdits);
+ 		String expected = "package test1;\n" //
+ 				+ "\n" //
+@@ -493,7 +493,8 @@ public void testMultiCleanup() throws Exception {
+ 
+ 		ICompilationUnit unit = pack1.createCompilationUnit("MultiCleanup.java", contents, false, monitor);
+ 		String uri = unit.getUnderlyingResource().getLocationURI().toString();
+-		List<TextEdit> textEdits = registry.getEditsForAllActiveCleanUps(new TextDocumentIdentifier(uri), Arrays.asList("lambdaExpression", "instanceofPatternMatch", "stringConcatToTextBlock", "addFinalModifier"), monitor);
++		List<TextEdit> textEdits = registry.getEditsForAllActiveCleanUps(new TextDocumentIdentifier(uri), Arrays.asList("lambdaExpressionFromAnonymousClass", "instanceofPatternMatch", "stringConcatToTextBlock", "addFinalModifier"),
++				monitor);
+ 		String actual = TextEditUtil.apply(unit, textEdits);
+ 		String expected = "package test1;\n"
+ 				+ "\n"
+diff --git a/org.eclipse.jdt.ls.tests/src/org/eclipse/jdt/ls/core/internal/correction/ConvertMethodReferenceToLambaTest.java b/org.eclipse.jdt.ls.tests/src/org/eclipse/jdt/ls/core/internal/correction/ConvertMethodReferenceToLambdaTest.java
+similarity index 91%
+rename from org.eclipse.jdt.ls.tests/src/org/eclipse/jdt/ls/core/internal/correction/ConvertMethodReferenceToLambaTest.java
+rename to org.eclipse.jdt.ls.tests/src/org/eclipse/jdt/ls/core/internal/correction/ConvertMethodReferenceToLambdaTest.java
+index 6519aa9bcf..d6f3d62465 100644
+--- a/org.eclipse.jdt.ls.tests/src/org/eclipse/jdt/ls/core/internal/correction/ConvertMethodReferenceToLambaTest.java
++++ b/org.eclipse.jdt.ls.tests/src/org/eclipse/jdt/ls/core/internal/correction/ConvertMethodReferenceToLambdaTest.java
+@@ -34,7 +34,7 @@
+ import org.junit.Before;
+ import org.junit.Test;
+ 
+-public class ConvertMethodReferenceToLambaTest extends AbstractQuickFixTest {
++public class ConvertMethodReferenceToLambdaTest extends AbstractQuickFixTest {
+ 	private IJavaProject fJProject;
+ 	private IPackageFragmentRoot fSourceFolder;
+ 
+@@ -73,7 +73,7 @@ public void testMethodReferenceToLambda() throws Exception {
+ 		assertEquals(2, codeActions.size());
+ 		Either<Command, CodeAction> codeAction = codeActions.get(0);
+ 		CodeAction action = codeAction.getRight();
+-		assertEquals(CodeActionKind.QuickFix, action.getKind());
++		assertEquals(JavaCodeActionKind.QUICK_ASSIST, action.getKind());
+ 		assertEquals("Convert to lambda expression", action.getTitle());
+ 		Command c = action.getCommand();
+ 		assertEquals("java.apply.workspaceEdit", c.getCommand());
+@@ -98,14 +98,14 @@ public void testLambdaToMethodReference() throws Exception {
+ 		Range range = new Range(new Position(4, 39), new Position(4, 39));
+ 		List<Either<Command, CodeAction>> codeActions = evaluateCodeActions(cu, range);
+ 		assertEquals(2, codeActions.size());
+-		Either<Command, CodeAction> codeAction = codeActions.get(0);
++		Either<Command, CodeAction> codeAction = codeActions.get(1);
+ 		CodeAction action = codeAction.getRight();
+-		assertEquals(CodeActionKind.QuickFix, action.getKind());
+-		assertEquals("Convert to method reference", action.getTitle());
++		assertEquals(JavaCodeActionKind.QUICK_ASSIST, action.getKind());
++		assertEquals("Clean up lambda expression", action.getTitle());
+ 		Command c = action.getCommand();
+ 		assertEquals("java.apply.workspaceEdit", c.getCommand());
+ 		assertNotNull(c.getArguments());
+-		assertEquals("Convert to method reference", c.getTitle());
++		assertEquals("Clean up lambda expression", c.getTitle());
+ 	}
+ 
+ }
+diff --git a/org.eclipse.jdt.ls.tests/src/org/eclipse/jdt/ls/core/internal/correction/LambdaQuickFixTest.java b/org.eclipse.jdt.ls.tests/src/org/eclipse/jdt/ls/core/internal/correction/LambdaQuickFixTest.java
+new file mode 100644
+index 0000000000..cbafd242e7
+--- /dev/null
++++ b/org.eclipse.jdt.ls.tests/src/org/eclipse/jdt/ls/core/internal/correction/LambdaQuickFixTest.java
+@@ -0,0 +1,120 @@
++/*******************************************************************************
++ * Copyright (c) 2023 Red Hat Inc. and others.
++ * All rights reserved. This program and the accompanying materials
++ * are made available under the terms of the Eclipse Public License 2.0
++ * which accompanies this distribution, and is available at
++ * https://www.eclipse.org/legal/epl-2.0/
++ *
++ * SPDX-License-Identifier: EPL-2.0
++ *
++ * Contributors:
++ *     Red Hat Inc. - initial API and implementation
++ *******************************************************************************/
++package org.eclipse.jdt.ls.core.internal.correction;
++
++import java.util.Hashtable;
++import java.util.List;
++
++import org.eclipse.jdt.core.ICompilationUnit;
++import org.eclipse.jdt.core.IJavaProject;
++import org.eclipse.jdt.core.IPackageFragment;
++import org.eclipse.jdt.core.IPackageFragmentRoot;
++import org.eclipse.jdt.ls.core.internal.JavaCodeActionKind;
++import org.eclipse.lsp4j.CodeAction;
++import org.eclipse.lsp4j.CodeActionKind;
++import org.eclipse.lsp4j.Command;
++import org.eclipse.lsp4j.Position;
++import org.eclipse.lsp4j.Range;
++import org.eclipse.lsp4j.jsonrpc.messages.Either;
++import org.junit.Before;
++import org.junit.Test;
++
++public class LambdaQuickFixTest extends AbstractSelectionTest {
++
++	private IJavaProject fJProject1;
++
++	private IPackageFragmentRoot fSourceFolder;
++
++	@Before
++	public void setup() throws Exception {
++		fJProject1 = newEmptyProject();
++		Hashtable<String, String> options = TestOptions.getDefaultOptions();
++		fJProject1.setOptions(options);
++		fSourceFolder = fJProject1.getPackageFragmentRoot(fJProject1.getProject().getFolder("src"));
++		setOnly(CodeActionKind.Refactor, CodeActionKind.QuickFix);
++	}
++
++	@Test
++	public void testCleanUpLambdaConvertLambdaBlockToExpression() throws Exception {
++		IPackageFragment pack1 = fSourceFolder.createPackageFragment("test1", false, null);
++		setOnly(JavaCodeActionKind.QUICK_ASSIST);
++		//@formatter:off
++		String contents = "package test1;\r\n"
++				+ "interface F1 {\r\n"
++				+ "    int foo1(int a);\r\n"
++				+ "}\r\n"
++				+ "public class E {\r\n"
++				+ "    public void foo(int a) {\r\n"
++				+ "        F1 k = (e) -> {\r\n"
++				+ "            return a;\r\n"
++				+ "        };\r\n"
++				+ "        k.foo1(5);\r\n"
++				+ "    }\r\n"
++				+ "}";
++		//@formatter:on
++		ICompilationUnit cu = pack1.createCompilationUnit("E.java", contents, false, null);
++		//@formatter:off
++		String expected = "package test1;\r\n"
++				+ "interface F1 {\r\n"
++				+ "    int foo1(int a);\r\n"
++				+ "}\r\n"
++				+ "public class E {\r\n"
++				+ "    public void foo(int a) {\r\n"
++				+ "        F1 k = e -> a;\r\n"
++				+ "        k.foo1(5);\r\n"
++				+ "    }\r\n"
++				+ "}";
++		//@formatter:on
++		Range range = new Range(new Position(7, 16), new Position(7, 16));
++		List<Either<Command, CodeAction>> codeActions = evaluateCodeActions(cu, range);
++		Expected e1 = new Expected("Clean up lambda expression", expected, JavaCodeActionKind.QUICK_ASSIST);
++		assertCodeActions(codeActions, e1);
++	}
++
++	@Test
++	public void testCleanUpLambdaConvertLambdaBlockToExpressionAddParenthesis() throws Exception {
++		IPackageFragment pack1 = fSourceFolder.createPackageFragment("test1", false, null);
++		setOnly(JavaCodeActionKind.QUICK_ASSIST);
++		//@formatter:off
++		String contents = "package test1;\r\n"
++				+ "interface F1 {\r\n"
++				+ "    int foo1(int a);\r\n"
++				+ "}\r\n"
++				+ "public class E {\r\n"
++				+ "    public void foo(int a) {\r\n"
++				+ "        F1 k = (e) -> {\r\n"
++				+ "            return a + 1;\r\n"
++				+ "        };\r\n"
++				+ "        k.foo1(5);\r\n"
++				+ "    }\r\n"
++				+ "}";
++		//@formatter:on
++		ICompilationUnit cu = pack1.createCompilationUnit("E.java", contents, false, null);
++		//@formatter:off
++		String expected = "package test1;\r\n"
++				+ "interface F1 {\r\n"
++				+ "    int foo1(int a);\r\n"
++				+ "}\r\n"
++				+ "public class E {\r\n"
++				+ "    public void foo(int a) {\r\n"
++				+ "        F1 k = e -> (a + 1);\r\n"
++				+ "        k.foo1(5);\r\n"
++				+ "    }\r\n"
++				+ "}";
++		//@formatter:on
++		Range range = new Range(new Position(7, 16), new Position(7, 16));
++		List<Either<Command, CodeAction>> codeActions = evaluateCodeActions(cu, range);
++		Expected e1 = new Expected("Clean up lambda expression", expected, JavaCodeActionKind.QUICK_ASSIST);
++		assertCodeActions(codeActions, e1);
++	}
++}
+\ No newline at end of file
+diff --git a/org.eclipse.jdt.ls.tests/src/org/eclipse/jdt/ls/core/internal/handlers/CodeActionHandlerTest.java b/org.eclipse.jdt.ls.tests/src/org/eclipse/jdt/ls/core/internal/handlers/CodeActionHandlerTest.java
+index 0d1ae5af0c..6a862ab456 100644
+--- a/org.eclipse.jdt.ls.tests/src/org/eclipse/jdt/ls/core/internal/handlers/CodeActionHandlerTest.java
++++ b/org.eclipse.jdt.ls.tests/src/org/eclipse/jdt/ls/core/internal/handlers/CodeActionHandlerTest.java
+@@ -635,7 +635,7 @@ public void testCodeAction_unimplementedMethodReference() throws Exception {
+ 		List<Either<Command, CodeAction>> codeActions = getCodeActions(params);
+ 
+ 		Assert.assertNotNull(codeActions);
+-		CodeAction action = codeActions.get(1).getRight();
++		CodeAction action = codeActions.get(0).getRight();
+ 		Assert.assertEquals("Add missing method 'action' to class 'Foo'", action.getTitle());
+ 	}
+ 
