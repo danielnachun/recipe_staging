@@ -1,0 +1,33 @@
+{% set name = "fsautocomplete" %}
+{% set version = "0.60.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/fsharp/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 27bae65a9c8ba0945f1cbcc2a8576e40b95507d191f602886df16661fef80832
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - dotnet
+  run:
+    - dotnet
+
+test:
+  commands:
+    - fsautocomplete --help
+
+about:
+  home: https://github.com/fsharp/{{ name }}
+  license: Apache-2.0
+  license_file: LICENSE.md
+  summary: F# language server using Language Server Protocol
+
+extra:
+  recipe-maintainers:
+    - danielnachun
