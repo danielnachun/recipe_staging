@@ -1,0 +1,38 @@
+{% set gem_name = "ast" %}
+{% set name = "rb-ast" %}
+{% set version = "2.4.2" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://rubygems.org/downloads/{{ gem_name }}-{{ version }}.gem
+  sha256: 1e280232e6a33754cde542bc5ef85520b74db2aac73ec14acef453784447cc12
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies {{ gem_name }}-{{ version }}.gem
+    - gem unpack {{ gem_name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby
+  run:
+    - ruby
+
+test:
+  commands:
+    - ruby -r {{ gem_name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/ast
+  license: MIT
+  summary: A library for working with Abstract Syntax Trees.
+  dev_url: https://github.com/whitequark/ast
+
+extra:
+  recipe-maintainers:
+    - danielnachun

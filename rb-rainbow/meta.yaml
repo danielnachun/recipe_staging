@@ -1,0 +1,38 @@
+{% set gem_name = "rainbow" %}
+{% set name = "rb-rainbow" %}
+{% set version = "3.1.1" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://rubygems.org/downloads/{{ gem_name }}-{{ version }}.gem
+  sha256: 039491aa3a89f42efa1d6dec2fc4e62ede96eb6acd95e52f1ad581182b79bc6a
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies {{ gem_name }}-{{ version }}.gem
+    - gem unpack {{ gem_name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby
+  run:
+    - ruby
+
+test:
+  commands:
+    - ruby -r {{ gem_name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/rainbow
+  license: MIT
+  summary: Colorize printed text on ANSI terminals
+  dev_url: http://github.com/sickill/rainbow
+
+extra:
+  recipe-maintainers:
+    - danielnachun

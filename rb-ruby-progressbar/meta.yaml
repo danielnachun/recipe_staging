@@ -1,0 +1,38 @@
+{% set gem_name = "ruby-progressbar" %}
+{% set name = "rb-ruby-progressbar" %}
+{% set version = "1.13.0" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://rubygems.org/downloads/{{ gem_name }}-{{ version }}.gem
+  sha256: 80fc9c47a9b640d6834e0dc7b3c94c9df37f08cb072b7761e4a71e22cff29b33
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies {{ gem_name }}-{{ version }}.gem
+    - gem unpack {{ gem_name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby
+  run:
+    - ruby
+
+test:
+  commands:
+    - ruby -r {{ gem_name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/ruby-progressbar
+  license: MIT
+  summary: Ruby/ProgressBar is an extremely flexible text progress bar library for Ruby.
+  dev_url: https://github.com/jfelchner/ruby-progressbar
+
+extra:
+  recipe-maintainers:
+    - danielnachun

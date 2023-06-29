@@ -1,0 +1,40 @@
+{% set name = "rubocop-performance" %}
+{% set version = "1.18.0" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: 4c9d74f1b5bfaffb5b1cdb843279364198ac804e2644ae194615834dd011e02e
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby
+  run:
+    - rb-ast
+    - rb-rubocop-ast
+    - rubocop
+    - ruby
+
+test:
+  commands:
+    - rubocop --require rubocop-performance --help
+
+about:
+  home: https://rubygems.org/gems/rubocop-performance
+  license: MIT
+  summary: A collection of RuboCop cops to check for performance optimizations in Ruby code.
+  dev_url: https://github.com/rubocop/rubocop-performance/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
