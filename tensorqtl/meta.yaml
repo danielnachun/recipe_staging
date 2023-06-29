@@ -1,13 +1,13 @@
 {% set name = "tensorqtl" %}
-{% set version = "1.0.7" %}
+{% set version = "1.0.8" %}
 
 package:
   name: "{{ name|lower }}"
   version: "{{ version }}"
 
 source:
-  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
-  sha256: 0623d7b99f62542616587402261798472120ff69cdb44f8e07dd415e54aea2fa
+  git_url: https://github.com/broadinstitute/tensorqtl
+  git_rev: 890f32977f36d7e5be2d0820c7f382764617b553
 
 build:
   number: 1
@@ -16,7 +16,7 @@ build:
 
 requirements:
   host:
-    - numpy
+    - numpy >=1.25
     - pandas
     - pandas-plink
     - pip
@@ -28,7 +28,7 @@ requirements:
     - pytorch
   run:
     - bioconductor-qvalue
-    - numpy
+    - numpy >=1.25
     - pandas
     - pandas-plink
     - pyarrow
@@ -46,12 +46,9 @@ test:
 
 about:
   home: https://github.com/broadinstitute/tensorqtl
-  license: BSD 3 Clause
-  license_family: BSD
-  license_file: 
-  summary: "GPU-accelerated QTL mapper"
-  doc_url: 
-  dev_url: 
+  license: BSD-3-Clause
+  license_file: LICENSE
+  summary: GPU-accelerated QTL mapper
 
 extra:
   recipe-maintainers:
