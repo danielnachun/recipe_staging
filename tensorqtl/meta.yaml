@@ -21,7 +21,7 @@ requirements:
     - pandas-plink
     - pip
     - pyarrow
-    - python
+    - python >=3.10,<3.11
     - qtl
     - rpy2
     - scipy
@@ -32,7 +32,7 @@ requirements:
     - pandas
     - pandas-plink
     - pyarrow
-    - python
+    - python >=3.10,<3.11
     - qtl
     - rpy2
     - scipy
