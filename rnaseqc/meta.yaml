@@ -18,6 +18,7 @@ requirements:
     - {{ compiler('cxx') }}
     - binutils
     - make
+    - sed
   host:
     - bzip2
     - xz
@@ -28,7 +29,7 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/rnaseqc
+    - rnaseqc --help
 
 about:
   home: https://github.com/getzlab/rnaseqc
