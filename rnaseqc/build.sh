@@ -6,9 +6,9 @@ cd rnaseqc
 sed -i 's/CC/CXX/g' Makefile
 sed -i "s?-lz?-L${PREFIX}/lib -lz?g" SeqLib/bwa/Makefile
 sed -i "s?-lz?-L${PREFIX}/lib -lz?g" SeqLib/fermi-lite/Makefile
-make CXX=${CXX} \
+make CXX="${CXX} -std=c++14" \
      CC="${CC} -fcommon" \
-     STDLIB="-std=c++14 -I${PREFIX}/include" \
+     STDLIB="-I${PREFIX}/include" \
      INCLUDES="-I${PREFIX}/include" \
      LDFLAGS="-L${PREFIX}/lib" \
      CPPFLAGS="-I${PREFIX}/include" \
