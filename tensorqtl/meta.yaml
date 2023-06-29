@@ -26,7 +26,7 @@ requirements:
     - rpy2
     - scipy
     - pytorch
-    - sedt c
+    - sed
   run:
     - bioconductor-qvalue
     - numpy >=1.25
