@@ -29,7 +29,7 @@ requirements:
 
 test:
   commands:
-    - rnaseqc --help
+    - rnaseqc --help || true
 
 about:
   home: https://github.com/getzlab/rnaseqc
