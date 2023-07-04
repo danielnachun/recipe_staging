@@ -1,0 +1,49 @@
+{% set name = "anakin-language-server" %}
+{% set version = "1.16" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: ef6888d0b4177230ddcde50028e4c5dd5260f63e34b6778a536349412b9dffaa
+
+build:
+  number: 0
+  entry_points:
+    - anakinls=anakinls.__main__:main
+  script: {{ PYTHON }} -m pip install . -vv
+
+requirements:
+  host:
+    - jedi >=0.18.0
+    - pip
+    - pycodestyle~ 2.5
+    - pyflakes~ 2.2
+    - pygls >=0.10.2,<0.11
+    - python
+    - yapf~ 0.30
+  run:
+    - jedi >=0.18.0
+    - pycodestyle~ 2.5
+    - pyflakes~ 2.2
+    - pygls >=0.10.2,<0.11
+    - python
+    - yapf~ 0.30
+
+test:
+  imports:
+    - anakinls
+  commands:
+    - anakinls --help
+
+about:
+  home: https://github.com/muffinmad/anakin-language-server
+  license: GPL-3.0-or-later
+  license_file: LICENSE
+  summary: Yet another Jedi Python language server
+
+extra:
+  recipe-maintainers:
+    - danielnachun
