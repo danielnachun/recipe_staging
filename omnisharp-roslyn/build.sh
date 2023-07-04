@@ -7,8 +7,8 @@ set -o xtrace -o nounset -o pipefail -o errexit
 sed -i "s/0.0.1-local/${PKG_VERSION}/" scripts/common.cake
 sed -i "s/0.0.1.0/${PKG_VERSION%.*}.0.0/" scripts/common.cake
 
-# only built STDIO
-#sed -i 's/"OmniSharp.Stdio.Driver",/"OmniSharp.Stdio.Driver"/;/OmniSharp.Http.Driver/d' build.json
+# only built STDIO because Http driver doesn't support OpenSSL 3.0 yet
+sed -i 's/"OmniSharp.Stdio.Driver",/"OmniSharp.Stdio.Driver"/;/OmniSharp.Http.Driver/d' build.json
 
 case $target_platform in
     osx-64 )
@@ -34,6 +34,11 @@ rm global.json
 sed -i "s|? \"dotnet\"|? \"$(command -v dotnet)\"|" scripts/common.cake
 
 export DOTNET_NOLOGO=1
+# On Linux, make sure the linker uses conda prefix and sysroot for libraries instead of host
+# Also needed for proper ICU detection
+if [[ ${target_platform} =~ .*linux.* ]]; then
+    export LD_LIBRARY_PATH="${PREFIX}/lib:${CONDA_BUILD_SYSROOT}/usr/lib"
+fi
 
 dotnet tool restore
 dotnet cake --target PublishNet6Builds --configuration Release --exclusive --use-global-dotnet-sdk
@@ -52,6 +57,7 @@ esac
 
 mkdir -p "${PREFIX}/usr/bin"
 ln -s "${PREFIX}/libexec/${PKG_NAME}/OmniSharp" "${PREFIX}/bin/OmniSharp"
+# Provide additional symlink that is all lowercase on Linux because it is case sensitive
 if [[ ${target_platform} =~ .*linux.* ]]; then
     ln -s "${PREFIX}/libexec/${PKG_NAME}/OmniSharp" "${PREFIX}/bin/omnisharp"
 fi

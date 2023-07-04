@@ -14,7 +14,10 @@ build:
 
 requirements:
   build:
+    - {{ compiler('cxx') }}
+  host:
     - dotnet
+    - icu  # [linux]
   run:
     - dotnet
 
