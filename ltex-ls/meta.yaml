@@ -1,0 +1,38 @@
+{% set name = "ltex-ls" %}
+{% set version = "16.0.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/valentjn/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
+  sha256: 0cd67495ee4695493fc2a0b37d14146325aa6b9f45d767d16c60abdefdd2dc1d
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - maven
+    - openjdk
+    - python
+    - sed
+  run:
+    - openjdk
+    - python
+
+test:
+  commands:
+    - ltex-ls --help
+    - ltex-cli --help
+
+about:
+  home: https://github.com/valentjn/{{ name }}
+  license: MPL-2.0
+  license_file: LICENSE.md
+  summary: LSP language server for LanguageTool with support for LaTeX, Markdown, and others
+
+extra:
+  recipe-maintainers:
+    - danielnachun
