@@ -1,0 +1,40 @@
+{% set name = "jdtls" %}
+{% set version = "1.24.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/eclipse/eclipse.jdt.ls/archive/v{{ version }}.tar.gz
+  sha256: 63385c68479debb56140a64ec072aa4e98e52aca45c00405c02bbf1adb9451eb
+  patches:
+    - 7622057513fa749e25b20840b4e4500a2a5df012.patch
+    - edd4b20e2bc3f062b0e1b25a7a1088f0b6a94142.patch
+    - 810f806fa6411022138b06e74dbb22640a318297.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - openjdk >=17,<18
+  host:
+    - openjdk >=17,<18
+  run:
+    - openjdk
+    - python
+
+test:
+  commands:
+    - jdtls --help
+
+about:
+  home: https://github.com/eclipse/eclipse.jdt.ls
+  license: EPL-2.0
+  license_file: LICENSE
+  summary: Java language specific implementation of the Language Server Protocol
+
+extra:
+  recipe-maintainers:
+    - danielnachun
