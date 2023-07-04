@@ -2,7 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-sed -i "s/<arg>-Werror<arg>//" pom.xml
+sed -i "s?<arg>-Werror<arg>??g" pom.xml
 
 ${PYTHON} -u tools/createCompletionLists.py
 mvn -B -e clean compile package -DskipTests=True
