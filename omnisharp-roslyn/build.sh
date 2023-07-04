@@ -36,9 +36,8 @@ sed -i "s|? \"dotnet\"|? \"$(command -v dotnet)\"|" scripts/common.cake
 export DOTNET_NOLOGO=1
 # On Linux, make sure the linker uses conda prefix and sysroot for libraries instead of host
 # Also needed for proper ICU detection
-if [[ ${target_platform} =~ .*linux.* ]]; then
-    export LD_LIBRARY_PATH="${PREFIX}/lib:${CONDA_BUILD_SYSROOT}/usr/lib"
-fi
+# This is variable is ignored on macOS.
+export LD_LIBRARY_PATH="${PREFIX}/lib:${CONDA_BUILD_SYSROOT}/usr/lib"
 
 dotnet tool restore
 dotnet cake --target PublishNet6Builds --configuration Release --exclusive --use-global-dotnet-sdk
@@ -55,9 +54,14 @@ case $target_platform in
         cp -a "artifacts/publish/OmniSharp.Stdio.Driver/linux-arm64/net6.0" "${PREFIX}/libexec/${PKG_NAME}" ;;
 esac
 
-mkdir -p "${PREFIX}/usr/bin"
-ln -s "${PREFIX}/libexec/${PKG_NAME}/OmniSharp" "${PREFIX}/bin/OmniSharp"
+mkdir -p "${PREFIX}/bin"
+
+cat << EOF > ${PREFIX}/bin/OmniSharp
+#!/bin/sh
+DOTNET_ROOT=${DOTNET_ROOT} exec ${PREFIX}/libexec/${PKG_NAME}/OmniSharp "\$@"
+EOF
+
 # Provide additional symlink that is all lowercase on Linux because it is case sensitive
 if [[ ${target_platform} =~ .*linux.* ]]; then
-    ln -s "${PREFIX}/libexec/${PKG_NAME}/OmniSharp" "${PREFIX}/bin/omnisharp"
+    ln -s "${PREFIX}/bin/OmniSharp" "${PREFIX}/bin/omnisharp"
 fi
