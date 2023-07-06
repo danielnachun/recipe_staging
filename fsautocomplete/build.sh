@@ -13,4 +13,7 @@ dotnet tool restore
 dotnet run --project build -t LocalRelease
 dotnet tool install --add-source bin/release_as_tool --tool-path ${PREFIX}/libexec/${PKG_NAME} fsautocomplete
 
-ln -sf ${PREFIX}/libexec/${PKG_NAME}/fsautocomplete ${PREFIX}/bin
+cat << EOF > ${PREFIX}/bin/fsautocomplete
+#!/bin/sh
+DOTNET_ROOT=${DOTNET_ROOT} exec ${PREFIX}/libexec/${PKG_NAME}/fsautocomplete "\$@"
+EOF
