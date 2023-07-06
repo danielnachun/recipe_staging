@@ -1,0 +1,39 @@
+{% set name = "omnisharp-roslyn" %}
+{% set version = "1.39.7" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/OmniSharp/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 1e5b73e393e62d75e789bae7a19bcdb57548f8966647c533fb8243a42fba0373
+
+build:
+  number: 0
+  ignore_run_exports:
+    - icu
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - sed
+  host:
+    - dotnet
+    - icu  # [linux]
+  run:
+    - dotnet
+
+test:
+  commands:
+    - omnisharp --help
+
+about:
+  home: https://github.com/OmniSharp/{{ name }}
+  license: MIT
+  license_file: license.md
+  summary: OmniSharp server (HTTP, STDIO) based on Roslyn workspaces
+
+extra:
+  recipe-maintainers:
+    - danielnachun
