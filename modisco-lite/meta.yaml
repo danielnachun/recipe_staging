@@ -21,7 +21,7 @@ requirements:
     - leidenalg >=0.8.10
     - logomaker >=0.8
     - numba >=0.53.1
-    - numpy >=1.21.5
+    - numpy >=1.21.5,<1.25
     - pandas >=1.4.3
     - pip
     - python
@@ -35,7 +35,7 @@ requirements:
     - leidenalg >=0.8.10
     - logomaker >=0.8
     - numba >=0.53.1
-    - numpy >=1.21.5
+    - numpy >=1.21.5,<1.25
     - pandas >=1.4.3
     - python
     - scikit-learn >=1.0.2
