@@ -18,11 +18,10 @@ requirements:
     - libpsl-native
   host:
     - lttng-ust  # [linux]
-    - openssl <3
   run:
     - dotnet
     - lttng-ust  # [linux]
-    - openssl <3
+    - omi
 
 test:
   commands:

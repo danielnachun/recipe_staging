@@ -33,7 +33,7 @@ ln -sf ${PREFIX}/lib/libpsl-native${SHLIB_EXT} src/powershell-unix/libpsl-native
 mkdir -p ${PREFIX}/libexec/powershell/7
 case ${target_platform} in 
     osx-64 )
-        dotnet publish --no-self-contained --configuration Darwin src/powershell-unix --output bin --runtime osx-x64 --framework netstandard2.0
+        dotnet publish --no-self-contained --configuration Darwin src/powershell-unix --output bin --runtime osx-x64
         cp -r src/powershell-unix/bin/Darwin/net7.0/osx-x64/* ${PREFIX}/libexec/powershell/7 ;;
     osx-arm64 )
         dotnet publish --no-self-contained --configuration Darwin src/powershell-unix --output bin --runtime osx-arm64
@@ -55,6 +55,9 @@ cp -r nuget/psreadline/**/* ${PREFIX}/libexec/powershell/7/Modules/PSReadLine
 cp -r nuget/packagemanagement/**/* ${PREFIX}/libexec/powershell/7/Modules/PackageManagement
 cp -r nuget/powershellget/**/* ${PREFIX}/libexec/powershell/7/Modules/PowerShellGet
 cp -r nuget/threadjob/**/* ${PREFIX}/libexec/powershell/7/Modules/ThreadJob
+
+rm -rf ${PREFIX}/libexec/powershell/7/libmi${SHLIB_EXT}
+ln -sf ${PREFIX}/lib/libmi${SHLIB_EXT} ${PREFIX}/libexec/powershell/7
 
 mkdir -p ${PREFIX}/bin
 ln -sf ${PREFIX}/libexec/powershell/7/pwsh ${PREFIX}/bin
