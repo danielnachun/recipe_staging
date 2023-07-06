@@ -1,0 +1,64 @@
+{% set name = "modisco" %}
+{% set version = "0.5.16.0" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: 24d1eef8f7e3617a8da7e595252fe9f5a20803b79453a8d11132769f04f49085
+
+build:
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - h5py >=2.5
+    - joblib >=0.11
+    - leidenalg >=0.8.7
+    - matplotlib >=2.2.5
+    - numpy >=1.9,<1.25
+    - pip
+    - psutil >=5.4.8
+    - python
+    - scikit-learn >=0.19
+    - tqdm >=4.38.0
+  run:
+    - h5py >=2.5
+    - joblib >=0.11
+    - leidenalg >=0.8.7
+    - matplotlib >=2.2.5
+    - numpy >=1.9,<1.25
+    - psutil >=5.4.8
+    - python
+    - scikit-learn >=0.19
+    - tensorflow >=2.8.0
+    - tqdm >=4.38.0
+
+test:
+  imports:
+    - modisco
+    - modisco.affinitymat
+    - modisco.backend
+    - modisco.cluster
+    - modisco.cluster.phenograph
+    - modisco.clusterinit
+    - modisco.hit_scoring
+    - modisco.seqlet_embedding
+    - modisco.tfmodisco_workflow
+    - modisco.visualization
+
+about:
+  home: "https://github.com/kundajelab/tfmodisco"
+  license: UNKNOWN
+  license_family: OTHER
+  license_file: 
+  summary: "TF MOtif Discovery from Importance SCOres"
+  doc_url: 
+  dev_url: 
+
+extra:
+  recipe-maintainers:
+    - your-github-id-here
