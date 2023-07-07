@@ -1,0 +1,60 @@
+{% set name = "modisco-lite" %}
+{% set version = "2.2.0" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: 358d3f6827a1467569db91615e0f0c57029ce7c995901fd4eeaad7bab2a9f1a8
+
+build:
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - h5py >=3.7.0
+    - hdf5plugin
+    - python-igraph >=0.9.11
+    - leidenalg >=0.8.10
+    - logomaker >=0.8
+    - numba >=0.53.1
+    - numpy >=1.21.5,<1.25
+    - pandas >=1.4.3
+    - pip
+    - python ==3.10.*
+    - scikit-learn >=1.0.2
+    - scipy >=1.6.2
+    - tqdm >=4.38.0
+  run:
+    - h5py >=3.7.0
+    - hdf5plugin
+    - python-igraph >=0.9.11
+    - leidenalg >=0.8.10
+    - logomaker >=0.8
+    - numba >=0.53.1
+    - numpy >=1.21.5,<1.25
+    - pandas >=1.4.3
+    - python ==3.10.*
+    - scikit-learn >=1.0.2
+    - scipy >=1.6.2
+    - tqdm >=4.38.0
+
+test:
+  imports:
+    - modiscolite
+
+about:
+  home: "https://github.com/jmschrei/tfmodisco-lite"
+  license: LICENSE.txt
+  license_family: OTHER
+  license_file: 
+  summary: "Transcription Factor MOtif Discovery from Importance SCOres - lite"
+  doc_url: 
+  dev_url: 
+
+extra:
+  recipe-maintainers:
+    - your-github-id-here

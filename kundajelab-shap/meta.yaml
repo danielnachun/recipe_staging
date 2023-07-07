@@ -1,0 +1,66 @@
+{% set name = "kundajelab-shap" %}
+{% set version = "1" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: 0269759677ae8a71544e34168c680588703c2e983a20ff8bce93cd73dc6004ff
+
+build:
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
+    - ipython
+    - matplotlib
+    - numpy <1.25
+    - pandas
+    - pip
+    - python ==3.10.*
+    - scikit-image
+    - scikit-learn
+    - scipy
+    - tqdm >4.25.0
+  run:
+    - ipython
+    - matplotlib
+    - numpy <1.25
+    - pandas
+    - python ==3.10.*
+    - scikit-image
+    - scikit-learn
+    - scipy
+    - tqdm >4.25.0
+
+test:
+  imports:
+    - shap
+    - shap.benchmark
+    - shap.explainers
+    - shap.explainers.deep
+    - shap.explainers.other
+    - shap.plots
+  requires:
+    - lightgbm
+    - nose
+    - xgboost
+
+about:
+  home: "http://github.com/kundajelab/shap"
+  license: MIT
+  license_family: MIT
+  license_file: 
+  summary: "Kundaje lab edits to Scott Lundberg's unified approach to explain the output of any machine learning model."
+  doc_url: 
+  dev_url: 
+
+extra:
+  recipe-maintainers:
+    - your-github-id-here
