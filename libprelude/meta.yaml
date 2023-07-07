@@ -1,0 +1,45 @@
+{% set name = "libprelude" %}
+{% set version = "5.2.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://www.prelude-siem.org/attachments/download/1395/{{ name }}-{{ version }}.tar.gz
+  sha256: 187e025a5d51219810123575b32aa0b40037709a073a775bc3e5a65aa6d6a66e
+  patches:
+    - 025-Fix-PyIOBase_Type.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - libtool
+    - make
+    - pkg-config
+    - python
+  host:
+    - gnutls
+    - pcre
+  run:
+    - gnutls
+    - pcre
+
+test:
+  commands:
+    - libprelude-config --prefix
+    - libprelude-config --version
+
+about:
+  home: https://www.prelude-siem.org/
+  license: GPL-2.0-or-later
+  license_file: COPYING
+  summary: Universal Security Information & Event Management (SIEM) system
+
+extra:
+  recipe-maintainers:
+    - danielnachun

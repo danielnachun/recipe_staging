@@ -1,0 +1,170 @@
+Description: Fix PyIOBase_Type for Python 3.10 compatibility
+Author: Thomas Andrejak <thomas.andrejak@gmail.com>
+Last-Update: 2021-08-13
+Forwarded: yes, privately
+
+--- libprelude-5.2.0/bindings/python/libpreludecpp-python.i	2020-09-09 16:30:32.510000000 +0200
++++ libprelude-5.2.0/bindings/python/libpreludecpp-python.i	2021-08-13 23:20:11.672221930 +0200
+@@ -163,6 +163,26 @@
+         $1 = _cb_python_log;
+ };
+ 
++%{
++static PyObject *PyIOBase_TypeObj;
++
++static int init_file_emulator(void)
++{
++    PyObject *io = PyImport_ImportModule("_io");
++    if (io == NULL)
++        return -1;
++    PyIOBase_TypeObj = PyObject_GetAttrString(io, "_IOBase");
++    if (PyIOBase_TypeObj == NULL)
++        return -1;
++    return 0;
++}
++%}
++
++%init %{
++if (init_file_emulator() < 0) {
++    return NULL;
++}
++%}
+ 
+ /* tell swig not to cast void * value */
+ %typemap(in) void *nocast_file_p %{
+@@ -172,8 +192,7 @@
+ 
+         }
+ #else
+-        extern PyTypeObject PyIOBase_Type;
+-        if ( ! PyObject_IsInstance((PyObject *) $input, (PyObject *) &PyIOBase_Type) ) {
++        if ( ! PyObject_IsInstance((PyObject *) $input, PyIOBase_TypeObj) ) {
+                 SWIG_exception_fail(SWIG_RuntimeError, "Argument is not a file object");
+         }
+ #endif
+@@ -186,8 +205,7 @@
+ #if PY_VERSION_HEX < 0x03000000
+         $1 = PyFile_Check((PyObject *) $input);
+ #else
+-        extern PyTypeObject PyIOBase_Type;
+-        $1 = PyObject_IsInstance((PyObject *) $input, (PyObject *) &PyIOBase_Type);
++        $1 = PyObject_IsInstance((PyObject *) $input, PyIOBase_TypeObj);
+ #endif
+ %}
+ 
+--- libprelude-5.2.0/bindings/python/_prelude.cxx
++++ libprelude-5.2.0/bindings/python/_prelude.cxx
+@@ -2761,7 +2761,7 @@ SwigPyBuiltin_FunpackSetterClosure (PyObject *obj, PyObject *val, void *closure)
+ 
+ SWIGINTERN void
+ SwigPyStaticVar_dealloc(PyDescrObject *descr) {
+-  PyObject_GC_UnTrack(descr);
++  PyObject_GC_UnTrack(descr);
+   Py_XDECREF(PyDescr_TYPE(descr));
+   Py_XDECREF(PyDescr_NAME(descr));
+   PyObject_GC_Del(descr);
+@@ -4176,6 +4176,20 @@ static ssize_t _cb_python_read(prelude_io_t *fd, void *buf, size_t size)
+ }
+ 
+ 
++static PyObject *PyIOBase_TypeObj;
++
++static int init_file_emulator(void)
++{
++    PyObject *io = PyImport_ImportModule("_io");
++    if (io == NULL)
++        return -1;
++    PyIOBase_TypeObj = PyObject_GetAttrString(io, "_IOBase");
++    if (PyIOBase_TypeObj == NULL)
++        return -1;
++    return 0;
++}
++
++
+ void python2_return_unicode(int enabled)
+ {
+     _PYTHON2_RETURN_UNICODE = enabled;
+@@ -5291,13 +5305,19 @@ namespace swig
+       return const_reference(_seq, n);
+     }
+ 
+-    bool check() const
++    bool check(bool set_err = true) const
+     {
+       Py_ssize_t s = size();
+       for (Py_ssize_t i = 0; i < s; ++i) {
+ 	swig::SwigVar_PyObject item = PySequence_GetItem(_seq, i);
+-	if (!swig::check<value_type>(item))
++	if (!swig::check<value_type>(item)) {
++	  if (set_err) {
++	    char msg[1024];
++	    sprintf(msg, "in sequence element %d", (int)i);
++	    SWIG_Error(SWIG_RuntimeError, msg);
++	  }
+ 	  return false;
++	}
+       }
+       return true;
+     }
+@@ -17755,8 +17775,7 @@ SWIGINTERN int _wrap_new_IDMEF__SWIG_4(PyObject *self, Py_ssize_t nobjs, PyObjec
+     
+   }
+ #else
+-  extern PyTypeObject PyIOBase_Type;
+-  if ( ! PyObject_IsInstance((PyObject *) swig_obj[0], (PyObject *) &PyIOBase_Type) ) {
++  if ( ! PyObject_IsInstance((PyObject *) swig_obj[0], PyIOBase_TypeObj) ) {
+     SWIG_exception_fail(SWIG_RuntimeError, "Argument is not a file object");
+   }
+ #endif
+@@ -17822,8 +17841,7 @@ check_3:
+ #if PY_VERSION_HEX < 0x03000000
+       _v = PyFile_Check((PyObject *) argv[0]);
+ #else
+-      extern PyTypeObject PyIOBase_Type;
+-      _v = PyObject_IsInstance((PyObject *) argv[0], (PyObject *) &PyIOBase_Type);
++      _v = PyObject_IsInstance((PyObject *) argv[0], PyIOBase_TypeObj);
+ #endif
+     }
+     if (!_v) goto check_4;
+@@ -17871,8 +17889,7 @@ SWIGINTERN PyObject *_wrap_IDMEF_write(PyObject *self, PyObject *args) {
+     
+   }
+ #else
+-  extern PyTypeObject PyIOBase_Type;
+-  if ( ! PyObject_IsInstance((PyObject *) swig_obj[0], (PyObject *) &PyIOBase_Type) ) {
++  if ( ! PyObject_IsInstance((PyObject *) swig_obj[0], PyIOBase_TypeObj) ) {
+     SWIG_exception_fail(SWIG_RuntimeError, "Argument is not a file object");
+   }
+ #endif
+@@ -17919,8 +17936,7 @@ SWIGINTERN PyObject *_wrap_IDMEF_read(PyObject *self, PyObject *args) {
+     
+   }
+ #else
+-  extern PyTypeObject PyIOBase_Type;
+-  if ( ! PyObject_IsInstance((PyObject *) swig_obj[0], (PyObject *) &PyIOBase_Type) ) {
++  if ( ! PyObject_IsInstance((PyObject *) swig_obj[0], PyIOBase_TypeObj) ) {
+     SWIG_exception_fail(SWIG_RuntimeError, "Argument is not a file object");
+   }
+ #endif
+@@ -17971,8 +17987,7 @@ SWIGINTERN PyObject *_wrap_IDMEF_readExcept(PyObject *self, PyObject *args) {
+     
+   }
+ #else
+-  extern PyTypeObject PyIOBase_Type;
+-  if ( ! PyObject_IsInstance((PyObject *) swig_obj[0], (PyObject *) &PyIOBase_Type) ) {
++  if ( ! PyObject_IsInstance((PyObject *) swig_obj[0], PyIOBase_TypeObj) ) {
+     SWIG_exception_fail(SWIG_RuntimeError, "Argument is not a file object");
+   }
+ #endif
+@@ -22337,6 +22352,11 @@ SWIG_init(void) {
+   SwigPyBuiltin_AddPublicSymbol(public_interface, "SwigPyIterator");
+   d = md;
+   
++  if (init_file_emulator() < 0) {
++    return NULL;
++  }
++  
++  
+   int argc, ret, idx;
+   char **argv = NULL;
+   PyObject *sys = PyImport_ImportModule("sys");

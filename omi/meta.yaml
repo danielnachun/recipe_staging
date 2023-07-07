@@ -1,0 +1,50 @@
+{% set name = "omi" %}
+{% set version = "1.7.0_0" %}
+{% set version_dash = version.replace("_", "-") %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/microsoft/{{ name }}/archive/v{{ version_dash }}.tar.gz
+  sha256: 96a6a02a5d97681ebbe7724c985852e1eab582f6680952224f1d21f204cc3f38
+
+build:
+  number: 0
+  ignore_run_exports:
+    - krb5
+
+requirements:
+  build:
+    - binutils
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - gcc  # [linux]
+    - make
+    - pkg-config
+    - sed
+    - sysroot_linux-64=2.17  # [linux]
+  host:
+    - gmp  # [linux]
+    - krb5  # [linux]
+    - linux-pam  # [linux]
+    - openssl
+  run:
+    - gmp  # [linux]
+    - linux-pam  # [linux]
+    - openssl
+
+test:
+  commands:
+    - test -f ${PREFIX}/lib/libmi${SHLIB_EXT}
+
+about:
+  home: https://github.com/microsoft/omi
+  license: MIT
+  license_file: LICENSE
+  summary: Open Management Infrastructure
+
+extra:
+  recipe-maintainers:
+    - danielnachun
