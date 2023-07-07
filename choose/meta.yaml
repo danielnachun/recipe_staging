@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/geier/{{ name }}/archive/v{{ version }}.tar.gz
+  url: https://github.com/geier/choose/archive/v{{ version }}.tar.gz
   sha256: 6c711901bb094a1241a2cd11951d5b7c96f337971f8d2eeff33f38dfa6ffb6ed
 
 build:
@@ -24,13 +24,13 @@ test:
     - choose --help
 
 about:
-  home: https://github.com/geir/{{ name }}
+  home: https://github.com/geir/choose
   license: MIT
   license_file: 
     - LICENSE
     - THIRDPARTY.yml
   summary: Human-friendly and fast alternative to cut and (sometimes) awk
-  dev_url: https://github.com/geir/{{ name }}
+  dev_url: https://github.com/geir/choose
 
 extra:
   recipe-maintainers:
