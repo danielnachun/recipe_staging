@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://registry.npmjs.org/azure-pipelines-language-server/-/{{ name }}-{{ version }}.tgz
-  sha256: acfe9c75fa26074fd56ce55147ac8b0b3dfcf1ce71d42e16f493062d1bbb7488
+  sha256: a49fc2eedbc9c4ff4b0013b2dc3b9834b81f5cca70c81070d7a12c5bf6a2d4a0
 
 build:
   number: 0
