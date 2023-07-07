@@ -22,7 +22,7 @@ requirements:
     - gcc  # [linux]
     - make
     - pkg-config
-    - sysroot_linux-64=2.17
+    - sysroot_linux-64=2.17  # [linux]
   host:
     - gmp  # [linux]
     - krb5  # [linux]
