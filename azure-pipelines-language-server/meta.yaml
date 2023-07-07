@@ -1,5 +1,5 @@
 {% set name = "azure-pipelines-language-server" %}
-{% set version = "4.10.0" %}
+{% set version = "0.7.0" %}
 
 package:
   name: {{ name|lower }}
