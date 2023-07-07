@@ -13,9 +13,6 @@ source:
 build:
   noarch: generic
   number: 0
-  script:
-    - gem install -N -l -V --ignore-dependencies {{ gem_name }}-{{ version }}.gem
-    - gem unpack {{ gem_name }}-{{ version }}.gem
 
 requirements:
   host:

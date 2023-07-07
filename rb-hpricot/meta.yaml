@@ -13,10 +13,6 @@ source:
 build:
   noarch: generic
   number: 0
-  script:
-    - gem install -N -l -V --ignore-dependencies {{ gem_name }}-{{ version }}.gem -- --with-cflags=\"-Wno-incompatible-function-pointer-types\" 
-    - gem unpack {{ gem_name }}-{{ version }}.gem
-
 
 requirements:
   build:
