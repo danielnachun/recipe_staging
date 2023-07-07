@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/geier/choose/archive/v{{ version }}.tar.gz
-  sha256: d09a679920480e66bff36c76dd4d33e8ad739a53eace505d01051c114a82963
+  sha256: d09a679920480e66bff36c76dd4d33e8ad739a53eace505d01051c114a829633
 
 build:
   number: 0
