@@ -1,0 +1,42 @@
+{% set name = "linux-pam" %}
+{% set version = "1.5.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/linux-pam/{{ name }}/releases/download/v{{ version }}/Linux-PAM-{{ version }}.tar.xz
+  sha256: 7ac4b50feee004a9fa88f1dfd2d2fa738a82896763050cd773b3c54b0a818283
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+    - pkg-config
+  host:
+    - gnutls
+    - libprelude
+    - pcre
+  run:
+    - gnutls
+    - libprelude
+    - pcre
+
+test:
+  commands:
+    - test -f ${PREFIX}/lib/libpam.so
+
+about:
+  home: http://www.linux-pam.org
+  license: BSD-3-Clause OR GPL-1.0-only
+  license_file: COPYING
+  summary: Pluggable Authentication Modules for Linux
+  dev_url: https://github.com/linux-pam/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
