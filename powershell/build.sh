@@ -6,6 +6,7 @@ export DOTNET_SKIP_FIRST_TIME_EXPERIENCE=true
 export DOTNET_CLI_TELEMETRY_OPTOUT=true
 export NUGET_PACKAGES=${SRC_DIR}/nuget
 export POWERSHELL_GIT_DESCRIBE_OUTPUT="v${PKG_VERSION}-0-gxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+export LD_LIBRARY_PATH="${PREFIX}/lib:${CONDA_BUILD_SYSROOT}/usr/lib"
 
 sed -i "s/<Exec Command='git describe --abbrev=60 --long'/<Exec Command='echo \$POWERSHELL_GIT_DESCRIBE_OUTPUT'/" PowerShell.Common.props
 
