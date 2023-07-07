@@ -16,6 +16,7 @@ requirements:
   build:
     - {{ compiler('cxx') }}
     - dotnet
+    - sed
   host:
     - icu  # [linux]
     - libpsl-native
