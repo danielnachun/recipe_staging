@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://registry.npmjs.org/awk-language-server/-/{{ name }}-{{ version }}.tgz
-  sha256: acfe9c75fa26074fd56ce55147ac8b0b3dfcf1ce71d42e16f493062d1bbb7488
+  sha256: 50ca8ef6aca2b91fc88f73f94926244af60894406690f669797129d6447c91dc
 
 build:
   number: 0
