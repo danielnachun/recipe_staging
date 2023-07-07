@@ -23,7 +23,7 @@ requirements:
     - numpy <1.25
     - pandas
     - pip
-    - python
+    - python ==3.10.*
     - scikit-image
     - scikit-learn
     - scipy
@@ -33,7 +33,7 @@ requirements:
     - matplotlib
     - numpy <1.25
     - pandas
-    - python
+    - python ==3.10.*
     - scikit-image
     - scikit-learn
     - scipy

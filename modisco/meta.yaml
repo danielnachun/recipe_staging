@@ -22,7 +22,7 @@ requirements:
     - numpy >=1.9,<1.25
     - pip
     - psutil >=5.4.8
-    - python
+    - python ==3.10.*
     - scikit-learn >=0.19
     - tqdm >=4.38.0
   run:
@@ -32,7 +32,7 @@ requirements:
     - matplotlib >=2.2.5
     - numpy >=1.9,<1.25
     - psutil >=5.4.8
-    - python
+    - python ==3.10.*
     - scikit-learn >=0.19
     - tensorflow >=2.8.0
     - tqdm >=4.38.0
