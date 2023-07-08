@@ -2,7 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-export LDFLAGS="-liconv"
+export LIBS="-liconv"
 ./autogen.sh
 ./configure --disable-silent \
     --disable-debug \
