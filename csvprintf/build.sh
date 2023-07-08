@@ -2,9 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-if [[ ${target_platform} =~ .*osx.* ]]; then
-    export LDFLAGS="-liconv"
-fi
+export LDFLAGS="-liconv"
 ./autogen.sh
 ./configure --disable-silent \
     --disable-debug \

@@ -19,8 +19,10 @@ requirements:
     - automake
     - make
   host:
+    - libiconv
     - libxslt
   run:
+    - libiconv
     - libxslt
 
 test:
