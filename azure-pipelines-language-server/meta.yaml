@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://registry.npmjs.org/azure-pipelines-language-server/-/{{ name }}-{{ version }}.tgz
-  sha256: a49fc2eedbc9c4ff4b0013b2dc3b9834b81f5cca70c81070d7a12c5bf6a2d4a0
+  sha256: 9f290508b47f5f30a91345261a5279ecc67f2031c7eb3356803630ab7bb47564
 
 build:
   number: 0
@@ -25,6 +25,7 @@ test:
 about:
   home: https://github.com/microsoft/{{ name }}
   license: MIT
+  license_file: language-server/LICENSE
   summary: A language server for Azure Pipelines YAML
   dev_url: https://github.com/microsoft/{{ name }}
 
