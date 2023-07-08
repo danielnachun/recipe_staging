@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://registry.npmjs.org/@microsoft/compose-language-service/-/{{ name }}-{{ version }}.tgz
-  sha256: acfe9c75fa26074fd56ce55147ac8b0b3dfcf1ce71d42e16f493062d1bbb7488
+  sha256: 56aa27237794cf45290e7a13448a998a71dfca6582e29ae9b464b6b63fed9833
 
 build:
   number: 0
