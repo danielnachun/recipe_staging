@@ -1,0 +1,33 @@
+{% set name = "compose-language-service" %}
+{% set version = "0.2.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://registry.npmjs.org/compose-language-service/-/{{ name }}-{{ version }}.tgz
+  sha256: acfe9c75fa26074fd56ce55147ac8b0b3dfcf1ce71d42e16f493062d1bbb7488
+
+build:
+  number: 0
+
+requirements:
+  host:
+    - nodejs
+  run:
+    - nodejs
+
+test:
+  commands:
+    - docker-compose-langserver --help
+
+about:
+  home: https://github.com/microsoft/{{ name }}
+  license: MIT
+  summary: Language service for Docker Compose documents
+  dev_url: https://github.com/microsoft/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
