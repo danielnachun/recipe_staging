@@ -2,7 +2,8 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-./configure --disable-silent \
-    --disable-dependency-tracking \
-    --prefix=${PREFIX} 
-make install
+cmake -S . -B build ${CMAKE_ARGS} -DCMAKE_BUILD_TYPE=Release
+cmake --build build --target Luau.LanguageServer.CLI --config Release
+
+mkdir -p ${PREFIX}/bin
+install -m 755 build/${PKG_NAME} ${PREFIX}/bin
