@@ -1,0 +1,34 @@
+{% set name = "rimraf" %}
+{% set version = "5.0.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/isaacs/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 154d205b05676fae01f3db455a6579305dde802f89b77022184a07854984475b
+
+build:
+  number: 0
+
+requirements:
+  host:
+    - nodejs
+    - typescript
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/isaacs/{{ name }}
+  license: ISC
+  summary: A `rm -rf` util for nodejs
+  dev_url: https://github.com/isaacs/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
