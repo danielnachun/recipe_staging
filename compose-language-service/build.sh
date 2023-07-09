@@ -8,7 +8,7 @@ npm install -ddd \
     --global \
     --build-from-source \
     --prefix=${PREFIX}/libexec/${PKG_NAME} \
-    ${PKG_NAME}-${PKG_VERSION}.tgz
+    microsoft-${PKG_NAME}-${PKG_VERSION}.tgz
 
 mkdir -p ${PREFIX}/bin
 ln -sf ${PREFIX}/libexec/${PKG_NAME}/bin/docker-compose-langserver ${PREFIX}/bin
