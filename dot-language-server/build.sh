@@ -2,6 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+npm install --save-dev @types/node
 npm pack --ignore-scripts
 
 npm install -ddd \

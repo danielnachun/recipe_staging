@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://registry.npmjs.org/dot-language-server/-/{{ name }}-{{ version }}.tgz
-  sha256: 6968a89fe4a3d7fe4a7a80804af7881fbf069aaaca26882cad6ba3abb4f6d1a7
+  url: https://github.com/nikeee/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: fe9106e57f56a2a3087dee58885411d22ccbd9b87691c84988438d2fe5f45b86
 
 build:
   number: 0
