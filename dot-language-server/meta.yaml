@@ -15,6 +15,7 @@ build:
 requirements:
   host:
     - nodejs
+    - rimraf
   run:
     - nodejs
 
