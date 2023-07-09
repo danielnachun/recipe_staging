@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://luarocks.org/manifests/astoff/{{ name }}-{{ version }}-1.rockspec
-  sha256: 09452ae89e2b383a3d54f0c25ac9b3ba412ef03aeb338d2657f272ca59b94821
+  sha256: 9943f9a7e7e9cebde169fcdd84c3d97622c89b5d1c0d4cf520bc7d1df0fd100e
 
 build:
   number: 0
