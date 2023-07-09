@@ -1,0 +1,37 @@
+{% set name = "the-way" %}
+{% set version = "0.19.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/out-of-cheese-error/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: dbfc7b4a97631d16fc8fb0155bd9d2ba45c22c6e696b0cc7c57d1c35d62e35de
+
+build:
+  number: 0
+  skip: true  # [win]
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/out-of-cheese-error/{{ name }}
+  license: MIT
+  license_file: 
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: A code snippets manager for your terminal
+  dev_url: https://github.com/out-of-cheese-error/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
