@@ -28,7 +28,6 @@ test:
 about:
   home: https://github.com/astoff/{{ name }}
   license: GPL-3.0-or-later
-  license_file: LICENSE.md
   summary: A language server for TeX and friends
   dev_url: https://github.com/astoff/{{ name }}
 
