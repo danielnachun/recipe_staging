@@ -16,6 +16,7 @@ requirements:
   host:
     - nodejs
     - rimraf
+    - typescript
   run:
     - nodejs
 
