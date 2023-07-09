@@ -1,0 +1,37 @@
+{% set name = "prosemd-lsp" %}
+{% set version = "0.1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/kitten/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: ef3b34d145423307b50382df4ce12c663ff2710b0e37edfe242a671aa1c563f6
+
+build:
+  number: 0
+  skip: true  # [win]
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/kitten/{{ name }}
+  license: MIT
+  license_file: 
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: An experimental proofreading and linting language server for markdown files
+  dev_url: https://github.com/kitten/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
