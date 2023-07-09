@@ -1,0 +1,32 @@
+{% set name = "efm-langserver" %}
+{% set version = "0.0.44" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/mattn/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 825aef5815fb6eff656370e9f01fc31f91e5b2ab9d2b1f080881839676020dac
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - efm-langserver --help
+
+about:
+  home: https://github.com/mattn/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: General purpose Language Server
+  dev_url: https://github.com/mattn/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
