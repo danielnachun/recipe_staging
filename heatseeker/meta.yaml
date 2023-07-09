@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/rschmitt/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 3a5637bbd3ef3fc2f8164a1af90b8894f79c1b2adb89a874f1f3c5a56006e18b
+  sha256: ef3b34d145423307b50382df4ce12c663ff2710b0e37edfe242a671aa1c563f6
 
 build:
   number: 0
