@@ -18,7 +18,7 @@ requirements:
 
 test:
   commands:
-    - go-jsonnet --help
+    - jsonnet --help
 
 about:
   home: https://github.com/google/{{ name }}
