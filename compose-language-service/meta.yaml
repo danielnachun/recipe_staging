@@ -20,7 +20,7 @@ requirements:
 
 test:
   commands:
-    - docker-compose-langserver --help
+    - test -f ${PREFIX}/bin/docker-compose-langserver
 
 about:
   home: https://github.com/microsoft/{{ name }}
