@@ -1,0 +1,36 @@
+{% set name = "ijq" %}
+{% set version = "0.4.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://git.sr.ht/~gpanders/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 5b39ca08cd5e0d1992071b0be9eb77304489823824570236c4df4dc0f8b33aab
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+    - scdoc
+  host:
+    - jq
+  run:
+    - jq
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://sr.ht/~gpanders/ijq/
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  summary: Interactive jq
+
+extra:
+  recipe-maintainers:
+    - danielnachun
