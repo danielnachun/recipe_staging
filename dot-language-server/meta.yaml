@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://registry.npmjs.org/dot-language-server/-/{{ name }}-{{ version }}.tgz
-  sha256: acfe9c75fa26074fd56ce55147ac8b0b3dfcf1ce71d42e16f493062d1bbb7488
+  sha256: 6968a89fe4a3d7fe4a7a80804af7881fbf069aaaca26882cad6ba3abb4f6d1a7
 
 build:
   number: 0
