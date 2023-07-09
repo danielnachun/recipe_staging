@@ -1,0 +1,37 @@
+{% set name = "marksman" %}
+{% set version = "2023-07-01" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version.replace("-", "_") }}
+
+source:
+  git_url: https://github.com/artempyanykh/{{ name }}
+  git_rev: {{ version }}
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - dotnet
+  host:
+    - icu  # [linux]
+  run:
+    - dotnet
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/artempyanykh/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: Write Markdown with code assist and intelligence in the comfort of your favourite editor
+  dev_url: https://github.com/artempyanykh/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
