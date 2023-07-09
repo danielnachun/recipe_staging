@@ -61,4 +61,7 @@ rm -rf ${PREFIX}/libexec/powershell/7/libmi${SHLIB_EXT}
 ln -sf ${PREFIX}/lib/libmi${SHLIB_EXT} ${PREFIX}/libexec/powershell/7
 
 mkdir -p ${PREFIX}/bin
-ln -sf ${PREFIX}/libexec/powershell/7/pwsh ${PREFIX}/bin
+cat << EOF > ${PREFIX}/bin/pwsh
+#!/bin/sh
+DOTNET_ROOT=${DOTNET_ROOT} exec ${PREFIX}/libexec/powershell/7/pwsh "\$@"
+EOF
