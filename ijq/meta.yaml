@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://git.sr.ht/~gpanders/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 5b39ca08cd5e0d1992071b0be9eb77304489823824570236c4df4dc0f8b33aab
+  sha256: 314d9a451666981aaab5e0a18c1ea98b1a3ca1afe275f0fcd87fb12f4c7b2b74
 
 build:
   number: 0
