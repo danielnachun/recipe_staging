@@ -7,7 +7,7 @@ package:
 
 source:
   git_url: https://github.com/JonnyMorganz/{{ name }}
-  git_rev: {{ verison }}
+  git_rev: {{ version }}
 
 build:
   number: 0
