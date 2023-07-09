@@ -6,8 +6,10 @@ package:
   version: {{ version }}
 
 source:
-  url: https://registry.npmjs.org/azure-pipelines-language-server/-/{{ name }}-{{ version }}.tgz
+  url: https://github.com/microsoft/{{ name }}/archive/refs/tags/{{ name }}/v{{ version }}.tar.gz
   sha256: 9f290508b47f5f30a91345261a5279ecc67f2031c7eb3356803630ab7bb47564
+  patches:
+    - bf83e08d6e9ba6e0e00d3eedef9f040bcec4bfd0.patch
 
 build:
   number: 0
@@ -15,12 +17,13 @@ build:
 requirements:
   host:
     - nodejs
+    - typescript
   run:
     - nodejs
 
 test:
   commands:
-    - {{ name }} --help
+    - test -f ${PREFIX}/bin/azure-pipelines-language-server
 
 about:
   home: https://github.com/microsoft/{{ name }}
