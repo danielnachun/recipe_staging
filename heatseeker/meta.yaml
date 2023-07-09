@@ -1,0 +1,37 @@
+{% set name = "heatseeker" %}
+{% set version = "1.7.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/rschmitt/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 3a5637bbd3ef3fc2f8164a1af90b8894f79c1b2adb89a874f1f3c5a56006e18b
+
+build:
+  number: 0
+  skip: true  # [win]
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/rschmitt/{{ name }}
+  license: MIT
+  license_file: 
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: A high-performance Selecta clone, written in Rust
+  dev_url: https://github.com/rschmitt/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
