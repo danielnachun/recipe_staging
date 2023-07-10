@@ -18,6 +18,7 @@ requirements:
     - openjdk >=11,<12
   run:
     - openjdk
+    - python
 
 test:
   commands:

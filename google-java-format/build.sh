@@ -13,3 +13,5 @@ cat << EOF > ${PREFIX}/bin/google-java-format
 #!/bin/sh
 exec ${JAVA_HOME}/bin/java -jar ${PREFIX}/libexec/${PKG_NAME}/google-java-format-${PKG_VERSION}-all-deps.jar "\$@"
 EOF
+
+install -m 755 scripts/google-java-format-diff.py ${PREFIX}/bin/google-java-format-diff
