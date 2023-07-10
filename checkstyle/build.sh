@@ -10,5 +10,5 @@ cp target/checkstyle-${PKG_VERSION}-all.jar ${PREFIX}/libexec/${PKG_NAME}
 
 cat << EOF > ${PREFIX}/bin/checkstyle
 #!/bin/sh
-exec ${JAVA_HOME}/bin/java -jar ${PREFIX}/libexec/${PKG_NAME}/checkstyle-${PKG_VERSION}-all.jar "\$@"
+JAVA_HOME=${JAVA_HOME} exec ${JAVA_HOME}/bin/java -jar ${PREFIX}/libexec/${PKG_NAME}/checkstyle-${PKG_VERSION}-all.jar "\$@"
 EOF

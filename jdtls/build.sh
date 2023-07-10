@@ -8,4 +8,7 @@ touch ${BUILD_PREFIX}/lib/jvm/release
 mkdir -p ${PREFIX}/libexec/${PKG_NAME}
 mkdir -p ${PREFIX}/bin
 cp -r org.eclipse.jdt.ls.product/target/repository/* ${PREFIX}/libexec/${PKG_NAME}
-ln -sf ${PREFIX}/libexec/${PKG_NAME}/bin/jdtls ${PREFIX}/bin
+cat << EOF > ${PREFIX}/bin/jdtls
+#!/bin/sh
+JAVA_HOME=${JAVA_HOME} exec ${PREFIX}/libexec/${PKG_NAME}/bin/jdtls "\$@"
+EOF

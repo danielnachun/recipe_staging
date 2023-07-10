@@ -12,5 +12,11 @@ tar xzf target/ltex-ls-${PKG_VERSION}.tar.gz -C .
 mkdir -p ${PREFIX}/bin
 mkdir -p ${PREFIX}/libexec/${PKG_NAME}
 cp -r ltex-ls-${PKG_VERSION}/* ${PREFIX}/libexec/${PKG_NAME}
-ln -sf ${PREFIX}/libexec/${PKG_NAME}/bin/ltex-cli ${PREFIX}/bin
-ln -sf ${PREFIX}/libexec/${PKG_NAME}/bin/ltex-ls ${PREFIX}/bin
+
+cat << EOF > ${PREFIX}/bin/ltex-cli
+JAVA_HOME=${JAVA_HOME} exec ${PREFIX}/libexec/${PKG_NAME}/bin/ltex-cli "\$@"
+EOF
+
+cat << EOF > ${PREFIX}/bin/ltex-ls
+JAVA_HOME=${JAVA_HOME} exec ${PREFIX}/libexec/${PKG_NAME}/bin/ltex-ls "\$@"
+EOF

@@ -19,8 +19,6 @@ build:
 requirements:
   build:
     - openjdk >=17,<18
-  host:
-    - openjdk >=17,<18
   run:
     - openjdk
     - python
