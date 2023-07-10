@@ -1,0 +1,34 @@
+{% set name = "pmd" %}
+{% set version = "6.55.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/pmd/{{ name }}/archive/refs/tags/pmd_releases/{{ version }}.tar.gz
+  sha256: cdc7442777988d7221d652fb01e4d5248311cf2bf4dd25aa1c0d3e114f88b6f1
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - openjdk >=17,<18
+  run:
+    - openjdk
+
+test:
+  commands:
+    - pmd pmd --help
+
+about:
+  home: https://pmd.github.io
+  license: BSD-4-Clause AND Apache-2.0
+  license_file: LICENSE
+  summary: An extensible multilanguage static code analyzer
+  dev_url: https://github.com/pmd/pmd
+
+extra:
+  recipe-maintainers:
+    - danielnachun
