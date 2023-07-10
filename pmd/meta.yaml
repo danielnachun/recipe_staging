@@ -15,6 +15,7 @@ build:
 requirements:
   build:
     - openjdk >=17,<18
+    - unzip
   run:
     - openjdk
 
