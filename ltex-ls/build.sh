@@ -14,9 +14,9 @@ mkdir -p ${PREFIX}/libexec/${PKG_NAME}
 cp -r ltex-ls-${PKG_VERSION}/* ${PREFIX}/libexec/${PKG_NAME}
 
 cat << EOF > ${PREFIX}/bin/ltex-cli
-JAVA_HOME=${PREFIX}/lib/jvm exec ${PREFIX}/libexec/${PKG_NAME}/bin/ltex-cli "\$@"
+JAVA_HOME=${JAVA_HOME} exec ${PREFIX}/libexec/${PKG_NAME}/bin/ltex-cli "\$@"
 EOF
 
 cat << EOF > ${PREFIX}/bin/ltex-ls
-JAVA_HOME=${PREFIX}/lib/jvm exec ${PREFIX}/libexec/${PKG_NAME}/bin/ltex-ls "\$@"
+JAVA_HOME=${JAVA_HOME} exec ${PREFIX}/libexec/${PKG_NAME}/bin/ltex-ls "\$@"
 EOF
