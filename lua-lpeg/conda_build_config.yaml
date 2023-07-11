@@ -1,0 +1,9 @@
+lua:
+  - lua=5.4
+  - luajit-openresty
+lua_cmd:
+  - lua
+  - luajit
+zip_keys:
+  - lua
+  - lua_cmd
