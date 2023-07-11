@@ -14,8 +14,11 @@ build:
 
 requirements:
   build:
-    - dotnet
+    - {{ compiler('cxx') }}
     - powershell
+    - sed
+  host:
+    - dotnet
   run:
     - dotnet
 
