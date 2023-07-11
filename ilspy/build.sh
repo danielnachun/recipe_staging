@@ -8,17 +8,17 @@ mkdir -p ${PREFIX}/libexec/${PKG_NAME}
 rm global.json
 case ${target_platform} in 
     osx-64 )
-        dotnet publish --no-self-contained --configuration Darwin ILSpy.XPlat.slnf -maxcpucount:1 --output bin --runtime osx-x64 ;;
-        rm -rf bin/InstrumentationEngine/ubuntu
+        dotnet publish --no-self-contained --configuration Darwin ILSpy.XPlat.slnf -maxcpucount:1 --output bin --runtime osx-x64
+        rm -rf bin/InstrumentationEngine/ubuntu ;;
     osx-arm64 )
-        dotnet publish --no-self-contained --configuration Darwin ILSpy.XPlat.slnf -maxcpucount:1 --output bin --runtime osx-arm64 ;;
-        rm -rf bin/InstrumentationEngine/ubuntu
+        dotnet publish --no-self-contained --configuration Darwin ILSpy.XPlat.slnf -maxcpucount:1 --output bin --runtime osx-arm64
+        rm -rf bin/InstrumentationEngine/ubuntu ;;
     linux-64 )
-        dotnet publish --no-self-contained --configuration Linux ILSpy.XPlat.slnf -maxcpucount:1 --output bin --runtime linux-x64 ;;
-        rm -rf bin/InstrumentationEngine/macos
+        dotnet publish --no-self-contained --configuration Linux ILSpy.XPlat.slnf -maxcpucount:1 --output bin --runtime linux-x64
+        rm -rf bin/InstrumentationEngine/macos ;;
     linux-arm64 )
-        dotnet publish --no-self-contained --configuration Linux ILSpy.XPlat.slnf -maxcpucount:1 --output bin --runtime linux-arm64 ;;
-        rm -rf bin/InstrumentationEngine/macos
+        dotnet publish --no-self-contained --configuration Linux ILSpy.XPlat.slnf -maxcpucount:1 --output bin --runtime linux-arm64
+        rm -rf bin/InstrumentationEngine/macos ;;
 esac
 
 rm -rf bin/InstrumentationEngine/alpine
