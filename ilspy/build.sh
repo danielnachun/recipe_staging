@@ -6,7 +6,7 @@ mkdir -p ${PREFIX}/bin
 mkdir -p ${PREFIX}/libexec/${PKG_NAME}
 
 rm global.json
-dotnet publish --no-self-contained --output bin -maxcpucount:1 ILSpy.Xplat.slnf --runtime osx-x64
+dotnet publish --no-self-contained --output bin -maxcpucount:1 ILSpy.XPlat.slnf --runtime osx-x64
 sed -i "s/net6.0/net7.0/" bin/ilspycmd.runtimeconfig.json
 sed -i "s/6.0.0/7.0.0/" bin/ilspycmd.runtimeconfig.json
 cp -r bin/* ${PREFIX}/libexec/${PKG_NAME}
