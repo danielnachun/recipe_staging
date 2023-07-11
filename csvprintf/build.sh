@@ -2,10 +2,12 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-export LIBS="-liconv"
+if [[ $target_platform =~ .*osx.* ]]; then
+    export LDFLAGS="-liconv"
+fi
 ./autogen.sh
 ./configure --disable-silent \
     --disable-debug \
     --disable-dependency-tracking \
     --prefix=${PREFIX} 
-make install
+make install LIBS="-L${PREFIX}/lib -liconv"

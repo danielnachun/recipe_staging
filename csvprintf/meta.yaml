@@ -23,7 +23,6 @@ requirements:
     - libxslt
   run:
     - libiconv
-    - libxslt
 
 test:
   commands:
