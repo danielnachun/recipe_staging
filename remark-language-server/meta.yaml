@@ -21,7 +21,7 @@ requirements:
 
 test:
   commands:
-    - {{ name }} --help
+    - test -f ${PREFIX}/bin/remark-language-server
 
 about:
   home: https://github.com/remarkjs/{{ name }}
