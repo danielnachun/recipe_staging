@@ -1,0 +1,34 @@
+{% set name = "remark-language-server" %}
+{% set version = "2.0.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://registry.npmjs.org/remark-language-server/-/{{ name }}-{{ version }}.tgz
+  sha256: bbcbfbd25769df496df0091ca012cba146f490c17f120289cdb5b69046a87b84
+
+build:
+  number: 0
+
+requirements:
+  host:
+    - nodejs
+    - typescript
+  run:
+    - nodejs
+
+test:
+  commands:
+    - test -f ${PREFIX}/bin/remark-language-server
+
+about:
+  home: https://github.com/remarkjs/{{ name }}
+  license: MIT
+  summary: A language server to lint and format markdown files with remark
+  dev_url: https://github.com/remarkjs/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
