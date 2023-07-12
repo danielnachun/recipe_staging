@@ -1,0 +1,35 @@
+{% set name = "cmake-language-server" %}
+{% set version = "0.1.7" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: 40943df341d4278d99114223be86f874077a4462c52779dd178edaefa2d76fc5
+
+build:
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - pygls
+    - pdm
+    - pdm-pep517
+    - pip
+    - python
+  run:
+    - pygls
+    - python
+
+about:
+  home: "https://github.com/regen100/cmake-language-server"
+  license: MIT
+  summary: CMake LSP Implementation.
+  dev_url: "https://github.com/regen100/cmake-language-server"
+
+extra:
+  recipe-maintainers:
+    - danielnachun
