@@ -30,11 +30,11 @@ requirements:
     - {{ posix }}zip               # [win]
 
   host:
-    - r-base
+    - r-base =4.2.3
     - r-mixmeta
 
   run:
-    - r-base
+    - r-base >=4.2
     - r-mixmeta
 
 test:
