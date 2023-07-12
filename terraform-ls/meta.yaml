@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/hashicorp/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: b69a76f837b6cc1c34c72ace16670360577b123ccc17872a95af07178e69fbe7
+  sha256: 0175823793a95fdd96a5426d2e675054b0e46653f890ca0010887dd62f2c0e7e
 
 build:
   number: 0
