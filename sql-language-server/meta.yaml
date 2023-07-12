@@ -1,0 +1,34 @@
+{% set name = "sql-language-server" %}
+{% set version = "1.6.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://registry.npmjs.org/bash-language-server/-/{{ name }}-{{ version }}.tgz
+  sha256: acfe9c75fa26074fd56ce55147ac8b0b3dfcf1ce71d42e16f493062d1bbb7488
+
+build:
+  number: 0
+
+requirements:
+  host:
+    - nodejs
+    - typescript
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/joe-re/{{ name }}
+  license: MIT
+  summary: SQL Language Server
+  dev_url: https://github.com/joe-re/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
