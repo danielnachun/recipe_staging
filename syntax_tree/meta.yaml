@@ -1,0 +1,34 @@
+{% set name = "syntax_tree" %}
+{% set version = "6.1.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: eb03ff60f51ac29af5cf4fe39bc06e6714cd5b8b3f91cbec2a61e0b8602f5598
+
+build:
+  number: 0
+
+requirements:
+  host:
+    - rb-prettier_print
+    - ruby >=3.2
+  run:
+    - rb-prettier_print
+    - ruby >=3.2
+
+test:
+  commands:
+    - stree help
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  summary: A parser based on ripper
+
+extra:
+  recipe-maintainers:
+    - danielnachun

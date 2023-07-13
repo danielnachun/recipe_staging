@@ -1,0 +1,36 @@
+{% set name = "prettier_print" %}
+{% set version = "1.2.1" %}
+
+package:
+  name: "rb-{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: a72838b5f23facff21f90a5423cdcdda19e4271092b41f4ea7f50b83929e6ff9
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby >=3.2
+  run:
+    - ruby >=3.2
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  summary: A drop-in replacement for the prettyprint gem with more functionality.
+
+extra:
+  recipe-maintainers:
+    - danielnachun
