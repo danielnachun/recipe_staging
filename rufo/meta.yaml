@@ -1,4 +1,3 @@
-{% set gem_name = "rufo" %}
 {% set name = "rufo" %}
 {% set version = "0.16.1" %}
 
@@ -7,7 +6,7 @@ package:
   version: "{{ version }}"
 
 source:
-  url: https://rubygems.org/downloads/{{ gem_name }}-{{ version }}.gem
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
   sha256: 350719451783d41f7b811f1276e998ef757065c0fc2fff5a3162d94756289471
 
 build:
@@ -16,16 +15,16 @@ build:
 
 requirements:
   host:
-    - ruby
+    - ruby >=3.2
   run:
-    - ruby
+    - ruby >=3.2
 
 test:
   commands:
-    - rufo --help
+    - {{ name }} --help
 
 about:
-  home: https://rubygems.org/gems/rufo
+  home: https://rubygems.org/gems/{{ name }}
   license: MIT
   summary: Fast and unobtrusive Ruby code formatter
 
