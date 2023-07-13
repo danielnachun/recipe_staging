@@ -1,0 +1,63 @@
+{% set name = "solargraph" %}
+{% set version = "0.49.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: e8e0fcb03b664913bc2f8d0bb10eb2bb717b7ea54a7219dcc702f15785aa97a3
+
+build:
+  number: 0
+
+requirements:
+  host:
+    - rb-backport
+    - rb-benchmark
+    - rb-bundler
+    - rb-diff-lcs
+    - rb-e2mmap
+    - rb-jaro_winkler
+    - rb-kramdown
+    - rb-kramdown-parser-gfm
+    - rb-parser
+    - rb-rbs
+    - rb-reverse_markdown
+    - rubocop
+    - rb-thor
+    - rb-tilt
+    - rb-yard
+    - ruby
+  run:
+    - rb-backport
+    - rb-benchmark
+    - rb-bundler
+    - rb-diff-lcs
+    - rb-e2mmap
+    - rb-jaro_winkler
+    - rb-kramdown
+    - rb-kramdown-parser-gfm
+    - rb-parser
+    - rb-rbs
+    - rb-reverse_markdown
+    - rubocop
+    - rb-thor
+    - rb-tilt
+    - rb-yard
+    - ruby
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  summary: Ruby language server
+  dev_url: https://github.com/castwide/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
