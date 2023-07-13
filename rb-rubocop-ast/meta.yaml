@@ -1,36 +1,40 @@
-{% set gem_name = "rubocop-ast" %}
-{% set name = "rb-rubocop-ast" %}
+{% set name = "rubocop-ast" %}
 {% set version = "1.29.0" %}
 
 package:
-  name: "{{ name|lower }}"
+  name: "rb-{{ name|lower }}"
   version: "{{ version }}"
 
 source:
-  url: https://rubygems.org/downloads/{{ gem_name }}-{{ version }}.gem
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
   sha256: d1da2ab279a074baefc81758ac430c5768a8da8c7438dd4e5819ce5984d00ba1
 
 build:
   noarch: generic
   number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
 
 requirements:
   host:
-    - ruby
+    - rb-ast
+    - rb-parser
+    - ruby >=3.2
   run:
     - rb-ast
     - rb-parser
-    - ruby
+    - ruby >=3.2
 
 test:
   commands:
-    - ruby -r {{ gem_name }} -e 'exit 0'
+    - ruby -r {{ name }} -e 'exit 0'
 
 about:
-  home: https://rubygems.org/gems/rubocop-ast
+  home: https://rubygems.org/gems/{{ name }}
   license: MIT
   summary: RuboCop's Node and NodePattern classes.
-  dev_url: https://github.com/rubocop/rubocop-ast
+  dev_url: https://github.com/rubocop/{{ name }}
 
 extra:
   recipe-maintainers:

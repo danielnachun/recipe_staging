@@ -1,31 +1,33 @@
-{% set gem_name = "rexml" %}
-{% set name = "rb-rexml" %}
+{% set name = "rexml" %}
 {% set version = "3.2.5" %}
 
 package:
-  name: "{{ name|lower }}"
+  name: "rb-{{ name|lower }}"
   version: "{{ version }}"
 
 source:
-  url: https://rubygems.org/downloads/{{ gem_name }}-{{ version }}.gem
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
   sha256: a33c3bf95fda7983ec7f05054f3a985af41dbc25a0339843bd2479e93cabb123
 
 build:
   noarch: generic
   number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
 
 requirements:
   host:
-    - ruby
+    - ruby >=3.2
   run:
-    - ruby
+    - ruby >=3.2
 
 test:
   commands:
-    - ruby -r {{ gem_name }} -e 'exit 0'
+    - ruby -r {{ name }} -e 'exit 0'
 
 about:
-  home: https://rubygems.org/gems/rexml
+  home: https://rubygems.org/gems/{{ name }}
   license: BSD-2-Clause
   summary: An XML toolkit for Ruby
 

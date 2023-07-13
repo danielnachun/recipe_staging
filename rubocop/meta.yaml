@@ -1,4 +1,3 @@
-{% set gem_name = "rubocop" %}
 {% set name = "rubocop" %}
 {% set version = "1.52.0" %}
 
@@ -7,16 +6,26 @@ package:
   version: "{{ version }}"
 
 source:
-  url: https://rubygems.org/downloads/{{ gem_name }}-{{ version }}.gem
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
   sha256: a9860af191f6d51696de9ece6ca8c072643ee6c04af4310242b13e642b11ef91
 
 build:
-  noarch: generic
   number: 0
 
 requirements:
   host:
-    - ruby
+    - rb-ast
+    - rb-json
+    - rb-language_server-protocol
+    - rb-parallel
+    - rb-parser
+    - rb-rainbow
+    - rb-regexp_parser
+    - rb-rexml
+    - rb-rubocop-ast
+    - rb-ruby-progressbar
+    - rb-unicode-display_width
+    - ruby >=3.2
   run:
     - rb-ast
     - rb-json
@@ -29,17 +38,17 @@ requirements:
     - rb-rubocop-ast
     - rb-ruby-progressbar
     - rb-unicode-display_width
-    - ruby
+    - ruby >=3.2
 
 test:
   commands:
-    - rubocop --help
+    - {{ name }} --help
 
 about:
-  home: https://rubygems.org/gems/rubocop
+  home: https://rubygems.org/gems/{{ name }}
   license: MIT
   summary: RuboCop is a Ruby code style checking and code formatting tool.
-  dev_url: https://github.com/rubocop/rubocop
+  dev_url: https://github.com/rubocop/{{ name }}
 
 extra:
   recipe-maintainers:

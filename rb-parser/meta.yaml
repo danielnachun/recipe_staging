@@ -1,36 +1,40 @@
-{% set gem_name = "parser" %}
-{% set name = "rb-parser" %}
+{% set name = "parser" %}
 {% set version = "3.2.2.3" %}
 
 package:
-  name: "{{ name|lower }}"
+  name: "rb-{{ name|lower }}"
   version: "{{ version }}"
 
 source:
-  url: https://rubygems.org/downloads/{{ gem_name }}-{{ version }}.gem
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
   sha256: 10685f358ab36ffea2252dc4952e5b8fad3a297a8152a85f59adc982747b91eb
 
 build:
   noarch: generic
   number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
 
 requirements:
   host:
-    - ruby
+    - rb-ast
+    - rb-racc
+    - ruby >=3.2
   run:
     - rb-ast
     - rb-racc
-    - ruby
+    - ruby >=3.2
 
 test:
   commands:
-    - ruby -r {{ gem_name }} -e 'exit 0'
+    - ruby -r {{ name }} -e 'exit 0'
 
 about:
-  home: https://rubygems.org/gems/parser
+  home: https://rubygems.org/gems/{{ name }}
   license: MIT
   summary: A Ruby parser written in pure Ruby.
-  dev_url: https://github.com/whitequark/parser
+  dev_url: https://github.com/whitequark/{{ name }}
 
 extra:
   recipe-maintainers:

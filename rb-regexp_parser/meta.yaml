@@ -1,31 +1,33 @@
-{% set gem_name = "regexp_parser" %}
-{% set name = "rb-regexp_parser" %}
+{% set name = "regexp_parser" %}
 {% set version = "2.8.1" %}
 
 package:
-  name: "{{ name|lower }}"
+  name: "rb-{{ name|lower }}"
   version: "{{ version }}"
 
 source:
-  url: https://rubygems.org/downloads/{{ gem_name }}-{{ version }}.gem
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
   sha256: 83f63e2bfae3db38f988c66f114485140ff1791321fd827480bc75aa42cacb8c
 
 build:
   noarch: generic
   number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
 
 requirements:
   host:
-    - ruby
+    - ruby >=3.2
   run:
-    - ruby
+    - ruby >=3.2
 
 test:
   commands:
-    - ruby -r {{ gem_name }} -e 'exit 0'
+    - ruby -r {{ name }} -e 'exit 0'
 
 about:
-  home: https://rubygems.org/gems/regexp_parser
+  home: https://rubygems.org/gems/{{ name }}
   license: MIT
   summary: A library for tokenizing, lexing, and parsing Ruby regular expressions.
 

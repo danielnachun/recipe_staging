@@ -1,5 +1,4 @@
-{% set gem_name = "rdiscount" %}
-{% set name = "rb-rdiscount" %}
+{% set name = "rdiscount" %}
 {% set version = "2.2.7.1" %}
 
 package:
@@ -7,31 +6,33 @@ package:
   version: "{{ version }}"
 
 source:
-  url: https://rubygems.org/downloads/{{ gem_name }}-{{ version }}.gem
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
   sha256: 51ab13ce8781c813c88a191eb7d5704ebde2a5d2417cf0e01fd46997748330a9
 
 build:
-  noarch: generic
   number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
 
 requirements:
   build:
     - {{ compiler('c') }}
     - make
   host:
-    - ruby
+    - ruby >=3.2
   run:
-    - ruby
+    - ruby >=3.2
 
 test:
   commands:
-    - ruby -r {{ gem_name }} -e 'exit 0'
+    - ruby -r {{ name }} -e 'exit 0'
 
 about:
-  home: https://rubygems.org/gems/rdiscount
+  home: https://rubygems.org/gems/{{ name }}
   license: MIT
   summary: Fast Implementation of Gruber's Markdown in C
-  dev_url: https://github.com/davidfstr/rdiscount
+  dev_url: https://github.com/davidfstr/{{ name }}
 
 extra:
   recipe-maintainers:

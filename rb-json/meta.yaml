@@ -1,36 +1,38 @@
-{% set gem_name = "json" %}
-{% set name = "rb-json" %}
+{% set name = "json" %}
 {% set version = "2.6.3" %}
 
 package:
-  name: "{{ name|lower }}"
+  name: "rb-{{ name|lower }}"
   version: "{{ version }}"
 
 source:
-  url: https://rubygems.org/downloads/{{ gem_name }}-{{ version }}.gem
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
   sha256: 86aaea16adf346a2b22743d88f8dcceeb1038843989ab93cda44b5176c845459
 
 build:
-  noarch: generic
   number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
 
 requirements:
-  host:
+  build:
     - {{ compiler('c') }}
     - make
-    - ruby
+  host:
+    - ruby >=3.2
   run:
-    - ruby
+    - ruby >=3.2
 
 test:
   commands:
-    - ruby -r {{ gem_name }} -e 'exit 0'
+    - ruby -r {{ name }} -e 'exit 0'
 
 about:
-  home: https://rubygems.org/gems/json
+  home: https://rubygems.org/gems/{{ name }}
   license: Ruby
   summary: This is a JSON implementation as a Ruby extension in C.
-  dev_url: https://github.com/flori/json
+  dev_url: https://github.com/flori/{{ name }}
 
 extra:
   recipe-maintainers:
