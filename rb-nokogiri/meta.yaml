@@ -27,9 +27,11 @@ requirements:
     - rb-mini_portile2
     - rb-racc
     - ruby >=3.2
+    - zlib
   run:
     - libxml2
     - libxslt
+    - libzlib
     - rb-mini_portile2
     - rb-racc
     - ruby >=3.2
