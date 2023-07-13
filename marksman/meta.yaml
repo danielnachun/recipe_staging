@@ -17,8 +17,8 @@ build:
 requirements:
   build:
     - {{ compiler('cxx') }}
-    - dotnet
   host:
+    - dotnet
     - icu  # [linux]
   run:
     - dotnet
