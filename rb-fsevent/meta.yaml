@@ -1,0 +1,36 @@
+{% set name = "rb-fsevent" %}
+{% set version = "0.11.2" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: 43900b972e7301d6570f64b850a5aa67833ee7d87b458ee92805d56b7318aefe
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}  # [osx]
+    - make  # [osx]
+  host:
+    - ruby >=3.2
+  run:
+    - ruby >=3.2
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  summary: FSEvents API with Signals catching (without RubyCocoa)
+  dev_url: https://github.com/guard/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun

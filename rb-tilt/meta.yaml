@@ -1,13 +1,13 @@
-{% set name = "mustache" %}
-{% set version = "1.1.1" %}
+{% set name = "tilt" %}
+{% set version = "2.2.0" %}
 
 package:
-  name: "{{ name|lower }}"
+  name: "rb-{{ name|lower }}"
   version: "{{ version }}"
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
-  sha256: 90891fdd50b53919ca334c8c1031eada1215e78d226d5795e523d6123a2717d0
+  sha256: e76f850e611128a87992bb13ba74807624a9b8ec748e2c2ea7139580f67ab22e
 
 build:
   noarch: generic
@@ -18,9 +18,9 @@ build:
 
 requirements:
   host:
-    - ruby
+    - ruby >=3.2
   run:
-    - ruby
+    - ruby >=3.2
 
 test:
   commands:
@@ -29,8 +29,8 @@ test:
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: MIT
-  summary: framework-agnostic way to render logic-free views
-  dev_url: https://github.com/mustache/{{ name }}
+  summary: Generic interface to multiple Ruby template engines
+  dev_url: https://github.com/jeremyevans/{{ name }}
 
 extra:
   recipe-maintainers:

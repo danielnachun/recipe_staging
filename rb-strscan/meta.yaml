@@ -1,26 +1,28 @@
-{% set name = "mustache" %}
-{% set version = "1.1.1" %}
+{% set name = "strscan" %}
+{% set version = "3.0.6" %}
 
 package:
-  name: "{{ name|lower }}"
+  name: "rb-{{ name|lower }}"
   version: "{{ version }}"
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
-  sha256: 90891fdd50b53919ca334c8c1031eada1215e78d226d5795e523d6123a2717d0
+  sha256: d68e0ebf351efcfa6403f90e0d4e624e9a2969d132ef9ee9d140eff55aa4e4b4
 
 build:
-  noarch: generic
   number: 0
   script:
     - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
     - gem unpack {{ name }}-{{ version }}.gem
 
 requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
   host:
-    - ruby
+    - ruby >=3.2
   run:
-    - ruby
+    - ruby >=3.2
 
 test:
   commands:
@@ -29,8 +31,7 @@ test:
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: MIT
-  summary: framework-agnostic way to render logic-free views
-  dev_url: https://github.com/mustache/{{ name }}
+  summary: Provides lexical scanning operations on a String.
 
 extra:
   recipe-maintainers:

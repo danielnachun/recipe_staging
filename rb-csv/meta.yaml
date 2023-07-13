@@ -1,13 +1,13 @@
-{% set name = "mustache" %}
-{% set version = "1.1.1" %}
+{% set name = "csv" %}
+{% set version = "3.2.7" %}
 
 package:
-  name: "{{ name|lower }}"
+  name: "rb-{{ name|lower }}"
   version: "{{ version }}"
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
-  sha256: 90891fdd50b53919ca334c8c1031eada1215e78d226d5795e523d6123a2717d0
+  sha256: aab338791beb5d2306880202c9667651fff07b2cc74cc484a743d3b17c8e4064
 
 build:
   noarch: generic
@@ -16,11 +16,12 @@ build:
     - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
     - gem unpack {{ name }}-{{ version }}.gem
 
+
 requirements:
   host:
-    - ruby
+    - ruby >=3.2
   run:
-    - ruby
+    - ruby >=3.2
 
 test:
   commands:
@@ -28,9 +29,8 @@ test:
 
 about:
   home: https://rubygems.org/gems/{{ name }}
-  license: MIT
-  summary: framework-agnostic way to render logic-free views
-  dev_url: https://github.com/mustache/{{ name }}
+  license: BSD-2-Clause
+  summary: The CSV library provides a complete interface to CSV files and data.
 
 extra:
   recipe-maintainers:

@@ -1,5 +1,5 @@
-{% set name = "mustache" %}
-{% set version = "1.1.1" %}
+{% set name = "rb-inotify" %}
+{% set version = "0.10.1" %}
 
 package:
   name: "{{ name|lower }}"
@@ -7,10 +7,9 @@ package:
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
-  sha256: 90891fdd50b53919ca334c8c1031eada1215e78d226d5795e523d6123a2717d0
+  sha256: 050062d4f31d307cca52c3f6a7f4b946df8de25fc4bd373e1a5142e41034a7ca
 
 build:
-  noarch: generic
   number: 0
   script:
     - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
@@ -18,19 +17,20 @@ build:
 
 requirements:
   host:
-    - ruby
+    - rb-ffi
+    - ruby >=3.2
   run:
-    - ruby
+    - rb-ffi
+    - ruby >=3.2
 
 test:
   commands:
-    - ruby -r {{ name }} -e 'exit 0'
+    - ruby -r {{ name }} -e 'exit 0'  #[linux]
 
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: MIT
-  summary: framework-agnostic way to render logic-free views
-  dev_url: https://github.com/mustache/{{ name }}
+  summary: A Ruby wrapper for Linux inotify, using FFI
 
 extra:
   recipe-maintainers:

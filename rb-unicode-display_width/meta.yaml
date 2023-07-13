@@ -1,24 +1,22 @@
-{% set name = "rdiscount" %}
-{% set version = "2.2.7.1" %}
+{% set name = "unicode-display_width" %}
+{% set version = "2.4.2" %}
 
 package:
-  name: "{{ name|lower }}"
+  name: "rb-{{ name|lower }}"
   version: "{{ version }}"
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
-  sha256: 51ab13ce8781c813c88a191eb7d5704ebde2a5d2417cf0e01fd46997748330a9
+  sha256: 6a10205d1a19ca790c4e53064ba93f09d9eb234bf6bd135d9deb6001c21428be
 
 build:
+  noarch: generic
   number: 0
   script:
     - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
     - gem unpack {{ name }}-{{ version }}.gem
 
 requirements:
-  build:
-    - {{ compiler('c') }}
-    - make
   host:
     - ruby >=3.2
   run:
@@ -26,13 +24,13 @@ requirements:
 
 test:
   commands:
-    - ruby -r {{ name }} -e 'exit 0'
+    - GEM_HOME=${PREFIX}/share/rubygems ruby -r unicode/display_width -e 'exit 0'
 
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: MIT
-  summary: Fast Implementation of Gruber's Markdown in C
-  dev_url: https://github.com/davidfstr/{{ name }}
+  summary: Determines the monospace display width of a string using EastAsianWidth.txt, Unicode general category, and other data.
+  dev_url: https://github.com/janlelis/{{ name }}
 
 extra:
   recipe-maintainers:

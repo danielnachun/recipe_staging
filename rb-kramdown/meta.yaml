@@ -1,13 +1,13 @@
-{% set name = "mustache" %}
-{% set version = "1.1.1" %}
+{% set name = "kramdown" %}
+{% set version = "2.4.0" %}
 
 package:
-  name: "{{ name|lower }}"
+  name: "rb-{{ name|lower }}"
   version: "{{ version }}"
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
-  sha256: 90891fdd50b53919ca334c8c1031eada1215e78d226d5795e523d6123a2717d0
+  sha256: b62e5bcbd6ea20c7a6730ebbb2a107237856e14f29cebf5b10c876cc1a2481c5
 
 build:
   noarch: generic
@@ -18,9 +18,9 @@ build:
 
 requirements:
   host:
-    - ruby
+    - ruby >=3.2
   run:
-    - ruby
+    - ruby >=3.2
 
 test:
   commands:
@@ -29,8 +29,8 @@ test:
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: MIT
-  summary: framework-agnostic way to render logic-free views
-  dev_url: https://github.com/mustache/{{ name }}
+  summary: kramdown is yet-another-markdown-parser but fast, pure Ruby, using a strict syntax definition and supporting several common extensions.
+  dev_url: https://github.com/gettalong/{{ name }}
 
 extra:
   recipe-maintainers:

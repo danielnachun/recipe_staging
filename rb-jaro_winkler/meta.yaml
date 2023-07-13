@@ -1,13 +1,13 @@
-{% set name = "hpricot" %}
-{% set version = "0.8.6" %}
+{% set name = "jaro_winkler" %}
+{% set version = "1.5.6" %}
 
 package:
-  name: "{{ name|lower }}"
+  name: "rb-{{ name|lower }}"
   version: "{{ version }}"
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
-  sha256: dfe8f4b3414ba8377d7626030f3aa605caadee9de87cffbeadf8a50359eac8ca
+  sha256: 007db7805527ada1cc12f2547676181d63b0a504ec4dd7a9a2eb2424521ccd81
 
 build:
   number: 0
@@ -20,9 +20,9 @@ requirements:
     - {{ compiler('c') }}
     - make
   host:
-    - ruby
+    - ruby >=3.2
   run:
-    - ruby
+    - ruby >=3.2
 
 test:
   commands:
@@ -31,8 +31,8 @@ test:
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: MIT
-  summary: a swift, liberal HTML parser with a fantastic library
-  dev_url: https://github.com/hpricot/{{ name }}
+  summary: jaro_winkler is an implementation of Jaro-Winkler distance algorithm which is written in C extension and will fallback to pure Ruby version in platforms other than MRI/KRI like JRuby or Rubinius.
+  dev_url: https://github.com/tonytonyjan/{{ name }}
 
 extra:
   recipe-maintainers:

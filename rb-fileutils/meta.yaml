@@ -1,13 +1,13 @@
-{% set name = "mustache" %}
-{% set version = "1.1.1" %}
+{% set name = "fileutils" %}
+{% set version = "1.7.1" %}
 
 package:
-  name: "{{ name|lower }}"
+  name: "rb-{{ name|lower }}"
   version: "{{ version }}"
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
-  sha256: 90891fdd50b53919ca334c8c1031eada1215e78d226d5795e523d6123a2717d0
+  sha256: cef0f9c7ca39a265ede68c7372e0969986436c579d2971b3e147e859e6020221
 
 build:
   noarch: generic
@@ -18,9 +18,9 @@ build:
 
 requirements:
   host:
-    - ruby
+    - ruby >=3.2
   run:
-    - ruby
+    - ruby >=3.2
 
 test:
   commands:
@@ -28,9 +28,8 @@ test:
 
 about:
   home: https://rubygems.org/gems/{{ name }}
-  license: MIT
-  summary: framework-agnostic way to render logic-free views
-  dev_url: https://github.com/mustache/{{ name }}
+  license: BSD-2-Clause
+  summary: Several file utility methods for copying, moving, removing, etc.
 
 extra:
   recipe-maintainers:

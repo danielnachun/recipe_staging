@@ -1,18 +1,18 @@
-{% set name = "hpricot" %}
-{% set version = "0.8.6" %}
+{% set name = "ffi" %}
+{% set version = "1.15.5" %}
 
 package:
-  name: "{{ name|lower }}"
+  name: "rb-{{ name|lower }}"
   version: "{{ version }}"
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
-  sha256: dfe8f4b3414ba8377d7626030f3aa605caadee9de87cffbeadf8a50359eac8ca
+  sha256: 6f2ed2fa68047962d6072b964420cba91d82ce6fa8ee251950c17fca6af3c2a0
 
 build:
   number: 0
   script:
-    - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem -- --enable-system-libffi
     - gem unpack {{ name }}-{{ version }}.gem
 
 requirements:
@@ -20,9 +20,11 @@ requirements:
     - {{ compiler('c') }}
     - make
   host:
-    - ruby
+    - libffi
+    - ruby >=3.2
   run:
-    - ruby
+    - libffi
+    - ruby >=3.2
 
 test:
   commands:
@@ -31,8 +33,8 @@ test:
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: MIT
-  summary: a swift, liberal HTML parser with a fantastic library
-  dev_url: https://github.com/hpricot/{{ name }}
+  summary: Ruby FFI library
+  dev_url: https://github.com/ffi/{{ name }}
 
 extra:
   recipe-maintainers:

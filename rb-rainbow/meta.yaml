@@ -1,13 +1,13 @@
-{% set name = "mustache" %}
-{% set version = "1.1.1" %}
+{% set name = "rainbow" %}
+{% set version = "3.1.1" %}
 
 package:
-  name: "{{ name|lower }}"
+  name: "rb-{{ name|lower }}"
   version: "{{ version }}"
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
-  sha256: 90891fdd50b53919ca334c8c1031eada1215e78d226d5795e523d6123a2717d0
+  sha256: 039491aa3a89f42efa1d6dec2fc4e62ede96eb6acd95e52f1ad581182b79bc6a
 
 build:
   noarch: generic
@@ -18,9 +18,9 @@ build:
 
 requirements:
   host:
-    - ruby
+    - ruby >=3.2
   run:
-    - ruby
+    - ruby >=3.2
 
 test:
   commands:
@@ -29,8 +29,8 @@ test:
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: MIT
-  summary: framework-agnostic way to render logic-free views
-  dev_url: https://github.com/mustache/{{ name }}
+  summary: Colorize printed text on ANSI terminals
+  dev_url: http://github.com/sickill/{{ name }}
 
 extra:
   recipe-maintainers:

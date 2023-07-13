@@ -1,13 +1,13 @@
-{% set name = "mustache" %}
-{% set version = "1.1.1" %}
+{% set name = "terminal-table" %}
+{% set version = "3.0.2" %}
 
 package:
-  name: "{{ name|lower }}"
+  name: "rb-{{ name|lower }}"
   version: "{{ version }}"
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
-  sha256: 90891fdd50b53919ca334c8c1031eada1215e78d226d5795e523d6123a2717d0
+  sha256: f951b6af5f3e00203fb290a669e0a85c5dd5b051b3b023392ccfd67ba5abae91
 
 build:
   noarch: generic
@@ -18,9 +18,11 @@ build:
 
 requirements:
   host:
-    - ruby
+    - rb-unicode-display_width
+    - ruby >=3.2
   run:
-    - ruby
+    - rb-unicode-display_width
+    - ruby >=3.2
 
 test:
   commands:
@@ -29,8 +31,7 @@ test:
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: MIT
-  summary: framework-agnostic way to render logic-free views
-  dev_url: https://github.com/mustache/{{ name }}
+  summary: Simple, feature rich ascii table generation library
 
 extra:
   recipe-maintainers:

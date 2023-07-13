@@ -1,26 +1,28 @@
-{% set name = "mustache" %}
-{% set version = "1.1.1" %}
+{% set name = "racc" %}
+{% set version = "1.7.1" %}
 
 package:
-  name: "{{ name|lower }}"
+  name: "rb-{{ name|lower }}"
   version: "{{ version }}"
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
-  sha256: 90891fdd50b53919ca334c8c1031eada1215e78d226d5795e523d6123a2717d0
+  sha256: af64124836fdd3c00e830703d7f873ea5deabde923f37006a39f5a5e0da16387
 
 build:
-  noarch: generic
   number: 0
   script:
     - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
     - gem unpack {{ name }}-{{ version }}.gem
 
 requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
   host:
-    - ruby
+    - ruby >=3.2
   run:
-    - ruby
+    - ruby >=3.2
 
 test:
   commands:
@@ -28,9 +30,9 @@ test:
 
 about:
   home: https://rubygems.org/gems/{{ name }}
-  license: MIT
-  summary: framework-agnostic way to render logic-free views
-  dev_url: https://github.com/mustache/{{ name }}
+  license: BSD-2-Clause
+  summary: Racc is a LALR(1) parser generator. 
+  dev_url: https://github.com/ruby/{{ name }}
 
 extra:
   recipe-maintainers:

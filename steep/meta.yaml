@@ -1,0 +1,66 @@
+{% set name = "steep" %}
+{% set version = "1.4.0" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: 59da9a4d79c69ef1b8491dfc8b4e70041dcffbd0459bb03e2e2a09d2a1f8eb47
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - sed
+  host:
+    - rb-activesupport
+    - rb-concurrent-ruby
+    - rb-csv
+    - rb-fileutils
+    - rb-inotify
+    - rb-json
+    - rb-language_server-protocol
+    - rb-listen
+    - rb-logger
+    - rb-parser
+    - rb-rainbow
+    - rb-rbs
+    - rb-securerandom
+    - rb-strscan
+    - rb-terminal-table
+    - rb-unicode-display_width
+    - ruby >=3.2
+  run:
+    - rb-activesupport
+    - rb-concurrent-ruby
+    - rb-csv
+    - rb-fileutils
+    - rb-inotify
+    - rb-json
+    - rb-language_server-protocol
+    - rb-listen
+    - rb-logger
+    - rb-parser
+    - rb-rainbow
+    - rb-rbs
+    - rb-securerandom
+    - rb-strscan
+    - rb-terminal-table
+    - rb-unicode-display_width
+    - ruby >=3.2
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://rubygems.org/gems/standard
+  license: OTHER
+  summary: Ruby Style Guide, with linter & automatic code fixer
+
+extra:
+  recipe-maintainers:
+    - danielnachun

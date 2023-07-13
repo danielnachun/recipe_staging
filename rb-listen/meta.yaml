@@ -1,13 +1,13 @@
-{% set name = "mustache" %}
-{% set version = "1.1.1" %}
+{% set name = "listen" %}
+{% set version = "3.8.0" %}
 
 package:
-  name: "{{ name|lower }}"
+  name: "rb-{{ name|lower }}"
   version: "{{ version }}"
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
-  sha256: 90891fdd50b53919ca334c8c1031eada1215e78d226d5795e523d6123a2717d0
+  sha256: 9679040ac6e7845ad9f19cf59ecde60861c78e2fae57a5c20fe35e94959b2f8f
 
 build:
   noarch: generic
@@ -18,9 +18,13 @@ build:
 
 requirements:
   host:
-    - ruby
+    - rb-fsevent 
+    - rb-inotify
+    - ruby >=3.2
   run:
-    - ruby
+    - rb-fsevent
+    - rb-inotify
+    - ruby >=3.2
 
 test:
   commands:
@@ -29,8 +33,8 @@ test:
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: MIT
-  summary: framework-agnostic way to render logic-free views
-  dev_url: https://github.com/mustache/{{ name }}
+  summary: The Listen gem listens to file modifications and notifies you about the changes. Works everywhere!
+  dev_url: https://github.com/guard/{{ name }}
 
 extra:
   recipe-maintainers:

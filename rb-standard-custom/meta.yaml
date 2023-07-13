@@ -1,13 +1,13 @@
-{% set name = "mustache" %}
-{% set version = "1.1.1" %}
+{% set name = "standard-custom" %}
+{% set version = "1.0.1" %}
 
 package:
-  name: "{{ name|lower }}"
+  name: "rb-{{ name|lower }}"
   version: "{{ version }}"
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
-  sha256: 90891fdd50b53919ca334c8c1031eada1215e78d226d5795e523d6123a2717d0
+  sha256: 6fd8c16e6805dbe4710990ba6b0c8a54eea17b986e04bd2f9c973dc967d9dd08
 
 build:
   noarch: generic
@@ -18,9 +18,11 @@ build:
 
 requirements:
   host:
-    - ruby
+    - rb-lint_roller
+    - ruby >=3.2
   run:
-    - ruby
+    - rb-lint_roller
+    - ruby >=3.2
 
 test:
   commands:
@@ -29,8 +31,7 @@ test:
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: MIT
-  summary: framework-agnostic way to render logic-free views
-  dev_url: https://github.com/mustache/{{ name }}
+  summary: Plugin containing implementations of custom cops that are bundled as defaults in Standard Ruby
 
 extra:
   recipe-maintainers:

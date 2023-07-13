@@ -1,13 +1,13 @@
-{% set name = "mustache" %}
-{% set version = "1.1.1" %}
+{% set name = "tzinfo" %}
+{% set version = "2.0.6" %}
 
 package:
-  name: "{{ name|lower }}"
+  name: "rb-{{ name|lower }}"
   version: "{{ version }}"
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
-  sha256: 90891fdd50b53919ca334c8c1031eada1215e78d226d5795e523d6123a2717d0
+  sha256: 8daf828cc77bcf7d63b0e3bdb6caa47e2272dcfaf4fbfe46f8c3a9df087a829b
 
 build:
   noarch: generic
@@ -18,9 +18,11 @@ build:
 
 requirements:
   host:
-    - ruby
+    - rb-concurrent-ruby
+    - ruby >=3.2
   run:
-    - ruby
+    - rb-concurrent-ruby
+    - ruby >=3.2
 
 test:
   commands:
@@ -29,8 +31,8 @@ test:
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: MIT
-  summary: framework-agnostic way to render logic-free views
-  dev_url: https://github.com/mustache/{{ name }}
+  summary: TZInfo provides access to time zone data and allows times to be converted using time zone rules.
+  dev_url: https://github.com/tzinfo/{{ name }}
 
 extra:
   recipe-maintainers:
