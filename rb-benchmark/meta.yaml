@@ -1,0 +1,36 @@
+{% set name = "benchmark" %}
+{% set version = "0.2.1" %}
+
+package:
+  name: "rb-{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: b14e2020c9cb2790c6f94e620be61f0de092dd2a8c326cb7c4b0fcd1a980f204
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby >=3.2
+  run:
+    - ruby >=3.2
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: BSD-2-Clause
+  summary: a performance benchmarking library
+
+extra:
+  recipe-maintainers:
+    - danielnachun

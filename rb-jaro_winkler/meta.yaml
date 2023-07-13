@@ -1,0 +1,39 @@
+{% set name = "jaro_winkler" %}
+{% set version = "1.5.6" %}
+
+package:
+  name: "rb-{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: 007db7805527ada1cc12f2547676181d63b0a504ec4dd7a9a2eb2424521ccd81
+
+build:
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+  host:
+    - ruby >=3.2
+  run:
+    - ruby >=3.2
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  summary: jaro_winkler is an implementation of Jaro-Winkler distance algorithm which is written in C extension and will fallback to pure Ruby version in platforms other than MRI/KRI like JRuby or Rubinius.
+  dev_url: https://github.com/tonytonyjan/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun

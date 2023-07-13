@@ -1,0 +1,49 @@
+{% set name = "nokogiri" %}
+{% set version = "1.15.3" %}
+
+package:
+  name: "rb-{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: 876631295a85315dac37e7a71386d62d9eb452a891083cfe7505cca4805088cb
+
+build:
+  number: 0
+  script:
+    - export CPPFLAGS="-Igumbo_parser/src"
+    - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem --platform=ruby -- --use-system-libraries
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+    - pkg-config
+  host:
+    - libxml2
+    - libxslt
+    - rb-mini_portile2
+    - rb-racc
+    - ruby >=3.2
+  run:
+    - libxml2
+    - libxslt
+    - rb-mini_portile2
+    - rb-racc
+    - ruby >=3.2
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  summary: Nokogiri makes it easy and painless to work with XML and HTML from Ruby. It provides a sensible, easy-to-understand API for reading, writing, modifying, and querying documents. 
+  dev_url: https://github.com/sparklemotion/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun

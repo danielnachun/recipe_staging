@@ -1,0 +1,36 @@
+{% set name = "backport" %}
+{% set version = "1.2.0" %}
+
+package:
+  name: "rb-{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: 912c7dfdd9ee4625d013ddfccb6205c3f92da69a8990f65c440e40f5b2fc7f75
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby >=3.2
+  run:
+    - ruby >=3.2
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  summary: A pure Ruby library for event-driven IO
+
+extra:
+  recipe-maintainers:
+    - danielnachun

@@ -1,0 +1,38 @@
+{% set name = "terminal-table" %}
+{% set version = "3.0.2" %}
+
+package:
+  name: "rb-{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: f951b6af5f3e00203fb290a669e0a85c5dd5b051b3b023392ccfd67ba5abae91
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - rb-unicode-display_width
+    - ruby >=3.2
+  run:
+    - rb-unicode-display_width
+    - ruby >=3.2
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  summary: Simple, feature rich ascii table generation library
+
+extra:
+  recipe-maintainers:
+    - danielnachun

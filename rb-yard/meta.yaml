@@ -1,0 +1,37 @@
+{% set name = "yard" %}
+{% set version = "0.9.34" %}
+
+package:
+  name: "rb-{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: 5a8e04114d7f15f77814973ea56b7c38282126fb2930eb82851ffed0b9cd7e04
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby >=3.2
+  run:
+    - ruby >=3.2
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  summary: YARD is a documentation generation tool for the Ruby programming language.
+  dev_url: http://github.com/lsegal/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun

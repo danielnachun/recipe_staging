@@ -1,0 +1,37 @@
+{% set name = "thor" %}
+{% set version = "1.2.2" %}
+
+package:
+  name: "rb-{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: 2f93c652828cba9fcf4f65f5dc8c306f1a7317e05aad5835a13740122c17f24c
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby >=3.2
+  run:
+    - ruby >=3.2
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  summary: Thor is a toolkit for building powerful command-line interfaces.
+  dev_url: https://github.com/rails/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun

@@ -1,0 +1,45 @@
+{% set name = "activesupport" %}
+{% set version = "7.0.6" %}
+
+package:
+  name: "rb-{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: d3abba6b15d8fd7af07f3322c370f00eb8ce6715fb714436342999628c705ab2
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - rb-concurrent-ruby
+    - rb-i18n
+    - rb-minitest
+    - rb-tzinfo
+    - ruby >=3.2
+  run:
+    - rb-concurrent-ruby
+    - rb-i18n
+    - rb-minitest
+    - rb-tzinfo
+    - ruby >=3.2
+
+test:
+  commands:
+    - ruby -r active_support -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  summary: A toolkit of support libraries and Ruby core extensions extracted from the Rails framework. 
+  dev_url: https://github.com/rails/rails
+
+extra:
+  recipe-maintainers:
+    - danielnachun

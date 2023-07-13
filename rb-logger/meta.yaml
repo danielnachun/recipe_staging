@@ -1,0 +1,36 @@
+{% set name = "logger" %}
+{% set version = "1.5.3" %}
+
+package:
+  name: "rb-{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: ed443128c2c9254db1a3573c53708b00319c01022b40dcce60a873911831d67b
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby >=3.2
+  run:
+    - ruby >=3.2
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: BSD-2-Clause
+  summary: Provides a simple logging utility for outputting messages.
+
+extra:
+  recipe-maintainers:
+    - danielnachun

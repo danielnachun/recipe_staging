@@ -1,0 +1,37 @@
+{% set name = "concurrent-ruby" %}
+{% set version = "1.2.2" %}
+
+package:
+  name: "rb-{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: 3879119b8b75e3b62616acc256c64a134d0b0a7a9a3fcba5a233025bcde22c4f
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby >=3.2
+  run:
+    - ruby >=3.2
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  summary: Modern concurrency tools including agents, futures, promises, thread pools, actors, supervisors, and more.
+  dev_url: https://github.com/ruby-concurrency/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun

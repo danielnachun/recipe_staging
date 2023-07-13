@@ -1,0 +1,37 @@
+{% set name = "rb-inotify" %}
+{% set version = "0.10.1" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: 050062d4f31d307cca52c3f6a7f4b946df8de25fc4bd373e1a5142e41034a7ca
+
+build:
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - rb-ffi
+    - ruby >=3.2
+  run:
+    - rb-ffi
+    - ruby >=3.2
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'  #[linux]
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  summary: A Ruby wrapper for Linux inotify, using FFI
+
+extra:
+  recipe-maintainers:
+    - danielnachun

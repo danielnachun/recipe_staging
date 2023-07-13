@@ -1,0 +1,39 @@
+{% set name = "reverse_markdown" %}
+{% set version = "2.1.1" %}
+
+package:
+  name: "rb-{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: b2206466b682ac1177b6b8ec321d00a84fca02d096c5d676a7a0cc5838dc0701
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - rb-nokogiri
+    - ruby >=3.2
+  run:
+    - rb-nokogiri
+    - ruby >=3.2
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  summary: Map simple html back into markdown, e.g. if you want to import existing html data in your application.
+  dev_url: https://github.com/xijo/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun

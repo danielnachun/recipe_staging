@@ -1,0 +1,36 @@
+{% set name = "fileutils" %}
+{% set version = "1.7.1" %}
+
+package:
+  name: "rb-{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: cef0f9c7ca39a265ede68c7372e0969986436c579d2971b3e147e859e6020221
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby >=3.2
+  run:
+    - ruby >=3.2
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: BSD-2-Clause
+  summary: Several file utility methods for copying, moving, removing, etc.
+
+extra:
+  recipe-maintainers:
+    - danielnachun

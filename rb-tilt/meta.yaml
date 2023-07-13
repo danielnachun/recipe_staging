@@ -1,0 +1,37 @@
+{% set name = "tilt" %}
+{% set version = "2.2.0" %}
+
+package:
+  name: "rb-{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: e76f850e611128a87992bb13ba74807624a9b8ec748e2c2ea7139580f67ab22e
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby >=3.2
+  run:
+    - ruby >=3.2
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  summary: Generic interface to multiple Ruby template engines
+  dev_url: https://github.com/jeremyevans/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
