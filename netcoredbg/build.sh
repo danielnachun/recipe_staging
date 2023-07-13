@@ -7,6 +7,12 @@ if [[ $target_platform =~ .*linux.* ]]; then
     export CXX=${BUILD_PREFIX}/bin/clang++
 fi
 
-cmake -S . -B build ${CMAKE_ARGS} -DDOTNET_DIR=${DOTNET_ROOT}
+cmake -S . -B build ${CMAKE_ARGS} -DCMAKE_INSTALL_PREFIX=${PREFIX}/libexec/${PKG_NAME} -DDOTNET_DIR=${DOTNET_ROOT}
 cmake --build build
 cmake --install build
+
+mkdir -p ${PREFIX}/bin
+cat << EOF > ${PREFIX}/bin/${PKG_NAME}
+#!/bin/sh
+DOTNET_ROOT=${DOTNET_ROOT} exec ${PREFIX}/libexec/${PKG_NAME}/${PKG_NAME} "\$@"
+EOF
