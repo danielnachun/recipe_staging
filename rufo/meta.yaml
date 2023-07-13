@@ -1,0 +1,35 @@
+{% set name = "rufo" %}
+{% set version = "0.16.1" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: 350719451783d41f7b811f1276e998ef757065c0fc2fff5a3162d94756289471
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - sed
+  host:
+    - ruby >=3.2
+  run:
+    - ruby >=3.2
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  summary: Fast and unobtrusive Ruby code formatter
+
+extra:
+  recipe-maintainers:
+    - danielnachun
