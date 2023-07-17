@@ -1,0 +1,34 @@
+{% set name = "gnustep-make" %}
+{% set version = "2.9.1" %}
+{% set version_under = version.replace(".", "_") %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/gnustep/tools-make/releases/download/make-{{ version_under }}/gnustep-make-{{ version }}.tar.gz
+  sha256: c3d6e70cf156b27e7d1ed2501c57df3f96e27488ce2f351b93e479c58c01eae7
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+
+test:
+  commands:
+    - gnustep-config --help
+
+about:
+  home: http://gnustep.org
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  summary: Basic GNUstep Makefiles
+  dev_url: https://github.com/gnustep/tools-make
+
+extra:
+  recipe-maintainers:
+    - danielnachun
