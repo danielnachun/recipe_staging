@@ -1,0 +1,42 @@
+{% set name = "autogen" %}
+{% set version = "5.18.16" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://ftp.gnu.org/gnu/{{ name }}/rel{{ version }}/{{ name }}-{{ version }}.tar.xz
+  sha256: f8a13466b48faa3ba99fe17a069e71c9ab006d9b1cfabe699f8c60a47d5bb49a
+
+build:
+  number: 1
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - guile
+    - libxml2
+    - make
+    - pkg-config
+  host:
+    - guile
+    - libxml2
+  run:
+    - guile
+    - libxml2
+
+test:
+  commands:
+    - {{ name }} -v
+
+about:
+  home: https://autogen.sourceforge.io
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  summary: Automated text file generator
+  dev_url: https://autogen.sourceforge.io
+
+extra:
+  recipe-maintainers:
+    - danielnachun
