@@ -1,0 +1,39 @@
+{% set name = "libobjc2" %}
+{% set version = "2.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  - url: https://github.com/gnustep/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+    sha256: 78fc3711db14bf863040ae98f7bdca08f41623ebeaf7efaea7dd49a38b5f054c
+
+build:
+  number: 0
+  skip: True  # [not linux]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - clang
+    - clangxx
+    - cmake
+    - make
+    - tsl_robin_map
+
+test:
+  commands:
+    - test -f $PREFIX/lib/libobjc${SHLIB_EXT}
+
+about:
+  home: https://github.com/gnustep/{{ name }}
+  license: MIT
+  license_file: COPYING
+  summary: Objective-C runtime library intended for use with Clang 
+  dev_url: https://github.com/gnustep/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
