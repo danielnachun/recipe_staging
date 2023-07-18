@@ -22,7 +22,7 @@ requirements:
     - biopython
     - dask
     - liftover
-    - numpy
+    - numpy =1.24
     - packaging
     - pandas
     - pandas-plink >=2.2.5
@@ -37,7 +37,7 @@ requirements:
     - dask
     - liftover
     - nbdev =0.2.40
-    - numpy
+    - numpy =1.24
     - packaging
     - pandas
     - pandas-plink >=2.2.5
