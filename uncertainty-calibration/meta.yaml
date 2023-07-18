@@ -1,0 +1,42 @@
+{% set name = "uncertainty-calibration" %}
+{% set version = "0.1.4" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: e99baf2f2ced29b852eb47c25852e4bcc3fff183befef6c35cc239165c6e2634
+
+build:
+  noarch: generic
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - numpy=1.24
+    - parameterized
+    - pip
+    - python
+    - scikit-learn
+  run:
+    - numpy=1.24
+    - parameterized
+    - python
+    - scikit-learn
+
+test:
+  imports:
+    - calibration
+
+about:
+  home: "https://github.com/AnanyaKumar/verified_calibration"
+  license: MIT
+  license_file: 
+  summary: "Utilities to calibrate model uncertainties and measure calibration."
+
+extra:
+  recipe-maintainers:
+    - danielnachun

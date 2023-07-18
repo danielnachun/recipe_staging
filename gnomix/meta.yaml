@@ -1,0 +1,57 @@
+{% set name = "gnomix" %}
+{% set version = "0.0.7" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: 11ff33182481cf74fd875e4be4ffc5b0709fd5803b434a92cfe3c20463e28bb3
+
+build:
+  noarch: python
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - matplotlib
+    - numpy =1.24
+    - pandas
+    - pip
+    - python
+    - pyyaml
+    - scikit-allel
+    - scikit-learn
+    - scipy
+    - seaborn
+    - sklearn-crfsuite
+    - tqdm
+    - uncertainty-calibration
+    - xgboost
+  run:
+    - matplotlib
+    - numpy =1.24
+    - pandas
+    - python
+    - pyyaml
+    - scikit-allel
+    - scikit-learn
+    - scipy
+    - seaborn
+    - sklearn-crfsuite
+    - tqdm
+    - uncertainty-calibration
+    - xgboost
+
+about:
+  home: https://github.com/AI-sandbox/gnomix
+  license: UNKNOWN
+  license_family: OTHER
+  license_file: 
+  summary: "A fast, scalable, and accurate local ancestry method"
+
+extra:
+  recipe-maintainers:
+    - danielnachun
