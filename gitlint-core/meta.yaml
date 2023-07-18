@@ -3,12 +3,12 @@
 {% set name_under = name.replace("_", "-") %}
 
 package:
-  name: "{{ name|lower }}"
+  name: "{{ name_under }}"
   version: "{{ version }}"
 
 source:
-  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name_under }}-{{ version }}.tar.gz"
-  sha256: b032eb574f7399aec6a5246a78810bacb7ce9c9fd2d9e4375950549196cae681
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: 7bf977b03ff581624a9e03f65ebb8502cc12dfaa3e92d23e8b2b54bbdaa29992
 
 build:
   noarch: generic
@@ -21,6 +21,8 @@ requirements:
   host:
     - arrow >=1
     - click >=8
+    - hatch-vcs
+    - hatchling
     - pip
     - python
     - sh >=1.13.0   # [ not win ]
