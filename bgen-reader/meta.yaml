@@ -1,5 +1,5 @@
-{% set name = "fastscript" %}
-{% set version = "1.0.0" %}
+{% set name = "bgen-reader" %}
+{% set version = "4.0.8" %}
 
 package:
   name: "{{ name|lower }}"
@@ -7,7 +7,7 @@ package:
 
 source:
   url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
-  sha256: 67d2315a508ffd0499af590fffaa63d276ce6eaff73ffbd60eb3315ba38d08fa
+  sha256: 50414918914b8cd893d0dfa7fef32ee1912ba1802ead37d9502b3d8936d8c68a
 
 build:
   noarch: python
@@ -16,23 +16,16 @@ build:
 
 requirements:
   host:
-    - packaging
     - pip
     - python
   run:
-    - packaging
-    - pip
     - python
 
-test:
-  imports:
-    - fastscript
-
 about:
-  home: https://github.com/fastai/fastscript
-  license: Apache-2.0
+  home: The package home page
+  license: MIT
   license_file: 
-  summary: A fast way to turn your python function into a script
+  summary: "Bgen file format reader"
 
 extra:
   recipe-maintainers:

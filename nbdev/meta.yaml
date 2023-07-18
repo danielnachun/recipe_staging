@@ -10,6 +10,7 @@ source:
   sha256: b9d5cf8df85a18559865ba0eaca6ce59580435b4eaf38ac54e7f5e1ba227a8ee
 
 build:
+  noarch: python
   number: 0
   entry_points:
     - nbdev_build_lib=nbdev.cli:nbdev_build_lib
@@ -73,13 +74,10 @@ test:
 
 about:
   home: "https://github.com/fastai/nbdev/tree/master/"
-  license: Apache Software
-  license_family: APACHE
+  license: Apache-2.0
   license_file: 
   summary: "Create delightful software with Jupyter Notebooks"
-  doc_url: 
-  dev_url: 
 
 extra:
   recipe-maintainers:
-    - your-github-id-here
+    - danielnachun
