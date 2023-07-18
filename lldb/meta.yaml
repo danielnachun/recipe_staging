@@ -1,0 +1,64 @@
+{% set name = "lldb" %}
+{% set version = "16.0.6" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  - url: https://github.com/llvm/llvm-project/releases/download/llvmorg-{{ version }}/{{ name }}-{{ version }}.src.tar.xz
+    sha256: e70a2360aff09553ab327f0f87a08ab869cea991068df38fd3e530368d4d3fae
+    folder: lldb
+  - url: https://github.com/llvm/llvm-project/releases/download/llvmorg-{{ version }}/cmake-{{ version }}.src.tar.xz
+    sha256: 39d342a4161095d2f28fb1253e4585978ac50521117da666e2b1f6f28b62f514
+    folder: cmake
+
+build:
+  number: 2
+  skip: true  # [win and vc<14]
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - doxygen
+    - graphviz
+    - cmake >=3.4.3
+    - ninja
+  host:
+    - python
+    - llvmdev =={{ version }}
+    - clangdev =={{ version }}
+    - llvm =={{ version }}
+    - swig
+    - ncurses  # [not win]
+    - libedit  # [not win]
+    - libxml2
+    - lit
+    - xz
+    - six
+  run:
+    - ncurses  # [not win]
+    - libedit  # [not win]
+    - libzlib
+    - python
+    - six
+    - libclang-cpp16
+  run_constrained:
+    - llvmdev =={{ version }}
+    - clangdev =={{ version }}
+
+test:
+  imports:
+    - lldb
+  commands:
+    - lldb --version
+
+about:
+  home: http://llvm.org/
+  license: NCSA
+  license_file: lldb/LICENSE.TXT
+  summary: The LLVM Debugger
+
+extra:
+  recipe-maintainers:
+    - isuruf
