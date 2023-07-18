@@ -1,0 +1,42 @@
+{% set name = "qsv" %}
+{% set version = "0.107.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/jqnatividad/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
+  sha256: 628b18a3ea9ebd0b5e82e3fd9db05348c0c6aa32b43b32bdd12c0217443d88be
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cargo-bundle-licenses
+    - clangdev
+    - python
+    - rust
+  host:
+    - python
+  run:
+    - python
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/jqnatividad/{{ name }}
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE-MIT
+  summary: Ultra-fast CSV data-wrangling toolkit
+  dev_url: https://github.com/jqnatividad/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
