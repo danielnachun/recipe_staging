@@ -22,7 +22,7 @@ requirements:
     - cython
     - packaging
     - pip
-    - python
+    - python=3.10
     - zlib
   run:
     - cython

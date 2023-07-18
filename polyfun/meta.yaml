@@ -26,7 +26,7 @@ requirements:
     - pandas-plink
     - pip
     - pyarrow>=3.0
-    - python
+    - python=3.10
     - r-ckmeans.1d.dp
     - r-expm
     - r-lattice
