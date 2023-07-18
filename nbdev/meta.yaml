@@ -10,7 +10,7 @@ source:
   sha256: b9d5cf8df85a18559865ba0eaca6ce59580435b4eaf38ac54e7f5e1ba227a8ee
 
 build:
-  noarch: generic
+  noarch: python
   number: 0
   entry_points:
     - nbdev_build_lib=nbdev.cli:nbdev_build_lib
