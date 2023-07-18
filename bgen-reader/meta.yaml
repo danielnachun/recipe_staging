@@ -1,0 +1,32 @@
+{% set name = "bgen-reader" %}
+{% set version = "4.0.8" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: 50414918914b8cd893d0dfa7fef32ee1912ba1802ead37d9502b3d8936d8c68a
+
+build:
+  noarch: generic
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - pip
+    - python
+  run:
+    - python
+
+about:
+  home: The package home page
+  license: MIT
+  license_file: 
+  summary: "Bgen file format reader"
+
+extra:
+  recipe-maintainers:
+    - danielnachun
