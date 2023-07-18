@@ -16,6 +16,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - sed
   host:
     - python=3.10
     - numpy
