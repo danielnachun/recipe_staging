@@ -10,18 +10,19 @@ source:
   sha256: 0a28be5e750c2fe7867c064c62729d9d172d4459f2cc5900cd0e2466c24b8d26
 
 build:
+  noarch: python
   number: 0
   script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
   host:
-    - numpy
+    - numpy =1.24.*
     - pandas
     - pip
     - python
     - zstd
   run:
-    - numpy
+    - numpy =1.24.*
     - pandas
     - python
     - zstd
@@ -33,11 +34,7 @@ test:
 about:
   home: "http://www.finemap.me"
   license: MIT
-  license_family: MIT
-  license_file: 
   summary: "A package for reading files created by LDstore"
-  doc_url: 
-  dev_url: 
 
 extra:
   recipe-maintainers:
