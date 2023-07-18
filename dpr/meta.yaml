@@ -1,0 +1,40 @@
+{% set name = "dpr" %}
+{% set version = "1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: http://www.xzlab.org/software/dpr/DPR.rar
+  sha256: 75c92172e1bf8dd63cfeba28076a25bc05d36839b11d4af282a20e8ec68d904a
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - make
+    - go-archiver
+  host:
+    - blas
+    - eigen
+    - gsl
+    - zlib
+  run:
+    - libopenblas
+    - libzlib
+ 
+test:
+  commands:
+    - DPR --help
+
+about:
+  home: http://www.xzlab.org/software
+  license: GPL-3.0-or-later
+  summary: Non-parametric genetic prediction of complex traits with latent Dirichlet process regression models
+
+extra:
+  recipe-maintainers:
+    - danielnachun

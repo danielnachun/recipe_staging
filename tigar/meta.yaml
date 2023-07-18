@@ -1,0 +1,51 @@
+{% set name = "tigar" %}
+{% set version = "2.0" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  git_url: https://github.com/yanglab-emory/TIGAR
+  git_rev: 3b29c9c09384b4e17da1ae1840a6be26039517e6
+
+build:
+  number: 0
+
+requirements:
+  host:
+    - dpr
+    - numpy =1.24
+    - pandas
+    - python =3.10
+    - scipy
+    - scikit-learn
+    - statsmodels
+    - htslib
+  run:
+    - dpr
+    - numpy =1.24
+    - pandas
+    - python =3.10
+    - scipy
+    - scikit-learn
+    - statsmodels
+    - htslib
+
+test:
+  commands:
+    - test -f ${PREFIX}/bin/TIGAR_GReX_Pred.sh
+    - test -f ${PREFIX}/bin/TIGAR_LD.sh
+    - test -f ${PREFIX}/bin/TIGAR_Model_Train.sh
+    - test -f ${PREFIX}/bin/TIGAR_TWAS.sh
+    - test -f ${PREFIX}/bin/TIGAR_VC_TWAS.sh
+    - test -f ${PREFIX}/bin/VC_TWAS_summary.sh
+
+about:
+  home: "https://github.com/hakyimlab/MetaXcan"
+  license: Other
+  summary: "Transcriptome-Integrated Genetic Association Resource"
+
+extra:
+  recipe-maintainers:
+    - danielnachun
