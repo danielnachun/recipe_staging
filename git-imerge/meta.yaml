@@ -18,7 +18,6 @@ build:
 
 requirements:
   host:
-    - bash-completion
     - pip
     - python
   run:
