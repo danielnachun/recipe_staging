@@ -1,0 +1,43 @@
+{% set name = "pycp" %}
+{% set version = "8.0.8" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: 258e34e15c4b1eb229db2a48a1f3bb010500825d6f90abc19801b4de2824dbde
+
+build:
+  noarch: python
+  number: 0
+  entry_points:
+    - pycp = pycp.main:main
+    - pymv = pycp.main:main
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - attrs
+    - pip
+    - python
+  run:
+    - attrs
+    - python
+
+test:
+  imports:
+    - pycp
+  commands:
+    - pycp --help
+    - pymv --help
+
+about:
+  home: "http://github.com/dmerejkowsky/pycp"
+  license: BSD
+  summary: "cp and mv with a progressbar"
+
+extra:
+  recipe-maintainers:
+    - danielnachun
