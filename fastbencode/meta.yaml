@@ -1,0 +1,37 @@
+{% set name = "fastbencode" %}
+{% set version = "0.0.12" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: c3b17eef44755a2ce8fe2d06182735dc00dfe89a8046d3d7312ebfa9398f2846
+
+build:
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - {{ compiler('c') }}
+    - cython
+    - pip
+    - python >=3.11
+  run:
+    - python >=3.11
+
+test:
+  imports:
+    - fastbencode
+
+about:
+  home: "https://github.com/breezy-team/fastbencode"
+  license: GPL-2.0-or-later
+  license_file: 
+  summary: "Implementation of bencode with optional fast C extensions"
+
+extra:
+  recipe-maintainers:
+    - danielnachun
