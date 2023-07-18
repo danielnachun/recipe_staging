@@ -1,0 +1,51 @@
+{% set name = "gitlint_core" %}
+{% set version = "0.19.1" %}
+{% set name_under = name.replace("_", "-") %}
+
+package:
+  name: "{{ name_under }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: 7bf977b03ff581624a9e03f65ebb8502cc12dfaa3e92d23e8b2b54bbdaa29992
+
+build:
+  noarch: python
+  number: 0
+  entry_points:
+    - gitlint = gitlint.cli:cli
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - arrow >=1
+    - click >=8
+    - hatch-vcs
+    - hatchling
+    - pip
+    - python
+    - sh >=1.13.0   # [ not win ]
+  run:
+    - arrow >=1
+    - click >=8
+    - python
+    - sh >=1.13.0   # [ not win ]
+
+test:
+  imports:
+    - gitlint
+    - gitlint.contrib
+    - gitlint.contrib.rules
+  commands:
+    - gitlint --help
+
+about:
+  home: "https://jorisroovers.github.io/gitlint"
+  license: MIT
+  license_file: 
+  summary: "Git commit message linter written in python, checks your commit messages for style."
+
+extra:
+  recipe-maintainers:
+    - danielnachun
