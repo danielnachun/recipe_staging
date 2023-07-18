@@ -1,0 +1,57 @@
+{% set name = "breezy" %}
+{% set version = "3.3.1" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  noarch: python
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: f00c2d17766f2947f6dc692e1247e5c1771a9186f4e941aa97ecc9d2ac23a8a6
+
+build:
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  build: 
+    - gettext
+  host:
+    - {{ compiler("c") }}
+    - certifi
+    - configobj
+    - cython
+    - dulwich
+    - fastbencode
+    - patiencediff
+    - python
+    - rust
+    - setuptools-rust
+    - six
+    - pyyaml
+    - urllib3
+  run:
+    - configobj
+    - dulwich
+    - fastbencode
+    - patiencediff
+    - pip
+    - six
+    - urllib3
+    - python
+    - pyyaml
+
+test:
+  imports:
+    - breezy
+
+about:
+  home: "https://github.com/breezy-team/breezy"
+  license: GPL-2.0-or-later
+  license_file: 
+  summary: "Friendly distributed version control system"
+
+extra:
+  recipe-maintainers:
+    - danielnachun

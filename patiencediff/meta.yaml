@@ -1,0 +1,38 @@
+{% set name = "patiencediff" %}
+{% set version = "0.2.3" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: 013c931850e8986518f1ee7792b049cd581a6fb91e77bddf6c8230a7adfeb732
+
+build:
+  number: 0
+  script_env:
+    - CFLAGS="-Wno-int-conversion"
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - {{ compiler('c') }}
+    - pip
+    - python >=3.11
+  run:
+    - python >=3.11
+
+test:
+  imports:
+    - patiencediff
+
+about:
+  home: The package home page
+  license: GPL-2.0-or-later
+  license_file: 
+  summary: "Python implementation of the patiencediff algorithm"
+
+extra:
+  recipe-maintainers:
+    - danielnachun
