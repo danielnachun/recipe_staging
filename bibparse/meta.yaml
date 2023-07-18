@@ -1,0 +1,36 @@
+{% set name = "bibparse" %}
+{% set version = "1.0.0" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: 68eb68e37a461b73000b07c173929cdd99c0669c11d88973c2f9f87ca44be9b5
+
+build:
+  noarch: python
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - pip
+    - python
+  run:
+    - python
+
+test:
+  imports:
+    - bibparse
+
+about:
+  home: "http://github.com/Legisign/bibparse"
+  license: GPLv3
+  license_file: 
+  summary: "Read and write BibTeX files"
+
+extra:
+  recipe-maintainers:
+    - danielnachun
