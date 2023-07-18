@@ -16,12 +16,12 @@ build:
 
 requirements:
   host:
-    - cmigemo >=0.1.5
+    - cmigemo
     - pip
     - python
     - six >=1.7.3
   run:
-    - cmigemo >=0.1.5
+    - cmigemo
     - python
     - six >=1.7.3
 
