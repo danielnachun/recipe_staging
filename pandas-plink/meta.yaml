@@ -1,0 +1,32 @@
+{% set name = "pandas_plink" %}
+{% set version = "2.2.5" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: f109c1d156b37e04cb1400c83ec4a2beedb90ff7e5bae10035e5bcf1d754448c
+
+build:
+  noarch: python
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - pip
+    - python
+  run:
+    - python
+
+about:
+  home: https://github.com/glimix/pandas-plink
+  license: MIT
+  license_file: 
+  summary: "Read PLINK files into Pandas data frames"
+
+extra:
+  recipe-maintainers:
+    - danielnachun
