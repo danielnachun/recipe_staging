@@ -1,0 +1,41 @@
+{% set name = "fine-mapping-inf" %}
+{% set version = "1.0" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  git_url: "https://github.com/FinucaneLab/fine-mapping-inf"
+  git_rev: 4af3e6ebf04f372bcb641977601a2b65a4080237
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
+    - python
+    - numpy
+    - pandas
+    - scipy
+  run:
+    - python
+    - numpy
+    - pandas
+    - scipy
+
+test:
+  commands:
+    - test -f ${PREFIX}/bin/run_fine_mapping.py
+
+about:
+  home: "https://github.com/FinucaneLab/fine-mapping-inf"
+  license: Unspecified
+  summary: "Fine-mapping with infinitesimal effects"
+
+extra:
+  recipe-maintainers:
+    - danielnachun
