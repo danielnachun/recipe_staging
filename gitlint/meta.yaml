@@ -10,13 +10,15 @@ source:
   sha256: b5b70fb894e80849b69abbb65ee7dbb3520fc3511f202a6e6b6ddf1a71ee8f61
 
 build:
-  noarch: generic
+  noarch: python
   number: 0
   script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
   host:
     - gitlint-core[trusted-deps] ==0.19.1
+    - hatchling
+    - hatch-vcs
     - pip
     - python
   run:
