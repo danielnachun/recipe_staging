@@ -10,6 +10,7 @@ source:
   sha256: bbb776842c25b93ce51528925ea43c22f8fc025667ea05474e14fc2d5af3e487
 
 build:
+  noarch: generic
   number: 0
   entry_points:
     - nbdev_build_lib=nbdev.cli:nbdev_build_lib
@@ -58,8 +59,6 @@ about:
   license_family: APACHE
   license_file: 
   summary: "Modules for LD computing, liftover and region extraction"
-  doc_url: 
-  dev_url: 
 
 extra:
   recipe-maintainers:
