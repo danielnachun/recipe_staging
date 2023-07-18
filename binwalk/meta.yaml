@@ -1,0 +1,37 @@
+{% set name = "binwalk" %}
+{% set version = "2.1.0" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: 218c8045c6cb3ed6e21814fb89cdb913808b02dfe5a6cc30f85f4a59e8129f6b
+
+build:
+  noarch: generic
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - pip
+    - python
+  run:
+    - python
+
+test:
+  imports:
+    - binwalk
+
+about:
+  home: "https://github.com/devttys0/binwalk"
+  license: UNKNOWN
+  license_family: OTHER
+  license_file: 
+  summary: "Firmware analysis tool"
+
+extra:
+  recipe-maintainers:
+    - danielnachun
