@@ -24,7 +24,7 @@ requirements:
     - dulwich
     - fastbencode
     - patiencediff
-    - python
+    - python >=3.11
     - rust
     - setuptools-rust
     - setuptools-gettext
@@ -39,7 +39,7 @@ requirements:
     - pip
     - six
     - urllib3
-    - python
+    - python >=3.11
     - pyyaml
 
 test:
