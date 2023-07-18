@@ -1,0 +1,52 @@
+{% set name = "qtl" %}
+{% set version = "0.1.8" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: 8fdb99cda1ceff578a233db6c15a944fa57b43a2826af41c292e36848906117b
+
+build:
+  noarch: python
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+  skip: True  # [not linux]
+
+requirements:
+  host:
+    - bx-python
+    - matplotlib
+    - numpy =1.24
+    - pandas
+    - pip
+    - pybigwig
+    - python
+    - scipy
+    - seaborn
+  run:
+    - bx-python
+    - matplotlib
+    - numpy =1.24
+    - pandas
+    - pybigwig
+    - python
+    - scipy
+    - seaborn
+
+test:
+  imports:
+    - qtl
+
+about:
+  home: The package home page
+  license: UNKNOWN
+  license_family: OTHER
+  license_file: 
+  summary: "Utilities for analyzing and visualizing QTL data"
+
+extra:
+  recipe-maintainers:
+    - danielnachun
