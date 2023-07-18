@@ -1,0 +1,45 @@
+{% set name = "ocdc" %}
+{% set version = "0.3.3" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: 39f687472cf86a10c54ef035027a8408a4bf915b6ede56b003d0ce741086d5f7
+
+build:
+  noarch: python
+  number: 0
+  entry_points:
+    - ocdc = ocdc.__main__:main
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - packaging 
+    - pip
+    - poetry >=1.1.15,<2.0.0
+    - pydantic >=1.9.1,<2.0.0
+    - python
+  run:
+    - packaging
+    - pydantic >=1.9.1,<2.0.0
+    - python
+
+test:
+  imports:
+    - ocdc
+  commands:
+    - ocdc --help
+
+about:
+  home: https://github.com/mdwint/ocdc
+  license: MIT
+  license_file: 
+  summary: A changelog formatter for people, neat freaks, and sloppy typists
+
+extra:
+  recipe-maintainers:
+    - danielnachun
