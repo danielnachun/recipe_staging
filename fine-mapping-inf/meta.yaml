@@ -17,12 +17,12 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
-    - python
+    - python=3.10
     - numpy
     - pandas
     - scipy
   run:
-    - python
+    - python=3.10
     - numpy
     - pandas
     - scipy
