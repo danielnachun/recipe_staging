@@ -15,6 +15,7 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - coreutils
     - guile
     - libxml2
     - make
