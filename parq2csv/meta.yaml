@@ -10,7 +10,7 @@ source:
   sha256: a91bcdb08214ef36fdd2593743d01edc117cdaeb8d3f85bea1e8f952929f62f7
 
 build:
-  noarch: generic
+  noarch: python
   number: 0
   entry_points:
     - parq2csv = parq2csv.main:main
