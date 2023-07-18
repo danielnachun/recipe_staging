@@ -10,6 +10,7 @@ source:
   sha256: 4b3cc35463544c5747c895c52a0343cfdbba15d307647d7f57f1cce0c6a27d02
 
 build:
+  noarch: python
   number: 0
   entry_points:
     - nvr = nvr.nvr:main
