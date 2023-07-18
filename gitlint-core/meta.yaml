@@ -1,12 +1,13 @@
 {% set name = "gitlint_core" %}
 {% set version = "0.19.1" %}
+{% set name_under = name.replace("_", "-") %}
 
 package:
   name: "{{ name|lower }}"
   version: "{{ version }}"
 
 source:
-  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name_under }}-{{ version }}.tar.gz"
   sha256: b032eb574f7399aec6a5246a78810bacb7ce9c9fd2d9e4375950549196cae681
 
 build:
