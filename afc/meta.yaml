@@ -1,0 +1,36 @@
+{% set name = "afc" %}
+{% set version = "1.0" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  git_url: https://github.com/secastel/aFC
+  git_rev: 6ad52374a1b8b8f2ed1c5450718a3730b9cf360a
+
+build:
+  number: 0
+
+requirements:
+  run:
+    - nose
+    - numpy
+    - pandas
+    - pysam
+    - scikits-bootstrap
+    - statsmodels
+
+test:
+   commands:
+    - python3 ${PREFIX}/bin/aFC.py -h
+
+about:
+  home: https://github.com/secastel/aFC
+  license: OTHER
+  license_family: OTHER
+  summary: Calculates allelic Fold Change (aFC) using standard input files for fastQTL
+
+extra:
+  recipe-maintainers:
+    - danielnachun
