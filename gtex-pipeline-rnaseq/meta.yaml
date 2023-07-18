@@ -10,6 +10,7 @@ source:
   git_rev: bed31e12a48b25db8b111252e2136b31c64c9e82
 
 build:
+  noarch: python
   number: 0
 
 requirements:
@@ -50,8 +51,6 @@ about:
   license: OTHER
   license_family: OTHER
   summary: GTEx & TOPMed data production and analysis pipelines - RNA-seq component
-  doc_url: 
-  dev_url: 
 
 extra:
   recipe-maintainers:
