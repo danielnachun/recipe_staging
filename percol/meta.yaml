@@ -1,0 +1,40 @@
+{% set name = "percol" %}
+{% set version = "0.2.1" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: 7a649c6fae61635519d12a6bcacc742241aad1bff3230baef2cedd693ed9cfe8
+
+build:
+  noarch: python
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - cmigemo
+    - pip
+    - python
+    - six >=1.7.3
+  run:
+    - cmigemo
+    - python
+    - six >=1.7.3
+
+test:
+  imports:
+    - percol
+
+about:
+  home: "https://github.com/mooz/percol"
+  license: MIT
+  license_file: 
+  summary: "Adds flavor of interactive filtering to the traditional pipe concept of shell"
+
+extra:
+  recipe-maintainers:
+    - danielnachun
