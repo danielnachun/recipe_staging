@@ -41,7 +41,7 @@ test:
 
 about:
   home: "https://github.com/BlankSpruce/gersemi"
-  license: MPL-.20
+  license: MPL-2.0
   license_file: 
   summary: "A formatter to make your CMake code the real treasure"
 
