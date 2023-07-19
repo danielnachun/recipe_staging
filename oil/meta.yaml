@@ -15,6 +15,7 @@ build:
 
 requirements:
   build:
+    - binutils
     - {{ compiler('c') }}
     - gcc  # [linux]
     - make
