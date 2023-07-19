@@ -1,0 +1,38 @@
+{% set name = "oil" %}
+{% set version = "0.16.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://www.oilshell.org/download/{{ name }}-{{ version }}.tar.gz
+  sha256: 4cfb601d5dbcaf01d25b3168a1e3647b8537c5b9866561225d8d38f9b61450c1
+
+build:
+  number: 0
+  binary_relocation: false
+
+requirements:
+  build:
+    - binutils
+    - {{ compiler('c') }}
+    - gcc  # [linux]
+    - make
+  host:
+    - readline
+
+test:
+  commands:
+    - osh --help
+
+about:
+  home: https://www.oilshell.org
+  license: Apache-2.0
+  license_file: LICENSE.txt
+  summary: Bash-compatible Unix shell with more consistent syntax and semantics
+  dev_url: https://github.com/oilshell/oil
+
+extra:
+  recipe-maintainers:
+    - danielnachun
