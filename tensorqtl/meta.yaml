@@ -10,13 +10,14 @@ source:
   git_rev: 890f32977f36d7e5be2d0820c7f382764617b553
 
 build:
+  noarch: python
   number: 1
   entry_points:
     - tensorqtl = tensorqtl:__main__
 
 requirements:
   host:
-    - numpy >=1.25
+    - numpy =1.24
     - pandas
     - pandas-plink
     - pip
@@ -29,7 +30,7 @@ requirements:
     - sed
   run:
     - bioconductor-qvalue
-    - numpy >=1.25
+    - numpy =1.24
     - pandas
     - pandas-plink
     - pyarrow
