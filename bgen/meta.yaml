@@ -11,18 +11,18 @@ source:
 
 build:
   number: 0
-  script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - gcc
+    - gcc  # [linux]
+    - sed
   host:
     - cython
     - packaging
     - pip
-    - python
+    - python=3.10
     - zlib
   run:
     - cython
@@ -35,11 +35,8 @@ test:
 about:
   home: https://github.com/jeremymcrae/bgen
   license: MIT
-  license_family: MIT
   license_file: 
   summary: Package for loading data from bgen files
-  doc_url: 
-  dev_url: 
 
 extra:
   recipe-maintainers:
