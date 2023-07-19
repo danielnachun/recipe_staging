@@ -1,0 +1,32 @@
+{% set name = "git-town" %}
+{% set version = "9.0.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/{{ name }}/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 35e78c30ee41b0c3a6c07c1415c8102732c4bab8c2b843ec24e8e5cdcb0a7be1
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/{{ name }}/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: High-level command-line interface for Git
+  dev_url: https://github.com/{{ name }}/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
