@@ -1,0 +1,32 @@
+{% set name = "lefthook" %}
+{% set version = "1.4.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/evilmartians/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 870dc85504d677c10d514f5a8f4bfaf328e6990892a1bc169a2f44616203b56f
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/evilmartians/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: Fast and powerful Git hooks manager for any type of projects
+  dev_url: https://github.com/evilmartians/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
