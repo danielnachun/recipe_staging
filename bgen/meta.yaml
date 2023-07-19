@@ -11,6 +11,9 @@ source:
 
 build:
   number: 0
+  script_env:
+    - CXXFLAGS="-I${PREFIX}/include"
+    - CPPFLAGS="-I${PREFIX}/include"
   script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
