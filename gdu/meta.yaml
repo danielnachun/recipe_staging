@@ -1,0 +1,32 @@
+{% set name = "gdu" %}
+{% set version = "5.25.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/dundee/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 83fe876d953b4f2f7a856552e758aae4aa0cd9569dcf1aded61bdc834b834275
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/dundee/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: Disk usage analyzer with console interface written in Go
+  dev_url: https://github.com/dundee/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
