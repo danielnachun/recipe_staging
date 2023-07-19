@@ -11,11 +11,12 @@ source:
 
 build:
   number: 0
+  binary_relocation: false
 
 requirements:
   build:
     - {{ compiler('c') }}
-    #- gcc
+    - gcc  # [linux]
     - make
   host:
     - readline
