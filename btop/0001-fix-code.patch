@@ -1,0 +1,24 @@
+From 4eb6d81f7cce74ddb3b157a68f49cc10eaa08f02 Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Tue, 18 Jul 2023 20:38:08 -0700
+Subject: [PATCH] fix code
+
+---
+ src/btop_tools.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/btop_tools.cpp b/src/btop_tools.cpp
+index 6e8becb..df61fc0 100644
+--- a/src/btop_tools.cpp
++++ b/src/btop_tools.cpp
+@@ -17,6 +17,7 @@ tab-size = 4
+ */
+ 
+ #include <cmath>
++#include <codecvt>
+ #include <iostream>
+ #include <fstream>
+ #include <ctime>
+-- 
+2.41.0
+
