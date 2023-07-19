@@ -17,6 +17,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - gcc  # [linux]
+    - sed
   host:
     - cython
     - packaging
