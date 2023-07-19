@@ -1,0 +1,32 @@
+{% set name = "rospo" %}
+{% set version = "0.11.4" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/ferama/{{ name }}/archive/refs/tags/v{{ version}}.tar.gz
+  sha256: 57bc1ec5fdfc7c5456ec87ff483e8f033be38a4026cbe2045ad60f347c21cd6c
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/ferama/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: Simple, reliable, persistent ssh tunnels with embedded ssh server
+  dev_url: https://github.com/ferama/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
