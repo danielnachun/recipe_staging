@@ -11,10 +11,6 @@ source:
 
 build:
   number: 0
-  script_env:
-    - CXXFLAGS="-I${PREFIX}/include"
-    - CPPFLAGS="-I${PREFIX}/include"
-  script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
   build:
@@ -38,11 +34,8 @@ test:
 about:
   home: https://github.com/jeremymcrae/bgen
   license: MIT
-  license_family: MIT
   license_file: 
   summary: Package for loading data from bgen files
-  doc_url: 
-  dev_url: 
 
 extra:
   recipe-maintainers:
