@@ -1,0 +1,32 @@
+{% set name = "pylsp-rope" %}
+{% set version = "0.1.10" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: 9e6104f15f922f633a4ba06ba0280f08a5e18973028f9bbdcae57b715d81cdd7
+
+build:
+  noarch: python
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - pip
+    - python
+  run:
+    - python
+
+about:
+  home: The package home page
+  license: MIT
+  license_file: 
+  summary: "Extended refactoring capabilities for Python LSP Server using Rope."
+
+extra:
+  recipe-maintainers:
+    - danielnachun
