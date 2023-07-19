@@ -1,0 +1,67 @@
+{% set name = "metaxcan" %}
+{% set version = "0.7.3" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  git_url: "https://github.com/hakyimlab/MetaXcan"
+  git_rev: aca75164070513b2616e0608891fca8b874fa934
+
+build:
+  number: 0
+
+requirements:
+  host:
+    - bgen-reader
+    - cyvcf2
+    - h5py
+    - numpy =1.24
+    - pip
+    - pandas
+    - pyarrow
+    - pyliftover
+    - python
+    - scipy
+    - statsmodels
+  run:
+    - bgen-reader
+    - cyvcf2
+    - h5py
+    - numpy =1.24
+    - pip
+    - pandas
+    - pyarrow
+    - pyliftover
+    - python
+    - scipy
+    - statsmodels
+
+test:
+  commands:
+    - test -f ${PREFIX}/bin/BuildExpressionProduct.py
+    - test -f ${PREFIX}/bin/CovarianceBuilder.py
+    - test -f ${PREFIX}/bin/M00_prerequisites.py
+    - test -f ${PREFIX}/bin/M01_covariances_correlations.py
+    - test -f ${PREFIX}/bin/M02_variances.py
+    - test -f ${PREFIX}/bin/M03_betas.py
+    - test -f ${PREFIX}/bin/M04_zscores.py
+    - test -f ${PREFIX}/bin/MetaMany.py
+    - test -f ${PREFIX}/bin/MulTiXcan.py
+    - test -f ${PREFIX}/bin/PrediXcan.py
+    - test -f ${PREFIX}/bin/PrediXcanAssociation.py
+    - test -f ${PREFIX}/bin/Predict.py
+    - test -f ${PREFIX}/bin/SPrediXcan.py
+    - test -f ${PREFIX}/bin/SMulTiXcan.py
+    - test -f ${PREFIX}/bin/ToHDF5.py
+
+about:
+  home: "https://github.com/hakyimlab/MetaXcan"
+  license: MIT
+  license_file: LICENSE
+  summary: "Set of tools to integrate genomic information of biological mechanisms with complex traits"
+
+extra:
+  recipe-maintainers:
+    - danielnachun
