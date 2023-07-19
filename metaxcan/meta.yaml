@@ -22,7 +22,7 @@ requirements:
     - pandas
     - pyarrow
     - pyliftover
-    - python
+    - python =3.10
     - scipy
     - statsmodels
   run:
@@ -34,7 +34,7 @@ requirements:
     - pandas
     - pyarrow
     - pyliftover
-    - python
+    - python =3.10
     - scipy
     - statsmodels
 
