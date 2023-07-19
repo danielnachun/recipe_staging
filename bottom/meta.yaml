@@ -20,7 +20,7 @@ requirements:
 
 test:
   commands:
-    - bottom --help
+    - btm --help
 
 about:
   home: https://clementtsang.github.io/{{ name }}
