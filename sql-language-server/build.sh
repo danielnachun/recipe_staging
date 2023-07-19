@@ -13,3 +13,5 @@ npm install -ddd \
 
 mkdir -p ${PREFIX}/bin
 ln -sf ${PREFIX}/libexec/${PKG_NAME}/bin/sql-language-server ${PREFIX}/bin
+
+rm -rf ${PREFIX}/libexec/${PKG_NAME}/lib/node_modules/sql-language-server/node_modules/sqlite3/build-tmp-napi-v6
