@@ -1,0 +1,37 @@
+{% set name = "finestructure" %}
+{% set version = "0.0.5" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://people.maths.bris.ac.uk/~madjl/finestructure-old/{{ name }}-{{ version }}.tar.gz
+  sha256: ffd4e68f68759f68e4a6aa0b023355d66203d803216e07f2685397285433ddfc
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - make
+  host:
+    - gsl
+    - blas
+  run:
+    - libopenblas
+
+test:
+  commands:
+    - test -f $PREFIX/bin/finestructure
+
+about:
+  home: https://people.maths.bris.ac.uk/~madjl/finestructure-old/finestructure.html
+  license: Creative Commons v3
+  license_file: COPYING
+  summary: Fast and powerful algorithm for identifying population structure using dense sequencing data
+
+extra:
+  recipe-maintainers:
+    - danielnachun
