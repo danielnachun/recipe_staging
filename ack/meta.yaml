@@ -1,0 +1,41 @@
+{% set name = "ack" %}
+{% set version = "3.6.0" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/P/PE/PETDANCE/ack-v{{ version }}.tar.gz
+  sha256: 03144d1070649e92f6a1b7d20bdc535e2bb1ac258daabe482e9aa8277b48f005
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-file-next
+  run:
+    - perl>=5.32
+    - perl-file-next
+
+test:
+  script:
+    - {{ name }} --help
+
+about:
+  home: https://beyondgrep.com/
+  license: artistic_2
+  summary: 'A grep-like program for searching source code'
+
+maintainers:
+  - danielnachun
