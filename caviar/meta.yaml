@@ -1,0 +1,37 @@
+{% set name = "caviar" %}
+{% set version = "1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/fhormoz/caviar
+  git_rev: 3e149b877778c52456b63385b125f77adda12059
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - make
+  host:
+    - blas
+    - gsl
+  run:
+    - libopenblas
+
+test:
+  commands:
+    - test -f $PREFIX/bin/CAVIAR
+    - test -f $PREFIX/bin/eCAVIAR
+
+about:
+  home: http://zarlab.cs.ucla.edu/tag/ecaviar/
+  license: AGPL-3.0-or-later
+  summary: Statistical framework for identifying causal variants
+
+extra:
+  recipe-maintainers:
+    - danielnachun
