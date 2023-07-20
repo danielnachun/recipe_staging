@@ -1,0 +1,50 @@
+{% set name = "bgw-twas" %}
+{% set version = "1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/yanglab-emory/BGW-TWAS
+  git_rev: 6b14517b0e9331b6480106719af1d454febf46fa
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - make
+  host:
+    - blas
+    - eigen
+    - gsl
+    - zlib
+  run:
+    - eigen
+    - perl
+    - libzlib
+    - libopenblas
+    - r-base>=4.2
+    - r-data.table
+    - r-gridextra
+    - r-ggplot2
+    - htslib
+
+test:
+  commands:
+    - test -f $PREFIX/bin/Step1_get_sumstat.sh
+    - test -f $PREFIX/bin/Step2_prune.sh
+    - test -f $PREFIX/bin/Step3_EM-MCMC.sh
+    - test -f $PREFIX/bin/Step4_get_test_grex.sh
+
+about:
+  home: https://github.com/yanglab-emory/BGW-TWAS
+  license: GPL-3.0-or-later
+  license_file: LICENSE
+  summary: Bayesian Genome-wide (BGW) TWAS
+
+extra:
+  recipe-maintainers:
+    - danielnachun
