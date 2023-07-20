@@ -1,0 +1,35 @@
+{% set name = "perl-cpanel-json-xs" %}
+{% set version = "4.32" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/R/RU/RURBAN/Cpanel-JSON-XS-{{ version }}.tar.gz
+  sha256: ece9d35914175e6c47b62fd936244278365ebce0905fe92b037e484e6d501895
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+test:
+  imports:
+    - Cpanel::JSON::XS
+    - Cpanel::JSON::XS::Type
+
+about:
+  home: http://metacpan.org/pod/Cpanel-JSON-XS
+  license: perl_5
+  summary: 'cPanel fork of JSON::XS, fast and correct serializing'
+
+maintainers:
+  - danielnachun

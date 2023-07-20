@@ -1,0 +1,40 @@
+{% set name = "perl-ref-util" %}
+{% set version = "0.204" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/A/AR/ARC/Ref-Util-{{ version }}.tar.gz
+  sha256: 415fa73dbacf44f3d5d79c14888cc994562720ab468e6f71f91cd1f769f105e1
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+test:
+  imports:
+    - Ref::Util
+    - Ref::Util::PP
+
+about:
+  home: http://metacpan.org/pod/Ref-Util
+  license: mit
+  summary: 'Utility functions for checking references'
+
+maintainers:
+  - danielnachun

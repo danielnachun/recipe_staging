@@ -1,0 +1,56 @@
+{% set name = "perl-term-table" %}
+{% set version = "0.016" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/E/EX/EXODIST/Term-Table-{{ version }}.tar.gz
+  sha256: 8fb4fbb8e96a2d6c514949eb8cfd7e66319bcb1cbf7cea0ab19af887a72d97bf
+
+build:
+  noarch: generic
+  number: 0
+  ignore_run_exports:
+    - perl-module-build
+    - perl-extutils-makemaker
+    - perl-test-simple
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+   - make
+  host:
+    - perl >=5.32
+    - perl-module-build
+    - perl-extutils-makemaker
+    - perl-carp
+    - perl-test-simple
+    - perl-importer
+  run:
+    - perl >=5.32
+    - perl-carp
+    - perl-importer
+
+test:
+  imports:
+    - Term::Table
+    - Term::Table::Cell
+    - Term::Table::CellStack
+    - Term::Table::HashBase
+    - Term::Table::LineBreak
+    - Term::Table::Spacer
+    - Term::Table::Util
+
+about:
+  home: http://metacpan.org/pod/Term-Table
+  license: perl_5
+  summary: 'Format a header and rows into a table'
+
+maintainers:
+  - danielnachun

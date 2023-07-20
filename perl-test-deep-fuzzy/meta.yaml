@@ -1,0 +1,44 @@
+{% set name = "perl-test-deep-fuzzy" %}
+{% set version = "0.01" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/K/KA/KARUPA/Test-Deep-Fuzzy-{{ version }}.tar.gz
+  sha256: f5c94fdd836b0d07187e297556986b0888d2cd5d136251962eed427580394daf
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Build.PL
+    - perl ./Build
+    - perl ./Build test
+    - perl ./Build install --installdirs site
+
+requirements:
+  host:
+    - perl >=5.32
+    - perl-math-round
+    - perl-module-build-tiny
+    - perl-test-deep
+  run:
+    - perl >=5.32
+    - perl-math-round
+    - perl-module-build-tiny
+    - perl-test-deep
+
+test:
+  imports:
+    - Test::Deep::Fuzzy
+    - Test::Deep::Fuzzy::Number
+
+about:
+  home: https://github.com/karupanerura/Test-Deep-Fuzzy
+  license: perl_5
+  summary: 'fuzzy number comparison with Test::Deep'
+
+maintainers:
+  - danielnachun

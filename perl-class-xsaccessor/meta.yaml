@@ -1,0 +1,40 @@
+{% set name = "perl-class-xsaccessor" %}
+{% set version = "1.19" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/S/SM/SMUELLER/Class-XSAccessor-{{ version }}.tar.gz
+  sha256: 99c56b395f1239af19901f2feeb125d9ecb4e351a0d80daa9529211a4700a6f2
+
+build:
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+  host:
+    - perl >=5.32
+  run:
+    - perl >=5.32
+
+test:
+  imports:
+    - Class::XSAccessor
+    - Class::XSAccessor::Array
+
+about:
+  home: http://metacpan.org/pod/Class-XSAccessor
+  license: perl_5
+  summary: 'Generate fast XS accessors without runtime compilation'
+
+maintainers:
+  - danielnachun

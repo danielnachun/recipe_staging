@@ -1,0 +1,39 @@
+{% set name = "perl-test-file" %}
+{% set version = "1.993" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/B/BD/BDFOY/Test-File-{{ version }}.tar.gz
+  sha256: ef2ffe1aaec7b42d874ad411ec647547b9b9bc2f5fb93e49e3399488456afc7a
+
+build:
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+  host:
+    - perl >=5.32
+  run:
+    - perl >=5.32
+
+test:
+  imports:
+    - Test::File
+
+about:
+  home: https://github.com/briandfoy/test-file
+  license: artistic_2
+  summary: 'test file attributes'
+
+maintainers:
+  - danielnachun

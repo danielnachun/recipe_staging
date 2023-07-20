@@ -1,0 +1,90 @@
+{% set name = "perl-io-async" %}
+{% set version = "0.802" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/P/PE/PEVANS/IO-Async-{{ version }}.tar.gz
+  sha256: e582731577767c47eac435ef2904663d4a750b0e6802a4a6189a37f0cb308738
+
+build:
+  noarch: generic
+  number: 0
+  ignore_run_exports:
+    - perl-module-build
+    - perl-test-fatal
+    - perl-test-future-io-impl
+    - perl-test-identity
+    - perl-test-metrics-any
+    - perl-test-refcount
+    - perl-test2-suite
+  script:
+    - perl Build.PL
+    - perl ./Build
+    - perl ./Build test
+    - perl ./Build install --installdirs site
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-module-build
+    - perl-struct-dumb
+    - perl-future
+    - perl-test-fatal
+    - perl-test-future-io-impl
+    - perl-test-identity
+    - perl-test-metrics-any
+    - perl-test-refcount
+    - perl-test2-suite
+  run:
+    - perl>=5.32
+    - perl-struct-dumb
+    - perl-future
+
+test:
+  imports:
+    - IO::Async
+    - IO::Async::Channel
+    - IO::Async::Debug
+    - IO::Async::File
+    - IO::Async::FileStream
+    - IO::Async::Function
+    - IO::Async::Future
+    - IO::Async::Handle
+    - IO::Async::Internals::ChildManager
+    - IO::Async::Internals::FunctionWorker
+    - IO::Async::Listener
+    - IO::Async::Loop
+    - IO::Async::Loop::Poll
+    - IO::Async::Loop::Select
+    - IO::Async::Notifier
+    - IO::Async::OS
+    - IO::Async::OS::MSWin32
+    - IO::Async::OS::cygwin
+    - IO::Async::OS::linux
+    - IO::Async::PID
+    - IO::Async::Process
+    - IO::Async::Protocol
+    - IO::Async::Protocol::LineStream
+    - IO::Async::Protocol::Stream
+    - IO::Async::Resolver
+    - IO::Async::Routine
+    - IO::Async::Signal
+    - IO::Async::Socket
+    - IO::Async::Stream
+    - IO::Async::Timer
+    - IO::Async::Timer::Absolute
+    - IO::Async::Timer::Countdown
+    - IO::Async::Timer::Periodic
+
+about:
+  home: http://metacpan.org/pod/IO-Async
+  license: perl_5
+  summary: 'Asynchronous event-driven programming'
+
+maintainers:
+  - danielnachun

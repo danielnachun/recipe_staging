@@ -1,0 +1,53 @@
+{% set name = "perl-datetime-format-iso8601" %}
+{% set version = "0.16" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/D/DR/DROLSKY/DateTime-Format-ISO8601-{{ version }}.tar.gz
+  sha256: 582847f6e029065334a00564f20cd7c28f4e5cd4ec21513d0f692531ed3b56e1
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl >=5.32
+    - perl-datetime
+    - perl-datetime-format-builder
+    - perl-namespace-autoclean
+    - perl-params-validationcompiler
+    - perl-specio
+    - perl-sub-identify
+    - perl-test2-suite
+  run:
+    - perl >=5.32
+    - perl-datetime
+    - perl-datetime-format-builder
+    - perl-namespace-autoclean
+    - perl-params-validationcompiler
+    - perl-specio
+    - perl-sub-identify
+
+test:
+  imports:
+    - DateTime::Format::ISO8601
+    - DateTime::Format::ISO8601::Types
+
+about:
+  home: https://metacpan.org/release/DateTime-HiRes
+  license: perl_5
+  summary: 'Parses ISO8601 formats'
+
+maintainers:
+  - danielnachun

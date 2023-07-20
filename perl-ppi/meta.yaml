@@ -1,0 +1,144 @@
+{% set name = "perl-ppi" %}
+{% set version = "1.276" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/O/OA/OALDERS/PPI-{{ version }}.tar.gz
+  sha256: 657655470e78b7c5b7660f7dec82893489c2e2d880e449135613da3b37500f01
+
+build:
+  noarch: generic
+  number: 0
+  ignore_run_exports:
+    - perl-test-nowarnings
+    - perl-test-object
+    - perl-test-subcalls
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl >=5.32
+    - perl-class-inspector
+    - perl-clone
+    - perl-params-util
+    - perl-task-weaken
+    - perl-test-nowarnings
+    - perl-test-object
+    - perl-test-subcalls
+  run:
+    - perl >=5.32
+    - perl-class-xsaccessor
+    - perl-clone
+    - perl-params-util
+    - perl-task-weaken
+
+test:
+  imports:
+    - PPI
+    - PPI::Cache
+    - PPI::Document
+    - PPI::Document::File
+    - PPI::Document::Fragment
+    - PPI::Document::Normalized
+    - PPI::Dumper
+    - PPI::Element
+    - PPI::Exception
+    - PPI::Exception::ParserRejection
+    - PPI::Find
+    - PPI::Lexer
+    - PPI::Node
+    - PPI::Normal
+    - PPI::Normal::Standard
+    - PPI::Singletons
+    - PPI::Statement
+    - PPI::Statement::Break
+    - PPI::Statement::Compound
+    - PPI::Statement::Data
+    - PPI::Statement::End
+    - PPI::Statement::Expression
+    - PPI::Statement::Given
+    - PPI::Statement::Include
+    - PPI::Statement::Include::Perl6
+    - PPI::Statement::Null
+    - PPI::Statement::Package
+    - PPI::Statement::Scheduled
+    - PPI::Statement::Sub
+    - PPI::Statement::Unknown
+    - PPI::Statement::UnmatchedBrace
+    - PPI::Statement::Variable
+    - PPI::Statement::When
+    - PPI::Structure
+    - PPI::Structure::Block
+    - PPI::Structure::Condition
+    - PPI::Structure::Constructor
+    - PPI::Structure::For
+    - PPI::Structure::Given
+    - PPI::Structure::List
+    - PPI::Structure::Subscript
+    - PPI::Structure::Unknown
+    - PPI::Structure::When
+    - PPI::Token
+    - PPI::Token::ArrayIndex
+    - PPI::Token::Attribute
+    - PPI::Token::BOM
+    - PPI::Token::Cast
+    - PPI::Token::Comment
+    - PPI::Token::DashedWord
+    - PPI::Token::Data
+    - PPI::Token::End
+    - PPI::Token::HereDoc
+    - PPI::Token::Label
+    - PPI::Token::Magic
+    - PPI::Token::Number
+    - PPI::Token::Number::Binary
+    - PPI::Token::Number::Exp
+    - PPI::Token::Number::Float
+    - PPI::Token::Number::Hex
+    - PPI::Token::Number::Octal
+    - PPI::Token::Number::Version
+    - PPI::Token::Operator
+    - PPI::Token::Pod
+    - PPI::Token::Prototype
+    - PPI::Token::Quote
+    - PPI::Token::Quote::Double
+    - PPI::Token::Quote::Interpolate
+    - PPI::Token::Quote::Literal
+    - PPI::Token::Quote::Single
+    - PPI::Token::QuoteLike
+    - PPI::Token::QuoteLike::Backtick
+    - PPI::Token::QuoteLike::Command
+    - PPI::Token::QuoteLike::Readline
+    - PPI::Token::QuoteLike::Regexp
+    - PPI::Token::QuoteLike::Words
+    - PPI::Token::Regexp
+    - PPI::Token::Regexp::Match
+    - PPI::Token::Regexp::Substitute
+    - PPI::Token::Regexp::Transliterate
+    - PPI::Token::Separator
+    - PPI::Token::Structure
+    - PPI::Token::Symbol
+    - PPI::Token::Unknown
+    - PPI::Token::Whitespace
+    - PPI::Token::Word
+    - PPI::Tokenizer
+    - PPI::Transform
+    - PPI::Transform::UpdateCopyright
+    - PPI::Util
+    - PPI::XSAccessor
+
+about:
+  home: https://github.com/Perl-Critic/PPI
+  license: perl_5
+  summary: 'Parse, Analyze and Manipulate Perl (without perl)'
+
+maintainers:
+  - danielnachun

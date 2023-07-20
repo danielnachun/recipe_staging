@@ -1,0 +1,39 @@
+{% set name = "perl-text-simpletable" %}
+{% set version = "2.07" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/M/MR/MRAMBERG/Text-SimpleTable-{{ version }}.tar.gz
+  sha256: 256d3f38764e96333158b14ab18257b92f3155c60d658cafb80389f72f4619ed
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+test:
+  imports:
+    - Text::SimpleTable
+
+about:
+  home: http://metacpan.org/pod/Text-SimpleTable
+  license: artistic_2
+  summary: 'Simple eyecandy ASCII tables'
+
+maintainers:
+  - danielnachun

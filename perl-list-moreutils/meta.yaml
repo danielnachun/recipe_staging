@@ -1,0 +1,44 @@
+{% set name = "perl-list-moreutils" %}
+{% set version = "0.430" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/R/RE/REHSACK/List-MoreUtils-{{ version }}.tar.gz
+  sha256: 63b1f7842cd42d9b538d1e34e0330de5ff1559e4c2737342506418276f646527
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-list-moreutils-xs
+    - perl-exporter-tiny
+  run:
+    - perl>=5.32
+    - perl-list-moreutils-xs
+    - perl-exporter-tiny
+
+test:
+  imports:
+    - List::MoreUtils
+    - List::MoreUtils::PP
+
+about:
+  home: https://metacpan.org/release/List-MoreUtils
+  license: apache_2_0
+  summary: 'Provide the stuff missing in List::Util'
+
+maintainers:
+  - danielnachun

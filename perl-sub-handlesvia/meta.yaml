@@ -1,0 +1,68 @@
+{% set name = "perl-sub-handlesvia" %}
+{% set version = "0.050000" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/T/TO/TOBYINK/Sub-HandlesVia-{{ version }}.tar.gz
+  sha256: 2df93493e2f9e95be579b950b6e19ff524f94c80613aadc03a88611dff75794f
+
+build:
+  noarch: generic
+  number: 0
+  ignore_run_exports:
+    - perl-test-requires
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl >=5.32
+    - perl-class-method-modifiers
+    - perl-role-hooks
+    - perl-role-tiny
+    - perl-test-requires
+    - perl-type-tiny >=1.004
+  run:
+    - perl >=5.32
+    - perl-class-method-modifiers
+    - perl-exporter-tiny
+    - perl-role-hooks
+    - perl-role-tiny
+    - perl-type-tiny >=1.004
+
+test:
+  imports:
+    - Sub::HandlesVia
+    - Sub::HandlesVia::CodeGenerator
+    - Sub::HandlesVia::Handler
+    - Sub::HandlesVia::HandlerLibrary
+    - Sub::HandlesVia::HandlerLibrary::Array
+    - Sub::HandlesVia::HandlerLibrary::Blessed
+    - Sub::HandlesVia::HandlerLibrary::Bool
+    - Sub::HandlesVia::HandlerLibrary::Code
+    - Sub::HandlesVia::HandlerLibrary::Counter
+    - Sub::HandlesVia::HandlerLibrary::Enum
+    - Sub::HandlesVia::HandlerLibrary::Hash
+    - Sub::HandlesVia::HandlerLibrary::Number
+    - Sub::HandlesVia::HandlerLibrary::Scalar
+    - Sub::HandlesVia::HandlerLibrary::String
+    - Sub::HandlesVia::Toolkit
+    - Sub::HandlesVia::Toolkit::Mite
+    - Sub::HandlesVia::Toolkit::Moo
+    - Sub::HandlesVia::Toolkit::Plain
+
+about:
+  home: https://metacpan.org/release/Sub-HandlesVia
+  license: perl_5
+  summary: 'alternative handles_via implementation'
+
+maintainers:
+  - danielnachun

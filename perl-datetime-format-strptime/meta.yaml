@@ -1,0 +1,57 @@
+{% set name = "perl-datetime-format-strptime" %}
+{% set version = "1.79" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/D/DR/DROLSKY/DateTime-Format-Strptime-{{ version }}.tar.gz
+  sha256: 701e46802c86ed4d88695c1a6dacbbe90b3390beeb794f387e7c792300037579
+
+build:
+  noarch: generic
+  number: 0
+  ignore_run_exports:
+    - perl-test-warnings
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl >=5.32
+    - perl-datetime
+    - perl-datetime-locale
+    - perl-datetime-timezone >=2.09
+    - perl-params-validationcompiler
+    - perl-specio
+    - perl-sub-identify
+    - perl-try-tiny
+    - perl-test-warnings
+  run:
+    - perl >=5.32
+    - perl-datetime
+    - perl-datetime-locale
+    - perl-datetime-timezone >=2.09
+    - perl-params-validationcompiler
+    - perl-specio
+    - perl-sub-identify
+    - perl-try-tiny
+
+test:
+  imports:
+    - DateTime::Format::Strptime
+    - DateTime::Format::Strptime::Types
+
+about:
+  home: https://metacpan.org/release/DateTime-Format-Strptime
+  license: artistic_2
+  summary: 'Parse and format strp and strf time patterns'
+
+maintainers:
+  - danielnachun

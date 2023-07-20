@@ -1,0 +1,39 @@
+{% set name = "perl-compiler-lexer" %}
+{% set version = "0.23" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/G/GO/GOCCY/Compiler-Lexer-{{ version }}.tar.gz
+  sha256: 6031ce4afebbfa4f492a274949be7b8232314e91023828c438e47981ff0a99db
+
+build:
+  number: 0
+  ignore_run_exports:
+    - perl-module-build-xsutil
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - make
+  host:
+    - perl=5.32
+    - perl-module-build-xsutil
+  run:
+    - perl>=5.32
+
+test:
+  imports:
+    - Compiler::Lexer
+    - Compiler::Lexer::Token
+
+about:
+  home: https://github.com/goccy/p5-Compiler-Lexer
+  license: perl_5
+  summary: 'Lexical Analyzer for Perl5'
+
+maintainers:
+  - danielnachun

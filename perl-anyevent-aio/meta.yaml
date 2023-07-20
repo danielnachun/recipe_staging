@@ -1,0 +1,45 @@
+{% set name = "perl-anyevent-aio" %}
+{% set version = "1.1" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/M/ML/MLEHMANN/AnyEvent-AIO-{{ version }}.tar.gz
+  sha256: 6b105b8c641561631f533ec3423e8067a3d7d58043bf85f0f5e09d706905706b
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-io-aio
+    - perl-anyevent
+    - perl-common-sense
+  run:
+    - perl>=5.32
+    - perl-io-aio
+    - perl-anyevent
+    - perl-common-sense
+
+test:
+  imports:
+    - AnyEvent::AIO
+
+about:
+  home: http://metacpan.org/pod/AnyEvent-AIO
+  license: unknown
+  summary: 'truly asynchronous file and directory I/O'
+
+maintainer:
+  - danielnachun

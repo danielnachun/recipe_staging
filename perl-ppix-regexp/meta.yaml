@@ -1,0 +1,107 @@
+{% set name = "perl-ppix-regexp" %}
+{% set version = "0.088" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/W/WY/WYANT/PPIx-Regexp-{{ version }}.tar.gz
+  sha256: 885433f9b102fad4fd36b21c7320bb036036111caf998131bf416f7cd5ee9764
+
+build:
+  noarch: generic
+  number: 0
+  ignore_run_exports:
+    - perl-module-build
+  script:
+    - perl Build.PL
+    - perl ./Build
+    - perl ./Build test
+    - perl ./Build install --installdirs site
+
+requirements:
+  host:
+    - perl >=5.32
+    - perl-module-build 0.4232
+    - perl-task-weaken
+    - perl-ppi
+  run:
+    - perl >=5.32
+    - perl-task-weaken
+    - perl-ppi
+
+test:
+  imports:
+    - PPIx::Regexp
+    - PPIx::Regexp::Dumper
+    - PPIx::Regexp::Element
+    - PPIx::Regexp::Lexer
+    - PPIx::Regexp::Node
+    - PPIx::Regexp::Node::Range
+    - PPIx::Regexp::Node::Unknown
+    - PPIx::Regexp::Structure
+    - PPIx::Regexp::Structure::Assertion
+    - PPIx::Regexp::Structure::Atomic_Script_Run
+    - PPIx::Regexp::Structure::BranchReset
+    - PPIx::Regexp::Structure::Capture
+    - PPIx::Regexp::Structure::CharClass
+    - PPIx::Regexp::Structure::Code
+    - PPIx::Regexp::Structure::Main
+    - PPIx::Regexp::Structure::Modifier
+    - PPIx::Regexp::Structure::NamedCapture
+    - PPIx::Regexp::Structure::Quantifier
+    - PPIx::Regexp::Structure::RegexSet
+    - PPIx::Regexp::Structure::Regexp
+    - PPIx::Regexp::Structure::Replacement
+    - PPIx::Regexp::Structure::Script_Run
+    - PPIx::Regexp::Structure::Subexpression
+    - PPIx::Regexp::Structure::Switch
+    - PPIx::Regexp::Structure::Unknown
+    - PPIx::Regexp::Support
+    - PPIx::Regexp::Token
+    - PPIx::Regexp::Token::Assertion
+    - PPIx::Regexp::Token::Backreference
+    - PPIx::Regexp::Token::Backtrack
+    - PPIx::Regexp::Token::CharClass
+    - PPIx::Regexp::Token::CharClass::POSIX
+    - PPIx::Regexp::Token::CharClass::POSIX::Unknown
+    - PPIx::Regexp::Token::CharClass::Simple
+    - PPIx::Regexp::Token::Code
+    - PPIx::Regexp::Token::Comment
+    - PPIx::Regexp::Token::Condition
+    - PPIx::Regexp::Token::Control
+    - PPIx::Regexp::Token::Delimiter
+    - PPIx::Regexp::Token::Greediness
+    - PPIx::Regexp::Token::GroupType
+    - PPIx::Regexp::Token::GroupType::Assertion
+    - PPIx::Regexp::Token::GroupType::Atomic_Script_Run
+    - PPIx::Regexp::Token::GroupType::BranchReset
+    - PPIx::Regexp::Token::GroupType::Code
+    - PPIx::Regexp::Token::GroupType::Modifier
+    - PPIx::Regexp::Token::GroupType::NamedCapture
+    - PPIx::Regexp::Token::GroupType::Script_Run
+    - PPIx::Regexp::Token::GroupType::Subexpression
+    - PPIx::Regexp::Token::GroupType::Switch
+    - PPIx::Regexp::Token::Interpolation
+    - PPIx::Regexp::Token::Literal
+    - PPIx::Regexp::Token::Modifier
+    - PPIx::Regexp::Token::NoOp
+    - PPIx::Regexp::Token::Operator
+    - PPIx::Regexp::Token::Quantifier
+    - PPIx::Regexp::Token::Recursion
+    - PPIx::Regexp::Token::Reference
+    - PPIx::Regexp::Token::Structure
+    - PPIx::Regexp::Token::Unknown
+    - PPIx::Regexp::Token::Unmatched
+    - PPIx::Regexp::Token::Whitespace
+    - PPIx::Regexp::Tokenizer
+    - PPIx::Regexp::Util
+
+about:
+  home: http://metacpan.org/pod/PPIx-Regexp
+  license: perl_5
+  summary: 'Parse regular expressions'
+
+maintainers:
+  - danielnachun

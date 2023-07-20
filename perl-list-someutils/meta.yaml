@@ -1,0 +1,42 @@
+{% set name = "perl-list-someutils" %}
+{% set version = "0.59" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/D/DR/DROLSKY/List-SomeUtils-{{ version }}.tar.gz
+  sha256: fab30372e4c67bf5a46062da38d1d0c8756279feada866eb439fa29571a2dc7b
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl >=5.32
+    - perl-module-implementation
+  run:
+    - perl >=5.32
+    - perl-module-implementation
+
+test:
+  imports:
+    - List::SomeUtils
+    - List::SomeUtils::PP
+
+about:
+  home: https://metacpan.org/release/List-SomeUtils
+  license: perl_5
+  summary: 'Provide the stuff missing in List::Util'
+
+maintainers:
+  - danielnachun

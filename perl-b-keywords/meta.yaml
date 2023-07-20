@@ -1,0 +1,39 @@
+{% set name = "perl-b-keywords" %}
+{% set version = "1.26" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/R/RU/RURBAN/B-Keywords-{{ version }}.tar.gz
+  sha256: 2daa155d2f267fb0dedd87f8a4c4fb5663879fc106517b1ee258353ef87aed34
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl >=5.32
+  run:
+    - perl >=5.32
+
+test:
+  imports:
+    - B::Keywords
+
+about:
+  home: http://metacpan.org/pod/B-Keywords
+  license: unknown
+  summary: 'Lists of reserved barewords and symbol names'
+
+maintainers:
+  - danielnachun

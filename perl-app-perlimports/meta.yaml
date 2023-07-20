@@ -1,0 +1,113 @@
+{% set name = "perl-app-perlimports" %}
+{% set version = "0.000051" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/O/OA/OALDERS/App-perlimports-{{ version }}.tar.gz
+  sha256: e24a61755ea78d54be1406ed88b54ce432da9f59d995167fc45870ff20bab4e0
+
+build:
+  noarch: generic
+  number: 0
+  ignore_run_exports:
+    - perl-test-needs
+    - perl-test-differences
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl >=5.32
+    - perl-capture-tiny
+    - perl-cpanel-json-xs
+    - perl-class-inspector
+    - perl-data-uuid
+    - perl-file-pushd
+    - perl-file-xdg
+    - perl-getopt-long-descriptive
+    - perl-log-dispatch
+    - perl-log-dispatch-array
+    - perl-module-runtime
+    - perl-moo
+    - perl-moox-strictconstructor
+    - perl-number-compare
+    - perl-path-iterator-rule
+    - perl-path-tiny
+    - perl-perl-tidy
+    - perl-ppi
+    - perl-ppix-utils
+    - perl-ref-util
+    - perl-sereal-decoder
+    - perl-sereal-encoder
+    - perl-sub-handlesvia
+    - perl-symbol-get
+    - perl-text-diff
+    - perl-text-glob
+    - perl-text-simpletable-autowidth
+    - perl-test-needs
+    - perl-test-differences
+    - perl-test-warnings
+    - perl-toml-tiny
+    - perl-try-tiny
+    - perl-type-tiny
+
+  run:
+    - perl >=5.32
+    - perl-capture-tiny
+    - perl-cpanel-json-xs
+    - perl-class-inspector
+    - perl-data-uuid
+    - perl-file-pushd
+    - perl-file-xdg
+    - perl-getopt-long-descriptive
+    - perl-log-dispatch
+    - perl-log-dispatch-array
+    - perl-module-runtime
+    - perl-moo
+    - perl-moox-strictconstructor
+    - perl-number-compare
+    - perl-path-iterator-rule
+    - perl-path-tiny
+    - perl-perl-tidy
+    - perl-ppi
+    - perl-ppix-utils
+    - perl-ref-util
+    - perl-sereal-decoder
+    - perl-sereal-encoder
+    - perl-sub-handlesvia
+    - perl-symbol-get
+    - perl-text-diff
+    - perl-text-glob
+    - perl-text-simpletable-autowidth
+    - perl-toml-tiny
+    - perl-try-tiny
+    - perl-type-tiny
+    - perl-type-tiny
+
+test:
+  imports:
+    - App::perlimports
+    - App::perlimports::Annotations
+    - App::perlimports::CLI
+    - App::perlimports::Config
+    - App::perlimports::Document
+    - App::perlimports::ExportInspector
+    - App::perlimports::Include
+    - App::perlimports::Role::Logger
+    - App::perlimports::Sandbox
+
+about:
+  home: https://github.com/oalders/App-perlimports
+  license: perl_5
+  summary: 'Make implicit imports explicit'
+
+maintainers:
+  - danielnachun

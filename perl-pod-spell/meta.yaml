@@ -1,0 +1,49 @@
+{% set name = "perl-pod-spell" %}
+{% set version = "1.26" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/H/HA/HAARG/Pod-Spell-{{ version }}.tar.gz
+  sha256: 2f05bfc9cfb04b96fcbfa2c8544d1e6ae908596d3696c46e0e26556b750afbbf
+
+build:
+  noarch: generic
+  number: 0
+  ignore_run_exports:
+    - perl-file-sharedir-install
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl >=5.32
+    - perl-class-tiny
+    - perl-file-sharedir-install >=0.06
+    - perl-lingua-en-inflect
+    - perl-file-sharedir
+  run:
+    - perl >=5.32
+    - perl-class-tiny
+    - perl-lingua-en-inflect
+    - perl-file-sharedir
+
+test:
+  imports:
+    - Pod::Spell
+    - Pod::Wordlist
+
+about:
+  home: https://github.com/perl-pod/Pod-Spell
+  license: artistic_2
+  summary: 'a formatter for spellchecking Pod'
+
+maintainers:
+  - danielnachun

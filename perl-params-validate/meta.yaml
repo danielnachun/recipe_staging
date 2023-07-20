@@ -1,0 +1,58 @@
+{% set name = "perl-params-validate" %}
+{% set version = "1.31" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/D/DR/DROLSKY/Params-Validate-{{ version }}.tar.gz
+  sha256: 1bf2518ef2c4869f91590e219f545c8ef12ed53cf313e0eb5704adf7f1b2961e
+
+build:
+  number: 0
+  ignore_run_exports:
+    - perl-extutils-makemaker
+    - perl-test-fatal
+    - perl-test-requires
+    - perl-module-build
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+  host:
+    - perl >=5.32
+    - perl-base
+    - perl-carp
+    - perl-exporter
+    - perl-extutils-makemaker
+    - perl-file-temp
+    - perl-lib
+    - perl-module-build >=0.4227
+    - perl-module-implementation
+    - perl-test-fatal
+    - perl-test-requires
+  run:
+    - perl >=5.32
+    - perl-base
+    - perl-carp
+    - perl-exporter
+    - perl-file-temp
+    - perl-lib
+    - perl-module-implementation
+
+test:
+  imports:
+    - Params::Validate
+    - Params::Validate::Constants
+    - Params::Validate::PP
+    - Params::Validate::XS
+
+about:
+  home: https://metacpan.org/release/Params-Validate
+  license: artistic_2
+  summary: 'Validate method/function parameters'
+
+maintainers:
+  - danielnachun

@@ -1,0 +1,52 @@
+{% set name = "perl-class-refresh" %}
+{% set version = "0.07" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/D/DO/DOY/Class-Refresh-{{ version }}.tar.gz
+  sha256: e3b0035355cbb35a2aee3f223688d578946a7a7c570acd398b28cddb1fd4beb3
+
+build:
+  noarch: generic
+  number: 0
+  ignore_run_exports:
+    - perl-test-fatal
+    - perl-test-requires
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-class-unload
+    - perl-devel-overrideglobalrequire
+    - perl-test-fatal
+    - perl-test-requires
+    - perl-try-tiny
+    - perl-class-load
+  run:
+    - perl>=5.32
+    - perl-class-unload
+    - perl-devel-overrideglobalrequire
+    - perl-try-tiny
+    - perl-class-load
+
+test:
+  imports:
+    - Class::Refresh
+
+about:
+  home: http://metacpan.org/release/Class-Refresh
+  license: perl_5
+  summary: 'refresh your classes during runtime'
+
+maintainers:
+  - danielnachun

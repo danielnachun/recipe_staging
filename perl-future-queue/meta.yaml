@@ -1,0 +1,44 @@
+{% set name = "perl-future-queue" %}
+{% set version = "0.51" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/P/PE/PEVANS/Future-Queue-{{ version }}.tar.gz
+  sha256: 1d501c3a9a2ddffc7c60f96fa66969d40cb292e09204cf6decd1c2b8b5003cd6
+
+build:
+  noarch: generic
+  number: 0
+  ignore_run_exports:
+    - perl-module-build
+    - perl-test2-suite
+  script:
+    - perl Build.PL
+    - perl ./Build
+    - perl ./Build test
+    - perl ./Build install --installdirs site
+
+requirements:
+  host:
+    - perl=5.32
+    - perl-future
+    - perl-module-build
+    - perl-test2-suite
+  run:
+    - perl>=5.32
+    - perl-future
+
+test:
+  imports:
+    - Future::Queue
+
+about:
+  home: http://metacpan.org/pod/Future-Queue
+  license: perl_5
+  summary: 'a FIFO queue of values that uses Futures'
+
+maintainers:
+  - danielnachun

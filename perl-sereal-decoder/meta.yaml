@@ -1,0 +1,57 @@
+{% set name = "perl-sereal-decoder" %}
+{% set version = "5.004" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/Y/YV/YVES/Sereal-Decoder-{{ version }}.tar.gz
+  sha256: 68ef0314d87d1a6e60bb0f66fcf43eb2cacdeb1754432f5e25e784e39d3e6784
+
+build:
+  number: 0
+  ignore_run_exports:
+    - perl-test-differences
+    - perl-test-deep
+    - perl-test-longstring
+    - perl-test-warn
+    - perl-test-simple
+    - perl-extutils-makemaker
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+  host:
+    - perl >=5.32
+    - perl-devel-checklib
+    - perl-extutils-makemaker
+    - perl-file-path
+    - perl-pathtools
+    - perl-scalar-list-utils
+    - perl-test-deep
+    - perl-test-differences
+    - perl-test-longstring
+    - perl-test-warn
+    - perl-test-simple
+  run:
+    - perl >=5.32
+    - perl-devel-checklib
+    - perl-file-path
+    - perl-pathtools
+    - perl-scalar-list-utils
+
+test:
+  imports:
+    - Sereal::Decoder
+    - Sereal::Decoder::Constants
+    - Sereal::Performance
+
+about:
+  home: http://metacpan.org/pod/Sereal-Decoder
+  license: perl_5
+  summary: 'Fast, compact, powerful binary deserialization'
+
+maintainers:
+  - danielnachun

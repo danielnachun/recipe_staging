@@ -1,0 +1,41 @@
+{% set name = "perl-cwd-guard" %}
+{% set version = "0.05" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/K/KA/KAZEBURO/Cwd-Guard-{{ version }}.tar.gz
+  sha256: 7afc7ca2b9502e440241938ad97a3e7ebd550180ebd6142e1db394186b268e77
+
+build:
+  noarch: generic
+  number: 0
+  ignore_run_exports:
+    - perl-module-build
+    - perl-test-requires
+  script:
+    - perl Build.PL
+    - perl ./Build
+    - perl ./Build test
+    - perl ./Build install --installdirs site
+
+requirements:
+  host:
+    - perl=5.32
+    - perl-module-build
+    - perl-test-requires
+  run:
+    - perl>=5.32
+
+test:
+  imports:
+    - Cwd::Guard
+about:
+  home: https://github.com/kazeburo/Cwd-Guard
+  license: perl_5
+  summary: 'Temporary changing working directory (chdir)'
+
+maintainers:
+  - danielnachun

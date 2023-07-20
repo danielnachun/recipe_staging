@@ -1,0 +1,38 @@
+{% set name = "perl-test-refcount" %}
+{% set version = "0.10" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/P/PE/PEVANS/Test-Refcount-{{ version }}.tar.gz
+  sha256: 0457c20a4956473d157c4faaff8814154bc93f6e2b543c2812a19ff8e3370eb2
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Build.PL
+    - perl ./Build
+    - perl ./Build test
+    - perl ./Build install --installdirs site
+
+requirements:
+  host:
+    - perl=5.32
+    - perl-module-build
+  run:
+    - perl>=5.32
+
+test:
+  imports:
+    - Test::Refcount
+
+about:
+  home: http://metacpan.org/pod/Test-Refcount
+  license: perl_5
+  summary: 'assert reference counts on objects'
+
+maintainers:
+  - danielnachun

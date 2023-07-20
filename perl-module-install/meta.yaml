@@ -1,0 +1,81 @@
+{% set name = "perl-module-install" %}
+{% set version = "1.19" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/E/ET/ETHER/Module-Install-{{ version }}.tar.gz
+  sha256: 1a53a78ddf3ab9e3c03fc5e354b436319a944cba4281baf0b904fa932a13011b
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-json
+    - perl-yaml-tiny
+    - perl-file-remove
+    - perl-module-scandeps
+    - perl-par-dist
+  run:
+    - perl>=5.32
+    - perl-json
+    - perl-yaml-tiny
+    - perl-file-remove
+    - perl-module-scandeps
+    - perl-par-dist
+
+test:
+  imports:
+    - Module::AutoInstall
+    - inc::Module::Install
+    - Module::Install::Admin
+    - Module::Install::Admin::Bundle
+    - Module::Install::Admin::Compiler
+    - Module::Install::Admin::Find
+    - Module::Install::Admin::Include
+    - Module::Install::Admin::Makefile
+    - Module::Install::Admin::Manifest
+    - Module::Install::Admin::Metadata
+    - Module::Install::Admin::ScanDeps
+    - Module::Install::Admin::WriteAll
+    - Module::Install::AutoInstall
+    - Module::Install::Base
+    - Module::Install::Bundle
+    - Module::Install::Can
+    - Module::Install::Compiler
+    - inc::Module::Install::DSL
+    - Module::Install::Deprecated
+    - Module::Install::External
+    - Module::Install::Fetch
+    - Module::Install::Include
+    - Module::Install::Inline
+    - Module::Install::MakeMaker
+    - Module::Install::Makefile
+    - Module::Install::Metadata
+    - Module::Install::PAR
+    - Module::Install::Run
+    - Module::Install::Scripts
+    - Module::Install::Share
+    - Module::Install::Win32
+    - Module::Install::With
+    - Module::Install::WriteAll
+
+about:
+  home: http://metacpan.org/pod/Module-Install
+  license: perl_5
+  summary: 'Standalone, extensible Perl module installer'
+
+maintainers:
+  - danielnachun

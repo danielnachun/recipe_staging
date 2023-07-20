@@ -1,0 +1,56 @@
+{% set name = "perl-getopt-long-descriptive" %}
+{% set version = "0.111" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/R/RJ/RJBS/Getopt-Long-Descriptive-{{ version }}.tar.gz
+  sha256: 9b8d15fcaf18fdd740246b438f0e7eb914b831c51d9d708c099eca776622076d
+
+build:
+  noarch: generic
+  number: 0
+  ignore_run_exports:
+    - perl-cpan-meta-check
+    - perl-extutils-makemaker
+    - perl-test-fatal
+    - perl-test-warnings
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl >=5.32
+    - perl-carp
+    - perl-cpan-meta-check
+    - perl-extutils-makemaker
+    - perl-params-validate
+    - perl-sub-exporter
+    - perl-test-fatal
+    - perl-test-warnings >=0.005
+  run:
+    - perl >=5.32
+    - perl-carp
+    - perl-sub-exporter
+    - perl-params-validate
+
+test:
+  imports:
+    - Getopt::Long::Descriptive
+    - Getopt::Long::Descriptive::Opts
+    - Getopt::Long::Descriptive::Usage
+
+about:
+  home: https://github.com/rjbs/Getopt-Long-Descriptive
+  license: perl_5
+  summary: 'Getopt::Long, but simpler and more powerful'
+
+maintainers:
+  - danielnachun

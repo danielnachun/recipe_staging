@@ -1,0 +1,46 @@
+{% set name = "perl-symbol-get" %}
+{% set version = "0.10" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/F/FE/FELIPE/Symbol-Get-{{ version }}.tar.gz
+  sha256: 0ee5568c5ae3573ca874e09e4d0524466cfc1ad9a2c24d0bc91d4c7b06f21d9c
+
+build:
+  noarch: generic
+  number: 0
+  ignore_run_exports:
+    - perl-test-deep
+    - perl-test-exception
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-call-context
+    - perl-test-deep
+    - perl-test-exception
+  run:
+    - perl>=5.32
+    - perl-call-context
+
+test:
+  imports:
+    - Symbol::Get
+
+about:
+  home: http://metacpan.org/pod/Symbol-Get
+  license: perl_5
+  summary: 'Read Perl’s symbol table programmatically'
+
+maintainers:
+  - danielnachun

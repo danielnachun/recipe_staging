@@ -1,0 +1,39 @@
+{% set name = "perl-par-dist" %}
+{% set version = "0.51" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/R/RS/RSCHUPP/PAR-Dist-{{ version }}.tar.gz
+  sha256: d242062df9b689f39040e4c4e09131a6c464d0eefadbd1c9ac947173af33dff8
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+test:
+  imports:
+    - PAR::Dist
+
+about:
+  home: http://metacpan.org/pod/PAR-Dist
+  license: perl_5
+  summary: 'Create and manipulate PAR distributions'
+
+maintainers:
+  - danielnachun

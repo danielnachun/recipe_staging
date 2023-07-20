@@ -1,0 +1,43 @@
+{% set name = "perl-future" %}
+{% set version = "0.50" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/P/PE/PEVANS/Future-{{ version }}.tar.gz
+  sha256: c035e3d9e69a3af144b33ac834dee9e65ad360f2a51db9f158dc342ecddd5f44
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Build.PL
+    - perl ./Build
+    - perl ./Build test
+    - perl ./Build install --installdirs site
+
+requirements:
+  host:
+    - perl=5.32
+    - perl-module-build
+    - perl-test2-suite
+  run:
+    - perl>=5.32
+
+test:
+  imports:
+    - Future
+    - Future::Exception
+    - Future::Mutex
+    - Future::PP
+    - Future::Utils
+
+about:
+  home: http://metacpan.org/pod/Future
+  license: perl_5
+  summary: 'represent an operation awaiting completion'
+
+maintainers:
+  - danielnachun

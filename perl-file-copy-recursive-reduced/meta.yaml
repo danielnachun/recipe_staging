@@ -1,0 +1,43 @@
+{% set name = "perl-file-copy-recursive-reduced" %}
+{% set version = "0.006" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/J/JK/JKEENAN/File-Copy-Recursive-Reduced-{{ version }}.tar.gz
+  sha256: e618f993a69f4355205c58fffff6982609f28b47f646ec6e244e41b5c6707e2c
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-capture-tiny
+    - perl-path-tiny
+  run:
+    - perl>=5.32
+    - perl-capture-tiny
+    - perl-path-tiny
+
+test:
+  imports:
+    - File::Copy::Recursive::Reduced
+
+about:
+  home: http://thenceforward.net/perl/modules/File-Copy-Recursive-Reduced/
+  license: perl_5
+  summary: 'Recursive copying of files and directories within Perl 5 toolchain'
+
+maintainers:
+  - danielnachun

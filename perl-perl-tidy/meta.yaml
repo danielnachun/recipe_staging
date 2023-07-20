@@ -1,0 +1,56 @@
+{% set name = "perl-perl-tidy" %}
+{% set version = "20221112" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/S/SH/SHANCOCK/Perl-Tidy-{{ version }}.tar.gz
+  sha256: 8e3fffbaadb5612ff2c66742641838cf403ff1ed11091f5f5d72a8eb61c4bfa8
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+test:
+  imports:
+    - Perl::Tidy
+    - Perl::Tidy::Debugger
+    - Perl::Tidy::DevNull
+    - Perl::Tidy::Diagnostics
+    - Perl::Tidy::FileWriter
+    - Perl::Tidy::Formatter
+    - Perl::Tidy::HtmlWriter
+    - Perl::Tidy::IOScalar
+    - Perl::Tidy::IOScalarArray
+    - Perl::Tidy::IndentationItem
+    - Perl::Tidy::LineBuffer
+    - Perl::Tidy::LineSink
+    - Perl::Tidy::LineSource
+    - Perl::Tidy::Logger
+    - Perl::Tidy::Tokenizer
+    - Perl::Tidy::VerticalAligner
+    - Perl::Tidy::VerticalAligner::Alignment
+    - Perl::Tidy::VerticalAligner::Line
+
+about:
+  home: http://metacpan.org/pod/Perl-Tidy
+  license: gpl_2
+  summary: 'indent and reformat perl scripts'
+
+maintainers:
+  - danielnachun

@@ -1,0 +1,51 @@
+{% set name = "perl-file-sharedir" %}
+{% set version = "1.118" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/R/RE/REHSACK/File-ShareDir-{{ version }}.tar.gz
+  sha256: 3bb2a20ba35df958dc0a4f2306fc05d903d8b8c4de3c8beefce17739d281c958
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-carp
+    - perl-class-inspector
+    - perl-exporter
+    - perl-extutils-makemaker
+    - perl-file-path
+    - perl-file-sharedir-install
+  run:
+    - perl>=5.32
+    - perl-carp
+    - perl-class-inspector
+    - perl-exporter
+    - perl-extutils-makemaker
+    - perl-file-path
+    - perl-file-sharedir-install
+
+test:
+  imports:
+    - File::ShareDir
+
+about:
+  home: https://metacpan.org/release/File-ShareDir
+  license: perl_5
+  summary: 'Locate per-dist and per-module shared files'
+
+maintainers:
+  - danielnachun
