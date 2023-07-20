@@ -17,6 +17,7 @@ requirements:
     - {{ compiler('cxx') }}
     - make
     - gxx  # [linux]
+    - sed
   host:
     - blas
     - gsl
