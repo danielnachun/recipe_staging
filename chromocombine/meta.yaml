@@ -1,0 +1,33 @@
+{% set name = "chromocombine" %}
+{% set version = "0.0.4" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://people.maths.bris.ac.uk/~madjl/finestructure-old/{{ name }}-{{ version }}.tar.gz
+  sha256: 24fb13ef17e333612df83c1d8f39c75c2c52a48d4cc2c520ba9b1179679fc86a
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - make
+
+test:
+  commands:
+    - test -f $PREFIX/bin/chromocombine
+
+about:
+  home: https://people.maths.bris.ac.uk/~madjl/finestructure-old/chromocombine.html
+  license: Creative Commons v3
+  license_file: COPYING
+  summary: Tool to help manage the large number of files generated when running ChromoPainter 
+
+extra:
+  recipe-maintainers:
+    - danielnachun
