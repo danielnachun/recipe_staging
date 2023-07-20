@@ -1,0 +1,33 @@
+{% set name = "members" %}
+{% set version = "20080128" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: http://ftp.de.debian.org/debian/pool/main/m/members/{{ name }}_{{ version }}.1+nmu1.tar.xz
+  sha256: 334fed53fd3698f6fb644188550e0ff91769c63606bc189dd7a4380a3e6f8160
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - make
+  host:
+  run:
+
+test:
+  commands:
+    - test -f $PREFIX/bin/members # [not win]
+
+about:
+  home: https://packages.qa.debian.org/m/members.html
+  license: GPL-2.0-or-later
+  summary: Shows the members of a group
+
+extra:
+  recipe-maintainers:
+    - danielnachun
