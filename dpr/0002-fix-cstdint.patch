@@ -1,0 +1,48 @@
+diff --git a/DPR/src/io.cpp b/DPR/src/io.cpp
+index b17bb76..055c676 100644
+--- a/DPR/src/io.cpp
++++ b/DPR/src/io.cpp
+@@ -25,6 +25,7 @@
+ #include <vector>
+ #include <map>
+ #include <set>
++#include <cstdint>
+ #include <cstring>
+ #include <cmath>
+ #include <stdio.h>
+diff --git a/DPR/src/lm.cpp b/DPR/src/lm.cpp
+index 6ff6b6c..ec6374d 100644
+--- a/DPR/src/lm.cpp
++++ b/DPR/src/lm.cpp
+@@ -29,6 +29,7 @@
+ #include <stdlib.h>
+ #include <bitset>
+ #include <string>
++#include <cstdint>
+ #include <cstring>
+ 
+ #include "gsl/gsl_vector.h"
+diff --git a/DPR/src/lmm.cpp b/DPR/src/lmm.cpp
+index 7bcf89a..3856889 100644
+--- a/DPR/src/lmm.cpp
++++ b/DPR/src/lmm.cpp
+@@ -28,6 +28,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <bitset>
++#include <cstdint>
+ #include <cstring>
+ 
+ #include "gsl/gsl_vector.h"
+diff --git a/DPR/src/mvlmm.cpp b/DPR/src/mvlmm.cpp
+index 5826a1f..c611f4d 100644
+--- a/DPR/src/mvlmm.cpp
++++ b/DPR/src/mvlmm.cpp
+@@ -28,6 +28,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <bitset>
++#include <cstdint>
+ #include <cstring>
+ 
+ #include "gsl/gsl_vector.h"
