@@ -1,0 +1,24 @@
+From 46e617f57b507536c11c15aa5554de226a483c3b Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Thu, 20 Jul 2023 00:07:39 -0700
+Subject: [PATCH] fix cstdint
+
+---
+ DPR/src/io.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/DPR/src/io.cpp b/DPR/src/io.cpp
+index b17bb76..f0bdfb8 100644
+--- a/DPR/src/io.cpp
++++ b/DPR/src/io.cpp
+@@ -27,6 +27,7 @@
+ #include <set>
+ #include <cstring>
+ #include <cmath>
++#include <cstdint>
+ #include <stdio.h>
+ #include <stdlib.h>
+ 
+-- 
+2.41.0
+
