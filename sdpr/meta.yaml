@@ -1,0 +1,37 @@
+{% set name = "SDPR" %}
+{% set version = "0.9.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/eldronzhou/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: f5f6579f4ced2b5d9cb0d7f78e0fe75ff5a615aa0ed7137bde755041fd984eba
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - make
+  host:
+    - mkl
+    - gsl
+  run:
+    - mkl
+ 
+test:
+  commands:
+    - test -f $PREFIX/bin/SDPR
+
+about:
+  home: https://github.com/eldronzhou/SDPR
+  license: GPL-3.0-or-later
+  license_file: LICENSE
+  summary: Method to compute polygenic risk score (PRS) from summary statistics
+
+extra:
+  recipe-maintainers:
+    - danielnachun
