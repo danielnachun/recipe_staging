@@ -28,7 +28,7 @@ test:
 
 about:
   home: https://people.maths.bris.ac.uk/~madjl/finestructure-old/finestructure.html
-  license: Creative Commons v3
+  license: CC-BY-NC-ND-3.0
   license_file: COPYING
   summary: Fast and powerful algorithm for identifying population structure using dense sequencing data
 
