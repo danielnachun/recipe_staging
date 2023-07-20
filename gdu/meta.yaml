@@ -23,7 +23,7 @@ test:
 about:
   home: https://github.com/dundee/{{ name }}
   license: MIT
-  license_file: LICENSE
+  license_file: LICENSE.md
   summary: Disk usage analyzer with console interface written in Go
   dev_url: https://github.com/dundee/{{ name }}
 
