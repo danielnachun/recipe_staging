@@ -1,0 +1,38 @@
+{% set name = "inetutils" %}
+{% set version = "2.4" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://ftp.gnu.org/gnu/inetutils/inetutils-{{ version }}.tar.xz
+  sha256: 1789d6b1b1a57dfe2a7ab7b533ee9f5dfd9cbf5b59bb1bb3c2612ed08d0f68b2
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+  host:
+    - libidn2
+    - libxcrypt
+    - ncurses
+    - readline
+
+test:
+  commands:
+    - test -f $PREFIX/bin/ftp # [not win]
+
+about:
+  home: https://www.gnu.org/software/inetutils/
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  summary: GNU utilities for networking
+  dev_url: https://www.gnu.org/software/inetutils/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
