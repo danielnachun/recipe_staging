@@ -8,8 +8,6 @@ package:
 source:
   url: http://www.xzlab.org/software/dpr/DPR.rar
   sha256: 75c92172e1bf8dd63cfeba28076a25bc05d36839b11d4af282a20e8ec68d904a
-  patches:
-    - 0001-fix-duplicated-symbols.patch
 
 build:
   number: 0
@@ -19,6 +17,7 @@ requirements:
     - {{ compiler('cxx') }}
     - make
     - go-archiver
+    - patch
   host:
     - blas
     - eigen
@@ -30,7 +29,7 @@ requirements:
  
 test:
   commands:
-    - DPR --help
+    - test -f ${PREFIX}/bin/DPR
 
 about:
   home: http://www.xzlab.org/software
