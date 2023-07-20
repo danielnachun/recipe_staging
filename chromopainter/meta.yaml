@@ -1,0 +1,37 @@
+{% set name = "chromopainter" %}
+{% set version = "0.0.4" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://people.maths.bris.ac.uk/~madjl/finestructure-old/{{ name }}-{{ version }}.tar.gz
+  sha256: 190679a0f2720345d59a770437d1a1e1afa37eea2a25da2d8b865c174082c882
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - make
+  host:
+    - zlib
+  run:
+    - libzlib
+
+test:
+  commands:
+    - test -f $PREFIX/bin/chromopainter
+
+about:
+  home: https://people.maths.bris.ac.uk/~madjl/finestructure-old/chromopainter.html
+  license: Creative Commons v3
+  license_file: COPYING
+  summary: Tool for finding haplotypes in sequence data
+
+extra:
+  recipe-maintainers:
+    - danielnachun
