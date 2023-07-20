@@ -16,12 +16,12 @@ requirements:
   build:
     - {{ compiler('cxx') }}
     - make
-    - gxx
+    - gxx  # [linux]
   host:
     - blas
     - gsl
   run:
-    - _openmp_mutex
+    - _openmp_mutex  # [linux]
     - libopenblas
     - perl
 
