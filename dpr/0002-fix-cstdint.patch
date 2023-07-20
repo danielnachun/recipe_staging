@@ -1,24 +1,48 @@
-From 46e617f57b507536c11c15aa5554de226a483c3b Mon Sep 17 00:00:00 2001
-From: danielnachun <daniel.nachun@gmail.com>
-Date: Thu, 20 Jul 2023 00:07:39 -0700
-Subject: [PATCH] fix cstdint
-
----
- DPR/src/io.cpp | 1 +
- 1 file changed, 1 insertion(+)
-
 diff --git a/DPR/src/io.cpp b/DPR/src/io.cpp
-index b17bb76..f0bdfb8 100644
+index b17bb76..055c676 100644
 --- a/DPR/src/io.cpp
 +++ b/DPR/src/io.cpp
-@@ -27,6 +27,7 @@
+@@ -25,6 +25,7 @@
+ #include <vector>
+ #include <map>
  #include <set>
++#include <cstdint>
  #include <cstring>
  #include <cmath>
+ #include <stdio.h>
+diff --git a/DPR/src/lm.cpp b/DPR/src/lm.cpp
+index 6ff6b6c..ec6374d 100644
+--- a/DPR/src/lm.cpp
++++ b/DPR/src/lm.cpp
+@@ -29,6 +29,7 @@
+ #include <stdlib.h>
+ #include <bitset>
+ #include <string>
 +#include <cstdint>
+ #include <cstring>
+ 
+ #include "gsl/gsl_vector.h"
+diff --git a/DPR/src/lmm.cpp b/DPR/src/lmm.cpp
+index 7bcf89a..3856889 100644
+--- a/DPR/src/lmm.cpp
++++ b/DPR/src/lmm.cpp
+@@ -28,6 +28,7 @@
  #include <stdio.h>
  #include <stdlib.h>
+ #include <bitset>
++#include <cstdint>
+ #include <cstring>
  
--- 
-2.41.0
-
+ #include "gsl/gsl_vector.h"
+diff --git a/DPR/src/mvlmm.cpp b/DPR/src/mvlmm.cpp
+index 5826a1f..c611f4d 100644
+--- a/DPR/src/mvlmm.cpp
++++ b/DPR/src/mvlmm.cpp
+@@ -28,6 +28,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <bitset>
++#include <cstdint>
+ #include <cstring>
+ 
+ #include "gsl/gsl_vector.h"
