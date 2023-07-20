@@ -1,0 +1,43 @@
+{% set name = "caviarbf" %}
+{% set version = "1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: https://bitbucket.org/Wenan/caviarbf
+  git_rev: 25bac331a20353046f0838804baef4d8cec05c05
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - make
+    - gxx  # [linux]
+  host:
+    - r-base >=4.2
+    - r-rcpp
+    - r-rcppeigen
+    - r-glmnet
+  run:
+    - r-base >=4.2
+    - r-rcpp
+    - r-rcppeigen
+    - r-glmnet
+
+test:
+  commands:
+    - test -f $PREFIX/bin/caviarbf
+    - test -f $PREFIX/bin/model_search
+    - $R -e "library('caviarbf')"
+
+about:
+  home: https://bitbucket.org/Wenan/caviarbf
+  license: GPL-3.0-or-later
+  summary: Statistical framework for identifying causal variants
+
+extra:
+  recipe-maintainers:
+    - danielnachun
