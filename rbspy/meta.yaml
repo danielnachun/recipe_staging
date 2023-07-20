@@ -27,7 +27,7 @@ about:
   home: https://rbspy.github.io/
   license: MIT
   license_file: 
-    - LICENSE
+    - License.md
     - THIRDPARTY.yml
   summary: Sampling profiler for Ruby
   dev_url: https://github.com/rbspy/{{ name }}
