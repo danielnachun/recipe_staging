@@ -23,6 +23,7 @@ requirements:
     - gsl
   run:
     - _openmp_mutex  # [linux]
+    - llvm-omp  # [osx]
     - libopenblas
     - perl
 
