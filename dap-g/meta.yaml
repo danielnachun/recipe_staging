@@ -16,12 +16,14 @@ requirements:
   build:
     - {{ compiler('cxx') }}
     - make
-    - gxx
+    - gxx  # [linux]
+    - sed
   host:
     - blas
     - gsl
   run:
-    - _openmp_mutex
+    - _openmp_mutex  # [linux]
+    - llvm-openmp  # [osx]
     - libopenblas
     - perl
 
