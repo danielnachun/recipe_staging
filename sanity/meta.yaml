@@ -15,6 +15,7 @@ build:
 requirements:
   build:
     - {{ compiler('cxx') }}
+    - llvm-openmp  # [osx]
     - make
   run:
     - _openmp_mutex  # [linux]
