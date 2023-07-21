@@ -27,7 +27,7 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/man # [not win]
+    - test -f $PREFIX/bin/man
 
 about:
   home: https://www.nongnu.org/man-db
