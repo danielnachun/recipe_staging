@@ -1,0 +1,37 @@
+{% set name = "sanity" %}
+{% set version = "1.1.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/jmbreda/Sanity/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 4bd3149966dbccdf1ce9fafb094459ee25968f7d7218a87f4a80df23a28cec4b
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - llvm-openmp  # [osx]
+    - make
+  run:
+    - _openmp_mutex  # [linux]
+    - llvm-openmp  # [osx]
+
+test:
+  commands:
+    - test -f $PREFIX/bin/Sanity
+
+about:
+  home: https://github.com/jmbreda/Sanity
+  license: GPL-3.0-or-later
+  license_file: LICENSE
+  summary: Filtering of Poison noise on a single-cell RNA-seq UMI count matrix
+  dev_url: https://github.com/jmbreda/Sanity
+
+extra:
+  recipe-maintainers:
+    - danielnachun
