@@ -2,7 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-export "CFLAGS=-fcommon ${CFLAGS}"
+export "CFLAGS=${CFLAGS} -fcommon -Wno-incompatible-function-pointer-types"
 
 ./configure --disable-debug \
     --disable-dependency-tracking \
