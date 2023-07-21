@@ -1,0 +1,18 @@
+diff --git a/src/SMR_data_p3.cpp b/src/SMR_data_p3.cpp
+index c4ff0a7..2c29d84 100644
+--- a/src/SMR_data_p3.cpp
++++ b/src/SMR_data_p3.cpp
+@@ -794,13 +794,8 @@ namespace SMRDATA
+                 uint64_t colNum=(etmp._probNum<<1)+1;
+                 fseek(fptr, 0L, SEEK_END);
+                 uint64_t lSize = 0;
+-#if defined __linux
+                 long fsize = 0;
+                 fsize = ftell(fptr);
+-#elif defined _WIN32 || _WIN64
+-                int64_t fsize = 0;
+-                fsize = _ftelli64(fptr);
+-#endif
+                 if (fsize == -1) {
+                     fprintf(stderr, "error, ftell function error\n");
+                 } else {
