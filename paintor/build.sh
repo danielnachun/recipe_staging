@@ -11,4 +11,4 @@ cd ..
 make 
 	
 mkdir -p ${PREFIX}/bin
-install -D -m 755 PAINTOR ${PREFIX}/bin
+install -m 755 PAINTOR ${PREFIX}/bin
