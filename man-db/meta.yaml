@@ -1,0 +1,43 @@
+{% set name = "man-db" %}
+{% set version = "2.11.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://download.savannah.gnu.org/releases/{{ name }}/{{ name }}-{{ version }}.tar.xz
+  sha256: cffa1ee4e974be78646c46508e6dd2f37e7c589aaab2938cc1064f058fef9f8d
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - groff
+    - make
+    - pkg-config
+    - sed
+  host:
+    - gdbm
+    - libpipeline
+    - zlib
+  run:
+    - libpipeline
+    - libzlib
+
+test:
+  commands:
+    - test -f $PREFIX/bin/man
+
+about:
+  home: https://www.nongnu.org/man-db
+  license: GPL-2.0-or-later
+  license_file: COPYING
+  summary: Unix documentation system
+  dev_url: https://www.nongnu.org/man-db
+
+extra:
+  recipe-maintainers:
+    - danielnachun
