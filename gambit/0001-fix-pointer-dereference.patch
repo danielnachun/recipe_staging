@@ -1,0 +1,12 @@
+diff --git a/src/cdflib/cdflib.cpp b/src/cdflib/cdflib.cpp
+index 5343d2b..fd992a5 100644
+--- a/src/cdflib/cdflib.cpp
++++ b/src/cdflib/cdflib.cpp
+@@ -10061,7 +10061,7 @@ double *cdf ) {
+ 		0, 1, 2
+ 	};
+ 
+-	if ( n_data < 0 ) {
++	if ( *n_data < 0 ) {
+ 		*n_data = 0;
+ 	}

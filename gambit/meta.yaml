@@ -1,0 +1,43 @@
+{% set name = "GAMBIT" %}
+{% set version = "1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/corbinq/GAMBIT
+  git_rev: 1644b80d252d9def1ae2fdf85067d53d06162966
+  patches:
+    - 0001-fix-pointer-dereference.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - {{ compiler('c') }}
+    - {{ compiler('fortran') }}
+    - binutils
+    - make
+    - gxx  # [linux]
+    - gfortran
+    - sed
+  host:
+    - zlib
+  run:
+    - libzlib
+
+test:
+  commands:
+    - test -f $PREFIX/bin/GAMBIT
+
+about:
+  home: https://github.com/corbinq/GAMBIT
+  license: GPL-3.0-or-later
+  summary: A C++ tool for Gene-based Analysis with oMniBus, Integrative Tests
+
+extra:
+  recipe-maintainers:
+    - danielnachun
