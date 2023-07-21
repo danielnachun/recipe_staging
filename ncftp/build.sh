@@ -2,7 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-export CFLAGS="${CFLAGS} -fcommon"
+export CFLAGS="${CFLAGS} -fcommon -Wno-implicit-int -Wno-implicit-function-declaration"
 
 ./configure --disable-debug \
     --disable-dependency-tracking \
