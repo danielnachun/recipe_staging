@@ -1,0 +1,32 @@
+{% set name = "ptwas" %}
+{% set version = "1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/xqwen/ptwas
+  git_rev: 35fa68df0a591f100ec9fc909e5ba351a7c6a94d
+
+build:
+  number: 0
+
+requirements:
+  run:
+    - perl
+    - r-base
+
+test:
+  commands:
+    - test -f $PREFIX/bin/PTWAS_est
+    - test -f $PREFIX/bin/make_GAMBIT_DB.R
+
+about:
+  home: https://github.com/xqwen/ptwas
+  license: GPL-3.0
+  summary: Probabilistic Transcriptome-wide Association Analysis 
+
+extra:
+  recipe-maintainers:
+    - danielnachun
