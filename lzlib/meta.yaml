@@ -8,6 +8,8 @@ package:
 source:
   url: https://download.savannah.gnu.org/releases/lzip/lzlib/lzlib-{{ version }}.tar.gz  
   sha256: a1ab58f3148ba4b2674e938438166042137a9275bed747306641acfddc9ffb80
+  patches:
+    - 0001-make-shared-lib-work-on-macOS.patch  # [osx]
 
 build:
   number: 0
