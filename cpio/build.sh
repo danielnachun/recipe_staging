@@ -13,5 +13,8 @@ export "CFLAGS=${CFLAGS} -fcommon -Wno-incompatible-function-pointer-types"
 make install
 
 # Delete files that conflict with tar
-rm ${PREFIX}/libexec/rmt
-rm ${PREFIX}/share/man/man8/rmt.8
+if [[ ${target_platform} =~ .*linux.* ]]; then
+    rm ${PREFIX}/libexec/rmt
+    rm ${PREFIX}/share/man/man8/rmt.8
+fi
+
