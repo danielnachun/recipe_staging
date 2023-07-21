@@ -18,7 +18,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('fortran') }}
     - make
-    - gxx
+    - gxx  # [linux]
     - gfortran
   host:
     - zlib
