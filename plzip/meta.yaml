@@ -24,7 +24,7 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/plzip # [not win]
+    - {{ name }} --help
 
 about:
   home: https://www.nongnu.org/lzip/plzip.html
