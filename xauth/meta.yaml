@@ -1,0 +1,48 @@
+{% set name = "xauth" %}
+{% set version = "1.1.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://www.x.org/pub/individual/app/xauth-{{ version }}.tar.xz
+  sha256: 78ba6afd19536ced1dddb3276cba6e9555a211b468a06f95f6a97c62ff8ee200
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+    - pkg-config
+  host:
+    - xorg-libx11
+    - xorg-libxmu
+    - xorg-libxext
+    - xorg-libxmu
+    - xorg-libxcb
+    - xorg-libxdmcp
+  run:
+    - xorg-libx11
+    - xorg-libxmu
+    - xorg-libxext
+    - xorg-libxmu
+    - xorg-libxcb
+    - xorg-libxdmcp
+
+test:
+  commands:
+    - test -f $PREFIX/bin/xauth # [not win]
+
+about:
+  home: https://github.com/astrand/xclip
+  license: GPL-2.0-or-later
+  license_file: COPYING
+  summary: Access X11 clipboards from the command-line
+  dev_url: https://github.com/astrand/xclip
+
+extra:
+  recipe-maintainers:
+    - danielnachun
