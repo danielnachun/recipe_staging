@@ -22,10 +22,11 @@ requirements:
   host:
     - zlib
     - eigen
+    - llvm-openmp  # [osx]
   run:
     - libzlib
     - _openmp_mutex  # [linux]
-    - llvm-openmp  # [linux]
+    - llvm-openmp  # [osx]
 
 test:
   commands:
