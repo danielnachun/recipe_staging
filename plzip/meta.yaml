@@ -1,0 +1,38 @@
+{% set name = "plzip" %}
+{% set version = "1.10" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://download.savannah.gnu.org/releases/lzip/plzip/plzip-{{ version }}.tar.gz
+  sha256: 43faa58265d8b89ad75bd4ed11d347ef10065a8070748bc1ed0e06f191458098
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - lzlib
+    - make
+  host:
+    - lzlib
+  run:
+    - lzlib
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://www.nongnu.org/lzip/plzip.html
+  license: GPL-2.0-or-later
+  license_file: COPYING
+  summary: Data compressor
+  dev_url: https://www.nongnu.org/lzip/plzip.html
+
+extra:
+  recipe-maintainers:
+    - danielnachun
