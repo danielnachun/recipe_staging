@@ -7,7 +7,8 @@ set -o xtrace -o nounset -o pipefail -o errexit
     --prefix=${PREFIX} \
     --libdir=${PREFIX}/lib \
     CXX=${CXX} \
-    CXXFLAGS="-I${PREFIX}/include"
+    CXXFLAGS="-I${PREFIX}/include" \
+    LDFLAGS="-L${PREFIX}/lib"
 
 make
 make install
