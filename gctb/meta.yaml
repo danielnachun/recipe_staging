@@ -1,0 +1,39 @@
+{% set name = "gctb" %}
+{% set version = "2.03beta" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://cnsgenomics.com/software/gctb/download/gctb_{{ version }}.zip
+  sha256: a811ee9cb5807bd34bd9fcafb46aafc23c6b3b4d40e509ca1e149ad3d0210fa8
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - make
+  host:
+    - boost-cpp
+    - eigen
+    - llvm-openmp  #[osx]
+  run:
+    - _openmp_mutex  #[linux]
+    - llvm-openmp  #[osx]
+
+test:
+  commands:
+    - test -f $PREFIX/bin/gctb
+
+about:
+  home: https://cnsgenomics.com/software/gctb
+  license: MIT
+  license_file: LICENSE
+  summary: A tool for Genome-wide Complex Trait Bayesian analysis
+
+extra:
+  recipe-maintainers:
+    - danielnachun
