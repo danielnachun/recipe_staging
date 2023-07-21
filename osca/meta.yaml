@@ -26,7 +26,8 @@ requirements:
     - r-base-rmath
     - zlib
   run:
-    - _openmp_mutex
+    - _openmp_mutex  # [linux]
+    - llvm-openmp  # [osx]
     - libzlib
     - mkl
     - r-base-rmath
