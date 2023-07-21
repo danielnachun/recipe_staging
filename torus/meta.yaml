@@ -16,7 +16,6 @@ requirements:
   build:
     - {{ compiler('cxx') }}
     - make
-    - gxx
   host:
     - blas
     - boost-cpp

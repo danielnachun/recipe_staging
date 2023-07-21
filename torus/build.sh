@@ -6,7 +6,7 @@ export LDFLAGS="${LDFLAGS} -L${PREFIX}/lib"
 export CXXFLAGS="${CXXFLAGS} -I${PREFIX}/include"
 
 cd src
-make
+make CXX=${CXX}
 
 mkdir -p ${PREFIX}/bin
 install -m 755 torus ${PREFIX}/bin/torus
