@@ -21,7 +21,7 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/{{ name }}
+    - {{ name }} --help
 
 about:
   home: https://www.duckdb.org
