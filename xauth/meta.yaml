@@ -16,6 +16,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - make
+    - pkg-config
   host:
     - xorg-libx11
     - xorg-libxmu
