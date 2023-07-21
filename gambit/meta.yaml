@@ -19,9 +19,11 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('c') }}
     - {{ compiler('fortran') }}
+    - binutils
     - make
     - gxx  # [linux]
     - gfortran
+    - sed
   host:
     - zlib
   run:
