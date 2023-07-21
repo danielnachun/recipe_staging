@@ -1,0 +1,32 @@
+{% set name = "paintor" %}
+{% set version = "3.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/gkichaev/PAINTOR_V3.0
+  git_rev: ffce82a7114eeb98220db39ba5d6b69e5a419a9e
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - make
+    - gxx  # [linux]
+
+test:
+  commands:
+    - test -f $PREFIX/bin/PAINTOR
+
+about:
+  home: https://bogdan.dgsom.ucla.edu/pages/paintor/
+  license: Other
+  summary: Tool for integration of functional and association data in fine-mapping studies
+
+extra:
+  recipe-maintainers:
+    - danielnachun
