@@ -8,6 +8,8 @@ package:
 source:
   url: https://yanglab.westlake.edu.cn/software/{{ name }}/download/{{ name }}_v{{ version }}_src.tar.gz
   sha256: a1f62ada9ff2bb237a7b0ffbd2bcd4b024f5e619191e708012b5e71b98fadfbc
+  patches:
+    - 0001-fix-fsize-definition.patch
 
 build:
   number: 0
