@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -o xtrace -o nounset -o pipefail -o errexit
+
+export "CFLAGS=-fcommon ${CFLAGS}"
+
+./configure --disable-debug \
+    --disable-dependency-tracking \
+    --disable-silent-rules \
+    --prefix=${PREFIX} \
+    --libdir=${PREFIX}/lib
+
+make install
+
+# Delete files that conflict with tar
+rm ${PREFIX}/libexec/rmt
+rm ${PREFIX}/share/man/man8/rmt.8
