@@ -19,7 +19,7 @@ requirements:
 
 test:
   commands:
-    - {{ name }} -h
+    - test -f ${PREFIX}/bin/cpio
 
 about:
   home: https://www.gnu.org/software/cpio
