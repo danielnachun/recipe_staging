@@ -1,0 +1,35 @@
+{% set name = "lpmd_array" %}
+{% set version = "1.0.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/gp-ryu/lpmd_array
+  git_rev: 3622a45cbec35b465fccdc4e61cb4f1bf099c019
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - cmake
+    - eigen
+    - ninja
+
+test:
+  commands:
+    - test -f ${PREFIX}/bin/lpmd
+
+about:
+  home: https://github.com/gp-ryu/lpmd_array
+  license: GPL-3.0-or-later
+  license_file: LICENSE
+  summary: Tool for calculating local pairwise methylation disorder
+  dev_url: https://github.com/gp-ryu/lpmd_array
+
+extra:
+  recipe-maintainers:
+    - danielnachun
