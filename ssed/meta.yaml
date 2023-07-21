@@ -1,0 +1,33 @@
+{% set name = "ssed" %}
+{% set version = "3.62" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: http://deb.debian.org/debian/pool/main/s/ssed/ssed_{{ version }}.orig.tar.gz
+  sha256: af7ff67e052efabf3fd07d967161c39db0480adc7c01f5100a1996fec60b8ec4
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+
+test:
+  commands:
+    - test -f $PREFIX/bin/ssed # [not win]
+
+about:
+  home: https://sed.sourceforge.io/grabbag/ssed/
+  license: GPL-2.0-or-later
+  license_file: COPYING
+  summary: Super sed stream editor
+  dev_url: https://sed.sourceforge.io/grabbag/ssed
+
+extra:
+  recipe-maintainers:
+    - danielnachun
