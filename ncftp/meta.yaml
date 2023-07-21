@@ -1,0 +1,40 @@
+{% set name = "ncftp" %}
+{% set version = "3.2.6" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://mirrorservice.org/sites/ftp.ncftp.com/ncftp/ncftp-{{ version }}-src.tar.gz
+  sha256: 129e5954850290da98af012559e6743de193de0012e972ff939df9b604f81c23
+  patches:
+    - 0001-fix-macOS-version-detection.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - binutils
+    - make
+    - ncurses
+  host:
+    - ncurses
+  run:
+    - ncurses
+
+test:
+  commands:
+    - test -f $PREFIX/bin/ncftp # [not win]
+
+about:
+  home: https://www.ncftp.com/
+  license: ClArtistic
+  summary: FTP client with an advanced user interface
+  dev_url: https://www.ncftp.com/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
