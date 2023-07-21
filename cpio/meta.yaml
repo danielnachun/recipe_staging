@@ -1,0 +1,33 @@
+{% set name = "cpio" %}
+{% set version = "2.13" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://ftp.gnu.org/gnu/cpio/cpio-{{ version }}.tar.bz2
+  sha256: eab5bdc5ae1df285c59f2a4f140a98fc33678a0bf61bdba67d9436ae26b46f6d
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+
+test:
+  commands:
+    - test -f ${PREFIX}/bin/cpio
+
+about:
+  home: https://www.gnu.org/software/cpio
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  summary: Copies files into or out of a cpio or tar archive
+  dev_url: https://www.gnu.org/software/cpio
+
+extra:
+  recipe-maintainers:
+    - danielnachun
