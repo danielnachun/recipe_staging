@@ -3,6 +3,7 @@
 set -o xtrace -o nounset -o pipefail -o errexit
 
 export CXXFLAGS=-std=c++11
+
 pushd 3rd/luamake
     compile/install.sh
 popd
