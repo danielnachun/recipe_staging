@@ -7,7 +7,7 @@ rm -rf bin/*
 pushd src
     make Sanity CC="${CXX} -I${PREFIX}/include"
     make Sanity_distance CC="${CXX} -I${PREFIX}/include"
-popd ..
+popd
 
 mkdir -p ${PREFIX}/bin
 install -m 755 bin/Sanity ${PREFIX}/bin
