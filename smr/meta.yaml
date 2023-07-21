@@ -26,7 +26,6 @@ requirements:
   run:
     - libzlib
     - _openmp_mutex  # [linux]
-    - llvm-openmp  # [osx]
 
 test:
   commands:
