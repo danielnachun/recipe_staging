@@ -1,0 +1,39 @@
+{% set name = "torus" %}
+{% set version = "1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/xqwen/torus
+  git_rev: f21fac0546c0bd51e5029b103d8c6fe38757019f
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - make
+  host:
+    - blas
+    - boost-cpp
+    - gsl
+    - zlib
+  run:
+    - boost-cpp
+    - libopenblas
+
+test:
+  commands:
+    - test -f $PREFIX/bin/torus
+
+about:
+  home: https://github.com/xqwen/torus
+  license: Other
+  summary: Tool for QTL discovery utilizing genomic annotations
+
+extra:
+  recipe-maintainers:
+    - danielnachun
