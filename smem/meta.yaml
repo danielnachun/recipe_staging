@@ -1,0 +1,34 @@
+{% set name = "smem" %}
+{% set version = "1.5" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://selenic.com/repo/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: 5c3907b0ac9d3252cbbc5cb9ebe93f0c2b602df67376d9050c09146871822293
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+  run:
+    - python >=3.6
+
+test:
+  commands:
+    - test -f $PREFIX/bin/smem
+
+about:
+  home: https://www.selenic.com/smem/
+  license: GPL-2.0-or-later
+  summary: Generate reports on memory usage
+  dev_url: https://selenic.com/repo/smem
+
+extra:
+  recipe-maintainers:
+    - danielnachun
