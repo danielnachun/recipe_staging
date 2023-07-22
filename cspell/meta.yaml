@@ -1,0 +1,33 @@
+{% set name = "cspell" %}
+{% set version = "6.17.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://registry.npmjs.org/{{ name }}/-/{{ name }}-{{ version }}.tgz
+  sha256: 443a3c83c909f7b8c6cd630f5a617c57b0bd818ca49354fb148a2064dac08d72
+
+build:
+  number: 0
+
+requirements:
+  host:
+    - nodejs
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://cspell.org/
+  license: MIT
+  summary: A Spell Checker for Code!
+  dev_url: https://github.com/streetsidesoftware/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
