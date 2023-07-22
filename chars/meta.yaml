@@ -1,0 +1,36 @@
+{% set name = "chars" %}
+{% set version = "0.6.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/antifuchs/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 34537fd7b8b5fdc79a35284236443b07c54dded81d558c5bb774a2a354b498c7
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} 10
+
+about:
+  home: https://github.com/antifuchs/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Command-line tool to display information about unicode characters
+  dev_url: https://github.com/antifuchs/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
