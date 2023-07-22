@@ -1,0 +1,34 @@
+{% set name = "htmlq" %}
+{% set version = "0.4.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/mgdm/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: c2954c0fcb3ada664b14834646aa0a2c4268683cc51fd60d47a71a9f7e77d4b9
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/mgdm/{{ name }}
+  license: MIT
+  license_file: LICENSE.md
+  summary: Uses CSS selectors to extract bits content from HTML files
+  dev_url: https://github.com/mgdm/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
