@@ -1,0 +1,32 @@
+{% set name = "fq" %}
+{% set version = "0.1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/wader/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 156ad8b9fd8ede40ab4c12c7c7ef6ca0558a9cb5260c546863a6e96425caf9b2
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/wader/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: jq for binary formats
+  dev_url: https://github.com/wader/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
