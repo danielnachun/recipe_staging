@@ -1,0 +1,32 @@
+{% set name = "gaze" %}
+{% set version = "1.1.5" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/wtetsu/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: e954f074bcd3e7f8c898bf83faecfe5f2acff7001f1001157798c9e723916aab
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/whetsu/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: Execute commands for you
+  dev_url: https://github.com/whetsu/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
