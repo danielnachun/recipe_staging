@@ -1,6 +1,6 @@
 set "CGO_ENABLED=0"
 set "LDFLAGS=-s -w"
-go build -buildmode=pie -trimpath -o="%LIBRARY_BIN%\%PKG_NAME%.exe" -ldflags="%LDFLAGS%" -mod=mod || goto :error
+go build -buildmode=pie -trimpath -o="%LIBRARY_BIN%\2fa.exe" -ldflags="%LDFLAGS%" -mod=mod || goto :error
 goto :EOF
 
 :error
