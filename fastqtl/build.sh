@@ -10,4 +10,4 @@ make CXX="${CXX} -std=c++11" \
    RMATH=$PREFIX/lib/R/include \
    LDFLAG_OPT="-L${PREFIX}/lib -O3" 
 	
-install -D -m 755 bin/fastQTL ${PREFIX}/bin
+install -m 755 bin/fastQTL ${PREFIX}/bin
