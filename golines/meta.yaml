@@ -1,0 +1,33 @@
+{% set name = "golines" %}
+{% set version = "0.11.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/segmentio/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: d7336fbddb045bd2448629c4b8ef5ab2dc6136e71a795b6fdd596066bc00adc0
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/segmentio/{{ name }}
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: A golang formatter that fixes long lines
+  dev_url: https://github.com/segmentio/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
