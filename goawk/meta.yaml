@@ -1,0 +1,32 @@
+{% set name = "goawk" %}
+{% set version = "1.21.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/benhoyt/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 3846a1bdacedb1c87edf7627ebd67fe29ce7b2cdafa77a8528eb45b22df5506d
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://benhoyt.com/writings/{{ name }}
+  license: MIT
+  license_file: LICENSE.txt
+  summary: POSIX-compliant AWK interpreter written in Go
+  dev_url: https://github.com/benhoyt/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
