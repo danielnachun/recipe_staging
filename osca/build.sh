@@ -2,8 +2,11 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-#sed -i 's/Rmath/R/g' CMakeLists.txt
 sed -i 's/PRIVATE  ${mkl_include_dir} PRIVATE ${rmath_lib_dir}/PRIVATE  ${mkl_include_dir} PRIVATE ${rmath_include_dir}/g' CMakeLists.txt
+
+if [[ ${target_platform} =~ .*osx.* ]]; then
+    sed -i 's/gnu_thread/intel_thread/g' CMakeLists.txt
+fi
 
 cmake -S . -B build \
     -Dzlib_path=${PREFIX} \
