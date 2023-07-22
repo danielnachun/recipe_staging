@@ -24,8 +24,7 @@ test:
 
 about:
   home: https://helix-editor.com
-  license: MPL 2.0
-  license_family: OTHER
+  license: MPL-2.0
   license_file:
     - LICENSE
     - THIRDPARTY.yml
