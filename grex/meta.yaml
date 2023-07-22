@@ -1,0 +1,36 @@
+{% set name = "grex" %}
+{% set version = "1.4.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/pemistahl/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 8413aae520d696969525961438d22e31cd966058ce3510e91e77da18603c96b9
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/pemistahl/{{ name }}
+  license: Apache-2.0
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Command-line tool for generating regular expressions
+  dev_url: https://github.com/pemistahl/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
