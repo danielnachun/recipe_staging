@@ -1,0 +1,36 @@
+{% set name = "binwalk" %}
+{% set version = "2.3.4" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/ReFirmLabs/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 60416bfec2390cec76742ce942737df3e6585c933c2467932f59c21e002ba7a9
+
+build:
+  noarch: python
+  number: 0
+  script: {{ PYTHON }} -m pip install . -vv
+
+requirements:
+  host:
+    - pip
+    - python
+  run:
+    - python
+
+test:
+  imports:
+    - binwalk
+
+about:
+  home: https://github.com/ReFirmLabs/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: Firmware analysis tool
+
+extra:
+  recipe-maintainers:
+    - danielnachun
