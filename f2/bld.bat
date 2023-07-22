@@ -1,7 +1,7 @@
 set "CGO_ENABLED=0"
 set "LDFLAGS=-s -w"
 cd cmd\f2
-go build -trimpath -o="%LIBRARY_BIN%\%PKG_NAME%.exe" -ldflags="%LDFLAGS%" || goto :error
+go build -buildmode=pie -trimpath -o="%LIBRARY_BIN%\%PKG_NAME%.exe" -ldflags="%LDFLAGS%" || goto :error
 goto :EOF
 
 :error
