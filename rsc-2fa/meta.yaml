@@ -22,8 +22,7 @@ test:
 
 about:
   home: https://github.com/rsc/{{ name }}
-  license: BSD 3 Clause
-  license_family: BSD
+  license: BSD-3-Clause
   license_file: LICENSE
   summary: Two-factor authentication on the command-line
   dev_url: https://github.com/rsc/{{ name }}
