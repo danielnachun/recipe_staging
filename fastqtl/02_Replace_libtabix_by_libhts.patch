@@ -1,0 +1,216 @@
+Author: Dylan Aïssi <bob.dybian@gmail.com>
+Description: Merge src/utils/tabix.*pp with upstream (libtabixpp 1.0.0) in order to use libhts instead libtabix. 
+Last-Update: 2016-04-29
+Forwarded: No
+
+
+--- a/Makefile
++++ b/Makefile
+@@ -52,7 +52,7 @@
+   LIB_TABX=$(PATH_TABX)/libtabix.a
+ else
+   LIB_MATH=-lRmath
+-  LIB_TABX=-ltabix
++  LIB_TABX=-lhts
+ endif
+ LIB_MACX=-L/usr/local/lib/
+ 
+--- a/src/utils/tabix.cpp
++++ b/src/utils/tabix.cpp
+@@ -8,6 +8,7 @@
+ Tabix::Tabix(void) { }
+ 
+ Tabix::Tabix(string& file) {
++    has_jumped = false;
+     filename = file;
+     const char* cfilename = file.c_str();
+     struct stat stat_tbi,stat_vcf;
+@@ -30,78 +31,99 @@
+     }
+     free(fnidx);
+ 
+-    if ((t = ti_open(cfilename, 0)) == 0) {
++    if ((fn = hts_open(cfilename, "r")) == 0) {
+         cerr << "[tabix++] fail to open the data file." << endl;
+         exit(1);
+     }
+ 
+-    if (ti_lazy_index_load(t) < 0) {
++    if ((tbx = tbx_index_load(cfilename)) == NULL) {
+         cerr << "[tabix++] failed to load the index file." << endl;
+         exit(1);
+     }
+ 
+-    idxconf = ti_get_conf(t->idx);
++    int nseq;
++    const char** seq = tbx_seqnames(tbx, &nseq);
++    for (int i=0; i<nseq; i++) {
++        chroms.push_back(seq[i]);
++    }
++    free(seq);
++
++    idxconf = &tbx_conf_vcf;
+ 
+     // set up the iterator, defaults to the beginning
+-    iter = ti_query(t, 0, 0, 0);
++    current_chrom = chroms.begin();
++    iter = tbx_itr_querys(tbx, current_chrom->c_str());
+ 
+ }
+ 
+ Tabix::~Tabix(void) {
+-    ti_iter_destroy(iter);
+-    ti_close(t);
++    tbx_itr_destroy(iter);
++    tbx_destroy(tbx);
+ }
+ 
+ void Tabix::getHeader(string& header) {
+     header.clear();
+-    ti_iter_destroy(iter);
+-    iter = ti_query(t, 0, 0, 0);
+-    const char* s;
+-    int len;
+-    while ((s = ti_read(t, iter, &len)) != 0) {
+-        if ((int)(*s) != idxconf->meta_char) {
+-            firstline = string(s); // stash this line
++    kstring_t str = {0,0,0};
++    while ( hts_getline(fn, KS_SEP_LINE, &str) >= 0 ) {
++        if ( !str.l || str.s[0]!=tbx->conf.meta_char ) {
+             break;
+         } else {
+-            header += string(s);
++            header += string(str.s);
+             header += "\n";
+         }
+     }
++    // set back to start
++    current_chrom = chroms.begin();
++    if (iter) tbx_itr_destroy(iter);
++    iter = tbx_itr_querys(tbx, current_chrom->c_str());
+ }
+ 
+ void Tabix::getLastHeader(string & header) {
+-	header.clear();
+-	ti_iter_destroy(iter);
+-	iter = ti_query(t, 0, 0, 0);
+-	const char* s;
+-	int len;
+-	while ((s = ti_read(t, iter, &len)) != 0) {
+-		if ((int)(*s) != idxconf->meta_char) {
+-			firstline = string(s); // stash this line
+-			break;
+-		} else header = string(s);
+-	}
++    header.clear();
++    kstring_t str = {0,0,0};
++    while ( hts_getline(fn, KS_SEP_LINE, &str) >= 0 ) {
++        if ( !str.l || str.s[0]!=tbx->conf.meta_char ) {
++            break;
++        } else header = string(str.s);
++    }
++    // set back to start
++    current_chrom = chroms.begin();
++    if (iter) tbx_itr_destroy(iter);
++    iter = tbx_itr_querys(tbx, current_chrom->c_str());
+ }
+ 
+ bool Tabix::setRegion(string region) {
+-    if (ti_parse_region(t->idx, region.c_str(), &tid, &beg, &end) == 0) {
+-        firstline.clear();
+-        ti_iter_destroy(iter);
+-        iter = ti_queryi(t, tid, beg, end);
+-        return true;
+-    } else return false;
++    tbx_itr_destroy(iter);
++    iter = tbx_itr_querys(tbx, region.c_str());
++    has_jumped = true;
++    return true;
+ }
+ 
+ bool Tabix::getNextLine(string & line) {
+-    const char* s;
+-    int len;
+-    if (!firstline.empty()) {
+-        line = firstline; // recovers line read if header is parsed
+-        firstline.clear();
+-        return true;
+-    }
+-    if ((s = ti_read(t, iter, &len)) != 0) {
+-        line = string(s);
+-        return true;
+-    } else return false;
++    kstring_t str = {0,0,0};
++    if (has_jumped) {
++        if (iter && tbx_itr_next(fn, tbx, iter, &str) >= 0) {
++            line = string(str.s);
++            return true;
++        } else return false;
++    } else { // step through all sequences in the file
++        // we've never jumped, so read everything
++        if (iter && tbx_itr_next(fn, tbx, iter, &str) >= 0) {
++            line = string(str.s);
++            return true;
++        } else {
++            ++current_chrom;
++            while (current_chrom != chroms.end()) {
++                tbx_itr_destroy(iter);
++                iter = tbx_itr_querys(tbx, current_chrom->c_str());
++                if (iter && tbx_itr_next(fn, tbx, iter, &str) >= 0) {
++                    line = string(str.s);
++                    return true;
++                } else {
++                    ++current_chrom;
++                }
++            }
++            return false;
++        }
++    }
+ }
+--- a/src/utils/tabix.hpp
++++ b/src/utils/tabix.hpp
+@@ -9,24 +9,31 @@
+ #include <string>
+ #include <stdlib.h>
+ #include <sys/stat.h>
+-#include <bgzf.h>
+-#include <tabix.h>
++#include <htslib/bgzf.h>
++#include <htslib/tbx.h>
++#include <htslib/kseq.h>
+ #include <iostream>
++#include <cstring>
++#include <vector>
+ 
+ 
+ using namespace std;
+ 
+ class Tabix {
+ 
+-    tabix_t *t;
+-    ti_iter_t iter;
+-    const ti_conf_t *idxconf;
++    htsFile* fn;
++    tbx_t* tbx;
++    hts_itr_t* iter;
++    const tbx_conf_t *idxconf;
+     int tid, beg, end;
+     string firstline;
++    bool has_jumped;
++    vector<string>::iterator current_chrom;
+ 
+ public:
+ 
+     string filename;
++    vector<string> chroms;
+ 
+     Tabix(void);
+     Tabix(string& file);
+@@ -36,6 +43,7 @@
+     void getLastHeader(string & header);
+     bool setRegion(string region);
+     bool getNextLine(string& line);
++
+ };
+ 
+ #endif
