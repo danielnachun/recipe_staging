@@ -1,0 +1,48 @@
+{% set name = "osca" %}
+{% set version = "0.46.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/jianyangqt/osca/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: a3b60d8caf0e6cdb5f4adf79c24e8df414f3832122c97fcfa7dcfd4b23c73366
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - cmake
+    - make
+    - sed
+  host:
+    - boost-cpp
+    - gsl
+    - eigen
+    - mkl
+    - mkl-include
+    - r-base-rmath
+    - zlib
+  run:
+    - _openmp_mutex  # [linux]
+    - llvm-openmp  # [osx]
+    - libzlib
+    - mkl
+    - r-base-rmath
+
+test:
+  commands:
+    - test -f $PREFIX/bin/osca
+
+about:
+  home: https://yanglab.westlake.edu.cn/software/osca/
+  license: GPL-3.0-or-later
+  license_file: Copyright.txt
+  summary: Tool for the analysis of complex traits using multi-omics data 
+
+extra:
+  recipe-maintainers:
+    - danielnachun
