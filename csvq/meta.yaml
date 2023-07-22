@@ -1,0 +1,32 @@
+{% set name = "csvq" %}
+{% set version = "1.17.11" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/mithrandie/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 0186d1571af9cebb4c0d3c5e733c0a96bb735c7988f9c148b0a852301fcc89ba
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/mithrandie/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: SQL-like query language for csv
+  dev_url: https://github.com/mithrandie/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
