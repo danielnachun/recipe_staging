@@ -23,7 +23,6 @@ test:
 about:
   home: https://github.com/segmentio/{{ name }}
   license: MIT
-  license_family: MIT
   license_file: LICENSE
   summary: A golang formatter that fixes long lines
   dev_url: https://github.com/segmentio/{{ name }}
