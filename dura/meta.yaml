@@ -18,6 +18,7 @@ requirements:
     - {{ compiler('c') }}              # [not win]
     - {{ compiler('m2w64_c') }}        # [win]
     - cargo-bundle-licenses
+    - pkg-config
   host:
     - openssl
   run:
