@@ -1,0 +1,32 @@
+{% set name = "gum" %}
+{% set version = "0.8.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/charmbracelet/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 80d0000d8eaf1d577c76099a6747307df445ae66e368b99467d3493cce21c668
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/charmbracelet/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: Tool for glamorous shell scripts
+  dev_url: https://github.com/charmbracelet/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
