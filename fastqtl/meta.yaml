@@ -19,6 +19,7 @@ requirements:
   build:
     - {{ compiler('cxx') }}
     - make
+    - sed
   host:
     - blas
     - boost-cpp
