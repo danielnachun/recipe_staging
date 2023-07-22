@@ -1,0 +1,32 @@
+{% set name = "fetch" %}
+{% set version = "0.4.5" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/gruntwork-io/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: baa14d521cf0c59668dd5e84451579f48b623e16bb4d3b2254fa3c54b504fc9b
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/gruntwork-io/{{ name }}
+  license: MIT
+  license_file: LICENSE.txt
+  summary: Download assets from a commit, branch, or tag of GitHub repositories
+  dev_url: https://github.com/gruntwork-io/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
