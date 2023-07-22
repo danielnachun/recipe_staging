@@ -1,0 +1,34 @@
+{% set name = "gcsfuse" %}
+{% set version = "0.41.12" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/GoogleCloudPlatform/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: b4fa0cb7b6695714b9ba961977012354e55998f22039be96a7ababcbfd1cdf40
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - go
+    - libfuse
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/GoogleCloudPlatform/{{ name }}
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: User-space file system for interacting with Google Cloud
+  dev_url: https://github.com/GoogleCloudPlatform/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
