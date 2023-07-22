@@ -1,0 +1,32 @@
+{% set name = "fx" %}
+{% set version = "24.0.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/antonmedv/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
+  sha256: 43682e6b189a84602930b9fb09a87af400359a9e97a4bb8e1119688c53fad9fd
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - {{ name }} -v
+
+about:
+  home: https://github.com/antonmedv/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: Terminal JSON viewer
+  dev_url: https://github.com/antonmedv/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
