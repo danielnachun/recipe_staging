@@ -1,0 +1,45 @@
+{% set name = "fusion_twas" %}
+{% set version = "1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/gusevlab/fusion_twas
+  git_rev: e1ba5f7f3907e6f586f7fb5bb115b35cc0d3c0c2
+
+build:
+  number: 0
+  skip: True  # [not linux]
+
+requirements:
+  host:
+    - r-plink2r
+    - r-optparse
+    - r-rcolorbrewer
+    - r-glmnet
+  run:
+    - r-plink2r
+    - r-optparse
+    - r-rcolorbrewer
+    - r-glmnet
+
+test:
+  commands:
+    - test -f ${PREFIX}/bin/FUSION.assoc_test
+    - test -f ${PREFIX}/bin/FUSION.compute_weights
+    - test -f ${PREFIX}/bin/FUSION.post_process
+    - test -f ${PREFIX}/bin/FUSION.profile_wgt
+    - test -f ${PREFIX}/bin/compare_models
+    - test -f ${PREFIX}/bin/make_score
+
+about:
+  home: https://github.com/gusevlab/fusion_twas
+  license: GPL-3.0-or-later
+  license_file: LICENSE
+  summary: Suite of tools for performing transcriptome-wide and regulome-wide association studies
+
+extra:
+  recipe-maintainers:
+    - danielnachun
