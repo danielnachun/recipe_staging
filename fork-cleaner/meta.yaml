@@ -11,24 +11,19 @@ source:
 
 build:
   number: 0
-  script_env:
-    - CGO_ENABLED=0
 
 requirements:
   build:
     - make
     - go
-  host:
-  run:
 
 test:
   commands:
-    - test -f $PREFIX/bin/{{ name }}
+    - {{ name }} --help
 
 about:
   home: https://github.com/caarlos0/{{ name }}
   license: MIT
-  license_family: MIT
   license_file: LICENSE.md
   summary: Cleans up old and inactive forks on your GitHub account
   dev_url: https://github.com/caarlos0/{{ name }}
