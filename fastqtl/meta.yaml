@@ -1,0 +1,51 @@
+{% set name = "fastqtl" %}
+{% set version = "2.184" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: http://deb.debian.org/debian/pool/main/f/{{ name }}/{{ name }}_{{ version }}+dfsg.orig.tar.xz
+  sha256: 5f40bf8d9dbce2cd738080ebe28bf2b3892b75c9a8446e5e1d8c293d4b382b65
+  patches:
+    - 01_Makefile_dynamic_hardenings.patch
+    - 02_Replace_libtabix_by_libhts.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - make
+    - sed
+  host:
+    - blas
+    - boost-cpp
+    - eigen
+    - gsl
+    - htslib >=1.16
+    - openssl
+    - r-base-rmath
+    - zlib
+  run:
+    - boost-cpp
+    - htslib >=1.16
+    - openblas
+    - openssl
+    - r-base-rmath
+
+test:
+  commands:
+    - test -f $PREFIX/bin/fastQTL
+
+about:
+  home: https://fastqtl.sourceforge.net
+  license: GPL-3.0-or-later
+  license_file: LICENCE
+  summary: Fast and efficient QTL mapper for molecular phenotypes
+
+extra:
+  recipe-maintainers:
+    - danielnachun
