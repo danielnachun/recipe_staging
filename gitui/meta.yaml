@@ -1,0 +1,37 @@
+{% set name = "gitui" %}
+{% set version = "0.22.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/extrawurst/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 285e86c136ee7f410fdd52c5284ccf0d19011cc5f7709e5e10bb02f439a218ea
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+    - make
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/extrawurst/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE.md
+    - THIRDPARTY.yml
+  summary: Blazing fast terminal-ui for git written in rust
+  dev_url: https://github.com/extrawurst/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
