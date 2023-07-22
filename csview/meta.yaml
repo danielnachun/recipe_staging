@@ -1,0 +1,36 @@
+{% set name = "csview" %}
+{% set version = "1.2.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/wfxr/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: c8c4d1207b225e4257f301af6333d28cfee611781cfa51bf8227b742b043105a
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/wfxr/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE-MIT
+    - THIRDPARTY.yml
+  summary: High performance csv viewer for cli
+  dev_url: https://github.com/wfxr/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
