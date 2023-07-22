@@ -1,0 +1,32 @@
+{% set name = "delve" %}
+{% set version = "1.20.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/go-delve/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: a10aa97d3f6b6219877a73dd305d511442ad0caab740de76fc005796a480de93
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - dlv --help
+
+about:
+  home: https://github.com/go-delve/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: Debugger for the Go programming language
+  dev_url: https://github.com/go-delve/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
