@@ -1,0 +1,36 @@
+{% set name = "pileup_region" %}
+{% set version = "0.1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/weinstockj/{{ name }}
+  git_rev: 644f39abd8a2aaaba3de3fead896bc1351c0c35e
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+    - make
+
+test:
+  commands:
+    - test -f ${PREFIX}/bin/{{ name }}
+
+about:
+  home: https://github.com/weinstockj/{{ name }}
+  license: OTHER
+  license_file: THIRDPARTY.yml
+  summary: A simple rust application to count alt reads in a specified list of positions.
+  dev_url: https://github.com/weinstockj/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+
