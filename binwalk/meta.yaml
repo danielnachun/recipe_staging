@@ -1,18 +1,18 @@
 {% set name = "binwalk" %}
-{% set version = "2.1.0" %}
+{% set version = "2.3.4" %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
-  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
-  sha256: 218c8045c6cb3ed6e21814fb89cdb913808b02dfe5a6cc30f85f4a59e8129f6b
+  url: https://github.com/ReFirmLabs/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 60416bfec2390cec76742ce942737df3e6585c933c2467932f59c21e002ba7a9
 
 build:
   noarch: python
   number: 0
-  script: "{{ PYTHON }} -m pip install . -vv"
+  script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
@@ -26,11 +26,10 @@ test:
     - binwalk
 
 about:
-  home: "https://github.com/devttys0/binwalk"
-  license: UNKNOWN
-  license_family: OTHER
-  license_file: 
-  summary: "Firmware analysis tool"
+  home: https://github.com/ReFirmLabs/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: Firmware analysis tool
 
 extra:
   recipe-maintainers:
