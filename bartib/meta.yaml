@@ -1,0 +1,36 @@
+{% set name = "bartib" %}
+{% set version = "1.0.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/nikolassv/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 51ee91f0ebcdba8a3e194d1f800aab942d99b1be1241d9d29f85615a89c87e6e
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/nikolassv/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Simple timetracker for the command-line
+  dev_url: https://github.com/nikolassv/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
