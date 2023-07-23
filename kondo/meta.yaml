@@ -1,0 +1,34 @@
+{% set name = "kondo" %}
+{% set version = "0.6" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/tbillington/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: fce3082e294353e5a82ad1481796ea8130234eb581c31a279c9e7a73ca72d632
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/tbillington/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: Save disk space by cleaning non-essential files from software projects
+  dev_url: https://github.com/tbillington/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
