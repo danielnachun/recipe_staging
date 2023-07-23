@@ -1,0 +1,68 @@
+{% set version = "1.2.0" %}
+
+package:
+  name: r-cause
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/jean997/cause/archive/refs/tags/v1.2.0.tar.gz
+  sha256: c67340b3a68b5029d9ce3644a9dab5f416dd732bd4a4fec6da6314e5cc631cdf
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.3
+    - r-rcpp
+    - r-rcppparallel
+    - r-mixsqp
+    - r-numderiv
+    - r-ashr
+    - r-dplyr
+    - r-ggplot2
+    - r-scales
+    - r-gridextra
+    - r-loo
+    - r-matrixstats
+    - r-purrr
+    - r-tidyr
+    - r-intervals
+    - r-readr
+  run:
+    - r-base>=4.3
+    - r-rcpp
+    - r-rcppparallel
+    - r-mixsqp
+    - r-numderiv
+    - r-ashr
+    - r-dplyr
+    - r-ggplot2
+    - r-scales
+    - r-gridextra
+    - r-loo
+    - r-matrixstats
+    - r-purrr
+    - r-tidyr
+    - r-intervals
+    - r-readr
+
+test:
+  commands:
+    - $R -e "library('cause')"           # [not win]
+    - "\"%R%\" -e \"library('cause')\""  # [win]
+
+about:
+  home: https://jean997.github.io/cause/
+  license: GPL-2.0-or-later
+  summary: Causal Analysis Using Summary Effect Estimates
+
+extra:
+  recipe-maintainers:
+    - danielnachun
