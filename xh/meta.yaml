@@ -1,0 +1,34 @@
+{% set name = "xh" %}
+{% set version = "0.17.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/ducaale/{{ name }}/archive/v{{ version}}.tar.gz
+  sha256: 31a944b1932fb785a191932944ff662a33ad99724cb5bc260acdaf821fb2e088
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/ducaale/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: Friendly and fast tool for sending HTTP requests
+  dev_url: https://github.com/ducaale/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
