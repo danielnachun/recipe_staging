@@ -1,0 +1,36 @@
+{% set name = "jless" %}
+{% set version = "0.8.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/PaulJuliusMartinez/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 3f1168c9b2432f7f4fa9dd3c31b55e371ef9d6f822dc98a8cdce5318a112bf2d
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+    - libxcb #[linux]
+    - python
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://jless.io
+  license: MIT
+  license_file: LICENSE
+  summary: Command-line pager for JSON data
+  dev_url: https://github.com/PaulJuliusMartinez/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
