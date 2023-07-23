@@ -1,0 +1,34 @@
+{% set name = "skim" %}
+{% set version = "0.10.4" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/lotabout/skim/archive/v{{ version }}.tar.gz
+  sha256: eb5609842ad7c19b1267e77682ee5ae11aa8e84e46c27d9d198cc22d00c5e924
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - sk --help
+
+about:
+  home: https://github.com/lotabout/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: Fuzzy Finder in rust!
+  dev_url: https://github.com/lotabout/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
