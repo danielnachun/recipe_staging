@@ -1,0 +1,35 @@
+{% set name = "textlint" %}
+{% set version = "12.2.4" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://registry.npmjs.org/{{ name }}/-/{{ name }}-{{ version }}.tgz
+  sha256: 219f9ab10bb08fc0ec39ad0e3aea8fde97d42eebee47dd98bd97cfb361e5141f
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - typescript
+  host:
+    - nodejs
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/{{ name }}/{{ name }}
+  license: MIT
+  summary: The pluggable natural language linter for text and markdown
+  dev_url: https://github.com/{{ name }}/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
