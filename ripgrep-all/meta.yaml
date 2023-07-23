@@ -1,0 +1,36 @@
+{% set name = "ripgrep-all" %}
+{% set version = "0.9.6" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/phiresky/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 8cd7c5d13bd90ef0582168cd2bef73ca13ca6e0b1ecf24b9a5cd7cb886259023
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+  run:
+    - ripgrep
+
+test:
+  commands:
+    - rga --help
+
+about:
+  home: https://github.com/phiresky/{{ name }}
+  license: AGPL-3.0-or-later
+  license_file: LICENSE.md
+  summary: Wrapper around ripgrep that adds multiple rich file types
+  dev_url: https://github.com/phiresky/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
