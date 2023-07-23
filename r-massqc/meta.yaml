@@ -11,6 +11,7 @@ source:
 build:
   merge_build_host: true  # [win]
   number: 0
+  noarch: generic
   rpaths:
     - lib/R/lib/
     - lib/
@@ -19,7 +20,7 @@ requirements:
   build:
     - cross-r-base {{ r_base }}  # [build_platform != target_platform]
   host:
-    - r-base=4.3
+    - r-base=4.2
     - r-cli
     - r-crayon
     - r-dplyr
@@ -37,7 +38,7 @@ requirements:
     - r-ggrepel
     - r-ggcorrplot
   run:
-    - r-base>=4.3
+    - r-base>=4.2
     - r-cli
     - r-crayon
     - r-dplyr
