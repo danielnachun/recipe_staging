@@ -1,0 +1,32 @@
+{% set name = "rush" %}
+{% set version = "0.5.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/shenwei356/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 8046a0ac9ed10d2adff250ab5b95a95c895cae3b43d2a25bd95979f319146cb9
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/shenwei365/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: A cross-platform command-line tool for executing jobs in parallel
+  dev_url: https://github.com/shenwei365/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
