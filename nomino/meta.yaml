@@ -1,0 +1,34 @@
+{% set name = "nomino" %}
+{% set version = "1.3.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/yaa110/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: 45e8ed1e3131d4e0bacad2e1f2b4c2780b6db5a2ffaa4b8635cb2aee80bc2920
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/yaa110/{{ name }}
+  license: MIT
+  license_file: LICENSE-MIT
+  summary: Batch rename utility
+  dev_url: https://github.com/yaa110/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
