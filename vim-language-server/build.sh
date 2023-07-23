@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+set -o xtrace -o nounset -o pipefail -o errexit
 
 npm pack --ignore-scripts
 
@@ -8,5 +10,5 @@ npm install -ddd \
     --prefix=${PREFIX}/libexec/${PKG_NAME} \
     ${PKG_NAME}-${PKG_VERSION}.tgz
 
-install -Dd ${PREFIX}/bin
+mkdir -p ${PREFIX}/bin
 ln -sf ${PREFIX}/libexec/${PKG_NAME}/bin/vim-language-server ${PREFIX}/bin

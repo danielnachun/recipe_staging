@@ -13,7 +13,6 @@ build:
   number: 0
 
 requirements:
-  build:
   host:
     - nodejs
   run:
@@ -21,14 +20,13 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/vim-language-server
+    - test -f ${PREFIX}/bin/{{ name }}
 
 about:
-  home: https://github.com/iamcco/vim-language-server
+  home: https://github.com/iamcco/{{ name }}
   license: MIT
-  license_family: MIT
   summary: VimScript language server
-  dev_url: https://github.com/iamcco/vim-language-server
+  dev_url: https://github.com/iamcco/{{ name }}
 
 extra:
   recipe-maintainers:
