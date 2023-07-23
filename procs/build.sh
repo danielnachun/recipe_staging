@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+set -o xtrace -o nounset -o pipefail -o errexit
+
+cargo-bundle-licenses \
+    --format yaml \
+    --output THIRDPARTY.yml
+
+# build statically linked binary with Rust
+cargo install --locked --root ${PREFIX} --path .
+
+procs --completion bash
+procs --completion fish
+procs --completion zsh
+mkdir -p ${PREFIX}/etc/bash_completion.d
+mkdir -p ${PREFIX}/share/fish/vendor_completions.d
+mkdir -p ${PREFIX}/share/zsh/site-functions
+install -m 644 procs.bash ${PREFIX}/etc/bash_completion.d/procs/procs.bash
+install -m 644 procs.fish ${PREFIX}/share/fish/vendor_completions.d/procs.fish
+install -m 644 _procs ${PREFIX}/share/zsh/site-functions/_procs
+
+# strip debug symbols
+"$STRIP" "$PREFIX/bin/${PKG_NAME}"
+
+# remove extra build file
+rm -f "${PREFIX}/.crates.toml"

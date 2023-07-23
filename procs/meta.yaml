@@ -1,0 +1,34 @@
+{% set name = "procs" %}
+{% set version = "0.14.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/dalance/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: fa5af0951dc8aa63c0590f8c5c1136594866057704cfb1cdfc22ac3cc49437c6
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/dalance/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: Modern replacement for ps written by Rust
+  dev_url: https://github.com/dalance/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
