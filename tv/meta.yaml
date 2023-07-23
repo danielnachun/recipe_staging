@@ -20,7 +20,7 @@ requirements:
 
 test:
   commands:
-    - {{ name }} --help
+    - tidy-viewer --help
 
 about:
   home: https://github.com/alexhallam/{{ name }}
