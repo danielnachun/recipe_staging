@@ -1,0 +1,46 @@
+{% set version = "0.3" %}
+
+package:
+  name: r-lcmix
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url: http://download.r-forge.r-project.org/src/contrib/lcmix_{{ version }}.tar.gz
+  sha256: f808016bbb97cc844c8de6ceb941baf508c6cbb13a1916b8b6313b918fe34489
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  noarch: generic
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+    - r-mass
+    - r-matrixstats
+    - r-nnls
+    - r-r.methodss3
+  run:
+    - r-base>=4.2
+    - r-mass
+    - r-matrixstats
+    - r-nnls
+    - r-r.methodss3
+
+test:
+  commands:
+    - $R -e "library('lcmix')"           # [not win]
+
+about:
+  home: https://r-forge.r-project.org/R/?group_id=1092
+  license: GPL-2.0-or-later
+  summary: Layered and chained mixture models
+
+extra:
+  recipe-maintainers:
+    - danielnachun
