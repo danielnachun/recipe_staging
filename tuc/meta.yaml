@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/riquito/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: e8208e0cb92bd17b36e1d43f0ea9d45f4573222fa40ca576775b4ebbb6442adf
+  sha256: ea4d1adb1949b8f564c375cbd7e0569de5dcc1fcabd57d56174748091102eec2
 
 build:
   number: 0
