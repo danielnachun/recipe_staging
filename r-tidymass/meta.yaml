@@ -10,6 +10,7 @@ source:
 
 build:
   merge_build_host: true  # [win]
+  noarch: generic
   number: 0
   rpaths:
     - lib/R/lib/
@@ -18,24 +19,8 @@ build:
 requirements:
   build:
     - cross-r-base {{ r_base }}  # [build_platform != target_platform]
-    - r-cli
-    - r-crayon
-    - r-dplyr
-    - r-purrr
-    - r-stringr
-    - r-magrittr
-    - r-remotes
-    - r-rstudioapi
-    - r-masstools
-    - r-massdataset
-    - r-massprocessor
-    - r-masscleaner
-    - r-massstat
-    - r-metpath
-    - r-metid
-    - r-massqc
   host:
-    - r-base=4.2.2
+    - r-base=4.2
     - r-cli
     - r-crayon
     - r-dplyr
@@ -79,7 +64,6 @@ test:
 about:
   home: https://github.com/tidymass/tidymass
   license: MIT
-  license_family: MIT
   summary: The 'tidymass' package is a collection of several packages for Mass Spectrometry data processing and analysis.
 
 extra:
