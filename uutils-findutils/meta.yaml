@@ -18,6 +18,7 @@ requirements:
     - {{ compiler('c') }}
     - cargo-bundle-licenses
     - clangdev #[linux]
+    - oniguruma
 
 test:
   commands:
