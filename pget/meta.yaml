@@ -1,0 +1,32 @@
+{% set name = "pget" %}
+{% set version = "0.1.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/Code-Hex/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 34d674dc48144c84de72d525e67d96500243cc1d1c4c0433794495c0846c193f
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - test -f ${PREFIX}/bin/${PKG_NAME}
+
+about:
+  home: https://github.com/Code-Hex/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: File download client
+  dev_url: https://github.com/Code-Hex/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
