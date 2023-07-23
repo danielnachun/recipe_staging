@@ -1,0 +1,32 @@
+{% set name = "massren" %}
+{% set version = "1.5.6" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/laurent22/massren/archive/v{{ version }}.tar.gz
+  sha256: 49758b477a205f3fbf5bbe72c2575fff8b5536f8c6b45f8f6bd2fdde023ce874
+
+build:
+  number: 1
+
+requirements:
+  build:
+    - go
+    - sqlite
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/laurent22/{{ name }}
+  license: MIT
+  summary: Easily rename multiple files using your text editor
+  dev_url: https://github.com/laurent22/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
