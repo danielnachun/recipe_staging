@@ -1,0 +1,34 @@
+{% set name = "page" %}
+{% set version = "4.6.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/I60R/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 51cf01933180499b27027fcdbda067f0cf80cebaa06d62400b655419f1806d46
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/I60R/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: Use Neovim as pager
+  dev_url: https://github.com/I60R/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
