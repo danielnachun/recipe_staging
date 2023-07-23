@@ -1,0 +1,43 @@
+{% set name = "hstr" %}
+{% set version = "2.6" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/dvorka/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: 085f8a087481bcdf33e75e2fa5aaa9289931782c0bee2db3e02425b9a7d83cdf
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - autoconf
+    - automake
+    - libtool
+    - pkg-config
+    - make
+  host:
+    - bash-completion
+    - readline
+    - ncurses
+  run:
+    - bash-completion
+
+test:
+  commands:
+    - hh --help
+
+about:
+  home: https://github.com/dvorka/{{ name }}
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Bash and zsh history suggest box
+  dev_url: https://github.com/dvorka/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
