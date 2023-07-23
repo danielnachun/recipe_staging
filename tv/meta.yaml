@@ -1,0 +1,34 @@
+{% set name = "tv" %}
+{% set version = "1.4.30" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/alexhallam/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
+  sha256: 52beddc07283396c7fd30097dc2ea37b9f1872eee7f2d83546dc93dfe644747e
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/alexhallam/{{ name }}
+  license: Unlicense
+  license_file: UNLICENSE
+  summary: Tidy Viewer is a cross-platform CLI csv pretty printer that uses column styling to maximize viewer enjoyment
+  dev_url: https://github.com/alexhallam/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
