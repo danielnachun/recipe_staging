@@ -1,0 +1,38 @@
+{% set name = "prr" %}
+{% set version = "0.8.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/danobi/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 15fc841f50c3313ca8646240e937fb76b87d5270cd3db64042e48e819745e5af
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+  host:
+    - openssl
+  run:
+    - openssl
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/danobi/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: Mailing list style code reviews for github
+  dev_url: https://github.com/danobi/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
