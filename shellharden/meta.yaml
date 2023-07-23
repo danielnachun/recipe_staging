@@ -1,0 +1,34 @@
+{% set name = "shellharden" %}
+{% set version = "4.3.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/anordal/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: d17bf55bae4ed6aed9f0d5cea8efd11026623a47b6d840b826513ab5b48db3eb
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/anordal/{{ name }}
+  license: MPL-2.0
+  license_file: LICENSE
+  summary: Bash syntax highlighter that encourages/fixes variables quoting
+  dev_url: https://github.com/anordal/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
