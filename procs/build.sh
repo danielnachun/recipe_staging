@@ -15,7 +15,7 @@ procs --gen-completion zsh
 mkdir -p ${PREFIX}/etc/bash_completion.d
 mkdir -p ${PREFIX}/share/fish/vendor_completions.d
 mkdir -p ${PREFIX}/share/zsh/site-functions
-install -m 644 procs.bash ${PREFIX}/etc/bash_completion.d/procs/procs.bash
+install -m 644 procs.bash ${PREFIX}/etc/bash_completion.d/procs.bash
 install -m 644 procs.fish ${PREFIX}/share/fish/vendor_completions.d/procs.fish
 install -m 644 _procs ${PREFIX}/share/zsh/site-functions/_procs
 
