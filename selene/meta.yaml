@@ -1,0 +1,34 @@
+{% set name = "selene" %}
+{% set version = "0.25.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/Kampfkarren/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: e62c1328b1cb7ff2014a8419501a3fabaa87341a8932456283b53c148040e9e4
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/Kampfkarren/{{ name }}
+  license: MPL-2.0
+  license_file: LICENSE.md
+  summary: Blazing-fast modern Lua linter
+  dev_url: https://github.com/Kampfkarren/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
