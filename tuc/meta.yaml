@@ -1,0 +1,34 @@
+{% set name = "tuc" %}
+{% set version = "1.0.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/riquito/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: e8208e0cb92bd17b36e1d43f0ea9d45f4573222fa40ca576775b4ebbb6442adf
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/riquito/{{ name }}
+  license: GPL-3.0-or-later
+  license_file: LICENSE
+  summary: Text manipulation and cutting tool
+  dev_url: https://github.com/riquito/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
