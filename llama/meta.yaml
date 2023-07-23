@@ -1,0 +1,32 @@
+{% set name = "llama" %}
+{% set version = "1.4.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/antonmedv/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 301f5dff2b8f27595a08a12626125d28313b5a92e97ccdaf4d0cb89111ebab9a
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/antonmedv/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: Terminal file manager
+  dev_url: https://github.com/antonmedv/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
