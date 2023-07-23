@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://registry.npmjs.org/@fsouza/{{ name }}/-/{{ name }}-{{ version }}.tgz
-  sha256: 81c9006358a8eb428cd3f5455d6061359e4c7c04e7aaf569db64e33a6664d2d6
+  sha256: 1dfe44ebfad78799fcaf477cd9fdb74be4095b1646433de2b13f490498106670
 
 build:
   number: 0
