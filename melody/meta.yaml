@@ -1,0 +1,34 @@
+{% set name = "melody" %}
+{% set version = "0.18.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/yoav-lavi/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: c68c05c0d87d4ab1069196f339043252fb1754395d8e5504f5295a2fadcc51d2
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://yoav-lavi.github.io/{{ name }}/book
+  license: MIT
+  license_file: LICENSE
+  summary: Language that compiles to regular expressions
+  dev_url: https://github.com/yoav-lavi/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
