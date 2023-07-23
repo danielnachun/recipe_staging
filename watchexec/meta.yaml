@@ -1,0 +1,34 @@
+{% set name = "watchexec" %}
+{% set version = "1.20.6" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/watchexec/{{ name }}/archive/cli-v{{ version}}.tar.gz
+  sha256: fa490944bbc8eafdc585454d27ec6f75988ce7d159db8ee1244b1fc5bbd86935
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/watchexec/{{ name }}
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Execute commands when watched files change
+  dev_url: https://github.com/watchexec/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
