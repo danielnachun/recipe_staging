@@ -13,22 +13,16 @@ build:
   number: 0
   script: "./install.sh ${PREFIX}"
 
-requirements:
-  build:
-  host:
-  run:
-
 test:
   commands:
-    - test -f $PREFIX/bin/xpanes # [not win]
+    - xpanes --help
 
 about:
-  home: https://github.com/greymd/tmux-xpanes
+  home: https://github.com/greymd/{{ name }}
   license: MIT
-  license_family: MIT
   license_file: LICENSE
   summary: Ultimate terminal divider powered by tmux
-  dev_url: https://github.com/greymd/tmux-xpanes
+  dev_url: https://github.com/greymd/{{ name }}
 
 extra:
   recipe-maintainers:
