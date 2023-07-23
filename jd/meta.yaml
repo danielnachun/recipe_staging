@@ -1,0 +1,32 @@
+{% set name = "jd" %}
+{% set version = "1.7.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/josephburnett/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 3d0b693546891bab41ca5c3be859bc760631608c9add559aa561fb751cdd1c92
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/josephburnett/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: JSON diff and patch
+  dev_url: https://github.com/josephburnett/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
