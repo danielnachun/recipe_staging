@@ -1,0 +1,33 @@
+{% set name = "markdownlint-cli2" %}
+{% set version = "0.5.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://registry.npmjs.org/{{ name }}/-/{{ name }}-{{ version }}.tgz
+  sha256: faff3847b5ddd648adf53935668ed9c4649cc1e20fcd608db8a0e47c3d038d1d
+
+build:
+  number: 0
+
+requirements:
+  host:
+    - nodejs
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/DavidAnson/{{ name }}
+  license: MIT
+  summary: A fast, flexible, configuration-based command-line interface for linting Markdown/CommonMark files with the markdownlint library
+  dev_url: https://github.com/DavidAnson/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
