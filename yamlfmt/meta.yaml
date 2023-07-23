@@ -1,0 +1,32 @@
+{% set name = "yamlfmt" %}
+{% set version = "0.6.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/google/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 9e08c8141acc0a4fabc3ac5a2a47294f8c0a1863a28604b78065e2ca49a27d67
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/google/{{ name }}
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: An extensible command line tool or library to format yaml files
+  dev_url: https://github.com/google/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
