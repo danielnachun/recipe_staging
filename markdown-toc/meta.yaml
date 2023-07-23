@@ -1,0 +1,33 @@
+{% set name = "markdown-toc" %}
+{% set version = "1.2.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://registry.npmjs.org/{{ name }}/-/{{ name }}-{{ version }}.tgz
+  sha256: 4a5bf3efafb21217889ab240caacd795a1101bfbe07cd8abb228cc44937acd9c
+
+build:
+  number: 0
+
+requirements:
+  host:
+    - nodejs
+  run:
+    - nodejs
+
+test:
+  commands:
+    - test -f ${PREFIX}/bin/{{ name }}
+
+about:
+  home: https://github.com/jonschlinkert/{{ name }}
+  license: MIT
+  summary: API and CLI for generating a markdown TOC (table of contents) for a README or any markdown files.
+  dev_url: https://github.com/jonschlinkert/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
