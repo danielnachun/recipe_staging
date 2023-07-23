@@ -1,0 +1,32 @@
+{% set name = "restic" %}
+{% set version = "0.14.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/restic/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 78cdd8994908ebe7923188395734bb3cdc9101477e4163c67e7cc3b8fd3b4bd6
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/restic/{{ name }}
+  license: BSD-2-Clause
+  license_file: LICENSE
+  summary: Fast, efficient and secure backup program
+  dev_url: https://github.com/restic/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
