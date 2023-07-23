@@ -1,0 +1,34 @@
+{% set name = "tere" %}
+{% set version = "1.4.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/mgunyho/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 84eeafc346ee2207bcfb0a9e29a6a4e7748817741a0f7245a204d16da0ef651f
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/mgunyho/{{ name }}
+  license: EUPL-1.2
+  license_file: LICENSE
+  summary: Terminal file explorer
+  dev_url: https://github.com/mgunyho/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
