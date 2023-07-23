@@ -1,0 +1,39 @@
+{% set version = "0.1.0" %}
+
+package:
+  name: r-genetics.binaries
+  version: {{ version|replace("-", "_") }}
+
+source:
+  git_url: https://github.com/MRCIEU/genetics.binaRies
+  git_rev: a63ef35707d0848f32bc4748346663bf512d5c97
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+  run:
+    - r-base>=4.2
+
+test:
+  commands:
+    - $R -e "library('genetics.binaRies')"           # [not win]
+    - "\"%R%\" -e \"library('genetics.binaRies')\""  # [win]
+
+about:
+  home: a63ef35707d0848f32bc4748346663bf512d5c97
+  license: MIT
+  license_file: LICENSE
+  summary: Binaries for Tools Used in Genetics in an R Package
+
+extra:
+  recipe-maintainers:
+    - danielnachun
