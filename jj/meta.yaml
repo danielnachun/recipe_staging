@@ -1,0 +1,40 @@
+{% set name = "jj" %}
+{% set version = "0.7.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/martinvonz/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 85e73cde738a2b92aeb253ee3a29f113589c19ad11d4244a14e2d0ca5fbfb3c7
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+  host:
+    - openssl #[not win]
+    - zlib #[not win]
+  run:
+    - openssl #[not win]
+    - libzlib #[not win]
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/martinvonz/{{ name }}
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Git-compatible distributed version control system
+  dev_url: https://github.com/martinvonz/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
