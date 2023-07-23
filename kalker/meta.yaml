@@ -1,0 +1,36 @@
+{% set name = "kalker" %}
+{% set version = "2.0.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/PaddiM8/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: d2904b5b537a2ec31570f83ac36da0fcf95b0b2957594edf8f07881a067bf8c2
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+    - m4
+    - make
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/PaddiM8/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: Full-featured calculator with math syntax
+  dev_url: https://github.com/PaddiM8/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
