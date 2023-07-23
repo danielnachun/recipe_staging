@@ -1,0 +1,34 @@
+{% set name = "sad" %}
+{% set version = "0.4.22" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/ms-jpq/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: cc3f66432ad2b97b1991afe8400846c64ba7d0a65d6c9615bcdf285d7a534634
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/ms-jpq/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: CLI search and replace | Space Age seD
+  dev_url: https://github.com/ms-jpq/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
