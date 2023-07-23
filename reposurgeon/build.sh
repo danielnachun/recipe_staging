@@ -2,6 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+export CGO_ENABLED=0
 export XML_CATALOG_FILES=${PREFIX}/etc/xml/catalog
 
 make
