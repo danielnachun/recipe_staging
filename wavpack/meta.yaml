@@ -19,7 +19,7 @@ requirements:
 
 test:
   commands:
-    - wavpack -h
+    - test -f ${PREFIX}/bin/wavpack
 
 about:
   home: https://www.wavpack.com
