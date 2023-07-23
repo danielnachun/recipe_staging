@@ -1,0 +1,34 @@
+{% set name = "kickstart" %}
+{% set version = "0.3.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/Keats/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 98f25f870d6b1bff9bb22a485cf307d42a1d4243550080cf0d122c6d71c23ded
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/Keats/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: Scaffolding tool to get new projects up and running quickly
+  dev_url: https://github.com/Keats/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
