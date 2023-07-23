@@ -1,0 +1,57 @@
+{% set version = "0.1.29" %}
+{% set name = "ctwas" %}
+
+package:
+  name: r-{{ name }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/xinhe-lab/ctwas
+  git_rev: fc23c51993408af2d1abd45f164916d05d995005
+
+build:
+  number: 0
+  noarch: generic
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+    - r-data.table
+    - r-pgenlibr
+    - r-matrix
+    - r-doparallel
+    - r-foreach
+    - r-logging
+    - r-rfast
+    - r-readr
+    - r-rsqlite
+  run:
+    - r-base>=4.2
+    - r-data.table
+    - r-pgenlibr
+    - r-matrix
+    - r-doparallel
+    - r-foreach
+    - r-logging
+    - r-rfast
+    - r-readr
+    - r-rsqlite
+
+test:
+  commands:
+    - $R -e "library('ctwas')"           # [not win]
+
+about:
+  home: https://github.com/xinhe-lab/ctwas
+  license: MIT
+  license_file: LICENSE
+  summary: Identify causal genes in TWAS analysis
+
+extra:
+  recipe-maintainers:
+    - danielnachun
