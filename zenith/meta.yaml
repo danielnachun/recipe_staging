@@ -1,0 +1,39 @@
+{% set name = "zenith" %}
+{% set version = "0.13.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/bvaisvil/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: 1f2914a1ddd7dd76cca0e0c07ca77bd048addfd80fc6329ea7b83647ea66020a
+
+build:
+  number: 0
+  ignore_run_exports:
+    - libclang-cpp
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+  host:
+    - libclang #[linux]
+    - llvmdev #[linux]
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/bvaisvil/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: In terminal graphical metrics for your *nix system
+  dev_url: https://github.com/bvaisvil/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
