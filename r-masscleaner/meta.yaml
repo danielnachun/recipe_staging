@@ -10,6 +10,7 @@ source:
 
 build:
   merge_build_host: true  # [win]
+  noarch: generic
   number: 0
   rpaths:
     - lib/R/lib/
@@ -19,7 +20,7 @@ requirements:
   build:
     - cross-r-base {{ r_base }}  # [build_platform != target_platform]
   host:
-    - r-base=4.3
+    - r-base=4.2
     - r-cli
     - r-crayon
     - r-dplyr
@@ -38,7 +39,7 @@ requirements:
     - bioconductor-pcamethods
     - bioconductor-impute
   run:
-    - r-base>=4.3
+    - r-base>=4.2
     - r-cli
     - r-crayon
     - r-dplyr
