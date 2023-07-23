@@ -1,0 +1,33 @@
+{% set name = "write-good" %}
+{% set version = "1.0.8" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://registry.npmjs.org/{{ name }}/-/{{ name }}-{{ version }}.tgz
+  sha256: f54db3db8db0076fd1c05411c7f3923f055176632c51dc4046ab216e51130221
+
+build:
+  number: 0
+
+requirements:
+  host:
+    - nodejs
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/btford/{{ name }}
+  license: MIT
+  summary: Naive linter for English prose
+  dev_url: https://github.com/btford/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
