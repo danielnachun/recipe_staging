@@ -1,0 +1,35 @@
+{% set name = "vim-language-server" %}
+{% set version = "2.2.7" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://registry.npmjs.org/vim-language-server/-/{{ name }}-{{ version }}.tgz
+  sha256: 1538f3202b4406f7b4455990a9f5c016b5edbfc2a2f82e3bf6613bbfecd3c982
+
+build:
+  number: 0
+
+requirements:
+  build:
+  host:
+    - nodejs
+  run:
+    - nodejs
+
+test:
+  commands:
+    - test -f $PREFIX/bin/vim-language-server
+
+about:
+  home: https://github.com/iamcco/vim-language-server
+  license: MIT
+  license_family: MIT
+  summary: VimScript language server
+  dev_url: https://github.com/iamcco/vim-language-server
+
+extra:
+  recipe-maintainers:
+    - danielnachun
