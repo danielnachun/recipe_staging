@@ -1,0 +1,37 @@
+{% set name = "prettierd" %}
+{% set version = "0.22.5" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://registry.npmjs.org/@fsouza/{{ name }}/-/{{ name }}-{{ version }}.tgz
+  sha256: 81c9006358a8eb428cd3f5455d6061359e4c7c04e7aaf569db64e33a6664d2d6
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - typescript
+    - yarn
+  host:
+    - nodejs
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/fsouza/{{ name }}
+  license: ISC
+  license_family: OTHER
+  summary: prettier, as a daemon, for ludicrous formatting speed
+  dev_url: https://github.com/fsouza/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
