@@ -1,0 +1,78 @@
+{% set version = "1.0.5" %}
+
+package:
+  name: r-metpath
+  version: {{ version|replace("-", "_") }}
+
+source:
+  git_url: https://github.com/tidymass/metpath
+  git_rev: adcad4f44afcb2b91bb7a4fbed125de95b56c1d8
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.3
+    - r-cli
+    - r-crayon
+    - r-dplyr
+    - r-ggplot2
+    - r-magrittr
+    - r-pbapply
+    - r-plyr
+    - r-purrr
+    - r-stringr
+    - r-metid
+    - r-future
+    - r-furrr
+    - r-openxlsx
+    - r-rstudioapi
+    - r-ggraph
+    - r-ggrepel
+    - r-tidygraph
+    - r-rlang
+    - r-massdataset
+    - bioconductor-keggrest
+  run:
+    - r-base>=4.3
+    - r-cli
+    - r-crayon
+    - r-dplyr
+    - r-ggplot2
+    - r-magrittr
+    - r-pbapply
+    - r-plyr
+    - r-purrr
+    - r-stringr
+    - r-metid
+    - r-future
+    - r-furrr
+    - r-openxlsx
+    - r-rstudioapi
+    - r-ggraph
+    - r-ggrepel
+    - r-tidygraph
+    - r-rlang
+    - r-massdataset
+    - bioconductor-keggrest
+
+test:
+  commands:
+    - $R -e "library('metpath')"           # [not win]
+    - "\"%R%\" -e \"library('metpath')\""  # [win]
+
+about:
+  home: https://github.com/tidymass/metpath
+  license: GPL-3.0-or-later
+  summary: This package is used to do statistical data analysis for and pathway enrichment analysi for metabolomics data.
+
+extra:
+  recipe-maintainers:
+    - danielnachun

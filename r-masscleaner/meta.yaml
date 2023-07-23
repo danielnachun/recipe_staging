@@ -1,0 +1,72 @@
+{% set version = "1.0.7" %}
+
+package:
+  name: r-masscleaner
+  version: {{ version|replace("-", "_") }}
+
+source:
+  git_url: https://github.com/tidymass/masscleaner
+  git_rev: 7b455325cea4fddb8e54a1b93b9cc16d358f46d4
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.3
+    - r-cli
+    - r-crayon
+    - r-dplyr
+    - r-ggplot2
+    - r-missforest
+    - r-magrittr
+    - r-purrr
+    - r-e1071
+    - r-tibble
+    - r-masstools
+    - r-rstudioapi
+    - r-robust
+    - r-massdataset
+    - bioconductor-biocgenerics
+    - bioconductor-biocparallel
+    - bioconductor-pcamethods
+    - bioconductor-impute
+  run:
+    - r-base>=4.3
+    - r-cli
+    - r-crayon
+    - r-dplyr
+    - r-ggplot2
+    - r-missforest
+    - r-magrittr
+    - r-purrr
+    - r-e1071
+    - r-tibble
+    - r-masstools
+    - r-rstudioapi
+    - r-robust
+    - r-massdataset
+    - bioconductor-biocgenerics
+    - bioconductor-biocparallel
+    - bioconductor-pcamethods
+    - bioconductor-impute
+
+test:
+  commands:
+    - $R -e "library('masscleaner')"           # [not win]
+    - "\"%R%\" -e \"library('masscleaner')\""  # [win]
+
+about:
+  home: https://gitlab.com/tidymass/masscleaner
+  license: GPL-3.0-or-later
+  summary: This package is uesd to do the data cleaning for LC-MS metabolomics data.
+
+extra:
+  recipe-maintainers:
+    - danielnachun

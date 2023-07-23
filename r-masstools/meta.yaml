@@ -1,0 +1,82 @@
+{% set version = "1.0.8" %}
+
+package:
+  name: r-masstools
+  version: {{ version|replace("-", "_") }}
+
+source:
+  git_url: https://github.com/tidymass/masstools
+  git_rev: ad7219732372173d034b6ac36aa3323375fe98c6
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.3
+    - r-dplyr
+    - r-remotes
+    - r-lifecycle
+    - r-magrittr
+    - r-tibble
+    - r-tidyr
+    - r-rstudioapi
+    - r-stringr
+    - r-ggplot2
+    - r-crayon
+    - r-cli
+    - r-purrr
+    - r-plotly
+    - r-pbapply
+    - r-clisymbols
+    - r-httr
+    - r-rvest
+    - r-xml2
+    - bioconductor-biocparallel
+    - bioconductor-msnbase
+    - bioconductor-protgenerics
+    - bioconductor-rdisop
+  run:
+    - r-base>=4.3
+    - r-dplyr
+    - r-remotes
+    - r-lifecycle
+    - r-magrittr
+    - r-tibble
+    - r-tidyr
+    - r-rstudioapi
+    - r-stringr
+    - r-ggplot2
+    - r-crayon
+    - r-cli
+    - r-purrr
+    - r-plotly
+    - r-pbapply
+    - r-clisymbols
+    - r-httr
+    - r-rvest
+    - r-xml2
+    - bioconductor-biocparallel
+    - bioconductor-msnbase
+    - bioconductor-protgenerics
+    - bioconductor-rdisop
+
+test:
+  commands:
+    - $R -e "library('masstools')"           # [not win]
+    - "\"%R%\" -e \"library('masstools')\""  # [win]
+
+about:
+  home: https://gitlab.com/masstools/masstools
+  license: GPL-3.0-or-later
+  summary: This package contains a lot of base functions which can be used for mass spectrometry and metabolomics data processing and analysis.
+
+extra:
+  recipe-maintainers:
+    - danielnachun

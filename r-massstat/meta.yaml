@@ -1,0 +1,84 @@
+{% set version = "1.0.3" %}
+
+package:
+  name: r-massstat
+  version: {{ version|replace("-", "_") }}
+
+source:
+  git_url: https://github.com/tidymass/massstat
+  git_rev: 38d76be88a9b7cf7c84c2aea4f32f7c218573828
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.3
+    - r-cli
+    - r-crayon
+    - r-dplyr
+    - r-ggplot2
+    - r-ggfortify
+    - r-magrittr
+    - r-plyr
+    - r-purrr
+    - r-stringr
+    - r-tibble
+    - r-tidyr
+    - r-masstools
+    - r-massdataset
+    - r-rstudioapi
+    - r-ggrepel
+    - r-fastdummies
+    - r-hmisc
+    - r-tidygraph
+    - r-ggraph
+    - r-extrafont
+    - bioconductor-biocparallel
+    - bioconductor-mixomics
+    - bioconductor-complexheatmap
+  run:
+    - r-base>=4.3
+    - r-cli
+    - r-crayon
+    - r-dplyr
+    - r-ggplot2
+    - r-ggfortify
+    - r-magrittr
+    - r-plyr
+    - r-purrr
+    - r-stringr
+    - r-tibble
+    - r-tidyr
+    - r-masstools
+    - r-massdataset
+    - r-rstudioapi
+    - r-ggrepel
+    - r-fastdummies
+    - r-hmisc
+    - r-tidygraph
+    - r-ggraph
+    - r-extrafont
+    - bioconductor-biocparallel
+    - bioconductor-mixomics
+    - bioconductor-complexheatmap
+
+test:
+  commands:
+    - $R -e "library('massstat')"           # [not win]
+    - "\"%R%\" -e \"library('massstat')\""  # [win]
+
+about:
+  home: https://github.com/tidymass/massstat
+  license: GPL-3.0-or-later
+  summary: This package is used to do statistical analysis for LC-MS based metabolomics data.
+
+extra:
+  recipe-maintainers:
+    - danielnachun

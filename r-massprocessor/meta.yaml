@@ -1,0 +1,78 @@
+{% set version = "1.0.6" %}
+
+package:
+  name: r-massprocessor
+  version: {{ version|replace("-", "_") }}
+
+source:
+  git_url: https://github.com/tidymass/massprocesser
+  git_rev: 4579f98c58a7b32736216dc1e37535bc398cc920
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.3
+    - r-cli
+    - r-crayon
+    - r-dplyr
+    - r-ggplot2
+    - r-magrittr
+    - r-plyr
+    - r-purrr
+    - r-readr
+    - r-readxl
+    - r-plotly
+    - r-stringr
+    - r-tibble
+    - r-masstools
+    - r-rstudioapi
+    - r-massdataset
+    - bioconductor-biocparallel
+    - bioconductor-biobase
+    - bioconductor-msnbase
+    - bioconductor-mzr
+    - bioconductor-xcms
+  run:
+    - r-base>=4.3
+    - r-cli
+    - r-crayon
+    - r-dplyr
+    - r-ggplot2
+    - r-magrittr
+    - r-plyr
+    - r-purrr
+    - r-readr
+    - r-readxl
+    - r-plotly
+    - r-stringr
+    - r-tibble
+    - r-masstools
+    - r-rstudioapi
+    - r-massdataset
+    - bioconductor-biocparallel
+    - bioconductor-biobase
+    - bioconductor-msnbase
+    - bioconductor-mzr
+    - bioconductor-xcms
+
+test:
+  commands:
+    - $R -e "library('massprocesser')"           # [not win]
+    - "\"%R%\" -e \"library('massprocesser')\""  # [win]
+
+about:
+  home: https://github.com/tidymass/massprocesser
+  license: GPL-3.0-or-later
+  summary: This package is used to do raw data processing of LC-MS untargeted metabolomics processing.
+
+extra:
+  recipe-maintainers:
+    - danielnachun

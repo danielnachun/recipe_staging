@@ -1,0 +1,70 @@
+{% set version = "1.0.5" %}
+
+package:
+  name: r-massqc
+  version: {{ version|replace("-", "_") }}
+
+source:
+  git_url: https://github.com/tidymass/massqc
+  git_rev: c769f4af90f238fb2512d3a5e32106772741e471
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.3
+    - r-cli
+    - r-crayon
+    - r-dplyr
+    - r-ggplot2
+    - r-ggsci
+    - r-ggfortify
+    - r-magrittr
+    - r-purrr
+    - r-patchwork
+    - r-tibble
+    - r-tidyr
+    - r-masstools
+    - r-massdataset
+    - r-rstudioapi
+    - r-ggrepel
+    - r-ggcorrplot
+  run:
+    - r-base>=4.3
+    - r-cli
+    - r-crayon
+    - r-dplyr
+    - r-ggplot2
+    - r-ggsci
+    - r-ggfortify
+    - r-magrittr
+    - r-purrr
+    - r-patchwork
+    - r-tibble
+    - r-tidyr
+    - r-masstools
+    - r-massdataset
+    - r-rstudioapi
+    - r-ggrepel
+    - r-ggcorrplot
+
+test:
+  commands:
+    - $R -e "library('massqc')"           # [not win]
+    - "\"%R%\" -e \"library('massqc')\""  # [win]
+
+about:
+  home: https://gitlab.com/masstools/massqc
+  license: GPL-2.0-or-later
+  summary: This package is used to do quality control and assessment of untargeted metabolomics data.
+
+extra:
+  recipe-maintainers:
+    - danielnachun
