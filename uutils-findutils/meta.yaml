@@ -1,0 +1,36 @@
+{% set name = "uutils-findutils" %}
+{% set version = "0.3.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/uutils/findutils/archive/refs/tags/{{ version }}.tar.gz
+  sha256: 0ea77daf31b9740cfecb06a9dbd06fcd50bc0ba55592a12b9f9b74f3302f5c41
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+    - clangdev #[linux]
+
+test:
+  commands:
+    - ufind --help
+    - uxargs --help
+
+about:
+  home: https://github.com/uutils/findutils
+  license: MIT
+  license_file: LICENSE
+  summary: Cross-platform Rust rewrite of the GNU findutils
+  dev_url: https://github.com/uutils/findutils
+
+extra:
+  recipe-maintainers:
+    - danielnachun
