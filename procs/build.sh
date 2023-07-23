@@ -9,9 +9,9 @@ cargo-bundle-licenses \
 # build statically linked binary with Rust
 cargo install --locked --root ${PREFIX} --path .
 
-procs --completion bash
-procs --completion fish
-procs --completion zsh
+procs --gen-completion bash
+procs --gen-completion fish
+procs --gen-completion zsh
 mkdir -p ${PREFIX}/etc/bash_completion.d
 mkdir -p ${PREFIX}/share/fish/vendor_completions.d
 mkdir -p ${PREFIX}/share/zsh/site-functions
