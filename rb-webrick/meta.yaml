@@ -1,0 +1,37 @@
+{% set name = "webrick" %}
+{% set version = "1.7.0" %}
+
+package:
+  name: "rb-{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://rubygems.org/downloads/{{ name }}-{{ version }}.gem"
+  sha256: 87e9b8e39947b7925338a5eb55427b11ce1f2b25a3645770ec9f39d8ebdb8cb4
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: BSD-2-Clause
+  summary: "HTTP server toolkit"
+  dev_url: https://github.com/ruby/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
