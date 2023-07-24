@@ -1,0 +1,44 @@
+{% set version = "1.0" %}
+
+package:
+  name: r-mraid
+  version: {{ version|replace("-", "_") }}
+
+source:
+  git_url: https://github.com/yuanzhongshang/MRAID
+  git_rev: 8abfb1ed4425c3ccfdc1566ae7516468cd8bc774
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+    - r-rcpp
+    - r-rcpparmadillo
+    - r-rcppdist
+  run:
+    - r-base>=4.2
+    - r-rcpp
+    - r-rcpparmadillo
+    - r-rcppdist
+
+test:
+  commands:
+    - $R -e "library('MRAID')"           # [not win]
+    - "\"%R%\" -e \"library('MRAID')\""  # [win]
+
+about:
+  home: https://github.com/yuanzhongshang/MRAID
+  license: GPL-3.0-or-later
+  summary: Mendelian Randomization with Automated Instrument Determination
+
+extra:
+  recipe-maintainers:
+    - danielnachun
