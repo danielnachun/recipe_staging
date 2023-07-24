@@ -1,0 +1,36 @@
+{% set name = "security" %}
+{% set version = "0.1.5" %}
+
+package:
+  name: "rb-{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://rubygems.org/downloads/{{ name }}-{{ version }}.gem"
+  sha256: 3a977a0eca7706e804c96db0dd9619e0a94969fe3aac9680fcfc2bf9b8a833b7
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/security
+  license: MIT
+  summary: "Interact with the macOS Keychain"
+
+extra:
+  recipe-maintainers:
+    - danielnachun
