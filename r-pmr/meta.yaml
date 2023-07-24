@@ -1,0 +1,46 @@
+{% set version = "1.0" %}
+
+package:
+  name: r-pmr
+  version: {{ version|replace("-", "_") }}
+
+source:
+  git_url: https://github.com/yuanzhongshang/PMR
+  git_rev: 7e49f14f41c92cee9e38165c8e2d2d1578890bd8
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+    - r-rcpp
+    - r-rcpparmadillo
+    - r-compquadform
+    - r-pdsce
+  run:
+    - r-base>=4.2
+    - r-rcpp
+    - r-rcpparmadillo
+    - r-compquadform
+    - r-pdsce
+
+test:
+  commands:
+    - $R -e "library('PMR')"           # [not win]
+    - "\"%R%\" -e \"library('PMR')\""  # [win]
+
+about:
+  home: https://github.com/yuanzhongshang/PMR
+  license: GPL-3.0-or-later
+  summary: Probabilistic two sample mendelian randomization
+
+extra:
+  recipe-maintainers:
+    - danielnachun
