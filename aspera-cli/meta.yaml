@@ -19,13 +19,13 @@ requirements:
   build:
     - unzip
   host:
-    - rb-execjs=2.8.1
+    - rb-execjs
     - rb-jwt
     - rb-net-ssh
     - rb-ruby-progressbar
-    - rb-rubyzip=2.3.2
+    - rb-rubyzip
     - rb-security
-    - rb-terminal-table=1.8.0
+    - rb-terminal-table
     - rb-tty-spinner
     - rb-webrick
     - rb-websocket
@@ -33,13 +33,13 @@ requirements:
     - rb-xml-simple
     - ruby=3.2
   run:
-    - rb-execjs>=2.8.1
+    - rb-execjs
     - rb-jwt
     - rb-net-ssh
     - rb-ruby-progressbar
-    - rb-rubyzip>=2.3.2
+    - rb-rubyzip
     - rb-security
-    - rb-terminal-table=1.8.0
+    - rb-terminal-table
     - rb-tty-spinner
     - rb-webrick
     - rb-websocket
