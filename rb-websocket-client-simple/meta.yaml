@@ -1,0 +1,41 @@
+{% set name = "websocket-client-simple" %}
+{% set version = "0.6.0" %}
+
+package:
+  name: "rb-{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://rubygems.org/downloads/{{ name }}-{{ version }}.gem"
+  sha256: c282dbe3cab9463a6e65d52695af6a971008d31daa04f1535aac00acf70d4510
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - rb-event_emitter
+    - rb-websocket
+    - ruby=3.2
+  run:
+    - rb-event_emitter
+    - rb-websocket
+    - ruby>=3.2
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  summary: "Simple WebSocket Client for Ruby"
+  dev_url: https://github.com/ruby-jp/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
