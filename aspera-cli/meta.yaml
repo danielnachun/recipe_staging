@@ -31,7 +31,7 @@ requirements:
     - rb-websocket
     - rb-websocket-client-simple
     - rb-xml-simple
-    - ruby=3.1.2
+    - ruby=3.2
   run:
     - rb-execjs>=2.8.1
     - rb-jwt
@@ -45,7 +45,7 @@ requirements:
     - rb-websocket
     - rb-websocket-client-simple
     - rb-xml-simple
-    - ruby>=3.1.2
+    - ruby>=3.2
 
 test:
   commands:
