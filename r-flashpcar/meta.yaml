@@ -18,14 +18,8 @@ build:
 requirements:
   build:
     - cross-r-base {{ r_base }}  # [build_platform != target_platform]
-    - r-abind
-    - r-bh
-    - r-ggplot2
-    - r-rcpp
-    - r-rcppeigen
-    - r-rspectra
   host:
-    - r-base=4.2.3
+    - r-base=4.2
     - r-abind
     - r-bh
     - r-ggplot2
@@ -49,7 +43,6 @@ test:
 about:
   home: https://github.com/gabraham/flashpca
   license: GPL-3.0-or-later
-  license_family: GPL
   license_file: LICENSE
   summary: Fast Principal Component Analysis of Large-Scale Genome-Wide Data
 
