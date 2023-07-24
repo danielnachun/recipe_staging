@@ -15,70 +15,31 @@ source:
 
 build:
   merge_build_host: True  # [win]
-  # If this is a new build for the same version, increment the build number.
   number: 0
-  # no skip
-
-  # This is required to make R link correctly on Linux.
+  noarch: generic
   rpaths:
     - lib/R/lib/
     - lib/
 
-# Suggests: metafor, meta, rmeta, nlme, MASS, dlnm
 requirements:
   build:
     - {{ posix }}zip               # [win]
-
   host:
-    - r-base =4.2.3
+    - r-base =4.2
     - r-mixmeta
-
   run:
     - r-base >=4.2
     - r-mixmeta
 
 test:
   commands:
-    # You can put additional test commands to be run here.
     - $R -e "library('mvmeta')"           # [not win]
     - "\"%R%\" -e \"library('mvmeta')\""  # [win]
 
-  # You can also put a file called run_test.py, run_test.sh, or run_test.bat
-  # in the recipe that will be run at test time.
-
-  # requires:
-    # Put any additional test requirements here.
-
 about:
   home: http://www.ag-myresearch.com/package-mvmeta
-  license: GPL-2
+  license: GPL-2.0-or-later
   summary: Collection of functions to perform fixed and random-effects multivariate and univariate
     meta-analysis and meta-regression.
-  license_family: GPL2
   license_file:
     - '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2'
-
-# The original CRAN metadata for this package was:
-
-# Package: mvmeta
-# Type: Package
-# Title: Multivariate and Univariate Meta-Analysis and Meta-Regression
-# Version: 1.0.3
-# Date: 2019-12-10
-# Author: Antonio Gasparrini
-# Maintainer: Antonio Gasparrini <antonio.gasparrini@lshtm.ac.uk>
-# Depends: R (>= 2.13.0)
-# Imports: mixmeta, stats, graphics, grDevices, utils
-# Suggests: metafor, meta, rmeta, nlme, MASS, dlnm
-# Description: Collection of functions to perform fixed and random-effects multivariate and univariate meta-analysis and meta-regression.
-# URL: http://www.ag-myresearch.com/package-mvmeta
-# License: GPL (>= 2)
-# LazyData: yes
-# NeedsCompilation: no
-# Packaged: 2019-12-10 11:26:34 UTC; emsuagas
-# Repository: CRAN
-# Date/Publication: 2019-12-10 13:20:02 UTC
-
-# See
-# https://docs.conda.io/projects/conda-build for
-# more information about meta.yaml
