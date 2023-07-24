@@ -11,6 +11,7 @@ source:
 build:
   merge_build_host: true  # [win]
   number: 0
+  noarch: generic
   rpaths:
     - lib/R/lib/
     - lib/
@@ -18,19 +19,8 @@ build:
 requirements:
   build:
     - cross-r-base {{ r_base }}  # [build_platform != target_platform]
-    - r-abind
-    - r-ashr
-    - r-cowplot
-    - r-ggplot2
-    - r-ggrepel
-    - r-mashr
-    - r-matrixstats
-    - r-mvtnorm
-    - r-progress
-    - r-r6
-    - r-susier
   host:
-    - r-base=4.2.3
+    - r-base=4.2
     - r-abind
     - r-ashr
     - r-cowplot
@@ -64,7 +54,6 @@ test:
 about:
   home: https://github.com/stephenslab/mvsusier
   license: OTHER
-  license_family: OTHER
   license_file: LICENSE
   summary: Implements a multivariate generalization of the "Sum of
           Single Effects" (SuSiE) model for variable selection in multivariate
