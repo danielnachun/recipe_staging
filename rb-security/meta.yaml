@@ -27,7 +27,7 @@ test:
     - ruby -r {{ name }} -e 'exit 0'
 
 about:
-  home: https://rubygems.org/gems/security
+  home: https://rubygems.org/gems/{{ name }}
   license: MIT
   summary: "Interact with the macOS Keychain"
 
