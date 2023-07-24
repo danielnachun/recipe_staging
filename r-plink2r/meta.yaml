@@ -1,0 +1,43 @@
+{% set version = "1.1" %}
+
+package:
+  name: r-plink2r
+  version: {{ version|replace("-", "_") }}
+
+source:
+  git_url: https://github.com/gabraham/plink2R
+  git_rev: d74be015e8f54d662b96c6c2a52a614746f9030d
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+    - r-rcpp
+    - r-rcppeigen
+  run:
+    - r-base>=4.2
+    - r-rcpp
+    - r-rcppeigen
+
+test:
+  commands:
+    - $R -e "library('plink2R')"           # [not win]
+    - "\"%R%\" -e \"library('plink2R')\""  # [win]
+
+about:
+  home: https://github.com/gabraham/plink2R
+  license: Unspecified
+  summary: R package to read in plink files
+
+extra:
+  recipe-maintainers:
+    - danielnachun
