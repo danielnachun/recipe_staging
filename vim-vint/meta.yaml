@@ -1,0 +1,74 @@
+{% set name = "vim-vint" %}
+{% set version = "0.4a3" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: c6c03d9abd1dc21bbe2cf9c2b9945d1c096fb551d4bf5238a14af927ef56aaa2
+
+build:
+  number: 0
+  entry_points:
+    - vint = vint:main
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - ansicolor >=0.2.4
+    - chardet >=2.3.0
+    - enum34 >=1.0.4
+    - pathlib >=1.0.1
+    - pip
+    - python
+    - pyyaml >=3.11
+    - setuptools >=36.2.2
+    - typing >=3.6.2
+  run:
+    - ansicolor >=0.2.4
+    - chardet >=2.3.0
+    - enum34 >=1.0.4
+    - pathlib >=1.0.1
+    - python
+    - pyyaml >=3.11
+    - setuptools >=36.2.2
+    - typing >=3.6.2
+
+test:
+  imports:
+    - vint
+    - vint._bundles
+    - vint.ast
+    - vint.ast.dictionary
+    - vint.ast.plugin
+    - vint.ast.plugin.scope_plugin
+    - vint.compat
+    - vint.compat.itertools
+    - vint.compat.unittest
+    - vint.encodings
+    - vint.linting
+    - vint.linting.config
+    - vint.linting.formatter
+    - vint.linting.policy
+    - vint.linting.policy.reference
+    - vint.utils
+  commands:
+    - vint --help
+  requires:
+    - pytest
+    - pytest-cov
+
+about:
+  home: "https://github.com/Kuniwak/vint"
+  license: MIT
+  license_family: MIT
+  license_file: 
+  summary: "Lint tool for Vim script Language"
+  doc_url: 
+  dev_url: 
+
+extra:
+  recipe-maintainers:
+    - your-github-id-here
