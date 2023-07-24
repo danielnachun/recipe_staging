@@ -37,7 +37,7 @@ requirements:
     - r-truncnorm
     - r-trust
   run:
-    - r-base>4.2
+    - r-base>=4.2
     - r-ashr
     - r-deconvolver
     - r-dplyr
