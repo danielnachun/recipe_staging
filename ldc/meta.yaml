@@ -1,0 +1,52 @@
+{% set name = "ldc" %}
+{% set version = "1.33.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/ldc-developers/ldc/releases/download/v{{ version }}/ldc-{{ version }}-src.tar.gz  # [unix]
+  sha256: 834c1b08c5f5b3a98f9efbaf8632f0d377d17dac1c1710e483c9ee684658c3a8  # [unix]
+
+build:
+  number: 0
+  skip: true  # [win and vc<14]
+
+requirements:
+  build:
+    - {{ compiler('c') }}        # [unix]
+    - {{ compiler('cxx') }}      # [unix]
+    - git                        # [unix]
+    - cmake                      # [unix]
+    - make                       # [unix]
+    - ninja                      # [unix]
+    - 7za                        # [win]
+  host:
+    - libconfig                  # [unix]
+    - libedit                    # [linux]
+    - ncurses                    # [linux]
+    - curl                       # [unix]
+    - clangdev =15          # [unix]
+    - llvmdev =15                # [unix]
+    - llvm =15                      # [unix]
+
+test:
+  commands:
+    - ldc2 --version
+
+about:
+  home: https://github.com/ldc-developers/ldc
+  license: BSD, MIT, LDC
+  license_file: LICENSE
+  summary: The LLVM-based D Compiler
+
+  description: |
+    The LDC project provides a portable D programming language compiler with modern optimization and code generation capabilities.
+    The compiler uses the official DMD frontend to support the latest version of D2, and relies on the LLVM Core libraries for code generation.
+  doc_url: https://wiki.dlang.org/LDC
+  dev_url: https://github.com/ldc-developers/ldc
+
+extra:
+  recipe-maintainers:
+    - brainstorm
