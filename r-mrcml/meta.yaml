@@ -1,0 +1,40 @@
+{% set version = "0.0.0.9000" %}
+
+package:
+  name: r-mrcml
+  version: {{ version|replace("-", "_") }}
+
+source:
+  git_url: https://github.com/xue-hr/MRcML
+  git_rev: c2642094935db99632f243302d1e6361a7555f22
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  noarch: generic
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+  run:
+    - r-base>=4.2
+
+test:
+  commands:
+    - $R -e "library('MRcML')"           # [not win]
+    - "\"%R%\" -e \"library('MRcML')\""  # [win]
+
+about:
+  home: https://github.com/xue-hr/MRcML
+  license: MIT
+  license_file: LICENSE
+  summary: R Package applying MRcML methods
+
+extra:
+  recipe-maintainers:
+    - danielnachun
