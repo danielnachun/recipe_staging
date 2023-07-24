@@ -11,6 +11,7 @@ source:
 build:
   merge_build_host: true  # [win]
   number: 0
+  noarch: generic
   rpaths:
     - lib/R/lib/
     - lib/
@@ -18,15 +19,8 @@ build:
 requirements:
   build:
     - cross-r-base {{ r_base }}  # [build_platform != target_platform]
-    - r-abind
-    - r-ashr
-    - r-mixsqp
-    - r-mashr
-    - r-matrixstats
-    - r-mvtnorm
-    - r-susif.alpha
   host:
-    - r-base=4.2.3
+    - r-base=4.2
     - r-abind
     - r-ashr
     - r-mixsqp
@@ -52,7 +46,6 @@ test:
 about:
   home: https://github.com/william-denault/mvf.susie.alpha
   license: OTHER
-  license_family: OTHER
   summary: Multivariate Sum of Single Functions
 
 extra:
