@@ -1,0 +1,76 @@
+{% set version = '1.2.1' %}
+
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
+
+package:
+  name: r-tca
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url:
+    - {{ cran_mirror }}/src/contrib/TCA_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/TCA/TCA_{{ version }}.tar.gz
+  sha256: 8bd3ab276b966802b0022cccefead65d2c3f85ef43e775ff629b907c2ad0d7bf
+
+build:
+  merge_build_host: True  # [win]
+  number: 0
+  noarch: generic
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ posix }}zip               # [win]
+  host:
+    - r-base=4.2.2
+    - r-matrix
+    - r-config
+    - r-data.table
+    - r-futile.logger
+    - r-gmodels
+    - r-matrixstats
+    - r-matrixcalc
+    - r-nloptr
+    - r-pbapply
+    - r-pracma
+    - r-quadprog
+    - r-rsvd
+  run:
+    - r-base>=4.2
+    - r-matrix
+    - r-config
+    - r-data.table
+    - r-futile.logger
+    - r-gmodels
+    - r-matrixstats
+    - r-matrixcalc
+    - r-nloptr
+    - r-pbapply
+    - r-pracma
+    - r-quadprog
+    - r-rsvd
+
+test:
+  commands:
+    - $R -e "library('TCA')"           # [not win]
+    - "\"%R%\" -e \"library('TCA')\""  # [win]
+
+about:
+  home: https://www.nature.com/articles/s41467-019-11052-9
+  license: GPL-3.0-or-later
+  summary: Tensor Composition Analysis (TCA) allows the deconvolution of two-dimensional data
+    (features by observations) coming from a mixture of heterogeneous sources into a
+    three-dimensional matrix of signals (features by observations by sources). The TCA
+    framework further allows to test the features in the data for different statistical
+    relations with an outcome of interest while modeling source-specific effects; particularly,
+    it allows to look for statistical relations between source-specific signals and
+    an outcome. For example, TCA can deconvolve bulk tissue-level DNA methylation data
+    (methylation sites by individuals) into a three-dimensional tensor of cell-type-specific
+    methylation levels for each individual (i.e. methylation sites by individuals by
+    cell types) and it allows to detect cell-type-specific statistical relations (associations)
+    with phenotypes. For more details see Rahmani et al. (2019) <DOI:10.1038/s41467-019-11052-9>.
+  license_file:
+    - '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3'
