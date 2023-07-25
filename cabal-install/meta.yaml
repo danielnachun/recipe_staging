@@ -1,0 +1,47 @@
+{% set name = "cabal-install" %}
+{% set version = "3.10.2.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  - url: https://hackage.haskell.org/package/{{ name }}-{{ version }}/{{ name }}-{{ version }}.tar.gz
+    sha256: d53620c5f72d40d7f225af03f9fe5d7dc4dc1e5b4e5297bace968970859f8244
+  - url: https://downloads.haskell.org/~cabal/{{ name }}-3.10.2.0/{{ name }}-3.10.2.0-x86_64-linux-centos7.tar.xz  # [build_platform == "linux-64"]
+    sha256: cfcdab399380dec7fedda55898bff975ac30b5d5d579433cbf8773b17c15f410  # [build_platform == "linux-64"]
+  - url: https://downloads.haskell.org/~cabal/{{ name }}-3.10.2.0/{{ name }}-3.10.2.0-x86_64-darwin.tar.xz  # [build_platform == "osx-64"]
+    sha256: cd64f2a8f476d0f320945105303c982448ca1379ff54b8625b79fb982b551d90  # [build_platform == "osx-64"]
+       
+build:
+  number: 0
+  skip: true  # [not unix]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - ghc
+    - zlib <1.3
+  host:
+    - libiconv  # [osx]
+    - zlib <1.3
+  run:
+    - libiconv  # [osx]
+    - libzlib <1.3
+
+test:
+  commands:
+    - cabal v2-install --help
+
+about:
+  home: https://www.haskell.org/cabal
+  license: BSD-3-Clause
+  license_file: LICENSE
+  summary: Command-line interface for Cabal and Hackage
+  doc_url: https://www.haskell.org/cabal
+  dev_url: https://github.com/haskell/cabal
+
+extra:
+  recipe-maintainers:
+    - danielnachun
