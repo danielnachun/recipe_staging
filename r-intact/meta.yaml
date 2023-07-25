@@ -7,7 +7,7 @@ package:
 
 source:
   git_url: https://github.com/jokamoto97/INTACT
-  git_rev: 06cffcf1fef44b70347af7e3ef5bd0a6b547c5e2
+  git_rev: 8bee80f6562eca2ae1f23e6ab133401c51174f6b
 
 build:
   number: 0
