@@ -1,0 +1,81 @@
+{% set version = "1.0.19" %}
+
+package:
+  name: r-massdataset
+  version: {{ version|replace("-", "_") }}
+
+source:
+  git_url: https://github.com/tidymass/massdataset
+  git_rev: fb07111c086961b571f567059e6673d12d838df5
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  noarch: generic
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base==4.2
+    - r-dplyr
+    - r-magrittr
+    - r-tibble
+    - r-stringr
+    - r-rstudioapi
+    - r-ggplot2
+    - r-openxlsx
+    - r-crayon
+    - r-cli
+    - r-plotly
+    - r-purrr
+    - r-readr
+    - r-rlang
+    - r-masstools
+    - bioconductor-complexheatmap
+    - r-ggplotify
+    - r-tidyselect
+    - r-vctrs
+    - r-tidyr
+    - bioconductor-summarizedexperiment
+    - bioconductor-s4vectors
+  run:
+    - r-base>=4.2
+    - r-dplyr
+    - r-magrittr
+    - r-tibble
+    - r-stringr
+    - r-rstudioapi
+    - r-ggplot2
+    - r-openxlsx
+    - r-crayon
+    - r-cli
+    - r-plotly
+    - r-purrr
+    - r-readr
+    - r-rlang
+    - r-masstools
+    - bioconductor-complexheatmap
+    - r-ggplotify
+    - r-tidyselect
+    - r-vctrs
+    - r-tidyr
+    - bioconductor-summarizedexperiment
+    - bioconductor-s4vectors
+
+test:
+  commands:
+    - $R -e "library('massdataset')"           # [not win]
+    - "\"%R%\" -e \"library('massdataset')\""  # [win]
+
+about:
+  home: https://gitlab.com/tidymass/massdataset
+  license: GPL-3.0-or-later
+  summary: massdata provide a uniform and stanford data structure of mass spectrometry experimental data.
+
+extra:
+  recipe-maintainers:
+    - danielnachun

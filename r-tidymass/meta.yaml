@@ -1,0 +1,71 @@
+{% set version = "1.0.8" %}
+
+package:
+  name: r-tidymass
+  version: {{ version|replace("-", "_") }}
+
+source:
+  git_url: https://github.com/tidymass/tidymass
+  git_rev: 7e5668e0b75226fd114d040fd7f5bb9f97478e78
+
+build:
+  merge_build_host: true  # [win]
+  noarch: generic
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+    - r-cli
+    - r-crayon
+    - r-dplyr
+    - r-purrr
+    - r-stringr
+    - r-magrittr
+    - r-remotes
+    - r-rstudioapi
+    - r-masstools
+    - r-massdataset
+    - r-massprocessor
+    - r-masscleaner
+    - r-massstat
+    - r-metpath
+    - r-metid
+    - r-massqc
+  run:
+    - r-base>=4.2
+    - r-cli
+    - r-crayon
+    - r-dplyr
+    - r-purrr
+    - r-stringr
+    - r-magrittr
+    - r-remotes
+    - r-rstudioapi
+    - r-masstools
+    - r-massdataset
+    - r-massprocessor
+    - r-masscleaner
+    - r-massstat
+    - r-metpath
+    - r-metid
+    - r-massqc
+
+test:
+  commands:
+    - $R -e "library('tidymass')"           # [not win]
+    - "\"%R%\" -e \"library('tidymass')\""  # [win]
+
+about:
+  home: https://github.com/tidymass/tidymass
+  license: MIT
+  summary: The 'tidymass' package is a collection of several packages for Mass Spectrometry data processing and analysis.
+
+extra:
+  recipe-maintainers:
+    - danielnachun
