@@ -1,0 +1,20 @@
+From 5d5f89eb54ae93bfd9f9a9e5fc2060f6abee5746 Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Thu, 18 Jan 2024 13:13:39 -0800
+Subject: [PATCH] fix ghc-9.8 build
+
+---
+ cabal.project | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/cabal.project b/cabal.project
+index e732b752..2697df38 100644
+--- a/cabal.project
++++ b/cabal.project
+@@ -1 +1,3 @@
+ packages: ./dhall ./dhall-bash ./dhall-json ./dhall-yaml ./dhall-nix ./dhall-docs ./dhall-openapi ./dhall-nixpkgs ./dhall-csv ./dhall-toml ./dhall-lsp-server
++package *
++    ghc-options: -XDuplicateRecordFields
+-- 
+2.43.0
+
