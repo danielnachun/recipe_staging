@@ -9,7 +9,7 @@ source:
   - url: https://launch.basespace.illumina.com/CLI/{{ version }}/amd64-linux/bs  # [linux]
     sha256: 9c4b244e412484fdb95f868b1242b65c50c3927babe761522728e847d3796753  # [linux]
   - url: https://launch.basespace.illumina.com/CLI/{{ version }}/amd64-osx/bs  # [osx]
-    sha256: 9c4b244e412484fdb95f868b1242b65c50c3927babe761522728e847d3796753  # [osx]
+    sha256: baf0a6fcee2bb46b6148405e8bc983c0cc7ea7ebb95ca6d701fadaef9a558b7c  # [osx]
 
 build:
   number: 0
