@@ -67,14 +67,6 @@ else
     install -m 755 dmd/generated/osx/release/64/dmd ${PREFIX}/bin/dmd
 fi
 
-if [[ ${target_platform} =~ .*linux.* ]]; then
-    cp -r phobos/generated/linux/release/64/libphobos2.* ${PREFIX}/lib
-    cp -r dmd/generated/linux/release/64/libdruntime.a ${PREFIX}/lib
-else
-    cp -r phobos/generated/osx/release/64/libphobos2.* ${PREFIX}/lib
-    cp -r dmd/generated/osx/release/64/libdruntime.a ${PREFIX}/lib
-fi
-
 tee ${PREFIX}/etc/dmd.conf <<EOF
         [Environment]
         DFLAGS=-I${PREFIX}/include/dlang/dmd -L-L${PREFIX}/lib
