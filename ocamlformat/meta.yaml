@@ -1,0 +1,39 @@
+{% set name = "ocamlformat" %}
+{% set version = "0.25.0" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/ocaml-ppx/ocamlformat/archive/refs/tags/{{ version }}.tar.gz
+  sha256: 46bff5fdc49481508adc79c93c47fc8c05ec3be46a08d9af9c52340439b352d6
+
+build:
+  number: 0
+  skip: true  # [win]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - gcc # [linux64]
+    - sysroot_linux-64=2.17  # [linux64]
+    - make  # [unix]
+    - m2-make  # [win]
+    - posix  # [win]
+    - opam
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/ocaml-ppx/{{ name }}
+  license: MIT
+  license_file: LICENSE.md
+  summary: Auto-formatter for OCaml code
+  dev_url: https://github.com/ocaml-ppx/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
