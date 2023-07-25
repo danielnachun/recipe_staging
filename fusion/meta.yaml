@@ -14,8 +14,6 @@ build:
   skip: True  # [not linux]
 
 requirements:
-  build:
-    - sed
   host:
     - r-plink2r
     - r-optparse
