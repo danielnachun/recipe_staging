@@ -1,0 +1,41 @@
+{% set version = "0.91" %}
+
+package:
+  name: r-acat
+  version: {{ version|replace("-", "_") }}
+
+source:
+  git_url: https://github.com/yaowuliu/ACAT
+  git_rev: e737d7d188ba6731800c5e6971539ca6a3888405
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  noarch: generic
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+    - r-matrix
+  run:
+    - r-base>=4.2
+    - r-matrix
+
+test:
+  commands:
+    - $R -e "library('ACAT')"
+
+about:
+  home: https://github.com/yaowuliu/ACAT
+  license: GPL-3.0-or-later
+  license_family: GPL
+  summary: Aggregated Cauchy Association Test
+
+extra:
+  recipe-maintainers:
+    - danielnachun
