@@ -1,0 +1,50 @@
+{% set name = "comby" %}
+{% set version = "1.8.1" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/comby-tools/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: 04d51cf742bbbf5e5fda064a710be44537fac49bff598d0e9762a3a799d666e2
+
+build:
+  number: 0
+  skip: true  # [win]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - gcc # [linux64]
+    - sysroot_linux-64=2.17  # [linux64]
+    - make  # [unix]
+    - m2-make  # [win]
+    - posix  # [win]
+    - autoconf
+    - m4
+    - opam
+    - unzip
+  host:
+    - gmp
+    - libev
+    - pcre
+    - sqlite
+    - zlib
+  run:
+    - libzlib
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://comby.dev
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Tool for changing code across many languages
+  dev_url: https://github.com/comby-tools/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
