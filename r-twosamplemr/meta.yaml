@@ -1,0 +1,88 @@
+{% set version = "0.5.6" %}
+
+package:
+  name: r-twosamplemr
+  version: {{ version|replace("-", "_") }}
+
+source:
+  git_url: https://github.com/MRCIEU/TwoSampleMR
+  git_rev: c174107cfd9ba47cf2f780849a263f37ac472a0e
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  noarch: generic
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+    - r-car
+    - r-cowplot
+    - r-data.table
+    - r-dplyr
+    - r-ggplot2
+    - r-glmnet
+    - r-gridExtra
+    - r-gtable
+    - r-ieugwasr
+    - r-knitr
+    - r-lattice
+    - r-magrittr
+    - r-mass
+    - r-mendelianrandomization
+    - r-meta
+    - r-mrraps
+    - r-mrmix
+    - r-mrpresso
+    - r-pbapply
+    - r-plyr
+    - r-psych
+    - r-radialmr
+    - r-reshape2
+    - r-rmarkdown
+  run:
+    - r-base>=4.2
+    - r-car
+    - r-cowplot
+    - r-data.table
+    - r-dplyr
+    - r-ggplot2
+    - r-glmnet
+    - r-gridExtra
+    - r-gtable
+    - r-ieugwasr
+    - r-knitr
+    - r-lattice
+    - r-magrittr
+    - r-mass
+    - r-mendelianrandomization
+    - r-meta
+    - r-mrraps
+    - r-mrmix
+    - r-mrpresso
+    - r-pbapply
+    - r-plyr
+    - r-psych
+    - r-radialmr
+    - r-reshape2
+    - r-rmarkdown
+
+test:
+  commands:
+    - $R -e "library('TwoSampleMR')"           # [not win]
+    - "\"%R%\" -e \"library('TwoSampleMR')\""  # [win]
+
+about:
+  home: https://github.com/MRCIEU/TwoSampleMR
+  license: MIT
+  license_file: LICENSE
+  summary: Two Sample MR Functions and Interface to MR Base Database
+
+extra:
+  recipe-maintainers:
+    - danielnachun

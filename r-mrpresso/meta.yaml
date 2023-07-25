@@ -1,0 +1,39 @@
+{% set version = "1.0" %}
+
+package:
+  name: r-mrpresso
+  version: {{ version|replace("-", "_") }}
+
+source:
+  git_url: https://github.com/rondolab/MR-PRESSO
+  git_rev: cece763b47e59763a7916974de43c7cb93843e41
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  noarch: generic
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+  run:
+    - r-base>=4.2
+
+test:
+  commands:
+    - $R -e "library('MRPRESSO')"           # [not win]
+    - "\"%R%\" -e \"library('MRPRESSO')\""  # [win]
+
+about:
+  home: https://github.com/rondolab/MR-PRESSO
+  license: Unspecified
+  summary: Mendelian Randomization Pleiotropy RESidual Sum and Outlier
+
+extra:
+  recipe-maintainers:
+    - danielnachun
