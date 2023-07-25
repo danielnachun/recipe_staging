@@ -5,7 +5,7 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  url: https://github.com/jean997/cause/archive/refs/tags/v1.2.0.tar.gz
+  url: https://github.com/jean997/cause/archive/refs/tags/v{{ version }}.tar.gz
   sha256: c67340b3a68b5029d9ce3644a9dab5f416dd732bd4a4fec6da6314e5cc631cdf
 
 build:
