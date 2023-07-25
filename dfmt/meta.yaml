@@ -1,0 +1,34 @@
+{% set name = "dfmt" %}
+{% set version = "0.15.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/dlang-community/{{ name }}.git 
+  git_rev: v{{ version }}
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - ldc
+    - make
+
+test:
+  commands:
+    - test -f $PREFIX/bin/dfmt
+
+about:
+  home: https://github.com/dlang-community/{{ name }}
+  license: BSL-1.0
+  license_file: LICENSE.txt
+  summary: Formatter for D source code
+  dev_url: https://github.com/dlang-community/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
