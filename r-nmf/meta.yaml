@@ -32,7 +32,7 @@ requirements:
     - {{ posix }}coreutils         # [win]
     - {{ posix }}zip               # [win]
   host:
-    - r-base=4.2.2
+    - r-base=4.2
     - bioconductor-biobase
     - r-biocmanager
     - r-rcolorbrewer
