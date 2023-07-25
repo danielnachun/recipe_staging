@@ -1,0 +1,63 @@
+diff --git a/runtime/dynlink.c b/runtime/dynlink.c
+index b92d5e3..9f85d24 100644
+--- a/runtime/dynlink.c
++++ b/runtime/dynlink.c
+@@ -82,7 +82,6 @@ CAMLexport char_os * caml_get_stdlib_location(void)
+   char_os * stdlib;
+   stdlib = caml_secure_getenv(T("OCAMLLIB"));
+   if (stdlib == NULL) stdlib = caml_secure_getenv(T("CAMLLIB"));
+-  if (stdlib == NULL) stdlib = OCAML_STDLIB_DIR;
+   return stdlib;
+ }
+ 
+diff --git a/stdlib/Makefile b/stdlib/Makefile
+index ac0ef4c..cd7e20b 100644
+--- a/stdlib/Makefile
++++ b/stdlib/Makefile
+@@ -134,17 +134,12 @@ CAMLHEADERS =\
+ # patterns and $(subst ...) since `camlheader%:` wouldn't match `camlheader`
+ ifeq "$(SHEBANGSCRIPTS)" "true"
+ camlhead%: $(ROOTDIR)/Makefile.config Makefile
+-ifeq "$(LONG_SHEBANG)" "true"
+-	echo '#!/bin/sh' > $@
+-	echo 'exec "$(BINDIR)/ocamlrun$(subst er,,$*)" "$$0" "$$@"' >> $@
+-else
+-	echo '#!$(BINDIR)/ocamlrun$(subst er,,$*)' > $@
+-endif
++	echo '#!/usr/bin/env ocamlrun$(subst er,,$*)' > $@
+ 
+ # TODO This does not take long shebangs into account (since TARGET_BINDIR is not
+ #      yet processed by configure)
+ target_%: $(ROOTDIR)/Makefile.config Makefile
+-	echo '#!$(TARGET_BINDIR)/ocamlrun$(subst camlheader,,$*)' > $@
++	echo '#!/usr/bin/env ocamlrun$(subst camlheader,,$*)' > $@
+ 
+ camlheader_ur: Makefile
+ 	echo '#!' | tr -d '\012' > $@
+diff --git a/tools/ocamlmklib.ml b/tools/ocamlmklib.ml
+index 8a81a45..c8c4cb2 100644
+--- a/tools/ocamlmklib.ml
++++ b/tools/ocamlmklib.ml
+@@ -30,8 +30,7 @@ let mklib out files opts =
+ 
+ (* PR#4783: under Windows, don't use absolute paths because we do
+    not know where the binary distribution will be installed. *)
+-let compiler_path name =
+-  if Sys.os_type = "Win32" then name else Filename.concat Config.bindir name
++let compiler_path name = name
+ 
+ let bytecode_objs = ref []  (* .cmo,.cma,.ml,.mli files to pass to ocamlc *)
+ and native_objs = ref []    (* .cmx,.ml,.mli files to pass to ocamlopt *)
+diff --git a/utils/config.mlp b/utils/config.mlp
+index 7e1848f..442bc25 100644
+--- a/utils/config.mlp
++++ b/utils/config.mlp
+@@ -16,7 +16,7 @@
+ 
+ let bindir = "%%BINDIR%%"
+ 
+-let standard_library_default = "%%LIBDIR%%"
++let standard_library_default = (Sys.getenv "OCAML_PREFIX") ^ "/lib/ocaml"
+ 
+ let ccomp_type = "%%CCOMPTYPE%%"
+ let c_compiler = "%%CC%%"
