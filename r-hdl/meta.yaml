@@ -1,0 +1,43 @@
+{% set version = "1.4.0" %}
+
+package:
+  name: r-hdl
+  version: {{ version|replace("-", "_") }}
+
+source:
+  git_url: https://github.com/zhenin/HDL
+  git_rev: d308812f7c0f4f2cbbdcbad825d26c850df9a950
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  noarch: generic
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+    - r-data.table
+    - r-dplyr
+  run:
+    - r-base>=4.2
+    - r-data.table
+    - r-dplyr
+
+test:
+  commands:
+    - $R -e "library('HDL')"           # [not win]
+    - "\"%R%\" -e \"library('HDL')\""  # [win]
+
+about:
+  home: https://github.com/zhenin/HDL
+  license: GPL-3.0-or-later
+  summary: High definition likelihood
+
+extra:
+  recipe-maintainers:
+    - danielnachun
