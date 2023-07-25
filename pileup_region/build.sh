@@ -6,6 +6,7 @@ cargo-bundle-licenses \
     --format yaml \
     --output THIRDPARTY.yml
 
+export CFLAGS="-Wno-implicit-function-declaration"
 # build statically linked binary with Rust
 cargo install --locked --root ${PREFIX} --path .
 
