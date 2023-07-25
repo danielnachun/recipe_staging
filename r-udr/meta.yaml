@@ -18,11 +18,8 @@ build:
 requirements:
   build:
     - cross-r-base {{ r_base }}  # [build_platform != target_platform]
-    - r-mvtnorm
-    - r-rcpp
-    - r-rcpparmadillo
   host:
-    - r-base=4.2.3
+    - r-base=4.2
     - r-mvtnorm
     - r-rcpp
     - r-rcpparmadillo
@@ -40,7 +37,6 @@ test:
 about:
   home: https://github.com/stephenslab/udr
   license: OTHER
-  license_family: OTHER
   license_file: LICENSE
   summary: R package implementing empirical Bayes methods for multivariate normal means.
 
