@@ -1,0 +1,30 @@
+{% set name = "shapeit2" %}
+{% set version = "2.r904" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://mathgen.stats.ox.ac.uk/genetics_software/shapeit/shapeit.v{{ version }}.glibcv2.17.linux.tar.gz
+  sha256: a5c3445c82fa45b1fa604582f003a491ecce8de6316e210be831127da09ea9e6
+
+build:
+  number: 0
+  script:
+    - install -Dm 755 bin/shapeit ${PREFIX}/bin/shapeit
+  skip: true  # [not linux]
+
+test:
+  commands:
+    - shapeit --help
+
+about:
+  home: https://mathgen.stats.ox.ac.uk/genetics_software/shapeit/shapeit.html
+  license: Other
+  license_file: LICENCE
+  summary: Fast and accurate method for estimation of haplotypes (aka phasing) from genotype or sequencing data
+
+extra:
+  recipe-maintainers:
+    - danielnachun
