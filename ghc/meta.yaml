@@ -1,0 +1,70 @@
+{% set name = "ghc" %}
+{% set version = "9.8.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  - url: https://downloads.haskell.org/~ghc/{{ version }}/{{ name }}-{{ version }}-src.tar.xz
+    sha256: b2f8ed6b7f733797a92436f4ff6e088a520913149c9a9be90465b40ad1f20751
+  - url: https://downloads.haskell.org/ghc/9.6.4/ghc-9.6.4-x86_64-centos7-linux.tar.xz  # [build_platform == "linux-64"]
+    folder: binary  # [build_platform == "linux-64"]
+    sha256: 96231c5abcf397996f844e7db30954199eb5b4a407e3b31d6a4ed3ffd75bad2e  # [build_platform == "linux-64"]
+  - url: https://downloads.haskell.org/ghc/9.6.4/ghc-9.6.4-x86_64-apple-darwin.tar.xz  # [build_platform == "osx-64"]
+    folder: binary  # [build_platform == "osx-64"]
+    sha256: b897cbd156690f4e6cc4400f6b9465d610ea228d8527f8bd501210d1b93a4eab  # [build_platform == "osx-64"]
+  - url: https://downloads.haskell.org/~cabal/cabal-install-3.10.2.0/cabal-install-3.10.2.0-x86_64-linux-centos7.tar.xz # [build_platform == "linux-64"]
+    folder: binary/bin  # [build_platform == "linux-64"]
+    sha256: cfcdab399380dec7fedda55898bff975ac30b5d5d579433cbf8773b17c15f410  # [build_platform == "linux-64"]
+  - url: https://downloads.haskell.org/~cabal/cabal-install-3.10.2.0/cabal-install-3.10.2.0-x86_64-darwin.tar.xz   # [build_platform == "osx-64"]
+    folder: binary/bin  # [build_platform == "osx-64"]
+    sha256: cd64f2a8f476d0f320945105303c982448ca1379ff54b8625b79fb982b551d90  # [build_platform == "osx-64"]
+
+build:
+  number: 0
+  skip: true  # [not unix]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - patchelf  # [linux]
+    - gnuconfig
+    - gmp
+    - ncurses
+    - perl
+    - make
+    - automake
+    - autoconf
+    - libtool
+    - sed
+  host:
+    - xz
+    - gmp
+    - ncurses
+    - libffi
+    - cffi
+
+test:
+  requires:
+    - {{ compiler('c') }}
+  files:
+    - hello.hs
+  commands:
+    - ghc --help
+    - ghc hello.hs -o hello
+
+about:
+  home: https://haskell.org/ghc/
+  license: BSD-3-Clause
+  license_file: LICENSE
+  summary: Glorious Glasgow Haskell Compilation System
+  doc_url: https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/
+  dev_url: https://github.com/ghc/ghc
+
+extra:
+  recipe-maintainers:
+    - eggzilla
+    - step21
+    - xhochy
