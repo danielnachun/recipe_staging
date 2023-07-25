@@ -1,0 +1,106 @@
+{% set version = '1.5.0' %}
+
+package:
+  name: r-cellchat
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/sqjin/CellChat/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: c9e31327cbbcf1fec5e6d8a0dfe011ded8e543557107e93dd4a417c4c137d1c6
+
+build:
+  merge_build_host: True  # [win]
+  number: 0
+
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - make
+  host:
+    - bioconductor-biocgenerics
+    - bioconductor-biocneighbors
+    - bioconductor-complexheatmap
+    - r-base=4.2
+    - r-circlize
+    - r-colorspace
+    - r-cowplot
+    - r-expm
+    - r-fnn
+    - r-forcats
+    - r-future
+    - r-future.apply
+    - r-ggalluvial
+    - r-ggnetwork
+    - r-ggpubr
+    - r-ggrepel
+    - r-irlba
+    - r-magrittr
+    - r-matrix
+    - r-nmf=0.24.0
+    - r-patchwork
+    - r-pbapply
+    - r-plyr
+    - r-rcolorbrewer
+    - r-rcpp
+    - r-rcppeigen
+    - r-reshape2
+    - r-reticulate
+    - r-rspectra
+    - r-rtsne
+    - r-shape
+    - r-scales
+    - r-sna
+    - r-stringr
+    - r-svglite
+  run:
+    - bioconductor-biocgenerics
+    - bioconductor-biocneighbors
+    - bioconductor-complexheatmap
+    - r-base>=4.2
+    - r-circlize
+    - r-colorspace
+    - r-cowplot
+    - r-expm
+    - r-fnn
+    - r-forcats
+    - r-future
+    - r-future.apply
+    - r-ggalluvial
+    - r-ggnetwork
+    - r-ggpubr
+    - r-ggrepel
+    - r-irlba
+    - r-magrittr
+    - r-matrix
+    - r-nmf=0.24.0
+    - r-patchwork
+    - r-pbapply
+    - r-plyr
+    - r-rcolorbrewer
+    - r-rcpp
+    - r-rcppeigen
+    - r-reshape2
+    - r-reticulate
+    - r-rspectra
+    - r-rtsne
+    - r-shape
+    - r-scales
+    - r-sna
+    - r-stringr
+    - r-svglite
+
+test:
+  commands:
+    - $R -e "library('CellChat')"
+
+
+about:
+  home: https://www.nature.com/articles/s41467-019-11052-9
+  license: GPL-3.0-or-later
+  summary: an open source R tool that infers, visualizes and analyzes the cell-cell communication networks from scRNA-seq and spatial imaging data.
+  license_file:
+    - '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3'

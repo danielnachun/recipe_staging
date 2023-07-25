@@ -1,0 +1,85 @@
+{% set version = '0.24.0' %}
+
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
+
+package:
+  name: r-nmf
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url:
+    - {{ cran_mirror }}/src/contrib/NMF_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/NMF/NMF_{{ version }}.tar.gz
+  sha256: 481811d35b3bbc07e9a60e2f853b05ef26581b43be9c6c4bab81151b8dcadd93
+
+build:
+  merge_build_host: True  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('c') }}              # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{ compiler('cxx') }}            # [not win]
+    - {{ compiler('m2w64_cxx') }}      # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}make
+    - {{ posix }}sed               # [win]
+    - {{ posix }}coreutils         # [win]
+    - {{ posix }}zip               # [win]
+  host:
+    - r-base=4.2
+    - bioconductor-biobase
+    - r-biocmanager
+    - r-rcolorbrewer
+    - r-cluster
+    - r-colorspace
+    - r-digest
+    - r-doparallel
+    - r-foreach
+    - r-ggplot2
+    - r-gridbase
+    - r-pkgmaker >=0.20
+    - r-registry
+    - r-reshape2
+    - r-rngtools >=1.2.3
+    - r-stringr >=1.0.0
+  run:
+    - {{native}}gcc-libs         # [win]
+    - r-base>=4.2    
+    - bioconductor-biobase
+    - r-biocmanager
+    - r-rcolorbrewer
+    - r-cluster
+    - r-colorspace
+    - r-digest
+    - r-doparallel
+    - r-foreach
+    - r-ggplot2
+    - r-gridbase
+    - r-pkgmaker >=0.20
+    - r-registry
+    - r-reshape2
+    - r-rngtools >=1.2.3
+    - r-stringr >=1.0.0
+
+test:
+  commands:
+    - $R -e "library('NMF')"           # [not win]
+    - "\"%R%\" -e \"library('NMF')\""  # [win]
+
+about:
+  home: http://renozao.github.io/NMF/
+  license: GPL-2
+  summary: Provides a framework to perform Non-negative Matrix Factorization (NMF). The package
+    implements a set of already published algorithms and seeding methods, and provides
+    a framework to test, develop and plug new/custom algorithms. Most of the built-in
+    algorithms have been optimized in C++, and the main interface function provides
+    an easy way of performing parallel computations on multicore machines.
+  license_family: GPL2
+  license_file:
+    - '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2'
