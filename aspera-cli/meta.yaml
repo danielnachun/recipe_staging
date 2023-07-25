@@ -47,7 +47,7 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/share/rubygems/bin/ascli
+    - test -f $PREFIX/bin/ascli
 
 about:
   home: https://github.com/IBM/aspera-cli
