@@ -13,15 +13,10 @@ build:
 
 requirements:
   build:
-    - make
     - {{ compiler('c') }}
-  host:
-    - ldc
     - dtools
-    - libcurl
-  run:
     - ldc
-    - libcurl
+    - make
 
 test:
   commands:
@@ -35,4 +30,5 @@ about:
 
 extra:
   recipe-maintainers:
+    - danielnachun
     - dpryan79
