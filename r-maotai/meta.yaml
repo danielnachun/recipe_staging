@@ -31,6 +31,12 @@ requirements:
     - {{ posix }}sed               # [win]
     - {{ posix }}coreutils         # [win]
     - {{ posix }}zip               # [win]
+    - {{ cdt('mesa-libgl-devel') }}  # [linux]
+    - {{ cdt('mesa-dri-drivers') }}  # [linux]
+    - {{ cdt('libselinux') }}  # [linux]
+    - {{ cdt('libxdamage') }}  # [linux]
+    - {{ cdt('libxxf86vm') }}  # [linux]
+    - {{ cdt('libxext') }}     # [linux]
   host:
     - r-base=4.2
     - r-matrix
@@ -46,6 +52,7 @@ requirements:
     - r-fastcluster
     - r-labdsv
     - r-shapes
+    - xorg-libxfixes  # [linux]
   run:
     - r-base>=4.2
     - {{native}}gcc-libs         # [win]
