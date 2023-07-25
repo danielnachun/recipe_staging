@@ -2,7 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-DMD=ldmd2 ldmd2 -run ./build.d -release -O3 --flto=thin 
+DMD=ldmd2 ldmd2 -run ./build.d -release -O3
 bin/dub --single scripts/man/gen_man.d
 
 mkdir -p ${PREFIX}/bin
