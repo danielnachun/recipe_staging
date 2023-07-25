@@ -1,0 +1,89 @@
+{% set version = "0.1.1" %}
+
+package:
+  name: r-gwasvcf
+  version: {{ version|replace("-", "_") }}
+
+source:
+  git_url: https://github.com/MRCIEU/gwasvcf
+  git_rev: 77e0421756ee7b234f7eac9b7cd44299c4ef57f2
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  noarch: generic
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+    - bioconductor-biocgenerics
+    - bioconductor-biostrings
+    - bioconductor-genomeinfodb
+    - bioconductor-genomicranges
+    - bioconductor-iranges
+    - bioconductor-rsamtools
+    - bioconductor-s4vectors
+    - bioconductor-summarizedexperiment
+    - bioconductor-variantannotation
+    - r-data.table
+    - r-dplyr
+    - r-genetics.binaries
+    - r-magrittr
+    - r-rlang
+    - r-rsqlite
+    - r-stringr
+  host:
+    - r-base=4.2
+    - bioconductor-biocgenerics
+    - bioconductor-biostrings
+    - bioconductor-genomeinfodb
+    - bioconductor-genomicranges
+    - bioconductor-iranges
+    - bioconductor-rsamtools
+    - bioconductor-s4vectors
+    - bioconductor-summarizedexperiment
+    - bioconductor-variantannotation
+    - r-data.table
+    - r-dplyr
+    - r-genetics.binaries
+    - r-magrittr
+    - r-rlang
+    - r-rsqlite
+    - r-stringr
+  run:
+    - r-base>=4.2
+    - bioconductor-biocgenerics
+    - bioconductor-biostrings
+    - bioconductor-genomeinfodb
+    - bioconductor-genomicranges
+    - bioconductor-iranges
+    - bioconductor-rsamtools
+    - bioconductor-s4vectors
+    - bioconductor-summarizedexperiment
+    - bioconductor-variantannotation
+    - r-data.table
+    - r-dplyr
+    - r-genetics.binaries
+    - r-magrittr
+    - r-rlang
+    - r-rsqlite
+    - r-stringr
+
+test:
+  commands:
+    - $R -e "library('gwasvcf')"           # [not win]
+    - "\"%R%\" -e \"library('gwasvcf')\""  # [win]
+
+about:
+  home: https://mrcieu.github.io/gwasvcf
+  license: MIT
+  license_file: LICENSE.md
+  summary: Reading, querying and writing GWAS summary data in VCF format
+  dev_url: https://github.com/MRCIEU/gwasvcf
+
+extra:
+  recipe-maintainers:
+    - danielnachun
