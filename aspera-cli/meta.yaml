@@ -30,6 +30,7 @@ requirements:
     - rb-websocket-client-simple
     - rb-xml-simple
     - ruby=3.2
+    - sed
   run:
     - rb-execjs
     - rb-jwt
