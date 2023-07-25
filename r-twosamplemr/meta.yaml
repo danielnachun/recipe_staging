@@ -19,30 +19,6 @@ build:
 requirements:
   build:
     - cross-r-base {{ r_base }}  # [build_platform != target_platform]
-    - r-car
-    - r-cowplot
-    - r-data.table
-    - r-dplyr
-    - r-ggplot2
-    - r-glmnet
-    - r-gridExtra
-    - r-gtable
-    - r-ieugwasr
-    - r-knitr
-    - r-lattice
-    - r-magrittr
-    - r-mass
-    - r-mendelianrandomization
-    - r-meta
-    - r-mrraps
-    - r-mrmix
-    - r-mrpresso
-    - r-pbapply
-    - r-plyr
-    - r-psych
-    - r-radialmr
-    - r-reshape2
-    - r-rmarkdown
   host:
     - r-base=4.2
     - r-car
