@@ -1,0 +1,38 @@
+{% set name = "serve-d" %}
+{% set version = "0.8.0-beta.13" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version.replace("-", "") }}
+
+source:
+  url: https://github.com/Pure-D/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: e9c407ce5359284bd24018bc22af3c9846bea624a36b823179389cd1ff9bd504
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - ldc
+    - dtools
+    - dub
+  run:
+    - ldc
+    - dcd
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/Pure-D/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: D LSP server
+  dev_url: https://github.com/Pure-D/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun

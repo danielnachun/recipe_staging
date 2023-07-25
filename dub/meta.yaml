@@ -1,0 +1,34 @@
+{% set version = "1.33.1" %}
+
+package:
+  name: dub
+  version: {{ version }}
+
+source:
+  url: https://github.com/dlang/dub/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 60759c8f1d8cf81d5dfbffc7d76adc9855c5f2eeed1525a0fd523d0e79fcc88f
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - dtools
+    - ldc
+    - make
+
+test:
+  commands:
+    - dub --version
+
+about:
+  home: https://github.com/dlang/dub/
+  license: MIT
+  license_file: LICENSE
+  summary: Package and build management system for D
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+    - dpryan79

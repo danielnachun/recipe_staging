@@ -1,0 +1,41 @@
+{% set name = "dmd" %}
+{% set version = "2.104.0" %}
+
+package:
+  name: dmd
+  version: {{ version }}
+
+source:
+  - url: https://github.com/dlang/{{ name }}/archive/v{{ version }}.tar.gz
+    sha256: de9f8bb78b3980051b7b410fb348e57121204a47194170ef3c810a64c9c9c37c
+    folder: dmd
+  - url: https://github.com/dlang/phobos/archive/v{{ version }}.tar.gz
+    sha256: cc0f9b8429a526356ae4c6fbc007a6406cb3da4be8ed92d8d10c6d84ee1088a6
+    folder: phobos
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - gcc  # [linux]
+    - ldc
+    - make
+
+test:
+  commands:
+    - dmd --version 2>&1 | grep -q "D Compiler"
+  requires:
+    - m2-grep  # [win]
+
+about:
+  home: https://github.com/dlang/dmd/
+  license: BSL-1.0
+  license_file: dmd/LICENSE.txt
+  summary: D programming language compiler
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+    - dpryan79
