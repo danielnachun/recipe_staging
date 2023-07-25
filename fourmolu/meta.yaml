@@ -1,0 +1,40 @@
+{% set name = "fourmolu" %}
+{% set version = "0.14.1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/fourmolu/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 4ccf6bb2a2a9179ed30e94d14bb97b745ff897c4d62adefb3623a73d0f859567
+
+build:
+  number: 0
+  skip: true  # [not unix]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cabal-install
+    - ghc
+  host:
+    - libiconv  #[osx]
+  host:
+    - libiconv  #[osx]
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/fourmolu/fourmolu
+  license: BSD-3-Clause
+  license_file: LICENSE.md
+  summary: Formatter for Haskell source code
+  dev_url: https://github.com/fourmolu/fourmolu
+
+extra:
+  recipe-maintainers:
+    - danielnachun
