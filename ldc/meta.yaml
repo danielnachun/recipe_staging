@@ -24,12 +24,10 @@ requirements:
     - 7za                        # [win]
   host:
     - libconfig                  # [unix]
-    - libedit                    # [linux]
-    - ncurses                    # [linux]
     - curl                       # [unix]
-    - clangdev =15          # [unix]
+    - clangdev =15               # [unix]
     - llvmdev =15                # [unix]
-    - llvm =15                      # [unix]
+    - llvm =15                   # [unix]
 
 test:
   commands:
