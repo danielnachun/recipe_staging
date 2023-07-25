@@ -1,0 +1,43 @@
+{% set version = "0.1.1" %}
+{% set name = "bwmr" %}
+
+package:
+  name: r-{{ name }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/jiazhao97/BWMR
+  git_rev: 26f9958ca86d2ea83c494328a4a019c397b104f2
+
+build:
+  number: 0
+  skip: true # [win]
+  noarch: generic
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+    - r-ggplot2
+    - r-reshape2
+  run:
+    - r-base>=4.2
+    - r-ggplot2
+    - r-reshape2
+
+test:
+  commands:
+    - $R -e "library('BWMR')"           # [not win]
+
+about:
+  home: https://github.com/jiazhao97/BWMR
+  license: Other
+  summary: Bayesian Weighted Mendelian Randomization
+
+extra:
+  recipe-maintainers:
+    - danielnachun
