@@ -1,0 +1,42 @@
+{% set name = "execjs" %}
+{% set version = "2.8.1" %}
+
+package:
+  name: rb-{{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: 6d939919cfd81bcc4d6556f322c3995a70cfe4289ea0bd3b1f999b489c323088
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+  skip: {{ win }}
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+test:
+  requires:
+    - nodejs
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  license_file: {{ name }}-{{ version }}/MIT-LICENSE
+  summary: ExecJS lets you run JavaScript code from Ruby
+  doc_url: https://www.rubydoc.info/gems/{{ name }}
+  dev_url: https://github.com/rails/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun

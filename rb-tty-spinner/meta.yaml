@@ -1,0 +1,39 @@
+{% set name = "tty-spinner" %}
+{% set version = "0.9.3" %}
+
+package:
+  name: "rb-{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://rubygems.org/downloads/{{ name }}-{{ version }}.gem"
+  sha256: 0e036f047b4ffb61f2aa45f5a770ec00b4d04130531558a94bfc5b192b570542
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+    - rb-tty-cursor
+  run:
+    - ruby>=3.2
+    - rb-tty-cursor
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  summary: "A terminal spinner for tasks that have non-deterministic time frame"
+  dev_url: https://github.com/piotrmurach/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
