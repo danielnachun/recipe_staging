@@ -50,10 +50,9 @@ else
     cp -r dmd/generated/osx/release/64/libdruntime.a ${PREFIX}/lib
 fi
 
-export DFLAGS="-I${PREFIX}/include/dlang/dmd -L-L${PREFIX}/lib"
+export DFLAGS="-I${PREFIX}/include/dlang/dmd -L-L${PREFIX}/lib -fPIE"
 pushd dmd
     rm -rf generated
-    ${PREFIX}/bin/dmd compiler/src/build.d -of=compiler/src/build -release
     ./compiler/src/build INSTALL_DIR=${PREFIX} \
         SYSCONFDIR=${PREFIX}/etc \
             BUILD=release \
@@ -67,16 +66,6 @@ if [[ ${target_platform} =~ .*linux.* ]]; then
 else
     install -m 755 dmd/generated/osx/release/64/dmd ${PREFIX}/bin/dmd
 fi
-
-pushd phobos
-    make -f posix.mak VERSION=${SRC_DIR}/VERSION \
-        INSTALL_DIR=${PREFIX} \
-        MODEL=64 \
-        BUILD=release \
-        ENABLE_RELEASE=1 \
-        PIC=1 \
-        DMD=${PREFIX}/bin/dmd
-popd
 
 if [[ ${target_platform} =~ .*linux.* ]]; then
     cp -r phobos/generated/linux/release/64/libphobos2.* ${PREFIX}/lib
