@@ -16,8 +16,6 @@ requirements:
     - {{ compiler('c') }}
     - ldc
     - make
-  run:
-    - ldc
 
 test:
   commands:
