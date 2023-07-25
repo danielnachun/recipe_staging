@@ -17,6 +17,7 @@ build:
   script:
     - mkdir -p ${PREFIX}/bin
     - install -m 755 bs ${PREFIX}/bin
+  skip: true  # [win]
 
 test:
   commands:
