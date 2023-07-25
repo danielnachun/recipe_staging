@@ -1,0 +1,37 @@
+{% set version = "2.104.2" %}
+
+package:
+  name: dtools
+  version: {{ version }}
+
+source:
+  url: https://github.com/dlang/tools/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 728c3fca5197c85091a1b95e8fe2f30f9cd7b903cbab415a57264058b861e23d
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - ldc
+    - make
+  run:
+    - ldc
+
+test:
+  commands:
+    - rdmd --version 2>&1 | grep -q Usage
+  requires:
+    - m2-grep  # [win]
+
+about:
+  home: https://github.com/dlang/tools/
+  license: BSL-1.0
+  license_file: LICENSE.txt
+  summary: Ancillary tools for the D programming language compiler
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+    - dpryan79
