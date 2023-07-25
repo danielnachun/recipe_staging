@@ -1,0 +1,34 @@
+{% set name = "luaformatter" %}
+{% set version = "1.3.6" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  - git_url: https://github.com/Koihik/LuaFormatter.git
+    git_ref: {{ version }}
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - cmake
+    - make
+
+test:
+  commands:
+    - lua-format --help
+
+about:
+  home: https://github.com/Koihik/LuaFormatter
+  license: Apache 2.0
+  license_file: LICENSE
+  summary: Code formatter for Lua
+  dev_url: https://github.com/Koihik/LuaFormatter
+
+extra:
+  recipe-maintainers:
+    - danielnachun
