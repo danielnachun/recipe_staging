@@ -32,6 +32,10 @@ else
     install -m 755 dmd/generated/osx/release/64/dmd ${PREFIX}/bin/dmd
 fi
 
+tee ${SRC_DIR}/VERSION <<EOF
+v${PKG_VERSION}
+EOF
+
 pushd phobos
     make -f posix.mak VERSION=${SRC_DIR}/VERSION \
         INSTALL_DIR=${PREFIX} \
@@ -50,24 +54,7 @@ else
     cp -r dmd/generated/osx/release/64/libdruntime.a ${PREFIX}/lib
 fi
 
-export DFLAGS="-I${PREFIX}/include/dlang/dmd -L-L${PREFIX}/lib -fPIE"
-pushd dmd
-    rm -rf generated
-    ./compiler/src/build INSTALL_DIR=${PREFIX} \
-        SYSCONFDIR=${PREFIX}/etc \
-            BUILD=release \
-        HOST_DMD=${PREFIX}/bin/dmd \
-        ENABLE_RELEASE=1 \
-        VERBOSE=1
-popd
-
-if [[ ${target_platform} =~ .*linux.* ]]; then
-    install -m 755 dmd/generated/linux/release/64/dmd ${PREFIX}/bin/dmd
-else
-    install -m 755 dmd/generated/osx/release/64/dmd ${PREFIX}/bin/dmd
-fi
-
 tee ${PREFIX}/etc/dmd.conf <<EOF
-        [Environment]
-        DFLAGS=-I${PREFIX}/include/dlang/dmd -L-L${PREFIX}/lib
+[Environment]
+DFLAGS=-I${PREFIX}/include/dlang/dmd -L-L${PREFIX}/lib
 EOF
