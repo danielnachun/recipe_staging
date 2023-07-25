@@ -18,6 +18,7 @@ build:
 requirements:
   build:
     - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+    - sed
   host:
     - r-base=4.2
     - bioconductor-dirichletmultinomial
@@ -45,7 +46,7 @@ requirements:
     - r-stanheaders
     - r-stringr
     - r-tailrank
-    - tbb
+    - tbb-devel <2021
   run:
     - r-base>=4.2
     - bioconductor-dirichletmultinomial
