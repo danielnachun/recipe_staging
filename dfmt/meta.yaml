@@ -20,7 +20,7 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/dfmt
+    - {{ name }} --help
 
 about:
   home: https://github.com/dlang-community/{{ name }}
