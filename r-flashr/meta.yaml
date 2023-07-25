@@ -11,6 +11,7 @@ source:
 build:
   merge_build_host: true  # [win]
   number: 0
+  noarch: generic
   rpaths:
     - lib/R/lib/
     - lib/
@@ -18,13 +19,8 @@ build:
 requirements:
   build:
     - cross-r-base {{ r_base }}  # [build_platform != target_platform]
-    - r-ashr
-    - r-ggplot2
-    - r-reshape2
-    - r-softimpute
-    - r-stringi=1.7.12
   host:
-    - r-base=4.2.3
+    - r-base=4.2
     - r-ashr
     - r-ggplot2
     - r-reshape2
@@ -46,7 +42,6 @@ test:
 about:
   home: https://github.com/stephenslab/flashr
   license: BSD-3-clause
-  license_family: BSD
   license_file: LICENSE
   summary: Empirical Bayes Matrix Factorization
 
