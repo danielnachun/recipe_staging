@@ -27,7 +27,7 @@ requirements:
     - r-bigmemory
   run:
     - libopenblas
-    - _openmp_mutex
+    - _openmp_mutex  # [linux]
     - r-base>=4.2
     - r-rcpp
     - r-rcpparmadillo
