@@ -1,0 +1,40 @@
+{% set name = "shelltestrunner" %}
+{% set version = "1.10" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://hackage.haskell.org/package/{{ name }}-{{ version }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 07bd3365fbbde9b4c80a3139792c30c1b1929736175fc207b4af1285bb97cbb0
+
+build:
+  number: 0
+  skip: true  # [not unix]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cabal-install
+    - ghc
+  host:
+    - libiconv  # [osx]
+  run:
+    - libiconv  # [osx]
+
+test:
+  commands:
+    - shelltest --help
+
+about:
+  home: https://github.com/simonmichael/{{ name }}
+  license: BSD-3-Clause
+  license_file: LICENSE
+  summary: Portable command-line tool for testing command-line programs
+  dev_url: https://github.com/simonmichael/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
