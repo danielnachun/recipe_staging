@@ -6,10 +6,8 @@ package:
   version: "{{ version }}"
 
 source:
-  - url: "https://rubygems.org/downloads/{{ name }}-{{ version }}.gem"
+  - url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
     sha256: f2b97780ac394848c646a051d89bb01c370d2595c80e1e515a73089f8207af0d
-  - url: "https://ibm.biz/aspera_transfer_sdk"
-    sha256: c908127590df8a571e774a6c38eec7b80b6830c3e28ad5db31187d24ef67aae3
 
 build:
   noarch: generic
