@@ -11,6 +11,7 @@ source:
 build:
   merge_build_host: true  # [win]
   number: 0
+  noarch: generic
   rpaths:
     - lib/R/lib/
     - lib/
@@ -18,15 +19,8 @@ build:
 requirements:
   build:
     - cross-r-base {{ r_base }}  # [build_platform != target_platform]
-    - r-ashr
-    - r-wavethresh
-    - r-mixsqp
-    - r-matrixstats
-    - r-ggplot2
-    - r-gridextra
-    - r-laplacesdemon
   host:
-    - r-base=4.2.3
+    - r-base=4.2
     - r-ashr
     - r-wavethresh
     - r-mixsqp
@@ -52,7 +46,6 @@ test:
 about:
   home: https://github.com/stephenslab/susif.alpha
   license: GPL-3.0-or-later
-  license_family: GPL
   license_file: LICENSE
   summary: Draft package for "Sum of Single Functions" method.
 
