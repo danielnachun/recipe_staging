@@ -13,6 +13,7 @@ cmake -S . -B build -G Ninja \
       -DCMAKE_PREFIX_PATH=$PREFIX \
       -DBUILD_SHARED_LIBS=BOTH \
       -DD_COMPILER=$DCMP \
+      -DBUILD_LTO_LIBS=ON \
       ..
 cmake --build build
 cmake --install build
@@ -26,6 +27,7 @@ cmake -S . -B build -G Ninja \
       -DCMAKE_PREFIX_PATH=$PREFIX \
       -DBUILD_SHARED_LIBS=BOTH \
       -DD_COMPILER=${PREFIX}/bin/ldmd2 \
+      -DBUILD_LTO_LIBS=ON \
       ..
 cmake --build build
 cmake --install build
