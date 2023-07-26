@@ -8,14 +8,19 @@ package:
 source:
   - url: https://ftp.gnu.org/non-gnu/cvs/source/feature/{{ version }}/cvs-{{ version }}.tar.bz2
     sha256: 78853613b9a6873a30e1cc2417f738c330e75f887afdaf7b3d0800cb19ca515e
-  - url: https://opensource.apple.com/tarballs/cvs/cvs-47.tar.gz
-    sha256: 643d871d6c5f3aaa1f7be626d60bd83bbdcab0f61196f51cb81e8c20e41f808a
-  - url: https://raw.githubusercontent.com/Homebrew/formula-patches/24118ec737c7d008420d4683a07129ed80a759eb/cvs/vasnprintf-high-sierra-fix.diff
-    sha256: affa485332f66bb182963680f90552937bf1455b855388f7c06ef6a3a25286e2
-    folder: patches
-  - url: https://gitweb.gentoo.org/repo/gentoo.git/plain/dev-vcs/cvs/files/cvs-1.12.13.1-fix-gnulib-SEGV-vasnprintf.patch?id=6c49fbac47ddb2c42ee285130afea56f349a2d40
-    sha256: 4f4b820ca39405348895d43e0d0f75bab1def93fb7a43519f6c10229a7c64952
-    folder: patches
+    patches:
+      - PR5178707.diff
+      - ea.diff
+      - endian.diff
+      - fixtest-client-20.diff
+      - fixtest-recase.diff
+      - i18n.diff
+      - initgroups.diff
+      - remove-info.diff
+      - tag.diff
+      - zlib.diff
+      - vasnprintf-high-sierra-fix.diff  # [osx]
+      - fix-gnulib-SEGV-vasnprintf.patch  # [linux]
 
 build:
   number: 0
