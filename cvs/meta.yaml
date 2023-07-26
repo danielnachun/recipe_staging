@@ -30,8 +30,10 @@ requirements:
     - {{ compiler('c') }}
     - autoconf
     - automake
+    - binutils
     - make
     - patch
+    - sed
     - vim
   host:
     - gettext
