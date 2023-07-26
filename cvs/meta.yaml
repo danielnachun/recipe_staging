@@ -30,20 +30,17 @@ requirements:
     - {{ compiler('c') }}
     - autoconf
     - automake
-    - gettext
-    - libxcrypt
     - make
     - patch
     - vim
-    - zlib
   host:
     - gettext
-    - libxcrypt
-    - zlib
+    - libxcrypt  # [linux]
+    - zlib  # [linux]
   run:
     - gettext
-    - libxcrypt
-    - zlib
+    - libxcrypt  # [linux]
+    - libzlib  # [linux]
 
 test:
   commands:
