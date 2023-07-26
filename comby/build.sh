@@ -13,4 +13,5 @@ opam exec -- opam install . --deps-only -y --no-depexts
 export LIBRARY_PATH="${OPAMROOT}/default/lib/hack_parallel"
 opam exec -- make release
 
-install -Dm 755 _build/default/src/main.exe ${PREFIX}/bin/comby
+mkdir -p ${PREFIX}/bin
+install -m 755 _build/default/src/main.exe ${PREFIX}/bin/comby
