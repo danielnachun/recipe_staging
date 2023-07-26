@@ -1,0 +1,45 @@
+{% set name = "tsv-utils" %}
+{% set version = "2.2.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/eBay/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: daf6e88bff1843e69c066453ed384869eec0e497914a6a9c260791ef91d95241
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - ldc
+    - make
+
+test:
+  commands:
+    - csv2tsv --help
+    - keep-header --help
+    - number-lines --help
+    - tsv-append --help
+    - tsv-filter --help
+    - tsv-join --help
+    - tsv-pretty --help
+    - tsv-sample --help
+    - tsv-select --help
+    - tsv-split --help
+    - tsv-summarize --help
+    - tsv-uniq --help
+
+about:
+  home: https://github.com/eBay/{{ name }}
+  license: BSL-1.0
+  license_file: LICENSE.txt
+  summary: Command line tools for large, tabular data files. Filtering, statistics, sampling, joins and more.
+  dev_url: https://github.com/eBay/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
