@@ -1,0 +1,59 @@
+{% set name = "zig" %}
+{% set version = "0.11.0" %}
+{% set llvm_version = "16.0.6" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  - url: https://github.com/ziglang/{{ name }}/archive/refs/tags/{{ version }}.tar.gz  # [linux]
+    sha256: 71de3e958293dffaa17f7ad1438c775389f5406991c96b533bb1501178092b02  # [linux]
+  - url: https://ziglang.org/download/{{ version }}/zig-macos-x86_64-{{ version }}.tar.xz  # [osx]
+    sha256: 1c1c6b9a906b42baae73656e24e108fd8444bb50b6e8fd03e9e7a3f8b5f05686  # [osx]
+
+build:
+  number: 0
+  skip: true  # [win]
+  binary_relocation: false  # [osx]
+
+requirements:
+  build:
+    - {{ compiler('c') }}  # [linux]
+    - {{ compiler('cxx') }}  # [linux]
+    - sysroot_linux-64 2.17  # [linux64]
+    - cmake >=2.8.12  # [linux]
+    - make  # [linux]
+  host:
+    - clangdev {{ llvm_version }}  # [linux]
+    - llvmdev {{ llvm_version }}  # [linux]
+    - llvm {{ llvm_version }}  # [linux]
+    - lld {{ llvm_version }}  # [linux]
+    - libclang-cpp {{ llvm_version }}  # [linux]
+    - libxml2  # [linux]
+    - zstd  # [linux]
+
+test:
+  commands:
+    - zig version
+    - zig zen
+    - zig init-lib && zig build test
+
+about:
+  home: https://ziglang.org/
+  license: MIT
+  license_file: LICENSE
+  summary: Zig is a general-purpose programming language and toolchain for maintaining robust, optimal, and reusable software.
+  description: |
+    Zig is a general-purpose programming language and toolchain for maintaining robust, optimal, and reusable software.
+    Robust: Behavior is correct even for edge cases such as out of memory.
+    Optimal: Write programs the best way they can behave and perform.
+    Reusable: The same code works in many environments which have different constraints.
+    Maintainable: Precisely communicate intent to the compiler and other programmers. 
+      The language imposes a low overhead to reading code and is resilient to changing requirements and environments.
+  doc_url: https://ziglang.org/documentation/{{ version }}/
+  dev_url: https://github.com/ziglang/zig
+
+extra:
+  recipe-maintainers:
+    - xmnlab
