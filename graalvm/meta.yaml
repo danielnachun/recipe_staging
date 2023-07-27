@@ -16,14 +16,14 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - python
-    - make
-    - patch
-    - zlib
+    #- python
+    #- patch
+    #- zlib
     - git
-    - curl
+    #- curl
     - cmake
     - make
+    - mx
   host:
     - zlib
   run:
