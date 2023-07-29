@@ -6,8 +6,9 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/graalvm/graalvm-ce-builds/archive/refs/tags/graal-{{ version }}.tar.gz
-  sha256: 5b39ca08cd5e0d1992071b0be9eb77304489823824570236c4df4dc0f8b33aab
+  url: https://github.com/oracle/graal/archive/refs/tags/vm-ce-{{ version }}.tar.gz
+  sha256: 39214d58c2ade625a686fb6e40c2bc529230c995a88fa611186faa7bda4ffbdb
+  folder: graal
 
 build:
   number: 0
@@ -19,11 +20,12 @@ requirements:
     #- python
     #- patch
     #- zlib
-    - git
+    #- git
     #- curl
     - cmake
     - make
     - mx
+    - openjdk
   host:
     - zlib
   run:
