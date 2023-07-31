@@ -2,16 +2,20 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-#export CFLAGS="$CFLAGS --sysroot $CONDA_BUILD_SYSROOT"
-#export CXXFLAGS="$CXXFLAGS --sysroot $CONDA_BUILD_SYSROOT"
-#export LDFLAGS="$LDFLAGS --sysroot $CONDA_BUILD_SYSROOT"
-#export CPATH="$BUILD_PREFIX/include"
-#export LIBRARY_PATH="$BUILD_PREFIX/lib"
+touch ${BUILD_PREFIX}/lib/jvm/release
 
-git init $SRC_DIR/graal
-git -C $SRC_DIR/graal config --local user.name "none"
-git -C $SRC_DIR/graal config --local user.email "none@example.org"
-git -C $SRC_DIR/graal commit --allow-empty -m "dummy commit"
-
+mkdir -p ${PREFIX}/lib/jvm
+mkdir -p ${PREFIX}/bin
 export MX_PRIMARY_SUITE_PATH=graal/vm
-mx --env ce-darwin build 
+sed -i "s/\+(/+-(/g" graal/sdk/mx.sdk/mx_sdk_vm_impl.py
+
+if [[ ${target_platform} =~ "osx-64" ]]; then
+    mx --env ce-darwin build 
+    cp -r graal/sdk/mxbuild/darwin-amd64/GRAALVM_COMMUNITY_JAVA20/**/* ${PREFIX}/lib/jvm
+fi
+if [[ ${target_platform} =~ "linux-64" ]]; then
+    mx --env ce build 
+    cp -r graal/sdk/mxbuild/linux-amd64/GRAALVM_COMMUNITY_JAVA20/**/* ${PREFIX}/lib/jvm
+fi
+
+ln -sf ${PREFIX}/lib/jvm/bin/* ${PREFIX}/bin

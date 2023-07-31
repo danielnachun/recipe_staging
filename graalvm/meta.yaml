@@ -15,17 +15,8 @@ build:
 
 requirements:
   build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-    #- python
-    #- patch
-    #- zlib
-    #- git
-    #- curl
-    - cmake
-    - make
     - mx
-    - openjdk
+    - labs-openjdk
   host:
     - zlib
   run:
@@ -38,7 +29,7 @@ test:
 about:
   home: http://graalvm.org/
   license: UPL-1.0
-  license_file: LICENSE.txt
+  license_file: graal/LICENSE
   summary: "GraalVM: Run Programs Faster Anywhere"
 
 extra:
