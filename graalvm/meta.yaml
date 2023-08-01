@@ -15,12 +15,31 @@ build:
 
 requirements:
   build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - binutils
+    - gcc  # [linux]
+    - gxx  # [linux]
+    - make
     - mx
+    - ninja
     - labs-openjdk
   host:
     - zlib
   run:
+    - alsa-lib  #[linux]
+    - giflib  # [linux]
+    - freetype  # [linux]
+    - harfbuzz  # [linux]
+    - lcms2  # [linux]
+    - libjpeg-turbo  # [linux]
+    - libpng  # [linux]
     - libzlib
+    - xorg-libx11  # [linux]
+    - xorg-libxext  # [linux]
+    - xorg-libxi  # [linux]
+    - xorg-libxrender  # [linux]
+    - xorg-libxtst  # [linux]
 
 test:
   commands:
