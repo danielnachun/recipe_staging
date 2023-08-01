@@ -14,11 +14,16 @@ build:
 
 requirements:
   build:
+    - {{ compiler('c') }}
+    - gcc  # [linux]
     - graalvm
     - babashka
-    - boot-clj
     - leiningen
-    - clojure
+    - sed
+  host:
+    - zlib
+  run:
+    - libzlib
 
 test:
   commands:
