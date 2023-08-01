@@ -14,8 +14,14 @@ build:
 
 requirements:
   build:
+    - {{ compiler('c') }}
+    - gcc  # [linux]
     - graalvm
     - leiningen
+  host:
+    - zlib
+  run:
+    - libzlib
 
 test:
   commands:
