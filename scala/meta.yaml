@@ -1,0 +1,35 @@
+{% set name = "scala" %}
+{% set version = "3.3.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/lampepfl/dotty
+  git_rev: {{ version }}
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - sbt
+    - openjdk >=17,<18
+  run:
+    - openjdk
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://dotty.epfl.ch
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: The Scala 3 compiler, also known as Dotty.
+  dev_url: https://github.com/lampepfl/dotty
+
+extra:
+  recipe-maintainers:
+    - danielnachun
