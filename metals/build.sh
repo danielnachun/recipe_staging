@@ -18,7 +18,7 @@ cp -r $SRC_DIR/.ivy2/local/org.scalameta/**/**/jars/*.jar ${PREFIX}/libexec/${PK
 sbt -sbt-dir $SRC_DIR/.sbt -ivy $SRC_DIR/.ivy2 compile 'show metals/dependencyClasspath' 2>/dev/null | \
     grep Attributed | sed 's/^[^\*]\+\* Attributed(\([^)]\+\).*/\1/g' | \
     grep .jar | \
-    xargs --replace=% cp -r % ${PREFIX}/libexec/${PKG_NAME}
+    xargs -I % cp -r % ${PREFIX}/libexec/${PKG_NAME}
 
 tee ${PREFIX}/bin/metals << EOF
 #!/bin/sh
