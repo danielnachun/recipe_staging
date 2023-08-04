@@ -1,0 +1,35 @@
+{% set name = "metals" %}
+{% set version = "1.0.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/scalameta/{{ name }}
+  git_rev: v{{ version }}
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - sbt
+    - openjdk
+    - sed
+  run:
+    - openjdk
+
+test:
+  commands:
+    - {{ name }} --version
+
+about:
+  home: https://github.com/scalameta/{{ name }}
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Scala language server with rich IDE features
+
+extra:
+  recipe-maintainers:
+    - danielnachun
