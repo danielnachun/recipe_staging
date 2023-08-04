@@ -1,32 +1,33 @@
-{% set name = "abcm2ps" %}
-{% set version = "8.14.14" %}
+{% set name = "metals" %}
+{% set version = "1.0.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/leesavide/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 5b39ca08cd5e0d1992071b0be9eb77304489823824570236c4df4dc0f8b33aab
+  git_url: https://github.com/scalameta/{{ name }}
+  git_rev: v{{ version }}
 
 build:
   number: 0
 
 requirements:
   build:
-    - {{ compiler('c') }}
-    - make
-    - pkg-config
+    - sbt
+    - openjdk
+  run:
+    - openjdk
 
 test:
   commands:
-    - abcm2ps -h
+    - {{ name }} --version
 
 about:
-  home: https://www.gnu.org/software/hello/
-  license: GPL-3.0-or-later
-  license_file: COPYING
-  summary: ABC music notation software
+  home: https://github.com/scalameta/{{ name }}
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Scala language server with rich IDE features
 
 extra:
   recipe-maintainers:
