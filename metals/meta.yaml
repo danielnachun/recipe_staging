@@ -16,6 +16,7 @@ requirements:
   build:
     - sbt
     - openjdk
+    - sed
   run:
     - openjdk
 
