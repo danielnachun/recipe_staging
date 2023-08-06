@@ -1,0 +1,36 @@
+{% set name = "dotnet-script" %}
+{% set version = "1.4.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/dotnet-script/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: 61be50213dae1a99f1a5e330301ee52f384998ca57a0e8b8bb768d1327ec96a8
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+  host:
+    - dotnet
+  run:
+    - dotnet
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/dotnet-script/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: Run C# scripts from the .NET CLI
+  dev_url: https://github.com/dotnet-script/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
