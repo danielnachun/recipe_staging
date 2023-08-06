@@ -1,0 +1,46 @@
+{% set name = "dotnet-diagnostics" %}
+{% set version = "6.0.351802" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/dotnet/diagnostics/archive/v{{ version }}.tar.gz
+  sha256: 309566cfcce0ef541efcecf31abd8ca726f6361a6bc4775c2ef117eb706e3457
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - cmake
+    - make
+  host:
+    - dotnet
+    - lldb
+  run:
+    - dotnet
+    - lldb
+
+test:
+  commands:
+    - dotnet-counters --help
+    - dotnet-dsrouter --help
+    - dotnet-dump --help
+    - dotnet-gcdump --help
+    - dotnet-sos --help
+    - dotnet-stack --help
+    - dotnet-trace --help
+
+about:
+  url: https://github.com/dotnet/diagnostics
+  license: MIT
+  license_file: LICENSE.TXT
+  summary: .NET Core runtime diagnostic tools
+  dev_url: https://github.com/dotnet/diagnostics
+
+extra:
+  recipe-maintainers:
+    - danielnachun
