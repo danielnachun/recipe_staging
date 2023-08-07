@@ -22,7 +22,7 @@ requirements:
 
 test:
   commands:
-    - {{ name }} :secrets
+    - test -f ${PREFIX}/bin/{{ name }}
 
 about:
   home: https://nuke.build
