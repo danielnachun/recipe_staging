@@ -1,0 +1,34 @@
+{% set name = "ammonite-repl" %}
+{% set version = "2.5.9" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/com-lihaoyi/Ammonite
+  git_rev: {{ version }}
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - openjdk
+  run:
+    - openjdk
+
+test:
+  commands:
+    - amm --help
+
+about:
+  home: https://github.com/com-lihaoyi/Ammonite
+  license: MIT
+  license_file: LICENSE
+  summary: Scala Scripting
+  dev_rul: https://github.com/com-lihaoyi/Ammonite
+
+extra:
+  recipe-maintainers:
+    - danielnachun
