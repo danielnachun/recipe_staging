@@ -2,8 +2,6 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-export COURSIER_CACHE=${SRC_DIR}/.coursier
-
 mkdir -p .ivy2
 mkdir -p .sbt
 mkdir -p ${PREFIX}/libexec/${PKG_NAME}
