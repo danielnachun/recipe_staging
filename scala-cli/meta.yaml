@@ -1,0 +1,39 @@
+{% set name = "scala-cli" %}
+{% set version = "1.0.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/VirtusLab/{{ name }}
+  git_rev: v{{ version }}
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - curl
+    - gcc  # [linux]
+  host:
+    - graalvm
+    - zlib
+  run:
+    - libzlib
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://scala-cli.virtuslab.org/
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Scala CLI is a command-line tool to interact with the Scala language. It lets you compile, run, test, and package your Scala code (and more!)
+  dev_url: https://github.com/VirtusLab/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
