@@ -10,5 +10,5 @@ dotnet publish --no-self-contained src/Dotnet.Script/Dotnet.Script.csproj --outp
 
 tee ${PREFIX}/bin/dotnet-script << EOF
 #!/bin/sh
-DOTNET_ROOT=${DOTNET_ROOT} exec ${PREFIX}/libexec/${PKG_NAME}/dotnet-script "\$@"
+DOTNET_ROOT=${DOTNET_ROOT} exec dotnet exec ${PREFIX}/libexec/${PKG_NAME}/dotnet-script.dll "\$@"
 EOF
