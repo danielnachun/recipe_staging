@@ -1,5 +1,5 @@
 {% set name = "ghorg" %}
-{% set version = "1.9.6" %}
+{% set version = "1.9.7" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/gabrie30/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: f58b3df0c34440f5d5da2a0925287134e4ce7c71cb9f3c15a40fafda3bcc78e7
+  sha256: e9a9c11dca9692f0ed7218da2235b632c9fe7cb56e9197e959a7b24ecb1c83c5
 
 build:
   number: 0
@@ -22,8 +22,7 @@ test:
 
 about:
   home: https://github.com/gabrie30/{{ name }}
-  license: Apache 2.0
-  license_family: Apache
+  license: Apache-2.0
   license_file: LICENSE
   summary: Quickly clone an entire org's or user's repositories into one directory
   dev_url: https://github.com/gabrie30/{{ name }}
