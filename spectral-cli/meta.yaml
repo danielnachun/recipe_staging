@@ -1,5 +1,5 @@
 {% set name = "spectral-cli" %}
-{% set version = "6.8.0" %}
+{% set version = "6.10.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://registry.npmjs.org/@stoplight/{{ name }}/-/{{ name }}-{{ version }}.tgz
-  sha256: f06a4497b9e7a142f587e1da095857937929e72f602be66ec3d3947a0f254237
+  sha256: f95fafdb871b94af24e7422e1453e8c114c5ed97cfe919f61ec0208949761a92
 
 build:
   number: 0
@@ -26,7 +26,6 @@ test:
 about:
   home: https://github.com/stoplightio/spectral
   license: MIT
-  license_family: MIT
   summary: JSON/YAML linter and support OpenAPI v3.1/v3.0/v2.0, and AsyncAPI v2.x
   dev_url: https://github.com/zaach/{{ name }}
 
