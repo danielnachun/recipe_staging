@@ -1,5 +1,5 @@
 {% set name = "dprint" %}
-{% set version = "0.37.1" %}
+{% set version = "0.40.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/{{ name }}/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: 15fea45b760987427bc68a9da6d346b777ca0253d3f2a1c8cd2f3a584d59c7c1
+  sha256: 06afa0d071a35d759d8f5e480a52c3936c3daa85d1053df48a65fcbb1074683b
 
 build:
   number: 0
@@ -25,7 +25,6 @@ test:
 about:
   home: https://{{ name }}.dev
   license: MIT
-  license_family: MIT
   license_file: 
     - LICENSE
     - THIRDPARTY.yml
