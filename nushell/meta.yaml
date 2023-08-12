@@ -1,5 +1,5 @@
 {% set name = "nushell" %}
-{% set version = "0.81.0" %}
+{% set version = "0.83.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/{{ name }}/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: 7618f98c0ad7d824e8899351c394e77df1ca72f440a80f854b215a7a581fa2be
+  sha256: a08baef4e487cf200b14cd4a8555110106a947ac439ad8e2759f5ec52c8f9656
 
 build:
   number: 0
@@ -33,7 +33,6 @@ test:
 about:
   home: https://www.nushell.sh
   license: MIT
-  license_family: MIT
   license_file: LICENSE
   summary: Modern shell for the GitHub era
   dev_url: https://github.com/{{ name }}/{{ name }}
