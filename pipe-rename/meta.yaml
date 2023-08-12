@@ -1,5 +1,5 @@
 {% set name = "pipe-rename" %}
-{% set version = "1.6.4" %}
+{% set version = "1.6.5" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/marcusbuffett/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: f1ab9aff5a381b397916e3ffdd9d496785c2b015a6f244445eba569a31fbada0
+  sha256: 41edf419ab3d7b3c16d2efe209b3ca3d3f7104a3365f61fe821a59caac31810b
 
 build:
   number: 0
@@ -25,7 +25,6 @@ test:
 about:
   home: https://github.com/marcusbuffett/{{ name }}
   license: MIT
-  license_family: MIT
   summary: Rename your files using your favorite text editor
   dev_url: https://github.com/marcusbuffett/{{ name }}
 
