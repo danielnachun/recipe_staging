@@ -1,13 +1,13 @@
 {% set name = "melody" %}
-{% set version = "0.18.1" %}
+{% set version = "0.19.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/yoav-lavi/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: c68c05c0d87d4ab1069196f339043252fb1754395d8e5504f5295a2fadcc51d2
+  url: https://github.com/yoav-lavi/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
+  sha256: d7605160d3589578c84a919c09addd8f4bd1f06441795192041b491462c9f655
 
 build:
   number: 0
@@ -24,8 +24,10 @@ test:
 
 about:
   home: https://yoav-lavi.github.io/{{ name }}/book
-  license: MIT
-  license_file: LICENSE
+  license: MIT AND Apache-2.0
+  license_file: 
+    - LICENSE-APACHE
+    - LICENSE-MIT
   summary: Language that compiles to regular expressions
   dev_url: https://github.com/yoav-lavi/{{ name }}
 
