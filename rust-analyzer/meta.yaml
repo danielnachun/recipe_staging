@@ -1,14 +1,13 @@
 {% set name = "rust-analyzer" %}
-{% set version = "2023_06_05" %}
-{% set version_dash = version.replace("_", "-") %}
+{% set version = "2023-06-05" %}
 
 package:
   name: {{ name|lower }}
-  version: {{ version }}
+  version: {{ version.replace("-", "_") }}
 
 source:
   git_url: https://github.com/rust-lang/{{ name }}.git
-  git_rev: {{ version_dash }}
+  git_rev: {{ version }}
 
 build:
   number: 0
@@ -26,7 +25,6 @@ test:
 about:
   home: https://rust-analyzer.github.io/
   license: MIT
-  license_family: MIT
   license_file: LICENSE-MIT
   summary: Experimental Rust compiler front-end for IDEs
   dev_url: https://github.com/rust-lang/{{ name }}
