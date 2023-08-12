@@ -1,5 +1,5 @@
 {% set name = "murex" %}
-{% set version = "4.1.7300" %}
+{% set version = "4.4.9500" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/lmorg/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: a04e01a2b0d7c70e8dd5e671dccd5009646d0a4276556fca790add3d7d7853ec
+  sha256: 6840c83da6dcb9a2a109982de0bf36ed9182f25e829d3e5dc0a4e0be5a1c4baa
 
 build:
   number: 0
@@ -22,8 +22,7 @@ test:
 
 about:
   home: https://murex.rocks
-  license: GPL v2 only
-  license_family: GPL
+  license: GPL-2.0-only
   license_file: LICENSE
   summary: Bash-like shell designed for greater command-line productivity and safer scripts
   dev_url: https://github.com/lmorg/{{ name }}
