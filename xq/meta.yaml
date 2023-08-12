@@ -1,5 +1,5 @@
 {% set name = "xq" %}
-{% set version = "1.1.4" %}
+{% set version = "1.2.1" %}
 
 package:
   name: {{ name|lower }}
@@ -23,7 +23,6 @@ test:
 about:
   home: https://github.com/sibprogrammer/{{ name }}
   license: MIT
-  license_family: MIT
   summary: Command-line XML and HTML beautifier and content extractor
   dev_url: https://github.com/sibprogrammer/{{ name }}
 
