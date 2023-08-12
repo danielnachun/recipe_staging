@@ -1,5 +1,5 @@
 {% set name = "gopls" %}
-{% set version = "0.12.2" %}
+{% set version = "0.13.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/golang/tools/archive/{{ name }}/v{{ version }}.tar.gz
-  sha256: f185a44f46fe39688493008d47debfe63ea7cd26464f522df292c62539b8ca8d
+  sha256: e59a87ebd380d25e76701e163b9dd447b0c3ad94b5f7b68885d0cc94d8d956d3
 
 build:
   number: 0
@@ -22,8 +22,7 @@ test:
 
 about:
   home: https://github.com/golang/tools/tree/master/gopls
-  license: BSD 3 Clause
-  license_family: BSD
+  license: BSD-3-Clause
   summary: Language server for the Go language
   dev_url: https://github.com/golang/tools/tree/master/gopls
 
