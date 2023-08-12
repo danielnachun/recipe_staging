@@ -1,5 +1,5 @@
 {% set name = "ouch" %}
-{% set version = "0.4.1" %}
+{% set version = "0.4.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/ouch-org/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: b0fcd6bbe6c66544b5bf1167d72605427c5cc6afae564f23f3eff5ea22b01b79
+  sha256: 08015fa92770515cfa00570bc5f0f0a4f28f0ad238f360f3579ac043723a6ec2
 
 build:
   number: 0
