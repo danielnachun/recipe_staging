@@ -1,5 +1,5 @@
 {% set name = "jql" %}
-{% set version = "6.0.8" %}
+{% set version = "7.0.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/yamafaktory/{{ name }}/archive/refs/tags/{{ name }}-v{{ version }}.tar.gz
-  sha256: 484d9973dd202f3f437feff8ba4b845bfd57b574dd96eef7c78b82c8148783ad
+  sha256: ac3816e4aab33972dbf359de1df369ffc8d434af78638536b4243d6cecb55a79
 
 build:
   number: 0
@@ -25,7 +25,6 @@ test:
 about:
   home: https://github.com/yamafaktory/{{ name }}
   license: MIT
-  license_family: MIT
   license_file: LICENSE-MIT
   summary: JSON query language CLI tool
   dev_url: https://github.com/yamafaktory/{{ name }}
