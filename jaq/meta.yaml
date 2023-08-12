@@ -1,0 +1,34 @@
+{% set name = "jaq" %}
+{% set version = "0.10.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/01mf02/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: cccac0263a7699347c40a596cc6855b02aa0ec8288901cde0214fc6ed6d811af
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/01mf02/{{ name }}
+  license: MIT
+  license_file: LICENSE-MIT
+  summary: JQ clone focussed on correctness, speed, and simplicity
+  dev_url: https://github.com/01mf02/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
