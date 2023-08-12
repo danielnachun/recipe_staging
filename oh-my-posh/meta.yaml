@@ -1,5 +1,5 @@
 {% set name = "oh-my-posh" %}
-{% set version = "17.0.0" %}
+{% set version = "18.3.3" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/JanDeDobbeleer/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 58b03ce38ef8f7e01b093590f7fb926c9ad1c0998a51ed21b605bb8ad43b855a
+  sha256: 8d5fda43bf35b4837a7f4b42d61c02a27848e21767edd0a4762b9b2c22c8efb4
 
 build:
   number: 0
@@ -23,7 +23,6 @@ test:
 about:
   home: https://github.com/JanDeDobbeleer/{{ name }}
   license: MIT
-  license_family: MIT
   summary: Prompt theme engine for any shell
   dev_url: https://github.com/JanDeDobbeleer/{{ name }}
 
