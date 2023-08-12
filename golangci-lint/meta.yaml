@@ -1,5 +1,5 @@
 {% set name = "golangci-lint" %}
-{% set version = "1.53.2" %}
+{% set version = "1.54.1" %}
 
 package:
   name: {{ name|lower }}
