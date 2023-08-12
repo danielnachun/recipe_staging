@@ -1,5 +1,5 @@
 {% set name = "chezmoi" %}
-{% set version = "2.34.1" %}
+{% set version = "2.37.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/twpayne/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: d81bb3a9f4632ab27422c05bb243692f1d55e33cae2c55c691f7f0b9248f46cf
+  sha256: c9c37268e437c28b8da93f48fcfdffc8586136a09f95910a06baa94bc4562667
 
 build:
   number: 0
@@ -23,7 +23,6 @@ test:
 about:
   home: https://chezmoi.io
   license: MIT
-  license_family: MIT
   license_file: LICENSE
   summary: Manage your dotfiles across multiple diverse machines, securely
   dev_url: https://github.com/twpayne/{{ name }}
