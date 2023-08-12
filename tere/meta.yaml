@@ -1,5 +1,5 @@
 {% set name = "tere" %}
-{% set version = "1.4.0" %}
+{% set version = "1.5.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/mgunyho/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 84eeafc346ee2207bcfb0a9e29a6a4e7748817741a0f7245a204d16da0ef651f
+  sha256: 84195f45b738fb7c805d7b348185658d0dc58aa26e7f92fcad9578bc7bd694bf
 
 build:
   number: 0
