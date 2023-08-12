@@ -1,13 +1,13 @@
 {% set name = "act" %}
-{% set version = "0.2.46" %}
+{% set version = "0.2.49" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
-source:
+source: 
   url: https://github.com/nektos/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: ca3f27316b0a0cf0f86203124d685dc13da090577ad459f3cd61840a66f2bcde
+  sha256: 3e27111277a1dfb3dcfc6c5b3a81df1225974a379d0f10b253306ad44fb20ff8
 
 build:
   number: 0
@@ -23,7 +23,6 @@ test:
 about:
   home: https://github.com/nektos/{{ name }}
   license: MIT
-  license_family: MIT
   license_file: LICENSE
   summary: Run your GitHub Actions locally
   dev_url: https://github.com/nektos/{{ name }}
