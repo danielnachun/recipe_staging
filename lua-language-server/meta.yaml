@@ -1,5 +1,5 @@
 {% set name = "lua-language-server" %}
-{% set version = "3.6.18" %}
+{% set version = "3.6.25" %}
 
 package:
   name: {{ name|lower }}
