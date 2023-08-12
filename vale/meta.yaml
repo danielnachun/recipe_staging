@@ -1,5 +1,5 @@
 {% set name = "vale" %}
-{% set version = "2.27.0" %}
+{% set version = "2.28.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/errata-ai/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 65de0683d653767da8ef9f58fe3bf5978263978db4b98ee9609d7b90f2c4f4dc
+  sha256: db8ba14266e026dbbefcd6495e9095a41434e599c109310a6f493a6025a5a42f
 
 build:
   number: 0
@@ -23,7 +23,6 @@ test:
 about:
   home: https://docs.errata.ai
   license: MIT
-  license_family: MIT
   license_file: LICENSE
   summary: Syntax-aware linter for prose
   dev_url: https://github.com/errata-ai/{{ name }}
