@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/yoav-lavi/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  url: https://github.com/yoav-lavi/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
   sha256: d7605160d3589578c84a919c09addd8f4bd1f06441795192041b491462c9f655
 
 build:
