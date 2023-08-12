@@ -1,5 +1,5 @@
 {% set name = "kickstart" %}
-{% set version = "0.3.0" %}
+{% set version = "0.4.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/Keats/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 98f25f870d6b1bff9bb22a485cf307d42a1d4243550080cf0d122c6d71c23ded
+  sha256: 5aae308d7d6aa021ddf7f5dc882f8199a5d4f4db8cb8f7175c1c1ac831075a8c
 
 build:
   number: 0
