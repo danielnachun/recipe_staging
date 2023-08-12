@@ -1,5 +1,5 @@
 {% set name = "chezmoi" %}
-{% set version = "2.34.1" %}
+{% set version = "2.37.0" %}
 
 package:
   name: {{ name|lower }}
@@ -23,7 +23,6 @@ test:
 about:
   home: https://chezmoi.io
   license: MIT
-  license_family: MIT
   license_file: LICENSE
   summary: Manage your dotfiles across multiple diverse machines, securely
   dev_url: https://github.com/twpayne/{{ name }}
