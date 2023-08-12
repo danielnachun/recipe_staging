@@ -1,5 +1,5 @@
 {% set name = "chars" %}
-{% set version = "0.6.0" %}
+{% set version = "0.7.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/antifuchs/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 34537fd7b8b5fdc79a35284236443b07c54dded81d558c5bb774a2a354b498c7
+  sha256: 2f79843a3b1173870b41ebce491a54812b13a44090d0ae30a6f572caa91f0736
 
 build:
   number: 0
