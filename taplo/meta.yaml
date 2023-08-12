@@ -1,5 +1,5 @@
 {% set name = "taplo" %}
-{% set version = "0.8.0" %}
+{% set version = "0.8.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/tamasfe/{{ name }}/archive/refs/tags/release-{{ name }}-cli-{{ version }}.tar.gz
-  sha256: 8383920ba8bf90b98cf47628df4bf998ee224965af449d3f11f0e199ce43fa0a
+  sha256: 8c011d724bb6dd5d6af1fc4d416409f6686102850a6e74779f6bfa785c03bf4f
 
 build:
   number: 0
