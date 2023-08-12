@@ -1,5 +1,5 @@
 {% set name = "commitlint" %}
-{% set version = "17.6.5" %}
+{% set version = "17.7.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,13 +7,12 @@ package:
 
 source:
   url: https://registry.npmjs.org/{{ name }}/-/{{ name }}-{{ version }}.tgz
-  sha256: 6f57b54aec64b81e1b28c18d740e2c2490aec0f605fe71ea00f468eae68bc97c
+  sha256: 5ab11e73eb30fc1cee2c75306b58f729e6a69d628fc5117324dcf428410694ca
 
 build:
   number: 0
 
 requirements:
-  build:
   host:
     - nodejs
   run:
@@ -26,7 +25,6 @@ test:
 about:
   home: https://commitlint.js.org
   license: MIT
-  license_family: MIT
   summary: Lint commit messages according to a commit convention
   dev_url: https://github.com/conventional-changelog/{{ name }}
 
