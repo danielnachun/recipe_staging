@@ -24,8 +24,10 @@ test:
 
 about:
   home: https://yoav-lavi.github.io/{{ name }}/book
-  license: MIT
-  license_file: LICENSE
+  license: MIT AND Apache-2.0
+  license_file: 
+    - LICENSE-APACHE
+    - LICENSE-MIT
   summary: Language that compiles to regular expressions
   dev_url: https://github.com/yoav-lavi/{{ name }}
 
