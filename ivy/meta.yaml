@@ -1,0 +1,34 @@
+{% set name = "ivy" %}
+{% set version = "2.5.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://dlcdn.apache.org//ant/{{ name }}/{{ version }}/apache-{{ name }}-{{ version }}-src.tar.gz
+  sha256: 41c9aa4263d6c0564e9d8bcc4ef4dedb0dd72fd2e5324c6b7f23267bba432076
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ant
+    - openjdk =11
+  run:
+    - openjdk
+
+test:
+  commands:
+    - ivy -version
+
+about:
+  home: https://ant.apache.org/ivy
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Agile dependency manager
+
+extra:
+  recipe-maintainers:
+    - danielnachun
