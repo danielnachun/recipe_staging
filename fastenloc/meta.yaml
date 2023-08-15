@@ -10,7 +10,7 @@ source:
   sha256: e6273addff0e48ce24f8f7e67833d6ee8fe1c84e4e595109b583986ff7376e1d
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -18,12 +18,12 @@ requirements:
     - make
   host:
     - blas
-    - boost-cpp
+    - boost-cpp =1.80
     - gsl
     - zlib
   run:
     - _openmp_mutex
-    - boost-cpp
+    - boost-cpp =1.80
     - libopenblas
     - libzlib
 
