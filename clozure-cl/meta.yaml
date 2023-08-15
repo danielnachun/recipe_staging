@@ -1,0 +1,38 @@
+{% set name = "clozure-cl" %}
+{% set version = "1.12.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  - url: https://github.com/Clozure/ccl/archive/v{{ version }}.tar.gz
+    sha256: 7f424c52041486dde91e32726f919a16fb1d7272d2a6e404673ae63e04f2d185
+  - url: https://github.com/Clozure/ccl/releases/download/v{{ version }}/darwinx86.tar.gz  # [osx]
+    sha256: 428406380e64e42b1a5c202b7da807bfe8a5de507a466ad873f6292e389b1b2b  # [osx]
+  - url: https://github.com/Clozure/ccl/releases/download/v1.12.1/linuxx86.tar.gz  # [linux]
+    sha256: ec98d881abc3826b7fd5ec811f01f9bb77e4491ac4eb7f1cea5e3b26d5098052  # [linux]
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - binutils
+    - m4
+    - make
+
+test:
+  commands:
+    - ccl64 -h
+
+about:
+  home: https://ccl.clozure.com
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Common Lisp implementation with a long history
+
+extra:
+  recipe-maintainers:
+    - danielnachun
