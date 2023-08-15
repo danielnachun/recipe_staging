@@ -1,0 +1,40 @@
+{% set name = "clisp" %}
+{% set version = "2.49.92" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://alpha.gnu.org/gnu/clisp/clisp-2.49.92.tar.bz2
+  sha256: bd443a94aa9b02da4c4abbcecfc04ffff1919c0a8b0e7e35649b86198cd6bb89
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+  host:
+    - libsigsegv
+    - ncurses
+    - readline
+  run:
+    - libsigsegv
+    - ncurses
+    - readline
+
+test:
+  commands:
+    - clisp --help
+
+about:
+  home: https://clisp.sourceforge.io
+  license: GPL-2.0-or-later
+  license_file: GNU-GPL
+  summary: GNU CLISP, a Common Lisp implementation
+
+extra:
+  recipe-maintainers:
+    - danielnachun
