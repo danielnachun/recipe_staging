@@ -22,7 +22,8 @@ requirements:
     - gsl
     - zlib
   run:
-    - _openmp_mutex
+    - _openmp_mutex  # [linux]
+    - llvm-openmp  # [osx]
     - boost-cpp =1.80
     - libopenblas
     - libzlib
