@@ -12,8 +12,6 @@ tee image << EOF
 (quit)
 EOF
     cat image | ./dx86cl64 -n --image-name x86-boot64.image
-    rm -rf dx86cl64
-    rm -rf dx86cl64.image
 else
     ./lx86cl64 -n -l lib/x8664env.lisp \
         -e "(ccl:rebuild-ccl :full t)" \
@@ -23,11 +21,8 @@ tee image << EOF
 (quit)
 EOF
     cat image | ./lx86cl64 -n --image-name x86-boot64
-    rm -rf lx86cl64
-    rm -rf lx86cl64.image
 fi
 
-rm -rf x86-headers64
 mkdir -p ${PREFIX}/libexec/${PKG_NAME}
 mkdir -p ${PREFIX}/share/doc/${PKG_NAME}
 mkdir -p ${PREFIX}/bin
