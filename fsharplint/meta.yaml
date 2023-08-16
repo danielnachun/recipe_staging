@@ -1,0 +1,36 @@
+{% set name = "fsharplint" %}
+{% set version = "0.21.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/fsprojects/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 45454f6bddd5c631a4c0635a1586b4521e65443ad973db159149f1bd94a4e045
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+  host:
+    - dotnet
+  run:
+    - dotnet
+
+test:
+  commands:
+    - fsharplint --help
+
+about:
+  url: https://github.com/fsprojects/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: Lint tool for F#
+  dev_url: https://github.com/fsprojects/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
