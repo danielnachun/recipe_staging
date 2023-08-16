@@ -1,0 +1,27 @@
+diff --git a/src/core/foundation.cc b/src/core/foundation.cc
+index 5d1a909..4812e1a 100644
+--- a/src/core/foundation.cc
++++ b/src/core/foundation.cc
+@@ -32,6 +32,7 @@ THE SOFTWARE.
+ 
+ #include <csignal>
+ #include <dlfcn.h>
++#include <stdarg.h>
+ 
+ #include <clasp/core/foundation.h>
+ #include <clasp/core/object.h>
+diff --git a/src/llvmo/link_intrinsics.cc b/src/llvmo/link_intrinsics.cc
+index c9baf9b..4a42e41 100644
+--- a/src/llvmo/link_intrinsics.cc
++++ b/src/llvmo/link_intrinsics.cc
+@@ -32,6 +32,7 @@ extern "C" {
+ };
+ #endif
+ #include <dlfcn.h>
++#include <stdarg.h>
+ #include <typeinfo>
+ #include <clasp/core/foundation.h>
+ #include <clasp/core/common.h>
+-- 
+2.25.1
+
