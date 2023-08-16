@@ -1,0 +1,49 @@
+{% set name = "clasp" %}
+{% set version = "2.3.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/clasp-developers/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: 495c2055c21077f2834022e3008ed548858d3973028548195397e5d7cac5c234
+  patches:
+    - 0001-fix-includes.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - binutils
+    - clangdev
+    - llvmdev
+    - ninja
+    - pkg-config
+    - sbcl
+    - sysroot_linux-64=2.17
+  host:
+    - boost-cpp
+    - elfutils  # [linux]
+    - fmt
+    - gmp
+    - libclang-cpp
+    - libllvm16
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://clasp-developers.github.io
+  license: LGPL-2.1-or-later
+  license_file: licenses/LGPL
+  summary: clasp Common Lisp environment
+  dev_url: https://github.com/clasp-developers/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
