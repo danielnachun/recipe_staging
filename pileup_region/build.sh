@@ -6,7 +6,12 @@ cargo-bundle-licenses \
     --format yaml \
     --output THIRDPARTY.yml
 
-export CFLAGS="-Wno-implicit-function-declaration"
+if [[ ${target_platform} =~ .*osx.* ]]; then
+    export CFLAGS="-Wno-implicit-function-declaration"
+    # HACK - clang -print-resource-dir returns the wrong directory on macOS for some reason
+    export RUSTFLAGS="-L${BUILD_PREFIX}/lib/clang/16.0.6/lib/darwin"
+fi
+
 # build statically linked binary with Rust
 cargo install --locked --root ${PREFIX} --path .
 
