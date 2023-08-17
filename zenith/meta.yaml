@@ -1,0 +1,36 @@
+{% set name = "zenith" %}
+{% set version = "0.14.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/bvaisvil/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: 2cbcea2625cfa97c161b974ad412a47e330f7fd31bec0479e329ed3606cfc569
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+    - clangdev <16  # [linux]
+    - sysroot_linux-64=2.17  # [linux]
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/bvaisvil/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: In terminal graphical metrics for your *nix system
+  dev_url: https://github.com/bvaisvil/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
