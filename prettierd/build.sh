@@ -2,6 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+yarn install
 npm pack --ignore-scripts
 
 npm install -ddd \
