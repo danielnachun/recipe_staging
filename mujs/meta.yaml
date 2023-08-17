@@ -1,0 +1,36 @@
+{% set name = "mujs" %}
+{% set version = "1.3.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/ccxvii/{{ name }}/archive/{{ version }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 59763cc32776714b4f00a0efede83f4f56b381c9dbaced4756d665c214249dca
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+    - sed
+  host:
+    - readline
+
+test:
+  commands:
+    - test -f $PREFIX/bin/mujs
+
+about:
+  home: https://www.mujs.com
+  license: ISC
+  license_file: COPYING
+  summary: Embeddable Javascript interpreter
+  dev_url: https://github.com/ccxvii/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun

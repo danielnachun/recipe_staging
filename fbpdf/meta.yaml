@@ -1,0 +1,58 @@
+{% set name = "fbpdf" %}
+{% set version = "r102.6276360" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/aligrudi/{{ name }} 
+  git_rev: 6276360f47edd71de736e153f5dcc82b6d60b3db
+
+build:
+  number: 0
+  skip: True  # [not linux]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - gcc
+    - gxx
+    - make
+  host:
+    - djvulibre
+    - freetype
+    - libgumbo
+    - harfbuzz
+    - jbig2dec
+    - libjpeg-turbo
+    - mupdf
+    - mujs
+    - openjpeg
+  run:
+    - djvulibre
+    - freetype
+    - libgumbo
+    - harfbuzz
+    - jbig2dec
+    - libjpeg-turbo
+    - mupdf
+    - mujs
+    - openjpeg
+    - libzlib
+
+test:
+  commands:
+    - test -f $PREFIX/bin/fbpdf-mupdf
+
+about:
+  home: http://litcave.rudi.ir
+  license: ISC
+  license_file: LICENSE
+  summary: A small framebuffer pdf viewer, based on MuPDF
+  dev_url: https://github.com/aligrudi/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
