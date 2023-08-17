@@ -2,6 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+mkdir -p ${PREFIX}/bin
 install -m 755 "${SRC_DIR}/qtl/src/ase_aggregate_by_individual.py" "${PREFIX}/bin/ase_aggregate_by_individual.py"
 install -m 755 "${SRC_DIR}/qtl/src/ase_calculate_lamp.py" "${PREFIX}/bin/ase_calculate_lamp.py"
 install -m 755 "${SRC_DIR}/qtl/src/combine_covariates.py" "${PREFIX}/bin/combine_covariates.py"
