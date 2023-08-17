@@ -1,5 +1,5 @@
 {% set name = "fselect" %}
-{% set version = "0.8.3" %}
+{% set version = "0.8.4" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/jhspetersson/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: 2b8e8b40ef490663239f3a24f9383fd5b832530e96513d58755b688b507d876e
+  sha256: db720310ff265012f283f9fdfb4ac99188bb4a3cbfe5550171c7e2ab55a36420
 
 build:
   number: 0
