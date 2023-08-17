@@ -1,5 +1,5 @@
 {% set name = "zenith" %}
-{% set version = "0.13.1" %}
+{% set version = "0.14.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/bvaisvil/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: 1f2914a1ddd7dd76cca0e0c07ca77bd048addfd80fc6329ea7b83647ea66020a
+  sha256: 2cbcea2625cfa97c161b974ad412a47e330f7fd31bec0479e329ed3606cfc569
 
 build:
   number: 0
