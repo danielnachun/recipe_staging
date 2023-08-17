@@ -12,4 +12,5 @@ export RUSTONIG_DYNAMIC_LIBONIG=1
 cargo install --locked --root ${PREFIX}/libexec/${PKG_NAME} --path .
 
 mkdir -p ${PREFIX}/bin
-ls ${PREFIX}/libexec/${PKG_NAME}/bin | xargs -I % bash -c "ln -sf ${PREFIX}/libexec/${PKG_NAME}/bin/% ${PREFIX}/bin/u%"
+ln -sf ${PREFIX}/libexec/${PKG_NAME}/bin/find ${PREFIX}/bin/ufind
+ln -sf ${PREFIX}/libexec/${PKG_NAME}/bin/xargs ${PREFIX}/bin/uxargs

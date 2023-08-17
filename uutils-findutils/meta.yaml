@@ -18,7 +18,6 @@ requirements:
     - {{ compiler('c') }}
     - cargo-bundle-licenses
     - clangdev <16
-    - findutils
     - sysroot_linux-64=2.17  # [linux]
     - pkg-config
   host:
