@@ -1,0 +1,41 @@
+{% set name = "gtex-pipeline-genotype" %}
+{% set version = "gtex_v8" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  git_url: https://github.com/broadinstitute/gtex-pipeline
+  git_rev: bed31e12a48b25db8b111252e2136b31c64c9e82
+
+build:
+  number: 0
+
+requirements:
+  run:
+    - numpy
+    - pandas
+    #- shapeit2
+    #- extractpirs
+    #- bcftools 
+    #- htslib 
+    #- samtools 
+
+test:
+   commands:
+    - python3 ${PREFIX}/bin/compute_genotype_pcs.py -h
+    - python3 ${PREFIX}/bin/aggregate_pirs.py -h
+    - python3 ${PREFIX}/bin/bam_to_pir.py -h
+    - python3 ${PREFIX}/bin/run_shapeit.py -h
+    - python3 ${PREFIX}/bin/shapeit_postprocess.py -h
+
+about:
+  home: https://github.com/broadinstitute/gtex-pipeline
+  license: OTHER
+  summary: GTEx & TOPMed data production and analysis pipelines - genotype component
+  dev_url: https://github.com/broadinstitute/gtex-pipeline
+
+extra:
+  recipe-maintainers:
+    - danielnachun
