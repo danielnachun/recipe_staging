@@ -19,6 +19,11 @@ requirements:
     - cargo-bundle-licenses
     - clangdev #[linux]
     - sysroot_linux-64=2.17
+    - pkg-config
+  host:
+    - oniguruma
+  run:
+    - oniguruma
 
 test:
   commands:
