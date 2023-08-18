@@ -6,7 +6,7 @@ package:
   version: "{{ version }}"
 
 source:
-  url: https://pypi.io/packages/source/Airshare/Airshare/Airshare-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/airshare/airshare/airshare-{{ version }}.tar.gz
   sha256: 138976933bcf2c0bc99f18901242544919e9fafe43735b4f83b19d4ae5964be7
 
 build:
@@ -51,8 +51,7 @@ test:
 about:
   home: https://github.com/KuroLabs/airshare
   license: MIT
-  license_family: MIT
-  summary: "Cross-platform content sharing in a local network."
+  summary: Cross-platform content sharing in a local network
   doc_url: https://github.com/KuroLabs/airshare
 
 extra:
