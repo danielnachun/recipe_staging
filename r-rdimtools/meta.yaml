@@ -1,0 +1,78 @@
+{% set version = '1.1.0' %}
+
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
+
+package:
+  name: r-rdimtools
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url:
+    - {{ cran_mirror }}/src/contrib/Rdimtools_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/Rdimtools/Rdimtools_{{ version }}.tar.gz
+  sha256: 2314461d3b3bbe53c717acfc78d251fb3a1528ee135682fd09144e60d301b28b
+
+build:
+  merge_build_host: True  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('c') }}              # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{ compiler('cxx') }}            # [not win]
+    - {{ compiler('m2w64_cxx') }}      # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}make
+    - {{ posix }}sed               # [win]
+    - {{ posix }}coreutils         # [win]
+    - {{ posix }}zip               # [win]
+  host:
+    - r-base=4.2
+    - r-cvxr >=1.0
+    - r-mass
+    - r-rann
+    - r-rspectra
+    - r-rcpp >=0.12.15
+    - r-rcpparmadillo
+    - r-rcppde
+    - r-rcppdist
+    - r-rcsdp
+    - r-rdpack
+    - r-maotai >=0.2.4
+    - r-mclustcomp
+  run:
+    - r-base>=4.2
+    - {{native}}gcc-libs         # [win]
+    - r-cvxr >=1.0
+    - r-mass
+    - r-rann
+    - r-rspectra
+    - r-rcpp >=0.12.15
+    - r-rcpparmadillo
+    - r-rcppde
+    - r-rcppdist
+    - r-rcsdp
+    - r-rdpack
+    - r-maotai >=0.2.4
+    - r-mclustcomp
+
+test:
+  commands:
+    - $R -e "library('Rdimtools')"           # [not win]
+    - "\"%R%\" -e \"library('Rdimtools')\""  # [win]
+
+about:
+  home: https://www.kisungyou.com/Rdimtools/
+  license: MIT
+  summary: We provide linear and nonlinear dimension reduction techniques. Intrinsic dimension
+    estimation methods for exploratory analysis are also provided. For more details
+    on the package, see the paper by You (2020) <arXiv:2005.11107>.
+  license_family: MIT
+  license_file:
+    - '{{ environ["PREFIX"] }}/lib/R/share/licenses/MIT'
+    - LICENSE
