@@ -1,0 +1,37 @@
+{% set name = "prettierd" %}
+{% set version = "0.24.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/fsouza/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 0b5dc0e58d70fc1e5d8a72d98ec57016378e01d2d9e1d8178f8b783cbc6fcbb0
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - typescript
+    - yarn
+  host:
+    - nodejs
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/fsouza/{{ name }}
+  license: ISC
+  license_family: OTHER
+  summary: prettier, as a daemon, for ludicrous formatting speed
+  dev_url: https://github.com/fsouza/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
