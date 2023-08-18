@@ -20,7 +20,6 @@ requirements:
   host:
     - ipython
     - matplotlib
-    - numpy ==1.24
     - pandas
     - pip
     - python ==3.10.*
@@ -31,7 +30,6 @@ requirements:
   run:
     - ipython
     - matplotlib
-    - numpy ==1.24
     - pandas
     - python ==3.10.*
     - scikit-image
