@@ -22,7 +22,7 @@ requirements:
     - deepdish >=0.3.7
     - deeplift >=0.6.13.0
     - h5py >=2.10.0
-    - kundajelab-shap >=1
+    - kundajelab-shap
     - matplotlib >=3.3.1
     - matplotlib-venn >=0.11.6
     - modisco >=0.5.16.0
@@ -43,7 +43,7 @@ requirements:
     - deepdish >=0.3.7
     - deeplift >=0.6.13.0
     - h5py >=2.10.0
-    - kundajelab-shap >=1
+    - kundajelab-shap
     - matplotlib >=3.3.1
     - matplotlib-venn >=0.11.6
     - modisco >=0.5.16.0
