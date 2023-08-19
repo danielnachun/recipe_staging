@@ -64,6 +64,7 @@ requirements:
     - lcms2             # [linux and (build_platform != target_platform)]
     - symlink-exe-build  # [win]
     - m2-bash            # [win]
+    - file              # [unix]
   host:
     - zlib              # [unix]
     - freetype          # [unix]
