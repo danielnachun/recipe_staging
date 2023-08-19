@@ -178,6 +178,13 @@ function source_build
     _TOOLCHAIN_ARGS="$_TOOLCHAIN_ARGS OBJCOPY=$BUILD_PREFIX/bin/$HOST-objcopy"
     _TOOLCHAIN_ARGS="$_TOOLCHAIN_ARGS OBJDUMP=$BUILD_PREFIX/bin/$HOST-objdump"
     _TOOLCHAIN_ARGS="$_TOOLCHAIN_ARGS READELF=$BUILD_PREFIX/bin/$HOST-readelf"
+    CONFIGURE_ARGS="$CONFIGURE_ARGS --with-boot-jdk=$SRC_DIR/bootjdk"
+    CONFIGURE_ARGS="$CONFIGURE_ARGS --with-freetype=system"
+    CONFIGURE_ARGS="$CONFIGURE_ARGS --with-fontconfig=$PREFIX"
+    CONFIGURE_ARGS="$CONFIGURE_ARGS --with-cups=$PREFIX"
+    CONFIGURE_ARGS="$CONFIGURE_ARGS --with-x=$PREFIX"
+  else
+    CONFIGURE_ARGS="$CONFIGURE_ARGS --with-boot-jdk=$SRC_DIR/zulu-20.jdk/Contents/Home"
   fi
 
   ./configure \
@@ -204,18 +211,10 @@ function source_build
     --with-stdc++lib=dynamic \
     --with-harfbuzz=system \
     --disable-warnings-as-errors \
-    --with-boot-jdk=$SRC_DIR/zulu-20.jdk/Contents/Home \
     --disable-javac-server \
     ${CONFIGURE_ARGS} \
     $_TOOLCHAIN_ARGS
 
-    #--with-boot-jdk=$SRC_DIR/bootjdk \
-    #--with-freetype=system \
-    #--with-fontconfig=$PREFIX \
-    #--with-cups=$PREFIX \
-    #--with-x=$PREFIX \
-  #make JOBS=$CPU_COUNT $_TOOLCHAIN_ARGS || printerror
-  #make JOBS=$CPU_COUNT images $_TOOLCHAIN_ARGS || printerror
   make JOBS=$CPU_COUNT CONF_NAME=labsjdk graal-builder-image $_TOOLCHAIN_ARGS || printerror
 }
 
