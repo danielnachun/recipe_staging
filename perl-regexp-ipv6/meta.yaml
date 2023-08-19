@@ -1,0 +1,39 @@
+{% set name = "perl-regexp-ipv6" %}
+{% set version = "0.03" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/S/SA/SALVA/Regexp-IPv6-{{ version }}.tar.gz
+  sha256: d542d17d75ce93631de8ba2156da0e0b58a755c409cd4a0d27a3873a26712ce2
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+test:
+  imports:
+    - Regexp::IPv6
+
+about:
+  home: http://metacpan.org/pod/Regexp-IPv6
+  license: unknown
+  summary: 'Regular expression for IPv6 addresses'
+
+maintainers:
+  - danielnachun

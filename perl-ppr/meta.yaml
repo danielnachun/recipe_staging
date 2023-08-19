@@ -1,0 +1,39 @@
+{% set name = "perl-ppr" %}
+{% set version = "0.001008" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/D/DC/DCONWAY/PPR-{{ version }}.tar.gz
+  sha256: 110e71c05f2e2c90eb01f0a0694e55a9dbe91c857e48125e1742d17e5cdb1e49
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+test:
+  imports:
+    - PPR
+
+about:
+  home: http://metacpan.org/pod/PPR
+  license: artistic_2
+  summary: 'Pattern-based Perl Recognizer'
+
+maintainers:
+  - danielnachun

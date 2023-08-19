@@ -1,0 +1,76 @@
+{% set name = "perl-perl-languageserver" %}
+{% set version = "2.4.0" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/G/GR/GRICHTER/Perl-LanguageServer-{{ version }}.tar.gz
+  sha256: 50ff09fd9ebca75892fd84a712c0a938c5275513f1c55ca6db420c63b865a0a8
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-anyevent
+    - perl-anyevent-aio
+    - perl-class-refresh
+    - perl-compiler-lexer
+    - perl-common-sense
+    - perl-coro
+    - perl-data-dump
+    - perl-hash-safekeys
+    - perl-io-aio
+    - perl-json
+    - perl-moose
+    - perl-padwalker
+  run:
+    - perl>=5.32
+    - perl-anyevent
+    - perl-anyevent-aio
+    - perl-class-refresh
+    - perl-common-sense
+    - perl-compiler-lexer
+    - perl-coro
+    - perl-data-dump
+    - perl-hash-safekeys
+    - perl-io-aio
+    - perl-json
+    - perl-moose
+    - perl-padwalker
+
+test:
+  imports:
+    - Perl::LanguageServer
+    - Perl::LanguageServer::DebuggerBridge
+    - Perl::LanguageServer::DebuggerProcess
+    - Perl::LanguageServer::DevTool
+    - Perl::LanguageServer::IO
+    - Perl::LanguageServer::Methods
+    - Perl::LanguageServer::Methods::DebugAdapter
+    - Perl::LanguageServer::Methods::DebugAdapterInterface
+    - Perl::LanguageServer::Methods::textDocument
+    - Perl::LanguageServer::Methods::workspace
+    - Perl::LanguageServer::Parser
+    - Perl::LanguageServer::Req
+    - Perl::LanguageServer::SyntaxChecker
+    - Perl::LanguageServer::Workspace
+
+about:
+  home: http://metacpan.org/pod/Perl-LanguageServer
+  license: artistic_2
+  summary: 'Language Server and Debug Protocol Adapter for Perl'
+
+maintainers:
+  - danielnachun

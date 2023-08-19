@@ -1,0 +1,38 @@
+{% set name = "perl-test-identity" %}
+{% set version = "0.01" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/P/PE/PEVANS/Test-Identity-{{ version }}.tar.gz
+  sha256: 2f0205009aed152668182aafa16357ab1f47b4cbc001e89871b67387ef8e5f23
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Build.PL
+    - perl ./Build
+    - perl ./Build test
+    - perl ./Build install --installdirs site
+
+requirements:
+  host:
+    - perl=5.32
+    - perl-module-build
+  run:
+    - perl>=5.32
+
+test:
+  imports:
+    - Test::Identity
+
+about:
+  home: http://metacpan.org/pod/Test-Identity
+  license: perl_5
+  summary: 'assert the referential identity of a reference'
+
+maintainers:
+  - danielnachun

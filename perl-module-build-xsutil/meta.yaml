@@ -1,0 +1,45 @@
+{% set name = "perl-module-build-xsutil" %}
+{% set version = "0.19" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/H/HI/HIDEAKIO/Module-Build-XSUtil-{{ version }}.tar.gz
+  sha256: 9063b3c346edeb422807ffe49ffb23038c4f900d4a77b845ce4b53d97bf29400
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+  host:
+    - perl=5.32
+    - perl-devel-checkcompiler
+    - perl-module-build
+    - perl-file-copy-recursive
+    - perl-file-copy-recursive-reduced
+    - perl-cwd-guard
+    - perl-capture-tiny
+  run:
+    - perl>=5.32
+    - perl-devel-checkcompiler
+    - perl-module-build
+    - perl-file-copy-recursive
+    - perl-file-copy-recursive-reduced
+    - perl-cwd-guard
+    - perl-capture-tiny
+
+test:
+  imports:
+    - Module::Build::XSUtil
+
+about:
+  home: https://github.com/hideo55/Module-Build-XSUtil
+  license: perl_5
+  summary: 'A Module::Build class for building XS modules'
+
+maintainers:
+  - danielnachun

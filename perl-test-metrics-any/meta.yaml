@@ -1,0 +1,40 @@
+{% set name = "perl-test-metrics-any" %}
+{% set version = "0.01" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/P/PE/PEVANS/Test-Metrics-Any-{{ version }}.tar.gz
+  sha256: 2506c88d4eb21b274b1085f806c918dcc97fff69e16d1249e6e19d943625e468
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Build.PL
+    - perl ./Build
+    - perl ./Build test
+    - perl ./Build install --installdirs site
+
+requirements:
+  host:
+    - perl=5.32
+    - perl-module-build
+    - perl-metrics-any
+  run:
+    - perl>=5.32
+    - perl-metrics-any
+
+test:
+  imports:
+    - Test::Metrics::Any
+
+about:
+  home: http://metacpan.org/pod/Test-Metrics-Any
+  license: perl_5
+  summary: 'assert that code produces metrics via Metrics::Any'
+
+maintainers:
+  - danielnachun

@@ -1,0 +1,39 @@
+{% set name = "perl-devel-overrideglobalrequire" %}
+{% set version = "0.001" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/D/DA/DAGOLDEN/Devel-OverrideGlobalRequire-{{ version }}.tar.gz
+  sha256: 0791892de3ae292af4a94e382f21db1ee88210875031851e6ea82c3410785ef9
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+test:
+  imports:
+    - Devel::OverrideGlobalRequire
+
+about:
+  home: https://metacpan.org/release/Devel-OverrideGlobalRequire
+  license: perl_5
+  summary: 'Override CORE::GLOBAL::require safely'
+
+maintainers:
+  - danielnachun

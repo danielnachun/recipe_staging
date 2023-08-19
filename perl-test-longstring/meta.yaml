@@ -1,0 +1,36 @@
+{% set name = "perl-test-longstring" %}
+{% set version = "0.17" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/R/RG/RGARCIA/Test-LongString-{{ version }}.tar.gz
+  sha256: abc4349eaf04d1bec1e464166a3018591ea846d8f3c5c9c8af4ac4905d3e974f
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl >=5.32
+  run:
+    - perl >=5.32
+
+test:
+  imports:
+    - Test::LongString
+
+about:
+  home: http://metacpan.org/pod/Test-LongString
+  license: perl_5
+  summary: 'tests strings for equality, with more helpful failures'

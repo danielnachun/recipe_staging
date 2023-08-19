@@ -1,0 +1,131 @@
+{% set name = "perl-pls" %}
+{% set version = "0.905" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/M/MR/MREISNER/PLS-{{ version }}.tar.gz
+  sha256: 4555b52799c16415c3cbfe5e301ea02ca0ebbc34214c7fe52f1d7dca45302e29
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-ppi
+    - perl-pod-markdown
+    - perl-path-tiny
+    - perl-future
+    - perl-uri
+    - perl-ppr
+    - perl-perl-tidy
+    - perl-io-async
+    - perl-perl-critic
+    - perl-future-queue
+
+  run:
+    - perl>=5.32
+    - perl-ppi
+    - perl-pod-markdown
+    - perl-path-tiny
+    - perl-future
+    - perl-uri
+    - perl-ppr
+    - perl-perl-tidy
+    - perl-io-async
+    - perl-perl-critic
+    - perl-future-queue
+
+test:
+  imports:
+    - PLS
+    - PLS::JSON
+    - PLS::Parser::Document
+    - PLS::Parser::DocumentSymbols
+    - PLS::Parser::Element
+    - PLS::Parser::Element::Constant
+    - PLS::Parser::Element::Package
+    - PLS::Parser::Element::Subroutine
+    - PLS::Parser::Element::Variable
+    - PLS::Parser::Element::VariableStatement
+    - PLS::Parser::Index
+    - PLS::Parser::PackageSymbols
+    - PLS::Parser::Pod
+    - PLS::Parser::Pod::Builtin
+    - PLS::Parser::Pod::ClassMethod
+    - PLS::Parser::Pod::Method
+    - PLS::Parser::Pod::Package
+    - PLS::Parser::Pod::Subroutine
+    - PLS::Parser::Pod::Variable
+    - PLS::Server
+    - PLS::Server::Cache
+    - PLS::Server::Message
+    - PLS::Server::Method::CompletionItem
+    - PLS::Server::Method::ServerMethod
+    - PLS::Server::Method::TextDocument
+    - PLS::Server::Method::Workspace
+    - PLS::Server::Request
+    - PLS::Server::Request::CancelRequest
+    - PLS::Server::Request::Client::RegisterCapability
+    - PLS::Server::Request::CompletionItem::Resolve
+    - PLS::Server::Request::Exit
+    - PLS::Server::Request::Factory
+    - PLS::Server::Request::Initialize
+    - PLS::Server::Request::Initialized
+    - PLS::Server::Request::Progress
+    - PLS::Server::Request::Shutdown
+    - PLS::Server::Request::TextDocument::Completion
+    - PLS::Server::Request::TextDocument::Definition
+    - PLS::Server::Request::TextDocument::DidChange
+    - PLS::Server::Request::TextDocument::DidClose
+    - PLS::Server::Request::TextDocument::DidOpen
+    - PLS::Server::Request::TextDocument::DidSave
+    - PLS::Server::Request::TextDocument::DocumentSymbol
+    - PLS::Server::Request::TextDocument::Formatting
+    - PLS::Server::Request::TextDocument::Hover
+    - PLS::Server::Request::TextDocument::PublishDiagnostics
+    - PLS::Server::Request::TextDocument::RangeFormatting
+    - PLS::Server::Request::TextDocument::SignatureHelp
+    - PLS::Server::Request::Window::WorkDoneProgress::Create
+    - PLS::Server::Request::Workspace::ApplyEdit
+    - PLS::Server::Request::Workspace::Configuration
+    - PLS::Server::Request::Workspace::DidChangeConfiguration
+    - PLS::Server::Request::Workspace::DidChangeWatchedFiles
+    - PLS::Server::Request::Workspace::DidChangeWorkspaceFolders
+    - PLS::Server::Request::Workspace::ExecuteCommand
+    - PLS::Server::Request::Workspace::Symbol
+    - PLS::Server::Response
+    - PLS::Server::Response::Cancelled
+    - PLS::Server::Response::Completion
+    - PLS::Server::Response::DocumentSymbol
+    - PLS::Server::Response::Formatting
+    - PLS::Server::Response::Hover
+    - PLS::Server::Response::InitializeResult
+    - PLS::Server::Response::InvalidRequest
+    - PLS::Server::Response::Location
+    - PLS::Server::Response::RangeFormatting
+    - PLS::Server::Response::Resolve
+    - PLS::Server::Response::ServerNotInitialized
+    - PLS::Server::Response::Shutdown
+    - PLS::Server::Response::SignatureHelp
+    - PLS::Server::Response::WorkspaceSymbols
+    - PLS::Server::State
+
+about:
+  home: http://metacpan.org/pod/PLS
+  license: perl_5
+  summary: 'Perl Language Server'
+
+maintainers:
+  - danielnachun

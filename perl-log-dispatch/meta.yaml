@@ -1,0 +1,70 @@
+{% set name = "perl-log-dispatch" %}
+{% set version = "2.71" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/D/DR/DROLSKY/Log-Dispatch-{{ version }}.tar.gz
+  sha256: 9d60d9648c35ce2754731eb4deb7f05809ece1bd633b74d74795aed9ec732570
+
+build:
+  noarch: generic
+  number: 0
+  ignore_run_exports:
+    - perl-test-needs
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl >=5.32
+    - perl-devel-globaldestruction
+    - perl-dist-checkconflicts >=0.02
+    - perl-module-runtime
+    - perl-namespace-autoclean
+    - perl-params-validationcompiler
+    - perl-specio
+    - perl-sub-identify
+    - perl-test-needs
+    - perl-try-tiny
+  run:
+    - perl >=5.32
+    - perl-devel-globaldestruction
+    - perl-dist-checkconflicts >=0.02
+    - perl-module-runtime
+    - perl-namespace-autoclean
+    - perl-params-validationcompiler
+    - perl-specio
+    - perl-sub-identify
+    - perl-try-tiny
+
+test:
+  imports:
+    - Log::Dispatch
+    - Log::Dispatch::Base
+    - Log::Dispatch::Code
+    - Log::Dispatch::Email
+    - Log::Dispatch::File
+    - Log::Dispatch::File::Locked
+    - Log::Dispatch::Handle
+    - Log::Dispatch::Null
+    - Log::Dispatch::Output
+    - Log::Dispatch::Screen
+    - Log::Dispatch::Syslog
+    - Log::Dispatch::Types
+    - Log::Dispatch::Vars
+
+about:
+  home: https://metacpan.org/release/Log-Dispatch
+  license: artistic_2
+  summary: 'Dispatches messages to one or more outputs'
+
+maintainers:
+  - danielnachun

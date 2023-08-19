@@ -1,0 +1,56 @@
+{% set name = "perl-app-cope" %}
+{% set version = "0.99" %}
+
+package:
+  name: {{ name }}
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/xvybihal/cope/archive/refs/tags/v1.1-el9.tar.gz
+  sha256: 733768d3254a840c364bec8d914e753bc3741feaa8e50306592c2638f15371f2
+
+build:
+  number: 0
+  ignore_run_exports:
+    - perl-module-install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-class-inspector
+    - perl-env-path
+    - perl-file-sharedir
+    - perl-io-stty
+    - perl-io-tty
+    - perl-list-moreutils
+    - perl-number-format
+    - perl-params-util
+    - perl-regexp-common
+    - perl-regexp-ipv6
+    - perl-module-install
+  run:
+    - perl>=5.32
+    - perl-class-inspector
+    - perl-env-path
+    - perl-file-sharedir
+    - perl-io-stty
+    - perl-io-tty
+    - perl-list-moreutils
+    - perl-number-format
+    - perl-params-util
+    - perl-regexp-common
+    - perl-regexp-ipv6
+
+test:
+  imports:
+    - App::Cope
+
+about:
+  home: https://github.com/xvybihal/cope
+  license: perl_5
+  summary: 'Terminal colorizer'
+
+maintainers:
+  - danielnachun

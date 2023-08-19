@@ -1,0 +1,41 @@
+{% set name = "perl-moox-strictconstructor" %}
+{% set version = "0.011" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/H/HA/HARTZELL/MooX-StrictConstructor-{{ version }}.tar.gz
+  sha256: da382f822ffc4e22a03aa419a4257274999d36d89a4e1236ecf4fcf76bc653e2
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl >=5.32
+    - perl-moo
+    - perl-class-method-modifiers
+    - perl-strictures
+  run:
+    - perl >=5.32
+    - perl-moo
+    - perl-class-method-modifiers
+    - perl-strictures
+
+about:
+  home: https://metacpan.org/release/MooX-StrictConstructor
+  license: perl_5
+  summary: 'Make your Moo-based object constructors blow up on unknown attributes.'
+
+maintainers:
+  - danielnachun

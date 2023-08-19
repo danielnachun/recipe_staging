@@ -1,0 +1,62 @@
+{% set name = "perl-coro" %}
+{% set version = "6.57" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/M/ML/MLEHMANN/Coro-{{ version }}.tar.gz
+  sha256: 1928e48033540e11ebf5506986dd101af78d2421d210f96599223b15d51714c6
+
+build:
+  number: 0
+  ignore_run_exports:
+    - perl-canary-stability
+  script_env:
+    - PERL_CANARY_STABILITY_NOPROMPT=1
+    - PERL_MM_USE_DEFAULT=1
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+  host:
+    - perl=5.32
+    - perl-anyevent
+    - perl-canary-stability
+    - perl-common-sense
+    - perl-guard
+  run:
+    - perl>=5.32
+    - perl-anyevent
+    - perl-common-sense
+    - perl-guard
+
+test:
+  imports:
+    - Coro
+    - Coro::AnyEvent
+    - Coro::Channel
+    - Coro::Debug
+    - Coro::Handle
+    - Coro::MakeMaker
+    - Coro::RWLock
+    - Coro::Select
+    - Coro::Semaphore
+    - Coro::SemaphoreSet
+    - Coro::Signal
+    - Coro::Socket
+    - Coro::Specific
+    - Coro::State
+    - Coro::Storable
+    - Coro::Timer
+    - Coro::Util
+
+about:
+  home: http://metacpan.org/pod/Coro
+  license: unknown
+  summary: 'the only real threads in perl'
+
+maintainers:
+  - danielnachun

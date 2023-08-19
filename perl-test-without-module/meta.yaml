@@ -1,0 +1,39 @@
+{% set name = "perl-test-without-module" %}
+{% set version = "0.21" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/C/CO/CORION/Test-Without-Module-{{ version }}.tar.gz
+  sha256: 3cdeafadac4853ebeafe689346d555da5dfa3cfa9d4c84e3e5e7bfee50beec46
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl >=5.32
+  run:
+    - perl >=5.32
+
+test:
+  imports:
+    - Test::Without::Module
+
+about:
+  home: http://metacpan.org/pod/Test-Without-Module
+  license: perl_5
+  summary: 'Test fallback behaviour in absence of modules'
+
+maintainers:
+  - danielnachun

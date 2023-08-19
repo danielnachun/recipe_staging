@@ -1,0 +1,42 @@
+{% set name = "perl-test2-plugin-nowarnings" %}
+{% set version = "0.09" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/D/DR/DROLSKY/Test2-Plugin-NoWarnings-{{ version }}.tar.gz
+  sha256: be3dd800042eef362bf17d2056cf9e934dee91ccce98e4f178b8fb5772f2fb74
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl >=5.32
+    - perl-test2-suite
+  run:
+    - perl >=5.32
+    - perl-test2-suite
+
+test:
+  imports:
+    - Test2::Event::Warning
+    - Test2::Plugin::NoWarnings
+
+about:
+  home: https://metacpan.org/release/Test2-Plugin-NoWarnings
+  license: artistic_2
+  summary: 'Fail if tests warn'
+
+maintainers:
+  - danielnachun

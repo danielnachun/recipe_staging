@@ -1,0 +1,53 @@
+{% set name = "perl-datetime-format-builder" %}
+{% set version = "0.83" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/D/DR/DROLSKY/DateTime-Format-Builder-{{ version }}.tar.gz
+  sha256: 61ffb23d85b3ca1786b2da3289e99b57e0625fe0e49db02a6dc0cb62c689e2f2
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl >=5.32
+    - perl-datetime
+    - perl-datetime-format-strptime
+    - perl-params-validate
+    - perl-sub-identify
+  run:
+    - perl >=5.32
+    - perl-datetime
+    - perl-datetime-format-strptime
+    - perl-params-validate
+    - perl-sub-identify
+
+test:
+  imports:
+    - DateTime::Format::Builder
+    - DateTime::Format::Builder::Parser
+    - DateTime::Format::Builder::Parser::Dispatch
+    - DateTime::Format::Builder::Parser::Quick
+    - DateTime::Format::Builder::Parser::Regex
+    - DateTime::Format::Builder::Parser::Strptime
+    - DateTime::Format::Builder::Parser::generic
+
+about:
+  home: https://metacpan.org/release/DateTime-Format-Builder
+  license: artistic_2
+  summary: 'Create DateTime parser classes and objects.'
+
+maintainers:
+  - danielnachun

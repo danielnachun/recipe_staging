@@ -1,0 +1,36 @@
+{% set name = "perl-guard" %}
+{% set version = "1.023" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/M/ML/MLEHMANN/Guard-{{ version }}.tar.gz
+  sha256: 34c4ddf91fc93d1090d86da14df706d175b1610c67372c01e12ce9555d4dd1dc
+
+build:
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+test:
+  imports:
+    - Guard
+
+about:
+  home: http://metacpan.org/pod/Guard
+  license: unknown
+  summary: 'safe cleanup blocks'

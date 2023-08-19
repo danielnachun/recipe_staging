@@ -1,0 +1,39 @@
+{% set name = "perl-file-sharedir-install" %}
+{% set version = "0.14" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/E/ET/ETHER/File-ShareDir-Install-{{ version }}.tar.gz
+  sha256: 8f9533b198f2d4a9a5288cbc7d224f7679ad05a7a8573745599789428bc5aea0
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+test:
+  imports:
+    - File::ShareDir::Install
+
+about:
+  home: https://github.com/Perl-Toolchain-Gang/File-ShareDir-Install
+  license: perl_5
+  summary: 'Install shared files'
+
+maintainers:
+  - danielnachun

@@ -1,0 +1,45 @@
+{% set name = "perl-pod-markdown" %}
+{% set version = "3.300" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/R/RW/RWSTAUNER/Pod-Markdown-{{ version }}.tar.gz
+  sha256: ec79e9908a3605749c4feb5054763eb6812dd33b54ce85a51339aa7cf9991b79
+
+build:
+  noarch: generic
+  number: 0
+  ignore_run_exports:
+    - perl-test-differences
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-test-differences
+    - perl-uri
+  run:
+    - perl>=5.32
+    - perl-uri
+
+test:
+  imports:
+    - Pod::Markdown
+    - Pod::Perldoc::ToMarkdown
+
+about:
+  home: https://github.com/rwstauner/Pod-Markdown
+  license: perl_5
+  summary: 'Convert POD to Markdown'
+
+maintainers:
+  - danielnachun

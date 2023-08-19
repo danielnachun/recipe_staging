@@ -1,0 +1,39 @@
+{% set name = "perl-task-weaken" %}
+{% set version = "1.06" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/E/ET/ETHER/Task-Weaken-{{ version }}.tar.gz
+  sha256: 2383fedb9dbaef646468ea824afbf7c801076720cfba0df2a7a074726dcd66be
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl >=5.32
+  run:
+    - perl >=5.32
+
+test:
+  imports:
+    - Task::Weaken
+
+about:
+  home: https://github.com/karenetheridge/Task-Weaken
+  license: perl_5
+  summary: 'Ensure that a platform has weaken support'
+
+maintainers:
+  - danielnachun

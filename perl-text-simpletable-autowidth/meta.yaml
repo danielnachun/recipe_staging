@@ -1,0 +1,43 @@
+{% set name = "perl-text-simpletable-autowidth" %}
+{% set version = "0.09" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/C/CU/CUB/Text-SimpleTable-AutoWidth-{{ version }}.tar.gz
+  sha256: 1c176e8e1c01bbe86a7f3acde4473f0f034d410050246f2eba4cf68a08daf643
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl >=5.32
+    - perl-moo
+    - perl-text-simpletable
+  run:
+    - perl >=5.32
+    - perl-moo
+    - perl-text-simpletable
+
+test:
+  imports:
+    - Text::SimpleTable::AutoWidth
+
+about:
+  home: http://metacpan.org/pod/Text-SimpleTable-AutoWidth
+  license: perl_5
+  summary: 'Text::SimpleTable::AutoWidth - Simple eyecandy ASCII tables with auto-width selection'
+
+maintainers:
+  - danielnachun

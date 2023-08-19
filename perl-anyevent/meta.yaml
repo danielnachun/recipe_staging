@@ -1,0 +1,56 @@
+{% set name = "perl-anyevent" %}
+{% set version = "7.17" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/M/ML/MLEHMANN/AnyEvent-{{ version }}.tar.gz
+  sha256: 50beea689c098fe4aaeb83806c40b9fe7f946d5769acf99f849f099091a4b985
+
+build:
+  noarch: generic
+  number: 0
+  ignore_run_exports:
+    - perl-canary-stability
+  script_env:
+    - PERL_CANARY_STABILITY_NOPROMPT=1
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-canary-stability
+  run:
+    - perl>=5.32
+
+test:
+  # Perl 'use' tests
+  imports:
+    - AnyEvent
+    - AnyEvent::DNS
+    - AnyEvent::Debug
+    - AnyEvent::Handle
+    - AnyEvent::IO
+    - AnyEvent::IO::Perl
+    - AnyEvent::Impl::Perl
+    - AnyEvent::Log
+    - AnyEvent::Loop
+    - AnyEvent::Socket
+    - AnyEvent::Strict
+    - AnyEvent::Util
+
+about:
+  home: http://metacpan.org/pod/AnyEvent
+  license: unknown
+  summary: 'simpler/faster/newer/cooler AnyEvent API'
+
+maintainers:
+  - danielnachun

@@ -1,0 +1,41 @@
+{% set name = "perl-test-filename" %}
+{% set version = "0.03" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/D/DA/DAGOLDEN/Test-Filename-{{ version }}.tar.gz
+  sha256: 6a450cc4c6281ed1129f32a1c0741f228967feda2e32a2915ff621c36525fcbe
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-path-tiny
+  run:
+    - perl>=5.32
+    - perl-path-tiny
+
+test:
+  imports:
+    - Test::Filename
+
+about:
+  home: https://metacpan.org/release/Test-Filename
+  license: apache_2_0
+  summary: 'Portable filename comparison'
+
+maintainers:
+  - danielnachun

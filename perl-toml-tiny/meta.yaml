@@ -1,0 +1,63 @@
+{% set name = "perl-toml-tiny" %}
+{% set version = "0.16" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/O/OA/OALDERS/TOML-Tiny-{{ version }}.tar.gz
+  sha256: b83381bda894eaa3a9c58ac464024068969c74bd38753e5253979322b8a5ba7c
+
+build:
+  noarch: generic
+  number: 0
+  ignore_run_exports:
+    - perl-test2-suite
+    - perl-test-pod
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl >=5.32
+    - perl-common-sense
+    - perl-datetime
+    - perl-datetime-format-iso8601
+    - perl-datetime-format-rfc3339
+    - perl-sub-identify
+    - perl-test-pod
+    - perl-test2-suite
+    - perl-toml-parser
+    - perl-types-serialiser
+  run:
+    - perl >=5.32
+    - perl-common-sense
+    - perl-datetime
+    - perl-datetime-format-iso8601
+    - perl-datetime-format-rfc3339
+    - perl-sub-identify
+    - perl-toml-parser
+    - perl-types-serialiser
+
+test:
+  imports:
+    - TOML::Tiny
+    - TOML::Tiny::Grammar
+    - TOML::Tiny::Parser
+    - TOML::Tiny::Tokenizer
+    - TOML::Tiny::Util
+    - TOML::Tiny::Writer
+
+about:
+  home: https://github.com/sysread/TOML-Tiny
+  license: perl_5
+  summary: 'a minimal, pure perl TOML parser and serializer'
+
+maintainers:
+  - danielnachun

@@ -1,0 +1,39 @@
+{% set name = "perl-datetime-format-rfc3339" %}
+{% set version = "1.2.0" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/I/IK/IKEGAMI/DateTime-Format-RFC3339-v{{ version }}.tar.gz
+  sha256: 136ee1224c31c6e017692a9f5e56fdb4f70a95f46aec3ad855d3783de35a0df7
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-datetime
+    - perl-sub-identify
+  run:
+    - perl>=5.32
+    - perl-datetime
+    - perl-sub-identify
+
+about:
+  home: http://search.cpan.org/dist/DateTime-Format-RFC3339/
+  license: unrestricted
+  summary: 'Parse and format RFC3339 datetime strings'
+
+maintainers:
+  - danielnachun

@@ -1,0 +1,41 @@
+{% set name = "perl-test-subcalls" %}
+{% set version = "1.10" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/E/ET/ETHER/Test-SubCalls-{{ version }}.tar.gz
+  sha256: cbc1e9b35a05e71febc13e5ef547a31c8249899bb6011dbdc9d9ff366ddab6c2
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl >=5.32
+    - perl-hook-lexwrap
+  run:
+    - perl >=5.32
+    - perl-hook-lexwrap
+
+test:
+  imports:
+    - Test::SubCalls
+
+about:
+  home: https://github.com/karenetheridge/Test-SubCalls
+  license: perl_5
+  summary: 'Track the number of times subs are called'
+
+maintainers:
+  - danielnachun

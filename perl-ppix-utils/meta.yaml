@@ -1,0 +1,46 @@
+{% set name = "perl-ppix-utils" %}
+{% set version = "0.003" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/D/DB/DBOOK/PPIx-Utils-{{ version }}.tar.gz
+  sha256: 2a9bccfc8ead03be01b67248fe8e152522040f798286fa4ef4432b7f2efdba11
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl >=5.32
+    - perl-b-keywords
+    - perl-ppi
+  run:
+    - perl >=5.32
+    - perl-b-keywords
+    - perl-ppi
+
+test:
+  imports:
+    - PPIx::Utils
+    - PPIx::Utils::Classification
+    - PPIx::Utils::Language
+    - PPIx::Utils::Traversal
+
+about:
+  home: https://github.com/Grinnz/PPIx-Utils
+  license: perl_5
+  summary: 'Utility functions for PPI'
+
+maintainers:
+  - danielnachun

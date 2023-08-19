@@ -1,0 +1,39 @@
+{% set name = "perl-io-stty" %}
+{% set version = "0.04" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/T/TO/TODDR/IO-Stty-{{ version }}.tar.gz
+  sha256: 5c9509f1a8693d8287fa013def0bf87aa64cd927138461ef8deb55503c6651c2
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+test:
+  imports:
+    - IO::Stty
+
+about:
+  home: http://wiki.github.com/toddr/IO-Stty
+  license: perl_5
+  summary: 'Change and print terminal line settings'
+
+maintainers:
+  - danielnachun

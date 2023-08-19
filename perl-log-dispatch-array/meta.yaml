@@ -1,0 +1,46 @@
+{% set name = "perl-log-dispatch-array" %}
+{% set version = "1.005" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/R/RJ/RJBS/Log-Dispatch-Array-{{ version }}.tar.gz
+  sha256: 311640b7a967f8dd7c9bb41a227073565636d70df4fcc1d44fed8a8223b347ca
+
+build:
+  noarch: generic
+  number: 0
+  ignore_run_expoerts:
+    - perl-test-deep
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl >=5.32
+    - perl-log-dispatch
+    - perl-test-deep
+    - perl-sub-identify
+  run:
+    - perl >=5.32
+    - perl-log-dispatch
+    - perl-sub-identify
+
+test:
+  imports:
+    - Log::Dispatch::Array
+
+about:
+  home: https://github.com/rjbs/Log-Dispatch-Array
+  license: perl_5
+  summary: 'log events to an array (reference)'
+
+maintainers:
+  - danielnachun

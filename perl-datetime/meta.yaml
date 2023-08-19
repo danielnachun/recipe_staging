@@ -1,0 +1,67 @@
+{% set name = "perl-datetime" %}
+{% set version = "1.59" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/D/DR/DROLSKY/DateTime-{{ version }}.tar.gz
+  sha256: de3e9a63ce15470b4db4adad4ba6ac8ec297d88c0c6c6b354b081883b0a67695
+
+build:
+  number: 0
+  ignore_run_exports:
+    - perl-dist-checkconflicts
+    - perl-test-without-module
+    - perl-test-warnings
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+  host:
+    - perl >=5.32
+    - perl-datetime-timezone
+    - perl-namespace-autoclean
+    - perl-dist-checkconflicts >=0.02
+    - perl-try-tiny
+    - perl-params-validationcompiler
+    - perl-datetime-locale
+    - perl-specio
+    - perl-sub-identify
+    - perl-test-without-module
+    - perl-test-warnings
+  run:
+    - perl >=5.32
+    - perl-sub-identify
+    - perl-datetime-timezone
+    - perl-namespace-autoclean
+    - perl-try-tiny
+    - perl-params-validationcompiler
+    - perl-specio
+    - perl-datetime-locale
+
+test:
+  imports:
+    - DateTime
+    - DateTime::Duration
+    - DateTime::Helpers
+    - DateTime::Infinite
+    - DateTime::LeapSecond
+    - DateTime::PP
+    - DateTime::PPExtra
+    - DateTime::Types
+
+about:
+  home: https://metacpan.org/release/DateTime
+  license: artistic_2
+  summary: 'A date and time object for Perl'
+
+maintainers:
+  - danielnachun

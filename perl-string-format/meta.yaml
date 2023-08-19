@@ -1,0 +1,39 @@
+{% set name = "perl-string-format" %}
+{% set version = "1.18" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/S/SR/SREZIC/String-Format-{{ version }}.tar.gz
+  sha256: 9e417a8f8d9ea623beea2d13a47c0d5a696fc8602c0509b826cd45f97b76e778
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl >=5.32
+  run:
+    - perl >=5.32
+
+test:
+  imports:
+    - String::Format
+
+about:
+  home: http://metacpan.org/pod/String-Format
+  license: unknown
+  summary: 'sprintf-like string formatting capabilities with arbitrary format definitions'
+
+maintainers:
+  - danielnachun

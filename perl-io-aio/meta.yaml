@@ -1,0 +1,48 @@
+{% set name = "perl-io-aio" %}
+{% set version = "4.79" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/M/ML/MLEHMANN/IO-AIO-{{ version }}.tar.gz
+  sha256: a4617de75fec37aadcc09b8219fdb1e6e65f5a14ae930a2d8c130c3e45cb366c
+
+build:
+  number: 0
+  ignore_run_exports:
+    - perl-canary-stability
+  script_env:
+    - PERL_CANARY_STABILITY_NOPROMPT=1
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+
+  host:
+    - perl=5.32
+    - perl-canary-stability
+    - perl-common-sense
+
+  run:
+    - perl>=5.32
+    - perl-common-sense
+
+test:
+  imports:
+    - IO::AIO
+
+about:
+  home: http://metacpan.org/pod/IO-AIO
+  license: unknown
+  summary: 'Asynchronous/Advanced Input/Output'
+
+maintainers:
+  - danielnachun

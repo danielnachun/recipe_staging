@@ -1,0 +1,44 @@
+{% set name = "perl-class-unload" %}
+{% set version = "0.11" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/I/IL/ILMARI/Class-Unload-{{ version }}.tar.gz
+  sha256: 52e29747a7e4d2e1a289c0e1de8107634f10c8426cd7c9d31ecac8383e4a0a5f
+
+build:
+  noarch: generic
+  number: 0
+  ignore_run_exports:
+    - perl-test-requires
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl-class-inspector
+    - perl-test-requires
+    - perl=5.32
+  run:
+    - perl-class-inspector
+    - perl>=5.32
+
+test:
+  imports:
+    - Class::Unload
+
+about:
+  home: https://github.com/ilmari/Class-Unload
+  license: perl_5
+  summary: 'Unload a class'
+
+maintainers:
+  - danielnachun

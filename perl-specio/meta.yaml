@@ -1,0 +1,97 @@
+{% set name = "perl-specio" %}
+{% set version = "0.48" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/D/DR/DROLSKY/Specio-{{ version }}.tar.gz
+  sha256: 0c85793580f1274ef08173079131d101f77b22accea7afa8255202f0811682b2
+
+build:
+  noarch: generic
+  number: 0
+  ignore_run_exports:
+    - perl-test-fatal
+    - perl-test-needs
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl >=5.32
+    - perl-devel-stacktrace
+    - perl-eval-closure
+    - perl-module-runtime
+    - perl-mro-compat
+    - perl-role-tiny
+    - perl-sub-quote
+    - perl-test-fatal
+    - perl-test-needs
+    - perl-try-tiny
+
+  run:
+    - perl >=5.32
+    - perl-devel-stacktrace
+    - perl-eval-closure
+    - perl-module-runtime
+    - perl-mro-compat
+    - perl-role-tiny
+    - perl-sub-quote
+    - perl-try-tiny
+
+test:
+  imports:
+    - Specio
+    - Specio::Coercion
+    - Specio::Constraint::AnyCan
+    - Specio::Constraint::AnyDoes
+    - Specio::Constraint::AnyIsa
+    - Specio::Constraint::Enum
+    - Specio::Constraint::Intersection
+    - Specio::Constraint::ObjectCan
+    - Specio::Constraint::ObjectDoes
+    - Specio::Constraint::ObjectIsa
+    - Specio::Constraint::Parameterizable
+    - Specio::Constraint::Parameterized
+    - Specio::Constraint::Role::CanType
+    - Specio::Constraint::Role::DoesType
+    - Specio::Constraint::Role::Interface
+    - Specio::Constraint::Role::IsaType
+    - Specio::Constraint::Simple
+    - Specio::Constraint::Structurable
+    - Specio::Constraint::Structured
+    - Specio::Constraint::Union
+    - Specio::Declare
+    - Specio::DeclaredAt
+    - Specio::Exception
+    - Specio::Exporter
+    - Specio::Helpers
+    - Specio::Library::Builtins
+    - Specio::Library::Numeric
+    - Specio::Library::Perl
+    - Specio::Library::String
+    - Specio::Library::Structured
+    - Specio::Library::Structured::Dict
+    - Specio::Library::Structured::Map
+    - Specio::Library::Structured::Tuple
+    - Specio::OO
+    - Specio::PartialDump
+    - Specio::Registry
+    - Specio::Role::Inlinable
+    - Specio::Subs
+    - Specio::TypeChecks
+
+about:
+  home: https://metacpan.org/release/Specio
+  license: artistic_2
+  summary: 'Type constraints and coercions for Perl'
+
+maintainers:
+  - danielnachun

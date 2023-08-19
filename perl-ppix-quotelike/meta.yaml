@@ -1,0 +1,55 @@
+{% set name = "perl-ppix-quotelike" %}
+{% set version = "0.023" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/W/WY/WYANT/PPIx-QuoteLike-{{ version }}.tar.gz
+  sha256: 3576a3149d2c53e07e9737b7892be5cfb84a499a6ef1df090b713b0544234d21
+
+build:
+  noarch: generic
+  number: 0
+  ignore_run_exports:
+    - perl-module-build
+  script:
+    - perl Build.PL
+    - perl ./Build
+    - perl ./Build test
+    - perl ./Build install --installdirs site
+
+requirements:
+  host:
+    - perl >=5.32
+    - perl-module-build 0.4232
+    - perl-readonly
+    - perl-ppi
+  run:
+    - perl >=5.32
+    - perl-readonly
+    - perl-ppi
+
+test:
+  imports:
+    - PPIx::QuoteLike
+    - PPIx::QuoteLike::Constant
+    - PPIx::QuoteLike::Dumper
+    - PPIx::QuoteLike::Token
+    - PPIx::QuoteLike::Token::Control
+    - PPIx::QuoteLike::Token::Delimiter
+    - PPIx::QuoteLike::Token::Interpolation
+    - PPIx::QuoteLike::Token::String
+    - PPIx::QuoteLike::Token::Structure
+    - PPIx::QuoteLike::Token::Unknown
+    - PPIx::QuoteLike::Token::Whitespace
+    - PPIx::QuoteLike::Utils
+
+about:
+  home: http://metacpan.org/pod/PPIx-QuoteLike
+  license: perl_5
+  summary: 'Parse Perl string literals and string-literal-like things.'
+
+maintainers:
+  - danielnachun

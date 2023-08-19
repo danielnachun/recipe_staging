@@ -1,0 +1,41 @@
+{% set name = "perl-struct-dumb" %}
+{% set version = "0.14" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/P/PE/PEVANS/Struct-Dumb-{{ version }}.tar.gz
+  sha256: 13c148536b10e28c6e0b4e132f29e4ca6e69b5749059c44157a27e84a5459436
+
+build:
+  noarch: generic
+  number: 0
+  ignore_run_exports:
+    - perl-test2-suite
+  script:
+    - perl Build.PL
+    - perl ./Build
+    - perl ./Build test
+    - perl ./Build install --installdirs site
+
+requirements:
+  host:
+    - perl=5.32
+    - perl-module-build
+    - perl-test2-suite
+  run:
+    - perl>=5.32
+
+test:
+  imports:
+    - Struct::Dumb
+
+about:
+  home: http://metacpan.org/pod/Struct-Dumb
+  license: perl_5
+  summary: 'make simple lightweight record-like structures'
+
+maintainers:
+  - danielnachun

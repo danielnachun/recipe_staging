@@ -1,0 +1,41 @@
+{% set name = "perl-types-serialiser" %}
+{% set version = "1.01" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/M/ML/MLEHMANN/Types-Serialiser-{{ version }}.tar.gz
+  sha256: f8c7173b0914d0e3d957282077b366f0c8c70256715eaef3298ff32b92388a80
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl >=5.32
+    - perl-common-sense
+  run:
+    - perl >=5.32
+    - perl-common-sense
+
+test:
+  imports:
+    - Types::Serialiser
+
+about:
+  home: http://metacpan.org/pod/Types-Serialiser
+  license: unknown
+  summary: 'simple data types for common serialisation formats'
+
+maintainers:
+  - danielnachun
