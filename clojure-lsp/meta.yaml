@@ -1,0 +1,41 @@
+{% set name = "clojure-lsp" %}
+{% set version = "2023.07.01-22.35.41" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version.replace("-", "_") }}
+
+source:
+  url: https://github.com/clojure-lsp/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: d056fe0b511616567bf0cf191d5bc33725dad76165a39ed29f69ec0a2b95bc9d
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - gcc  # [linux]
+    - graalvm
+    - babashka
+    - leiningen
+    - sed
+  host:
+    - zlib
+  run:
+    - libzlib
+
+test:
+  commands:
+    - clojure-lsp --help
+
+about:
+  home: https://github.com/babashka/{{ name }}
+  license: EPL-1.0
+  license_file: LICENSE
+  summary: Native, fast starting Clojure interpreter for scripting
+  dev_url: https://github.com/babashka/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun

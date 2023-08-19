@@ -1,0 +1,57 @@
+{% set name = "graalvm" %}
+{% set version = "23.0.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/oracle/graal/archive/refs/tags/vm-ce-{{ version }}.tar.gz
+  sha256: 39214d58c2ade625a686fb6e40c2bc529230c995a88fa611186faa7bda4ffbdb
+  folder: graal
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - binutils
+    - gcc  # [linux]
+    - gxx  # [linux]
+    - make
+    - mx
+    - ninja
+    - labs-openjdk
+    - sed
+  host:
+    - zlib
+  run:
+    - alsa-lib  #[linux]
+    - giflib  # [linux]
+    - freetype  # [linux]
+    - harfbuzz  # [linux]
+    - lcms2  # [linux]
+    - libjpeg-turbo  # [linux]
+    - libpng  # [linux]
+    - libzlib
+    - xorg-libx11  # [linux]
+    - xorg-libxext  # [linux]
+    - xorg-libxi  # [linux]
+    - xorg-libxrender  # [linux]
+    - xorg-libxtst  # [linux]
+
+test:
+  commands:
+    - native-image --help
+
+about:
+  home: http://graalvm.org/
+  license: UPL-1.0
+  license_file: graal/LICENSE
+  summary: "GraalVM: Run Programs Faster Anywhere"
+
+extra:
+  recipe-maintainers:
+    - danielnachun

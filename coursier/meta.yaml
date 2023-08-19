@@ -1,0 +1,40 @@
+{% set name = "coursier" %}
+{% set version = "2.1.5" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/coursier/{{ name }}
+  git_rev: v{{ version }}
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - curl
+    - gcc  # [linux]
+    - sed
+  host:
+    - graalvm
+    - zlib
+  run:
+    - libzlib
+
+test:
+  commands:
+    - cs --help
+
+about:
+  home: https://get-coursier.io
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Pure Scala Artifact Fetching
+  dev_url: https://github.com/coursier/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun

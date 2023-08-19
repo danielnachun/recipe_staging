@@ -1,0 +1,36 @@
+{% set name = "leiningen" %}
+{% set version = "2.10.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  - url: https://github.com/technomancy/{{ name }}/archive/{{ version }}.tar.gz
+    sha256: 5f4ae6ef2a9665176138730f00ce008b17de96af99a2ce5e4c3f017b2d4d5659
+  - url: https://github.com/technomancy/{{ name }}/releases/download/{{ version }}/leiningen-{{ version }}-standalone.jar
+    sha256: d27299bad34075ac2864d0bd0559f835c6e2c476c0b0a283bcbdb574fdadbb34
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - sed
+  run:
+    - graalvm
+
+test:
+  commands:
+    - lein --help
+
+about:
+  home: https://github.com/technomancy/{{ name }}
+  license: EPL-1.0
+  license_file: COPYING
+  summary: Build tool for Clojure
+  dev_url: https://github.com/technomancy/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
