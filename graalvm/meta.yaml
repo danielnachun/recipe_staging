@@ -24,6 +24,7 @@ requirements:
     - mx
     - ninja
     - labs-openjdk
+    - sed
   host:
     - zlib
   run:
