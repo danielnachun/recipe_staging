@@ -31,7 +31,6 @@ test:
     - Pod::Parser
     - Pod::InputObjects
     - Pod::ParseUtils
-    - Pod::PlainText
 
 about:
   home: https://metacpan.org/pod/Pod::Parser
