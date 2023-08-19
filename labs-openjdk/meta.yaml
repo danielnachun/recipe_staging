@@ -65,6 +65,7 @@ requirements:
     - symlink-exe-build  # [win]
     - m2-bash            # [win]
     - file              # [unix]
+    - sed               # [unix]
   host:
     - zlib              # [unix]
     - freetype          # [unix]
