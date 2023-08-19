@@ -16,7 +16,7 @@ requirements:
   build:
     - ruby
   run:
-    - graalvm
+    - openjdk
     - rlwrap
 
 test:
