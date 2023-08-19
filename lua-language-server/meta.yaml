@@ -18,11 +18,11 @@ requirements:
     - {{ compiler('cxx') }}
     - gcc  # [linux]
     - ninja
-    - sysroot_linux-64=2.17
+    - sysroot_linux-64=2.17  # [linux]
 
 test:
   commands:
-    - {{ name }} --help
+    - {{ name }} --version
 
 about:
   home: https://github.com/sumneko/lua-language-server
