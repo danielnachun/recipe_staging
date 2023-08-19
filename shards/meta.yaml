@@ -1,0 +1,48 @@
+{% set name = "shards" %}
+{% set version = "0.17.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  - url: https://github.com/crystal-lang/{{ name }}/archive/v{{ version }}.tar.gz
+    sha256: 6512ff51bd69057f4da4783eb6b14c29d9a88b97d35985356d1dc644a08424c7
+  - url: https://github.com/crystal-lang/crystal-molinillo/archive/refs/tags/v0.2.0.tar.gz
+    sha256: e231cf2411a6a11a1538983c7fb52b19e650acc3338bd3cdf6fdb13d6463861a
+    folder: lib/molinillo
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - crystal
+    - make
+  host:
+    - bdw-gc
+    - libevent
+    - pcre2
+    - yaml
+  run:
+    - bdw-gc
+    - crystal
+    - libevent
+    - pcre2
+    - yaml
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/crystal-lang/{{ name }}
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Dependency manager for the Crystal language
+  dev_url: https://github.com/crystal-lang/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun

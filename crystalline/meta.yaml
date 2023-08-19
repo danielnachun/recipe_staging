@@ -1,0 +1,52 @@
+{% set name = "crystalline" %}
+{% set version = "0.10.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/elbywan/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 26c926ba423e4b04fc52af501cd842c8255312014fc4aa1bc3735a8cd0df3426
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - shards
+    - crystal
+    - libffi
+    - llvmdev =15
+  host:
+    - bdw-gc
+    - libevent
+    - libiconv
+    - libllvm15
+    - pcre2
+    - yaml
+  run:
+    - bdw-gc
+    - crystal
+    - libevent
+    - libiconv
+    - libllvm15
+    - pcre2
+    - yaml
+
+test:
+  commands:
+    - test -f ${PREFIX}/bin/{{ name }}
+
+about:
+  home: https://github.com/elbywan/{{ name }}
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Language Server Protocol implementation for Crystal
+  dev_url: https://github.com/elbywan/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
