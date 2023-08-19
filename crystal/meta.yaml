@@ -25,6 +25,7 @@ requirements:
     - llvmdev =15
     - make
     - pkg-config
+    - sed
   host:
     - bdw-gc
     - gmp
