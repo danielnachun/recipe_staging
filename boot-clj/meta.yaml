@@ -14,7 +14,7 @@ build:
 
 requirements:
   run:
-    - graalvm
+    - openjdk
 
 test:
   commands:
