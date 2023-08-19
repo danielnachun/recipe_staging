@@ -17,6 +17,7 @@ requirements:
     - {{ compiler('c') }}
     - gcc  # [linux]
     - graalvm
+    - sed
   host:
     - zlib
   run:
