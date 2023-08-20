@@ -2,20 +2,21 @@
 {% set version = "0.1.3" %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
-  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 61e61689b077f00ece6d990dd4d5e5e40fa0f476e14f8c1a4759d30261a27463
 
 build:
   noarch: python
-  number: 0
+  number: 1
   entry_points:
     - chrombpnet = chrombpnet.CHROMBPNET:main
     - print_meme_motif_file = chrombpnet.data.__init__:print_meme_motif_file
-  script: "{{ PYTHON }} -m pip install . -vv"
+  script: {{ PYTHON }} -m pip install . -vv
+  skip: True  # [not linux]
 
 requirements:
   host:
@@ -39,9 +40,11 @@ requirements:
     - tqdm >=4.48.2
     - weasyprint >=52.5
   run:
+    - bedtools
     - deepdish >=0.3.7
     - deeplift >=0.6.13.0
     - h5py >=2.10.0
+    - kent-tools
     - kundajelab-shap
     - matplotlib >=3.3.1
     - matplotlib-venn >=0.11.6
@@ -51,6 +54,7 @@ requirements:
     - protobuf >=3.20
     - pyfaidx >=0.6.1
     - python
+    - samtools
     - scikit-learn >=1.1.2
     - scipy >=1.4.1
     - tensorflow >=2.8.0
@@ -86,10 +90,11 @@ test:
     - print_meme_motif_file --help
 
 about:
-  home: The package home page
+  home: https://github.com/kundajelab/chrombpnet
   license: MIT
-  license_file: 
-  summary: "chrombpnet predicts chromatin accessibility from sequence"
+  license_file: LICENSE
+  summary: Bias factorized, base-resolution deep learning models of chromatin accessibility (chromBPNet)
+  dev_url: https://github.com/kundajelab/chrombpnet
 
 extra:
   recipe-maintainers:
