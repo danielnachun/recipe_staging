@@ -43,7 +43,7 @@ requirements:
     - r-shiny
     - r-shinycssloaders
     - r-shinyjs
-    - r-stanheaders
+    - r-stanheaders =2.21.0
     - r-stringr
     - r-tailrank
     - tbb-devel <2021
@@ -71,7 +71,7 @@ requirements:
     - r-shiny
     - r-shinycssloaders
     - r-shinyjs
-    - r-stanheaders
+    - r-stanheaders =2.21.0
     - r-stringr
     - r-tailrank
 
