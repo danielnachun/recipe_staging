@@ -18,33 +18,9 @@ build:
 requirements:
   build:
     - cross-r-base {{ r_base }}  # [build_platform != target_platform]
-    - bioconductor-dirichletmultinomial
-    - r-bh
-    - r-domc
-    - r-dplyr
-    - r-dt
-    - r-foreach
-    - r-ggplot2
-    - r-gridextra
-    - r-gtable
-    - r-hmisc
-    - r-intervals
-    - r-magrittr
-    - r-optparse
-    - r-r.utils
-    - r-rcpp
-    - r-rcppeigen
-    - r-reshape2
-    - r-rstan
-    - r-rstantools
-    - r-shiny
-    - r-shinycssloaders
-    - r-shinyjs
-    - r-stanheaders
-    - r-stringr
-    - r-tailrank
+    - sed
   host:
-    - r-base=4.2.3
+    - r-base=4.2
     - bioconductor-dirichletmultinomial
     - r-bh
     - r-domc
@@ -67,9 +43,10 @@ requirements:
     - r-shiny
     - r-shinycssloaders
     - r-shinyjs
-    - r-stanheaders
+    - r-stanheaders =2.21.0
     - r-stringr
     - r-tailrank
+    - tbb-devel <2021
   run:
     - r-base>=4.2
     - bioconductor-dirichletmultinomial
@@ -94,7 +71,7 @@ requirements:
     - r-shiny
     - r-shinycssloaders
     - r-shinyjs
-    - r-stanheaders
+    - r-stanheaders =2.21.0
     - r-stringr
     - r-tailrank
 
