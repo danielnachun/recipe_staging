@@ -153,6 +153,7 @@ Linux() {
     #   export CXXFLAGS="-I${BUILD_PREFIX}/${HOST}/sysroot/usr/lib64 ${CXXFLAGS}"
     # fi
     echo "ac_cv_lib_Xt_XtToolkitInitialize=yes" > config.site
+    export r_cv_working_mktime=yes
     export CONFIG_SITE=${PWD}/config.site
     if [[ "${IS_MINIMAL_R_BUILD:-0}" == "1" ]]; then
 	CONFIGURE_ARGS="--without-x"
