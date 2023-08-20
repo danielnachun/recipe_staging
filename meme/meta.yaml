@@ -50,7 +50,7 @@ requirements:
     - perl-sys-info
 
 test:
-  depends:
+  requires:
     - openssh
   commands:
     - meme -version
