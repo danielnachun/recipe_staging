@@ -1,12 +1,12 @@
-{% set version = "0.2.35" %}
+{% set version = "0.2.51" %}
 
 package:
   name: r-flashier
-  version: {{ version|replace("-", "_") }}
+  version: {{ version }}
 
 source:
-  git_url: https://github.com/willwerscheid/flashier
-  git_rev: 2d2ec1093a7f04e35fd0ae37cb067770bf0c01fe
+  url: https://github.com/willwerscheid/flashier/archive/{{ version }}.tar.gz
+  sha256: c70f5d84cbcc56d4ba19dfccc2fa98bf40a965bdb154366d6ad6b9d6ccc71a4f
 
 build:
   merge_build_host: true  # [win]
@@ -37,9 +37,8 @@ test:
 
 about:
   home: https://github.com/willwerscheid/flashier
-  license: OTHER
-  license_family: OTHER
-  license_file: LICENSE
+  license: GPL-3.0-or-later
+  license_file: LICENSE.md
   summary: A faster and angrier package for EBMF 
 
 extra:
