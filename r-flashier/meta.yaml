@@ -24,11 +24,15 @@ requirements:
     - r-ebnm
     - r-irlba
     - r-softimpute
+    - r-stringr
+    - r-tidyr
   run:
     - r-base>=4.2
     - r-ebnm
     - r-irlba
     - r-softimpute
+    - r-stringr
+    - r-tidyr
 
 test:
   commands:
