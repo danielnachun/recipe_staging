@@ -1,12 +1,12 @@
-{% set version = "0.0.3.0535" %}
+{% set version = "0.1.0" %}
 
 package:
   name: r-mvsusier
   version: {{ version|replace("-", "_") }}
 
 source:
-  git_url: https://github.com/stephenslab/mvsusier
-  git_rev: be5fce2dd42c970a872c03699d774cdc58ace50a
+  url: https://github.com/stephenslab/mvsusieR/archive/{{ version }}.tar.gz
+  sha256: a7b4fd910013c9344ce7a1acd245b952ddfda456529303b2999e9a2c54df168e
 
 build:
   merge_build_host: true  # [win]
@@ -53,8 +53,8 @@ test:
 
 about:
   home: https://github.com/stephenslab/mvsusier
-  license: OTHER
-  license_file: LICENSE
+  license: GPL-3.0-or-later
+  license_file: LICENSE.md
   summary: Implements a multivariate generalization of the "Sum of
           Single Effects" (SuSiE) model for variable selection in multivariate
           linear regression.
