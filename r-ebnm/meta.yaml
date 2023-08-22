@@ -1,4 +1,4 @@
-{% set version = '1.0-9' %}
+{% set version = '1.0-55' %}
 
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
@@ -8,10 +8,8 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  url:
-    - {{ cran_mirror }}/src/contrib/ebnm_{{ version }}.tar.gz
-    - {{ cran_mirror }}/src/contrib/Archive/ebnm/ebnm_{{ version }}.tar.gz
-  sha256: f870291e0c53ec82e4c44de9c77022da4b94d72c887bf9ac54dfe0caa877ff47
+  git_url: https://github.com/stephenslab/ebnm
+  git_rev: 341f59905bc9bd7c082031369aecc8a9ba247884
 
 build:
   merge_build_host: True  # [win]
