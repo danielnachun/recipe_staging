@@ -1,5 +1,4 @@
-{% set version = '0.2.57' %}
-
+{% set version = '0.2.73' %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -8,10 +7,8 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  url:
-    - {{ cran_mirror }}/src/contrib/mashr_{{ version }}.tar.gz
-    - {{ cran_mirror }}/src/contrib/Archive/mashr/mashr_{{ version }}.tar.gz
-  sha256: 956ad422f0fece198e20a132d460b43c2a23d334dc1ffe8decebb8f147c355ca
+  url: https://github.com/stephenslab/mashr/archive/{{ version }}.tar.gz
+  sha256: f5cdbc50e156621460b8bf7b47f773f0ccec08376d7eb459e28a07af784b46d0
 
 build:
   merge_build_host: True  # [win]
