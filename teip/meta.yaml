@@ -1,0 +1,42 @@
+{% set name = "teip" %}
+{% set version = "2.3.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/greymd/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 4c39466613f39d27fa22ae2a6309ac732ea94fdbc8711ecd4149fc1ecdfbaedf
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+    - clangdev <16
+    - pkg-config
+  host:
+    - oniguruma
+  run:
+    - oniguruma
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/greymd/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Masking tape to help commands do one thing well
+  dev_url: https://github.com/greymd/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
