@@ -1,12 +1,12 @@
-{% set version = "0.3-150" %}
+{% set version = "0.3.154" %}
 
 package:
   name: r-udr
-  version: {{ version|replace("-", "_") }}
+  version: {{ version }}
 
 source:
-  git_url: https://github.com/stephenslab/udr
-  git_rev: 920a94a34bdfdf8540cddad697415b1ca2b3e9bb
+  url: https://github.com/stephenslab/udr/archive/{{ version }}.tar.gz
+  sha256: 35daedc9be9d8b1015962f24a530d2a3e8ae62a4f5947c8c3eae69b8ea1bfde2
 
 build:
   merge_build_host: true  # [win]
@@ -36,7 +36,7 @@ test:
 
 about:
   home: https://github.com/stephenslab/udr
-  license: OTHER
+  license: BSD-3-Clause
   license_file: LICENSE
   summary: R package implementing empirical Bayes methods for multivariate normal means.
 
