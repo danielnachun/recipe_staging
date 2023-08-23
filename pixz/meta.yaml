@@ -16,10 +16,10 @@ requirements:
   build:
     - {{ compiler('c') }}
     - asciidoc
-    - libarchive
+    - libiconv  # [osx]
     - libxslt
     - make
-    - xz
+    - pkg-config
   host:
     - libarchive
     - xz
@@ -29,7 +29,7 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/pixz # [not win]
+    - test -f $PREFIX/bin/pixz
 
 about:
   home: https://github.com/vasi/pixz

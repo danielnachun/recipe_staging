@@ -2,6 +2,14 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+if [[ ${target_platform} =~ .*osx.* ]]; then
+    mkdir pkgconfig
+    cp ${PREFIX}/lib/pkgconfig/libarchive.pc pkgconfig
+    sed -i 's/Libs.private: /Libs.private: -liconv/g' pkgconfig/libarchive.pc
+    sed -i 's/Requires.private: iconv//g' pkgconfig/libarchive.pc
+    export PKG_CONFIG_PATH="${SRC_DIR}/pkgconfig:${PREFIX}/lib/pkgconfig"
+fi
+
 ./configure --disable-debug \
     --disable-dependency-tracking \
     --prefix=${PREFIX} \
@@ -10,6 +18,5 @@ set -o xtrace -o nounset -o pipefail -o errexit
 make
 make install
 
-#export XML_CATALOG_FILES=${PREFIX}/xml/catalog
-#a2x --doctype manpage --format manpage src/pixz.1.asciidoc
-#cp src/pixz.1 ${PREFIX}/share/man/man1
+mkdir -p ${PREFIX}/share/man/man1
+install -m 644 src/pixz.1 ${PREFIX}/share/man/man1
