@@ -1,5 +1,5 @@
 {% set name = "felix" %}
-{% set version = "2.2.1" %}
+{% set version = "2.7.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/kyoheiu/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: ee926c4b37d4ff70097f0336c82edec36df4bca5b03fd43ba16f802512994433
+  sha256: dd74642a23e56a2cfb23c46ce818feb8ab9602be76582b83ce7d08c3f8896253
 
 build:
   number: 0
