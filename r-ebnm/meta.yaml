@@ -57,4 +57,6 @@ about:
   summary: Provides simple, fast, and stable functions to fit the normal means model using empirical
     Bayes. For available models and details, see function ebnm(). A comprehensive introduction
     to the package is provided by Willwerscheid and Stephens (2021) <arXiv:2110.00152>.
-  license_file: LICENSE.md
+
+maintainers:
+  - danielnachun
