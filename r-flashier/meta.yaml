@@ -42,6 +42,7 @@ test:
 about:
   home: https://github.com/willwerscheid/flashier
   license: GPL-3.0-or-later
+  license_file: LICENSE.md
   summary: A faster and angrier package for EBMF 
 
 extra:
