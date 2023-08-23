@@ -1,5 +1,4 @@
-{% set version = '1.0-55' %}
-
+{% set version = '1.0.55' %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -8,8 +7,8 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  git_url: https://github.com/stephenslab/ebnm
-  git_rev: 341f59905bc9bd7c082031369aecc8a9ba247884
+  url: https://github.com/stephenslab/ebnm/archive/{{ version }}.tar.gz
+  sha256: 68fb3ad3eca8079a2b8dfbab0213c5941a3c9b00b38e8338311a058945e06d3a
 
 build:
   merge_build_host: True  # [win]
@@ -58,5 +57,4 @@ about:
   summary: Provides simple, fast, and stable functions to fit the normal means model using empirical
     Bayes. For available models and details, see function ebnm(). A comprehensive introduction
     to the package is provided by Willwerscheid and Stephens (2021) <arXiv:2110.00152>.
-  license_file:
-    - '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3'
+  license_file: LICENSE.md
