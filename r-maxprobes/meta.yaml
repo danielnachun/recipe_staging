@@ -1,0 +1,42 @@
+{% set version = "0.9.5" %}
+
+package:
+  name: r-maxprobes
+  version: {{ version|replace("-", "_") }}
+
+source:
+  git_url: https://github.com/markgene/maxprobes
+  git_rev: c2120dba972e12115280ef274ff80550cee5b264
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  noarch: generic
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - bioconductor-minfi
+    - bioconductor-minfidata
+    - r-base=4.2
+  run:
+    - bioconductor-minfi
+    - bioconductor-minfidata
+    - r-base=4.2
+
+test:
+  commands:
+    - $R -e "library('maxprobes')"
+
+about:
+  home: https://github.com/markgene/maxprobes
+  license: GPL-2.0-or-later
+  summary: Maxprobes package collects cross-reactive probes of Illumina methylation array 450K and EPIC/850K.
+
+extra:
+  recipe-maintainers:
+    - danielnachun
