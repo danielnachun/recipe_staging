@@ -1,0 +1,45 @@
+{% set version = "1.0" %}
+
+package:
+  name: r-mr.cue
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/QingCheng0218/MR.CUE/archive/{{ version }}.tar.gz
+  sha256: d9a2820d9fa0cf2141d99354db0fd78e72108bd018670a1f329239b5f0b0bf70
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+    - r-bh
+    - r-rcpp
+    - r-rcpparmadillo
+    - r-rcppdist
+  run:
+    - r-base>=4.2
+    - r-bh
+    - r-rcpp
+    - r-rcpparmadillo
+    - r-rcppdist
+
+test:
+  commands:
+    - $R -e "library('MR.CUE')"
+
+about:
+  home: https://github.com/QingCheng0218/MR.CUE
+  license: OTHER
+  summary: MR.CUE is a package for Mendelian randomization informs shared genetic etiology underlying exposure and outcome by interrogating correlated horizontal pleiotropy.
+
+extra:
+  recipe-maintainers:
+    - danielnachun
