@@ -1,0 +1,60 @@
+{% set name = "airshare" %}
+{% set version = "0.1.6" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://github.com/KuroLabs/Airshare/archive/{{ version }}.tar.gz
+  sha256: 70e6ee01273c464718d35a75f138b36863633bf3926a46ab0ce4261c63eb62d3
+
+build:
+  number: 0
+  noarch: python
+  entry_points:
+    - airshare=airshare.cli:main
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - aiohttp >=3.6.2
+    - click >=7.0
+    - colorama >=0.4.3
+    - humanize >=0.5.1
+    - pip
+    - pyperclip >=1.8.0
+    - python
+    - requests >=2.20.0
+    - requests-toolbelt >=0.9.1
+    - termcolor >=1.1.0
+    - tqdm >=4.36.1
+    - zeroconf >=0.25.0
+  run:
+    - aiohttp >=3.6.2
+    - click >=7.0
+    - colorama >=0.4.3
+    - humanize >=0.5.1
+    - pyperclip >=1.8.0
+    - python
+    - requests >=2.20.0
+    - requests-toolbelt >=0.9.1
+    - termcolor >=1.1.0
+    - tqdm >=4.36.1
+    - zeroconf >=0.25.0
+
+test:
+  imports:
+    - airshare
+  commands:
+    - airshare --help
+
+about:
+  home: https://github.com/KuroLabs/airshare
+  license: MIT
+  summary: Cross-platform content sharing in a local network
+  doc_url: https://github.com/KuroLabs/airshare
+
+extra:
+  recipe-maintainers:
+    - danielnachun
