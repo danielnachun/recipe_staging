@@ -1,0 +1,35 @@
+{% set version = "0.3.0" %}
+
+package:
+  name: python_circos
+  version: {{ version }}
+
+source:
+  # Only wheels on pypi and nothing tagged on github
+  url: https://github.com/ponnhide/pyCircos/archive/8b09cc951fa36f31496f54a9a7654ff99351fc97.zip
+  sha256: 8a717631d92123c72ad70ded1a269f0992aa3350c999dd06d22d1c0425b8f570
+
+build:
+  number: 0
+  noarch: python
+  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv"
+
+requirements:
+  host:
+    - python >=3.7
+    - pip
+  run:
+    - python >=3.7
+    - matplotlib-base >=3.4
+    - biopython >=1.78
+    - requests
+
+test:
+  imports:
+    - pycircos
+
+about:
+  home: https://github.com/ponnhide/pyCircos
+  license: GPL-3.0
+  license_file: LICENSE
+  summary: Circos plots for python
