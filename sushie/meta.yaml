@@ -1,0 +1,56 @@
+{% set name = "sushie" %}
+{% set version = "0.13" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/mancusolab/{{ name }}/archive/6f6f8ea7cb37c66f41b321afb50ae29879773f5c.zip
+  sha256: a6af8cc918a122f4c8ac111b7c2049df10f9c2209c0dd4675f0925051944265d
+
+build:
+  number: 0
+  noarch: python
+  entry_points:
+    - sushie = sushie.cli:run_cli
+  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv"
+
+requirements:
+  host:
+    - bgen-reader
+    - cyvcf2
+    - equinox
+    - glimix-core
+    - jax
+    - jaxlib
+    - pandas
+    - pandas-plink
+    - python >=3.8
+    - pip
+    - scipy
+  run:
+    - bgen-reader
+    - cbgen
+    - cyvcf2
+    - equinox
+    - glimix-core
+    - jax
+    - jaxlib
+    - pandas
+    - pandas-plink
+    - python >=3.8
+    - scipy
+
+test:
+  imports:
+    - sushie
+
+about:
+  home: https://github.com/mancusolab/{{ name }}
+  license: MIT
+  license_file: LICENSE.txt
+  summary: Software to perform multi-ancestry fine-mapping and estimate prediction weights for molQTL data
+
+maintainers:
+  - danielnachun
