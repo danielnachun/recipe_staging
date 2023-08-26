@@ -1,0 +1,51 @@
+{% set name = "cellphonedb" %}
+{% set version = "4.0.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/ventolab/CellphoneDB/archive/v{{ version }}.tar.gz
+  sha256: e49a6f01ad86bd9fe235810ca01448757ee6749b3a5afc78b8ee637b309720c4
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv
+  number: 0
+
+requirements:
+  host:
+    - python
+    - poetry-core >=1.0.0
+    - pip
+  run:
+    - python
+    - pandas >=1.5.0
+    - numpy >=1.21.6
+    - numpy_groupies >=0.9.15
+    - requests >=2.25.0
+    - scikit-learn ==0.24
+    - geosketch ==1.2
+    - anndata >=0.8
+    - ktplotspy >=0.1.4
+    - tqdm >=4.3,<5.0
+  run_constrained:
+    - black >=22.3
+    - isort >=5.7
+
+test:
+  imports:
+    - cellphonedb
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://cellphonedb.org
+  license: MIT
+
+extra:
+  recipe-maintainers:
+    - danielnachun
