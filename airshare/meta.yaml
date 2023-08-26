@@ -6,11 +6,12 @@ package:
   version: "{{ version }}"
 
 source:
-  url: https://pypi.io/packages/source/airshare/Airshare/Airshare-{{ version }}.tar.gz
-  sha256: 138976933bcf2c0bc99f18901242544919e9fafe43735b4f83b19d4ae5964be7
+  url: https://github.com/KuroLabs/Airshare/archive/{{ version }}.tar.gz
+  sha256: 70e6ee01273c464718d35a75f138b36863633bf3926a46ab0ce4261c63eb62d3
 
 build:
   number: 0
+  noarch: python
   entry_points:
     - airshare=airshare.cli:main
   script: "{{ PYTHON }} -m pip install . -vv"
