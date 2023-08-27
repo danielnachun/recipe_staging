@@ -1,0 +1,61 @@
+{% set name = "wasp" %}
+{% set version = "0.3.4" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://github.com/bmvdgeijn/WASP/archive/d3b8447fd7719fffa00b856fd1f27c845554693e.zip
+  sha256: 063a02e43360357317ec0b155903c72d9fd9d55694cf0ec094a40d5bd4bc9539
+
+build:
+  number: 0
+
+requirements:
+  host:
+    - hdf5
+    - numpy =1.24
+    - python =3.10
+    - pysam
+    - pytables
+    - scipy
+    - zlib
+  run:
+    - hdf5
+    - libzlib
+    - numpy =1.24
+    - python =3.10
+    - pysam
+    - pytables
+    - scipy
+
+test:
+  commands:
+    - python3 ${PREFIX}/bin/bam2h5.py -h
+    - python3 ${PREFIX}/bin/combined_test.py -h
+    - python3 ${PREFIX}/bin/extract_haplotype_read_counts.py -h
+    - python3 ${PREFIX}/bin/fit_as_coefficients.py -h
+    - python3 ${PREFIX}/bin/fit_bnb_coefficients.py -h
+    - python3 ${PREFIX}/bin/get_target_regions.py -h
+    - python3 ${PREFIX}/bin/simulate_counts.py -h
+    - python3 ${PREFIX}/bin/update_het_probs.py -h
+    - python3 ${PREFIX}/bin/update_total_depth.py -h
+    - python3 ${PREFIX}/bin/filter_remapped_reads.py -h
+    - python3 ${PREFIX}/bin/find_intersecting_snps.py -h
+    - python3 ${PREFIX}/bin/get_as_counts.py -h
+    - python3 ${PREFIX}/bin/rmdup.py -h
+    - python3 ${PREFIX}/bin/rmdup_pe.py -h
+    - python3 ${PREFIX}/bin/sim_pe_reads.py -h
+    - python3 ${PREFIX}/bin/get_sample_names.py -h
+    - test -f ${PREFIX}/bin/snp2h5
+
+about:
+  home: https://github.com/bmvdgeijn/WASP
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: "WASP: allele-specific pipeline for unbiased read mapping and molecular QTL discovery"
+
+extra:
+  recipe-maintainers:
+    - danielnachun
