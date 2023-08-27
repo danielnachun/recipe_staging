@@ -13,10 +13,13 @@ build:
   number: 0
 
 requirements:
+  build:
+    - {{ compiler('c') }}
+    - gcc # [linux]
+    - sed
   host:
     - cython
     - python =2.7
-    - sed
   run:
     - intervaltree
     - numpy
