@@ -14,10 +14,10 @@ build:
 
 requirements:
   host:
-    - hdf5
+    - hdf5 =1.14.0
     - zlib
   run:
-    - hdf5
+    - hdf5 =1.14.0
     - libzlib
     - numpy =1.24
     - python =3.10
