@@ -15,11 +15,6 @@ build:
 requirements:
   host:
     - hdf5
-    - numpy =1.24
-    - python =3.10
-    - pysam
-    - pytables
-    - scipy
     - zlib
   run:
     - hdf5
