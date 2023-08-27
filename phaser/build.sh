@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -o xtrace -o nounset -o pipefail -o errexit
+
+mkdir -p ${PREFIX}/bin 
+mkdir -p ${PREFIX}/libexec/${PKG_NAME}
+
+cp -r phaser ${PREFIX}/libexec/${PKG_NAME}
+cp -r phaser_annotate ${PREFIX}/libexec/${PKG_NAME}
+cp -r phaser_gene_ae ${PREFIX}/libexec/${PKG_NAME}
+cp -r phaser_pop ${PREFIX}/libexec/${PKG_NAME}
+
+sed -i 's/95%/95%%/' ${PREFIX}/libexec/${PKG_NAME}/phaser_pop/phaser_cis_var.py
+
+ln -sf ${PREFIX}/libexec/${PKG_NAME}/phaser/phaser.py ${PREFIX}/bin
+ln -sf ${PREFIX}/libexec/${PKG_NAME}/phaser_annotate/phaser_annotate.py ${PREFIX}/bin
+ln -sf ${PREFIX}/libexec/${PKG_NAME}/phaser_gene_ae/phaser_gene_ae.py ${PREFIX}/bin
+ln -sf ${PREFIX}/libexec/${PKG_NAME}/phaser_pop/phaser_cis_var.py ${PREFIX}/bin
+ln -sf ${PREFIX}/libexec/${PKG_NAME}/phaser_pop/phaser_expr_matrix.py ${PREFIX}/bin
+
+pushd phaser
+    ${PYTHON} -m pip install . -vv
+popd
