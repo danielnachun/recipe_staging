@@ -1,0 +1,178 @@
+From c286cec6d08ef522476987757d6c6c776ae56b99 Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Sun, 27 Aug 2023 19:44:46 -0700
+Subject: [PATCH 2/3] add std::placeholders namespace
+
+---
+ components/RelatednessComponent/src/PCAComputer.cpp             | 2 ++
+ components/RelatednessComponent/src/PCALoadingComputer.cpp      | 2 ++
+ components/RelatednessComponent/src/PCAProjector.cpp            | 2 ++
+ components/RelatednessComponent/src/RelatednessComponent.cpp    | 2 ++
+ components/SNPSummaryComponent/src/CallComparerComponent.cpp    | 1 +
+ .../SNPSummaryComponent/src/PairwiseCallComparerManager.cpp     | 2 ++
+ components/SNPSummaryComponent/src/SNPSummaryComponent.cpp      | 2 ++
+ .../SNPSummaryComponent/src/SNPSummaryComputationManager.cpp    | 2 ++
+ .../src/SampleSummaryComputationManager.cpp                     | 2 ++
+ genfile/src/SNPDataSource.cpp                                   | 2 ++
+ genfile/src/SampleMappingSNPDataSource.cpp                      | 2 ++
+ qcdb/src/DBOutputter.cpp                                        | 2 ++
+ 12 files changed, 23 insertions(+)
+
+diff --git a/components/RelatednessComponent/src/PCAComputer.cpp b/components/RelatednessComponent/src/PCAComputer.cpp
+index d640647..3d75c28 100644
+--- a/components/RelatednessComponent/src/PCAComputer.cpp
++++ b/components/RelatednessComponent/src/PCAComputer.cpp
+@@ -25,6 +25,8 @@
+ #include "components/RelatednessComponent/names.hpp"
+ #include "components/RelatednessComponent/write_matrix_to_stream.hpp"
+ 
++using namespace std::placeholders;
++
+ PCAComputer::PCAComputer(
+ 	appcontext::OptionProcessor const& options,
+ 	genfile::CohortIndividualSource const& samples,
+diff --git a/components/RelatednessComponent/src/PCALoadingComputer.cpp b/components/RelatednessComponent/src/PCALoadingComputer.cpp
+index 7e78325..6a6bcfa 100644
+--- a/components/RelatednessComponent/src/PCALoadingComputer.cpp
++++ b/components/RelatednessComponent/src/PCALoadingComputer.cpp
+@@ -22,6 +22,8 @@
+ #include "components/RelatednessComponent/LapackEigenDecomposition.hpp"
+ #include "components/RelatednessComponent/mean_centre_genotypes.hpp"
+ 
++using namespace std::placeholders;
++
+ // #define DEBUG_PCA_LOADING_COMPUTER 1
+ 
+ namespace {
+diff --git a/components/RelatednessComponent/src/PCAProjector.cpp b/components/RelatednessComponent/src/PCAProjector.cpp
+index 98cc9d4..da77ae4 100644
+--- a/components/RelatednessComponent/src/PCAProjector.cpp
++++ b/components/RelatednessComponent/src/PCAProjector.cpp
+@@ -18,6 +18,8 @@
+ #include "components/RelatednessComponent/names.hpp"
+ #include "components/RelatednessComponent/write_matrix_to_stream.hpp"
+ 
++using namespace std::placeholders;
++
+ // #define DEBUG_PCA_PROJECTOR 1
+ 
+ namespace pca {
+diff --git a/components/RelatednessComponent/src/RelatednessComponent.cpp b/components/RelatednessComponent/src/RelatednessComponent.cpp
+index 8e948ff..3049fc4 100644
+--- a/components/RelatednessComponent/src/RelatednessComponent.cpp
++++ b/components/RelatednessComponent/src/RelatednessComponent.cpp
+@@ -25,6 +25,8 @@
+ #include "components/RelatednessComponent/names.hpp"
+ #include "components/RelatednessComponent/write_matrix.hpp"
+ 
++using namespace std::placeholders;
++
+ void RelatednessComponent::declare_options( appcontext::OptionProcessor& options ) {
+ 	options.declare_group( "Kinship options" ) ;
+ 	options[ "-kinship" ]
+diff --git a/components/SNPSummaryComponent/src/CallComparerComponent.cpp b/components/SNPSummaryComponent/src/CallComparerComponent.cpp
+index 5cc1628..345cfe1 100644
+--- a/components/SNPSummaryComponent/src/CallComparerComponent.cpp
++++ b/components/SNPSummaryComponent/src/CallComparerComponent.cpp
+@@ -30,6 +30,7 @@
+ #include "components/SNPSummaryComponent/FrequentistTestCallMerger.hpp"
+ #include "components/SNPSummaryComponent/LeastMissingConsensusCaller.hpp"
+ 
++using namespace std::placeholders;
+ 
+ namespace stats {
+ 	CallComparerProcessor::UniquePtr CallComparerProcessor::create( PairwiseCallComparerManager::UniquePtr comparer, std::vector< std::string > const& call_fields ) {
+diff --git a/components/SNPSummaryComponent/src/PairwiseCallComparerManager.cpp b/components/SNPSummaryComponent/src/PairwiseCallComparerManager.cpp
+index e440b4e..b0e9bc0 100644
+--- a/components/SNPSummaryComponent/src/PairwiseCallComparerManager.cpp
++++ b/components/SNPSummaryComponent/src/PairwiseCallComparerManager.cpp
+@@ -19,6 +19,8 @@
+ #include "components/SNPSummaryComponent/FrequentistTestCallMerger.hpp"
+ #include "components/SNPSummaryComponent/AcceptAllCallMerger.hpp"
+ 
++using namespace std::placeholders;
++
+ PairwiseCallComparerManager::UniquePtr PairwiseCallComparerManager::create() {
+ 	PairwiseCallComparerManager::UniquePtr result( new PairwiseCallComparerManager() ) ;
+ 	return result ;
+diff --git a/components/SNPSummaryComponent/src/SNPSummaryComponent.cpp b/components/SNPSummaryComponent/src/SNPSummaryComponent.cpp
+index 02ce859..23cd1c0 100644
+--- a/components/SNPSummaryComponent/src/SNPSummaryComponent.cpp
++++ b/components/SNPSummaryComponent/src/SNPSummaryComponent.cpp
+@@ -32,6 +32,8 @@
+ #include "components/SNPSummaryComponent/CallComparerComponent.hpp"
+ #include "components/SNPSummaryComponent/ClusterFitComputation.hpp"
+ 
++using namespace std::placeholders;
++
+ void SNPSummaryComponent::declare_options( appcontext::OptionProcessor& options ) {
+ 	options.declare_group( "SNP computation options" ) ;
+ 	options[ "-snp-stats" ]
+diff --git a/components/SNPSummaryComponent/src/SNPSummaryComputationManager.cpp b/components/SNPSummaryComponent/src/SNPSummaryComputationManager.cpp
+index 56a8743..6e847fd 100644
+--- a/components/SNPSummaryComponent/src/SNPSummaryComputationManager.cpp
++++ b/components/SNPSummaryComponent/src/SNPSummaryComputationManager.cpp
+@@ -19,6 +19,8 @@
+ #include "components/SNPSummaryComponent/SNPSummaryComputationManager.hpp"
+ #include "components/SNPSummaryComponent/StratifyingSNPSummaryComputation.hpp"
+ 
++using namespace std::placeholders;
++
+ // #define DEBUG_SNP_SUMMARY_COMPUTATION_MANAGER 1
+ 
+ namespace stats {
+diff --git a/components/SampleSummaryComponent/src/SampleSummaryComputationManager.cpp b/components/SampleSummaryComponent/src/SampleSummaryComputationManager.cpp
+index 3837f8a..a68704c 100644
+--- a/components/SampleSummaryComponent/src/SampleSummaryComputationManager.cpp
++++ b/components/SampleSummaryComponent/src/SampleSummaryComputationManager.cpp
+@@ -16,6 +16,8 @@
+ #include "components/SampleSummaryComponent/SampleSummaryComputation.hpp"
+ #include "components/SampleSummaryComponent/SampleSummaryComputationManager.hpp"
+ 
++using namespace std::placeholders;
++
+ SampleSummaryComputationManager::UniquePtr SampleSummaryComputationManager::create() {
+ 	return SampleSummaryComputationManager::UniquePtr( new SampleSummaryComputationManager() ) ;
+ }
+diff --git a/genfile/src/SNPDataSource.cpp b/genfile/src/SNPDataSource.cpp
+index a796db3..fbf6665 100644
+--- a/genfile/src/SNPDataSource.cpp
++++ b/genfile/src/SNPDataSource.cpp
+@@ -29,6 +29,8 @@
+ #include "genfile/Error.hpp"
+ #include "genfile/vcf/MetadataParser.hpp"
+ 
++using namespace std::placeholders;
++
+ namespace genfile {
+ 	std::vector< std::string > SNPDataSource::get_file_types() {
+ 		std::vector< std::string > result ;
+diff --git a/genfile/src/SampleMappingSNPDataSource.cpp b/genfile/src/SampleMappingSNPDataSource.cpp
+index 906b5b2..096f616 100644
+--- a/genfile/src/SampleMappingSNPDataSource.cpp
++++ b/genfile/src/SampleMappingSNPDataSource.cpp
+@@ -18,6 +18,8 @@
+ #include "genfile/CohortIndividualSource.hpp"
+ #include "genfile/SampleMappingSNPDataSource.hpp"
+ 
++using namespace std::placeholders;
++
+ namespace genfile {
+ 	namespace impl {
+ 		struct SampleMapping {
+diff --git a/qcdb/src/DBOutputter.cpp b/qcdb/src/DBOutputter.cpp
+index a6d0115..64b4d73 100644
+--- a/qcdb/src/DBOutputter.cpp
++++ b/qcdb/src/DBOutputter.cpp
+@@ -18,6 +18,8 @@
+ #include "appcontext/get_current_time_as_string.hpp"
+ #include "qcdb/DBOutputter.hpp"
+ 
++using namespace std::placeholders;
++
+ namespace qcdb {
+ 	namespace impl {
+ 		bool get_match_rsid( std::string spec ) {
+-- 
+2.41.0
+

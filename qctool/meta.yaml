@@ -1,0 +1,58 @@
+{% set name = "qctool" %}
+{% set version = "2.2.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/gavinband/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 2afe85eefc1ed73ae0d4128c8b232b379fa7ccf34e42809ebebb620f7d166a03
+  patches:
+    - 0001-fix-sqlite3-paths.patch
+    - 0002-add-std-placeholders-namespace.patch
+    - 0003-fix-boost-optional-usage.patch
+    - 0004-fix-Eigen-slicing.patch
+    - 0005-add-missing-includes.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - make
+    - python
+    - sed
+  host:
+    - catch2
+    - eigen
+    - boost-cpp 
+    - libdeflate
+    - openblas
+    - sqlite
+    - zlib
+    - zstd
+  run:
+    - boost-cpp 
+    - libzlib
+    - openblas
+
+test:
+  commands:
+    - hptest -help
+    - inthinnerator -help
+    - ldbird -help
+    - qctool -help
+    - selfmap -help
+
+about:
+  home: https://enkre.net/cgi-bin/code/qctool
+  license: BSL-1.0
+  license_file: LICENSE_1_0.txt
+  summary: Command-line programs that manipulate gwas datasets and other genomic data. 
+
+extra:
+  recipe-maintainers:
+    - danielnachun

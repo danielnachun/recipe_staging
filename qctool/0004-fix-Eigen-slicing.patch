@@ -1,0 +1,53 @@
+From d1a673bd52ef050d195e095ed90195fb81de1f69 Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Sun, 27 Aug 2023 21:42:38 -0700
+Subject: [PATCH 4/4] fix Eigen slicing
+
+---
+ apps/ldbird.cpp                                                 | 2 +-
+ components/SNPSummaryComponent/src/HWEComputation.cpp           | 2 +-
+ .../SNPSummaryComponent/src/QuangStyleConsensusCaller.cpp       | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/apps/ldbird.cpp b/apps/ldbird.cpp
+index bdf7210..7fcbe5f 100644
+--- a/apps/ldbird.cpp
++++ b/apps/ldbird.cpp
+@@ -1029,7 +1029,7 @@ private:
+ 		for( std::size_t i = 0; i < included_samples.size(); ++i ) {
+ 			metro::SampleRange const& range = included_samples[i] ;
+ 			for( int j = range.begin(); j < range.end(); ++j ) {
+-				++result( dosages[0][j], dosages[1][j] ) ;
++				++result( static_cast<int>(dosages[0][j]), static_cast<int>(dosages[1][j]) ) ;
+ 			}
+ 		}
+ 		return result ;
+diff --git a/components/SNPSummaryComponent/src/HWEComputation.cpp b/components/SNPSummaryComponent/src/HWEComputation.cpp
+index 8c5131f..a1613d8 100644
+--- a/components/SNPSummaryComponent/src/HWEComputation.cpp
++++ b/components/SNPSummaryComponent/src/HWEComputation.cpp
+@@ -136,7 +136,7 @@ namespace stats {
+ 		}
+ 		for( int g = 0; g < 2; ++g ) {
+ 			allele_counts( 0, g ) = genotype_counts( 0, g ) ;
+-			allele_counts( 1, g ) = genotype_counts( 1, 1 ) + 2.0 * genotype_counts( 1, 2.0 * g ) ;
++			allele_counts( 1, g ) = genotype_counts( 1, 1 ) + 2.0 * genotype_counts( 1, static_cast<int>(2.0 * g) ) ;
+ 		}
+ 
+ 		if( genotype_counts.maxCoeff() == 0 ) {
+diff --git a/components/SNPSummaryComponent/src/QuangStyleConsensusCaller.cpp b/components/SNPSummaryComponent/src/QuangStyleConsensusCaller.cpp
+index 82810b1..77bfafd 100644
+--- a/components/SNPSummaryComponent/src/QuangStyleConsensusCaller.cpp
++++ b/components/SNPSummaryComponent/src/QuangStyleConsensusCaller.cpp
+@@ -95,7 +95,7 @@ void QuangStyleConsensusCaller::set_result(
+ 		m_result_probs.setZero( get_number_of_samples(), 3 ) ;
+ 		for( std::size_t i = 0; i < get_number_of_samples(); ++i ) {
+ 			if( m_result_calls( i ) > 0.0 ) {
+-				m_result_probs( i, m_result_calls( i ) - 1 ) = 1 ;
++				m_result_probs( i, static_cast<int>(m_result_calls( i ) - 1) ) = 1 ;
+ 			}
+ 		}
+ 
+-- 
+2.41.0
+
