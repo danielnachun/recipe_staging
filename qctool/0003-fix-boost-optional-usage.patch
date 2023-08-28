@@ -1,0 +1,72 @@
+From f807a699996fe40ff5a4a72ef54de5a969af9ce4 Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Sun, 27 Aug 2023 20:00:56 -0700
+Subject: [PATCH 3/4] fix boost::optional usage
+
+---
+ appcontext/src/CmdLineUIContext.cpp        | 2 +-
+ apps/qctool.cpp                            | 2 +-
+ genfile/src/BGenFileSNPDataSource.cpp      | 4 ++--
+ genfile/test/test_snp_data_source_rack.cpp | 2 +-
+ 4 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/appcontext/src/CmdLineUIContext.cpp b/appcontext/src/CmdLineUIContext.cpp
+index 842fa04..3ee460a 100644
+--- a/appcontext/src/CmdLineUIContext.cpp
++++ b/appcontext/src/CmdLineUIContext.cpp
+@@ -101,7 +101,7 @@ namespace appcontext {
+ 		}
+ 	
+ 		if( total_count ) {	
+-			double progress = (total_count == 0) ? 1.0 : (static_cast< double >( count ) / *total_count ) ;
++			double progress = (*total_count == 0) ? 1.0 : (static_cast< double >( count ) / *total_count ) ;
+ 			
+ 			if( count == *total_count ) {
+ 				m_ui_context.logger()
+diff --git a/apps/qctool.cpp b/apps/qctool.cpp
+index 940fa59..95e0bdb 100644
+--- a/apps/qctool.cpp
++++ b/apps/qctool.cpp
+@@ -1403,7 +1403,7 @@ public:
+ 		genfile::SNPDataSource::UniquePtr snp_data_source ;
+ 
+ 		// Load sample file(s) if they are provided
+-		if( sample_filenames > 0 ) {
++		if( static_cast<bool>(sample_filenames) ) {
+ 			// This is currently supposed to be checked elsewhere
+ 			assert( sample_filenames->size() == gen_filenames.size() ) ;
+ 			samples = open_samples( *sample_filenames ) ;
+diff --git a/genfile/src/BGenFileSNPDataSource.cpp b/genfile/src/BGenFileSNPDataSource.cpp
+index 12ca83f..b6e9ab4 100644
+--- a/genfile/src/BGenFileSNPDataSource.cpp
++++ b/genfile/src/BGenFileSNPDataSource.cpp
+@@ -56,11 +56,11 @@ namespace genfile {
+ 	}
+ 
+ 	bool BGenFileSNPDataSource::has_sample_ids() const {
+-		return m_sample_ids ;
++		return static_cast<bool>(m_sample_ids) ;
+ 	}
+ 
+ 	void BGenFileSNPDataSource::get_sample_ids( GetSampleIds getter ) const {
+-		if( m_sample_ids ) {
++		if( static_cast<bool>(m_sample_ids) ) {
+ 			for( std::size_t i = 0; i < m_sample_ids->size(); ++i ) {
+ 				getter( i, m_sample_ids->at(i) ) ;
+ 			}
+diff --git a/genfile/test/test_snp_data_source_rack.cpp b/genfile/test/test_snp_data_source_rack.cpp
+index de5f0a5..cabea96 100644
+--- a/genfile/test/test_snp_data_source_rack.cpp
++++ b/genfile/test/test_snp_data_source_rack.cpp
+@@ -180,7 +180,7 @@ AUTO_TEST_CASE( test_snp_data_source_rack ) {
+ 		if( data[i].size() > 0 ) {
+ 			number_of_snps = std::count( data[i].front().begin(), data[i].front().end(), '\n' ) ;
+ 		}
+-		std::cout << "rack: " << rack->total_number_of_snps() << " SNPs, expected: " << number_of_snps << ".\n" ;
++		std::cout << "rack: " << *rack->total_number_of_snps() << " SNPs, expected: " << number_of_snps << ".\n" ;
+ 		// We insist that a rack with a single source (or no sources) knows how many SNPs it contains.
+ 		// We do not mandate behaviour when there are more than one source.
+ 		TEST_ASSERT(
+-- 
+2.41.0
+
