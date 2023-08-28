@@ -3,10 +3,11 @@
 set -o xtrace -o nounset -o errexit
 
 export CXXFLAGS="${CXXFLAGS} -I${PREFIX}/include/eigen3 -Wno-return-type -DBOOST_TEST_DYN_LINK -fpermissive"
-export LINKFLAGS="${LDFLAGS} -lboost_unit_test_framework -lboost_thread -lboost_iostreams -lboost_filesystem -lboost_timer -lzstd -lsqlite3"
+export AS_NEEDED=""
 if [[ ${target_platform} =~ .*linux.* ]]; then
-    export LINKFLAGS=" -Wl,--no-as-needed ${LINKFLAGS}"
+    export AS_NEEDED="-Wl,--no-as-needed"
 fi
+export LINKFLAGS="${LDFLAGS} ${AS_NEEDED} -lboost_unit_test_framework -lboost_thread -lboost_iostreams -lboost_filesystem -lboost_timer -lzstd -lsqlite3"
 
 sed -i "s/'3rd_party', //" wscript
 ./waf configure --prefix=${PREFIX}
