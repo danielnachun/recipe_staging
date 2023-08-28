@@ -24,6 +24,7 @@ requirements:
     - {{ compiler('cxx') }}
     - make
     - python
+    - sed
   host:
     - catch2
     - eigen
