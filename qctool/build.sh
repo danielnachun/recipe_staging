@@ -25,4 +25,8 @@ EOF
 ./waf build
 ./waf install
 
-ls ${PREFIX}/bin/*_v${PKG_VERSION} | xargs -I % bash -c "mv % ${PREFIX}/bin/\$(basename % _v${PKG_VERSION})"
+mv ${PREFIX}/bin/hptest_v${PKG_VERSION} ${PREFIX}/bin/hptest
+mv ${PREFIX}/bin/inthinnerator_v${PKG_VERSION} ${PREFIX}/bin/inthinnerator
+mv ${PREFIX}/bin/ldbird_v${PKG_VERSION} ${PREFIX}/bin/ldbird
+mv ${PREFIX}/bin/qctool_v${PKG_VERSION} ${PREFIX}/bin/qctool
+mv ${PREFIX}/bin/selfmap_v${PKG_VERSION} ${PREFIX}/bin/selfmap
