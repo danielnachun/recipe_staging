@@ -9,9 +9,9 @@ cd macau-v${PKG_VERSION}
 rm macau
 rm -rf *.o
 if [[ ${target_platform} =~ .*osx.* ]]; then
-    make SYS=MAC FORCE_DYNAMIC=1 CPP=${CXX} LIBS_MAC_D_LAPACK="-L${PREFIX}/lib -Wl,-rpath,${PREFIX}/lib -llapack" HEADERS=-I${PREFIX}/include
+    make SYS=MAC FORCE_DYNAMIC=1 CPP=${CXX} LIBS_MAC_D_LAPACK="-L${PREFIX}/lib -Wl,-rpath,${PREFIX}/lib -lopenblas" HEADERS=-I${PREFIX}/include
 else
-    make SYS=LNX FORCE_DYNAMIC=1 CPP=${CXX} LIBS_LNX_D_LAPACK="-L${PREFIX}/lib -Wl,-rpath,${PREFIX}/lib -llapack" HEADERS=-I${PREFIX}/include
+    make SYS=LNX FORCE_DYNAMIC=1 CPP=${CXX} LIBS_LNX_D_LAPACK="-L${PREFIX}/lib -Wl,-rpath,${PREFIX}/lib -lopenblas" HEADERS=-I${PREFIX}/include
 fi
 
 mkdir -p ${PREFIX}/bin
