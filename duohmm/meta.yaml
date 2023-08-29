@@ -1,0 +1,39 @@
+{% set name = "duohmm" %}
+{% set version = "0.1.7" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/jaredo/{{ name }}/archive/95bd3958792aeaa43e9f301ead139e5691d7c165.zip
+  sha256: 8da765babcadc3173be7df0a92529a6b01b102e6fda3eb8a19bef9cbaa1f896c
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - make
+  host:
+    - boost-cpp
+    - zlib
+  run:
+    - boost-cpp
+    - libzlib
+
+test:
+  commands:
+    - duohmm
+
+about:
+  home: https://github.com/jaredo/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: A post-hoc pedigree phasing routine for use with SHAPEIT2
+  dev_url: https://github.com/jaredo/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
