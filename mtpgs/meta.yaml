@@ -26,7 +26,7 @@ requirements:
 
 test:
   commands:
-    - mtpgs -h
+    - mtPGS -h
 
 about:
   home: https://github.com/xuchang0201/mtPGS
