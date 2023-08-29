@@ -30,6 +30,7 @@ requirements:
     - libzlib
     - openmpi
     - mkl
+    - _openmp_mutex  # [linux]
 
 test:
   requires:
