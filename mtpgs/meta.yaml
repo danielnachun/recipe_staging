@@ -1,0 +1,39 @@
+{% set name = "mtpgs" %}
+{% set version = "1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/xuchang0201/mtPGS/archive/f0602e612f6f778b784b5fd6887a0ea6f5cee58a.zip
+  sha256: 543d50cc78b8c0c704f1a90fe15053c70be73d45bfc6fe2ccab76a863765dca1
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - make
+  host:
+    - armadillo
+    - boost-cpp
+    - llvm-openmp  # [osx]
+  run:
+    - armadillo
+    - llvm-openmp  # [osx]
+
+test:
+  commands:
+    - mtpgs -h
+
+about:
+  home: https://github.com/xuchang0201/mtPGS
+  license: OTHER
+  summary: mtPGS is a statistical method that leverages multiple traits to construct accurate polygenic scores (PGS) for a target trait of interest.
+  dev_url: https://github.com/xuchang0201/mtPGS
+
+extra:
+  recipe-maintainers:
+    - danielnachun
