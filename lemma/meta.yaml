@@ -1,0 +1,50 @@
+{% set name = "lemma" %}
+{% set version = "1.0.4" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/mkerin/LEMMA/archive/v{{ version }}.tar.gz
+  sha256: f9dcc8517ee52e2c4cc71cb7b1e1370c462ee9af1b529e405605125030135595
+  patches:
+    - 0001-add-missing-include.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - cmake
+    - make
+    - pkg-config
+  host:
+    - boost-cpp
+    - openmpi
+    - mkl-devel
+    - zlib
+  run:
+    - boost-cpp
+    - libzlib
+    - openmpi
+    - mkl
+    - _openmp_mutex  # [linux]
+
+test:
+  requires:
+    - openssh
+  commands:
+    - lemma --help
+
+about:
+  home: https://github.com/mkerin/LEMMA
+  license: MIT
+  license_file: LICENSE
+  summary: LEMMA (Linear Environment Mixed Model Analysis) aims to uncover GxE interactions between SNPs and a linear combination of multiple environmental variables.
+  dev_url: https://github.com/mkerin/LEMMA
+
+extra:
+  recipe-maintainers:
+    - danielnachun

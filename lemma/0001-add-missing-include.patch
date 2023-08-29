@@ -1,0 +1,24 @@
+From f4271c54758f31640e6a9ef59acfc50b61d67719 Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Mon, 28 Aug 2023 17:02:45 -0700
+Subject: [PATCH] add missing include
+
+---
+ src/parameters.hpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/parameters.hpp b/src/parameters.hpp
+index cd8b6c2..340f19f 100644
+--- a/src/parameters.hpp
++++ b/src/parameters.hpp
+@@ -2,6 +2,7 @@
+ #ifndef CLASS_H
+ #define CLASS_H
+ 
++#include <cstdint>
+ #include <iostream>
+ #include <limits>
+ #include <string>
+-- 
+2.41.0
+
