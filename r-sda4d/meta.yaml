@@ -1,0 +1,39 @@
+{% set version = "0.1" %}
+
+package:
+  name: r-sda4d
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/marchinilab/SDA4D/archive/18d5f895dbbcd81dc2e31cd3d80524da775c5cfa.zip
+  sha256: 282e4229d5d722045f934a377e1ea6fd66acdd02d329b1dc6806a3eeb7acd4a2
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  noarch: generic
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+  run:
+    - r-base>=4.2
+
+test:
+  commands:
+    - $R -e "library('SDA4D')"
+
+about:
+  home: https://github.com/marchinilab/SDA4D
+  license: MIT
+  license_file: LICENSE.md
+  summary: R package SDA4D for performing 4-dimensional sparse Bayesian tensor decomposition
+
+extra:
+  recipe-maintainers:
+    - danielnachun
