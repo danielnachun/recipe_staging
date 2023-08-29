@@ -23,9 +23,7 @@ requirements:
     - openblas
     - zlib
   run:
-    - boost-cpp
     - gsl
-    - openblas
     - libzlib
 
 test:
