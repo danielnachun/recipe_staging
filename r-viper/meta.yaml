@@ -1,0 +1,47 @@
+{% set version = "1.0" %}
+
+package:
+  name: r-viper
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/ChenMengjie/VIPER/archive/{{ version }}.tar.gz
+  sha256: c811a448e3e3ed580204d6fd090ae459ce4f4c6a571b15b721aed3598997706f
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+    - r-glmnet
+    - r-quadprog
+    - r-rcpp
+    - r-rcpparmadillo
+  run:
+    - r-base>=4.2
+    - r-glmnet
+    - r-quadprog
+    - r-rcpp
+    - r-rcpparmadillo
+
+test:
+  commands:
+    - $R -e "library('VIPER')"
+
+about:
+  home: https://github.com/ChenMengjie/VIPER
+  license: MIT
+  license_file: LICENSE.txt
+  summary: The package implements a straightforward, accurate, free-of-tuning, and relatively computationally efficient scRNAseq imputation method.
+  dev_url: https://github.com/ChenMengjie/VIPER
+
+extra:
+  recipe-maintainers:
+    - danielnachun
