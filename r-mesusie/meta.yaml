@@ -1,0 +1,56 @@
+{% set version = "1.0" %}
+
+package:
+  name: r-mesusie
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/borangao/MESuSiE/archive/1b8d80a0d1a4122493ae8ff06692482753f19b8b.zip
+  sha256: b7880ccbc64bb2e991eb068cdfb6d89a8783f0b6911b85a57730c08fc9e025ba
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+    - r-cowplot
+    - r-ggplot2
+    - r-ggrepel
+    - r-matrix
+    - r-nloptr
+    - r-progress
+    - r-r6
+    - r-rcpp
+    - r-rcpparmadillo
+  run:
+    - r-base>=4.2
+    - r-cowplot
+    - r-ggplot2
+    - r-ggrepel
+    - r-matrix
+    - r-nloptr
+    - r-progress
+    - r-r6
+    - r-rcpp
+    - r-rcpparmadillo
+
+test:
+  commands:
+    - $R -e "library('MESuSiE')"
+
+about:
+  home: https://github.com/borangao/MESuSiE
+  license: GPL-2.0-or-later
+  summary: Multi-ancestry Sum of the Single Effects Model 
+  dev_url: https://github.com/borangao/MESuSiE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
