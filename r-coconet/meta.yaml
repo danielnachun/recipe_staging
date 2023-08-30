@@ -1,0 +1,43 @@
+{% set version = "1.0" %}
+
+package:
+  name: r-coconet
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/xzhoulab/CoCoNet/archive/73f01e766f12bfa8360022e88cf857a560a3f198.zip
+  sha256: 5681188df9dfe663d79cde8b3279f40b2fbe646fcd0c5e17e80d8741e269c48a
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+    - r-rcpp
+    - r-rcpparmadillo
+  run:
+    - r-base>=4.2
+    - r-rcpp
+    - r-rcpparmadillo
+
+test:
+  commands:
+    - $R -e "library('CoCoNet')"
+
+about:
+  home: https://github.com/xzhoulab/CoCoNet
+  license: GPL-3.0-or-later
+  license_file: LICENSE.md
+  summary: Composite likelihood-based Covariance regression Network model for identification of trait-relevant tissues or cell types.
+  dev_url: https://github.com/xzhoulab/CoCoNet
+
+extra:
+  recipe-maintainers:
+    - danielnachun
