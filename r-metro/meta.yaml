@@ -1,0 +1,43 @@
+{% set version = "1.0" %}
+
+package:
+  name: r-metro
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/zhengli09/METRO/archive/bfdb5c5acb78894f8edacf5ef388f798f5d4f908.zip
+  sha256: dc9316616943ed6260a7d708251ed171db31ce8e0c7def5113688c4ca74f1f7e
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+    - r-rcpp
+    - r-rcpparmadillo
+  run:
+    - r-base>=4.2
+    - r-rcpp
+    - r-rcpparmadillo
+
+test:
+  commands:
+    - $R -e "library('METRO')"
+
+about:
+  home: https://github.com/zhengli09/METRO
+  license: GPL-3.0-or-later
+  license_file: LICENSE.md
+  summary: Multi-ancEstry TRanscriptOme-wide analysis
+  dev_url: https://github.com/zhengli09/METRO
+
+extra:
+  recipe-maintainers:
+    - danielnachun
