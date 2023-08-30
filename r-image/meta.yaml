@@ -1,0 +1,48 @@
+{% set version = "1.1" %}
+
+package:
+  name: r-image
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/fanyue322/IMAGE/archive/d0b91e97474dd6be9831a1f0fb46164071a54a48.zip
+  sha256: cbb9202f70a2bd8b146b6ee191629795acbbb5046d345e6a313d425d91b9ee32
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+    - r-doparallel
+    - r-foreach
+    - r-matrix
+    - r-rcpp
+    - r-rcpparmadillo
+  run:
+    - r-base>=4.2
+    - r-doparallel
+    - r-foreach
+    - r-matrix
+    - r-rcpp
+    - r-rcpparmadillo
+
+test:
+  commands:
+    - $R -e "library('IMAGE')"
+
+about:
+  home: https://github.com/fanyue322
+  license: GPL-2.0-or-later
+  summary: MQTL mapping in bisulfite sequencing studies by fitting a binomial mixed model, incorporating allelic-specific methylation pattern.
+  dev_url: https://github.com/fanyue322
+
+extra:
+  recipe-maintainers:
+    - danielnachun
