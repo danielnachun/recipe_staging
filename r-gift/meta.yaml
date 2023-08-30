@@ -1,0 +1,43 @@
+{% set version = "1.0" %}
+
+package:
+  name: r-gift
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/yuanzhongshang/GIFT/archive/3055f76de84edc3cd7c2b1282603fb70ee542d28.zip
+  sha256: 612b121ed9226b0fe0d310a28ecfef78142600f2c4f3b7d38cd41793c1344d5f
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+    - r-rcpp
+    - r-rcpparmadillo
+  run:
+    - r-base>=4.2
+    - r-rcpp
+    - r-rcpparmadillo
+
+test:
+  commands:
+    - $R -e "library('GIFT')"
+
+about:
+  home: https://github.com/yuanzhongshang/GIFT
+  license: GPL-2.0-or-later
+  license_file: LICENSE
+  summary: GIFT is an R package for efficient statistical inference of conditional TWAS fine-mapping.
+  dev_url: https://github.com/yuanzhongshang/GIFT
+
+extra:
+  recipe-maintainers:
+    - danielnachun
