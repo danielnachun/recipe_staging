@@ -1,0 +1,51 @@
+{% set version = "0.1" %}
+
+package:
+  name: r-idea
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/xzhoulab/iDEA/archive/a30fc8ec655813678049c5b4b4b0aa6a21c944f0.zip
+  sha256: 9bcaee1afeae40a202fa0481f18d14999942ad00b0bb161de2f26c2870a9df08
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+    - r-doparallel
+    - r-dosnow
+    - r-foreach
+    - r-pbmcapply
+    - r-rcpp
+    - r-rcpparmadillo
+  run:
+    - r-base>=4.2
+    - r-doparallel
+    - r-dosnow
+    - r-foreach
+    - r-pbmcapply
+    - r-rcpp
+    - r-rcpparmadillo
+
+test:
+  commands:
+    - $R -e "library('iDEA')"
+
+about:
+  home: https://github.com/xzhoulab/iDEA
+  license: GPL-3.0-or-later
+  license_file: LICENSE.md
+  summary: iDEA is a new method for analyzing single-cell RNAseq data.
+  dev_url: https://github.com/xzhoulab/iDEA
+
+extra:
+  recipe-maintainers:
+    - danielnachun
