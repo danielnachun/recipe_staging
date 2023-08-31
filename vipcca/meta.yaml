@@ -1,0 +1,51 @@
+{% set name = "vipcca" %}
+{% set version = "0.2.7" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/jhu99/vipcca/archive/v{{ version }}.tar.gz
+  sha256: ea6ecebd2fcd0a62ac024a9438f8b9bd7b4e43bd423ec20e63112989a10b01e0
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv
+  number: 0
+
+requirements:
+  host:
+    - python >=3.6
+    - pip
+  run:
+    - python >=3.6
+    - scanpy
+    - tensorflow
+    - anndata
+    - scipy
+    - pandas
+    - seaborn
+    - keras
+    - python-igraph
+    - louvain
+    - h5py
+    - future
+
+test:
+  imports:
+    - vipcca
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://github.com/jhu99/vipcca
+  license: MIT
+  license_file: LICENSE
+  dev_url: https://github.com/jhu99/vipcca
+
+extra:
+  recipe-maintainers:
+    - danielnachun
