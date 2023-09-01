@@ -21,7 +21,7 @@ requirements:
   run:
     - python >=3.6
     - scanpy
-    - tensorflow
+    - tensorflow ==2.4.0
     - anndata
     - scipy
     - pandas
