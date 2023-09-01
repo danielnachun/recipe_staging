@@ -19,18 +19,27 @@ requirements:
     - python >=3.6
     - pip
   run:
+    - absl-py 0.10
     - python >=3.6
     - scanpy
     - tensorflow ==2.4.0
+    - numpy ==1.21
     - anndata
     - scipy
-    - pandas
+    - six 1.15.0
+    - pandas <2
+    - python-igraph ==0.8.2
     - seaborn
     - keras
     - python-igraph
     - louvain
+    - matplotlib <3.7
     - h5py
     - future
+    - termcolor 1.1.0
+    - typing-extensions 3.7.4
+    - xlrd <2
+    - wrapt 1.12.1
 
 test:
   imports:
