@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://www.well.ox.ac.uk/~cfreeman/software/gwas/gtool_v0.7.5_x86_64.tgz
+  url: https://www.well.ox.ac.uk/~cfreeman/software/gwas/{{ name }}_v{{ version}}_x86_64.tgz
   sha256: e02c1b989fe73d54533f539c5d8787f56656ad568eb56fd0bf2ce6cc95834acd
 
 build:
