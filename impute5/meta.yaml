@@ -1,0 +1,33 @@
+{% set name = "impute5" %}
+{% set version = "1.2.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://www.dropbox.com/sh/mwnceyhir8yze2j/AADbzP6QuAFPrj0Z9_I1RSmla?dl=1
+  sha256: e1c8ab1007b976368e684cd3a125dfe2cf260ac0f33a69ebe3d03d61c5fb11a7
+  fn: impute5.zip_
+
+build:
+  number: 0
+  skip: true  # [not linux]
+
+requires:
+  build:
+    - unzip
+
+test:
+  commands:
+    - impute5 --help
+
+about:
+  home: https://jmarchini.org/software/#impute-5
+  license: Proprietary
+  license: LICENCE.txt
+  summary: IMPUTE 5 is a genotype imputation method that can scale to reference panels with millions of samples.
+
+extra:
+  recipe-maintainers:
+    - danielnachun
