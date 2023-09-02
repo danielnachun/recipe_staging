@@ -8,7 +8,7 @@ echo $(unzip sda.zip)
 
 mkdir -p ${PREFIX}/bin
 if [[ ${target_platform} =~ .*osx.* ]]; then
-	install -m 755 sda_static_osx ${PREFIX}/bin/sda
+    install -m 755 sda_static_osx ${PREFIX}/bin/sda
 else
-	install -m 755 sda_static_linux ${PREFIX}/bin/sda
+    install -m 755 sda_static_linux ${PREFIX}/bin/sda
 fi
