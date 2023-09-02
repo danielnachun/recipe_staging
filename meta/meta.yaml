@@ -1,0 +1,30 @@
+{% set name = "meta" %}
+{% set version = "1.7" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://mathgen.stats.ox.ac.uk/genetics_software/{{ name }}/{{ name }}_v{{ version }}_x86_64_static.tgz
+  sha256: 1cae6c1623f126dbe872e4deae74bf929d014ffee65984da644bedf9364392da
+
+build:
+  number: 0
+  script:
+    - install -Dm 755 meta ${PREFIX}/bin/meta
+  skip: true  # [not linux]
+
+test:
+  commands:
+    - meta
+
+about:
+  home: https://mathgen.stats.ox.ac.uk/genetics_software/{{ name }}/{{ name }}.html
+  license: Proprietary
+  license: LICENCE
+  summary: META is a program for the meta analysis of genome-wide association studies.
+
+extra:
+  recipe-maintainers:
+    - danielnachun
