@@ -1,0 +1,30 @@
+{% set name = "snptest" %}
+{% set version = "2.5.6" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: http://www.well.ox.ac.uk/~gav/resources/{{ name }}_v{{ version }}_CentOS_Linux7.8-x86_64_dynamic.tgz
+  sha256: c2c829def961dd2f6377c388d8aa22cab17945961c47e39c4a94493466c0a52e
+
+build:
+  number: 0
+  script:
+    - install -Dm 755 snptest_v{{ version }} ${PREFIX}/bin/snptest
+  skip: true  # [not linux]
+
+test:
+  commands:
+    - snptest -help
+
+about:
+  home: https://www.well.ox.ac.uk/~gav/{{ name }}
+  license: Proprietary
+  license: LICENCE
+  summary: SNPTEST is a program for the analysis of single SNP association in genome-wide studies.
+
+extra:
+  recipe-maintainers:
+    - danielnachun
