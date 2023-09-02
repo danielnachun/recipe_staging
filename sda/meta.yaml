@@ -1,0 +1,32 @@
+{% set name = "sda" %}
+{% set version = "1.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://www.dropbox.com/sh/chek4jkr28qnbrj/AAB1Km1shS-PjjuDVVfX5UJ2a/bin?dl=1
+  sha256: cb4e07c9f5f6261702eccad825fe3cfd0e75bac5b8e9df804d9597044c7cdab6
+  fn: sda.zip_
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - unzip
+
+test:
+  commands:
+    - test -f ${PREFIX}/bin/sda
+
+about:
+  home: https://jmarchini.org/software/#sda
+  license: Proprietary
+  license_file: LICENCE
+  summary: A program for sparse Bayesian matrix and tensor decomposition.
+
+extra:
+  recipe-maintainers:
+    - danielnachun
