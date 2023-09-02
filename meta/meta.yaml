@@ -22,7 +22,7 @@ test:
 about:
   home: https://mathgen.stats.ox.ac.uk/genetics_software/{{ name }}/{{ name }}.html
   license: Proprietary
-  license: LICENCE
+  license_file: LICENCE
   summary: META is a program for the meta analysis of genome-wide association studies.
 
 extra:
