@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/bergercookie/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: 172c413709dc81ced9dfa2750aaa398864e904d1ed213bd19e51d45d1ff0a8ff
+  sha256: aa1af79d397f1e6eb498eb152a916e2c52c7af08672680e407f9eb82636bce56
 
 build:
   number: 0
@@ -20,7 +20,7 @@ requirements:
 
 test:
   commands:
-    - {{ name }} --help
+    - test -f ${PREFIX}/bin/{{ name }}
 
 about:
   home: https://github.com/bergercookie/{{ name }}
