@@ -1,0 +1,38 @@
+{% set name = "hexyl" %}
+{% set version = "0.13.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/sharkdp/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: a4b3009aa7210f7d80f91d6b01543d1544586c4509247f01e028f1a56781056d
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+    - pandoc
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/sharkdp/{{ name }}
+  license: MIT OR Apache-2.0
+  license_file:
+    - LICENSE-APACHE
+    - LICENSE-MIT
+    - THIRDPARTY.yml
+  summary: A command-line hex viewer
+  dev_url: https://github.com/sharkdp/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
