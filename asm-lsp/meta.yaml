@@ -1,12 +1,12 @@
 {% set name = "asm-lsp" %}
-{% set version = "0.3.2" %}
+{% set version = "0.3.3" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/bergercookie/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
+  url: https://github.com/bergercookie/{{ name }}/archive/{{ version }}.tar.gz
   sha256: 172c413709dc81ced9dfa2750aaa398864e904d1ed213bd19e51d45d1ff0a8ff
 
 build:
