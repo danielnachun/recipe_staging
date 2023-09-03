@@ -1,0 +1,32 @@
+{% set name = "pup" %}
+{% set version = "0.4.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/ericchiang/{{ name }}/archive/5a57cf111366c7c08999a34b2afd7ba36d58a96d.zip
+  sha256: 8a9e0c5cd30d0b4227dc6639707ecf9591ada41a3351fbbab317eb9419948c06
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/ericchiang/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: Parsing HTML at the command line
+  dev_url: https://github.com/ericchiang/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
