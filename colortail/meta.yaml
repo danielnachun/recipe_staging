@@ -22,7 +22,7 @@ requirements:
 
 test:
   commands:
-    - colortail -h
+    - colortail --help
 
 about:
   home: https://github.com/joakim666/colortail
