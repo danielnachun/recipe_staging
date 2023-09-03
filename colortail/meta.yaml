@@ -1,0 +1,35 @@
+{% set name = "colortail" %}
+{% set version = "0.3.4" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/joakim666/{{ name }}/archive/ad3bc53f17d884f884e3341c1df700c0ead488eb.zip
+  sha256: 6e893b19f9bb1fc61a17e2eccd564e2f6bd5c697229e42770e9f0fd51d564867
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - make
+    - autoconf
+    - automake
+
+test:
+  commands:
+    - colortail -h
+
+about:
+  home: https://github.com/joakim666/colortail
+  license: GPL-2.0-or-later
+  license_file: COPYING
+  summary: Like the tail command line utility but with colors
+
+extra:
+  recipe-maintainers:
+    - danielnachun
