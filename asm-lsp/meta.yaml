@@ -1,0 +1,41 @@
+{% set name = "asm-lsp" %}
+{% set version = "0.3.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/bergercookie/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: aa1af79d397f1e6eb498eb152a916e2c52c7af08672680e407f9eb82636bce56
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+    - pkg-config
+  host:
+    - openssl
+  run:
+    - openssl
+
+test:
+  commands:
+    - test -f ${PREFIX}/bin/{{ name }}
+
+about:
+  home: https://github.com/bergercookie/{{ name }}
+  license: BSD-2-Clause
+  license_file: 
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Language server for NASM/GAS/GO Assembly
+  dev_url: https://github.com/bergercookie/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
