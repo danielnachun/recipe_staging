@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/karn/{{ name }}/archive/v{{ version }}.tar.gz
+  url: https://github.com/prydonius/{{ name }}/archive/v{{ version }}.tar.gz
   sha256: 96f10ff263468b9f91244edf16d8ea548c9d281cba9b2597eaf5270f9e6127e3
 
 build:
