@@ -1,0 +1,33 @@
+{% set name = "git-fixup" %}
+{% set version = "1.5.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/keis/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: b110730f37009f8fe26bcbdd83e20a9ccad02367b48cd0cfe50f4ec1a74f0eae
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+    - pkg-config
+
+test:
+  commands:
+    - test -f ${PREFIX}/bin/git-fixup
+
+about:
+  home: https://github.com/keis/git-fixup
+  license: ISC
+  license_file: COPYING.md
+  summary: Fighting the copy-paste element of your rebase workflow.
+
+extra:
+  recipe-maintainers:
+    - danielnachun
