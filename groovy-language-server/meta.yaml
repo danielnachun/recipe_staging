@@ -1,0 +1,34 @@
+{% set name = "groovy-language-server" %}
+{% set version = "1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/GroovyLanguageServer/groovy-language-server/archive/4866a3f2c180f628405b1e4efbde0949a1418c10.zip
+  sha256: ab6c9e50c10e7230fcecf977d96d4814ecd4232f648fbf1d0bfca4ac1bd4d2bf
+
+build:
+  number: 0
+
+requirements:
+  host:
+    - openjdk >=17,<18
+  run:
+    - openjdk
+
+test:
+  commands:
+    - test -f ${PREFIX}/bin/groovy-language-server
+
+about:
+  home: https://moonshine-ide.com
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: A language server for Groovy
+  dev_url: https://github.com/GroovyLanguageServer/groovy-language-server
+
+extra:
+  recipe-maintainers:
+    - danielnachun
