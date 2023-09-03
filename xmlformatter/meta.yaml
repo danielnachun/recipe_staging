@@ -1,0 +1,40 @@
+{% set name = "xmlformatter" %}
+{% set version = "0.1.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/pamoller/{{ name }}/archive/c2038cc5da925b02333b5d8763ceccf4263b6ed3.zip
+  sha256: dcdeacec256fbd68e2c99f8f716a08f7a0f1ff896babcc645dbd8fc607023378
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv
+  number: 0
+
+requirements:
+  host:
+    - python >=3.6
+    - pip
+  run:
+    - python >=3.6
+
+test:
+  imports:
+    - xmlformatter
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://github.com/pamoller/{{ name }}
+  license: MIT
+  license_file: LICENSE.txt
+  dev_url: https://github.com/pamoller/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
