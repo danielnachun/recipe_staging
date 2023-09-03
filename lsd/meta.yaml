@@ -1,0 +1,36 @@
+{% set name = "lsd" %}
+{% set version = "1.0.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/lsd-rs/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: ab34e9c85bc77cfa42b43bfb54414200433a37419f3b1947d0e8cfbb4b7a6325
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/lsd-rs/{{ name }}
+  license: Apache-2.0
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Clone of ls with colorful output, file type icons, and more
+  dev_url: https://github.com/lsd-rs/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
