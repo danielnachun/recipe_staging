@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/fsouza/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: a67fb563c160eb0240ad0c79249c4135c4d886beba2a60ece80ab4b64ddb474f
+  sha256: 657054408e8c6a907eb5d3b93b7a0bbf5245f371bfb4bfb49e8ff037ea0b578d
 
 build:
   number: 0
