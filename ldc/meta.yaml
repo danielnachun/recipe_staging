@@ -1,5 +1,5 @@
 {% set name = "ldc" %}
-{% set version = "1.33.0" %}
+{% set version = "1.34.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/ldc-developers/ldc/releases/download/v{{ version }}/ldc-{{ version }}-src.tar.gz  # [unix]
-  sha256: 834c1b08c5f5b3a98f9efbaf8632f0d377d17dac1c1710e483c9ee684658c3a8  # [unix]
+  sha256: 3005c6e9c79258538c83979766767a59e3d74f3cb90ac2cb0dce5d7573beb719  # [unix]
 
 build:
   number: 0
