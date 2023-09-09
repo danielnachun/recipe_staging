@@ -1,5 +1,5 @@
 {% set name = "checkstyle" %}
-{% set version = "10.12.2" %}
+{% set version = "10.12.3" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/checkstyle/{{ name }}/archive/{{ name }}-{{ version }}.tar.gz
-  sha256: 1e395c79c6b27a8660ecffef95fe1464f2099b39f99a07748c0fcc2e8fd8ae09
+  sha256: 76b24edec6658761bd7fcd1cbcf0f8d588e11d9b7be25995f5b4888540eb4caa
   folder: checkstyle
 
 build:
