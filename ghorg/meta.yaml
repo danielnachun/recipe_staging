@@ -1,5 +1,5 @@
 {% set name = "ghorg" %}
-{% set version = "1.9.7" %}
+{% set version = "1.9.9" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/gabrie30/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: e9a9c11dca9692f0ed7218da2235b632c9fe7cb56e9197e959a7b24ecb1c83c5
+  sha256: df174bfcd08fc89d4b606334559827865ab1ae7f5877b2f001963832ed083b20
 
 build:
   number: 0
