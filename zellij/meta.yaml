@@ -1,5 +1,5 @@
 {% set name = "zellij" %}
-{% set version = "0.36.0" %}
+{% set version = "0.38.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/zellij-org/{{ name }}/archive/v{{ version}}.tar.gz
-  sha256: df64fa143c10f3c7c3e53befeb6ab3b8f08c220f3cf6331cfc6faa2aa779b6b1
+  sha256: ff15b85f0413fdf8c7f3c67b89c1662b2772b84e9f17af9a3e937469af272a56
 
 build:
   number: 0
@@ -25,7 +25,6 @@ test:
 about:
   home: https://zellij.dev
   license: MIT
-  license_family: MIT
   license_file: LICENSE.md
   summary: Pluggable terminal workspace, with terminal multiplexer as the base feature
   dev_url: https://github.com/{{ name }}-org/{{ name }}
