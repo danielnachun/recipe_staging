@@ -1,5 +1,5 @@
 {% set name = "bottom" %}
-{% set version = "0.9.4" %}
+{% set version = "0.9.6" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/ClementTsang/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: 199123ef354bcabaa8a2e3b7b477b324f5b647d503a2599d08296733846eea6e
+  sha256: 202130e0d7c362d0d0cf211f6a13e31be3a02f13f998f88571e59a7735d60667
 
 build:
   number: 0
