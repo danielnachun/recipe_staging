@@ -1,5 +1,5 @@
 {% set name = "less" %}
-{% set version = "633" %}
+{% set version = "643" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://www.greenwoodsoftware.com/less/less-{{ version }}.tar.gz 
-  sha256: 09a8bf5acd15f5d6e665da063f834d4639a2b9f02cbef1fa6c389feb8d512079
+  sha256: c28dea82484a605590aa3dc0a173ab0a218a1293048ca4b42844bf10f1027eb5
 
 build:
   number: 0
