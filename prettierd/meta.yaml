@@ -1,5 +1,5 @@
 {% set name = "prettierd" %}
-{% set version = "0.24.2" %}
+{% set version = "0.25.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/fsouza/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 0b5dc0e58d70fc1e5d8a72d98ec57016378e01d2d9e1d8178f8b783cbc6fcbb0
+  sha256: a67fb563c160eb0240ad0c79249c4135c4d886beba2a60ece80ab4b64ddb474f
 
 build:
   number: 0
