@@ -1,5 +1,5 @@
 {% set name = "chezmoi" %}
-{% set version = "2.37.0" %}
+{% set version = "2.39.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/twpayne/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: c9c37268e437c28b8da93f48fcfdffc8586136a09f95910a06baa94bc4562667
+  sha256: e2c30b9cf023c50083d5cacec36a73088d4bb31548f3251a3baa275717e20817
 
 build:
   number: 0
