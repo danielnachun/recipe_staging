@@ -18,11 +18,14 @@ requirements:
     - {{ compiler('cxx') }}
     - cargo-bundle-licenses
     - clangdev
+    - pkg-config
     - python
     - rust
   host:
+    - openssl
     - python
   run:
+    - openssl
     - python
 
 test:
