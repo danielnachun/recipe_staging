@@ -1,5 +1,5 @@
 {% set name = "qsv" %}
-{% set version = "0.111.0" %}
+{% set version = "0.113.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/jqnatividad/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: d85bfeab3560865eb313de73f940242807af1eeacb628b99eb67a5566291b050
+  sha256: c7adcf4f0782001d258f3a6e4432fc3bde14fdf679b096c85d9f1ea83fb6d55f
 
 build:
   number: 0
