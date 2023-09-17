@@ -11,6 +11,7 @@ source:
 build:
   merge_build_host: true  # [win]
   number: 0
+  noarch: generic
   rpaths:
     - lib/R/lib/
     - lib/
@@ -18,10 +19,9 @@ build:
 requirements:
   build:
     - cross-r-base {{ r_base }}  # [build_platform != target_platform]
-    - bioconductor-minfi
   host:
     - bioconductor-minfi
-    - r-base=4.2.2
+    - r-base=4.2
   run:
     - bioconductor-minfi
     - r-base>=4.2
@@ -34,7 +34,6 @@ test:
 about:
   home: https://github.com/stephenslab/flashr
   license: Apache-2.0
-  license_family: Apache
   license_file: LICENSE
   summary: Illumina Human Methylation EPIC annotation to use with IlluminaHumanMethylationEPICB5manifest and minfi
 
