@@ -25,7 +25,7 @@ requirements:
   host:
     - bzip2
     - curl
-    - fmt=9.1
+    - fmt=10.0
     - krb5
     - libxcrypt #[linux]
     - ncurses
