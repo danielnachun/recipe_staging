@@ -32,6 +32,8 @@ requirements:
     - openssl
     - pcre2
     - libedit
+    - lz4  #[osx]
+    - snappy  #[osx]
     - xz
     - zlib
     - zstd
@@ -40,6 +42,7 @@ requirements:
     - libcurl
     - krb5
     - libxcrypt #[linux]
+    - lz4  #[osx]
     - ncurses
     - openssl>=3.0
     - pcre2
