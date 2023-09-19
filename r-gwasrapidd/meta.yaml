@@ -45,7 +45,7 @@ requirements:
     - r-tidyr >0.8.99
     - r-urltools
   run:
-    - r-base>4.2
+    - r-base>=4.2
     - r-assertthat
     - r-concatenate
     - r-dplyr
