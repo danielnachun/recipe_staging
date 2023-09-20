@@ -23,21 +23,21 @@ requirements:
     - r-base=4.2
     - r-ggplot2
     - r-gridextra
-    - r-ggigraph
+    - r-ggiraph
     - r-cowplot
     - r-colorspace
   run:
     - r-base>=4.2
     - r-ggplot2
     - r-gridextra
-    - r-ggigraph
+    - r-ggiraph
     - r-cowplot
     - r-colorspace
 
 test:
   commands:
-    - $R -e "library('colorspace')"           # [not win]
-    - "\"%R%\" -e \"library('colorspace')\""  # [win]
+    - $R -e "library('hudson')"           # [not win]
+    - "\"%R%\" -e \"library('hudson')\""  # [win]
 
 about:
   home: https://github.com/anastasia-lucas/hudson
