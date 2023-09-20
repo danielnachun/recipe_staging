@@ -1,0 +1,47 @@
+{% set version = '1.0.0' %}
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
+
+package:
+  name: r-pqlseq
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/anastasia-lucas/hudson/archive/54afdb0fd1a5fb883f43322ea185d9c8b0a65147
+  sha256: 727f59f9d56fa87255445a7a36691f191978921ece3f81c8054c5247e844f1bf
+
+build:
+  merge_build_host: True  # [win]
+  noarch: generic
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  host:
+    - r-base=4.2
+    - r-ggplot2
+    - r-gridextra
+    - r-ggigraph
+    - r-cowplot
+    - r-colorspace
+  run:
+    - r-base>=4.2
+    - r-ggplot2
+    - r-gridextra
+    - r-ggigraph
+    - r-cowplot
+    - r-colorspace
+
+test:
+  commands:
+    - $R -e "library('colorspace')"           # [not win]
+    - "\"%R%\" -e \"library('colorspace')\""  # [win]
+
+about:
+  home: https://github.com/anastasia-lucas/hudson
+  license: GPL-3.0-or-later
+  summary: This package creates mirrored Manhattan (Hudson) plots for *ome-wide association analyses, including, but not limited to, GWAS, PheWAS, and EWAS.
+  license_file:
+    - '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3'
