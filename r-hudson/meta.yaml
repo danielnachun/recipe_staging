@@ -7,7 +7,7 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  url: https://github.com/anastasia-lucas/hudson/archive/54afdb0fd1a5fb883f43322ea185d9c8b0a65147
+  url: https://github.com/anastasia-lucas/hudson/archive/54afdb0fd1a5fb883f43322ea185d9c8b0a65147.zip
   sha256: 727f59f9d56fa87255445a7a36691f191978921ece3f81c8054c5247e844f1bf
 
 build:
