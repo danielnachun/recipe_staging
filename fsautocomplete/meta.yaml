@@ -6,11 +6,13 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/fsharp/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 27bae65a9c8ba0945f1cbcc2a8576e40b95507d191f602886df16661fef80832
+  git_url: https://github.com/fsharp/{{ name }}
+  git_rev: v{{ version }}
 
 build:
-  number: 0
+  number: 1
+  ignore_run_exports:
+    - icu
 
 requirements:
   build:
