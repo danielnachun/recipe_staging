@@ -13,7 +13,7 @@ source:
     - 37913d006d96a6bdcb963f4ca4889888dcce6094.patch
 
 build:
-  number: 0
+  number: 1
   ignore_run_exports:
     - libstdcxx-ng  # [linux]
     - libcxx  # [osx]
