@@ -10,10 +10,9 @@ source:
   sha256: f95fafdb871b94af24e7422e1453e8c114c5ed97cfe919f61ec0208949761a92
 
 build:
-  number: 0
+  number: 1
 
 requirements:
-  build:
   host:
     - nodejs
   run:
