@@ -1,0 +1,40 @@
+{% set name = "commanderline" %}
+{% set version = "0.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/commanderline-{{ version }}.tar.gz
+  sha256: 4f174ce90c5adb10cf7d9c2ed03e8b9c199dd90214466344be47ad1cbfff47a1
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv
+  number: 0
+
+requirements:
+  host:
+    - python
+    - pip
+  run:
+    - python
+
+test:
+  imports:
+    - commanderline
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://github.com/tomazberisa/commanderline
+  summary: Easily expose any function to the command line
+  license: NOASSERTION
+  license_file: LICENSE.txt
+
+extra:
+  recipe-maintainers:
+    - danielnachun
