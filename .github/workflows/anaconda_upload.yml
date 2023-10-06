@@ -34,7 +34,7 @@ jobs:
         uses: mamba-org/setup-micromamba@v1
         with:
           environment-name: anaconda-client
-          create-args: anaconda-client
+          create-args: anaconda-client python=3.11
           generate-run-shell: true
 
       - name: Upload packages
