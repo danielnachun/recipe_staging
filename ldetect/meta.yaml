@@ -36,8 +36,8 @@ test:
 about:
   home: https://bitbucket.org/nygcresearch/ldetect
   summary: Package for detecting regions of linkage disequilibrium in the human genome
-  license: JSON
-  license_file: PLEASE_ADD_LICENSE_FILE
+  license: MIT
+  license: LICENSE.txt
 
 extra:
   recipe-maintainers:
