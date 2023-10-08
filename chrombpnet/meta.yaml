@@ -11,11 +11,10 @@ source:
 
 build:
   noarch: python
-  number: 1
+  number: 2
   entry_points:
     - chrombpnet = chrombpnet.CHROMBPNET:main
     - print_meme_motif_file = chrombpnet.data.__init__:print_meme_motif_file
-  script: {{ PYTHON }} -m pip install . -vv
   skip: True  # [not linux]
 
 requirements:
