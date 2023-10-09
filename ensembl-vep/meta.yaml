@@ -1,4 +1,8 @@
-{% set version="103.1" %}
+{% set checksums = {
+    "90.10": "ae58f17add40ed69ac73b850e50c1cd2e6609f28c8fed6274f2eea0e4ee25664",
+    "103.1": "3512a2c3514f7c10b0348b45bf9fe621dc691100e43f14bec48842b1e11bbf8b"
+  }
+%}
 
 package:
   name: ensembl-vep
@@ -6,10 +10,10 @@ package:
 
 source:
   url: https://github.com/Ensembl/ensembl-vep/archive/release/{{ version }}.tar.gz
-  sha256: 3512a2c3514f7c10b0348b45bf9fe621dc691100e43f14bec48842b1e11bbf8b
+  sha256: {{ checksums[version] }}
 
 build:
-  number: 1
+  number: 2
   noarch: generic
   
 requirements:

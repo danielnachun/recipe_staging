@@ -74,16 +74,3 @@ mv loftee-*/maxEntScan .
 mv loftee-*/splice_data .
 rm -f loftee.tar.gz
 rm -rf loftee-*
-
-# Export VEP_PLUGIN_DIR in activation scripts
-tee ${RECIPE_DIR}/activate.sh << EOF
-#!/usr/bin/env bash
-
-export VEP_PLUGIN_DIR=${target}
-EOF
-
-tee ${RECIPE_DIR}/deactivate.sh << EOF
-#!/usr/bin/env bash
-
-unset VEP_PLUGIN_DIR
-EOF
