@@ -74,3 +74,19 @@ mv loftee-*/maxEntScan .
 mv loftee-*/splice_data .
 rm -f loftee.tar.gz
 rm -rf loftee-*
+
+# Export VEP_PLUGIN_DIR in activation scripts
+mkdir -p ${PREFIX}/etc/conda/activate.d
+mkdir -p ${PREFIX}/etc/conda/deactivate.d
+
+tee ${PREFIX}/etc/conda/activate.d/${PKG_NAME}_activate.sh << EOF
+#!/usr/bin/env bash
+
+export VEP_PLUGIN_DIR=${target}
+EOF
+
+tee ${PREFIX}/etc/conda/deactivate.d/${PKG_NAME}_deactivate.sh << EOF
+#!/usr/bin/env bash
+
+unset VEP_PLUGIN_DIR
+EOF

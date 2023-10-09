@@ -13,8 +13,9 @@ source:
   sha256: {{ checksums[version] }}
 
 build:
-  number: 2
+  number: 3
   noarch: generic
+  skip: true  # [win]
   
 requirements:
   build:
