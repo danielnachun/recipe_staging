@@ -1,19 +1,23 @@
-{% set checksums = {
-    "90.10": "ae58f17add40ed69ac73b850e50c1cd2e6609f28c8fed6274f2eea0e4ee25664",
-    "103.1": "3512a2c3514f7c10b0348b45bf9fe621dc691100e43f14bec48842b1e11bbf8b"
-  }
-%}
+{% set version = "110.1" %}
+{% set plugins_version = "110" %}
+{% set loftee_version = "1.0.4" %}
 
 package:
   name: ensembl-vep
   version: {{ version }}
 
 source:
-  url: https://github.com/Ensembl/ensembl-vep/archive/release/{{ version }}.tar.gz
-  sha256: {{ checksums[version] }}
+  - url: https://github.com/Ensembl/ensembl-vep/archive/release/{{ version }}.tar.gz
+    sha256: 95b2238209bc9acfa01d4eff202dfbc22e8935abc64b750ea93d1c354a438bae
+  - url: https://github.com/Ensembl/VEP_plugins/archive/release/{{ plugins_version }}.tar.gz
+    sha256: e07c7df8e12f149938f46936bc2b058891b586e482cefce67dcc374e4ccc26a2
+    folder: VEP_plugins
+  - url: https://github.com/konradjk/loftee/archive/v{{ loftee_version }}_GRCh38.tar.gz
+    sha256: f2c93b0ca15cb5e2f656062a7c507d509cc7aaa06bbb8111103d3a776e0e9de8
+    folder: loftee
 
 build:
-  number: 3
+  number: 0
   noarch: generic
   skip: true  # [win]
   
