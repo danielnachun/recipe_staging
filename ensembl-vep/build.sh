@@ -33,7 +33,6 @@ sed -i.bak "s@'dir_plugins=s,'@'dir_plugins=s' => (\$RealBin || []),@" vep
 # Change location where INSTALL.pl looks for the zlib headers
 sed -i -e "s@/usr/include/zlib.h@${PREFIX}/include@" INSTALL.pl
 
-
 # Copy executables & modules
 cp convert_cache.pl $target/vep_convert_cache
 cp INSTALL.pl $target/vep_install
@@ -51,29 +50,23 @@ env_script $target/vep
 env_script $target/haplo
 env_script $target/variant_recoder
 
-cd $target
-# Use external Bio::DB::HTS::Faidx instead of compiling interally
-# Compile in VEP causes issues linking to /lib64 outside of rpath
-vep_install -a a --NO_HTSLIB --NO_TEST --NO_BIOPERL --NO_UPDATE
-# Remove test data
-rm -rf t/
+pushd $target
+    # Use external Bio::DB::HTS::Faidx instead of compiling interally
+    # Compile in VEP causes issues linking to /lib64 outside of rpath
+    vep_install -a a --NO_HTSLIB --NO_TEST --NO_BIOPERL --NO_UPDATE
+    # Remove test data
+    rm -rf t/
+popd
 
 # Install plugins
-curl -L -ks -o VEP_plugins.tar.gz https://github.com/Ensembl/VEP_plugins/archive/release/$version.tar.gz
-tar -xzvpf VEP_plugins.tar.gz
-mv VEP_plugins*/*.pm .
-mv VEP_plugins*/config .
-rm -rf VEP_plugins*
+mv VEP_plugins/*.pm ${target}
+mv VEP_plugins/config ${target}
 
 # Install loftee
-curl -L -ks -o loftee.tar.gz https://github.com/konradjk/loftee/archive/v1.0.4_GRCh38.tar.gz
-tar -xzvpf loftee.tar.gz
-mv loftee-*/*.pl .
-mv loftee-*/*.pm .
-mv loftee-*/maxEntScan .
-mv loftee-*/splice_data .
-rm -f loftee.tar.gz
-rm -rf loftee-*
+mv loftee/*.pl ${target}
+mv loftee/*.pm ${target}
+mv loftee/maxEntScan ${target}
+mv loftee/splice_data ${target}
 
 # Export VEP_PLUGIN_DIR in activation scripts
 mkdir -p ${PREFIX}/etc/conda/activate.d
