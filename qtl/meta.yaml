@@ -1,19 +1,18 @@
 {% set name = "qtl" %}
-{% set version = "0.1.8" %}
+{% set version = "0.1.9" %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
-  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
-  sha256: 8fdb99cda1ceff578a233db6c15a944fa57b43a2826af41c292e36848906117b
+  url: https://github.com/broadinstitute/pyqtl/archive/df199fdbecd0d933e63bcf6579f9fe4b1c59549e.zip
+  sha256: 86664a210087ec77f0966fa061300d2e261991820d3ea5b261ee8bedfaf86aed
 
 build:
   noarch: python
   number: 0
-  script: "{{ PYTHON }} -m pip install . -vv"
-  skip: True  # [not linux]
+  script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
@@ -23,7 +22,7 @@ requirements:
     - pandas
     - pip
     - pybigwig
-    - python
+    - python =3.10
     - scipy
     - seaborn
   run:
@@ -32,7 +31,7 @@ requirements:
     - numpy =1.24
     - pandas
     - pybigwig
-    - python
+    - python =3.10
     - scipy
     - seaborn
 
@@ -41,11 +40,10 @@ test:
     - qtl
 
 about:
-  home: The package home page
-  license: UNKNOWN
-  license_family: OTHER
-  license_file: 
-  summary: "Utilities for analyzing and visualizing QTL data"
+  home: https://github.com/broadinstitute/pyqtl
+  license: BSD-3-Clause
+  license_file: LICENSE
+  summary: Utilities for analyzing and visualizing QTL data
 
 extra:
   recipe-maintainers:
