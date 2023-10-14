@@ -1,5 +1,5 @@
 {% set name = "act" %}
-{% set version = "0.2.50" %}
+{% set version = "0.2.52" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source: 
   url: https://github.com/nektos/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 90f479dd7bc4e93c7d6817fd709752bd3225408bfe31b4b042bf516c90795c7f
+  sha256: f0be3a2cf93361a9b012e87962b5e4f99e6b7900957ddb726a360d2527fcc7d0
 
 build:
   number: 0
