@@ -1,5 +1,5 @@
 {% set name = "lf" %}
-{% set version = "r30" %}
+{% set version = "r31" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/gokcehan/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: 6f8bc88797710926867a74f3ef68e408e05758bb399266d2841bf0d341d4c146
+  sha256: ed47fc22c58cf4f4e4116a58c500bdb9f9ccc0b89f87be09f321e8d1431226ab
 
 build:
   number: 0
