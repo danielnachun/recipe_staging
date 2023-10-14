@@ -1,5 +1,5 @@
 {% set name = "staticcheck" %}
-{% set version = "2023.1.5" %}
+{% set version = "2023.1.6" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/dominikh/go-tools/archive/{{ version }}.tar.gz
-  sha256: fd231014b8d9668dc3d2d583a54c7988453c9b5a42e4ba681a9b4c5be6744546
+  sha256: c3a45209348ac0a6ea2018f4b25d483467ad5800ceff483834bce6345256fa62
 
 build:
   number: 0
