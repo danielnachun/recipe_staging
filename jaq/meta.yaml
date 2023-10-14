@@ -1,5 +1,5 @@
 {% set name = "jaq" %}
-{% set version = "0.10.1" %}
+{% set version = "1.0.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/01mf02/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: cccac0263a7699347c40a596cc6855b02aa0ec8288901cde0214fc6ed6d811af
+  sha256: 31e503ad55630c50e34ecc9ed54940986dc06a2fda54e605cc474a36ae5a22b4
 
 build:
   number: 0
