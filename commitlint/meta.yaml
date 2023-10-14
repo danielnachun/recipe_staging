@@ -1,5 +1,5 @@
 {% set name = "commitlint" %}
-{% set version = "17.7.1" %}
+{% set version = "17.7.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://registry.npmjs.org/{{ name }}/-/{{ name }}-{{ version }}.tgz
-  sha256: 5ab11e73eb30fc1cee2c75306b58f729e6a69d628fc5117324dcf428410694ca
+  sha256: d268c88c1b2ecc4efe8738b18f61128ae8003fe7def2a4197751aa9a0631633f
 
 build:
   number: 1
