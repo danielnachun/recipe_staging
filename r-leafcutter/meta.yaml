@@ -10,7 +10,7 @@ source:
 
 build:
   merge_build_host: true  # [win]
-  number: 0
+  number: 1
   rpaths:
     - lib/R/lib/
     - lib/
@@ -50,6 +50,13 @@ requirements:
   run:
     - r-base>=4.2
     - bioconductor-dirichletmultinomial
+    - perl-carp
+    - perl-getopt-long
+    - perl-data-dumper
+    - numpy =1.24
+    - python =3.10
+    - scipy
+    - scikit-learn
     - r-bh
     - r-domc
     - r-dplyr
@@ -77,8 +84,13 @@ requirements:
 
 test:
   commands:
-    - $R -e "library('leafcutter')"           # [not win]
-    - "\"%R%\" -e \"library('leafcutter')\""  # [win]
+    - $R -e "library('leafcutter')"
+    - leafcutter_cluster.py
+    - leafcutter_cluster_regtools.py
+    - leafcutter_quant_only.py
+    - echo $(bed2junc.pl)
+    - prepare_phenotype_table.py
+    - echo $(sam2bed.pl)
 
 about:
   home: https://github.com/davidaknowles/leafcutter
