@@ -23,10 +23,10 @@ requirements:
     - rust
   host:
     - openssl
-    - python
+    - python =3.11
   run:
     - openssl
-    - python
+    - python =3.11
 
 test:
   commands:
