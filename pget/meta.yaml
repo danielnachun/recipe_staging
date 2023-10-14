@@ -1,5 +1,5 @@
 {% set name = "pget" %}
-{% set version = "0.1.1" %}
+{% set version = "0.2.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/Code-Hex/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 34d674dc48144c84de72d525e67d96500243cc1d1c4c0433794495c0846c193f
+  sha256: fa7646bec975dd3995fb45d6b1f190565d6c4fae03c46c4eda34716c83ede03e
 
 build:
   number: 0
