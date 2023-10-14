@@ -1,5 +1,5 @@
 {% set name = "nushell" %}
-{% set version = "0.84.0" %}
+{% set version = "0.85.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/{{ name }}/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: 483211c44bb40ca6199b52824ea0a935da19d6a40259c4e27c29ae1e3b3be2a7
+  sha256: 19e327b23fc08b519f5077e33908afa7967d98139a516c180d029b3ca0618da3
 
 build:
   number: 0
