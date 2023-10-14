@@ -1,5 +1,5 @@
 {% set name = "stgit" %}
-{% set version = "2.3.2" %}
+{% set version = "2.4.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/stacked-git/{{ name }}/releases/download/v{{ version }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 8d337a9e998c8b7e5ad5b0d061aa65c241071b6af5274ab2bc796fc1e8c808d5
+  sha256: 5836789617a3794f5626194e9670a24497ff5b3f9c779bd13decef3d4e1ee95d
 
 build:
   number: 0
