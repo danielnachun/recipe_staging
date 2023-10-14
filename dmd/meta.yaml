@@ -1,5 +1,5 @@
 {% set name = "dmd" %}
-{% set version = "2.105.1" %}
+{% set version = "2.105.2" %}
 
 package:
   name: dmd
@@ -7,10 +7,10 @@ package:
 
 source:
   - url: https://github.com/dlang/{{ name }}/archive/v{{ version }}.tar.gz
-    sha256: 2261bbe1bf3dad1856bd5da4d334d8ea21ef8f54b9df4f7dc24000d2f72ee09a
+    sha256: 374b24aaf698e00f964fbe33c4cb2230182b3beb11f2c097a059c002b7a2ecf2
     folder: dmd
   - url: https://github.com/dlang/phobos/archive/v{{ version }}.tar.gz
-    sha256: 108b99d77d80083b3610ab9789ab73c9f3dc39e99fdb056871bea435763b4584
+    sha256: 285fe91629f8402c82e6fa9ff751747e77057fa4d97be6116594da76991b7a6e
     folder: phobos
 
 build:
