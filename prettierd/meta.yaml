@@ -1,5 +1,5 @@
 {% set name = "prettierd" %}
-{% set version = "0.25.0" %}
+{% set version = "0.25.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/fsouza/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 657054408e8c6a907eb5d3b93b7a0bbf5245f371bfb4bfb49e8ff037ea0b578d
+  sha256: 9b19f11c6b099c518fc8d4c0b6da697c8e15796fb2bb4ab689737f084d29ac3f
 
 build:
   number: 0
@@ -28,7 +28,6 @@ test:
 about:
   home: https://github.com/fsouza/{{ name }}
   license: ISC
-  license_family: OTHER
   summary: prettier, as a daemon, for ludicrous formatting speed
   dev_url: https://github.com/fsouza/{{ name }}
 
