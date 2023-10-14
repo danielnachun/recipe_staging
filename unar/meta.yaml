@@ -1,5 +1,5 @@
 {% set name = "unar" %}
-{% set version = "1.10.7" %}
+{% set version = "1.10.8" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   - url: https://github.com/MacPaw/XADMaster/archive/refs/tags/v{{ version }}.tar.gz
-    sha256: 3d766dc1856d04a8fb6de9942a6220d754d0fa7eae635d5287e7b1cf794c4f45
+    sha256: 652953d7988b3c33f4f52b61c357afd1a7c2fc170e5e6e2219f4432b0c4cd39f
     folder: XADMaster
   - url: https://github.com/MacPaw/universal-detector/archive/refs/tags/1.1.tar.gz
     sha256: 8e8532111d0163628eb828a60d67b53133afad3f710b1967e69d3b8eee28a811
