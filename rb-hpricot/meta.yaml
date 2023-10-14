@@ -12,7 +12,7 @@ source:
 build:
   number: 0
   script:
-    - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem -- --with-cflags=-Wno-incompatible-function-pointer-types
     - gem unpack {{ name }}-{{ version }}.gem
 
 requirements:
