@@ -1,5 +1,5 @@
 {% set name = "procs" %}
-{% set version = "0.14.0" %}
+{% set version = "0.14.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/dalance/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: fa5af0951dc8aa63c0590f8c5c1136594866057704cfb1cdfc22ac3cc49437c6
+  sha256: bb4f9d696081807ca105593092f8acd04ca339ae43fff29e0e820c6fc5e3f9ea
 
 build:
   number: 0
