@@ -1,5 +1,5 @@
 {% set name = "qsv" %}
-{% set version = "0.113.0" %}
+{% set version = "0.116.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/jqnatividad/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: c7adcf4f0782001d258f3a6e4432fc3bde14fdf679b096c85d9f1ea83fb6d55f
+  sha256: 9eaba2a347d3b8f4ca595a9268c8858475e2411d3f60d92f60d8bc91cf81a20e
 
 build:
   number: 0
@@ -19,14 +19,14 @@ requirements:
     - cargo-bundle-licenses
     - clangdev
     - pkg-config
-    - python
+    - python =3.11
     - rust
   host:
     - openssl
-    - python
+    - python =3.11
   run:
     - openssl
-    - python
+    - python =3.11
 
 test:
   commands:
