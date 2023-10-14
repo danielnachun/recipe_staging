@@ -30,7 +30,6 @@ test:
   imports:
     - Perl::Tidy
     - Perl::Tidy::Debugger
-    - Perl::Tidy::DevNull
     - Perl::Tidy::Diagnostics
     - Perl::Tidy::FileWriter
     - Perl::Tidy::Formatter
@@ -38,9 +37,6 @@ test:
     - Perl::Tidy::IOScalar
     - Perl::Tidy::IOScalarArray
     - Perl::Tidy::IndentationItem
-    - Perl::Tidy::LineBuffer
-    - Perl::Tidy::LineSink
-    - Perl::Tidy::LineSource
     - Perl::Tidy::Logger
     - Perl::Tidy::Tokenizer
     - Perl::Tidy::VerticalAligner
