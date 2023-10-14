@@ -1,5 +1,5 @@
 {% set name = "perl-perl-tidy" %}
-{% set version = "20221112" %}
+{% set version = "20230912" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://cpan.metacpan.org/authors/id/S/SH/SHANCOCK/Perl-Tidy-{{ version }}.tar.gz
-  sha256: 8e3fffbaadb5612ff2c66742641838cf403ff1ed11091f5f5d72a8eb61c4bfa8
+  sha256: 0c57888f206f987777e16640e72574aa0a777846719f8e3ed0413c35325f5540
 
 build:
   noarch: generic
@@ -30,7 +30,6 @@ test:
   imports:
     - Perl::Tidy
     - Perl::Tidy::Debugger
-    - Perl::Tidy::DevNull
     - Perl::Tidy::Diagnostics
     - Perl::Tidy::FileWriter
     - Perl::Tidy::Formatter
@@ -38,9 +37,6 @@ test:
     - Perl::Tidy::IOScalar
     - Perl::Tidy::IOScalarArray
     - Perl::Tidy::IndentationItem
-    - Perl::Tidy::LineBuffer
-    - Perl::Tidy::LineSink
-    - Perl::Tidy::LineSource
     - Perl::Tidy::Logger
     - Perl::Tidy::Tokenizer
     - Perl::Tidy::VerticalAligner
