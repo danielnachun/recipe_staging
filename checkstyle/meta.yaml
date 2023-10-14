@@ -1,5 +1,5 @@
 {% set name = "checkstyle" %}
-{% set version = "10.12.3" %}
+{% set version = "10.12.4" %}
 
 package:
   name: {{ name|lower }}
