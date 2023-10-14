@@ -1,5 +1,5 @@
 {% set name = "revive" %}
-{% set version = "1.3.3" %}
+{% set version = "1.3.4" %}
 
 package:
   name: {{ name|lower }}
@@ -23,7 +23,6 @@ test:
 about:
   home: https://github.com/mgechev/{{ name }}
   license: MIT
-  license_family: MIT
   license_file: LICENSE
   summary: Fast, configurable, extensible, flexible, and beautiful linter for Go
   dev_url: https://github.com/mgechev/{{ name }}
