@@ -2,8 +2,8 @@
 {% set version = "0.8.6" %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: rb-{{ name|lower }}
+  version: {{ version }}
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
