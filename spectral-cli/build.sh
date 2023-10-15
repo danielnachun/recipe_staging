@@ -2,7 +2,8 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-cd packages/cli
+mv package.json package.json.bak
+jq "del(.scripts.prepare)" < package.json.bak > package.json
 npm pack --ignore-scripts
 
 npm install -ddd \
