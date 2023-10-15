@@ -9,7 +9,7 @@ rm -rf global.json
 rm -rf paket.lock
 sed -i 's/net5.0/net7.0/g' src/FSharpLint.Console/FSharpLint.Console.fsproj
 sed -i 's/net5.0/net7.0/g' src/FSharpLint.Core/FSharpLint.Core.fsproj
-dotnet tool restore
+#dotnet tool restore
 dotnet fake build
 dotnet publish --no-self-contained src/FSharpLint.Console/FSharpLint.Console.fsproj --output ${PREFIX}/libexec/${PKG_NAME}
 

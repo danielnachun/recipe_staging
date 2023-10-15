@@ -16,6 +16,8 @@ requirements:
   build:
     - {{ compiler('cxx') }}
   host:
+    - fake
+    - paket
     - dotnet
   run:
     - dotnet
