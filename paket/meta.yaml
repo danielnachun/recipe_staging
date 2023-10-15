@@ -1,0 +1,37 @@
+{% set name = "paket" %}
+{% set version = "7.2.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/fsprojects/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: ea36195ae0b6127bce2e1f8c9ee4c0569e8c2ebd25f0f3acf16355c3097683c5
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - sed
+  host:
+    - dotnet
+  run:
+    - dotnet
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://fsprojects.github.io/Paket
+  license: MIT
+  license_file: LICENSE.txt
+  summary: A dependency manager for .NET with support for NuGet packages and Git repositories
+  dev_url: https://github.com/fsprojects/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
