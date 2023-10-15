@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/fsprojects/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 45454f6bddd5c631a4c0635a1586b4521e65443ad973db159149f1bd94a4e045
+  git_url: https://github.com/fsprojects/{{ name }}
+  git_rev: v{{ version }}
 
 build:
   number: 0
@@ -16,8 +16,6 @@ requirements:
   build:
     - {{ compiler('cxx') }}
   host:
-    - fake
-    - paket
     - dotnet
   run:
     - dotnet
