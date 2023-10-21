@@ -1,0 +1,32 @@
+{% set name = "probalign" %}
+{% set version = "1.4" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version.replace("_", ".") }}
+
+source:
+  url: http://probalign.njit.edu/standalone/{{ name }}{{ version }}.tgz
+  sha256: 97a4350fe7bdce02f6a9309adbd82e7c3e0ede6e756fad79496a7579abc2dbae
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - make
+
+test:
+  commands:
+    - probalign 2>&1 | grep "PROBALIGN {{ version }}"
+
+about:
+  home: http://probalign.njit.edu/standalone.html
+  license: Public Domain
+  summary: "Probalign: multiple sequence alignment using partition function posterior probabilities"
+
+extra:
+  recipe-maintainers:
+    - danielnachun
