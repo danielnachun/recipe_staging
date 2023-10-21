@@ -30,7 +30,7 @@ requirements:
     - r-gmp >=0.5_12
     - r-iterators
   run:
-    - r-base >=4.2
+    - r-base>=4.2
     - r-arrangements >=1.0.0
     - r-gmp >=0.5_12
     - r-iterators
