@@ -1,0 +1,37 @@
+{% set name = "contralign" %}
+{% set version = "2_01" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version.replace("_", ".") }}
+
+source:
+  url: http://contra.stanford.edu/{{ name }}/{{ name }}_v{{ version }}.tar.gz
+  sha256: 7ddaf41601ebf1e3867b30c05406d3e0ae9ea30cd3055f7118a2440251137211
+  patches:
+    - 0001-add-explicit-qualification.patch
+    - 0002-add-missing-include.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - make
+    - sed
+
+test:
+  commands:
+    - contralign-protein
+    - contralign-rna
+
+about:
+  home: http://contra.stanford.edu/contralign
+  license: Public Domain
+  summary: CONditional TRAining for Biosequence Analysis
+
+extra:
+  recipe-maintainers:
+    - danielnachun
