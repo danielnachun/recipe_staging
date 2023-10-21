@@ -12,7 +12,7 @@ source:
 
 build:
   merge_build_host: True  # [win]
-  number: 0
+  number: 1
   rpaths:
     - lib/R/lib/
     - lib/
@@ -46,7 +46,7 @@ requirements:
     - r-rmeta
     - r-softimpute
   run:
-    - r-base >=4.2
+    - r-base>=4.2
     - {{native}}gcc-libs         # [win]
     - r-rcpp >=0.12.11
     - r-rcpparmadillo
