@@ -1,0 +1,52 @@
+{% set name = "pasta" %}
+{% set version = "1.9.0" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/smirarab/pasta/archive/370ae2d21ef461bcb2cef7c20cb5a4a1db7ff99d.zip
+  sha256: e021c10da5895d73b3c197a543d92c1265468939384dd88c584216eea05fd67f
+  patches:
+    - 0001-remove-unneeded-code.patch
+
+build:
+  noarch: python
+  number: 0
+  script: 
+    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+    - install -m 755 resources/scripts/hmmeralign ${PREFIX}/bin
+
+requirements:
+  host:
+    - python
+    - setuptools
+    - dendropy >=4.1.0
+    - pymongo >=3.3.0
+
+  run:
+    - python
+    - clustalw
+    - contralign
+    - dendropy >=4.1.0
+    - fasttree
+    - hmmer
+    - mafft
+    - muscle
+    - opal
+    - prank
+    - probalign
+    - probcons
+    - pymongo >=3.3.0
+    - raxml
+    - treeshrink
+
+test:
+  imports:
+    - pasta
+
+about:
+  home: https://github.com/smirarab/pasta
+  license: GNU General Public License v3 or later (GPLv3+)
+  summary: 'An implementation of the PASTA (Practical Alignment using Sate and TrAnsitivity) algorithm'

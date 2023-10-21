@@ -1,0 +1,81 @@
+From 7962cdd3e6337a06af823a9245e3f356ef9aee85 Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Sat, 21 Oct 2023 15:17:49 -0700
+Subject: [PATCH] remove unneeded code
+
+---
+ setup.py | 60 --------------------------------------------------------
+ 1 file changed, 60 deletions(-)
+
+diff --git a/setup.py b/setup.py
+index 3116bf1..ad18a84 100644
+--- a/setup.py
++++ b/setup.py
+@@ -146,64 +146,4 @@ if sys.argv[1] == 'py2exe':
+     os.rename(src_path, dest_path)
+     sys.stderr.write("OK\n")
+ 
+-# On Linux and OS X systems, sym-link all tool scripts
+-# to `bin` subdirectory, so PASTA can be run from the command-line
+-# I know this is ugly. Trust me, I hate it as much as you do.
+-if platform.system() != "Windows":
+-
+-    DEST_DIR_ROOT = pasta.pasta_tools_deploy_dir(default_to_dev_dir=False)
+-    def create_symlink(src_path, subdir=None):
+-        if subdir:
+-            dest_dir = os.path.join(DEST_DIR_ROOT, subdir)
+-        else:
+-            dest_dir = DEST_DIR_ROOT
+-        dest_path = os.path.join(dest_dir, os.path.basename(src_path))
+-        sys.stderr.write("\nCreating link: '%s' => '%s'\n" % (src_path, dest_path))
+-        if os.path.exists(dest_path) and os.path.islink(dest_path):
+-            real_dest = os.path.abspath(os.path.realpath(dest_path))
+-            if real_dest != os.path.abspath(os.path.realpath(src_path)):
+-                msg = "ERROR: Symbolic link '%s' already exists, but points to different source: '%s'\n[Aborting]\nIf the old file was part of older PASTA versions, remove the old path manually and rerun." % (src_path, real_dest)
+-                sys.exit(msg)
+-            else:
+-                sys.stderr.write("Path already exists and is linked correctly.\n")
+-        elif os.path.exists(dest_path):
+-            msg = "ERROR: Path already exists: '%s'\n[Aborting]\n" % dest_path
+-            sys.exit(msg)
+-        else:
+-            if not os.path.exists(dest_dir):
+-                os.makedirs(dest_dir)
+-            os.symlink(src_path, dest_path)
+-
+-    # mafft
+-    #create_symlink(os.path.abspath(os.path.join(pasta.PASTA_SCRIPT_RESOURCES, "mafft")))
+-    create_symlink(os.path.abspath(os.path.join(pasta.PASTA_SCRIPT_RESOURCES, "hmmeralign")))
+-
+-    # others
+-    tools_bin_srcdir = pasta.pasta_tools_dev_dir()
+-    tools_bin_subdirs = ['', 'mafftdir/bin','mafftdir/libexec']
+-
+-    for subdir in tools_bin_subdirs:
+-        if subdir:
+-            tdir = os.path.join(tools_bin_srcdir, subdir)
+-	    #print 'tdir' + str(tdir)
+-        else:
+-            tdir = tools_bin_srcdir
+-        for fpath in os.listdir(tdir):
+-            src_path = os.path.join(tdir, fpath)
+-            if os.path.isfile(src_path) and not src_path.endswith('.txt'):
+-                create_symlink(src_path, subdir)
+-    #databases in sate-tools-linux holds the swissprot* files for mafft-homologs. They compressed to appease git so we have to extract them to use them.
+-    if os.path.exists(os.path.join(tools_bin_srcdir, 'pasta-databases')):
+-        searchDir = os.path.join(tools_bin_srcdir, 'pasta-databases')
+-        for files in os.listdir(searchDir):
+-            fullPath = os.path.join(searchDir, files)
+-            if fullPath.endswith("tar.gz"):
+-                tar = tarfile.open(fullPath, "r:gz")
+-                tar.extractall(searchDir)
+-                tar.close()
+-    mafftDir = os.path.join(tools_bin_srcdir, 'mafft')
+-    ginsiDir = os.path.join(DEST_DIR_ROOT, 'ginsi')
+-    if os.path.islink(ginsiDir) is False:
+-        os.symlink(mafftDir, ginsiDir)
+-
+ setup(**param)
+-- 
+2.42.0
+
