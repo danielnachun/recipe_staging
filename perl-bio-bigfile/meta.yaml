@@ -20,12 +20,14 @@ requirements:
     - {{ compiler('c') }}
   host:
     - zlib
+    - libpng
     - openssl
     - perl=5.32
     - perl-module-build
     - perl-bioperl-core
     - mysql
   run:
+    - libpng
     - perl=5.32
     - perl-bioperl-core
     - perl-io-string
