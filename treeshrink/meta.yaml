@@ -1,0 +1,43 @@
+{% set version = "1.3.9" %}
+
+package:
+  name: treeshrink
+  version: {{ version }}
+
+source:
+  url: https://github.com/uym2/TreeShrink/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 460894699250b7fc1a7096d84bebb0b52b5551612e9faa283c600a15d3f756a3
+
+build:
+  number: 0
+  noarch: python
+  script:
+    - rm -rf dendropy
+    - {{ PYTHON }} setup.py install --install-scripts=${PREFIX}/bin --single-version-externally-managed --record=record.txt
+    - ln -sf ${PREFIX}/bin/run_treeshrink.py ${PREFIX}/bin/run_treeshrink
+
+requirements:
+  host:
+    - dendropy
+    - python
+    - setuptools
+    - r-base=4.3
+  run:
+    - dendropy
+    - python
+    - r-base>=4.3
+    - r-bms >=0.3.5
+
+test:
+  imports:
+    - treeshrink
+  commands:
+    - $R -e "library('BMS')"
+    - run_treeshrink -h
+
+about:
+  home: https://github.com/uym2/TreeShrink
+  license_file: LICENSE
+  license: GPL-3
+  license_family: GPL
+  summary: an algorithm for detecting (and removing) abnormally long branches in one or more phylogenetic trees
