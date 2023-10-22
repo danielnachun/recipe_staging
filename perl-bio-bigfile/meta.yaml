@@ -16,6 +16,7 @@ build:
 
 requirements:
   build:
+    - binutils
     - make
     - {{ compiler('c') }}
   host:
