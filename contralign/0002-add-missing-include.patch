@@ -1,0 +1,25 @@
+From 87e1fdcd13f9f5d36c959026829669889ef61f74 Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Sat, 21 Oct 2023 12:47:23 -0700
+Subject: [PATCH 2/2] add missing include
+
+---
+ src/Utilities.cpp | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/Utilities.cpp b/src/Utilities.cpp
+index 6c69576..357b1aa 100644
+--- a/src/Utilities.cpp
++++ b/src/Utilities.cpp
+@@ -2,6 +2,8 @@
+ // Utilities.cpp
+ //////////////////////////////////////////////////////////////////////
+ 
++#include <climits>
++#include <unistd.h>
+ #include "Utilities.hpp"
+ 
+ bool toggle_error = false;
+-- 
+2.42.0
+
