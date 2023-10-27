@@ -10,7 +10,11 @@ source:
   sha256: 19e327b23fc08b519f5077e33908afa7967d98139a516c180d029b3ca0618da3
 
 build:
-  number: 0
+  number: 1
+  ignore_run_exports:
+    - xorg-libx11
+    - xorg-libxcb
+    - zlib
 
 requirements:
   build:
