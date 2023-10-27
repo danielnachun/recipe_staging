@@ -10,7 +10,7 @@ source:
   sha256: 838a8f29acb646bdfef7e8efcd1d6c93ccd69b0e491e5fa855df779a75122fe7
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -21,7 +21,6 @@ requirements:
   host:
     - gpgme
     - libgpg-error
-    - libxcb
   run:
     - gnupg
 
