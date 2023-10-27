@@ -11,9 +11,6 @@ source:
 
 build:
   number: 1
-  ignore_run_exports:
-    - libgpg-error
-    - libxcb
 
 requirements:
   build:
@@ -24,7 +21,6 @@ requirements:
   host:
     - gpgme
     - libgpg-error
-    - libxcb
   run:
     - gnupg
 
