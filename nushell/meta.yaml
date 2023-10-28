@@ -14,7 +14,6 @@ build:
   ignore_run_exports:
     - xorg-libx11
     - xorg-libxcb
-    - zlib
 
 requirements:
   build:
@@ -27,6 +26,7 @@ requirements:
     - zlib
   run:
     - openssl
+    - libzlib
 
 test:
   commands:
