@@ -46,6 +46,7 @@ requirements:
     - perl-dbd-sqlite
     - perl-io-compress
     - perl-json
+    - perl-lwp-simple
     - perl-perlio-gzip
     - perl-sereal
     - perl-set-intervaltree
