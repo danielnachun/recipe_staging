@@ -1,0 +1,38 @@
+{% set name = "teal" %}
+{% set version = "0.15.2" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/teal-language/tl/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: b93123b878ddb154fe2444f21990fa334fd8b0d77d4573c8679d4be8a78324c2
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - luarocks
+    - lua
+  run:
+    - lua
+    - lua-argparse
+    - lua-luafilesystem
+
+test:
+  commands:
+    - lua -e "require('tl')"
+    - tl --help
+
+about:
+  home: https://github.com/teal-language/tl
+  license: MIT
+  license_file: LICENSE
+  summary: The compiler for Teal, a typed dialect of Lua
+
+extra:
+  recipe-maintainers:
+    - danielnachun
