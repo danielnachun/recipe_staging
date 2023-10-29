@@ -1,0 +1,35 @@
+{% set name = "argparse" %}
+{% set version = "0.7.1" %}
+
+package:
+  name: lua-{{ name }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/luarocks/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
+  sha256: d344e49404c3e7b3e7fa4fe6741c106f25909d9b24923cb08dcceda1f9754809
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - luarocks
+    - lua
+  run:
+    - lua
+
+test:
+  commands:
+    - lua -e "require 'argparse'"
+
+about:
+  home: https://github.com/luarocks/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: Feature-rich command line parser for Lua
+
+extra:
+  recipe-maintainers:
+    - danielnachun

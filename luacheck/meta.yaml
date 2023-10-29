@@ -1,0 +1,38 @@
+{% set name = "luacheck" %}
+{% set version = "1.1.1" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/lunarmodules/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 6ef4276498c4bb4ec527c3f942e35ff5c71fdd8c88ed0619a83a1c967d135c81
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - luarocks
+    - lua
+  run:
+    - lua
+    - lua-argparse
+    - lua-luafilesystem
+
+test:
+  commands:
+    - luacheck --help
+
+about:
+  doc_url: https://luacheck.readthedocs.io/en/stable
+  home: https://github.com/lunarmodules/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: A tool for linting and static analysis of Lua code.
+
+extra:
+  recipe-maintainers:
+    - danielnachun
