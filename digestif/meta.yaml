@@ -6,21 +6,21 @@ package:
   version: {{ version }}
 
 source:
-  url: https://luarocks.org/manifests/astoff/{{ name }}-{{ version }}-1.rockspec
-  sha256: 9943f9a7e7e9cebde169fcdd84c3d97622c89b5d1c0d4cf520bc7d1df0fd100e
+  url: https://github.com/astoff/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 0e45ca4d79f79421964d5cee46a328a2f5e97243f9e88a330c6ec955b3d9dba7
 
 build:
   number: 0
   skip: true  # [win]
 
 requirements:
-  build:
+  build: 
+    - lua
     - luarocks
-  host:
-    - lua
   run:
-    - lua-lpeg
     - lua
+    - lua54-lpeg
+    - lua-luafilesystem
 
 test:
   commands:
@@ -29,6 +29,7 @@ test:
 about:
   home: https://github.com/astoff/{{ name }}
   license: GPL-3.0-or-later
+  license_file: LICENSE.md
   summary: A language server for TeX and friends
   dev_url: https://github.com/astoff/{{ name }}
 

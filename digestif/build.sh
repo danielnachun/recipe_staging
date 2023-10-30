@@ -2,4 +2,4 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-luarocks --tree ${PREFIX} build --lua-dir ${PREFIX} --deps-mode=none --no-manifest ${PKG_NAME}-${PKG_VERSION}-1.rockspec
+luarocks --tree ${PREFIX} make --lua-dir ${PREFIX} --deps-mode=none --no-manifest
