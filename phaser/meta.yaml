@@ -33,11 +33,11 @@ requirements:
 
 test:
   commands:
-    - python2 ${PREFIX}/bin/phaser.py -h
-    - python2 ${PREFIX}/bin/phaser_annotate.py -h
-    - python2 ${PREFIX}/bin/phaser_gene_ae.py -h
-    - python2 ${PREFIX}/bin/phaser_cis_var.py -h
-    - python2 ${PREFIX}/bin/phaser_expr_matrix.py -h
+    - phaser.py -h
+    - phaser_annotate.py -h
+    - phaser_gene_ae.py -h
+    - phaser_cis_var.py -h
+    - phaser_expr_matrix.py -h
 
 about:
   home: https://github.com/secastel/{{ name }}
