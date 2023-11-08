@@ -12,6 +12,12 @@ cp -r phaser_pop ${PREFIX}/libexec/${PKG_NAME}
 
 sed -i 's/95%/95%%/' ${PREFIX}/libexec/${PKG_NAME}/phaser_pop/phaser_cis_var.py
 
+chmod +x ${PREFIX}/libexec/${PKG_NAME}/phaser/phaser.py 
+chmod +x ${PREFIX}/libexec/${PKG_NAME}/phaser_annotate/phaser_annotate.py 
+chmod +x ${PREFIX}/libexec/${PKG_NAME}/phaser_gene_ae/phaser_gene_ae.py 
+chmod +x ${PREFIX}/libexec/${PKG_NAME}/phaser_pop/phaser_cis_var.py 
+chmod +x ${PREFIX}/libexec/${PKG_NAME}/phaser_pop/phaser_expr_matrix.py 
+
 ln -sf ${PREFIX}/libexec/${PKG_NAME}/phaser/phaser.py ${PREFIX}/bin
 ln -sf ${PREFIX}/libexec/${PKG_NAME}/phaser_annotate/phaser_annotate.py ${PREFIX}/bin
 ln -sf ${PREFIX}/libexec/${PKG_NAME}/phaser_gene_ae/phaser_gene_ae.py ${PREFIX}/bin
