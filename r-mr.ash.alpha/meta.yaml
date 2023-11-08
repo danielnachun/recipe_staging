@@ -1,0 +1,47 @@
+{% set version = "0.1.43" %}
+{% set name = "mr.ash.alpha" %}
+
+package:
+  name: r-{{ name }}
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/stephenslab/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: f48fa251971e3706f0efdd3cabd71cd40cf85ee6064dac3ffa81d90bb4be4742
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+    - r-matrix
+    - r-rcpp
+    - r-rcpparmadillo
+  run:
+    - r-base>=4.2
+    - r-matrix
+    - r-rcpp
+    - r-rcpparmadillo
+
+test:
+  commands:
+    - $R -e "library('mr.ash.alpha')"
+
+about:
+  home: https://github.com/stephenslab/{{ name }}
+  license: Other
+  license_file: LICENSE
+  summary: Implements variational empirical Bayes methods for linear
+    regression. Coordinate-wise optimization algorithms for model fitting
+    are implemented in C++ for efficient handling of large-scale data
+    sets.
+extra:
+  recipe-maintainers:
+    - danielnachun
