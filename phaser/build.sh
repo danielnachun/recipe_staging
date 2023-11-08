@@ -30,7 +30,6 @@ ln -sf ${PREFIX}/libexec/${PKG_NAME}/phaser_gene_ae/phaser_gene_ae.py ${PREFIX}/
 ln -sf ${PREFIX}/libexec/${PKG_NAME}/phaser_pop/phaser_cis_var.py ${PREFIX}/bin
 ln -sf ${PREFIX}/libexec/${PKG_NAME}/phaser_pop/phaser_expr_matrix.py ${PREFIX}/bin
 
-
 pushd phaser
-    ${PYTHON} -m pip install . -vv
+    ${PYTHON} python setup.py build_ext --inplace
 popd
