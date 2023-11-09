@@ -30,7 +30,8 @@ ln -sf ${PREFIX}/libexec/${PKG_NAME}/phaser_gene_ae/phaser_gene_ae.py ${PREFIX}/
 ln -sf ${PREFIX}/libexec/${PKG_NAME}/phaser_pop/phaser_cis_var.py ${PREFIX}/bin
 ln -sf ${PREFIX}/libexec/${PKG_NAME}/phaser_pop/phaser_expr_matrix.py ${PREFIX}/bin
 
-
 pushd phaser
     ${PYTHON} -m pip install . -vv
 popd
+
+ln -sf ${STDLIB_DIR}/site-packages/read_variant_map.so ${PREFIX}/libexec/${PKG_NAME}/phaser

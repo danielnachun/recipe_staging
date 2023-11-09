@@ -10,7 +10,7 @@ source:
   sha256: 7552f15723130a55a83d1b76fbb5303bf78d1a0d443aea776e0626fd74de3a4a
 
 build:
-  number: 1
+  number: 2
 
 requirements:
   build:
@@ -21,6 +21,7 @@ requirements:
     - cython
     - python =2.7
   run:
+    - bcftools
     - intervaltree
     - numpy
     - pandas
