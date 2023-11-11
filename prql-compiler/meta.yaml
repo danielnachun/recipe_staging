@@ -1,5 +1,5 @@
 {% set name = "prql-compiler" %}
-{% set version = "0.9.5" %}
+{% set version = "0.10.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/prql/prql/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 641846a1f1f2bdb5120f83880c1027b7868401f22479b885b972ecf0437296da
+  sha256: d279c881d9c8ca16b886be58fa2e8a12c2e708ee40caf605b688b85eaf5c0319
 
 build:
   number: 0
