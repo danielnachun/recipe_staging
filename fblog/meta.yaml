@@ -1,5 +1,5 @@
 {% set name = "fblog" %}
-{% set version = "4.4.0" %}
+{% set version = "4.5.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/brocode/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 5ac8beb5885359744f84fccd6d941d682842ed32ee0e229dc8edd2b183ce0667
+  sha256: b374f6f624eae664a53374c14879b1ffde7daa32ca37ae7f2c05dc3a114a5131
 
 build:
   number: 0
@@ -25,7 +25,6 @@ test:
 about:
   home: https://github.com/brocode/{{ name }}
   license: WTFPL
-  license_family: OTHER
   license_file:
     - LICENSE
     - THIRDPARTY.yml
