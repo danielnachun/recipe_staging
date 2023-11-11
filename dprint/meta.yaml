@@ -1,5 +1,5 @@
 {% set name = "dprint" %}
-{% set version = "0.41.0" %}
+{% set version = "0.42.5" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/{{ name }}/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: b456f0d77224338d6002188237f3cd2b977837e2d993143a5bfabc6e4fbf3837
+  sha256: 3843644d142efb61222d7fb9faaab2776f350bc3243830c7f82bcf609ef7bfb9
 
 build:
   number: 0
