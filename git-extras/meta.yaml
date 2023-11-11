@@ -1,5 +1,5 @@
 {% set name = "git-extras" %}
-{% set version = "7.0.0" %}
+{% set version = "7.1.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/tj/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: 3adcbc247d6cb78dc58cace22e9ad789cd6f5061522516660dfb59cc6ec08def
+  sha256: e5c855361d2f1ec1be6ee601247153d9c8c04a221949b6ec3903b32fa736f542
 
 build:
   number: 0
@@ -27,7 +27,6 @@ test:
 about:
   home: https://github.com/tj/{{ name }}
   license: MIT
-  license_family: MIT
   license_file: LICENSE
   summary: Small git utilities
   dev_url: https://github.com/tj/{{ name }}
