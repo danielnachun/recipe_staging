@@ -1,5 +1,5 @@
 {% set name = "golangci-lint" %}
-{% set version = "1.54.2" %}
+{% set version = "1.55.2" %}
 
 package:
   name: {{ name|lower }}
@@ -22,8 +22,7 @@ test:
 
 about:
   home: https://golangci-lint.run
-  license: GPL v3 only
-  license_family: GPL
+  license: GPL-3.0-only
   summary: Stricter gofmt
   dev_url: https://github.com/golangci/{{ name }}.git
 
