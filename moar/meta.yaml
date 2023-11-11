@@ -1,5 +1,5 @@
 {% set name = "moar" %}
-{% set version = "1.18.0" %}
+{% set version = "1.18.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/walles/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: ba3840b57536fc39ada112836179d3c6c6aa7208e8805f5db2bdc59bf69a899a
+  sha256: eb1d63f9fc5ddcc493bf03622572499ecdcac9f9da81b5be2e9ab3740310de9b
 
 build:
   number: 0
