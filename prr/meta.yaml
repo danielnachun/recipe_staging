@@ -1,5 +1,5 @@
 {% set name = "prr" %}
-{% set version = "0.8.2" %}
+{% set version = "0.9.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/danobi/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: f155191fdf220b0dfe5f86ff8ad5cd042ad2ab6e152ae61f33cbd578517197de
+  sha256: c713aa543e1c2987430ff0fbfa3892a543d02bb24549ebf7127c06b55f6b14f1
 
 build:
   number: 0
