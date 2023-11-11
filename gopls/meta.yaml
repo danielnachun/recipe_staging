@@ -1,5 +1,5 @@
 {% set name = "gopls" %}
-{% set version = "0.13.2" %}
+{% set version = "0.14.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/golang/tools/archive/{{ name }}/v{{ version }}.tar.gz
-  sha256: fa8a5d38c1e040686fda6018c3456801229d6ed992b6eecfbaba146e1fc772b2
+  sha256: 33f886f65268c6b1e3e3a0177681c2aeaeba3993b2a0829d18efb49869c1ca0e
 
 build:
   number: 0
