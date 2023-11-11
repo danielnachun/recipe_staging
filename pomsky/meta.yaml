@@ -1,5 +1,5 @@
 {% set name = "pomsky" %}
-{% set version = "0.10" %}
+{% set version = "0.11" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/rulex-rs/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: a7c02046c8919c16204d66161dfffd4e752ce86657213cb114fe0df9f561a657
+  sha256: 602cf73d7f7343b8c59ae82973635f5f62f26e2fe341fa990fca5fe504736384
 
 build:
   number: 0
