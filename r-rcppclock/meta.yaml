@@ -1,4 +1,4 @@
-{% set version = '0.2.0' %}
+{% set version = '1.1' %}
 
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
@@ -9,9 +9,9 @@ package:
 
 source:
   url:
-    - {{ cran_mirror }}/src/contrib/rcppclock_{{ version }}.tar.gz
-    - {{ cran_mirror }}/src/contrib/Archive/rcppclock/rcppclock_{{ version }}.tar.gz
-  sha256: 6c647314149e9862cfeb6e37408379772f88f11c2c0972847bf5c2f994e113e2
+    - {{ cran_mirror }}/src/contrib/RcppClock_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/RcppClock/RcppClock_{{ version }}.tar.gz
+  sha256: ebf046603c95a635c9bc83d9fd4b5b973dc0f1628ba4e88215cdac989cd1a940
 
 build:
   merge_build_host: True  # [win]
@@ -22,16 +22,33 @@ build:
 
 requirements:
   build:
+    - {{ compiler('c') }}              # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{ compiler('cxx') }}            # [not win]
+    - {{ compiler('m2w64_cxx') }}      # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}sed               # [win]
+    - {{ posix }}grep              # [win]
+    - {{ posix }}autoconf
+    - {{ posix }}automake          # [not win]
+    - {{ posix }}automake-wrapper  # [win]
+    - {{ posix }}pkg-config
+    - {{ posix }}make
+    - {{ posix }}coreutils         # [win]
     - {{ posix }}zip               # [win]
   host:
     - r-base=4.2
+    - r-rcpp
+    - r-ggplot2
   run:
     - r-base>=4.2
+    - r-rcpp
+    - r-ggplot2
 
 test:
   commands:
-    - $R -e "library('horseshoe')"           # [not win]
-    - "\"%R%\" -e \"library('horseshoe')\""  # [win]
+    - $R -e "library('rcppclock')"           # [not win]
+    - "\"%R%\" -e \"library('rcppclock')\""  # [win]
 
 about:
   home: https://CRAN.R-project.org/package=rcppclock
