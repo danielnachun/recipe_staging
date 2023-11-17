@@ -32,7 +32,7 @@ test:
     - $R -e "library('tidyukbiobank')"
 
 about:
-  home: https://github.com/wanglu205/OMR
+  home: https://github.com/Lab-Jaiswal/tidyukbiobank/
   license: Other
   summary: R-based package that you to easily extract, subset, and parse diagnositic (icd, cancer related, self reported dxs, etc.) from the UK Biobank dataset.
 
