@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/heatherjzhou/PCAForQTL/archive/b8f7d09e77cb5b50dd712ad99f3fbccab899b73d.zip
-  sha256: 18495310f028974fc8993073ba7cf6dc91d6c43f2b1a748a9cec29b5326ff6e0
+  sha256: 4e684b6d55b6d8ed4c1b0b144c3194dd5db46ddb3440f71511be2ca4d1cb8cc9
 
 build:
   noarch: generic
@@ -25,7 +25,7 @@ requirements:
 
 test:
   commands:
-    - $R -e "library('PCAforQTL')"
+    - $R -e "library('PCAForQTL')"
 
 about:
   home: https://github.com/heatherjzhou/PCAForQTL
