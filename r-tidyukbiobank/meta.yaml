@@ -1,0 +1,41 @@
+{% set version = "0.0.0.9000" %}
+
+package:
+  name: r-tidyukbiobank
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/Lab-Jaiswal/tidyukbiobank/archive/f188cd003a9a638f7b723f84f4b83fb6b6e2c96b.zip
+  sha256: 18495310f028974fc8993073ba7cf6dc91d6c43f2b1a748a9cec29b5326ff6e0
+
+build:
+  noarch: generic
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  host:
+    - r-base=4.2
+    - r-lubridate
+    - r-magrittr
+    - r-tidyverse
+  run:
+    - r-base>=4.2
+    - r-lubridate
+    - r-magrittr
+    - r-tidyverse
+
+test:
+  commands:
+    - $R -e "library('tidyukbiobank')"
+
+about:
+  home: https://github.com/wanglu205/OMR
+  license: Other
+  summary: R-based package that you to easily extract, subset, and parse diagnositic (icd, cancer related, self reported dxs, etc.) from the UK Biobank dataset.
+
+extra:
+  recipe-maintainers:
+    - danielnachun
