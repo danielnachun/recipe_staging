@@ -47,8 +47,8 @@ requirements:
 
 test:
   commands:
-    - $R -e "library('rcppclock')"           # [not win]
-    - "\"%R%\" -e \"library('rcppclock')\""  # [win]
+    - $R -e "library('RcppClock')"           # [not win]
+    - "\"%R%\" -e \"library('RcppClock')\""  # [win]
 
 about:
   home: https://CRAN.R-project.org/package=rcppclock
