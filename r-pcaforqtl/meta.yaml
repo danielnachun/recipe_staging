@@ -1,0 +1,37 @@
+{% set version = "0.1.0" %}
+
+package:
+  name: r-pcaforqtl
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/heatherjzhou/PCAForQTL/archive/b8f7d09e77cb5b50dd712ad99f3fbccab899b73d.zip
+  sha256: 4e684b6d55b6d8ed4c1b0b144c3194dd5db46ddb3440f71511be2ca4d1cb8cc9
+
+build:
+  noarch: generic
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  host:
+    - r-base=4.2
+    - r-ggplot2
+  run:
+    - r-base>=4.2
+    - r-ggplot2
+
+test:
+  commands:
+    - $R -e "library('PCAForQTL')"
+
+about:
+  home: https://github.com/heatherjzhou/PCAForQTL
+  license: GPL-3.0-or-later
+  summary: This package offers tips and functions for using PCA as a hidden variable inference method in QTL mapping.
+
+extra:
+  recipe-maintainers:
+    - danielnachun
