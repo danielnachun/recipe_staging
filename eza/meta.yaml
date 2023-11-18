@@ -1,0 +1,40 @@
+{% set name = "eza" %}
+{% set version = "0.15.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/eza-community/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 09093e565913104acb7a8eba974f8067c95566b6fbedf31138c9923a8cfde42f
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+    - pandoc
+    - pkg-config
+  host:
+    - libgit2
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/eza-community/{{ name }}
+  license: MIT
+  license_file:
+    - LICENCE
+    - THIRDPARTY.yml
+  summary: Modern, maintained replacement for ls
+  dev_url: https://github.com/eza-community/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
