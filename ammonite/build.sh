@@ -12,5 +12,5 @@ install -m 644 out/amm/3.0.0/assembly.dest/out.jar ${PREFIX}/libexec/${PKG_NAME}
 
 tee ${PREFIX}/bin/amm << EOF
 #!/bin/sh
-JAVA_HOME=${JAVA_HOME} exec \${JAVA_HOME}/bin/java -jar ${PREFIX}/libexec/${PKG_NAME}/ammonite-repl.jar "\$@"
+JAVA_HOME=${JAVA_HOME} exec ${JAVA_HOME}/bin/java -jar ${PREFIX}/libexec/${PKG_NAME}/ammonite-repl.jar "\$@"
 EOF

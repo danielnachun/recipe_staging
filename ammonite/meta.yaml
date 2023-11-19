@@ -10,12 +10,12 @@ source:
   git_rev: {{ version }}
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - curl
-    - openjdk
+    - openjdk =17
   run:
     - openjdk
 
