@@ -10,7 +10,7 @@ source:
   sha256: 9503c21c767b49634aefbe5b48ec3dcde5b56a0703a2196f7d967d091c745d55
 
 build:
-  number: 0
+  number: 1
   ignore_run_exports:
     - icu
 
