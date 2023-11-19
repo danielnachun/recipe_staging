@@ -19,6 +19,8 @@ requirements:
     - openjdk
 
 test:
+  script_env:
+    - BOOT_AS_ROOT=yes
   commands:
     - boot repl -e "(System/exit 0)"
 
