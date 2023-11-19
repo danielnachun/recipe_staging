@@ -10,5 +10,5 @@ cp build/artifact/jars/ivy.jar ${PREFIX}/libexec/${PKG_NAME}
 
 tee ${PREFIX}/bin/ivy << EOF
 #!/bin/sh
-JAVA_HOME=${JAVA_HOME} exec \${JAVA_HOME}/bin/java -jar "${PREFIX}/libexec/${PKG_NAME}/ivy.jar" "\$@"
+JAVA_HOME=${JAVA_HOME} exec ${JAVA_HOME}/bin/java -jar "${PREFIX}/libexec/${PKG_NAME}/ivy.jar" "\$@"
 EOF
