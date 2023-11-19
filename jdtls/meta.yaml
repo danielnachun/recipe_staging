@@ -1,5 +1,5 @@
 {% set name = "jdtls" %}
-{% set version = "1.24.0" %}
+{% set version = "1.29.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,14 +7,10 @@ package:
 
 source:
   url: https://github.com/eclipse/eclipse.jdt.ls/archive/v{{ version }}.tar.gz
-  sha256: 63385c68479debb56140a64ec072aa4e98e52aca45c00405c02bbf1adb9451eb
-  patches:
-    - 7622057513fa749e25b20840b4e4500a2a5df012.patch
-    - edd4b20e2bc3f062b0e1b25a7a1088f0b6a94142.patch
-    - 810f806fa6411022138b06e74dbb22640a318297.patch
+  sha256: a33987349a9b9895eaeaa3aed05230914ea20c0a74c156e7c56dabc8a2713783
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
