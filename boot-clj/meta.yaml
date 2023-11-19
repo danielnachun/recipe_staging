@@ -13,10 +13,14 @@ build:
   number: 0
 
 requirements:
+  host:
+    - openjdk
   run:
     - openjdk
 
 test:
+  script_env:
+    - BOOT_AS_ROOT=yes
   commands:
     - boot repl -e "(System/exit 0)"
 
