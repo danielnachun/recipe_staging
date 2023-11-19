@@ -25,5 +25,5 @@ dotnet publish --no-self-contained src/Paket/Paket.fsproj --output ${PREFIX}/lib
 
 tee ${PREFIX}/bin/paket << EOF
 #!/bin/sh
-DOTNET_ROOT=${DOTNET_ROOT} exec dotnet exec ${PREFIX}/libexec/${PKG_NAME}/paket.dll "\$@"
+DOTNET_ROOT=${DOTNET_ROOT} exec ${DOTNET_ROOT}/dotnet exec ${PREFIX}/libexec/${PKG_NAME}/paket.dll "\$@"
 EOF
