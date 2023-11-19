@@ -15,7 +15,7 @@ build:
 requirements:
   build:
     - curl
-    - openjdk
+    - openjdk =17
   run:
     - openjdk
 
