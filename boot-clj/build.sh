@@ -7,9 +7,7 @@ mkdir -p ${PREFIX}/libexec/${PKG_NAME}
 cp boot.jar ${PREFIX}/libexec/${PKG_NAME}
 
 tee ${PREFIX}/bin/boot << EOF
-#!/bin/bash
-export JAVA_HOME="${PREFIX}/lib/jvm"
+#!/bin/sh
 declare -a "options=(\$BOOT_JVM_OPTIONS)"
-exec "\${JAVA_HOME}/bin/java" "\${options[@]}" -Dboot.app.path="${PREFIX}/bin/boot" -jar "${PREFIX}/libexec/${PKG_NAME}/boot.jar" "\$@"
+JAVA_HOME=${JAVA_HOME} exec "${JAVA_HOME}/bin/java" "\${options[@]}" -Dboot.app.path="${PREFIX}/bin/boot" -jar "${PREFIX}/libexec/${PKG_NAME}/boot.jar" "\$@"
 EOF
-
