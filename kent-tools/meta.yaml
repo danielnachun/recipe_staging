@@ -10,12 +10,13 @@ source:
   sha256: faeaf46551eae87f4be8f6be4d1ddaa93c1ef6d52419f6a44a4759507f0d672b
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - binutils
     - libpng
     - mariadb
     - make
