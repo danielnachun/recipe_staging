@@ -12,5 +12,5 @@ cp -r cli/target/scala-2.13/cli-assembly-${PKG_VERSION}.jar ${PREFIX}/libexec/${
 
 tee ${PREFIX}/bin/scalariform << EOF
 #!/bin/sh
-JAVA_HOME=${JAVA_HOME} exec \${JAVA_HOME}/bin/java -jar "${PREFIX}/libexec/${PKG_NAME}/cli-assembly-${PKG_VERSION}.jar" "\$@"
+JAVA_HOME=${JAVA_HOME} exec ${JAVA_HOME}/bin/java -jar "${PREFIX}/libexec/${PKG_NAME}/cli-assembly-${PKG_VERSION}.jar" "\$@"
 EOF
