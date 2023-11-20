@@ -17,12 +17,12 @@ source:
     folder: loftee
 
 build:
-  number: 2
+  number: 3
   noarch: generic
-  skip: true  # [win]
   
 requirements:
   build:
+    - sed
     - curl
   host:
     - perl=5.32
