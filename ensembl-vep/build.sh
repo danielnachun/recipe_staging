@@ -6,10 +6,11 @@ env_script() {
 bin_name=$(basename $1)
 dir_name=$(dirname $1)
 full_path=$1
-tee ${PREFIX}/bin/${bin_name} << EOF
-#!/usr/bin/env bash
 
-PERL5LIB="\${PERL5LIB}:${dir_name}" exec ${full_path} "\$@"
+tee ${PREFIX}/bin/${bin_name} << EOF
+#!/bin/sh
+
+PERL5LIB="\${PERL5LIB}:${dir_name}" PATH=${PREFIX}/bin:\${PATH} exec ${full_path} "\$@"
 EOF
 chmod 0755 ${PREFIX}/bin/${bin_name}
 }
@@ -63,23 +64,8 @@ mv VEP_plugins/*.pm ${target}
 mv VEP_plugins/config ${target}
 
 # Install loftee
+sed -i "s?'/vep/loftee'?${target}?" loftee/LoF.pm
 mv loftee/*.pl ${target}
 mv loftee/*.pm ${target}
 mv loftee/maxEntScan ${target}
 mv loftee/splice_data ${target}
-
-# Export VEP_PLUGIN_DIR in activation scripts
-mkdir -p ${PREFIX}/etc/conda/activate.d
-mkdir -p ${PREFIX}/etc/conda/deactivate.d
-
-tee ${PREFIX}/etc/conda/activate.d/${PKG_NAME}_activate.sh << EOF
-#!/usr/bin/env bash
-
-export VEP_PLUGIN_DIR=${target}
-EOF
-
-tee ${PREFIX}/etc/conda/deactivate.d/${PKG_NAME}_deactivate.sh << EOF
-#!/usr/bin/env bash
-
-unset VEP_PLUGIN_DIR
-EOF
