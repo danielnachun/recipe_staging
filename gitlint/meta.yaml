@@ -6,13 +6,15 @@ package:
   version: "{{ version }}"
 
 source:
-  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: b5b70fb894e80849b69abbb65ee7dbb3520fc3511f202a6e6b6ddf1a71ee8f61
 
 build:
   noarch: python
-  number: 0
-  script: "{{ PYTHON }} -m pip install . -vv"
+  number: 1
+  script: {{ PYTHON }} -m pip install . -vv
+  entrypoints:
+    - gitlint = gitlint:__main__
 
 requirements:
   host:
@@ -25,11 +27,15 @@ requirements:
     - gitlint-core[trusted-deps] ==0.19.1
     - python
 
+test:
+  commands:
+    - gitlint --help
+
 about:
-  home: "https://jorisroovers.github.io/gitlint"
+  home: https://jorisroovers.github.io/gitlint
   license: MIT
   license_file: 
-  summary: "Git commit message linter written in python, checks your commit messages for style."
+  summary: Git commit message linter written in python, checks your commit messages for style.
 
 extra:
   recipe-maintainers:
