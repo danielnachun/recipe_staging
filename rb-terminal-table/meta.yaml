@@ -1,5 +1,5 @@
 {% set name = "terminal-table" %}
-{% set version = "3.0.2" %}
+{% set version = "1.8.0" %}
 
 package:
   name: "rb-{{ name|lower }}"
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
-  sha256: f951b6af5f3e00203fb290a669e0a85c5dd5b051b3b023392ccfd67ba5abae91
+  sha256: 13371f069af18e9baa4e44d404a4ada9301899ce0530c237ac1a96c19f652294
 
 build:
   noarch: generic
@@ -18,10 +18,10 @@ build:
 
 requirements:
   host:
-    - rb-unicode-display_width
+    - rb-unicode-display_width =1.1
     - ruby >=3.2
   run:
-    - rb-unicode-display_width
+    - rb-unicode-display_width =1.1
     - ruby >=3.2
 
 test:
