@@ -10,7 +10,7 @@ full_path=$1
 tee ${PREFIX}/bin/${bin_name} << EOF
 #!/bin/sh
 
-PERL5LIB="\${PERL5LIB}:${dir_name}" PATH=${PREFIX}/bin:\${PATH} exec ${full_path} "\$@"
+PERL5LIB="\${PERL5LIB}:${dir_name}" exec ${full_path} "\$@"
 EOF
 chmod 0755 ${PREFIX}/bin/${bin_name}
 }
