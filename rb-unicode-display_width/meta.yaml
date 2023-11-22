@@ -15,8 +15,11 @@ build:
   script:
     - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
     - gem unpack {{ name }}-{{ version }}.gem
+    - sed -i 's/Gem.gunzip/Gem::Util.gunzip/' ${PREFIX}/share/rubygems/gems/{{ name }}-{{ version }}/lib/unicode/display_width/index.rb
 
 requirements:
+  build:
+    - sed
   host:
     - ruby >=3.2
   run:
