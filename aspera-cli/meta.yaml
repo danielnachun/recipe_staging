@@ -11,7 +11,7 @@ source:
 
 build:
   noarch: generic
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -23,7 +23,7 @@ requirements:
     - rb-ruby-progressbar
     - rb-rubyzip
     - rb-security
-    - rb-terminal-table
+    - rb-terminal-table=1.8.0
     - rb-tty-spinner
     - rb-webrick
     - rb-websocket
@@ -38,7 +38,7 @@ requirements:
     - rb-ruby-progressbar
     - rb-rubyzip
     - rb-security
-    - rb-terminal-table
+    - rb-terminal-table=1.8.0
     - rb-tty-spinner
     - rb-webrick
     - rb-websocket
