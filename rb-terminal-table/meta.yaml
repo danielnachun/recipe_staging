@@ -18,10 +18,10 @@ build:
 
 requirements:
   host:
-    - rb-unicode-display_width
+    - rb-unicode-display_width =1.1
     - ruby >=3.2
   run:
-    - rb-unicode-display_width
+    - rb-unicode-display_width =1.1
     - ruby >=3.2
 
 test:
