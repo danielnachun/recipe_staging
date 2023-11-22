@@ -9,6 +9,10 @@ cargo-bundle-licenses \
 # build statically linked binary with Rust
 cargo install --locked --root ${PREFIX} --bin jj --path cli
 
+mkdir -p ${PREFIX}/share/fish/vendor_completions.d
+mkdir -p ${PREFIX}/share/zsh/site-functions
+jj util completion --zsh > ${PREFIX}/share/zsh/site-functions/_jj
+jj util completion --fish > ${PREFIX}/share/fish/vendor_completions.d/jj.fish
 mkdir -p ${PREFIX}/share/man/man1
 jj util mangen > ${PREFIX}/share/man/man1/jj.1
 
