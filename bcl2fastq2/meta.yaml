@@ -1,0 +1,52 @@
+{% set name = "bcl2fastq2" %}
+{% set version = "2.2.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  path: bcl2fastq
+  patches:
+    - 0001-devendor-libxml2-and-libxslt.patch
+    - 0002-add-missing-include-for-boost-foreach.patch
+    - 0003-add-missing-namespace-for-boost-placeholders.patch
+    - 0004-fix-types-in-Utility.cpp.patch
+    - 0005-fix-types-in-Xml.cpp.patch
+    - 0006-add-missing-include-for-iostream.patch
+
+build:
+  number: 0
+  skip: true  # [not linux]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cmake
+    - make
+  host:
+    - boost-cpp
+    - libxml2
+    - libxslt
+    - zlib
+  run:
+    - libboost
+    - libxml2
+    - libxslt
+    - libzlib
+    - _openmp_mutex
+
+test:
+  commands:
+    - bcl2fastq -h
+
+about:
+  home: https://support.illumina.com/sequencing/sequencing_software/bcl2fastq-conversion-software.html
+  license: OTHER
+  license_file: COPYRIGHT
+  summary:  Demultiplex sequencing data and converts base call (BCL) files into FASTQ files.
+
+extra:
+  recipe-maintainers:
+    - danielnachun

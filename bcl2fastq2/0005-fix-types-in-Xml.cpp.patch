@@ -1,0 +1,34 @@
+From f6316068ecfb522d613ef1e8484888c1421b0800 Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Thu, 23 Nov 2023 13:19:05 -0800
+Subject: [PATCH 5/5] fix types in Xml.cpp
+
+---
+ src/cxx/lib/io/Xml.cpp | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/cxx/lib/io/Xml.cpp b/src/cxx/lib/io/Xml.cpp
+index 720c530..cac1052 100755
+--- a/src/cxx/lib/io/Xml.cpp
++++ b/src/cxx/lib/io/Xml.cpp
+@@ -171,7 +171,7 @@ std::ostream &serializeAsXml(std::ostream &os, const boost::property_tree::ptree
+     {
+         unindex(*tree.begin(), treeWithIndexAttributes);
+ #ifndef WIN32
+-        boost::property_tree::write_xml(os, treeWithIndexAttributes, boost::property_tree::xml_writer_make_settings(' ', 2));
++        boost::property_tree::write_xml(os, treeWithIndexAttributes, boost::property_tree::xml_writer_make_settings<ptree::key_type>(' ', 2));
+ #else
+         boost::property_tree::write_xml(os, treeWithIndexAttributes, boost::property_tree::xml_writer_make_settings<std::string>(' ', 2));
+ #endif
+@@ -179,7 +179,7 @@ std::ostream &serializeAsXml(std::ostream &os, const boost::property_tree::ptree
+     else
+     {
+ #ifndef WIN32
+-        boost::property_tree::write_xml(os, tree, boost::property_tree::xml_writer_make_settings(' ', 2));
++        boost::property_tree::write_xml(os, tree, boost::property_tree::xml_writer_make_settings<ptree::key_type>(' ', 2));
+ #else
+         boost::property_tree::write_xml(os, tree, boost::property_tree::xml_writer_make_settings<std::string>(' ', 2));
+ #endif
+-- 
+2.42.0
+

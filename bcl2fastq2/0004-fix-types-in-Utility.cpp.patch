@@ -1,0 +1,69 @@
+From b6f528fd2ac7a3798cfa7494c762c136b99041ea Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Thu, 23 Nov 2023 13:16:53 -0800
+Subject: [PATCH 4/5] fix types in Utility.cpp
+
+---
+ src/cxx/lib/io/Utility.cpp | 28 ++++++++++++++--------------
+ 1 file changed, 14 insertions(+), 14 deletions(-)
+
+diff --git a/src/cxx/lib/io/Utility.cpp b/src/cxx/lib/io/Utility.cpp
+index 8014dec..6e8c277 100755
+--- a/src/cxx/lib/io/Utility.cpp
++++ b/src/cxx/lib/io/Utility.cpp
+@@ -35,38 +35,38 @@ static const std::vector<const char *> iosBaseToStdioOpenModesTranslationTable =
+                 // inspired by /usr/include/c++/4.3.2/fstream
+                 // | ios_base Flag combination      |
+                 // |binary  in  out  trunc  app     |
+-    (0      )   // |                                |
++    ("0"    )   // |                                |
+     ("a"    )   // |                         +      |
+-    (0      )   // |                   +            |
+-    (0      )   // |                   +     +      |
++    ("0"    )   // |                   +            |
++    ("0"    )   // |                   +     +      |
+     ("w"    )   // |             +                  |
+     ("a"    )   // |             +           +      |
+     ("w"    )   // |             +     +            |
+-    (0      )   // |             +     +     +      |
++    ("0"    )   // |             +     +     +      |
+     ("r"    )   // |         +                      |
+     ("a+"   )   // |         +               +      |
+-    (0      )   // |         +         +            |
+-    (0      )   // |         +         +     +      |
++    ("0"    )   // |         +         +            |
++    ("0"    )   // |         +         +     +      |
+     ("r+"   )   // |         +   +                  |
+     ("a+"   )   // |         +   +           +      |
+     ("w+"   )   // |         +   +     +            |
+-    (0      )   // |         +   +     +     +      |
+-    (0      )   // |   +                            |
++    ("0"    )   // |         +   +     +     +      |
++    ("0"    )   // |   +                            |
+     ("ab"   )   // |   +                     +      |
+-    (0      )   // |   +               +            |
+-    (0      )   // |   +               +     +      |
++    ("0"    )   // |   +               +            |
++    ("0"    )   // |   +               +     +      |
+     ("wb"   )   // |   +         +                  |
+     ("ab"   )   // |   +         +           +      |
+     ("wb"   )   // |   +         +     +            |
+-    (0      )   // |   +         +     +     +      |
++    ("0"    )   // |   +         +     +     +      |
+     ("rb"   )   // |   +     +                      |
+     ("a+b"  )   // |   +     +               +      |
+-    (0      )   // |   +     +         +            |
+-    (0      )   // |   +     +         +     +      |
++    ("0"    )   // |   +     +         +            |
++    ("0"    )   // |   +     +         +     +      |
+     ("r+b"  )   // |   +     +   +                  |
+     ("a+b"  )   // |   +     +   +           +      |
+     ("w+b"  )   // |   +     +   +     +            |
+-    (0      )   // |   +     +   +     +     +      |
++    ("0"    )   // |   +     +   +     +     +      |
+ ;
+ 
+ 
+-- 
+2.42.0
+
