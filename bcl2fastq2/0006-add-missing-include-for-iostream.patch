@@ -1,0 +1,24 @@
+From 61d36a8592140ff756f34b8751dcb88f4aa2626d Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Thu, 23 Nov 2023 13:44:48 -0800
+Subject: [PATCH 6/6] add missing include for <iostream>
+
+---
+ src/cxx/include/common/Logger.hh | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/cxx/include/common/Logger.hh b/src/cxx/include/common/Logger.hh
+index 52c7ad9..7bb4838 100755
+--- a/src/cxx/include/common/Logger.hh
++++ b/src/cxx/include/common/Logger.hh
+@@ -16,6 +16,7 @@
+ 
+ 
+ #include <ios>
++#include <iostream>
+ #include <string>
+ 
+ #include <boost/atomic.hpp>
+-- 
+2.42.0
+

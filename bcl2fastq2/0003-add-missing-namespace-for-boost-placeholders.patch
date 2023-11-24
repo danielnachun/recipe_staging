@@ -1,0 +1,38 @@
+From 63db2c6d9d393751be1c0385cc285c62fbe46ba4 Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Thu, 23 Nov 2023 13:13:13 -0800
+Subject: [PATCH 3/5] add missing namespace for boost::placeholders
+
+---
+ src/cxx/lib/io/Xml.cpp          | 2 ++
+ src/cxx/lib/layout/LaneInfo.cpp | 1 +
+ 2 files changed, 3 insertions(+)
+
+diff --git a/src/cxx/lib/io/Xml.cpp b/src/cxx/lib/io/Xml.cpp
+index 8069d25..720c530 100755
+--- a/src/cxx/lib/io/Xml.cpp
++++ b/src/cxx/lib/io/Xml.cpp
+@@ -30,6 +30,8 @@
+ 
+ #include "common/Logger.hh"
+ 
++using namespace boost::placeholders;
++
+ namespace bcl2fastq {
+ namespace io {
+ 
+diff --git a/src/cxx/lib/layout/LaneInfo.cpp b/src/cxx/lib/layout/LaneInfo.cpp
+index f8d1f53..cdb8027 100755
+--- a/src/cxx/lib/layout/LaneInfo.cpp
++++ b/src/cxx/lib/layout/LaneInfo.cpp
+@@ -26,6 +26,7 @@
+ #include "common/Debug.hh"
+ #include "layout/LaneInfo.hh"
+ 
++using namespace boost::placeholders;
+ 
+ namespace bcl2fastq {
+ 
+-- 
+2.42.0
+

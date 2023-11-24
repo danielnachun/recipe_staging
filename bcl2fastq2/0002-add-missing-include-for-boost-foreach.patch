@@ -1,0 +1,37 @@
+From 6827882b0aa0178e9c716f8caa2bfc40aba255cb Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Thu, 23 Nov 2023 13:04:10 -0800
+Subject: [PATCH 2/5] add missing include for boost::foreach
+
+---
+ src/cxx/lib/config/Bcl2FastqOptions.cpp | 1 +
+ src/cxx/lib/config/SampleSheetCsv.cpp   | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/src/cxx/lib/config/Bcl2FastqOptions.cpp b/src/cxx/lib/config/Bcl2FastqOptions.cpp
+index 0edb6ad..1aa37ff 100755
+--- a/src/cxx/lib/config/Bcl2FastqOptions.cpp
++++ b/src/cxx/lib/config/Bcl2FastqOptions.cpp
+@@ -24,6 +24,7 @@
+ #include <boost/filesystem/operations.hpp>
+ #include <boost/tokenizer.hpp>
+ #include <boost/lexical_cast.hpp>
++#include <boost/foreach.hpp>
+ 
+ #include "config.h"
+ #include "config/Bcl2FastqOptions.hh"
+diff --git a/src/cxx/lib/config/SampleSheetCsv.cpp b/src/cxx/lib/config/SampleSheetCsv.cpp
+index 2ef5c8d..c7c3268 100755
+--- a/src/cxx/lib/config/SampleSheetCsv.cpp
++++ b/src/cxx/lib/config/SampleSheetCsv.cpp
+@@ -23,6 +23,7 @@
+ #include <boost/filesystem.hpp>
+ #include <boost/lexical_cast.hpp>
+ #include <boost/algorithm/string.hpp>
++#include <boost/foreach.hpp>
+ 
+ #include "common/Logger.hh"
+ #include "common/Debug.hh"
+-- 
+2.42.0
+

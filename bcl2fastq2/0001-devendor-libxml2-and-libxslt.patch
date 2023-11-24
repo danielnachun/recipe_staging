@@ -1,0 +1,39 @@
+From 6bf6d0c2066ee3993be36643afc7d7ac7888ebc8 Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Thu, 23 Nov 2023 12:55:40 -0800
+Subject: [PATCH 1/5] devendor libxml2 and libxslt
+
+---
+ src/cmake/cxxConfigure.cmake | 14 ++------------
+ 1 file changed, 2 insertions(+), 12 deletions(-)
+
+diff --git a/src/cmake/cxxConfigure.cmake b/src/cmake/cxxConfigure.cmake
+index 872de24..f3b0072 100755
+--- a/src/cmake/cxxConfigure.cmake
++++ b/src/cmake/cxxConfigure.cmake
+@@ -96,20 +96,10 @@ set(REINSTDIR ${CMAKE_BINARY_DIR}/bootstrap)
+ # CPPUNIT
+ bcl2fastq_find_library(CPPUNIT "cppunit/Test.h" cppunit${CPPUNIT_DEBUG})
+ 
+-# XML2 - bootstrap first (if necessary) so xslt can build against it 
+ # XSLT and EXSLT
+ if((NOT HAVE_LIBXML2) OR (NOT HAVE_LIBXSLT))
+-  find_package_version(LibXml2 ${BCL2FASTQ_LIBXML2_VERSION})
+-  find_package_version(LibXslt ${BCL2FASTQ_LIBXSLT_VERSION})
+-endif((NOT HAVE_LIBXML2) OR (NOT HAVE_LIBXSLT))
+-
+-if((NOT HAVE_LIBXML2) OR (NOT HAVE_LIBXSLT))
+-  redist_package(LIBXML2 ${BCL2FASTQ_LIBXML2_VERSION} 
+-                 "--prefix=${REINSTDIR};--without-modules;--without-http;--without-ftp;--without-python;--without-threads;--without-schematron;--without-debug;--without-iconv")
+-  find_library_redist(LIBXML2 ${REINSTDIR} libxml/xpath.h xml2)
+-  redist_package(LIBXSLT ${BCL2FASTQ_LIBXSLT_VERSION} "--prefix=${REINSTDIR};--with-libxml-prefix=${REINSTDIR};--without-plugins;--without-crypto")
+-  find_library_redist(LIBEXSLT ${REINSTDIR} libexslt/exslt.h exslt)
+-  find_library_redist(LIBXSLT ${REINSTDIR} libxslt/xsltconfig.h xslt)
++  find_package(LibXml2 ${BCL2FASTQ_LIBXML2_VERSION})
++  find_package(LibXslt ${BCL2FASTQ_LIBXSLT_VERSION})
+ endif((NOT HAVE_LIBXML2) OR (NOT HAVE_LIBXSLT))
+ 
+ include_directories(BEFORE SYSTEM ${LIBXML2_INCLUDE_DIR})
+-- 
+2.42.0
+
