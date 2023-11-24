@@ -1,0 +1,34 @@
+{% set name = "astyle" %}
+{% set version = "3.4.10" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://downloads.sourceforge.net/project/astyle/astyle/astyle%203.4/astyle-3.4.10.tar.bz2
+  sha256: 6f67ec872b437bd3c51e0f75e112e4dbfdb26d5fb7bd9cf8a480f10af5557063
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - make
+
+test:
+  commands:
+    - astyle -h
+
+about:
+  home: https://astyle.sourceforge.net
+  license: MIT
+  license_file: LICENSE.md
+  summary: Source code beautifier for C, C++, C#, and Java
+  home: https://sourceforge.net/projects/astyle
+
+extra:
+  recipe-maintainers:
+    - danielnachun
