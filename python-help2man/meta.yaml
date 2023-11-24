@@ -1,0 +1,48 @@
+{% set name = "python-help2man" %}
+{% set version = "0.0.9" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/h/help2man/help2man-{{ version }}.tar.gz
+  sha256: 57fa18ed59ee94952a2341153eae34fc90020cb4ebb26ce8a7324334119cf81a
+
+build:
+  entry_points:
+    - help2man = help2man.__main__:main
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python >=3.9
+    - setuptools-scm >=6.2
+    - shtab
+    - jinja2
+    - tomli
+    - pip
+  run:
+    - python >=3.9
+    - jinja2
+
+test:
+  imports:
+    - help2man
+  commands:
+    - pip check
+    - help2man --help
+  requires:
+    - pip
+
+about:
+  summary: Convert --help and --version to man page.
+  dev_url: https://github.com/Freed-Wu/help2man
+  license: GPL-3.0
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun

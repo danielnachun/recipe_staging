@@ -1,0 +1,48 @@
+{% set name = "autotools-language-server" %}
+{% set version = "0.0.12" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/autotools-language-server-{{ version }}.tar.gz
+  sha256: 51a701a2c7ec8fa47e1546bde14b2bf68fdb8495516d092850763ac9c6593ffd
+
+build:
+  entry_points:
+    - autotools-language-server = autotools_language_server.__main__:main
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python >=3.10
+    - setuptools-scm >=6.2
+    - setuptools-generate
+    - pip
+  run:
+    - python >=3.10
+    - platformdirs
+    - tree_sitter_languages
+    - tree-sitter-lsp
+
+test:
+  imports:
+    - autotools_language_server
+  commands:
+    - pip check
+    - autotools-language-server --help
+  requires:
+    - pip
+
+about:
+  summary: Language server for makefile and configure.ac
+  dev_url: https://github.com/Freed-Wu/autotools-language-server
+  license: GPL-3.0
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
