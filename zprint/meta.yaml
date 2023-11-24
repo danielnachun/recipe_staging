@@ -1,0 +1,40 @@
+{% set name = "zprint" %}
+{% set version = "1.2.8" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version.replace("-", "_") }}
+
+source:
+  url: https://github.com/kkinnear/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: 80ddf806262a8451f58af70b9acde9c2b03eb0c7ad680476a053ad56e6c0da42
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - gcc  # [linux]
+    - graalvm
+    - leiningen
+    - sed
+  host:
+    - zlib
+  run:
+    - libzlib
+
+test:
+  commands:
+    - zprintl --help
+
+about:
+  home: https://github.com/kkinear/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: Executables, uberjar, and library to beautifully format Clojure and Clojurescript source code and s-expressions.
+  dev_url: https://github.com/kkinear/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
