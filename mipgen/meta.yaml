@@ -1,0 +1,50 @@
+{% set name = "mipgen" %}
+{% set version = "1.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/shendurelab/MIPGEN/archive/99602902c94231c4dd0f42dd9999b866148a8756.zip
+  sha256: 83579315c087f8b466fa990b05d586e8fdcfc79edb628eb5182ed9dcec4f6a26
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - make
+    - sed
+  host:
+    - boost-cpp
+    - cython
+    - numpy=1.16
+    - python=2.7
+    - scipy
+  run:
+    - numpy=1.16
+    - python=2.7
+    - scipy
+
+test:
+  commands:
+    - "mipgen 2>&1 | grep -q 'usage: mipgen'"
+    - "generate_ucsc_track.py 2>&1 | grep -q 'usage: python generate_ucsc_track.py'" 
+    - mipgen_fq_cutter_pe.py --help
+    - mipgen_fq_cutter_se.py --help
+    - mipgen_qseq2fq.py --help
+    - mipgen_smmip_collapser.py --help
+    - "prepare_mip_reference.py 2>&1 | grep -q 'usage: PROG <mip design file>'" 
+
+about:
+  home: https://github.com/shendurelab/MIPGEN
+  license: OTHER
+  license_file: LICENSE.txt
+  summary: One stop MIP design and analysis
+
+extra:
+  recipe-maintainers:
+    - danielnachun
