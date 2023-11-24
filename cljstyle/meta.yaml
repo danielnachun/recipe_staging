@@ -1,0 +1,40 @@
+{% set name = "cljstyle" %}
+{% set version = "0.15.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version.replace("-", "_") }}
+
+source:
+  url: https://github.com/greglook/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: d056fe0b511616567bf0cf191d5bc33725dad76165a39ed29f69ec0a2b95bc9d
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - gcc  # [linux]
+    - graalvm
+    - leiningen
+    - sed
+  host:
+    - zlib
+  run:
+    - libzlib
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/greglook/{{ name }}
+  license: EPL-1.0
+  license_file: LICENSE.txt
+  summary: A tool for formatting Clojure code
+  dev_url: https://github.com/greglook/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
