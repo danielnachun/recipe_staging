@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/nametake/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 563ae6b0fa279cb8ea8f66b4b455c7cb74a9e65a0edbe694505b2c8fc719b2ff
+  sha256: 1eeaf97b8296db740a49c20eb15d1ed2a73825da213a720f27f2fafc054191bd
 
 build:
   number: 0
