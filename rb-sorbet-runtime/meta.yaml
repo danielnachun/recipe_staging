@@ -1,0 +1,37 @@
+{% set name = "sorbet-runtime" %}
+{% set version = "0.5.11142" %}
+
+package:
+  name: "rb-{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: 65c9f1b4e4cd348f14ccc0ba0bd73d83e06a41d95ac7424e6576cb6d564b76ef
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby >=3.2
+  run:
+    - ruby >=3.2
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  summary: Sorbet's runtime type checking component
+  dev_url: https://github.com/sorbet/sorbet
+
+extra:
+  recipe-maintainers:
+    - danielnachun

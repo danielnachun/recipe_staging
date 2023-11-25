@@ -1,0 +1,41 @@
+{% set name = "ruby-lsp" %}
+{% set version = "0.12.5" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: 9d50460cfb3970ee8f10d1b5adc6c673c5b16e4b546582c13c65a0e92dd75961
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - sed
+  host:
+    - rb-language_server-protocol
+    - rb-prism
+    - rb-sorbet-runtime
+    - ruby
+  run:
+    - rb-language_server-protocol
+    - rb-prism
+    - rb-sorbet-runtime
+    - ruby
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  summary: An opinionated language server for Ruby
+  dev_url: https://github.com/shopify/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
