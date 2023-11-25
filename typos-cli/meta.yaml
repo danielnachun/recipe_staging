@@ -1,0 +1,37 @@
+{% set name = "typos-cli" %}
+{% set version = "1.16.23" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/crate-ci/typos/archive/v{{ version }}.tar.gz
+  sha256: 3947439f2cafa345f7a1c953aaca3c39c0674a6ea35da7812e34ffa641482aa7
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - typos --help
+
+about:
+  home: https://github.com/crate-ci/{{ name }}
+  license: Apache-2.0 AND MIT
+  license_file:
+    - LICENSE-APACHE
+    - LICENSE-MIT
+    - THIRDPARTY.yml
+  summary: Source code spell checker
+  dev_url: https://github.com/crate-ci/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
