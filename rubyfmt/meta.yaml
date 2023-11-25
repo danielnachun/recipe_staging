@@ -1,0 +1,44 @@
+{% set name = "rubyfmt" %}
+{% set version = "0.10.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/fables-tales/{{ name }}
+  git_rev: v{{ version }}
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - autoconf
+    - automake
+    - binutils
+    - bison
+    - cargo-bundle-licenses
+    - make
+    - ruby
+  run:
+    - ruby
+
+test:
+  commands:
+    - rubyfmt-main --help
+
+about:
+  home: https://github.com/fables-tales/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Ruby autoformatter
+  dev_url: https://github.com/fables-tales/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
