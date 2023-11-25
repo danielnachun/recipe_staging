@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/candid82/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 563ae6b0fa279cb8ea8f66b4b455c7cb74a9e65a0edbe694505b2c8fc719b2ff
+  sha256: 52ddab431c7e8ebd3f3733679c55639fe99964c9ffba969042c537a3d0e809d9
 
 build:
   number: 0
@@ -26,7 +26,6 @@ about:
   license: EPL-1.0
   license_file:
     - LICENSE
-    - license-files/
   summary: Small Clojure interpreter, linter and formatter.
   dev_url: https://github.com/candid82/{{ name }}
 
