@@ -1,0 +1,35 @@
+{% set name = "impl" %}
+{% set version = "1.2.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/josharian/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 563ae6b0fa279cb8ea8f66b4b455c7cb74a9e65a0edbe694505b2c8fc719b2ff
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+    - go-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/josharian/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE.txt
+    - license-files/
+  summary: impl generates method stubs for implementing an interface
+  dev_url: https://github.com/josharian/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
