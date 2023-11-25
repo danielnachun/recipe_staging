@@ -7,15 +7,20 @@ package:
 
 source:
   url: https://github.com/kortschak/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 563ae6b0fa279cb8ea8f66b4b455c7cb74a9e65a0edbe694505b2c8fc719b2ff
+  sha256: b807c55c2901c5dc517c126d4b67b3567dd1b3cc7bca22007bf4dc11eafbef87
 
 build:
   number: 0
 
 requirements:
   build:
-    - go
+    - go-cgo
     - go-licenses
+    - pkg-config
+  host:
+    - hunspell
+  run:
+    - hunspell
 
 test:
   commands:
