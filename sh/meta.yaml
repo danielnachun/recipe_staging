@@ -1,0 +1,37 @@
+{% set name = "sh" %}
+{% set version = "3.7.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/mvdan/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 89eafc8790df93305dfa42233e262fb25e1c96726a3db420a7555abadf3111ed
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+    - go-licenses
+
+test:
+  commands:
+    - gosh --help
+    - shfmt --help
+
+about:
+  home: https://github.com/mvdan/{{ name }}
+  license: BSD-3-Clause
+  license_file:
+    - LICENSE
+    - license-files_gosh/
+    - license-files_shfmt/
+  summary: A shell parser, formatter, and interpreter with bash support; includes shfmt
+  dev_url: https://github.com/mvdan/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
