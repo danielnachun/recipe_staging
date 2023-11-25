@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/josharian/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 563ae6b0fa279cb8ea8f66b4b455c7cb74a9e65a0edbe694505b2c8fc719b2ff
+  sha256: 1a5e02e396c4d60811780af4de44ba25ff96d851d240f8b39c2086def5ecfd6d
 
 build:
   number: 0
@@ -19,7 +19,7 @@ requirements:
 
 test:
   commands:
-    - {{ name }} --help
+    - {{ name }} --help 2>&1 | grep -q "impl generates method stubs for recv to implement iface"
 
 about:
   home: https://github.com/josharian/{{ name }}
