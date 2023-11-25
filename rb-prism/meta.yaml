@@ -16,9 +16,11 @@ build:
     - gem unpack {{ name }}-{{ version }}.gem
 
 requirements:
-  host:
+  build:
     - {{ compiler('c') }}
+    - gcc  # [linux]
     - make
+  host:
     - ruby >=3.2
   run:
     - ruby >=3.2
