@@ -1,0 +1,38 @@
+{% set name = "erg" %}
+{% set version = "0.6.24" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/erg-lang/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: ab445ab68f2c38d963c6a71c2d0be0e64cb313b1ff92b7e54fd99d3038d9dc09
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+    - python
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/erg-lang/{{ name }}
+  license: Apache-2.0 or MIT
+  license_file:
+    - LICENSE-APACHE
+    - LICENSE-MIT
+    - THIRDPARTY.yml
+  summary: Statically typed language that can deeply improve the Python ecosystem
+  dev_url: https://github.com/erg-lang/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
