@@ -33,6 +33,7 @@ test:
 about:
   home: https://rtomayko.github.io/ronn
   license: MIT
+  license: {{ name }}-{{ version }}/COPYING
   summary: Builds manuals - the opposite of roff
   dev_url: https://github.com/rtomayko/ronn
 
