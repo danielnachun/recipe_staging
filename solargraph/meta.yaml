@@ -10,7 +10,7 @@ source:
   sha256: e8e0fcb03b664913bc2f8d0bb10eb2bb717b7ea54a7219dcc702f15785aa97a3
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -57,6 +57,7 @@ test:
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: MIT
+  license_file: {{ name }}-{{ version }}/LICENSE
   summary: Ruby language server
   dev_url: https://github.com/castwide/{{ name }}
 
