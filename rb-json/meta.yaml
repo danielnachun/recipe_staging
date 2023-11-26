@@ -2,15 +2,15 @@
 {% set version = "2.6.3" %}
 
 package:
-  name: "rb-{{ name|lower }}"
-  version: "{{ version }}"
+  name: rb-{{ name|lower }}
+  version: {{ version }}
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
   sha256: 86aaea16adf346a2b22743d88f8dcceeb1038843989ab93cda44b5176c845459
 
 build:
-  number: 0
+  number: 1
   script:
     - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
     - gem unpack {{ name }}-{{ version }}.gem
@@ -20,9 +20,9 @@ requirements:
     - {{ compiler('c') }}
     - make
   host:
-    - ruby >=3.2
+    - ruby=3.2
   run:
-    - ruby >=3.2
+    - ruby>=3.2
 
 test:
   commands:
@@ -31,6 +31,7 @@ test:
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: Ruby
+  license_file: {{ name }}-{{ version }}/LICENSE
   summary: This is a JSON implementation as a Ruby extension in C.
   dev_url: https://github.com/flori/{{ name }}
 
