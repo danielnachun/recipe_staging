@@ -2,19 +2,20 @@
 {% set version = "0.6.0" %}
 
 package:
-  name: "rb-{{ name|lower }}"
-  version: "{{ version }}"
+  name: rb-{{ name|lower }}
+  version: {{ version }}
 
 source:
-  url: "https://rubygems.org/downloads/{{ name }}-{{ version }}.gem"
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
   sha256: c282dbe3cab9463a6e65d52695af6a971008d31daa04f1535aac00acf70d4510
 
 build:
   noarch: generic
-  number: 0
+  number: 1
   script:
     - gem install -N -l -V --norc --ignore-dependencies {{ name }}-{{ version }}.gem
     - gem unpack {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem --target .
 
 requirements:
   host:
@@ -33,7 +34,8 @@ test:
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: MIT
-  summary: "Simple WebSocket Client for Ruby"
+  license_file: {{ name }}-{{ version }}/LICENSE.txt
+  summary: Simple WebSocket Client for Ruby
   dev_url: https://github.com/ruby-jp/{{ name }}
 
 extra:
