@@ -2,15 +2,15 @@
 {% set version = "1.52.0" %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
   sha256: a9860af191f6d51696de9ece6ca8c072643ee6c04af4310242b13e642b11ef91
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   host:
@@ -47,6 +47,7 @@ test:
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: MIT
+  license_file: {{ name }}-{{ version }}/LICENSE.txt
   summary: RuboCop is a Ruby code style checking and code formatting tool.
   dev_url: https://github.com/rubocop/{{ name }}
 
