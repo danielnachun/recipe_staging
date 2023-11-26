@@ -2,18 +2,19 @@
 {% set version = "3.0.6" %}
 
 package:
-  name: "rb-{{ name|lower }}"
-  version: "{{ version }}"
+  name: rb-{{ name|lower }}
+  version: {{ version }}
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
   sha256: d68e0ebf351efcfa6403f90e0d4e624e9a2969d132ef9ee9d140eff55aa4e4b4
 
 build:
-  number: 0
+  number: 1
   script:
     - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
     - gem unpack {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem --target .
 
 requirements:
   build:
@@ -30,8 +31,10 @@ test:
 
 about:
   home: https://rubygems.org/gems/{{ name }}
-  license: MIT
+  license: BSD-2-Clause
+  license_file: {{ name }}-{{ version }}/LICENSE.txt
   summary: Provides lexical scanning operations on a String.
+  dev_url: https://github.com/ruby/{{ name }}
 
 extra:
   recipe-maintainers:
