@@ -1,0 +1,39 @@
+{% set name = "pry" %}
+{% set version = "0.14.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: c4fe54efedaca1d351280b45b8849af363184696fcac1c72e0415f9bdac4334d
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - sed
+  host:
+    - rb-coderay
+    - rb-method_source
+    - ruby
+  run:
+    - rb-coderay
+    - rb-method_source
+    - ruby
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  summary: Pry is a runtime developer console and IRB alternative with powerful introspection capabilities.
+  dev_url: http://pry.github.io/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
