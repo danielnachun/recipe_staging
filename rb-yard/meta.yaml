@@ -11,10 +11,11 @@ source:
 
 build:
   noarch: generic
-  number: 0
+  number: 1
   script:
     - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
     - gem unpack {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem --target .
 
 requirements:
   host:
@@ -29,6 +30,7 @@ test:
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: MIT
+  license_file: {{ name }}-{{ version }}/LICENSE
   summary: YARD is a documentation generation tool for the Ruby programming language.
   dev_url: http://github.com/lsegal/{{ name }}
 
