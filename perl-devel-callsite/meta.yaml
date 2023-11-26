@@ -1,13 +1,13 @@
-{% set name = "perl-padwalker" %}
-{% set version = "2.5" %}
+{% set name = "perl-devel-callsite" %}
+{% set version = "1.0.1" %}
 
 package:
   name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://cpan.metacpan.org/authors/id/R/RO/ROBIN/PadWalker-{{ version }}.tar.gz
-  sha256: 07b26abb841146af32072a8d68cb90176ffb176fd9268e6f2f7d106f817a0cd0
+  url: https://cpan.metacpan.org/authors/id/R/RO/ROCKY/Devel-Callsite-{{ version }}.tar.gz
+  sha256: 766728bfc1456fd348d7224a06a2f040a2120a009e8420246860ad492bb37772
 
 build:
   number: 0
@@ -30,12 +30,9 @@ requirements:
 
 test:
   imports:
-    - PadWalker
+    - Devel::Callsite
 
 about:
-  home: http://metacpan.org/pod/PadWalker
-  license: unknown
-  summary: "play with other peoples' lexical variables"
-
-maintainers:
-  - danielnachun
+  home: http://metacpan.org/pod/Devel-Callsite
+  license: perl_5
+  summary: 'Get caller return OP address and Perl interpreter context'

@@ -1,0 +1,37 @@
+{% set name = "perl-lwp-mediatypes" %}
+{% set version = "6.04" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/O/OA/OALDERS/LWP-MediaTypes-{{ version }}.tar.gz
+  sha256: 8f1bca12dab16a1c2a7c03a49c5e58cce41a6fec9519f0aadfba8dad997919d9
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-test-fatal
+  run:
+    - perl>=5.32
+
+test:
+  imports:
+    - LWP::MediaTypes
+
+about:
+  home: https://github.com/libwww-perl/lwp-mediatypes
+  license: perl_5
+  summary: 'guess media type for a file or a URL'

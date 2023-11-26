@@ -1,0 +1,36 @@
+{% set name = "perl-http-date" %}
+{% set version = "6.06" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/O/OA/OALDERS/HTTP-Date-{{ version }}.tar.gz
+  sha256: 7b685191c6acc3e773d1fc02c95ee1f9fae94f77783175f5e78c181cc92d2b52
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+test:
+  imports:
+    - HTTP::Date
+
+about:
+  home: https://github.com/libwww-perl/HTTP-Date
+  license: perl_5
+  summary: 'HTTP::Date - date conversion routines'

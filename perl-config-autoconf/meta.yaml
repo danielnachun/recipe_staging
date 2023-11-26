@@ -1,0 +1,43 @@
+{% set name = "perl-config-autoconf" %}
+{% set version = "0.320" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/A/AM/AMBS/Config-AutoConf-{{ version }}.tar.gz
+  sha256: bb57a958ef49d3f7162276dae14a7bd5af43fd1d8513231af35d665459454023
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - sed -i "/^lddlflags/ s|,|-rpath |g" ${PREFIX}/lib/perl*/*/core_perl/Config_heavy.pl  # [osx]
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - gawk
+    - bison
+    - make
+    - sed
+  host:
+    - perl=5.32
+    - perl-capture-tiny
+  run:
+    - perl>=5.32
+    - perl-capture-tiny
+
+test:
+  imports:
+    - Config::AutoConf
+
+about:
+  home: https://metacpan.org/release/Config-AutoConf
+  license: perl_5
+  summary: 'A module to implement some of AutoConf macros in pure perl.'

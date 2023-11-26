@@ -1,0 +1,50 @@
+{% set name = "perl-html-parser" %}
+{% set version = "3.81" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/O/OA/OALDERS/HTML-Parser-{{ version }}.tar.gz
+  sha256: c0910a5c8f92f8817edd06ccfd224ba1c2ebe8c10f551f032587a1fc83d62ff2
+
+build:
+  number: 0
+  script:
+    - sed -i "/^lddlflags/ s|,|-rpath |g" ${PREFIX}/lib/perl*/*/core_perl/Config_heavy.pl  # [osx]
+    - perl Makefile.PL INSTALLDIRS=site
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+    - sed
+  host:
+    - perl=5.32
+    - perl-html-tagset
+    - perl-http-message
+    - perl-uri
+  run:
+    - perl>=5.32
+    - perl-html-tagset
+    - perl-http-message
+    - perl-uri
+
+test:
+  imports:
+    - HTML::Entities
+    - HTML::Filter
+    - HTML::HeadParser
+    - HTML::LinkExtor
+    - HTML::Parser
+    - HTML::PullParser
+    - HTML::TokeParser
+
+about:
+  home: https://github.com/libwww-perl/HTML-Parser
+  license: perl_5
+  summary: 'HTML parser class'

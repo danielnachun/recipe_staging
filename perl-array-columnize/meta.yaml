@@ -1,0 +1,41 @@
+{% set name = "perl-array-columnize" %}
+{% set version = "1.04" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/R/RO/ROCKY/Array-Columnize-{{ version }}.tar.gz
+  sha256: fe87a310df92c93dd931fee9e2e7c9629f5990e8b93f28145758e0ba76013269
+
+build:
+  number: 0
+  noarch: generic
+  ignore_run_exports: 
+    - perl-module-build
+  script:
+    - perl Build.PL
+    - perl ./Build
+    - perl ./Build test
+    - perl ./Build install --installdirs site
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-rlib
+    - perl-module-build
+  run:
+    - perl=5.32
+    - perl-rlib
+
+test:
+  imports:
+    - Array::Columnize
+
+about:
+  home: http://metacpan.org/pod/Array-Columnize
+  license: open_source
+  summary: 'Format an Array as an Array of String aligned in columns.'
