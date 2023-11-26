@@ -2,25 +2,25 @@
 {% set version = "1.5.3" %}
 
 package:
-  name: "rb-{{ name|lower }}"
-  version: "{{ version }}"
+  name: rb-{{ name|lower }}
+  version: {{ version }}
 
 source:
-  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
-  sha256: ed443128c2c9254db1a3573c53708b00319c01022b40dcce60a873911831d67b
+  url: https://github.com/ruby/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 0d2ceb76ee033498c6e875eacb36067b650b3253779930c1ee9be375ab1ea954
 
 build:
   noarch: generic
-  number: 0
+  number: 1
   script:
+    - gem build {{ name }}.gemspec
     - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
-    - gem unpack {{ name }}-{{ version }}.gem
 
 requirements:
   host:
-    - ruby >=3.2
+    - ruby=3.2
   run:
-    - ruby >=3.2
+    - ruby>=3.2
 
 test:
   commands:
@@ -29,7 +29,9 @@ test:
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: BSD-2-Clause
+  license_file: LICENSE.txt
   summary: Provides a simple logging utility for outputting messages.
+  dev_url: https://github.com/ruby/{{ name }}
 
 extra:
   recipe-maintainers:
