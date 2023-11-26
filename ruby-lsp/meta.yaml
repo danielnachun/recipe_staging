@@ -10,7 +10,7 @@ source:
   sha256: 9d50460cfb3970ee8f10d1b5adc6c673c5b16e4b546582c13c65a0e92dd75961
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -33,6 +33,7 @@ test:
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: MIT
+  license_file: {{ name }}-{{ version }}/LICENSE.txt
   summary: An opinionated language server for Ruby
   dev_url: https://github.com/shopify/{{ name }}
 
