@@ -10,10 +10,11 @@ source:
   sha256: dfe8f4b3414ba8377d7626030f3aa605caadee9de87cffbeadf8a50359eac8ca
 
 build:
-  number: 0
+  number: 1
   script:
     - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem -- --with-cflags=-Wno-incompatible-function-pointer-types
     - gem unpack {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem --target .
 
 requirements:
   build:
@@ -31,6 +32,7 @@ test:
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: MIT
+  license_file: {{ name }}-{{ version }}/COPYING
   summary: a swift, liberal HTML parser with a fantastic library
   dev_url: https://github.com/hpricot/{{ name }}
 
