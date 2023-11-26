@@ -10,8 +10,9 @@ source:
   sha256: 99c56b395f1239af19901f2feeb125d9ecb4e351a0d80daa9529211a4700a6f2
 
 build:
-  number: 0
+  number: 1
   script:
+    - sed -i "/^lddlflags/ s|,|-rpath |g" ${PREFIX}/lib/perl*/*/core_perl/Config_heavy.pl  # [osx]
     - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
     - make
     - make test
@@ -21,6 +22,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - make
+    - sed
   host:
     - perl >=5.32
   run:

@@ -1,0 +1,129 @@
+{% set name = "perl-devel-trepan" %}
+{% set version = "1.0.1" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/R/RO/ROCKY/Devel-Trepan-v{{ version }}.tar.gz
+  sha256: b210c79907fdf72ae7efcd116386fb8e8d83b2fbb206bacf9b8a0113dfadbc47
+
+build:
+  number: 0
+  noarch: generic
+  ignore_run_exports:
+    - perl-module-build
+  script:
+    - perl Build.PL
+    - perl ./Build
+    - perl ./Build test
+    - perl ./Build install --installdirs site
+
+requirements:
+  host:
+    - perl=5.32
+    - perl-syntax-highlight-perl-improved
+    - perl-array-columnize
+    - perl-rlib
+    - perl-devel-callsite
+    - perl-file-homedir
+    - perl-marpa-r2
+    - perl-module-build
+    - perl-padwalker
+    - perl-pod-parser
+  run:
+    - perl>=5.32
+    - perl-syntax-highlight-perl-improved
+    - perl-array-columnize
+    - perl-devel-callsite
+    - perl-rlib
+    - perl-file-homedir
+    - perl-marpa-r2
+    - perl-padwalker
+    - perl-pod-parser
+
+test:
+  imports:
+    - Devel::Trepan
+    - Devel::Trepan::BrkptMgr
+    - Devel::Trepan::Client
+    - Devel::Trepan::CmdProcessor
+    - Devel::Trepan::CmdProcessor::Command
+    - Devel::Trepan::CmdProcessor::Command::Action
+    - Devel::Trepan::CmdProcessor::Command::Alias
+    - Devel::Trepan::CmdProcessor::Command::Backtrace
+    - Devel::Trepan::CmdProcessor::Command::Break
+    - Devel::Trepan::CmdProcessor::Command::Clear
+    - Devel::Trepan::CmdProcessor::Command::Complete
+    - Devel::Trepan::CmdProcessor::Command::Condition
+    - Devel::Trepan::CmdProcessor::Command::Continue
+    - Devel::Trepan::CmdProcessor::Command::Debug
+    - Devel::Trepan::CmdProcessor::Command::Delete
+    - Devel::Trepan::CmdProcessor::Command::Disable
+    - Devel::Trepan::CmdProcessor::Command::Display
+    - Devel::Trepan::CmdProcessor::Command::Down
+    - Devel::Trepan::CmdProcessor::Command::Edit
+    - Devel::Trepan::CmdProcessor::Command::Enable
+    - Devel::Trepan::CmdProcessor::Command::Eval
+    - Devel::Trepan::CmdProcessor::Command::Finish
+    - Devel::Trepan::CmdProcessor::Command::Frame
+    - Devel::Trepan::CmdProcessor::Command::Handle
+    - Devel::Trepan::CmdProcessor::Command::Help
+    - Devel::Trepan::CmdProcessor::Command::Info
+    - Devel::Trepan::CmdProcessor::Command::Kill
+    - Devel::Trepan::CmdProcessor::Command::List
+    - Devel::Trepan::CmdProcessor::Command::Load
+    - Devel::Trepan::CmdProcessor::Command::Macro
+    - Devel::Trepan::CmdProcessor::Command::Next
+    - Devel::Trepan::CmdProcessor::Command::Quit
+    - Devel::Trepan::CmdProcessor::Command::Run
+    - Devel::Trepan::CmdProcessor::Command::Server
+    - Devel::Trepan::CmdProcessor::Command::Set
+    - Devel::Trepan::CmdProcessor::Command::Show
+    - Devel::Trepan::CmdProcessor::Command::Source
+    - Devel::Trepan::CmdProcessor::Command::Step
+    - Devel::Trepan::CmdProcessor::Command::TBreak
+    - Devel::Trepan::CmdProcessor::Command::Unalias
+    - Devel::Trepan::CmdProcessor::Command::Undisplay
+    - Devel::Trepan::CmdProcessor::Command::Up
+    - Devel::Trepan::CmdProcessor::Command::Watch
+    - Devel::Trepan::CmdProcessor::Hook
+    - Devel::Trepan::CmdProcessor::Mock
+    - Devel::Trepan::CmdProcessor::Parse::BPLocation
+    - Devel::Trepan::CmdProcessor::Parse::Range
+    - Devel::Trepan::Complete
+    - Devel::Trepan::Condition
+    - Devel::Trepan::Core
+    - Devel::Trepan::DB::Colors
+    - Devel::Trepan::DB::Sig
+    - Devel::Trepan::DB::Use
+    - Devel::Trepan::IO::FIFOBase
+    - Devel::Trepan::IO::FIFOClient
+    - Devel::Trepan::IO::FIFOServer
+    - Devel::Trepan::IO::Input
+    - Devel::Trepan::IO::NullOutput
+    - Devel::Trepan::IO::Output
+    - Devel::Trepan::IO::TCPClient
+    - Devel::Trepan::IO::TCPPack
+    - Devel::Trepan::IO::TCPServer
+    - Devel::Trepan::Interface
+    - Devel::Trepan::Interface::Client
+    - Devel::Trepan::Interface::ComCodes
+    - Devel::Trepan::Interface::Script
+    - Devel::Trepan::Interface::Server
+    - Devel::Trepan::Interface::User
+    - Devel::Trepan::Options
+    - Devel::Trepan::Pod2Text
+    - Devel::Trepan::Position
+    - Devel::Trepan::Processor
+    - Devel::Trepan::SigHandler
+    - Devel::Trepan::Terminated
+    - Devel::Trepan::Util
+    - Devel::Trepan::Version
+    - Devel::Trepan::WatchMgr
+
+about:
+  home: http://metacpan.org/pod/Devel-Trepan
+  license: gpl_1
+  summary: 'Modular Perl Debugger (akin to Python "Trepanning" Debuggers).'

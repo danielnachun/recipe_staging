@@ -1,0 +1,36 @@
+{% set name = "perl-rlib" %}
+{% set version = "0.02" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/G/GB/GBARR/rlib-{{ version }}.tar.gz
+  sha256: ce721283257bd44ce0b1acb94f929c0a55628d5f6c449e0d5bf5fd599e79b3be
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - perl Makefile.PL INSTALLDIRS=site
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+test:
+  imports:
+    - rlib
+
+about:
+  home: http://metacpan.org/pod/rlib
+  license: unknown
+  summary: 'manipulate @INC at compile time with relative paths'

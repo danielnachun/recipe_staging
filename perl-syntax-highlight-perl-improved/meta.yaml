@@ -1,0 +1,36 @@
+{% set name = "perl-syntax-highlight-perl-improved" %}
+{% set version = "1.01" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/D/DA/DAVIDCYL/Syntax-Highlight-Perl-Improved-101/Syntax-Highlight-Perl-Improved-{{ version }}.tar.gz
+  sha256: 01467878edc6bdf006e9557d13db131ab4f77e9dd1fd6492d209f0698c3b5c9e
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+test:
+  imports:
+    - Syntax::Highlight::Perl::Improved
+
+about:
+  home: http://metacpan.org/pod/Syntax-Highlight-Perl-Improved
+  license: unknown
+  summary: 'Highlighting of Perl Syntactical Structures'

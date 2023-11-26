@@ -1,0 +1,57 @@
+{% set name = "perl-http-message" %}
+{% set version = "6.45" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/O/OA/OALDERS/HTTP-Message-{{ version }}.tar.gz
+  sha256: 01cb8406612a3f738842d1e97313ae4d874870d1b8d6d66331f16000943d4cbe
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+    - perl=5.32
+    - perl-clone
+    - perl-lwp-mediatypes
+    - perl-encode-locale
+    - perl-http-date
+    - perl-uri
+    - perl-io-html
+    - perl-test-needs
+  run:
+    - perl>=5.32
+    - perl-clone
+    - perl-lwp-mediatypes
+    - perl-encode-locale
+    - perl-http-date
+    - perl-uri
+    - perl-io-html
+
+test:
+  imports:
+    - HTTP::Config
+    - HTTP::Headers
+    - HTTP::Headers::Auth
+    - HTTP::Headers::ETag
+    - HTTP::Headers::Util
+    - HTTP::Message
+    - HTTP::Request
+    - HTTP::Request::Common
+    - HTTP::Response
+    - HTTP::Status
+
+about:
+  home: https://github.com/libwww-perl/HTTP-Message
+  license: perl_5
+  summary: 'HTTP style message (base class)'
