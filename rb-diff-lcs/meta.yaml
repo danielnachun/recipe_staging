@@ -2,8 +2,8 @@
 {% set version = "1.5.0" %}
 
 package:
-  name: "rb-{{ name|lower }}"
-  version: "{{ version }}"
+  name: rb-{{ name|lower }}
+  version: {{ version }}
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
@@ -11,16 +11,16 @@ source:
 
 build:
   noarch: generic
-  number: 0
+  number: 1
   script:
     - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
     - gem unpack {{ name }}-{{ version }}.gem
 
 requirements:
   host:
-    - ruby >=3.2
+    - ruby=3.2
   run:
-    - ruby >=3.2
+    - ruby>=3.2
 
 test:
   commands:
@@ -29,8 +29,9 @@ test:
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: MIT
+  license_file: {{ name }}-{{ version }}/License.md
   summary: Modern concurrency tools including agents, futures, promises, thread pools, actors, supervisors, and more.
-  dev_url: https://github.com/ruby-concurrency/{{ name }}
+  dev_url: https://github.com/halostatue/{{ name }}
 
 extra:
   recipe-maintainers:
