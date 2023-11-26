@@ -10,11 +10,12 @@ source:
   sha256: 563ae6b0fa279cb8ea8f66b4b455c7cb74a9e65a0edbe694505b2c8fc719b2ff
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://github.com/chriswalz/{{ name }}
   license: Apache-2.0
-  license_file: LICENSE
+  license_file:
+    - LICENSE
+    - license-files/
   summary: Bit is a modern Git CLI
   dev_url: https://github.com/chriswalz/{{ name }}
 
