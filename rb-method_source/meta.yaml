@@ -1,0 +1,37 @@
+{% set name = "method_source" %}
+{% set version = "1.0.0" %}
+
+package:
+  name: "rb-{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: d779455a2b5666a079ce58577bfad8534f571af7cec8107f4dce328f0981dede
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby >=3.2
+  run:
+    - ruby >=3.2
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  summary: retrieve the sourcecode for a method
+  dev_url: http://banisterfiend.wordpress.com
+
+extra:
+  recipe-maintainers:
+    - danielnachun
