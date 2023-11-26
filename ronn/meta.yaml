@@ -10,7 +10,7 @@ source:
   sha256: 82df6fd4a3aa91734866710d2811a6387e50a7513fc528ce6c7d95ee7ad7f41e
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -33,6 +33,7 @@ test:
 about:
   home: https://rtomayko.github.io/ronn
   license: MIT
+  license: {{ name }}-{{ version }}/COPYING
   summary: Builds manuals - the opposite of roff
   dev_url: https://github.com/rtomayko/ronn
 
