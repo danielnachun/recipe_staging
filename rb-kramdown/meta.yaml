@@ -2,8 +2,8 @@
 {% set version = "2.4.0" %}
 
 package:
-  name: "rb-{{ name|lower }}"
-  version: "{{ version }}"
+  name: rb-{{ name|lower }}
+  version: {{ version }}
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
@@ -11,16 +11,17 @@ source:
 
 build:
   noarch: generic
-  number: 0
+  number: 1
   script:
     - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
     - gem unpack {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem --target .
 
 requirements:
   host:
-    - ruby >=3.2
+    - ruby=3.2
   run:
-    - ruby >=3.2
+    - ruby>=3.2
 
 test:
   commands:
@@ -29,6 +30,7 @@ test:
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: MIT
+  license_file: {{ name }}-{{ version }}/COPYING
   summary: kramdown is yet-another-markdown-parser but fast, pure Ruby, using a strict syntax definition and supporting several common extensions.
   dev_url: https://github.com/gettalong/{{ name }}
 
