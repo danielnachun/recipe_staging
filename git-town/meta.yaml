@@ -10,11 +10,12 @@ source:
   sha256: 045b40f98158192238d0258e706cdac5d547cc92123a5c79118ceb072c2f145e
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://github.com/{{ name }}/{{ name }}
   license: MIT
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: High-level command-line interface for Git
   dev_url: https://github.com/{{ name }}/{{ name }}
 
