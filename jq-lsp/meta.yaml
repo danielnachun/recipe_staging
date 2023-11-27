@@ -10,11 +10,12 @@ source:
   sha256: 7ca01743b509a450602d8eaf66a2403b6a11070c45aaeec504f6274e9f52eab9
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://github.com/wader/{{ name }}
   license: MIT
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: jq language server
   dev_url: https://github.com/wader/{{ name }}
 
