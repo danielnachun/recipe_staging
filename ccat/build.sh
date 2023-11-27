@@ -2,9 +2,10 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+export GOPROXY=https://proxy.golang.org
+go mod init
+go mod tidy
 export CGO_ENABLED=0
-export GOPATH=${BUILD_PREFIX}
-export GO111MODULE=auto
-./script/build
-mkdir -p ${PREFIX}/bin
-install -m 755 ccat ${PREFIX}/bin
+export LDFLAGS="-s -w"
+go build -buildmode=pie -trimpath -o=${PREFIX}/bin/${PKG_NAME} -ldflags="${LDFLAGS}"
+go-licenses save . --save_path=license-files
