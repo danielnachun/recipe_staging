@@ -10,11 +10,12 @@ source:
   sha256: d8db6b9a714c9146a4b82fd65b54f9bdda3e58380bce393f45e1ef49e4e9bee5
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://github.com/rsc/{{ name }}
   license: BSD-3-Clause
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: Two-factor authentication on the command-line
   dev_url: https://github.com/rsc/{{ name }}
 
