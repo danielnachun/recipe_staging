@@ -10,11 +10,12 @@ source:
   sha256: d67529db954b4b8fd708ac984cf79a53baf57ab2d50ef9ee0f9188f7e4a83127
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://github.com/pdfcpu/{{ name }}
   license: Apache-2.0
-  license_file: LICENSE.txt
+  license_file: 
+    - LICENSE.txt
+    - license-files/
   summary: PDF processor written in Go
   dev_url: https://github.com/pdfcpu/{{ name }}
 
