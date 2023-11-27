@@ -6,6 +6,7 @@ export CGO_ENABLED=0
 export LDFLAGS="-s -w"
 
 go build -buildmode=pie -trimpath -o=${PREFIX}/bin/yq -ldflags="-s -w"
+go-licenses save . --save_path=license-files
 mkdir -p ${PREFIX}/etc/bash_completion.d 
 mkdir -p ${PREFIX}/share/fish/vendor_completions.d 
 mkdir -p ${PREFIX}/share/zsh/site-functions 
