@@ -10,11 +10,12 @@ source:
   sha256: 80d0000d8eaf1d577c76099a6747307df445ae66e368b99467d3493cce21c668
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://github.com/charmbracelet/{{ name }}
   license: MIT
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: Tool for glamorous shell scripts
   dev_url: https://github.com/charmbracelet/{{ name }}
 
