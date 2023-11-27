@@ -10,12 +10,13 @@ source:
   sha256: 7a93f58bd6025c9c2dffac90c58ea7e3bbda8b17c51a181b0a969abe2a6a5081
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - asciidoctor
     - go
+    - go-licenses
     - git
     - make
 
@@ -26,7 +27,12 @@ test:
 about:
   home: http://www.catb.org/esr/reposurgeon
   license: BSD-2-Clause
-  license_file: COPYING
+  license_file: 
+    - COPYING
+    - license-files_repocutter/
+    - license-files_repomapper/
+    - license-files_reposurgeon/
+    - license-files_repotool/
   summary: Edit version-control repository history
   dev_url: https://gitlab.com/esr/{{ name }}
 
