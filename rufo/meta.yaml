@@ -11,15 +11,15 @@ source:
 
 build:
   noarch: generic
-  number: 0
+  number: 1
 
 requirements:
   build:
     - sed
   host:
-    - ruby >=3.2
+    - ruby=3.2
   run:
-    - ruby >=3.2
+    - ruby>=3.2
 
 test:
   commands:
@@ -28,7 +28,9 @@ test:
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: MIT
+  license_file: {{ name }}-{{ version }}/LICENSE.txt
   summary: Fast and unobtrusive Ruby code formatter
+  dev_url: https://github.com/ruby-formatter/{{ name }}
 
 extra:
   recipe-maintainers:
