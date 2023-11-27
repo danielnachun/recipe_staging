@@ -10,11 +10,12 @@ source:
   sha256: e954f074bcd3e7f8c898bf83faecfe5f2acff7001f1001157798c9e723916aab
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://github.com/whetsu/{{ name }}
   license: MIT
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: Execute commands for you
   dev_url: https://github.com/whetsu/{{ name }}
 
