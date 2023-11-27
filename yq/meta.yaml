@@ -10,11 +10,12 @@ source:
   sha256: 8b17d710c56f764e9beff06d7a7b1c77d87c4ba4219ce4ce67e7ee29670f4f13
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
     - pandoc
 
 test:
@@ -24,7 +25,9 @@ test:
 about:
   home: https://github.com/mikefarah/{{ name }}
   license: MIT
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: Process YAML, JSON, XML, CSV and properties documents from the CLI
   dev_url: https://github.com/mikefarah/{{ name }}
 
