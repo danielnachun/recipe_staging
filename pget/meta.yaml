@@ -10,11 +10,12 @@ source:
   sha256: fa7646bec975dd3995fb45d6b1f190565d6c4fae03c46c4eda34716c83ede03e
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://github.com/Code-Hex/{{ name }}
   license: MIT
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: File download client
   dev_url: https://github.com/Code-Hex/{{ name }}
 
