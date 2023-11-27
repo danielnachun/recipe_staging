@@ -7,3 +7,4 @@ export BUILDER_EMAIL="conda@conda-forge.org"
 
 make
 make install
+go-licenses save . --save_path=license-files
