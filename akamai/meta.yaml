@@ -15,6 +15,7 @@ build:
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://github.com/akamai/cli
   license: Apache-2.0
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: CLI toolkit for working with Akamai's APIs
   home: https://github.com/akamai/cli
 
