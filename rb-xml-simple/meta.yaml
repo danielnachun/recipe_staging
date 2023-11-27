@@ -2,19 +2,18 @@
 {% set version = "1.1.9" %}
 
 package:
-  name: "rb-{{ name|lower }}"
-  version: "{{ version }}"
+  name: rb-{{ name|lower }}
+  version: {{ version }}
 
 source:
-  url: "https://rubygems.org/downloads/{{ name }}-{{ version }}.gem"
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
   sha256: d21131e519c86f1a5bc2b6d2d57d46e6998e47f18ed249b25cad86433dbd695d
 
 build:
   noarch: generic
-  number: 0
+  number: 1
   script:
     - gem install -N -l -V --norc --ignore-dependencies {{ name }}-{{ version }}.gem
-    - gem unpack {{ name }}-{{ version }}.gem
 
 requirements:
   host:
@@ -29,7 +28,8 @@ test:
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: MIT
-  summary: "A simple API for XML processing"
+  license_file: LICENSE
+  summary: A simple API for XML processing
   dev_url: https://github.com/maik/{{ name }}
 
 extra:
