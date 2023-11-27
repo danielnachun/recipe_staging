@@ -10,11 +10,12 @@ source:
   sha256: 3d0b693546891bab41ca5c3be859bc760631608c9add559aa561fb751cdd1c92
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://github.com/josephburnett/{{ name }}
   license: MIT
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: JSON diff and patch
   dev_url: https://github.com/josephburnett/{{ name }}
 
