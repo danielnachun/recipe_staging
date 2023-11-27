@@ -2,15 +2,15 @@
 {% set version = "1.4.0" %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
   sha256: 59da9a4d79c69ef1b8491dfc8b4e70041dcffbd0459bb03e2e2a09d2a1f8eb47
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -57,8 +57,9 @@ test:
     - {{ name }} --help
 
 about:
-  home: https://rubygems.org/gems/standard
-  license: OTHER
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  license_file: {{ name }}-{{ version }}/LICENSE
   summary: Ruby Style Guide, with linter & automatic code fixer
 
 extra:
