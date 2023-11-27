@@ -10,11 +10,12 @@ source:
   sha256: ed47fc22c58cf4f4e4116a58c500bdb9f9ccc0b89f87be09f321e8d1431226ab
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,8 +24,9 @@ test:
 about:
   home: https://godoc.org/github.com/gokcehan/{{ name }}
   license: MIT
-  license_family: MIT
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: Terminal file manager
   dev_url: https://github.com/gokcehan/{{ name }}
 

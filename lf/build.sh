@@ -5,6 +5,7 @@ set -o xtrace -o nounset -o pipefail -o errexit
 export CGO_ENABLED=0
 export LDFLAGS="-s -w -X main.gVersion=${PKG_VERSION}"
 go build -buildmode=pie -trimpath -o=${PREFIX}/bin/${PKG_NAME} -ldflags="${LDFLAGS}"
+go-licenses save . --save_path=license-files
 mkdir -p ${PREFIX}/share/man/man1
 mkdir -p ${PREFIX}/share/zsh/site-functions
 mkdir -p ${PREFIX}/share/fish/vendor_completions.d
