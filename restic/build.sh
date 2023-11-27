@@ -4,6 +4,7 @@ set -o xtrace -o nounset -o pipefail -o errexit
 
 export CGO_ENABLED=0
 go run build.go
+go-licenses save . --save_path=license-files
 
 mkdir -p ${PREFIX}/etc/bash_completion.d 
 mkdir -p ${PREFIX}/share/fish/vendor_completions.d 
