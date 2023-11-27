@@ -10,11 +10,12 @@ source:
   sha256: eba59793e70aa6fc94370a0629d7941a4302bd5c0aac33d96a6d1adb0d818f56
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -22,8 +23,10 @@ test:
 
 about:
   home: https://github.com/raspi/{{ name }}
-  license: Apache-.20
-  license_file: LICENSE
+  license: Apache-2.0
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: CLI hex dumper with colors
   dev_url: https://github.com/raspi/{{ name }}
 
