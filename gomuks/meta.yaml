@@ -10,11 +10,12 @@ source:
   sha256: 0710a63cc3ec9a4f525510497ba64aa94170498eb536411d089871f336d99ab4
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://github.com/tulir/{{ name }}
   license: AGPL-3.0-or-later
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: A terminal based Matrix client written in Go.
   dev_url: https://github.com/tulir/{{ name }}
 
