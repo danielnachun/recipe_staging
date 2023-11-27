@@ -6,3 +6,4 @@ export CGO_ENABLED=0
 make
 mkdir -p ${PREFIX}/bin
 install -m 755 ${PKG_NAME} ${PREFIX}/bin/${PKG_NAME}
+go-licenses save . --save_path=license-files
