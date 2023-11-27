@@ -2,8 +2,8 @@
 {% set version = "1.1.0" %}
 
 package:
-  name: "rb-{{ name|lower }}"
-  version: "{{ version }}"
+  name: rb-{{ name|lower }}
+  version: {{ version }}
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
@@ -11,7 +11,7 @@ source:
 
 build:
   noarch: generic
-  number: 0
+  number: 1
   script:
     - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
     - gem unpack {{ name }}-{{ version }}.gem
@@ -20,11 +20,11 @@ requirements:
   host:
     - rb-lint_roller
     - rb-rubocop-performance
-    - ruby >=3.2
+    - ruby=3.2
   run:
     - rb-lint_roller
     - rb-rubocop-performance
-    - ruby >=3.2
+    - ruby>=3.2
 
 test:
   commands:
@@ -33,7 +33,9 @@ test:
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: MIT
+  license_file: {{ name }}-{{ version }}/LICENSE.txt
   summary: Standard Ruby Plugin providing configuration for rubocop-performance
+  dev_url: https://github.com/standardrb/{{ name }}
 
 extra:
   recipe-maintainers:
