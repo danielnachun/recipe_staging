@@ -2,15 +2,15 @@
 {% set version = "1.7.1" %}
 
 package:
-  name: "rb-{{ name|lower }}"
-  version: "{{ version }}"
+  name: rb-{{ name|lower }}
+  version: {{ version }}
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
   sha256: af64124836fdd3c00e830703d7f873ea5deabde923f37006a39f5a5e0da16387
 
 build:
-  number: 0
+  number: 1
   script:
     - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
     - gem unpack {{ name }}-{{ version }}.gem
@@ -20,9 +20,9 @@ requirements:
     - {{ compiler('c') }}
     - make
   host:
-    - ruby >=3.2
+    - ruby=3.2
   run:
-    - ruby >=3.2
+    - ruby>=3.2
 
 test:
   commands:
@@ -31,6 +31,7 @@ test:
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: BSD-2-Clause
+  license_file: {{ name }}-{{ version}}/COPYING
   summary: Racc is a LALR(1) parser generator. 
   dev_url: https://github.com/ruby/{{ name }}
 
