@@ -10,11 +10,12 @@ source:
   sha256: 507d771f4c863bf98dfe1db3500a4c9344e3a35592a6e2ac4183f00a63291feb
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
     - groff
     - ronn
 
@@ -25,8 +26,9 @@ test:
 about:
   home: https://github.com/rhysd/{{ name }}
   license: MIT
-  license_family: MIT
-  license_file: LICENSE.txt
+  license_file: 
+    - LICENSE.txt
+    - license-files/
   summary: Static checker for GitHub Actions workflow files
   dev_url: https://github.com/rhysd/{{ name }}
 
