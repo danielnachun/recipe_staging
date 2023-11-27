@@ -10,11 +10,12 @@ source:
   sha256: 24f34e0a21848a54750cea366ca15f6b4c1ab255b4b46942e4e09b2ebde55931
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
   host:
     - curl
   run:
@@ -27,7 +28,9 @@ test:
 about:
   home: https://github.com/rs/{{ name }}
   license: MIT
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: Power of curl, ease of use of httpie
   dev_url: https://github.com/rs/{{ name }}
 
