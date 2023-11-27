@@ -15,6 +15,7 @@ build:
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://github.com/ahoy-cli/{{ name }}
   license: MIT
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: Creates self documenting CLI programs from commands in YAML files
   dev_url: https://github.com/ahoy-cli/{{ name }}
 
