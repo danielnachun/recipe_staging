@@ -10,11 +10,12 @@ source:
   sha256: 49758b477a205f3fbf5bbe72c2575fff8b5536f8c6b45f8f6bd2fdde023ce874
 
 build:
-  number: 1
+  number: 2
 
 requirements:
   build:
     - go
+    - go-licenses
     - sqlite
 
 test:
@@ -24,6 +25,9 @@ test:
 about:
   home: https://github.com/laurent22/{{ name }}
   license: MIT
+  license_file:
+    - README.md
+    - license-files/
   summary: Easily rename multiple files using your text editor
   dev_url: https://github.com/laurent22/{{ name }}
 
