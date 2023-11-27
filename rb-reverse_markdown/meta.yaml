@@ -2,8 +2,8 @@
 {% set version = "2.1.1" %}
 
 package:
-  name: "rb-{{ name|lower }}"
-  version: "{{ version }}"
+  name: rb-{{ name|lower }}
+  version: {{ version }}
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
@@ -11,7 +11,7 @@ source:
 
 build:
   noarch: generic
-  number: 0
+  number: 1
   script:
     - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
     - gem unpack {{ name }}-{{ version }}.gem
@@ -19,10 +19,10 @@ build:
 requirements:
   host:
     - rb-nokogiri
-    - ruby >=3.2
+    - ruby=3.2
   run:
     - rb-nokogiri
-    - ruby >=3.2
+    - ruby>=3.2
 
 test:
   commands:
@@ -30,7 +30,8 @@ test:
 
 about:
   home: https://rubygems.org/gems/{{ name }}
-  license: MIT
+  license: WTFPL
+  license_file: {{ name }}-{{ version }}/LICENSE
   summary: Map simple html back into markdown, e.g. if you want to import existing html data in your application.
   dev_url: https://github.com/xijo/{{ name }}
 
