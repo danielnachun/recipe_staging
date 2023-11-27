@@ -10,7 +10,7 @@ source:
   sha256: 9966969b8480ed343d89397a4399c20b26588fb053753982215fdad7f652d08a
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -33,6 +33,7 @@ test:
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: MIT
+  license_file: {{ name }}-{{ version }}/License.txt
   summary: Reek is a tool that examines Ruby classes, modules and methods and reports any code smells it finds.
   dev_url: https://github.com/troessner/{{ name }}
 
