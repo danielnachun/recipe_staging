@@ -15,6 +15,7 @@ build:
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://github.com/gruntwork-io/{{ name }}
   license: MIT
-  license_file: LICENSE.txt
+  license_file: 
+    - LICENSE.txt
+    - license-files/
   summary: Download assets from a commit, branch, or tag of GitHub repositories
   dev_url: https://github.com/gruntwork-io/{{ name }}
 
