@@ -10,11 +10,12 @@ source:
   sha256: e1866471dd3fc5d52fd18af5df489a25dca1168bf2517db2ee8fb976eee1e78a
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://github.com/filhodanuvem/{{ name }}
   license: MIT
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: Git query language
   dev_url: https://github.com/filhodanuvem/{{ name }}
 
