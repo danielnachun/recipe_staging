@@ -2,12 +2,12 @@
 {% set version = "4.9.0" %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
-  - url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
-    sha256: f2b97780ac394848c646a051d89bb01c370d2595c80e1e515a73089f8207af0d
+  git_url: https://github.com/IBM/{{ name }}
+  git_rev: v{{ version }}
 
 build:
   noarch: generic
@@ -48,13 +48,14 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/ascli
+    - ascli --help
 
 about:
-  home: https://github.com/IBM/aspera-cli
+  home: https://rubygems.org/gems/{{ name }}
   license: Apache-2.0
-  summary: "Command Line Interface for IBM Aspera products"
-  dev_url: https://github.com/IBM/aspera-cli
+  license_file: LICENSE
+  summary: Command Line Interface for IBM Aspera products
+  dev_url: https://github.com/IBM/{{ name }}
 
 extra:
   recipe-maintainers:
