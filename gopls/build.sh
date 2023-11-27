@@ -7,3 +7,4 @@ export LDFLAGS="-s -w"
 
 cd gopls
 go build -buildmode=pie -trimpath -o=${PREFIX}/bin/${PKG_NAME} -ldflags="${LDFLAGS}"
+go-licenses save . --save_path=../license-files --ignore golang.org/x/tools/gopls
