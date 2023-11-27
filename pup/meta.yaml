@@ -10,11 +10,12 @@ source:
   sha256: 8a9e0c5cd30d0b4227dc6639707ecf9591ada41a3351fbbab317eb9419948c06
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://github.com/ericchiang/{{ name }}
   license: MIT
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: Parsing HTML at the command line
   dev_url: https://github.com/ericchiang/{{ name }}
 
