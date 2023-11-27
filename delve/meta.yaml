@@ -10,11 +10,12 @@ source:
   sha256: a10aa97d3f6b6219877a73dd305d511442ad0caab740de76fc005796a480de93
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://github.com/go-delve/{{ name }}
   license: MIT
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: Debugger for the Go programming language
   dev_url: https://github.com/go-delve/{{ name }}
 
