@@ -2,15 +2,15 @@
 {% set version = "3.1.0" %}
 
 package:
-  name: "rb-{{ name|lower }}"
-  version: "{{ version }}"
+  name: rb-{{ name|lower }}
+  version: {{ version }}
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
   sha256: 4ef8f22f3452aad28ca2ff61ede65a2a98b604e0365058293e749de91a74d07d
 
 build:
-  number: 0
+  number: 1
   script:
     - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
     - gem unpack {{ name }}-{{ version }}.gem
@@ -20,9 +20,9 @@ requirements:
     - {{ compiler('c') }}
     - make
   host:
-    - ruby >=3.2
+    - ruby=3.2
   run:
-    - ruby >=3.2
+    - ruby>=3.2
 
 test:
   commands:
@@ -31,6 +31,7 @@ test:
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: MIT
+  license_file: {{ name }}-{{ version }}/COPYING
   summary: RBS is the language for type signatures for Ruby and standard library definitions.
   dev_url: https://github.com/ruby/{{ name }}
 
