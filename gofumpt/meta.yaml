@@ -10,11 +10,12 @@ source:
   sha256: e27f04b8b5619747ebfb955699d6895c1e4c7c5e4478507ca4e2d8b658b8b51c
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -22,8 +23,10 @@ test:
 
 about:
   home: https://github.com/mvdan/{{ name }}
-  license: BSD 3 Clause
-  license_family: BSD
+  license: BSD-3-Clause
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: Stricter gofmt
   dev_url: https://github.com/mvdan/{{ name }}
 
