@@ -10,11 +10,12 @@ source:
   sha256: df174bfcd08fc89d4b606334559827865ab1ae7f5877b2f001963832ed083b20
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://github.com/gabrie30/{{ name }}
   license: Apache-2.0
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: Quickly clone an entire org's or user's repositories into one directory
   dev_url: https://github.com/gabrie30/{{ name }}
 
