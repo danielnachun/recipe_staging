@@ -10,11 +10,12 @@ source:
   sha256: 4ae92fcf7a68cfc395650eebeca426688b5751a6a315b64295a190d6e9ca3343
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://github.com/evilmartians/{{ name }}
   license: MIT
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: Fast and powerful Git hooks manager for any type of projects
   dev_url: https://github.com/evilmartians/{{ name }}
 
