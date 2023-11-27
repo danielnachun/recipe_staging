@@ -10,11 +10,12 @@ source:
   sha256: 1dc785d1b1ee279c522e1297bf93257ba34fb90c168077351decec01afd4f132
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://github.com/aegoroff/{{ name }}
   license: MIT
-  license_file: LICENSE.txt
+  license_file: 
+    - LICENSE.txt
+    - license-files/
   summary: Small console app written in Go that allows you to easily analyze sources and Microsoft Visual Studio solutions and projects.
   dev_url: https://github.com/aegoroff/{{ name }}
 
