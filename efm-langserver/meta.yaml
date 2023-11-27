@@ -15,15 +15,18 @@ build:
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
-    - efm-langserver --help
+    - {{ name }} --help
 
 about:
   home: https://github.com/mattn/{{ name }}
   license: MIT
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: General purpose Language Server
   dev_url: https://github.com/mattn/{{ name }}
 
