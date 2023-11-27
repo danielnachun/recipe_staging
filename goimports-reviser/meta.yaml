@@ -10,11 +10,12 @@ source:
   sha256: f1e5087f7cb633af51faa42e89e2c5b23a4a6bd89c36b4c24836db17d9e0bac9
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://github.com/incu6us/{{ name }}
   license: MIT
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: Right imports sorting & code formatting tool (goimports alternative)
   dev_url: https://github.com/incu6us/{{ name }}
 
