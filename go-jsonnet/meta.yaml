@@ -10,11 +10,12 @@ source:
   sha256: bf9923a848dba65fa99f6e926221ab4222c2f259ba837d279b43917962bc7d70
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://github.com/google/{{ name }}
   license: Apache-2.0
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: Go implementation of configuration language for defining JSON data
   dev_url: https://github.com/google/{{ name }}
 

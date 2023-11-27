@@ -8,3 +8,4 @@ go build -buildmode=pie -trimpath -o=${PREFIX}/bin/jsonnet -ldflags="${LDFLAGS}"
 go build -buildmode=pie -trimpath -o=${PREFIX}/bin/jsonnetfmt -ldflags="${LDFLAGS}" ./cmd/jsonnetfmt
 go build -buildmode=pie -trimpath -o=${PREFIX}/bin/jsonnet-lint -ldflags="${LDFLAGS}" ./cmd/jsonnet-lint
 go build -buildmode=pie -trimpath -o=${PREFIX}/bin/jsonnet-deps -ldflags="${LDFLAGS}" ./cmd/jsonnet-deps
+go-licenses save . --save_path=license-files
