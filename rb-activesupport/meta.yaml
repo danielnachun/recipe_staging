@@ -2,8 +2,8 @@
 {% set version = "7.0.6" %}
 
 package:
-  name: "rb-{{ name|lower }}"
-  version: "{{ version }}"
+  name: rb-{{ name|lower }}
+  version: {{ version }}
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
@@ -11,7 +11,7 @@ source:
 
 build:
   noarch: generic
-  number: 0
+  number: 1
   script:
     - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
     - gem unpack {{ name }}-{{ version }}.gem
@@ -22,13 +22,13 @@ requirements:
     - rb-i18n
     - rb-minitest
     - rb-tzinfo
-    - ruby >=3.2
+    - ruby=3.2
   run:
     - rb-concurrent-ruby
     - rb-i18n
     - rb-minitest
     - rb-tzinfo
-    - ruby >=3.2
+    - ruby>=3.2
 
 test:
   commands:
@@ -37,6 +37,7 @@ test:
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: MIT
+  license_file: {{ name }}-{{ version }}/MIT-LICENSE
   summary: A toolkit of support libraries and Ruby core extensions extracted from the Rails framework. 
   dev_url: https://github.com/rails/rails
 
