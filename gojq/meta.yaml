@@ -10,11 +10,12 @@ source:
   git_rev: v{{ version }}
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://github.com/itchyny/{{ name }}
   license: MIT
-  license_family: MIT
+  license_file:
+    - LICENSE
+    - license-files/
   summary: Pure Go implementation of jq
   dev_url: https://github.com/itchyny/{{ name }}
 
