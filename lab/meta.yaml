@@ -10,11 +10,12 @@ source:
   sha256: 8b254ed2ff33fceaf5430667ba2667baaa2bdb8629e107d5afd1adc7e4403f6b
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,8 +24,9 @@ test:
 about:
   home: https://github.com/ackerr/{{ name }}
   license: MIT
-  license_family: MIT
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: A command-line tool for gitlab
   home: https://github.com/ackerr/{{ name }}
 
