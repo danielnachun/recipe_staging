@@ -10,11 +10,12 @@ source:
   sha256: b4ecf269b7c6447e19591b1d23f398ef2b38a6a75be68458390b42d3efc44b92
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,8 +24,9 @@ test:
 about:
   home: https://github.com/charmbracelet/{{ name }}
   license: MIT
-  license_family: MIT
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: Render markdown on the CLI
   dev_url: https://github.com/charmbracelet/{{ name }}
 
