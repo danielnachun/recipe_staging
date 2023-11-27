@@ -2,15 +2,15 @@
 {% set version = "1.29.0" %}
 
 package:
-  name: "{{ name|lower }}rb"
-  version: "{{ version }}"
+  name: {{ name|lower }}rb
+  version: {{ version }}
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
   sha256: 155b3629c9e8fb2c4b66a3fb49f0c80da25f8aef23e234cd41c8fefe6fe37ebc
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -36,8 +36,10 @@ test:
 
 about:
   home: https://rubygems.org/gems/standard
-  license: OTHER
+  license: MIT
+  license_file: {{ name }}-{{ version }}/LICENSE.txt
   summary: Ruby Style Guide, with linter & automatic code fixer
+  dev_url: https://github.com/standardrb/standard
 
 extra:
   recipe-maintainers:
