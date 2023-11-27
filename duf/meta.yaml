@@ -10,11 +10,12 @@ source:
   sha256: ebc3880540b25186ace220c09af859f867251f4ecaef435525a141d98d71a27a
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://github.com/muesli/{{ name }}
   license: MIT
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: Disk Usage/Free Utility - a better 'df' alternative
   dev_url: https://github.com/muesli/{{ name }}
 
