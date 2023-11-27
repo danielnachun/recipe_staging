@@ -15,6 +15,7 @@ build:
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://github.com/airyhq/{{ name }}
   license: Apache-2.0
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: Open Source App Framework to build streaming apps with real-time data
   dev_url: https://github.com/airyhq/{{ name }}
 
