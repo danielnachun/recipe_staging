@@ -10,11 +10,12 @@ source:
   sha256: fbeb4540c4afe4aa25565685ee7ef7498449da7fc5f5b70a0e303b15c6e35f71
 
 build:
-  number: 1
+  number: 2
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://github.com/ayoisaiah/{{ name }}
   license: MIT
-  license_file: LICENCE
+  license_file: 
+    - LICENCE
+    - license-files/
   summary: Command-line batch renaming tool
   dev_url: https://github.com/ayoisaiah/{{ name }}
 
