@@ -10,11 +10,12 @@ source:
   sha256: df32c34138b4fc03ca03339ac3061488e87507cf96fe1aad625f876d27091284
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://murex.rocks
   license: GPL-2.0-only
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    #- license-files/  
   summary: Bash-like shell designed for greater command-line productivity and safer scripts
   dev_url: https://github.com/lmorg/{{ name }}
 
