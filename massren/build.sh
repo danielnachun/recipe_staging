@@ -2,12 +2,11 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+export GOPROXY=https://proxy.golang.org
+go mod init
+go mod tidy
+go mod vendor
 export CGO_ENABLED=0
-export GOPATH=${BUILD_PREFIX}
-export GO111MODULE=auto
-
-build_dir=${BUILD_PREFIX}/src/github.com/laurent22/massren
-mkdir -p ${build_dir}
-cp -r * ${build_dir}
-cd ${build_dir}
-go build -o ${PREFIX}/bin/massren
+export LDFLAGS="-s -w"
+go build -buildmode=pie -trimpath -o=${PREFIX}/bin/${PKG_NAME} -ldflags="${LDFLAGS}"
+go-licenses save . --save_path=license-files
