@@ -10,11 +10,12 @@ source:
   sha256: 314d9a451666981aaab5e0a18c1ea98b1a3ca1afe275f0fcd87fb12f4c7b2b74
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
     - make
     - scdoc
   host:
@@ -29,7 +30,9 @@ test:
 about:
   home: https://sr.ht/~gpanders/ijq/
   license: GPL-3.0-or-later
-  license_file: COPYING
+  license_file: 
+    - COPYING
+    #- license-files/
   summary: Interactive jq
 
 extra:
