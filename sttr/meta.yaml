@@ -10,20 +10,23 @@ source:
   sha256: 89a031b02e976b4119c294723d121e31c1916b482dd367ffa6819bcab9b4c8f9
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
-    - sttr --help
+    - {{ name }} --help
 
 about:
   home: https://github.com/abhimanyu003/{{ name }}
   license_family: MIT
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: cross-platform, cli app to perform various operations on string
   dev_url: https://github.com/abhimanyu003/{{ name }}
 
