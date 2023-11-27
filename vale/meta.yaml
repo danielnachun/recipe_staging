@@ -10,11 +10,12 @@ source:
   sha256: 6ac15dd6defed7618d61f1bbbc79d20358f919ade8f60037ea5da775e4b554d2
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://docs.errata.ai
   license: MIT
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: Syntax-aware linter for prose
   dev_url: https://github.com/errata-ai/{{ name }}
 
