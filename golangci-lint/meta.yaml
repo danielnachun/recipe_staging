@@ -10,11 +10,12 @@ source:
   git_rev: v{{ version }}
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,6 +24,9 @@ test:
 about:
   home: https://golangci-lint.run
   license: GPL-3.0-only
+  license_file:
+    - LICENSE
+    #- license-files/
   summary: Stricter gofmt
   dev_url: https://github.com/golangci/{{ name }}.git
 
