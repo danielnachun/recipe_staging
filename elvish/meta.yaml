@@ -10,11 +10,12 @@ source:
   sha256: ef8032507c74c84369d49b098afcf1da65701aa071be9ee762f8bc456576ac94
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://github.com/elves/{{ name }}
   license: BSD-2-Clause
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: Friendly and expressive shell
   dev_url: https://github.com/elves/{{ name }}
 
