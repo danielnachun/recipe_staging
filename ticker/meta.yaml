@@ -10,11 +10,12 @@ source:
   sha256: d95e286a2ecda18154e24b1b8a05b6e3bff9cc48d2a127217ba7ec7379e4c163
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,8 +24,9 @@ test:
 about:
   home: https://github.com/achannarasappa/{{ name }}
   license: MIT
-  license_family: MIT
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    #- license-files/
   summary: Terminal stock ticker with live updates and position tracking
   dev_url: https://github.com/achannarasappa/{{ name }}
 
