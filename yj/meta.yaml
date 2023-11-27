@@ -10,11 +10,12 @@ source:
   sha256: 9a3e9895181d1cbd436a1b02ccf47579afacd181c73f341e697a8fe74f74f99d
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://github.com/sclevine/{{ name }}
   license: Apache-2.0
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: CLI to convert between YAML, TOML, JSON and HCL
   dev_url: https://github.com/sclevine/{{ name }}
 
