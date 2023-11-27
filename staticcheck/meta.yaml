@@ -10,11 +10,12 @@ source:
   sha256: c3a45209348ac0a6ea2018f4b25d483467ad5800ceff483834bce6345256fa62
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://staticcheck.io/
   license: MIT
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: State of the art linter for the Go programming language
   dev_url: https://github.com/dominikh/go-tools
 
