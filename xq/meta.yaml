@@ -10,11 +10,12 @@ source:
   git_rev: v{{ version }}
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,6 +24,9 @@ test:
 about:
   home: https://github.com/sibprogrammer/{{ name }}
   license: MIT
+  license_file:
+    - LICENSE
+    - license-files/
   summary: Command-line XML and HTML beautifier and content extractor
   dev_url: https://github.com/sibprogrammer/{{ name }}
 
