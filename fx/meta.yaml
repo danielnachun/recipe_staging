@@ -10,11 +10,12 @@ source:
   sha256: 8408047ef42506aac44aa805de209dd64ae4fc084e76bee8e24112ffbdc2d5dc
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://github.com/antonmedv/{{ name }}
   license: MIT
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: Terminal JSON viewer
   dev_url: https://github.com/antonmedv/{{ name }}
 
