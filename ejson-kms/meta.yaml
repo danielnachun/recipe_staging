@@ -10,11 +10,12 @@ source:
   sha256: b7422dced1392e7262383c3da3750ad88f8b4a506e281c1a73b41ebf5b2463c9
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://github.com/ejson-kms/{{ name }}
   license: MIT
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: ejson-kms is a utility for managing a collection of secrets in source control using AWS KMS
   dev_url: https://github.com/ejson-kms/{{ name }}
 
