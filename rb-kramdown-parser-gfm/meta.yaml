@@ -2,8 +2,8 @@
 {% set version = "1.1.0" %}
 
 package:
-  name: "rb-{{ name|lower }}"
-  version: "{{ version }}"
+  name: rb-{{ name|lower }}
+  version: {{ version }}
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
@@ -11,19 +11,18 @@ source:
 
 build:
   noarch: generic
-  number: 0
+  number: 1
   script:
     - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
     - gem unpack {{ name }}-{{ version }}.gem
 
-
 requirements:
   host:
     - rb-kramdown
-    - ruby >=3.2
+    - ruby=3.2
   run:
     - rb-kramdown
-    - ruby >=3.2
+    - ruby>=3.2
 
 test:
   commands:
@@ -32,7 +31,9 @@ test:
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: MIT
+  license_file: {{ name }}-{{ version }}/COPYING
   summary: kramdown-parser-gfm provides a kramdown parser for the GFM dialect of Markdown
+  dev_url: https://github.com/kramdown/parser-gfm
 
 extra:
   recipe-maintainers:
