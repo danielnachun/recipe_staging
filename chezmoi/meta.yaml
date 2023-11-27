@@ -10,11 +10,12 @@ source:
   sha256: 05113befe5e76f31bdc23f8a1982349cbaa5cfc11bf32523127d16a388aada27
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,7 +24,9 @@ test:
 about:
   home: https://chezmoi.io
   license: MIT
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: Manage your dotfiles across multiple diverse machines, securely
   dev_url: https://github.com/twpayne/{{ name }}
 
