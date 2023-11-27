@@ -2,16 +2,16 @@
 {% set version = "1.2.9" %}
 
 package:
-  name: "rb-{{ name|lower }}"
-  version: "{{ version }}"
+  name: rb-{{ name|lower }}
+  version: {{ version }}
 
 source:
-  url: "https://rubygems.org/downloads/{{ name }}-{{ version }}.gem"
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
   sha256: 884b12dee993217795bb5f58acc89c0121c88bdc99df4d1636c0505dca352b36
 
 build:
   noarch: generic
-  number: 0
+  number: 1
   script:
     - gem install -N -l -V --norc --ignore-dependencies {{ name }}-{{ version }}.gem
     - gem unpack {{ name }}-{{ version }}.gem
@@ -29,7 +29,8 @@ test:
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: MIT
-  summary: "Universal Ruby library to handle WebSocket protocol"
+  license_file: {{ name }}-{{ version }}/README.md
+  summary: Universal Ruby library to handle WebSocket protocol
   dev_url: https://github.com/imanel/websocket-ruby
 
 extra:
