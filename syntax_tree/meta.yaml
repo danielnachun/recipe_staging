@@ -10,7 +10,7 @@ source:
   sha256: eb03ff60f51ac29af5cf4fe39bc06e6714cd5b8b3f91cbec2a61e0b8602f5598
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build: 
@@ -29,7 +29,9 @@ test:
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: MIT
+  license_file: {{ name }}-{{ version }}/LICENSE
   summary: A parser based on ripper
+  dev_url: https://github.com/ruby-syntax-tree/{{ name }}
 
 extra:
   recipe-maintainers:
