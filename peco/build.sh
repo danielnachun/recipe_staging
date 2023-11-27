@@ -4,4 +4,5 @@ set -o xtrace -o nounset -o pipefail -o errexit
 
 export CGO_ENABLED=0
 make build
-go build -buildmode=pie -trimpath -o=${PREFIX}/bin/${PKG_NAME} cmd/${PKG_NAME}/${PKG_NAME}.go
+go build -buildmode=pie -trimpath -o=${PREFIX}/bin/${PKG_NAME} ./cmd/${PKG_NAME}/${PKG_NAME}.go
+go-licenses save ./cmd/${PKG_NAME} --save_path=license-files

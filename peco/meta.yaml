@@ -10,11 +10,12 @@ source:
   sha256: 781c2effc4f6a58d9ff96fb0fc8b0fba3aab56a91a34933d68c5de3aea5fe3f6
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
     - make
 
 test:
@@ -24,7 +25,9 @@ test:
 about:
   home: https://github.com/peco/{{ name }}
   license: MIT
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: Simplistic interactive filtering tool
   dev_url: https://github.com/peco/{{ name }}
 
