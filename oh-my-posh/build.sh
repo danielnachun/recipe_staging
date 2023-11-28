@@ -6,7 +6,12 @@ export CGO_ENABLED=0
 export LDFLAGS="-s -w -X main.Version=${PKG_VERSION}"
 
 pushd src
-go build -buildmode=pie -trimpath -o=${PREFIX}/bin/${PKG_NAME} -ldflags="${LDFLAGS}"
+    go build -buildmode=pie -trimpath -o=${PREFIX}/bin/${PKG_NAME} -ldflags="${LDFLAGS}"
+    go-licenses save . --save_path=../license-files \
+        --ignore github.com/golang/freetype/raster \
+        --ignore github.com/golang/freetype/truetype \
+        --ignore github.com/jandedobbeleer/oh-my-posh \
+        --ignore github.com/mattn/go-localereader
 popd
 
 cp -r themes ${PREFIX}

@@ -10,11 +10,12 @@ source:
   sha256: 106388473c8dc627bbee53a5b5f42c1b3792e85d0b491ba5a18ced45c3b52aa0
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - go
+    - go-licenses
 
 test:
   commands:
@@ -23,6 +24,9 @@ test:
 about:
   home: https://github.com/JanDeDobbeleer/{{ name }}
   license: MIT
+  license_file:
+    - COPYING
+    - license-files/
   summary: Prompt theme engine for any shell
   dev_url: https://github.com/JanDeDobbeleer/{{ name }}
 
