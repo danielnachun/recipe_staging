@@ -10,16 +10,15 @@ source:
   sha256: f8a13466b48faa3ba99fe17a069e71c9ab006d9b1cfabe699f8c60a47d5bb49a
 
 build:
-  number: 1
+  number: 2
 
 requirements:
   build:
     - {{ compiler('c') }}
     - coreutils
-    - guile
-    - libxml2
     - make
     - pkg-config
+    - sed
   host:
     - guile
     - libxml2
