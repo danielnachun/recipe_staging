@@ -26,17 +26,17 @@ sed -i "s/net6.0/net7.0/" bin/ilspycmd.runtimeconfig.json
 sed -i "s/6.0.0/7.0.0/" bin/ilspycmd.runtimeconfig.json
 cp -r bin/* ${PREFIX}/libexec/${PKG_NAME}
 
-cat << EOF > ${PREFIX}/bin/ilasm
+tee ${PREFIX}/bin/ilasm << EOF
 #!/bin/sh
 DOTNET_ROOT=${DOTNET_ROOT} exec ${PREFIX}/libexec/${PKG_NAME}/ilasm "\$@"
 EOF
 
-cat << EOF > ${PREFIX}/bin/ildasm
+tee ${PREFIX}/bin/ildasm << EOF
 #!/bin/sh
 DOTNET_ROOT=${DOTNET_ROOT} exec ${PREFIX}/libexec/${PKG_NAME}/ildasm "\$@"
 EOF
 
-cat << EOF > ${PREFIX}/bin/ilspycmd
+tee ${PREFIX}/bin/ilspycmd << EOF
 #!/bin/sh
 DOTNET_ROOT=${DOTNET_ROOT} exec ${PREFIX}/libexec/${PKG_NAME}/ilspycmd "\$@"
 EOF
