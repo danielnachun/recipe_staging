@@ -10,12 +10,12 @@ mkdir -p ${PREFIX}/bin
 sed -i "s?\$bindir?${PREFIX}/bin?g" ${PREFIX}/libexec/${PKG_NAME}/bin/ascli
 sed -i "s?\$bindir?${PREFIX}/bin?g" ${PREFIX}/libexec/${PKG_NAME}/bin/asession
 
-cat << EOF > ${PREFIX}/bin/ascli
+tee ${PREFIX}/bin/ascli << EOF
 #!/bin/sh
 GEM_HOME="${PREFIX}/share/rubygems" exec "${PREFIX}/libexec/${PKG_NAME}/bin/ascli" "\$@"
 EOF
 
-cat << EOF > ${PREFIX}/bin/asession
+tee ${PREFIX}/bin/asession << EOF
 #!/bin/sh
 GEM_HOME="${PREFIX}/share/rubygems" exec "${PREFIX}/libexec/${PKG_NAME}/bin/asession" "\$@"
 EOF
