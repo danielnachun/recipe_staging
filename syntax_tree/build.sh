@@ -8,7 +8,7 @@ gem unpack ${PKG_NAME}-${PKG_VERSION}.gem
 
 mkdir -p ${PREFIX}/bin
 sed -i "s?\$bindir?${PREFIX}/bin?g" ${PREFIX}/libexec/${PKG_NAME}/bin/stree
-cat << EOF > ${PREFIX}/bin/stree
+tee ${PREFIX}/bin/stree << EOF
 #!/bin/sh
 GEM_HOME="${PREFIX}/share/rubygems" exec "${PREFIX}/libexec/${PKG_NAME}/bin/stree" "\$@"
 EOF
