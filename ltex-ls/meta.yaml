@@ -15,7 +15,7 @@ build:
 requirements:
   build:
     - maven
-    - openjdk
+    - openjdk=11
     - python
     - sed
   run:

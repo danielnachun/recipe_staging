@@ -13,10 +13,10 @@ mkdir -p ${PREFIX}/bin
 mkdir -p ${PREFIX}/libexec/${PKG_NAME}
 cp -r ltex-ls-${PKG_VERSION}/* ${PREFIX}/libexec/${PKG_NAME}
 
-cat << EOF > ${PREFIX}/bin/ltex-cli
+tee ${PREFIX}/bin/ltex-cli << EOF
 JAVA_HOME=${JAVA_HOME} exec ${PREFIX}/libexec/${PKG_NAME}/bin/ltex-cli "\$@"
 EOF
 
-cat << EOF > ${PREFIX}/bin/ltex-ls
+tee ${PREFIX}/bin/ltex-ls << EOF
 JAVA_HOME=${JAVA_HOME} exec ${PREFIX}/libexec/${PKG_NAME}/bin/ltex-ls "\$@"
 EOF
