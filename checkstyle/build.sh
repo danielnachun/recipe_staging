@@ -8,7 +8,7 @@ mkdir -p ${PREFIX}/libexec/${PKG_NAME}
 mkdir -p ${PREFIX}/bin
 cp target/checkstyle-${PKG_VERSION}-all.jar ${PREFIX}/libexec/${PKG_NAME}
 
-cat << EOF > ${PREFIX}/bin/checkstyle
+tee ${PREFIX}/bin/checkstyle << EOF
 #!/bin/sh
 JAVA_HOME=${JAVA_HOME} exec ${JAVA_HOME}/bin/java -jar ${PREFIX}/libexec/${PKG_NAME}/checkstyle-${PKG_VERSION}-all.jar "\$@"
 EOF
