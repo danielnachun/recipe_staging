@@ -14,22 +14,22 @@ mkdir -p ${PREFIX}/etc/conda/deactivate.d/
 
 cp -r * ${PREFIX}/libexec/acl2
 
-cat << EOF > ${PREFIX}/etc/conda/activate.d/activate_acl2.sh
+tee ${PREFIX}/etc/conda/activate.d/activate_acl2.sh << EOF
 #!/bin/sh
-export ACL2_SYSTEM_BOOKS="${PREFIX}/libexec/acl2/books"
+export 
 EOF
 
-cat << EOF > ${PREFIX}/etc/conda/deactivate.d/deactivate_acl2.sh
+tee ${PREFIX}/etc/conda/deactivate.d/deactivate_acl2.sh << EOF
 #!/bin/sh
 unset ACL2_SYSTEM_BOOKS
 EOF
 
-cat << EOF > ${PREFIX}/bin/acl2
+tee ${PREFIX}/bin/acl2 << EOF
 #!/bin/sh
-${PREFIX}/bin/sbcl --core "${PREFIX}/libexec/acl2/saved_acl2.core" --userinit /dev/null --eval '(acl2::sbcl-restart)'
+ACL2_SYSTEM_BOOKS="${PREFIX}/libexec/acl2/books" exec ${PREFIX}/bin/sbcl --core "${PREFIX}/libexec/acl2/saved_acl2.core" --userinit /dev/null --eval '(acl2::sbcl-restart)'
 EOF
 
-cat << EOF > ${PREFIX}/bin/acl2p
+tee ${PREFIX}/bin/acl2p << EOF
 #!/bin/sh
-${PREFIX}/bin/sbcl --core "${PREFIX}/libexec/acl2/saved_acl2p.core" --userinit /dev/null --eval '(acl2::sbcl-restart)'
+ACL2_SYSTEM_BOOKS="${PREFIX}/libexec/acl2/books" ${PREFIX}/bin/sbcl --core "${PREFIX}/libexec/acl2/saved_acl2p.core" --userinit /dev/null --eval '(acl2::sbcl-restart)'
 EOF
