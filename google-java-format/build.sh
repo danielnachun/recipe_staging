@@ -9,7 +9,7 @@ mkdir -p ${PREFIX}/libexec/${PKG_NAME}
 mkdir -p ${PREFIX}/bin
 
 cp com/google/googlejavaformat/google-java-format/${PKG_VERSION}/google-java-format-${PKG_VERSION}-all-deps.jar ${PREFIX}/libexec/${PKG_NAME}
-cat << EOF > ${PREFIX}/bin/google-java-format
+tee ${PREFIX}/bin/google-java-format << EOF
 #!/bin/sh
 JAVA_HOME=${JAVA_HOME} exec ${JAVA_HOME}/bin/java -jar ${PREFIX}/libexec/${PKG_NAME}/google-java-format-${PKG_VERSION}-all-deps.jar "\$@"
 EOF
