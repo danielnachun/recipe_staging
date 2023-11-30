@@ -56,7 +56,7 @@ esac
 
 mkdir -p "${PREFIX}/bin"
 
-cat << EOF > ${PREFIX}/bin/OmniSharp
+tee ${PREFIX}/bin/OmniSharp << EOF
 #!/bin/sh
 DOTNET_ROOT=${DOTNET_ROOT} exec ${PREFIX}/libexec/${PKG_NAME}/OmniSharp "\$@"
 EOF
