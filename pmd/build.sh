@@ -9,6 +9,6 @@ mkdir -p ${PREFIX}/bin
 unzip pmd-dist/target/pmd-bin-${PKG_VERSION}.zip
 cp -r pmd-bin-${PKG_VERSION}/* ${PREFIX}/libexec/${PKG_NAME}
 
-cat << EOF > ${PREFIX}/bin/pmd
+tee ${PREFIX}/bin/pmd << EOF
 JAVA_HOME=${JAVA_HOME} exec ${PREFIX}/libexec/${PKG_NAME}/bin/run.sh "\$@"
 EOF
