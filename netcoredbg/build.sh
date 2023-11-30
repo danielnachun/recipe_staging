@@ -12,7 +12,7 @@ cmake --build build
 cmake --install build
 
 mkdir -p ${PREFIX}/bin
-cat << EOF > ${PREFIX}/bin/${PKG_NAME}
+tee ${PREFIX}/bin/${PKG_NAME} << EOF
 #!/bin/sh
 DOTNET_ROOT=${DOTNET_ROOT} exec ${PREFIX}/libexec/${PKG_NAME}/${PKG_NAME} "\$@"
 EOF
