@@ -1,0 +1,51 @@
+{% set name = "gregor" %}
+{% set version = "1.4.0" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://csg.sph.umich.edu/GREGOR/index.php/site/downloadFile?fileTag=source_codes
+  sha256: 6c0252bd68210f458cb0f0cb1c09cf590b88a8629c98b29b4afa4d81461bf0f4
+  fn: GREGOR.v{{ version }}.tar.gz
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - sed
+  host:
+    - perl=5.32
+  run:
+    - perl-dbi
+    - perl-dbd-sqlite
+    - perl-switch
+    - perl>=5.32
+
+test:
+  commands:
+    - GREGOR.pl 2>&1 | grep -q "Functional annotation of trait-associated variants"
+    - annotate.index.snp.pl 2>&1 | grep -q "No define indexSNPList!"
+    - calculate.cube.id.pl 2>&1 | grep -q "No define chrDIR!"
+    - calculate.maf.dist.ldnum.pl 2>&1 | grep -q "No define chrid!"
+    - calculatePvalue.pl 2>&1 | grep -q "Please define bedFilesDIR!"
+    - check.index.snp.and.lds.in.bed.pl 2>&1 | grep -q "Please define indexSNPLDFile!"
+    - create.index.SNP.LD.list.pl 2>&1 | grep -q "perl create.index.SNP.LD.list.pl"
+    - create.statistic.summary.file.pl 2>&1 | grep -q "No define statisticSummaryFile!"
+    - find.neighbors.LDbuddy.pl 2>&1 | grep -q "No define neighborlist!"
+    - find.neighbors.pl 2>&1 | grep -q "No define indexSNPFile!"
+    - merge.index.SNP.and.LD.in.bed.pl 2>&1 | grep -q "Please define bedFileName!"
+    - overlap.pl 2>&1 | grep -q "Please define indexSNPList!"
+    - put.snp.in.cubes.pl 2>&1 | grep -q "No define chrfile!"
+    - sort.bed.file.pl 2>&1 | grep -q "No define bedFile!"
+
+about:
+  home: https://csg.sph.umich.edu/GREGOR/
+  license: GPL-3.0-or-later AND MIT
+  license_file:
+    - Copyrights/COPYING
+    - Copyrights/LICENSE.txt
+  summary: GREGOR (Genomic Regulatory Elements and Gwas Overlap algoRithm) is a tool to test for enrichment of an input list of trait-associated index SNPs in experimentally annotated regulatory domains.
