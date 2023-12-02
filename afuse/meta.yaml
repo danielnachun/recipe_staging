@@ -28,7 +28,7 @@ requirements:
 
 test:
   commands:
-    - test -f ${PREFIX}/bin/afuse
+    - afuse
 
 about:
   home: https://github.com/pcarrier/{{ name }}
