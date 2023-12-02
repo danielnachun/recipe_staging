@@ -24,7 +24,7 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/chromopainter
+    - chromopainter 2>&1 | grep -q "Error with command line (Each of -g and -r MUST be specified if data are linked)."
 
 about:
   home: https://people.maths.bris.ac.uk/~madjl/finestructure-old/chromopainter.html
