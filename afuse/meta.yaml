@@ -28,7 +28,7 @@ requirements:
 
 test:
   commands:
-    - "afuse 2>&1 | grep -q 'Usage: afuse mountpoint [options]'"
+    - "afuse 2>&1 | grep -q 'Usage: afuse mountpoint \[options\]'"
 
 about:
   home: https://github.com/pcarrier/{{ name }}
