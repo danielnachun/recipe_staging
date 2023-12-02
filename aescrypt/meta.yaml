@@ -20,7 +20,7 @@ requirements:
 
 test:
   commands:
-    - test -f ${PREFIX}/bin/aescrypt
+    - "aescrypt 2>&1 | grep -q 'aescrypt: Usage: aescrypt'"
 
 about:
   home: https://aescrypt.sourceforge.io
