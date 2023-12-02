@@ -20,7 +20,7 @@ requirements:
 
 test:
   commands:
-    - "afio 2>&1 | grep -q 'Usage:  \[filename generator\] \| afio'"
+    - 'afio 2>&1 | grep -q "Usage:  \[filename generator\] \| afio"'
 
 about:
   home: https://github.com/kholtman/{{ name }}
