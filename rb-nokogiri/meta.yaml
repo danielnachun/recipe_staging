@@ -15,7 +15,6 @@ build:
     - export CPPFLAGS="-Igumbo_parser/src"
     - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem --platform=ruby -- --use-system-libraries
     - gem unpack {{ name }}-{{ version }}.gem
-    - gem unpack {{ name }}-{{ version }}.gem --target .
 
 requirements:
   build:
