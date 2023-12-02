@@ -8,6 +8,7 @@ on:
 
 jobs:
   setup:
+    if: ${{ !contains(github.event.pull_request.labels.*.name, 'ci-skip') }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
