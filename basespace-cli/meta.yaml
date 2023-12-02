@@ -17,11 +17,10 @@ build:
   script:
     - mkdir -p ${PREFIX}/bin
     - install -m 755 bs ${PREFIX}/bin
-  skip: true  # [win]
 
 test:
   commands:
-    - test -f $PREFIX/bin/bs
+    - bs 2>&1 | grep -q "bs \[OPTIONS\] <command>"
 
 about:
   home: https://developer.basespace.illumina.com/docs/content/documentation/cli/cli-overview
