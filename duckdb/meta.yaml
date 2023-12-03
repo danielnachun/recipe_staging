@@ -1,13 +1,13 @@
 {% set name = "duckdb" %}
 {% set version = "0.8.1" %}
 
-package:
+package: 
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  - git_url: https://github.com/duckdb/{{ name }}.git
-    git_rev: v{{ version }}
+  git_url: https://github.com/duckdb/{{ name }}.git
+  git_rev: v{{ version }}
 
 build:
   number: 0
@@ -21,7 +21,7 @@ requirements:
 
 test:
   commands:
-    - test -f ${PREFIX}/bin/{{ name }}
+    - '{{ name }} --help 2>&1 | grep -q "Usage: duckdb \[OPTIONS\] FILENAME \[SQL\]"'
 
 about:
   home: https://www.duckdb.org
