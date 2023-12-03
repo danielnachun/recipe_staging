@@ -20,7 +20,7 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/chromocombine
+    - chromocombine
 
 about:
   home: https://people.maths.bris.ac.uk/~madjl/finestructure-old/chromocombine.html
