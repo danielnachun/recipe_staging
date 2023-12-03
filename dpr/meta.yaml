@@ -29,7 +29,7 @@ requirements:
  
 test:
   commands:
-    - test -f ${PREFIX}/bin/DPR
+    - DPR
 
 about:
   home: http://www.xzlab.org/software
