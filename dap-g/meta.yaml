@@ -29,8 +29,8 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/dap-g
-    - test -f $PREFIX/bin/ptwas_builder
+    - 'dap-g 2>&1 | grep -q "Error: no suitable input data specified"'
+    - 'ptwas_builder 2>&1 | grep -q "Error: gene name is not specified"'
 
 about:
   home: https://github.com/xqwen/dap
