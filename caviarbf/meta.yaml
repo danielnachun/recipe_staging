@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  git_url: https://bitbucket.org/Wenan/caviarbf
-  git_rev: 25bac331a20353046f0838804baef4d8cec05c05
+  url: https://bitbucket.org/Wenan/caviarbf/get/25bac331a203.zip
+  sha256: a15d638d10bd1bcf588e2a135df0ddbe262adb1101adfa7e95d05408507b34df
 
 build:
   number: 0
@@ -29,8 +29,8 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/caviarbf
-    - test -f $PREFIX/bin/model_search
+    - 'caviarbf 2>&1 | grep -q "Required arguments missing: zfile, prior-type, prior-values, sample-number, max-causal, output"'
+    - 'model_search 2>&1 | grep -q "Required arguments missing: input, snp-number, output, prior-file, prior"'
     - $R -e "library('caviarbf')"
 
 about:
