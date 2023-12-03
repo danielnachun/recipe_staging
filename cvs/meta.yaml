@@ -46,7 +46,7 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/cvs # [not win]
+    - cvs --help 2>&1 | grep -q "Specify --help to receive this message"
 
 about:
   home: https://www.nongnu.org/cvs/
