@@ -20,7 +20,7 @@ requirements:
 
 test:
   commands:
-    - test -f ${PREFIX}/bin/{{ name }}
+    - '{{ name }} --help 2>&1 | grep -q "fcp \[OPTIONS\] SOURCE DESTINATION_FILE"'
 
 about:
   home: https://github.com/Svetlitski/{{ name }}
