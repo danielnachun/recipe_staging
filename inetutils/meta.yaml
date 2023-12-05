@@ -24,7 +24,7 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/ftp # [not win]
+    - ftp --help
 
 about:
   home: https://www.gnu.org/software/inetutils/
