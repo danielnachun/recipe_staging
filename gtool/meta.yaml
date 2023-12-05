@@ -17,7 +17,7 @@ build:
 
 test:
   commands:
-    - test -f ${PREFIX}/bin/gtool
+    - {{ name }}
 
 about:
   home: https://www.well.ox.ac.uk/~cfreeman/software/gwas/gtool.html
