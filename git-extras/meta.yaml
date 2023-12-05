@@ -22,7 +22,7 @@ requirements:
 
 test:
   commands:
-    - test -f ${PREFIX}/bin/git-root
+    - git-root 2>&1 | grep -q "Not a git repo!"
 
 about:
   home: https://github.com/tj/{{ name }}
