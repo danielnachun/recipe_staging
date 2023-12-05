@@ -31,7 +31,7 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/GAMBIT
+    - GAMBIT 2>&1 | grep -q "fatal error...  no gwas input file!"
 
 about:
   home: https://github.com/corbinq/GAMBIT
