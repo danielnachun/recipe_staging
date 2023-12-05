@@ -20,7 +20,7 @@ requirements:
 
 test:
   commands:
-    - test -f ${PREFIX}/bin/git-fixup
+    - 'git-fixup 2>&1 | grep -q "fatal: not a git repository"'
 
 about:
   home: https://github.com/keis/git-fixup
