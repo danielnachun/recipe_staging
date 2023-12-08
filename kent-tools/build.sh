@@ -12,7 +12,7 @@ make userApps BINDIR=${PREFIX}/bin \
     SCRIPTS="${PREFIX}/bin" \
     PNGLIB="-L${PREFIX}/lib -lpng -lz" \
     PNGINCL="-I${PREFIX}/include" \
-    MYSQLLIBS="-L${PREFIX}/lib -lmysqlclient -lz -lstdc++" \
+    MYSQLLIBS="${LDFLAGS} -lmysqlclient -lz -lstdc++" \
     MYSQLINCL="-I${PREFIX}/include/mysql"
 
 mv ${PREFIX}/bin/calc ${PREFIX}/bin/kent-tools-calc

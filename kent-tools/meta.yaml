@@ -37,7 +37,18 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/bigWigToBedGraph # [not win]
+    - addCols 2>&1 | grep -q "addCols - Sum columns in a text file."
+    - ameme 2>&1 | grep -q "ameme - find common patterns in DNA"
+    - autoDtd 2>&1 | grep -q "autoDtd - Give this a XML document to look at and it will come up with a DTD"
+    - autoSql 2>&1 | grep -q "autoSql - create SQL and C code for permanently storing"
+    - autoXml 2>&1 | grep -q "autoXml - Generate structures code and parser for XML file from DTD-like spec"
+    - ave 2>&1 | grep -q "ave - Compute average and basic stats"
+    - aveCols 2>&1 | grep -q "aveCols - average together columns"
+    - axtChain 2>&1 | grep -q "axtChain - Chain together axt alignments."
+    - axtSort 2>&1 | grep -q "axtSort - Sort axt files"
+    - axtSwap 2>&1 | grep -q "axtSwap - Swap source and query in an axt file"
+    - axtToMaf 2>&1 | grep -q "axtToMaf - Convert from axt to maf format"
+    - axtToPsl 2>&1 | grep -q "axtToPsl - Convert axt to psl format"
 
 about:
   home: https://genome.ucsc.edu/
