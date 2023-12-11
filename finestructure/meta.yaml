@@ -24,7 +24,7 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/finestructure
+    - finestructure 
 
 about:
   home: https://people.maths.bris.ac.uk/~madjl/finestructure-old/finestructure.html
