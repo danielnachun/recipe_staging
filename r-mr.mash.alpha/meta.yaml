@@ -1,0 +1,60 @@
+{% set version = "0.2.31" %}
+{% set name = "mr.mash.alpha" %}
+
+package:
+  name: r-{{ name }}
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/stephenslab/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 24269e929ee0c56bf332621521fe5bb3a30f6fe5b6c1fc4775807487d52bab66
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+    - r-ebnm
+    - r-flashier
+    - r-mashr
+    - r-mbsp
+    - r-matrixstats
+    - r-mvtnorm
+    - r-rcpp
+    - r-rcpparmadillo
+    - r-rcppparallel
+  run:
+    - r-base>=4.2
+    - r-ebnm
+    - r-flashier
+    - r-mashr
+    - r-mbsp
+    - r-matrixstats
+    - r-mvtnorm
+    - r-rcpp
+    - r-rcpparmadillo
+    - r-rcppparallel
+
+test:
+  commands:
+    - $R -e "library('mr.mash.alpha')"
+
+about:
+  home: https://github.com/stephenslab/{{ name }}
+  license: Other
+  license_file: LICENSE
+  summary: Provides an implementation of methods for multivariate 
+    multiple regression with adaptive shrinkage priors.
+
+extra:
+  recipe-maintainers:
+    - danielnachun

@@ -1,0 +1,41 @@
+{% set version = '0.8' %}
+
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
+
+package:
+  name: r-gigrvg
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url:
+    - {{ cran_mirror }}/src/contrib/GIGrvg_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/GIGrvg/GIGrvg_{{ version }}.tar.gz
+  sha256: 34f3d1accf94278ad37ce3c84d6b11d4e7917552fdc3f79d56c1ecb135b4c026
+
+build:
+  merge_build_host: True  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+  host:
+    - r-base=4.2
+  run:
+    - r-base>=4.2
+
+test:
+  commands:
+    - $R -e "library('GIGrvg')"           # [not win]
+    - "\"%R%\" -e \"library('GIGrvg')\""  # [win]
+
+about:
+  home: https://CRAN.R-project.org/package=gigrvg
+  license: GPL-2.0-or-later
+  summary: Generator and density function for the Generalized Inverse Gaussian (GIG) distribution.
+  license_file:
+    - '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2'
