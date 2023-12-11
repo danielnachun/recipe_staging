@@ -19,7 +19,7 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/entr # [not win]
+    - 'entr 2>&1 | grep -q "usage: entr \[-acdnprsz\]"'
 
 about:
   home: https://eradman.com/entrproject/
