@@ -31,7 +31,7 @@ requirements:
 
 test:
   commands:
-    - test -f ${PREFIX}/bin/glyrc
+    - 'glyrc 2>&1 | grep -q "Usage: glyrc \[GETTER\] (options)"'
 
 about:
   home: https://github.com/sahib/glyr
