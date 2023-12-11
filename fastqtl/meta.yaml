@@ -38,7 +38,7 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/fastQTL
+    - 'fastQTL 2>&1 | grep -q "* Version : v2.0"'
 
 about:
   home: https://fastqtl.sourceforge.net
