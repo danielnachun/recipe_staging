@@ -27,7 +27,7 @@ requirements:
 
 test:
   commands:
-    - test -f ${PREFIX}/bin/testwrapper
+    - testwrapper status 2>&1 | grep -q "Test Wrapper Sample Application (not installed) is not running."
 
 about:
   home: https://wrapper.tanukisoftware.com/
