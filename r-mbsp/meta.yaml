@@ -1,0 +1,42 @@
+{% set name = 'mbsp' %}
+{% set version = '4.0' %}
+
+package:
+  name: r-{{ name }}
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url:
+    - {{ cran_mirror }}/src/contrib/MBSP_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/MBSP/MBSP_{{ version }}.tar.gz
+  sha256: cb0d0da0e5542155d3731af5575ec7b46ad69aed7aa7cafc31759821eaf4d2e5
+
+build:
+  number: 0
+  noarch: generic
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  host:
+    - r-base=4.2
+    - r-gigrvg
+    - r-mcmcpack
+    - r-mvtnorm
+  run:
+    - r-base>=4.2
+    - r-gigrvg
+    - r-mcmcpack
+    - r-mvtnorm
+
+test:
+  commands:
+    - $R -e "library('MBSP')"
+
+about:
+  home: https://CRAN.R-project.org/package=mbsp
+  license: GPL-3.0-or-later
+  summary: Gibbs sampler for fitting multivariate Bayesian linear regression with shrinkage priors (MBSP), using the three parameter beta normal family. The method is described in Bai and Ghosh (2018) <doi:10.1016/j.jmva.2018.04.010>.
+  license_file:
+    - '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3'
