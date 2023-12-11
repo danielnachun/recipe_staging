@@ -26,7 +26,7 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/gctb
+    - {{ name }} | grep -q "Genome-wide Complex Trait Bayesian analysis"
 
 about:
   home: https://cnsgenomics.com/software/gctb
