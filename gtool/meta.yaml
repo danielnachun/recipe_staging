@@ -17,7 +17,7 @@ build:
 
 test:
   commands:
-    - {{ name }}
+    - {{ name }} 2>&1 | grep -q "Gtool v{{ version }} - Data Transformation"
 
 about:
   home: https://www.well.ox.ac.uk/~cfreeman/software/gwas/gtool.html
