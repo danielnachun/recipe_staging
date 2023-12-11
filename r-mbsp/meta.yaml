@@ -19,8 +19,6 @@ build:
     - lib/
 
 requirements:
-  build:
-    - {{ compiler('c') }}
   host:
     - r-base=4.2
     - r-gigrvg
