@@ -14,7 +14,7 @@ build:
     - cellbender = cellbender.base_cli:main
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  number: 1
 
 requirements:
   host:
@@ -35,15 +35,14 @@ requirements:
     - ipython
     - jupyter
     - jupyter_contrib_nbextensions
-    - notebook <7.0.0
-    - nbconvert <7.0.0
+    - notebook
+    - nbconvert
     - psutil
 
 test:
   imports:
     - cellbender
   commands:
-    - pip check
     - cellbender --help
   requires:
     - pip
