@@ -1,0 +1,44 @@
+{% set name = "ddqc" %}
+{% set version = "1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/ayshwaryas/ddqc/archive/b09a71efe43688f38f35634d61acb2a48d0d1af8.zip
+  sha256: d3e091621078bc2f7016b500be3e957942c18cffdd60e0cac760bf90d803e5a2
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python
+    - pip
+  run:
+    - cython
+    - python
+    - numpy >1.20
+    - matplotlib-base >=3.4.0
+    - pandas >=1.2.0
+    - pegasusio
+    - pegasuspy
+    - seaborn >=0.11
+
+test:
+  imports:
+    - ddqc
+  requires:
+    - pip
+
+about:
+  home: https://github.com/ayshwaryas/ddqc
+  license: BSD-3-Clause
+  license_file: license.md
+
+extra:
+  recipe-maintainers:
+    - danielnachun
