@@ -18,7 +18,7 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/pax # [not win]
+    - 'pax -h 2>&1 | grep -q "usage: pax"'
 
 about:
   home: https://www.mirbsd.org/pax.htm
