@@ -19,7 +19,7 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/members # [not win]
+    - members --help
 
 about:
   home: https://packages.qa.debian.org/m/members.html
