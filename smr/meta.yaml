@@ -29,7 +29,7 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/smr
+    - smr 2>&1 | grep -q "Summary-data-based Mendelian Randomization (SMR)"
 
 about:
   home: https://yanglab.westlake.edu.cn/software/{{ name }}
