@@ -20,7 +20,8 @@ requirements:
 
 test:
   commands:
-    - test -f ${PREFIX}/bin/{{ name }}
+    - '{{ name }} 2>&1 | grep -q "usage: rm \[-f | -i\] \[-dIPRrvWx\] file"'  # [osx]
+    - '{{ name }} 2>&1 | grep -q "/bin/rm: missing operand"'  # [linux]
 
 about:
   home: https://launchpad.net/{{ name }}
