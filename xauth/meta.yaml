@@ -34,14 +34,13 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/xauth # [not win]
+    - 'xauth -h 2>&1 | grep -q "usage:  xauth \[-options ...\] \[command arg ...\]"'
 
 about:
-  home: https://github.com/astrand/xclip
-  license: GPL-2.0-or-later
+  home: https://xorg.freedesktop.org/
+  license: MIT
   license_file: COPYING
-  summary: Access X11 clipboards from the command-line
-  dev_url: https://github.com/astrand/xclip
+  summary: X.Org authorization settings program
 
 extra:
   recipe-maintainers:
