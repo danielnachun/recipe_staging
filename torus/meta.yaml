@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  git_url: https://github.com/xqwen/torus
-  git_rev: f21fac0546c0bd51e5029b103d8c6fe38757019f
+  url: https://github.com/xqwen/torus/archive/f21fac0546c0bd51e5029b103d8c6fe38757019f.zip
+  sha256: 8aad2ac80e528c7753b73db3ac4d1ab9c0c7428ea264879811f485270bd0ff88
 
 build:
   number: 0
@@ -27,7 +27,7 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/torus
+    - torus
 
 about:
   home: https://github.com/xqwen/torus
