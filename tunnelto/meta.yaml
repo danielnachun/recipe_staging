@@ -26,8 +26,7 @@ requirements:
 
 test:
   commands:
-    - test -f ${PREFIX}/bin/tunnelto
-    - test -f ${PREFIX}/bin/tunnelto_server
+    - tunnelto --help
 
 about:
   home: https://github.com/agrinman/{{ name }}
