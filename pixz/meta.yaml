@@ -27,7 +27,7 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/pixz
+    - '{{ name }} -h 2>&1 | grep -q "pixz: Parallel Indexing XZ compression, fully compatible with XZ"'
 
 about:
   home: https://github.com/vasi/pixz
