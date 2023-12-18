@@ -19,7 +19,7 @@ requirements:
 
 test:
   commands:
-    - test -f ${PREFIX}/bin/wavpack
+    - wavpack -h 2>&1 | grep -q "WAVPACK  Hybrid Lossless Audio Compressor"
 
 about:
   home: https://www.wavpack.com
