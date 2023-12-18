@@ -20,7 +20,7 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/ssed # [not win]
+    - 'ssed 2>&1 | grep -q "Usage: ssed \[OPTION\]..."'
 
 about:
   home: https://sed.sourceforge.io/grabbag/ssed/
