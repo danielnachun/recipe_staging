@@ -20,7 +20,7 @@ requirements:
 
 test:
   commands:
-    - tidy-viewer --help | grep -q "Resource temporarily unavailable"
+    - tidy-viewer --help 2>&1 | grep -q "Resource temporarily unavailable"
 
 about:
   home: https://github.com/alexhallam/{{ name }}
