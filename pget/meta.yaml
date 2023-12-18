@@ -19,7 +19,7 @@ requirements:
 
 test:
   commands:
-    - test -f ${PREFIX}/bin/${PKG_NAME}
+    - '${PKG_NAME} --help 2>&1 | grep -q "Usage: pget \[options\] URL"'
 
 about:
   home: https://github.com/Code-Hex/{{ name }}
