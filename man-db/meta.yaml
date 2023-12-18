@@ -29,7 +29,7 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/man
+    - man -h
 
 about:
   home: https://www.nongnu.org/man-db
