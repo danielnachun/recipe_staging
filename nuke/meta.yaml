@@ -22,7 +22,7 @@ requirements:
 
 test:
   commands:
-    - test -f ${PREFIX}/bin/{{ name }}
+    - {{ name }} | grep -q "Could not find .nuke directory/file"
 
 about:
   home: https://nuke.build
