@@ -15,5 +15,5 @@ cmake -S . -B build \
 cmake --build build
 cmake --install build
 
-install -Dd ${PREFIX}/bin
-install -Dm 755 build/bin/metal ${PREFIX}/bin
+mkdir -p ${PREFIX}/bin
+install -m 755 build/bin/metal ${PREFIX}/bin

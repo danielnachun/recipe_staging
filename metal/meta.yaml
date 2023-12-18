@@ -18,6 +18,7 @@ requirements:
     - {{ compiler('cxx') }}
     - cmake
     - make
+    - sed
   host:
     - zlib
   run:
@@ -25,7 +26,7 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/metal
+    - {{ name }} <(QUIT)
 
 about:
   home: https://github.com/statgen/METAL
