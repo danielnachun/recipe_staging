@@ -25,7 +25,7 @@ requirements:
  
 test:
   commands:
-    - test -f $PREFIX/bin/SDPR
+    - SDPR
 
 about:
   home: https://github.com/eldronzhou/SDPR
