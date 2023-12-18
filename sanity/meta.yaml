@@ -23,7 +23,7 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/Sanity
+    - Sanity
 
 about:
   home: https://github.com/jmbreda/Sanity
