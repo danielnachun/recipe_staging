@@ -20,7 +20,7 @@ requirements:
 
 test:
   commands:
-    - test -f ${PREFIX}/bin/{{ name }}
+    - '{{ name }} --help 2>&1 | grep -q "Usage: markdown-toc \[options\] <input>"'
 
 about:
   home: https://github.com/jonschlinkert/{{ name }}
