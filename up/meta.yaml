@@ -19,7 +19,7 @@ requirements:
 
 test:
   commands:
-    - test -f ${PREFIX}/bin/{{ name }}
+    - '{{ name }} --help 2>&1 | grep -q "Usage: COMMAND | up \[OPTIONS\]"'
 
 about:
   home: https://github.com/akavel/{{ name }}
