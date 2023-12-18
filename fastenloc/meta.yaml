@@ -30,7 +30,7 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/fastenloc
+    - 'fastenloc 2>&1 | grep -q "Usage: fastenloc -eqtl eqtl_file -gwas gwas_file"'
 
 about:
   home: https://github.com/xqwen/fastenloc
