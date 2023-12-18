@@ -19,7 +19,7 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/{{ name }}
+    - '{{ name }} --help 2>&1 | grep -q "Usage: neofetch func_name"'
 
 about:
   home: https://github.com/dylanaraps/{{ name }}
