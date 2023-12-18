@@ -16,7 +16,7 @@ requirements:
   build:
     - {{ compiler('cxx') }}
     - make
-    - sysroot_linux-64=2.17
+    - sysroot_linux-64=2.17  # [linux]
   host:
     - blas
     - boost-cpp
@@ -37,7 +37,7 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/QTLtools
+    - QTLtools cis --help
 
 about:
   home: https://qtltools.github.io/qtltools/
