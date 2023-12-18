@@ -18,7 +18,7 @@ requirements:
 
 test:
   commands:
-    - test -f ${PREFIX}/bin/{{ name }}
+    - '{{ name }} --help 2>&1 | grep -q "Usage: yadm <command> \[options...\]"'
 
 about:
   home: https://yadm.io/
