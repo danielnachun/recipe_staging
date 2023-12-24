@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  git_url: https://github.com/xqwen/dap
-  git_rev: 875ba40b7b28d6972fb94e6d2fb352ce1aaa92a7
+  url: https://github.com/xqwen/dap/archive/875ba40b7b28d6972fb94e6d2fb352ce1aaa92a7.zip
+  sha256: d8a897c38f764764839559239ba2e3710216b2c78938354631d28844c86be731
 
 build:
   number: 0
