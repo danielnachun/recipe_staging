@@ -6,8 +6,11 @@ package:
   version: {{ version }}
 
 source:
-  git_url: https://github.com/corbinq/{{ name }}
-  git_rev: 63b605e00766141693a69eee6d630ad8ec3b9de0
+  url: https://github.com/corbinq/{{ name }}/archive/63b605e00766141693a69eee6d630ad8ec3b9de0.zip
+  sha256: ba52ddca0eb977c5d8b7692dbcd6677ab084c1d956fcb29157ae0d201e9d9f2a
+  patches:
+    - 0001-clean-up-CXXFLAGS-and-LDFLAGS.patch
+    - 0002-check-for-quick_exit.patch
 
 build:
   number: 0
@@ -17,11 +20,12 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('c') }}
     - binutils
+    - boost
     - curl
+    - eigen
     - krb5
     - make
-    - boost
-    - eigen
+    - sed
     - shrinkwrap
     - spectralib==0.9.0
     - taywee-args
@@ -31,7 +35,8 @@ requirements:
     - zlib
   run:
     - htslib
-    - _openmp_mutex
+    - _openmp_mutex  # [linux]
+    - llvm-openmp  # [osx]
 
 test:
   commands:
