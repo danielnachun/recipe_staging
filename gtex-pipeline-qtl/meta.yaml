@@ -2,17 +2,19 @@
 {% set version = "gtex_v8" %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
-  git_url: https://github.com/broadinstitute/gtex-pipeline
-  git_rev: bed31e12a48b25db8b111252e2136b31c64c9e82
+  url: https://github.com/broadinstitute/gtex-pipeline/archive/bed31e12a48b25db8b111252e2136b31c64c9e82.zip
+  sha256: 78a2a157eb059f6c5ac96ff0c68cc2f3fa1737d2c2f5d5b8545021f705c6174c
 
 build:
   number: 0
 
 requirements:
+  build:
+    - sed
   run:
     - numpy
     - pytables
@@ -45,20 +47,20 @@ requirements:
 
 test:
    commands:
-    - python3 ${PREFIX}/bin/ase_aggregate_by_individual.py -h
-    - python3 ${PREFIX}/bin/ase_calculate_lamp.py -h
-    - python3 ${PREFIX}/bin/cluster_prepare_fastqtl.py -h
-    - python3 ${PREFIX}/bin/combine_covariates.py -h
-    - python3 ${PREFIX}/bin/combine_signif_pairs.py -h
-    - python3 ${PREFIX}/bin/convert_vep.py -h
-    - python3 ${PREFIX}/bin/eqtl_prepare_expression.py -h
-    - Rscript ${PREFIX}/bin/map_clusters_to_genes.R -h
-    - python3 ${PREFIX}/bin/metasoft_postprocess.py -h
-    - python3 ${PREFIX}/bin/metasoft_prepare_input.py -h
-    - python3 ${PREFIX}/bin/run_GATK_ASEReadCounter.py -h
+    - ase_aggregate_by_individual.py -h
+    - ase_calculate_lamp.py -h
+    - cluster_prepare_fastqtl.py -h
+    - combine_covariates.py -h
+    - combine_signif_pairs.py -h
+    - convert_vep.py -h
+    - eqtl_prepare_expression.py -h
+    - map_clusters_to_genes.R -h
+    - metasoft_postprocess.py -h
+    - metasoft_prepare_input.py -h
+    - run_GATK_ASEReadCounter.py -h
     - test -f ${PREFIX}/bin/run_PEER.R 
-    - python3 ${PREFIX}/bin/run_metasoft.py -h
-    - python3 ${PREFIX}/bin/run_torus.py -h
+    - run_metasoft.py -h
+    - run_torus.py -h
 
 about:
   home: https://github.com/broadinstitute/gtex-pipeline

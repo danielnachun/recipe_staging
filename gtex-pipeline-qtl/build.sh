@@ -17,3 +17,7 @@ install -m 755 "${SRC_DIR}/qtl/src/run_metasoft.py" "${PREFIX}/bin/run_metasoft.
 install -m 755 "${SRC_DIR}/qtl/leafcutter/src/cluster_prepare_fastqtl.py" "${PREFIX}/bin/cluster_prepare_fastqtl.py"
 install -m 755 "${SRC_DIR}/qtl/leafcutter/src/map_clusters_to_genes.R" "${PREFIX}/bin/map_clusters_to_genes.R"
 install -m 755 "${SRC_DIR}/qtl/torus/src/run_torus.py" "${PREFIX}/bin/run_torus.py"
+sed -i '1i #!/usr/bin/env python3' "${PREFIX}/bin/ase_aggregate_by_individual.py"
+sed -i '1i #!/usr/bin/env python3' "${PREFIX}/bin/cluster_prepare_fastqtl.py"
+sed -i '1i #!/usr/bin/env python3' "${PREFIX}/bin/run_torus.py"
+sed -i '1i #!/usr/bin/env Rscript' "${PREFIX}/bin/map_clusters_to_genes.R"
