@@ -1,5 +1,5 @@
 {% set name = "git-absorb" %}
-{% set version = "0.6.10" %}
+{% set version = "0.6.11" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/tummychow/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: 6cc58d2ae50027a212811faa065623666ccb6e8bd933e801319aaf92b164aa0a
+  sha256: 36c3b2c7bcd1d9db5d1dedd02d6b0ac58faaeb6fd50df7ff01f5cf87e5367b52
 
 build:
   number: 0
@@ -24,8 +24,7 @@ test:
 
 about:
   home: https://github.com/tummychow/{{ name }}
-  license: BSD 3 Clause
-  license_family: BSD
+  license: BSD-3-Clause
   license_file:
     - LICENSE.md
     - THIRDPARTY.yml
