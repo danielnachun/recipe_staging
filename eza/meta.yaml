@@ -1,5 +1,5 @@
 {% set name = "eza" %}
-{% set version = "0.15.3" %}
+{% set version = "0.17.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/eza-community/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 09093e565913104acb7a8eba974f8067c95566b6fbedf31138c9923a8cfde42f
+  sha256: c5be22fbf8979d796509873327703353c243acbf42cb42b22b86be56cc11682c
 
 build:
   number: 0
