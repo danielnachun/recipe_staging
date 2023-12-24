@@ -1,5 +1,5 @@
 {% set name = "global" %}
-{% set version = "6.6.10" %}
+{% set version = "6.6.11" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://ftp.gnu.org/gnu/global/global-{{ version }}.tar.gz
-  sha256: 2dd1e6a945e93c01390fb941a4e694f4c71bbd7569d64149c04e927bbf4dcce8
+  sha256: 0533319f78d3860b81668dfaeaa507901541e5dda8cfc30d52dfc6ce9489f5e3
 
 build:
   number: 0
@@ -29,8 +29,7 @@ test:
 
 about:
   home: https://www.gnu.org/software/{{ name }}
-  license: GPLv3 or later
-  license_family: GPL
+  license: GPL-3.0-or-later
   license_file: LICENSE
   summary: Source code tag system
   dev_url: https://www.gnu.org/software/{{ name }}
