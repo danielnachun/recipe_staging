@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/FinucaneLab/fine-mapping-inf/archive/4af3e6ebf04f372bcb641977601a2b65a4080237.zip
-  sha256: 4af3e6ebf04f372bcb641977601a2b65a4080237
+  sha256: c8d592be2beaafb776ef191e5094ba34eab67e242fd089839f947878e9d2c9af
 
 build:
   number: 0
