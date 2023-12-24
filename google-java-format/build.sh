@@ -2,6 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+touch ${BUILD_PREFIX}/lib/jvm/release
 mkdir release
 mvn install -DskipTests=true -Dmaven.repo.local=${SRC_DIR}
 

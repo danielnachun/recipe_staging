@@ -1,5 +1,5 @@
 {% set name = "google-java-format" %}
-{% set version = "1.17.0" %}
+{% set version = "1.19.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/google/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: d1b77b8f91fb8136f6daf4160c1c86eee4d3297e3c1a3c0ef8b7551a77488195
+  sha256: 1de4c36ad4d89a18fcda976fee4a51630d7e8bc61a05f5939171ea339d07fde5
 
 build:
   number: 0
@@ -15,7 +15,7 @@ build:
 requirements:
   build:
     - maven
-    - openjdk >=11,<12
+    - openjdk=17
   run:
     - openjdk
     - python
