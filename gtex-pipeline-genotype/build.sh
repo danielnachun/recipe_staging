@@ -8,3 +8,5 @@ install -m 755 "${SRC_DIR}/genotype/shapeit2/src/aggregate_pirs.py" "${PREFIX}/b
 install -m 755 "${SRC_DIR}/genotype/shapeit2/src/bam_to_pir.py" "${PREFIX}/bin/bam_to_pir.py"
 install -m 755 "${SRC_DIR}/genotype/shapeit2/src/run_shapeit.py" "${PREFIX}/bin/run_shapeit.py"
 install -m 755 "${SRC_DIR}/genotype/shapeit2/src/shapeit_postprocess.py" "${PREFIX}/bin/shapeit_postprocess.py"
+
+sed -i '1i #!/usr/bin/env python3' "${PREFIX}/bin/shapeit_postprocess.py"
