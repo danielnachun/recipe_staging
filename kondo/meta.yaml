@@ -1,5 +1,5 @@
 {% set name = "kondo" %}
-{% set version = "0.7" %}
+{% set version = "0.8" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/tbillington/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: b7535807ba98bde86adfb920ec439e98b7c652361feb6a224e55c88cda569ff2
+  sha256: 4054c90e679a379a735b3166df4633fb86a33725175ebe23d7b659dcb7155b26
 
 build:
   number: 0
