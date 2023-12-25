@@ -1,5 +1,5 @@
 {% set name = "mcfly" %}
-{% set version = "0.8.1" %}
+{% set version = "0.8.3" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/cantino/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 727fc98b7291cc5b79c90a48d2e4460bc71550f221be8d2dad2377580f9b2d72
+  sha256: 1d9f4e3b55fdac8b9c3007c19875bd308eb79dd473d371647e82250a52446d53
 
 build:
   number: 0
@@ -25,7 +25,6 @@ test:
 about:
   home: https://github.com/cantino/{{ name }}
   license: MIT
-  license_family: MIT
   license_file: LICENSE
   summary: Fly through your shell history
   dev_url: https://github.com/cantino/{{ name }}
