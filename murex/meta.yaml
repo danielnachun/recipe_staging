@@ -1,5 +1,5 @@
 {% set name = "murex" %}
-{% set version = "5.1.2210" %}
+{% set version = "5.3.5000" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://github.com/lmorg/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: df32c34138b4fc03ca03339ac3061488e87507cf96fe1aad625f876d27091284
+  sha256: 01dd4cac5d71692c0bb3724c543f6a2a45259f0199249335f94511f3509d7ebf
 
 build:
-  number: 1
+  number: 0
 
 requirements:
   build:
