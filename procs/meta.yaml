@@ -1,5 +1,5 @@
 {% set name = "procs" %}
-{% set version = "0.14.3" %}
+{% set version = "0.14.4" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/dalance/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: a3012bba984faddcf8da2a72d21eb9a7e9be8d5d86a387d321987743b0080a8c
+  sha256: 77c5f5d3bdfc9cef870732500ef58c203a1464f924b12f79c7d9e301b4dd5b16
 
 build:
   number: 0
@@ -17,7 +17,7 @@ requirements:
     - {{ compiler('rust') }}
     - {{ compiler('c') }}
     - cargo-bundle-licenses
-    - sysroot_linux-64=2.17
+    - sysroot_linux-64=2.17  # [linux]
 
 test:
   commands:
