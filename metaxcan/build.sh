@@ -2,22 +2,12 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-mkdir -p ${PREFIX}/bin
-mkdir -p ${PREFIX}/libexec/${PKG_NAME}
-cp -r software/* ${PREFIX}/libexec/${PKG_NAME}
-chmod 755 ${PREFIX}/libexec/${PKG_NAME}/*.py
-ln -sf ${PREFIX}/libexec/${PKG_NAME}/BuildExpressionProduct.py ${PREFIX}/bin
-ln -sf ${PREFIX}/libexec/${PKG_NAME}/CovarianceBuilder.py ${PREFIX}/bin
-ln -sf ${PREFIX}/libexec/${PKG_NAME}/M00_prerequisites.py ${PREFIX}/bin
-ln -sf ${PREFIX}/libexec/${PKG_NAME}/M01_covariances_correlations.py ${PREFIX}/bin
-ln -sf ${PREFIX}/libexec/${PKG_NAME}/M02_variances.py ${PREFIX}/bin
-ln -sf ${PREFIX}/libexec/${PKG_NAME}/M03_betas.py ${PREFIX}/bin
-ln -sf ${PREFIX}/libexec/${PKG_NAME}/M04_zscores.py ${PREFIX}/bin
-ln -sf ${PREFIX}/libexec/${PKG_NAME}/MetaMany.py ${PREFIX}/bin
-ln -sf ${PREFIX}/libexec/${PKG_NAME}/MulTiXcan.py ${PREFIX}/bin
-ln -sf ${PREFIX}/libexec/${PKG_NAME}/PrediXcan.py ${PREFIX}/bin
-ln -sf ${PREFIX}/libexec/${PKG_NAME}/PrediXcanAssociation.py ${PREFIX}/bin
-ln -sf ${PREFIX}/libexec/${PKG_NAME}/Predict.py ${PREFIX}/bin
-ln -sf ${PREFIX}/libexec/${PKG_NAME}/SPrediXcan.py ${PREFIX}/bin
-ln -sf ${PREFIX}/libexec/${PKG_NAME}/SMulTiXcan.py ${PREFIX}/bin
-ln -sf ${PREFIX}/libexec/${PKG_NAME}/ToHDF5.py ${PREFIX}/bin
+cd software
+sed -i "s/'metax.deprecated'/'metax.deprecated', 'metax.cross_model', 'metax.expression', 'metax.genotype', 'metax.predixcan'/" setup.py
+sed -i '1i #!/usr/bin/env/python3' PrediXcan.py
+sed -i 's/Exceptions.ReportableException, e/Exceptions.ReportableException as e/' metax/MainScreen.py
+${PYTHON} -m pip install . -vv --no-deps --no-build-isolation
+install -m 755 BuildExpressionProduct.py ${PREFIX}/bin
+install -m 755 CovarianceBuilder.py ${PREFIX}/bin
+install -m 755 PrediXcanAssociation.py ${PREFIX}/bin
+install -m 755 Predict.py ${PREFIX}/bin
