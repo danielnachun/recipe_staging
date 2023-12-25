@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  git_url: https://github.com/dotnet/format
-  git_rev: 2cb3e68c6b9a966114572fd63f2a20d2cb54a288
+  url: https://github.com/dotnet/format/archive/2cb3e68c6b9a966114572fd63f2a20d2cb54a288.zip
+  sha256: ca4c6b161970d890ab8051e89d6501ccc86030128c7bde4d6c543844056350bb
 
 build:
   number: 0
