@@ -1,5 +1,5 @@
 {% set name = "ouch" %}
-{% set version = "0.4.2" %}
+{% set version = "0.5.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/ouch-org/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 08015fa92770515cfa00570bc5f0f0a4f28f0ad238f360f3579ac043723a6ec2
+  sha256: 46cc2b14f53de2f706436df59300eb90c5a58f08ac8c738fd976fcb8ec0cd335
 
 build:
   number: 0
@@ -16,6 +16,7 @@ requirements:
   build:
     - {{ compiler('rust') }}
     - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - cargo-bundle-licenses
   host:
     - bzip2
