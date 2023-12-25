@@ -3,7 +3,6 @@
 set -o xtrace -o nounset -o pipefail -o errexit
 
 export CGO_ENABLED=0
-make
-mkdir -p ${PREFIX}/bin
-install -m 755 ${PKG_NAME} ${PREFIX}/bin/${PKG_NAME}
+export LDFLAGS="-s -w"
+go build -buildmode=pie -trimpath -o=${PREFIX}/bin/${PKG_NAME} -ldflags="${LDFLAGS}" ./cmd/fork-cleaner
 go-licenses save . --save_path=license-files

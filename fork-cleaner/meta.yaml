@@ -1,5 +1,5 @@
 {% set name = "fork-cleaner" %}
-{% set version = "2.2.1" %}
+{% set version = "2.3.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,14 +7,13 @@ package:
 
 source:
   url: https://github.com/caarlos0/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 24397ec0ad89738aee48b77e80033a2e763941e67e67b673b6ff86ab04367283
+  sha256: 9fde99ed9877efc80e6940f9958468531b72a232d98c433cfe7022fd4c6018d8
 
 build:
-  number: 1
+  number: 0
 
 requirements:
   build:
-    - make
     - go
     - go-licenses
 
