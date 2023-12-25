@@ -2,12 +2,12 @@
 {% set version = "gtex_v8" %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
-  git_url: https://github.com/broadinstitute/gtex-pipeline
-  git_rev: bed31e12a48b25db8b111252e2136b31c64c9e82
+  url: https://github.com/broadinstitute/gtex-pipeline/archive/bed31e12a48b25db8b111252e2136b31c64c9e82.zip
+  sha256: 78a2a157eb059f6c5ac96ff0c68cc2f3fa1737d2c2f5d5b8545021f705c6174c
 
 build:
   number: 0
@@ -20,7 +20,7 @@ requirements:
 
 test:
    commands:
-    - python3 ${PREFIX}/bin/collapse_annotation.py -h
+    - collapse_annotation.py -h
 
 about:
   home: https://github.com/broadinstitute/gtex-pipeline
