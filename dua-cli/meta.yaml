@@ -1,5 +1,5 @@
 {% set name = "dua-cli" %}
-{% set version = "2.20.1" %}
+{% set version = "2.23.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/Byron/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 05ce2d74ec1282803c6825b0436d8b268eef176060b844ae29746a3d338fe658
+  sha256: 61f6fd0c13949d23224d9776c2fd444956d73dd363501e867cf11df6ca89ddfa
 
 build:
   number: 0
@@ -25,7 +25,6 @@ test:
 about:
   home: https://lib.rs/crates/{{ name }}
   license: MIT
-  license_family: MIT
   license_file:
     - LICENSE
     - THIRDPARTY.yml
