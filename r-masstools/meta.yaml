@@ -5,8 +5,8 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  git_url: https://github.com/tidymass/masstools
-  git_rev: ad7219732372173d034b6ac36aa3323375fe98c6
+  url: https://github.com/tidymass/masstools/archive/ad7219732372173d034b6ac36aa3323375fe98c6.zip
+  sha256: 1fcb1af73ee4aaaeaccd7da81c3775d1dfdddd5eb66aae4b5291a85a5d22cc9d
 
 build:
   merge_build_host: true  # [win]
