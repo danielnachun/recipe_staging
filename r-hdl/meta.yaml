@@ -5,8 +5,8 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  git_url: https://github.com/zhenin/HDL
-  git_rev: d308812f7c0f4f2cbbdcbad825d26c850df9a950
+  url: https://github.com/zhenin/HDL/archive/d308812f7c0f4f2cbbdcbad825d26c850df9a950.zip
+  sha256: 9980e1499d3b3ac5a927a4af79942434c63c1c071e24230f54ca4ab4796d391f
 
 build:
   merge_build_host: true  # [win]
