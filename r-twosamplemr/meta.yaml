@@ -5,8 +5,8 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  git_url: https://github.com/MRCIEU/TwoSampleMR
-  git_rev: c174107cfd9ba47cf2f780849a263f37ac472a0e
+  url: https://github.com/MRCIEU/TwoSampleMR/archive/c174107cfd9ba47cf2f780849a263f37ac472a0e.zip
+  sha256: 0a86061adc12c388b9a3f103181ab96c1b4296d12f054462b3071e302835eeac
 
 build:
   merge_build_host: true  # [win]
