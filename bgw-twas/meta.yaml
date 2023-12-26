@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  git_url: https://github.com/yanglab-emory/BGW-TWAS
-  git_rev: 6b14517b0e9331b6480106719af1d454febf46fa
+  url: https://github.com/yanglab-emory/BGW-TWAS/archive/6b14517b0e9331b6480106719af1d454febf46fa.zip
+  sha256: 31c455614b4c5edd65432ca4bb91f9dbb74c23f4deb8894e18e37a7a98650a5a
 
 build:
   number: 0
@@ -17,6 +17,7 @@ requirements:
     - {{ compiler('cxx') }}
     - binutils
     - make
+    - sed
   host:
     - blas
     - eigen
@@ -35,10 +36,10 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/Step1_get_sumstat.sh
-    - test -f $PREFIX/bin/Step2_prune.sh
-    - test -f $PREFIX/bin/Step3_EM-MCMC.sh
-    - test -f $PREFIX/bin/Step4_get_test_grex.sh
+    - test -f ${PREFIX}/bin/Step1_get_sumstat.sh
+    - test -f ${PREFIX}/bin/Step2_prune.sh
+    - test -f ${PREFIX}/bin/Step3_EM-MCMC.sh
+    - test -f ${PREFIX}/bin/Step4_get_test_grex.sh
 
 about:
   home: https://github.com/yanglab-emory/BGW-TWAS

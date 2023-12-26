@@ -21,3 +21,7 @@ ln -sf ${PREFIX}/libexec/bgw-twas/Step1_get_sumstat.sh ${PREFIX}/bin
 ln -sf ${PREFIX}/libexec/bgw-twas/Step2_prune.sh ${PREFIX}/bin
 ln -sf ${PREFIX}/libexec/bgw-twas/Step3_EM-MCMC.sh ${PREFIX}/bin
 ln -sf ${PREFIX}/libexec/bgw-twas/Step4_get_test_grex.sh ${PREFIX}/bin
+sed -i "s?/usr/bin/bash?/usr/bin/env bash?" ${PREFIX}/libexec/bgw-twas/Step1_get_sumstat.sh
+sed -i "s?/usr/bin/bash?/usr/bin/env bash?" ${PREFIX}/libexec/bgw-twas/Step2_prune.sh
+sed -i "s?/usr/bin/bash?/usr/bin/env bash?" ${PREFIX}/libexec/bgw-twas/Step3_EM-MCMC.sh
+sed -i "s?/usr/bin/bash?/usr/bin/env bash?" ${PREFIX}/libexec/bgw-twas/Step4_get_test_grex.sh
