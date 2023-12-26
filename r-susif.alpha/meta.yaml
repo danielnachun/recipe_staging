@@ -5,8 +5,8 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  git_url: https://github.com/stephenslab/susif.alpha
-  git_rev: dd4df3668d2ca59dd34a52b6c1b426054a998fbd
+  url: https://github.com/stephenslab/susif.alpha/archive/dd4df3668d2ca59dd34a52b6c1b426054a998fbd.zip
+  sha256: ee383462e14fc48730335f89e711b8a5b102a25b777a4f34551f065ac94d10ce
 
 build:
   merge_build_host: true  # [win]
