@@ -5,8 +5,8 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  git_url: https://github.com/aet21/EpiSCORE
-  git_rev: 4f7daef0e702dab6596331a06eda4aad49991853
+  url: https://github.com/aet21/EpiSCORE/archive/4f7daef0e702dab6596331a06eda4aad49991853.zip
+  sha256: 7f4ece3cfcfcc3c0df512fa56bd8dfc492d88ec2dba05e8f71d1023871f82f4c
 
 build:
   merge_build_host: true  # [win]
