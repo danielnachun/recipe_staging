@@ -5,8 +5,8 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  git_url: https://github.com/MRCIEU/genetics.binaRies
-  git_rev: a63ef35707d0848f32bc4748346663bf512d5c97
+  url: https://github.com/MRCIEU/genetics.binaRies/archive/a63ef35707d0848f32bc4748346663bf512d5c97.zip
+  sha256: 3091931ff936b0bfa88ec2dffadd574bca1f003cdcec5a88e6db5c205856e782
 
 build:
   merge_build_host: true  # [win]
