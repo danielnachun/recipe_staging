@@ -5,8 +5,8 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  git_url: https://github.com/achilleasNP/IlluminaHumanMethylationEPICanno.ilm10b5.hg38
-  git_rev: 3db06910e27f626e0cc8b335ff45cf9a4050a36a
+  url: https://github.com/achilleasNP/IlluminaHumanMethylationEPICanno.ilm10b5.hg38/archive/3db06910e27f626e0cc8b335ff45cf9a4050a36a.zip
+  sha256: de6524b921509fc4b5ca303e52e2510cff53d00f41b1f6302e73050e39010d79
 
 build:
   merge_build_host: true  # [win]
