@@ -5,8 +5,8 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  git_url: https://github.com/tye27/mr.divw
-  git_rev: 8f3f8f7e873e3895eebae877194fadc6e9132d1b
+  url: https://github.com/tye27/mr.divw/archive/8f3f8f7e873e3895eebae877194fadc6e9132d1b.zip
+  sha256: b211b92307957bd47b9ac86cd8dacf3e434bc7e1a948d2d70c5c69cfce553661
 
 build:
   merge_build_host: true  # [win]
