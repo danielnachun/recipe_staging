@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  git_url: https://github.com/corbinq/GAMBIT
-  git_rev: 1644b80d252d9def1ae2fdf85067d53d06162966
+  url: https://github.com/corbinq/GAMBIT/archive/1644b80d252d9def1ae2fdf85067d53d06162966.zip
+  sha256: 1bca7a27a12e27211e19b232e8e25fe30dbbcb8549bdc5210b0fc997daf0e02f
   patches:
     - 0001-fix-pointer-dereference.patch
 
