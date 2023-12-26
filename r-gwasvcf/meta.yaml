@@ -5,8 +5,8 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  git_url: https://github.com/MRCIEU/gwasvcf
-  git_rev: 77e0421756ee7b234f7eac9b7cd44299c4ef57f2
+  url: https://github.com/MRCIEU/gwasvcf/archive/77e0421756ee7b234f7eac9b7cd44299c4ef57f2.zip
+  sha256: 9804238a79b38403cc51775d8033546ddb6630d35472f5a258a37fd4fefbb4cc
 
 build:
   merge_build_host: true  # [win]
@@ -19,22 +19,6 @@ build:
 requirements:
   build:
     - cross-r-base {{ r_base }}  # [build_platform != target_platform]
-    - bioconductor-biocgenerics
-    - bioconductor-biostrings
-    - bioconductor-genomeinfodb
-    - bioconductor-genomicranges
-    - bioconductor-iranges
-    - bioconductor-rsamtools
-    - bioconductor-s4vectors
-    - bioconductor-summarizedexperiment
-    - bioconductor-variantannotation
-    - r-data.table
-    - r-dplyr
-    - r-genetics.binaries
-    - r-magrittr
-    - r-rlang
-    - r-rsqlite
-    - r-stringr
   host:
     - r-base=4.2
     - bioconductor-biocgenerics
