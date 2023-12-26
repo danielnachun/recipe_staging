@@ -5,8 +5,8 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  git_url: https://github.com/gabraham/flashpca
-  git_rev: b8044f13607a072125828547684fde8b081d6191
+  url: https://github.com/gabraham/flashpca/archive/b8044f13607a072125828547684fde8b081d6191.zip
+  sha256: d1e0dce72f8ab38150220cdc8c1fd1601174f5d8de44239d5868f2ffca385e6d
 
 build:
   merge_build_host: true  # [win]
