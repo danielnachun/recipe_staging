@@ -5,8 +5,8 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  git_url: https://github.com/tidymass/massprocesser
-  git_rev: 4579f98c58a7b32736216dc1e37535bc398cc920
+  url: https://github.com/tidymass/massprocesser/archive/4579f98c58a7b32736216dc1e37535bc398cc920.zip
+  sha256: 2ebb0c425bb18c09e113d1677f2e426d1ba9afcb12df133198184ea9926249ba
 
 build:
   merge_build_host: true  # [win]
