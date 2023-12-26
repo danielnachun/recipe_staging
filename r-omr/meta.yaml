@@ -5,8 +5,8 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  git_url: https://github.com/wanglu205/OMR
-  git_rev: 47bd93f695145e5c86dfb1be04d42d63199363e5
+  url: https://github.com/wanglu205/OMR/archive/47bd93f695145e5c86dfb1be04d42d63199363e5.zip
+  sha256: 6f216f476e91516e066c1d28661337eaf2579c9fb41b7862bc090dbb0a6d7d13
 
 build:
   merge_build_host: true  # [win]
