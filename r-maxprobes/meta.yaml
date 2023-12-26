@@ -5,8 +5,8 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  git_url: https://github.com/markgene/maxprobes
-  git_rev: c2120dba972e12115280ef274ff80550cee5b264
+  url: https://github.com/markgene/maxprobes/archive/c2120dba972e12115280ef274ff80550cee5b264.zip
+  sha256: f540e4929891726759a4dd03117d684258047cfeee71e0b1a7a7e197f4ee1bce
 
 build:
   merge_build_host: true  # [win]
