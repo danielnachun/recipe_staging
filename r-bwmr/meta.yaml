@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  git_url: https://github.com/jiazhao97/BWMR
-  git_rev: 26f9958ca86d2ea83c494328a4a019c397b104f2
+  url: https://github.com/jiazhao97/BWMR/archive/26f9958ca86d2ea83c494328a4a019c397b104f2.zip
+  sha256: 330310b897a47d0229604c30bc0c6fc333278fd408c73dc060bcc3619232f3e4
 
 build:
   number: 0
