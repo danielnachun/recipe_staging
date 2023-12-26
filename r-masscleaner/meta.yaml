@@ -5,8 +5,8 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  git_url: https://github.com/tidymass/masscleaner
-  git_rev: 7b455325cea4fddb8e54a1b93b9cc16d358f46d4
+  url: https://github.com/tidymass/masscleaner/archive/7b455325cea4fddb8e54a1b93b9cc16d358f46d4.zip
+  sha256: 875b5893bc9fdab1de7a35e267b0d9fec23e51c1686372c9eaac9dc360476d8a
 
 build:
   merge_build_host: true  # [win]
