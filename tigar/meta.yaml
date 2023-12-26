@@ -2,12 +2,12 @@
 {% set version = "2.0" %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
-  git_url: https://github.com/yanglab-emory/TIGAR
-  git_rev: 3b29c9c09384b4e17da1ae1840a6be26039517e6
+  url: https://github.com/yanglab-emory/TIGAR/archive/3b29c9c09384b4e17da1ae1840a6be26039517e6.zip
+  sha256: 14589dd9d1eb0d95d2bb0d245e72fd4e998207d3101ae4ce33dcdf790745ed26
 
 build:
   number: 0
@@ -34,17 +34,18 @@ requirements:
 
 test:
   commands:
-    - test -f ${PREFIX}/bin/TIGAR_GReX_Pred.sh
-    - test -f ${PREFIX}/bin/TIGAR_LD.sh
-    - test -f ${PREFIX}/bin/TIGAR_Model_Train.sh
-    - test -f ${PREFIX}/bin/TIGAR_TWAS.sh
-    - test -f ${PREFIX}/bin/TIGAR_VC_TWAS.sh
-    - test -f ${PREFIX}/bin/VC_TWAS_summary.sh
+    - 'TIGAR_GReX_Pred.sh 2>&1 | grep -q "Error: Training genotype file does not exist or is empty."'
+    - 'TIGAR_LD.sh 2>&1 | grep -q "Error: Reference genotype file does not exist or is empty."'
+    - 'TIGAR_Model_Train.sh 2>&1 | grep -q "Error: Gene expression file does not exist or is empty."'
+    - TIGAR_TWAS.sh 
+    - 'TIGAR_VC_TWAS.sh 2>&1 | grep -q "Error: Training genotype file does not exist or is empty."'
+    - 'VC_TWAS_summary.sh 2>&1 | grep -q "Error: Training genotype file does not exist or is empty."'
+
 
 about:
-  home: "https://github.com/hakyimlab/MetaXcan"
+  home: https://github.com/yanglab-emory/TIGAR
   license: Other
-  summary: "Transcriptome-Integrated Genetic Association Resource"
+  summary: Transcriptome-Integrated Genetic Association Resource
 
 extra:
   recipe-maintainers:
