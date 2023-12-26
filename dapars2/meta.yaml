@@ -2,12 +2,12 @@
 {% set version = "1.0" %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
-  git_url: https://github.com/cumc/xqtl-pipeline
-  git_rev: b2fda460cc562aa80b5c1cd12e0d4d0305a40a88
+  url: https://github.com/cumc/xqtl-pipeline/archive/b2fda460cc562aa80b5c1cd12e0d4d0305a40a88.zip
+  sha256: 9bb5a3497fe19f9b82d48bb23d33df07053dcf23f73d049c2e5500747eae9f81
 
 build:
   number: 0
@@ -20,17 +20,14 @@ requirements:
 
 test:
    commands:
-    - test -f ${PREFIX}/bin/DaPars_Extract_Anno.py
-    - test -f ${PREFIX}/bin/Dapars2_Multi_Sample.py
-    - test -f ${PREFIX}/bin/gtf2bed12.py
+    - DaPars_Extract_Anno.py -h 2>&1 | grep -q "DaPars_Extract_Anno.py -b <gene_bed_file> -s <gene_symbol_map> -o <output_file>"
+    - Dapars2_Multi_Sample.py 2>&1 | grep -q "Please provide the configure file and specify chr name..."
+    - gtf2bed12.py -h
 
 about:
   home: https://github.com/cumc/xqtl-pipeline
   license: OTHER
-  license_family: OTHER
   summary: Dynamic analysis of Alternative PolyAdenylation from RNA-seq
-  doc_url: 
-  dev_url: 
 
 extra:
   recipe-maintainers:
