@@ -5,8 +5,8 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  git_url: https://github.com/tidymass/massdataset
-  git_rev: fb07111c086961b571f567059e6673d12d838df5
+  url: https://github.com/tidymass/massdataset/archive/fb07111c086961b571f567059e6673d12d838df5.zip
+  sha256: 8f994f6ca028f144c69d8d43dc0c7be3ed25fc8e729ea59d091922f2efd3a708
 
 build:
   merge_build_host: true  # [win]
