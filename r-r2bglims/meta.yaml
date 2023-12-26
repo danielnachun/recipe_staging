@@ -5,8 +5,8 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  git_url: https://github.com/pjnewcombe/R2BGLiMS
-  git_rev: 0842f6cb81691d14957a38db78040f07af146410
+  url: https://github.com/pjnewcombe/R2BGLiMS/archive/0842f6cb81691d14957a38db78040f07af146410.zip
+  sha256: 35702754e56e915efcde4333da4ec15aaf0de0d4e959882d51c5ac93f8e7c1b8
 
 build:
   merge_build_host: true  # [win]
