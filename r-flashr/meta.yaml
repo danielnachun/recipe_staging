@@ -5,8 +5,8 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  git_url: https://github.com/stephenslab/flashr
-  git_rev: cbaf810aadc8499a9b5625b36cd0382cc22c711d
+  url: https://github.com/stephenslab/flashr/archive/cbaf810aadc8499a9b5625b36cd0382cc22c711d.zip
+  sha256: 2750e2d715507d419c019710c7f12e1747f6c51f624a394e1321dfa6635c4146
 
 build:
   merge_build_host: true  # [win]
