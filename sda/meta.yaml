@@ -19,7 +19,7 @@ requirements:
 
 test:
   commands:
-    - test -f ${PREFIX}/bin/sda
+    - sda 2>&1 | grep -q "SDA (Sparse Decomposition of Arrays)"
 
 about:
   home: https://jmarchini.org/software/#sda
