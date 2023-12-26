@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  git_url: https://github.com/daiqile96/OTTERS
-  git_commit: c435db185fbbce085c35050933973d25368a835f
+  url: https://github.com/daiqile96/OTTERS/archive/c435db185fbbce085c35050933973d25368a835f.zip
+  sha256: 60605f0252c5c6db918b8bcf7d3ac9605ab72ed1d9509fb6faac4bc0acb98834
 
 build:
   number: 0
@@ -27,9 +27,9 @@ requirements:
 
 test:
   commands:
-    - test -f $PREFIX/bin/imputing
-    - test -f $PREFIX/bin/training
-    - test -f $PREFIX/bin/testing
+    - imputing -h
+    - training -h
+    - testing -h
 
 about:
   home: https://github.com/daiqile96/OTTERS
