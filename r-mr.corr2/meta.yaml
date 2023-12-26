@@ -5,8 +5,8 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  git_url: https://github.com/QingCheng0218/MR.Corr2
-  git_rev: 2e0677e1749c2fa4ba23b92e2b237d82d067f4ef
+  url: https://github.com/QingCheng0218/MR.Corr2/archive/2e0677e1749c2fa4ba23b92e2b237d82d067f4ef.zip
+  sha256: ac048a86271dd13928dda705bec8e2d51b0255f108f1e4c6162f234d4c3f1abb
 
 build:
   merge_build_host: true  # [win]
