@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  git_url: https://github.com/QingCheng0218/MR.LDP
-  git_rev: 05980184a358190a479d2d7fa479eae8ca052dcb
+  url: https://github.com/QingCheng0218/MR.LDP/archive/05980184a358190a479d2d7fa479eae8ca052dcb.zip
+  sha256: cc363a2ee7e01ad8bfae9fe38a38f1804b6e2d06b05e3ecce44e306687e6324a
 
 build:
   number: 0
