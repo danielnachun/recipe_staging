@@ -2,12 +2,12 @@
 {% set version = "1.0" %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
-  git_url: https://github.com/omerwe/polyfun
-  git_rev: de889bde9ce3d46326fc5ea568b623450f349569
+  url: https://github.com/omerwe/polyfun/archive/de889bde9ce3d46326fc5ea568b623450f349569.zip
+  sha256: d686393960542b1f3b35652b571ed074afd8a6473ced3b955c5662eb028300bd
 
 build:
   number: 0
@@ -47,11 +47,8 @@ test:
 about:
   home: https://github.com/omerwe/polyfun
   license: MIT
-  license_family: MIT
   license_file: LICENSE
   summary: PolyFun (POLYgenic FUNctionally-informed fine-mapping)
-  doc_url: 
-  dev_url: 
 
 extra:
   recipe-maintainers:
