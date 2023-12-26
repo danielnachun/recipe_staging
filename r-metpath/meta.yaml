@@ -5,8 +5,8 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  git_url: https://github.com/tidymass/metpath
-  git_rev: adcad4f44afcb2b91bb7a4fbed125de95b56c1d8
+  url: https://github.com/tidymass/metpath/archive/adcad4f44afcb2b91bb7a4fbed125de95b56c1d8.zip
+  sha256: e2603a9b8c1e817beb9f6d9ebb1e14ff0995c0220d81dcd2aa0781b387444118
 
 build:
   merge_build_host: true  # [win]
