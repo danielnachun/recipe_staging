@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  git_url: https://github.com/gkichaev/PAINTOR_V3.0
-  git_rev: ffce82a7114eeb98220db39ba5d6b69e5a419a9e
+  url: https://github.com/gkichaev/PAINTOR_V3.0/archive/ffce82a7114eeb98220db39ba5d6b69e5a419a9e.zip
+  sha256: 08bf5f6c06e7f312710b6e4c05aae4c142a19d2465f100662179491e2a4d3261
 
 build:
   number: 0
@@ -16,11 +16,14 @@ requirements:
   build:
     - {{ compiler('cxx') }}
     - make
-    - gxx  # [linux]
+    - sed
+  host:
+    - eigen
+    - nlopt
 
 test:
   commands:
-    - test -f $PREFIX/bin/PAINTOR
+    - PAINTOR
 
 about:
   home: https://bogdan.dgsom.ucla.edu/pages/paintor/
