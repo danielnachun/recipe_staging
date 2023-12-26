@@ -5,8 +5,8 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  git_url: https://github.com/tidymass/massqc
-  git_rev: c769f4af90f238fb2512d3a5e32106772741e471
+  url: https://github.com/tidymass/massqc/archive/c769f4af90f238fb2512d3a5e32106772741e471.zip
+  sha256: dabb4aefca2c127e3d0d48b18a1bf34af033dceaa9c0481a8d1df232d4145253
 
 build:
   merge_build_host: true  # [win]
