@@ -5,8 +5,8 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  git_url: https://github.com/yuanzhongshang/PMR
-  git_rev: 7e49f14f41c92cee9e38165c8e2d2d1578890bd8
+  url: https://github.com/yuanzhongshang/PMR/archive/7e49f14f41c92cee9e38165c8e2d2d1578890bd8.zip
+  sha256: fc03ee30c76327e3b1cb722b83273a3275d02ef04657726860a1279f0db37984
 
 build:
   merge_build_host: true  # [win]
