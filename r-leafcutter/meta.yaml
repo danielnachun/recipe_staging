@@ -5,8 +5,8 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  git_url: https://github.com/davidaknowles/leafcutter
-  git_rev: 4b24a3c32b9eae7c91f63af80543abf168777285
+  url: https://github.com/davidaknowles/leafcutter/archive/4b24a3c32b9eae7c91f63af80543abf168777285.zip
+  sha256: 9e70e21551b949961ac3f76163013c3cac34ce2ee1884c9567d6e1e5f5240d11
 
 build:
   merge_build_host: true  # [win]
