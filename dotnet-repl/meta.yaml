@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  git_url: https://github.com/jonsequitur/{{ name }}
-  git_rev: 6d91680b4a3fd6e74f7d36f1a0695992a514b7bc
+  url: https://github.com/jonsequitur/{{ name }}/archive/6d91680b4a3fd6e74f7d36f1a0695992a514b7bc.zip
+  sha256: 204c065e63a28300b016dd08ad0dd19f9e7a09d9ad67b26cb322519f407c5cfa
 
 build:
   number: 1
@@ -16,13 +16,13 @@ requirements:
   build:
     - {{ compiler('cxx') }}
   host:
-    - dotnet
+    - dotnet <8
     - libpsl-native
     - omi
     - nodejs
     - powershell
   run:
-    - dotnet
+    - dotnet <8
     - libpsl-native
     - omi
     - nodejs
