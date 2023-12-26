@@ -20,7 +20,8 @@ requirements:
 
 test:
   commands:
-    - test -f ${PREFIX}/bin/mkcue
+    - mkcue 2>&1 | grep -q "Cannot open '/dev/rdisk1'"  # [osx]
+    - mkcue 2>&1 | grep -q "Cannot open '/dev/cdrom'"  # [linux]
 
 about:
   home: https://packages.debian.org/sid/mkcue
