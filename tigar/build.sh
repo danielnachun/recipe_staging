@@ -11,6 +11,12 @@ rm ${PREFIX}/libexec/tigar/Model_Train_Pred/DPR
 ln -s ${PREFIX}/bin/DPR ${PREFIX}/libexec/tigar/Model_Train_Pred/DPR
 
 chmod 755 ${PREFIX}/libexec/tigar/*.sh
+sed -i 's?/usr/bin/bash?/usr/bin/env bash?' ${PREFIX}/libexec/tigar/TIGAR_GReX_Pred.sh
+sed -i 's?/usr/bin/bash?/usr/bin/env bash?' ${PREFIX}/libexec/tigar/TIGAR_LD.sh
+sed -i 's?/usr/bin/bash?/usr/bin/env bash?' ${PREFIX}/libexec/tigar/TIGAR_Model_Train.sh
+sed -i 's?/usr/bin/bash?/usr/bin/env bash?' ${PREFIX}/libexec/tigar/TIGAR_TWAS.sh
+sed -i 's?/usr/bin/bash?/usr/bin/env bash?' ${PREFIX}/libexec/tigar/TIGAR_VC_TWAS.sh
+sed -i 's?/usr/bin/bash?/usr/bin/env bash?' ${PREFIX}/libexec/tigar/VC_TWAS_summary.sh
 ln -sf ${PREFIX}/libexec/tigar/TIGAR_GReX_Pred.sh ${PREFIX}/bin
 ln -sf ${PREFIX}/libexec/tigar/TIGAR_LD.sh ${PREFIX}/bin
 ln -sf ${PREFIX}/libexec/tigar/TIGAR_Model_Train.sh ${PREFIX}/bin
