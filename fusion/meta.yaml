@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  git_url: https://github.com/gusevlab/fusion_twas
-  git_rev: e1ba5f7f3907e6f586f7fb5bb115b35cc0d3c0c2
+  url: https://github.com/gusevlab/fusion_twas/archive/e1ba5f7f3907e6f586f7fb5bb115b35cc0d3c0c2.zip
+  sha256: dedbce2698da1cdd568cb576b00d3174f8e20a46e4e1d4c7367c9dd2a7205df0
 
 build:
   number: 0
@@ -27,12 +27,12 @@ requirements:
 
 test:
   commands:
-    - test -f ${PREFIX}/bin/FUSION.assoc_test
-    - test -f ${PREFIX}/bin/FUSION.compute_weights
-    - test -f ${PREFIX}/bin/FUSION.post_process
-    - test -f ${PREFIX}/bin/FUSION.profile_wgt
-    - test -f ${PREFIX}/bin/compare_models
-    - test -f ${PREFIX}/bin/make_score
+    - FUSION.assoc_test 2>&1 | grep -q "Error in file(file, \"rt\")"
+    - 'FUSION.compute_weights 2>&1 | grep -q "ERROR: NA.bed input file does not exist"'
+    - FUSION.post_process 2>&1 | grep -q "Error in file(file, \"rt\")"
+    - FUSION.profile_wgt 2>&1 | grep -q "Error in file(file, \"rt\")"
+    - compare_models 2>&1 | grep -q "Error in file(file, \"rt\")"
+    - make_score
 
 about:
   home: https://github.com/gusevlab/fusion_twas
