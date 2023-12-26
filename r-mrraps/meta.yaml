@@ -5,8 +5,8 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  git_url: https://github.com/qingyuanzhao/mr.raps
-  git_rev: 2a23d8418206d6dc68e32e2a247ea4caa414d853
+  url: https://github.com/qingyuanzhao/mr.raps/archive/2a23d8418206d6dc68e32e2a247ea4caa414d853.zip
+  sha256: c62c507a7fa47a6aea8a83cfdd0e62ceca0400dffdd82e40666dc74f8dd16783
 
 build:
   merge_build_host: true  # [win]
