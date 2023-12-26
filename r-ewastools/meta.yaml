@@ -5,8 +5,8 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  git_url: https://github.com/hhhh5/ewastools
-  git_rev: f7646cacd73266708479b3fea5d625054d179f95
+  url: https://github.com/hhhh5/ewastools/archive/f7646cacd73266708479b3fea5d625054d179f95.zip
+  sha256: baf8616eee3df7a38003d835fc95097410a1d6a768e24a753aa3239e9c967b43
 
 build:
   merge_build_host: true  # [win]
