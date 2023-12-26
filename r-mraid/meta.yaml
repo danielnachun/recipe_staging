@@ -5,8 +5,8 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  git_url: https://github.com/yuanzhongshang/MRAID
-  git_rev: 8abfb1ed4425c3ccfdc1566ae7516468cd8bc774
+  url: https://github.com/yuanzhongshang/MRAID/archive/8abfb1ed4425c3ccfdc1566ae7516468cd8bc774.zip
+  sha256: 008b2fd58ca8c0fea077c9472f6d69a7198bd6a51f71759e61a7d434e96738ea
 
 build:
   merge_build_host: true  # [win]
