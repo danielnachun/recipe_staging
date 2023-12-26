@@ -2,8 +2,8 @@
 {% set version = "0.3.4" %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
   url: https://github.com/bmvdgeijn/WASP/archive/d3b8447fd7719fffa00b856fd1f27c845554693e.zip
@@ -17,6 +17,7 @@ requirements:
     - {{ compiler('c') }}
     - gcc  # [linux]
     - make
+    - sed
   host:
     - hdf5 =1.14.0
     - zlib
@@ -31,23 +32,23 @@ requirements:
 
 test:
   commands:
-    - python3 ${PREFIX}/bin/bam2h5.py -h
-    - python3 ${PREFIX}/bin/combined_test.py -h
-    - python3 ${PREFIX}/bin/extract_haplotype_read_counts.py -h
-    - python3 ${PREFIX}/bin/fit_as_coefficients.py -h
-    - python3 ${PREFIX}/bin/fit_bnb_coefficients.py -h
-    - python3 ${PREFIX}/bin/get_target_regions.py -h
-    - python3 ${PREFIX}/bin/simulate_counts.py -h
-    - python3 ${PREFIX}/bin/update_het_probs.py -h
-    - python3 ${PREFIX}/bin/update_total_depth.py -h
-    - python3 ${PREFIX}/bin/filter_remapped_reads.py -h
-    - python3 ${PREFIX}/bin/find_intersecting_snps.py -h
-    - python3 ${PREFIX}/bin/get_as_counts.py -h
-    - python3 ${PREFIX}/bin/rmdup.py -h
-    - python3 ${PREFIX}/bin/rmdup_pe.py -h
-    - python3 ${PREFIX}/bin/sim_pe_reads.py -h
-    - python3 ${PREFIX}/bin/get_sample_names.py -h
-    - test -f ${PREFIX}/bin/snp2h5
+    - bam2h5.py -h
+    - combined_test.py -h
+    - extract_haplotype_read_counts.py -h
+    - fit_as_coefficients.py -h
+    - fit_bnb_coefficients.py -h
+    - get_target_regions.py -h
+    - simulate_counts.py -h
+    - update_het_probs.py -h
+    - update_total_depth.py -h
+    - filter_remapped_reads.py -h
+    - find_intersecting_snps.py -h
+    - get_as_counts.py -h
+    - rmdup.py -h
+    - rmdup_pe.py -h
+    - sim_pe_reads.py -h
+    - get_sample_names.py -h
+    - 'snp2h5 2>&1 | grep -q "usage: snp2h5 OPTIONS INPUT_FILE1 \[INPUT_FILE2 ...\]"'
 
 about:
   home: https://github.com/bmvdgeijn/WASP
