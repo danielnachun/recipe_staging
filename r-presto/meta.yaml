@@ -5,8 +5,8 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  git_url: https://github.com/immunogenomics/presto
-  git_rev: 31dc97fed5e2e7fc323ae4af62f72181cc51d9a3
+  url: https://github.com/immunogenomics/presto/archive/31dc97fed5e2e7fc323ae4af62f72181cc51d9a3.zip
+  sha256: 594ed9b4ed05bdb864841aeeb172e903038a317487271a638382146bc88e3d77
 
 build:
   merge_build_host: true  # [win]
