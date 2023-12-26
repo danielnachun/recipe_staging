@@ -5,8 +5,8 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  git_url: https://github.com/gqi/MRMix
-  git_rev: 56afdb2bc96760842405396f5d3f02e60e305039
+  url: https://github.com/gqi/MRMix/archive/56afdb2bc96760842405396f5d3f02e60e305039.zip
+  sha256: 557a0b740b6b13aab9b7b034cb57e6e3a1e747be9fde15abb3c97625080a42ba
 
 build:
   merge_build_host: true  # [win]
