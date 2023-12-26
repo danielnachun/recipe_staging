@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  git_url: https://github.com/xinhe-lab/ctwas
-  git_rev: fc23c51993408af2d1abd45f164916d05d995005
+  url: https://github.com/xinhe-lab/ctwas/archive/fc23c51993408af2d1abd45f164916d05d995005.zip
+  sha256: acd2d3c5e35cdf9c7c70bf94c26eaac2c1fb7b7f34fa44cd5f6f662d71a08567
 
 build:
   number: 0
