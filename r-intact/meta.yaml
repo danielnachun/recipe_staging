@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  git_url: https://github.com/jokamoto97/INTACT
-  git_rev: 8bee80f6562eca2ae1f23e6ab133401c51174f6b
+  url: https://github.com/jokamoto97/INTACT/archive/8bee80f6562eca2ae1f23e6ab133401c51174f6b.zip
+  sha256: 147e510e02909b73fce50f147eae213e150784f98d93f319562232a9c3cd291b
 
 build:
   number: 0
