@@ -55,7 +55,7 @@ test:
   commands:
     - test -f $PREFIX/lib/libmariadb.a # [not win]
     - test -f $PREFIX/lib/libmariadb${SHLIB_EXT} # [not win]
-    - test -f $PREFIX/bin/mariadb
+    - mariadb 2>&1 | grep -q "Can't read dir of '/etc/my.cnf.d'"
 
 about:
   home: https://mariadb.org/
