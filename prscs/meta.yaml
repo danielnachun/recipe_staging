@@ -1,5 +1,5 @@
 {% set name = "prscs" %}
-{% set version = "1.0.0" %}
+{% set version = "1.1.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/getian107/PRScs/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 806c0e7cf18d3d128111f17e5a0b2bd906ba4749d607a96d92719d457793fc4c
+  sha256: eca00fe40bef63178e7a6dcf56ad529206be04139b809f6c8cbf6cf5365da758
 
 build:
   number: 0
@@ -26,7 +26,7 @@ requirements:
 
 test:
   commands:
-    - test -f ${PREFIX}/bin/PRScs
+    - PRScs -h
 
 about:
   home: https://github.com/getian107/PRScs
