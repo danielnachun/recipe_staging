@@ -6,9 +6,8 @@ set -o xtrace -o nounset -o pipefail -o errexit
 mkdir "${SRC_DIR}/src/args"
 ln -sf "${BUILD_PREFIX}/include/args.hxx" "${SRC_DIR}/src/args"
 
-# Disable static linking of libraries
-sed -i 's/-static //g' Makefile
+export CXXFLAGS="${CXXFLAGS} -I${BUILD_PREFIX}/include -I${BUILD_PREFIX}/include/eigen3" 
+make CXX="${CXX}"
 
-make CXX="${CXX} -L${PREFIX}/lib -I${BUILD_PREFIX}/include -I${BUILD_PREFIX}/include/eigen3" 
-
-install -D -m 755 bin/apex ${PREFIX}/bin/apex
+mkdir -p ${PREFIX}/bin
+install -m 755 bin/apex ${PREFIX}/bin/apex

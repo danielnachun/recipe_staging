@@ -1,0 +1,26 @@
+From a8e8e76b01a39da11dcbb9a6ec95e15941971f1b Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Tue, 26 Dec 2023 00:01:37 -0600
+Subject: [PATCH 2/2] check for quick_exit
+
+---
+ src/Main.cpp | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/Main.cpp b/src/Main.cpp
+index d4f2b55..900fc89 100644
+--- a/src/Main.cpp
++++ b/src/Main.cpp
+@@ -145,7 +145,9 @@ int main(int argc, char* argv[])
+     signal(SIGTERM, lam_kill);
+     // signal(SIGTSTP, lam_wait);
+ 	
++    #ifdef _GLIBCXX_HAVE_QUICK_EXIT
+ 	at_quick_exit (restore_cursor);
++    #endif
+ 	atexit (restore_cursor);
+ 	
+ 
+-- 
+2.43.0
+
