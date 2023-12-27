@@ -8,20 +8,7 @@ rm global.json
 dotnet tool restore
 
 mkdir -p ${PREFIX}/libexec/${PKG_NAME}
-case ${target_platform} in 
-    osx-64 )
-        dotnet publish --no-self-contained --configuration Darwin Marksman/Marksman.fsproj --output bin --runtime osx-x64
-        cp -r bin/* ${PREFIX}/libexec/${PKG_NAME} ;;
-    osx-arm64 )
-        dotnet publish --no-self-contained --configuration Darwin Marksman/Marksman.fsproj --output bin --runtime osx-arm64
-        cp -r bin/* ${PREFIX}/libexec/${PKG_NAME} ;;
-    linux-64 )
-        dotnet publish --no-self-contained --configuration Linux Marksman/Marksman.fsproj --output bin --runtime linux-x64
-        cp -r bin/* ${PREFIX}/libexec/${PKG_NAME} ;;
-    linux-arm64 )
-        dotnet publish --no-self-contained --configuration Linux Marksman/Marksman.fsproj --output bin --runtime linux-arm64
-        cp -r bin/* ${PREFIX}/libexec/${PKG_NAME} ;;
-esac
+dotnet publish --no-self-contained Marksman/Marksman.fsproj --output ${PREFIX}/libexec/${PKG_NAME}
 
 mkdir -p ${PREFIX}/bin
 tee ${PREFIX}/bin/${PKG_NAME} << EOF
