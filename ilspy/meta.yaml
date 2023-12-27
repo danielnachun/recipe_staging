@@ -1,5 +1,5 @@
 {% set name = "ilspy" %}
-{% set version = "8.0" %}
+{% set version = "8.2" %}
 
 package:
   name: {{ name|lower }}
