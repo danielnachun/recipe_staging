@@ -2,9 +2,6 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-sed -i 's/-l:\$/-l$/g' Makefile
-make prefix=${PREFIX} static libmujs=mujs
-make prefix=${PREFIX} shared libmujs=mujs
-make prefix=${PREFIX} release libmujs=mujs
+make prefix=${PREFIX} release READLINE_LIBS="-Wl,-rpath,${PREFIX}/lib -L${PREFIX}/lib -lreadline -I${PREFIX}/include"
 make prefix=${PREFIX} install
 make prefix=${PREFIX} install-shared
