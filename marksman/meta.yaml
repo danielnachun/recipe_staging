@@ -1,5 +1,5 @@
 {% set name = "marksman" %}
-{% set version = "2023-07-01" %}
+{% set version = "2023-12-09" %}
 
 package:
   name: {{ name|lower }}
