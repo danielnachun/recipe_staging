@@ -1,5 +1,5 @@
 {% set name = "csharpier" %}
-{% set version = "0.24.2" %}
+{% set version = "0.26.7" %}
 
 package:
   name: {{ name|lower }}
