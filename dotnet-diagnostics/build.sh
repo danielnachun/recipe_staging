@@ -4,8 +4,7 @@ set -o xtrace -o nounset -o pipefail -o errexit
 
 build() {
     bin_name=$1
-    platform=$2
-    dotnet publish --no-self-contained src/Tools/${bin_name}/${bin_name}.csproj --output bin --runtime ${platform}
+    dotnet publish --no-self-contained src/Tools/${bin_name}/${bin_name}.csproj --output ${PREFIX}/libexec/${PKG_NAME}
 }
 
 export -f build
@@ -29,6 +28,5 @@ rm -rf global.json
 mv global.json.new global.json
 tools=(dotnet-counters dotnet-dsrouter dotnet-dump dotnet-gcdump dotnet-sos dotnet-stack dotnet-trace)
 
-printf "%s\n" "${tools[@]}" | xargs -I % bash -c "build % ${target_platform//-64/-x64}"
-cp -r bin/* ${PREFIX}/libexec/${PKG_NAME}
+printf "%s\n" "${tools[@]}" | xargs -I % bash -c "build %"
 printf "%s\n" "${tools[@]}" | xargs -I % bash -c "env_script %"
