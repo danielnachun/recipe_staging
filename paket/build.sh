@@ -7,21 +7,25 @@ mkdir -p ${PREFIX}/libexec/${PKG_NAME}
 
 rm -rf global.json
 rm .paket/paket.exe
+framework_version="$(dotnet --version | sed -e 's/\..*//g').0"
 tee ${SRC_DIR}/.paket/paket.runtimeconfig.json << EOF
 {
   "runtimeOptions": {
-    "tfm": "netcoreapp2.1",
+    "tfm": "net${framework_version}",
     "framework": {
       "name": "Microsoft.NETCore.App",
-      "version": "7.0.10"
+      "version": "${framework_version}.0"
     }
   }
 }
 EOF
 sed -i 's/$(MonoPath) --runtime=.* "$(PaketExePath)"/"$(PaketExePath)"/' .paket/Paket.Restore.targets
 
+sed -i "s?<TargetFrameworks>.*</TargetFrameworks>?<TargetFrameworks>net${framework_version}</TargetFrameworks>?" \
+     src/Paket/Paket.fsproj
 dotnet tool restore
-dotnet publish --no-self-contained src/Paket/Paket.fsproj --output ${PREFIX}/libexec/${PKG_NAME} --framework netcoreapp2.1
+dotnet tool update paket
+dotnet publish --no-self-contained src/Paket/Paket.fsproj --output ${PREFIX}/libexec/${PKG_NAME} --framework net${framework_version}
 
 tee ${PREFIX}/bin/paket << EOF
 #!/bin/sh
