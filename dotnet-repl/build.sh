@@ -6,7 +6,7 @@ mkdir -p ${PREFIX}/bin
 mkdir -p ${PREFIX}/libexec/${PKG_NAME}
 
 rm -rf global.json
-dotnet publish --no-self-contained src/dotnet-repl/dotnet-repl.csproj --output ${PREFIX}/libexec/${PKG_NAME} --runtime ${target_platform//-64/-x64} 
+dotnet publish --no-self-contained src/dotnet-repl/dotnet-repl.csproj --output ${PREFIX}/libexec/${PKG_NAME} 
 
 rm -rf ${PREFIX}/libexec/${PKG_NAME}/libmi${SHLIB_EXT}
 rm -rf ${PREFIX}/libexec/${PKG_NAME}/libpsl-native${SHLIB_EXT}
@@ -17,13 +17,8 @@ ln -sf ${PREFIX}/lib/libpsl-native${SHLIB_EXT} ${PREFIX}/libexec/${PKG_NAME}
 ln -sf ${PREFIX}/libexec/powershell/7/libpsrpclient${SHLIB_EXT} ${PREFIX}/libexec/${PKG_NAME}
 ln -sf ${PREFIX}/libexec/powershell/7/libSystem.IO.Ports.Native${SHLIB_EXT} ${PREFIX}/libexec/${PKG_NAME}
 
-if [[ ${target_platform} =~ .*linux.* ]]; then
-    rm -rf ${PREFIX}/libexec/${PKG_NAME}/.playwright/node/linux-x64/node
-    ln -sf ${PREFIX}/bin/node ${PREFIX}/libexec/${PKG_NAME}/.playwright/node/linux-x64
-else
-    rm -rf ${PREFIX}/libexec/${PKG_NAME}/.playwright/node/mac/node
-    ln -sf ${PREFIX}/bin/node ${PREFIX}/libexec/${PKG_NAME}/.playwright/node/mac
-fi
+rm -rf ${PREFIX}/libexec/${PKG_NAME}/.playwright
+rm -rf ${PREFIX}/libexec/${PKG_NAME}/runtimes
 
 tee ${PREFIX}/bin/dotnet-repl << EOF
 #!/bin/sh
