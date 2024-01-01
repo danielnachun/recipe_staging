@@ -3,8 +3,10 @@
 set -o xtrace -o nounset -o pipefail -o errexit
 
 rm -rf global.json
+framework_version="$(dotnet --version | sed -e 's/\..*//g').0"
 
-sed -i 's/net6.0/net8.0/;' src/OmniSharp.Stdio.Driver/OmniSharp.Stdio.Driver.csproj
+sed -i "s?<TargetFrameworks>.*</TargetFrameworks>?<TargetFrameworks>net${framework_version}</TargetFrameworks>?" \
+    src/OmniSharp.Stdio.Driver/OmniSharp.Stdio.Driver.csproj
 sed -i '/RuntimeFrameworkVersion/d;' src/OmniSharp.Stdio.Driver/OmniSharp.Stdio.Driver.csproj
 sed -i '/RuntimeIdentifier/d;' src/OmniSharp.Stdio.Driver/OmniSharp.Stdio.Driver.csproj
 
@@ -15,7 +17,8 @@ export LD_LIBRARY_PATH="${PREFIX}/lib:${CONDA_BUILD_SYSROOT}/usr/lib"
 
 mkdir -p "${PREFIX}/bin"
 mkdir -p "${PREFIX}/libexec/${PKG_NAME}"
-dotnet publish --no-self-contained "src/OmniSharp.Stdio.Driver/OmniSharp.Stdio.Driver.csproj" -maxcpucount:1 --output ${PREFIX}/libexec/${PKG_NAME} --framework net8.0
+dotnet publish --no-self-contained "src/OmniSharp.Stdio.Driver/OmniSharp.Stdio.Driver.csproj" \
+    -maxcpucount:1 --output ${PREFIX}/libexec/${PKG_NAME} --framework net${framework_version}
 
 tee ${PREFIX}/bin/OmniSharp << EOF
 #!/bin/sh
