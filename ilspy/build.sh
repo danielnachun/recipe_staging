@@ -16,7 +16,8 @@ rm -rf ${PREFIX}/libexec/${PKG_NAME}/InstrumentationEngine/alpine
 sed -i "s/net6.0/net8.0/" ${PREFIX}/libexec/${PKG_NAME}/ilspycmd.runtimeconfig.json
 sed -i "s/6.0.0/8.0.0/" ${PREFIX}/libexec/${PKG_NAME}/ilspycmd.runtimeconfig.json
 
+rm -rf ${PREFIX}/libexec/${PKG_NAME}/ilspycmd
 tee ${PREFIX}/bin/ilspycmd << EOF
 #!/bin/sh
-DOTNET_ROOT=${DOTNET_ROOT} exec ${PREFIX}/libexec/${PKG_NAME}/ilspycmd "\$@"
+DOTNET_ROOT=${DOTNET_ROOT} exec ${DOTNET_ROOT}/dotnet run ${PREFIX}/libexec/${PKG_NAME}/ilspycmd.dll "\$@"
 EOF
