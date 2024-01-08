@@ -10,11 +10,12 @@ source:
   sha256: 3eac2cfb3b1de9d14b6a712941985d6b240b7f3726c94a5e337317c7161e869d
 
 build:
-  number: 0
+  noarch: generic
+  number: 1
 
 requirements:
-  build:
   host:
+    - perl>=5.32
   run:
     - perl>=5.32
 
@@ -25,7 +26,6 @@ test:
 about:
   home: https://github.com/so-fancy/{{ name }}
   license: MIT
-  license_family: MIT
   license_file: LICENSE
   summary: Good-lookin' diffs with diff-highlight and more
   dev_url: https://github.com/so-fancy/{{ name }}
