@@ -20,4 +20,4 @@ EOF
 
 export -f env_script
 
-find ${PREFIX}/libexec/${PKG_NAME}/bin -type f | grep -v ".bat" | grep -v ".ico" | sort -u | xargs --replace=% bash -c "env_script %"
+find ${PREFIX}/libexec/${PKG_NAME}/bin -type f | grep -v ".bat" | grep -v ".ico" | sort -u | xargs -I % bash -c "env_script %"
