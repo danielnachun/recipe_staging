@@ -10,13 +10,12 @@ source:
   git_rev: v{{ version }}
 
 build:
-  number: 1
+  noarch: generic
+  number: 2
   ignore_run_exports:
     - icu
 
 requirements:
-  build:
-    - {{ compiler('cxx') }}
   host:
     - dotnet
     - icu  # [linux]
