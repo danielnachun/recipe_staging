@@ -10,11 +10,10 @@ source:
   git_rev: {{ version }}
 
 build:
+  noarch: generic
   number: 0
 
 requirements:
-  build:
-    - {{ compiler('cxx') }}
   host:
     - dotnet
   run:
