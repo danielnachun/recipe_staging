@@ -10,11 +10,10 @@ source:
   sha256: a9860af191f6d51696de9ece6ca8c072643ee6c04af4310242b13e642b11ef91
 
 build:
-  number: 1
+  noarch: generic
+  number: 2
 
 requirements:
-  build:
-    - sed
   host:
     - rb-ast
     - rb-json
