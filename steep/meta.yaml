@@ -10,11 +10,10 @@ source:
   sha256: 59da9a4d79c69ef1b8491dfc8b4e70041dcffbd0459bb03e2e2a09d2a1f8eb47
 
 build:
-  number: 1
+  noarch: generic
+  number: 2
 
 requirements:
-  build:
-    - sed
   host:
     - rb-activesupport
     - rb-concurrent-ruby
