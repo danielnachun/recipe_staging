@@ -13,7 +13,7 @@ export -f build
 env_script() { bin_name=$1
 tee ${PREFIX}/bin/${bin_name} << EOF
 #!/bin/sh
-DOTNET_ROOT=${DOTNET_ROOT} exec ${DOTNET_ROOT}/dotnet run ${PREFIX}/libexec/${PKG_NAME}/${bin_name}.dll "\$@"
+DOTNET_ROOT=${DOTNET_ROOT} exec ${DOTNET_ROOT}/dotnet exec ${PREFIX}/libexec/${PKG_NAME}/${bin_name}.dll "\$@"
 EOF
 chmod +x ${PREFIX}/bin/${bin_name}
 }
