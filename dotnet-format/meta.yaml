@@ -10,11 +10,11 @@ source:
   sha256: ca4c6b161970d890ab8051e89d6501ccc86030128c7bde4d6c543844056350bb
 
 build:
-  number: 0
+  noarch: generic
+  number: 1
 
 requirements:
   build:
-    - {{ compiler('cxx') }}
     - jq
   host:
     - dotnet
