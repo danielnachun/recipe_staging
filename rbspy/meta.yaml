@@ -15,7 +15,7 @@ build:
 requirements:
   build:
     - {{ compiler('rust') }}
-    - {{ compiler('c') }}
+    - clangdev <16
     - cargo-bundle-licenses
     - sysroot_linux-64=2.17
 
