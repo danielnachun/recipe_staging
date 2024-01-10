@@ -10,11 +10,10 @@ source:
   sha256: eb03ff60f51ac29af5cf4fe39bc06e6714cd5b8b3f91cbec2a61e0b8602f5598
 
 build:
-  number: 1
+  noarch: generic
+  number: 2
 
 requirements:
-  build: 
-    - sed
   host:
     - rb-prettier_print
     - ruby >=3.2
