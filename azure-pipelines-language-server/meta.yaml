@@ -12,7 +12,8 @@ source:
     - bf83e08d6e9ba6e0e00d3eedef9f040bcec4bfd0.patch
 
 build:
-  number: 2
+  noarch: generic
+  number: 3
 
 requirements:
   host:
