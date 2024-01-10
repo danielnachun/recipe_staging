@@ -10,19 +10,15 @@ sed -i "s?<TargetFrameworks>.*</TargetFrameworks>?<TargetFrameworks>net${framewo
 sed -i '/RuntimeFrameworkVersion/d;' src/OmniSharp.Stdio.Driver/OmniSharp.Stdio.Driver.csproj
 sed -i '/RuntimeIdentifier/d;' src/OmniSharp.Stdio.Driver/OmniSharp.Stdio.Driver.csproj
 
-# On Linux, make sure the linker uses conda prefix and sysroot for libraries instead of host
-# Also needed for proper ICU detection
-# This variable is ignored on macOS.
-export LD_LIBRARY_PATH="${PREFIX}/lib:${CONDA_BUILD_SYSROOT}/usr/lib"
-
 mkdir -p "${PREFIX}/bin"
 mkdir -p "${PREFIX}/libexec/${PKG_NAME}"
 dotnet publish --no-self-contained "src/OmniSharp.Stdio.Driver/OmniSharp.Stdio.Driver.csproj" \
     -maxcpucount:1 --output ${PREFIX}/libexec/${PKG_NAME} --framework net${framework_version}
 
+rm ${PREFIX}/libexec/${PKG_NAME}/OmniSharp
 tee ${PREFIX}/bin/OmniSharp << EOF
 #!/bin/sh
-DOTNET_ROOT=${DOTNET_ROOT} exec ${PREFIX}/libexec/${PKG_NAME}/OmniSharp "\$@"
+DOTNET_ROOT=${DOTNET_ROOT} exec ${DOTNET_ROOT}/dotnet run ${PREFIX}/libexec/${PKG_NAME}/OmniSharp.dll "\$@"
 EOF
 
 # Provide additional symlink that is all lowercase on Linux because it is case sensitive
