@@ -17,11 +17,9 @@ build:
 
 requirements:
   build:
-    - {{ compiler('cxx') }}
     - sed
   host:
     - dotnet
-    - icu  # [linux]
   run:
     - dotnet
 

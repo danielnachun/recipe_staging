@@ -18,5 +18,5 @@ dotnet publish --no-self-contained "src/OmniSharp.Stdio.Driver/OmniSharp.Stdio.D
 rm ${PREFIX}/libexec/${PKG_NAME}/OmniSharp
 tee ${PREFIX}/bin/OmniSharp << EOF
 #!/bin/sh
-DOTNET_ROOT=${DOTNET_ROOT} exec ${DOTNET_ROOT}/dotnet run ${PREFIX}/libexec/${PKG_NAME}/OmniSharp.dll "\$@"
+DOTNET_ROOT=${DOTNET_ROOT} exec ${DOTNET_ROOT}/dotnet exec ${PREFIX}/libexec/${PKG_NAME}/OmniSharp.dll "\$@"
 EOF
