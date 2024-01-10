@@ -10,11 +10,10 @@ source:
   sha256: 4eee60e7dc2c4f182af30e1a64639bc1787a985462b4615bba7117acfd78fdd9
 
 build:
-  number: 1
+  noarch: generic
+  number: 2
 
 requirements:
-  build:
-    - sed
   host:
     - ruby
   run:
