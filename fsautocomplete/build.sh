@@ -2,18 +2,20 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-if [[ ${target_platform} =~ .*linux.* ]]; then
-    export LD_LIBRARY_PATH="${PREFIX}/lib:${CONDA_BUILD_SYSROOT}/usr/lib"
-fi
+rm -rf global.json
+framework_version="$(dotnet --version | sed -e 's/\..*//g').0"
 
-mkdir -p ${PREFIX}/libexec/${PKG_NAME}
+sed -i "s?<TargetFrameworks>.*</TargetFrameworks>?<TargetFrameworks>net${framework_version}</TargetFrameworks>?" \
+    src/FsAutoComplete/FsAutoComplete.fsproj
+sed -i "/TargetFrameworks Condition/d" src/FsAutoComplete/FsAutoComplete.fsproj
 
-rm global.json
+mkdir -p "${PREFIX}/bin"
+mkdir -p "${PREFIX}/libexec/${PKG_NAME}"
 dotnet tool restore 
-dotnet run --project build -t LocalRelease
-dotnet tool install --add-source bin/release_as_tool --tool-path ${PREFIX}/libexec/${PKG_NAME} fsautocomplete
+dotnet publish --no-self-contained src/FsAutoComplete/FsAutoComplete.fsproj --output ${PREFIX}/libexec/${PKG_NAME} --framework net${framework_version}
 
-tee ${PREFIX}/bin/fsautocomplete << EOF
+rm -rf ${PREFIX}/libexec/${PKG_NAME}/${PKG_NAME}
+tee ${PREFIX}/bin/${PKG_NAME} << EOF
 #!/bin/sh
-DOTNET_ROOT=${DOTNET_ROOT} exec ${PREFIX}/libexec/${PKG_NAME}/fsautocomplete "\$@"
+DOTNET_ROOT=${DOTNET_ROOT} exec ${DOTNET_ROOT}/dotnet exec ${PREFIX}/libexec/${PKG_NAME}/${PKG_NAME}.dll "\$@"
 EOF
