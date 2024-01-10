@@ -2,7 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-make DCOMPILER=ldc2
+make DCOMPILER=ldc2 LDC_LTO=off
 
 mkdir -p ${PREFIX}/bin
 mkdir -p ${PREFIX}/etc/bash_completion.d
