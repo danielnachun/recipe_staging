@@ -13,5 +13,5 @@ dotnet publish --no-self-contained src/dotnet-format.csproj --output ${PREFIX}/l
 rm -rf ${PREFIX}/libexec/${PKG_NAME}/dotnet-format
 tee ${PREFIX}/bin/dotnet-format << EOF
 #!/bin/sh
-DOTNET_ROOT=${DOTNET_ROOT} exec ${DOTNET_ROOT}/dotnet run ${PREFIX}/libexec/${PKG_NAME}/dotnet-format.dll "\$@"
+DOTNET_ROOT=${DOTNET_ROOT} exec ${DOTNET_ROOT}/dotnet exec ${PREFIX}/libexec/${PKG_NAME}/dotnet-format.dll "\$@"
 EOF
