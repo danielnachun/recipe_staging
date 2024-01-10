@@ -27,7 +27,7 @@ requirements:
 
 test:
   commands:
-    - omnisharp --help
+    - OmniSharp --help
 
 about:
   home: https://github.com/OmniSharp/{{ name }}
