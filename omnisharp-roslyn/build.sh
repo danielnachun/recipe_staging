@@ -20,8 +20,3 @@ tee ${PREFIX}/bin/OmniSharp << EOF
 #!/bin/sh
 DOTNET_ROOT=${DOTNET_ROOT} exec ${DOTNET_ROOT}/dotnet run ${PREFIX}/libexec/${PKG_NAME}/OmniSharp.dll "\$@"
 EOF
-
-# Provide additional symlink that is all lowercase on Linux because it is case sensitive
-if [[ ${target_platform} =~ .*linux.* ]]; then
-    ln -s "${PREFIX}/bin/OmniSharp" "${PREFIX}/bin/omnisharp"
-fi
