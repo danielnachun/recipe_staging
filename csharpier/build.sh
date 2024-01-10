@@ -12,5 +12,5 @@ dotnet publish --no-self-contained Src/CSharpier.Cli/CSharpier.Cli.csproj --outp
 rm ${PREFIX}/libexec/${PKG_NAME}/dotnet-csharpier
 tee ${PREFIX}/bin/dotnet-csharpier << EOF
 #!/bin/sh
-DOTNET_ROOT=${DOTNET_ROOT} exec ${DOTNET_ROOT}/dotnet run ${PREFIX}/libexec/${PKG_NAME}/dotnet-csharpier.dll "\$@"
+DOTNET_ROOT=${DOTNET_ROOT} exec ${DOTNET_ROOT}/dotnet exec ${PREFIX}/libexec/${PKG_NAME}/dotnet-csharpier.dll "\$@"
 EOF
