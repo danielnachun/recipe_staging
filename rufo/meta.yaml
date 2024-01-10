@@ -14,8 +14,6 @@ build:
   number: 1
 
 requirements:
-  build:
-    - sed
   host:
     - ruby=3.2
   run:
