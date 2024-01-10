@@ -12,13 +12,12 @@ source:
 build:
   noarch: generic
   number: 2
-  ignore_run_exports:
-    - icu
 
 requirements:
+  build:
+    - sed
   host:
     - dotnet
-    - icu  # [linux]
   run:
     - dotnet
 
