@@ -19,5 +19,5 @@ sed -i "s/6.0.0/8.0.0/" ${PREFIX}/libexec/${PKG_NAME}/ilspycmd.runtimeconfig.jso
 rm -rf ${PREFIX}/libexec/${PKG_NAME}/ilspycmd
 tee ${PREFIX}/bin/ilspycmd << EOF
 #!/bin/sh
-DOTNET_ROOT=${DOTNET_ROOT} exec ${DOTNET_ROOT}/dotnet run ${PREFIX}/libexec/${PKG_NAME}/ilspycmd.dll "\$@"
+DOTNET_ROOT=${DOTNET_ROOT} exec ${DOTNET_ROOT}/dotnet exec ${PREFIX}/libexec/${PKG_NAME}/ilspycmd.dll "\$@"
 EOF
