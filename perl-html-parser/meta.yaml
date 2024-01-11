@@ -12,7 +12,6 @@ source:
 build:
   number: 0
   script:
-    - sed -i "/^lddlflags/ s|,|-rpath |g" ${PREFIX}/lib/perl*/*/core_perl/Config_heavy.pl  # [osx]
     - perl Makefile.PL INSTALLDIRS=site
     - make
     - make test
