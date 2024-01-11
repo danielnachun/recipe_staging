@@ -14,7 +14,6 @@ build:
   ignore_run-exports:
     - perl-module-build
   script:
-    - sed -i "/^lddlflags/ s|,|-rpath |g" ${PREFIX}/lib/perl*/*/core_perl/Config_heavy.pl  # [osx]
     - export CFLAGS="${CFLAGS} -std=c11"
     - export LD="${CC}"
     - ${PREFIX}/bin/perl Build.PL
