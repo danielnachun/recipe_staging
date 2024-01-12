@@ -1,0 +1,44 @@
+{% set name = "podman-remote" %}
+{% set version = "4.8.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/containers/podman/archive/v{{ version }}.tar.gz
+  sha256: 994537a8535f3e4d2f03ced8b0dd58fda44c9d44cef6ba5bf15a970ddfeaf6f8
+
+build:
+  number: 0
+  skip: True  # [not osx]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - go
+    - go-licenses
+    - go-md2man
+    - make
+    - python
+  run:
+    - gvproxy
+    - qemu
+
+test:
+  commands:
+    - podman --help
+    - {{ name }} --help 2>&1 | grep -q "This command must be ran as root via sudo or osascript"
+
+about:
+  home: https://github.com/containers/{{ name }}
+  license: Apache-2.0 AND GPL-3.0-or-later
+  license_file: 
+    - LICENSE
+    - license-files_podman-mac-helper/
+  summary: Tool for managing OCI containers and pods
+  dev_url: https://github.com/containers/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun

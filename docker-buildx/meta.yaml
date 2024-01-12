@@ -1,0 +1,35 @@
+{% set name = "docker-buildx" %}
+{% set version = "0.12.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/docker/buildx/archive/v{{ version }}.tar.gz
+  sha256: 7d00cc435b5ea8d180c0deda30e46ae2bca81d630629ad3c370a70448995ea5a
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+    - go-licenses
+
+test:
+  commands:
+    - docker-buildx --help
+
+about:
+  home: https://github.com/docker/buildx
+  license: MIT
+  license_file: 
+    - LICENSE
+    - license-files/
+  summary: Docker CLI plugin for extended build capabilities with BuildKit
+  dev_url: https://github.com/docker/buildx
+
+extra:
+  recipe-maintainers:
+    - danielnachun
