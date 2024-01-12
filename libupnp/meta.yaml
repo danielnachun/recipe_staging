@@ -1,0 +1,32 @@
+{% set name = "libupnp" %}
+{% set version = "1.14.18" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/pupnp/pupnp/releases/download/release-{{ version }}/libupnp-{{ version }}.tar.bz2
+  sha256: 16a7cee93ce2868ae63ab1a8164dc7de43577c59983b9f61293a310d6888dceb
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+
+test:
+  commands:
+    - test -f ${PREFIX}/lib/${PKG_NAME}${SHLIB_EXT}
+
+about:
+  home: https://pupnp.sourceforge.io/
+  license: BSD-3-Clause
+  license_file: COPYING
+  summary: Portable UPnP development kit
+
+extra:
+  recipe-maintainers:
+    - danielnachun

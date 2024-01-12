@@ -1,0 +1,90 @@
+{% set name = "mpd" %}
+{% set version = "0.23.15" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/MusicPlayerDaemon/MPD/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: d2865d8f8ea79aa509b1465b99a2b8f3f449fe894521c97feadc2dca85a6ecd2
+
+build:
+  number: 0
+  ignore_run_exports:
+    - libboost
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - expat
+    - meson
+    - ninja
+    - pkg-config
+  host:
+    - curl
+    - faad2
+    - ffmpeg
+    - fluidsynth
+    - fmt
+    - icu
+    - lame
+    - libao
+    - libboost-devel
+    - libflac
+    - libid3tag
+    - libmpdclient
+    - libnfs
+    - libopus
+    - libsamplerate
+    - libshout
+    - libsystemd  # [linux]
+    - libupnp
+    - libvorbis
+    - speex
+    - wavpack
+  run:
+    - bzip2
+    - faad2
+    - ffmpeg
+    - fluidsynth
+    - fmt
+    - icu
+    - lame
+    - libao
+    - libboost
+    - libcurl
+    - libexpat
+    - libflac
+    - libid3tag
+    - libmpdclient
+    - libnfs
+    - libogg
+    - libopus
+    - libsamplerate
+    - libshout
+    - libsndfile
+    - libsqlite
+    - libsystemd  # [linux]
+    - libupnp
+    - libvorbis
+    - libzlib
+    - mpg123
+    - pcre2
+    - speex
+    - wavpack
+
+test:
+  commands:
+    - mpd --version
+
+about:
+  home: https://www.musicpd.org/libs/libmpdclient/
+  license: BSD-3-Clause
+  license_file: COPYING
+  summary: Library for MPD in the C, C++, and Objective-C languages
+
+extra:
+  recipe-maintainers:
+    - danielnachun

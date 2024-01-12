@@ -1,0 +1,39 @@
+{% set name = "libid3tag" %}
+{% set version = "0.16.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://codeberg.org/tenacityteam/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: 0561009778513a95d91dac33cee8418d6622f710450a7cb56a74636d53b588cb
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cmake
+    - gperf
+    - make
+    - pkg-config
+  host:
+    - zlib <1.3
+
+test:
+  commands:
+    - test -f ${PREFIX}/lib/${PKG_NAME}${SHLIB_EXT}
+
+about:
+  home: https://www.underbit.com/products/mad/
+  license: GPL-2.0-only
+  license_file: COPYING
+  summary: ID3 tag manipulation library
+  dev_url: https://codeberg.org/tenacityteam/libid3tag
+
+extra:
+  recipe-maintainers:
+    - danielnachun

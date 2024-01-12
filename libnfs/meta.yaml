@@ -1,0 +1,35 @@
+{% set name = "libnfs" %}
+{% set version = "5.0.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/sahlberg/{{ name }}/archive/libnfs-{{ version }}.tar.gz
+  sha256: 637e56643b19da9fba98f06847788c4dad308b723156a64748041035dcdf9bd3
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - autoconf
+    - automake
+    - libtool
+    - make
+
+test:
+  commands:
+    - test -f ${PREFIX}/lib/${PKG_NAME}${SHLIB_EXT}
+
+about:
+  home: https://github.com/sahlberg/libnfs
+  license: LGPL-2.1-or-later
+  license_file: COPYING
+  summary: Cross-platform Audio Library
+
+extra:
+  recipe-maintainers:
+    - danielnachun
