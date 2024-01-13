@@ -10,7 +10,7 @@ source:
   sha256: 876631295a85315dac37e7a71386d62d9eb452a891083cfe7505cca4805088cb
 
 build:
-  number: 1
+  number: 2
   script:
     - export CPPFLAGS="-Igumbo_parser/src"
     - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem --platform=ruby -- --use-system-libraries
