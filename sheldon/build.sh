@@ -11,7 +11,7 @@ cargo install --locked --root ${PREFIX} --path .
 
 mkdir -p ${PREFIX}/etc/bash_completion.d
 mkdir -p ${PREFIX}/share/zsh/site-functions
-install -m 644 completions/sheldon.bash ${PREFIX}/etc/bash_completion.d/sheldon
+#install -m 644 completions/sheldon.bash ${PREFIX}/etc/bash_completion.d/sheldon
 install -m 644 completions/sheldon.zsh ${PREFIX}/share/zsh/site-functions/_sheldon
 
 # strip debug symbols
