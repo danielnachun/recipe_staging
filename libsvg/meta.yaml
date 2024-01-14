@@ -1,0 +1,49 @@
+{% set name = "libsvg" %}
+{% set version = "0.1.4" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://cairographics.org/snapshots/{{ name }}-{{ version }}.tar.gz
+  sha256: 4c3bf9292e676a72b12338691be64d0f38cd7f2ea5e8b67fbbf45f1ed404bc8f
+  patches:
+    - 0001-use-newer-autotools.patch
+    - 0002-Fix-undefined-symbol-png_set_gray_1_2_4_to_8.patch
+
+build:
+  number: 0
+  ignore_run_exports:
+    - libjpeg-turbo
+    - libpng
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - autoconf
+    - automake
+    - libtool
+    - make
+    - pkg-config
+  host:
+    - libjpeg-turbo
+    - libtool
+    - libpng
+    - libxml2
+  run:
+    - libxml2
+
+test:
+  commands:
+    - test -f ${PREFIX}/lib/${PKG_NAME}${SHLIB_EXT}
+
+about:
+  home: https://cairographics.org/
+  license: LGPL-2.1-or-later
+  license_file: COPYING
+  summary: SVG rendering library using Cairo
+
+extra:
+  recipe-maintainers:
+    - danielnachun
