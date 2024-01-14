@@ -1,5 +1,5 @@
 {% set name = "vim-vint" %}
-{% set version = "0.4a3" %}
+{% set version = "0.3.21" %}
 
 package:
   name: "{{ name|lower }}"
@@ -7,19 +7,19 @@ package:
 
 source:
   url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
-  sha256: c6c03d9abd1dc21bbe2cf9c2b9945d1c096fb551d4bf5238a14af927ef56aaa2
+  sha256: 5dc59b2e5c2a746c88f5f51f3fafea3d639c6b0fdbb116bb74af27bf1c820d97
 
 build:
   number: 0
+  noarch: generic
   entry_points:
     - vint = vint:main
   script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
   host:
-    - ansicolor >=0.2.4
+    - ansicolor
     - chardet >=2.3.0
-    - enum34 >=1.0.4
     - pathlib >=1.0.1
     - pip
     - python
@@ -27,9 +27,8 @@ requirements:
     - setuptools >=36.2.2
     - typing >=3.6.2
   run:
-    - ansicolor >=0.2.4
+    - ansicolor
     - chardet >=2.3.0
-    - enum34 >=1.0.4
     - pathlib >=1.0.1
     - python
     - pyyaml >=3.11
@@ -63,7 +62,6 @@ test:
 about:
   home: "https://github.com/Kuniwak/vint"
   license: MIT
-  license_family: MIT
   license_file: 
   summary: "Lint tool for Vim script Language"
   doc_url: 
@@ -71,4 +69,4 @@ about:
 
 extra:
   recipe-maintainers:
-    - your-github-id-here
+    - danielnachun
