@@ -1,0 +1,42 @@
+{% set name = "perl-term-animation" %}
+{% set version = "2.6" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/K/KB/KBAUCOM/Term-Animation-{{ version }}.tar.gz
+  sha256: 7d5c3c2d4f9b657a8b1dce7f5e2cbbe02ada2e97c72f3a0304bf3c99d084b045
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-curses
+  run:
+    - perl>=5.32
+    - perl-curses
+
+test:
+  imports:
+    - Term::Animation
+    - Term::Animation::Entity
+
+about:
+  home: http://metacpan.org/pod/Term-Animation
+  license: unknown
+  summary: ASCII sprite animation framework
+
+maintainers:
+  - danielnachun
