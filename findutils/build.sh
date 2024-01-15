@@ -2,7 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-autoreconf -fiv
+#autoreconf -fiv
 ./configure --disable-debug \
 	--disable-dependency-tracking \
 	--prefix="${PREFIX}" \
