@@ -1,0 +1,44 @@
+{% set name = "perl-curses" %}
+{% set version = "1.44" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/G/GI/GIRAFFED/Curses-{{ version }}.tar.gz
+  sha256: a2efb8c7c886d692ffc4db21361c76809a065e588e43fad0d67e44ef9d42bd30
+
+build:
+  number: 0
+  script:
+    - export CURSES_LDFLAGS="-L${CONDA_BUILD_SYSROOT}/usr/lib -L${PREFIX}/lib -lncurses"
+    - export CURSES_CFLAGS="-I${PREFIX}/include"
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make  # [not win]
+    - m2-make  # [win]
+    - sed
+  host:
+    - ncurses
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+test:
+  imports:
+    - Curses
+
+about:
+  home: http://metacpan.org/pod/Curses
+  license: unknown
+  summary: 'terminal screen handling and optimization'
+
+maintainers:
+  - danielnachun
