@@ -1,0 +1,39 @@
+{% set name = "tmuxinator" %}
+{% set version = "3.1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: 73b9af3f679a552b69003b57153944837ad882ba8e19fdd32a00d56db2c1ff0f
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - erubis
+    - rb-abstract
+    - rb-thor =1.3
+    - rb-xdg =2.2
+    - ruby>=3.2
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  #license_file: {{ name }}-{{ version }}/LICENSE
+  summary: Create and manage complex tmux sessions easily.
+  dev_url: https://github.com/tmuxinator/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
