@@ -1,5 +1,5 @@
 {% set name = "ocaml-lsp" %}
-{% set version = "1.15.1" %}
+{% set version = "1.17.0" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   git_url: https://github.com/ocaml/{{ name }}.git
-  git_rev: {{ version }}-5.0
+  git_rev: {{ version }}
 
 build:
   number: 0
