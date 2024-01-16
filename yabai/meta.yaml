@@ -1,0 +1,33 @@
+{% set name = "yabai" %}
+{% set version = "6.0.6" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/koekeishiya/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: e659d4483a75f0fcfb5f8ca218a656e668c85d25c656dfa32410ff1f232643fd
+
+build:
+  number: 0
+  skip: True  # [not osx]
+
+requirements:
+  build:
+    - make
+
+test:
+  commands:
+    - {{ name }} --version
+
+about:
+  home: https://github.com/koekeishiya/{{ name }}
+  license: MIT
+  license_file: LICENSE.txt
+  summary: Simple hotkey-daemon for macOS
+  dev_url: https://github.com/koekeishiya/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
