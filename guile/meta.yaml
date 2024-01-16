@@ -1,0 +1,57 @@
+{% set name = "guile" %}
+{% set version = "3.0.9" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://ftp.gnu.org/gnu/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 18525079ad29a0d46d15c76581b5d91c8702301bfd821666d2e1d13726162811
+  #patches:
+    #- skip_posix_crypt_test.patch  # [linux]
+
+build:
+  number: 0
+  skip: True  # [win]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make                # [unix]
+  host:
+    - sed  # [osx]
+    - libunistring
+    - libffi
+    - bdw-gc
+    - gmp
+    - libiconv
+    - readline
+    - libtool
+    - pkg-config
+    - gettext
+  run:
+    - libunistring
+    - libtool
+    - libffi
+    - bdw-gc
+    - gmp
+    - libiconv
+    - readline
+    - gettext
+
+test:
+  commands:
+    - guile -v
+
+about:
+  home: https://www.gnu.org/software/guile
+  license: LGPL-3.0-or-later
+  license_file: LICENSE
+  license_family: LGPL
+  summary: 'The GNU C implementation of the Scheme programming language'
+  doc_url: https://www.gnu.org/software/guile/manual/ 
+
+extra:
+  recipe-maintainers:
+    - ChristopherHogan
