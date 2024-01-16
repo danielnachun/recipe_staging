@@ -24,6 +24,7 @@ requirements:
     - autoconf
     - m4
     - opam
+    - pkg-config
     - unzip
   host:
     - gmp
