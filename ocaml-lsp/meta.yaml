@@ -22,6 +22,7 @@ requirements:
     - m2-make  # [win]
     - posix  # [win]
     - opam
+    - pkg-config
   host:
     - libev
 
