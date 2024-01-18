@@ -4,6 +4,9 @@ set -o xtrace -o nounset -o pipefail -o errexit
 
 cabal v2-update
 cabal v2-install -v3 \
+    --extra-lib-dirs=${PREFIX}/lib \
+    --constraint "ShellCheck==0.9.0" \
+    --allow-newer=base,Cabal,deepseq \
 	--jobs=${CPU_COUNT} \
 	--max-backjumps=100000 \
 	--install-method=copy \
