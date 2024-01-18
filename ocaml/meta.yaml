@@ -1,4 +1,4 @@
-{% set version = "4.14.0" %}
+{% set version = "5.1.1" %}
 {% set version_major = version.split(".")[0] %}
 {% set version_minor = version.split(".")[1] %}
 
@@ -8,7 +8,7 @@ package:
 
 source:
   url: http://caml.inria.fr/pub/distrib/ocaml-{{ version_major }}.{{ version_minor }}/ocaml-{{ version }}.tar.gz
-  sha256: 2df5b42d82099ad4eb1c1b9b77ab00ae52f8c19c9b20d20cefd953738ecf4586
+  sha256: 57f7b382b3d71198413ede405d95ef3506f1cdc480cda1dca1e26b37cb090e17
   patches:
     - prefix_fix.diff
 
