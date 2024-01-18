@@ -20,7 +20,7 @@ requirements:
     - cabal-install
     - git
   host:
-    - ghc >=9.2,<9.4
+    - ghc
 
 test:
   commands:
