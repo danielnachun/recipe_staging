@@ -2,7 +2,7 @@
 set -eu -o pipefail
 set -x
 
-mamba install -y ldc -p ${BUILD_PREFIX}
+mamba install -c conda-forge -y ldc -p ${BUILD_PREFIX}
 DCMP=${BUILD_PREFIX}/bin/ldmd2
 
 # Build latest version
