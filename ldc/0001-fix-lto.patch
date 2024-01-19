@@ -1,0 +1,56 @@
+From 93b9babe8087a9e1ba3a6a76233175d96e1d2f3f Mon Sep 17 00:00:00 2001
+From: Johan Engelen <jbc.engelen@gmail.com>
+Date: Tue, 28 Nov 2023 23:13:09 +0100
+Subject: [PATCH] macos: Explicitly set the macOS version in the triple to
+ avoid linker warnings and support LTO (#4534)
+
+Obey MACOSX_DEPLOYMENT_TARGET, and if it is not set, then default to host OS version.
+---
+ driver/targetmachine.cpp | 26 ++++++++++++++++++++++++--
+ 1 file changed, 24 insertions(+), 2 deletions(-)
+
+diff --git a/driver/targetmachine.cpp b/driver/targetmachine.cpp
+index 46a9c63dce9e000eaaad9440e6631a6563ba6973..33870f5d2e8cdb1948e507c601addec23de1fdbc 100644
+--- a/driver/targetmachine.cpp
++++ b/driver/targetmachine.cpp
+@@ -16,6 +16,7 @@
+ #include "driver/targetmachine.h"
+ 
+ #include "dmd/errors.h"
++#include "driver/args.h"
+ #include "driver/cl_options.h"
+ #include "gen/logger.h"
+ #include "llvm/ADT/StringExtras.h"
+@@ -440,9 +441,30 @@ createTargetMachine(const std::string targetTriple, const std::string arch,
+     triple = llvm::Triple(
+         llvm::Triple::normalize(llvm::sys::getDefaultTargetTriple()));
+ 
+-    // We only support OSX, so darwin should really be macosx.
+     if (triple.getOS() == llvm::Triple::Darwin) {
+-      triple.setOS(llvm::Triple::MacOSX);
++      // We only support OSX, so darwin should really be macosx.
++      llvm::SmallString<16> osname;
++      osname += "macosx";
++      // We have to specify OS version in the triple to avoid linker warnings,
++      // see https://github.com/ldc-developers/ldc/issues/4501.
++      // If environment variable MACOSX_DEPLOYMENT_TARGET is not set, then use
++      // host OS version.
++      // https://developer.apple.com/library/archive/documentation/DeveloperTools/Conceptual/cross_development/Configuring/configuring.html
++      std::string envVersion = env::get("MACOSX_DEPLOYMENT_TARGET");
++      if (!envVersion.empty()) {
++        osname += envVersion;
++      } else {
++#if LDC_LLVM_VER >= 1400
++        llvm::VersionTuple OSVersion;
++        triple.getMacOSXVersion(OSVersion);
++        osname += OSVersion.getAsString();
++#else
++        // Hardcode the version, because `getMacOSXVersion` is not available.
++        osname += "10.7";
++#endif
++      }
++
++      triple.setOSName(osname);
+     }
+ 
+     // Handle -m32/-m64.
