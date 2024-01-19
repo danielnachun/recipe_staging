@@ -15,16 +15,27 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - autoconf
+    - automake
+    - binutils
     - make
     - pkg-config
   host:
+    - gettext  # [linux]
     - libassuan
     - libgpg-error
+    - libiconv  # [linux]
     - libsecret  # [linux]
+    - libtool
+    - ncurses  # [linux]
+    - zlib  # [linux]
   run:
+    - gettext  # [linux]
     - libassuan
     - libgpg-error
+    - libiconv  # [linux]
     - libsecret  # [linux]
+    - ncurses  # [linux]
 
 test:
   commands:
