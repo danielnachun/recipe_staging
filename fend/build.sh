@@ -9,7 +9,8 @@ cargo-bundle-licenses \
 # build statically linked binary with Rust
 cargo install --locked --root ${PREFIX} --path cli
 ./documentation/build.sh
-install -Dm 644 documentation/fend.1 ${PREFIX}/share/man/man1/fend.1
+mkdir -p ${PREFIX}/share/man/man1
+install -m 644 documentation/fend.1 ${PREFIX}/share/man/man1/fend.1
 
 # strip debug symbols
 "$STRIP" "$PREFIX/bin/${PKG_NAME}"
