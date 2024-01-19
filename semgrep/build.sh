@@ -12,16 +12,15 @@ opam install -vvv -j ${CPU_COUNT} -y --deps-only --no-depexts ./libs/ocaml-tree-
 opam install -vvv -j ${CPU_COUNT} -y --deps-only --no-depexts ./
 
 pushd ./libs/ocaml-tree-sitter-core
-	./configure
+	./configure --prefix ${PREFIX}
 popd
 
 opam install -vvv -j ${CPU_COUNT} --deps-only --no-depexts -y .
 opam exec -- make core
-opam exec -- make core-install
+opam exec -- make copy-core-for-cli
 
 mkdir -p ${PREFIX}/bin
 install -m 755 _build/install/default/bin/semgrep-core ${PREFIX}/bin/semgrep-core
-install -m 755 _build/install/default/bin/spacegrep ${PREFIX}/bin/spacegrep
 
 export SEMGREP_SKIP_BIN=1
 cd cli
