@@ -1,0 +1,42 @@
+{% set name = "lsof" %}
+{% set version = "4.99.3" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/lsof-org/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
+  sha256: b9c56468b927d9691ab168c0b1e9f8f1f835694a35ff898c549d383bd8d09bd4
+
+build:
+  skip: true  # [win]
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - binutils
+    - make
+    - perl 5.*
+    - sed
+  host:
+
+test:
+  commands:
+    - lsof -v 2>&1 | grep -qF '{{ version }}'
+    - lsof .
+
+about:
+  home: http://people.freebsd.org/~abe/
+  license: BSD-compatible
+  license_family: BSD
+  summary: LiSt Open Files
+  description: |
+    The free, open-source, Unix administrative tool lsof (for LiSt Open Files)
+    displays information about files open to Unix processes.
+  doc_url: https://people.freebsd.org/~abe/
+
+extra:
+  recipe-maintainers:
+    - keuv-grvl
