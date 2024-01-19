@@ -60,7 +60,7 @@ jobs:
         uses: mamba-org/setup-micromamba@v1
         with:
           environment-name: boa
-          create-args: boa conda-verify
+          create-args: boa conda-verify mamba
           generate-run-shell: true
 
       - name: Set up working directories
