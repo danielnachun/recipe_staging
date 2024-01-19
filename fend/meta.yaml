@@ -1,5 +1,5 @@
 {% set name = "fend" %}
-{% set version = "1.2.0" %}
+{% set version = "1.3.3" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/printfn/{{ name }}/archive/v{{ version}}.tar.gz
-  sha256: d2781dfdbaed22b38fabea6897ff2249ac804f9021c921cd67603f3b609994e2
+  sha256: 90364fab29b51e1c359ff72f8ccfc3e8a3c96bbc8b38d0646c28c489a8071084
 
 build:
   number: 0
@@ -18,7 +18,7 @@ requirements:
     - {{ compiler('c') }}
     - cargo-bundle-licenses
     - pandoc
-    - sysroot_linux-64=2.17
+    - sysroot_linux-64=2.17  # [linux]
 test:
   commands:
     - {{ name }} --help
@@ -26,7 +26,6 @@ test:
 about:
   home: https://printfn.github.io/{{ name }}
   license: MIT
-  license_family: MIT
   license_file: 
     - LICENSE.md
     - THIRDPARTY.yml
