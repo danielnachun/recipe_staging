@@ -1,0 +1,47 @@
+{% set name = "pinentry" %}
+{% set version = "1.1.1.1" %}
+
+package:
+  name: {{ name|lower }}-mac
+  version: {{ version }}
+
+source:
+  url: https://github.com/GPGTools/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 1a414f2e172cf8c18a121e60813413f27aedde891c5955151fbf8d50c46a9098
+
+build:
+  number: 0
+  skip: True  # [not osx]
+
+requirements:
+  build:
+    - autoconf
+    - automake
+    - make
+    - texinfo
+  host:
+    - gettext
+    - libiconv
+    - libassuan
+    - libtool
+    - ncurses
+  run:
+    - gettext
+    - libiconv
+    - libassuan
+    - libiconv
+
+test:
+  commands:
+    - {{ name }} --version
+
+about:
+  home: https://github.com/GPGTools/{{ name }}
+  license: GPL-2.0-or-later AND GPL-3.0-or-later
+  license_file: COPYING
+  summary: Pinentry for GPG on Mac
+  dev_url: https://github.com/GPGTools/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
