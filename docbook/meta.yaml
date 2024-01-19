@@ -1,0 +1,51 @@
+{% set name = "docbook" %}
+{% set version = "5.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  - url: https://docbook.org/xml/4.1.2/docbkx412.zip
+    sha256: 30f0644064e0ea71751438251940b1431f46acada814a062870f486c772e7772
+    folder: xml4.1.2
+  - url: https://docbook.org/xml/4.2/docbook-xml-4.2.zip
+    sha256: acc4601e4f97a196076b7e64b368d9248b07c7abf26b34a02cca40eeebe60fa2
+    folder: xml4.2
+  - url: https://docbook.org/xml/4.3/docbook-xml-4.3.zip
+    sha256: 23068a94ea6fd484b004c5a73ec36a66aa47ea8f0d6b62cc1695931f5c143464
+    folder: xml4.3
+  - url: https://docbook.org/xml/4.4/docbook-xml-4.4.zip
+    sha256: 02f159eb88c4254d95e831c51c144b1863b216d909b5ff45743a1ce6f5273090
+    folder: xml4.4
+  - url: https://docbook.org/xml/4.5/docbook-xml-4.5.zip
+    sha256: 4e4e037a2b83c98c6c94818390d4bdd3f6e10f6ec62dd79188594e26190dc7b4
+    folder: xml4.5
+  - url: https://docbook.org/xml/5.0/docbook-5.0.zip
+    sha256: 3dcd65e1f5d9c0c891b3be204fa2bb418ce485d32310e1ca052e81d36623208e
+    folder: xml5.0
+  - url: https://docbook.org/xml/5.1/docbook-v5.1-os.zip
+    sha256: b3f3413654003c1e773360d7fc60ebb8abd0e8c9af8e7d6c4b55f124f34d1e7f
+    folder: xml5.1
+
+build:
+  noarch: generic
+  number: 0
+  skip: True  # [win]
+
+requirements:
+  run:
+    - libxml2
+
+test:
+  commands:
+    - test -f ${PREFIX}/etc/xml/catalog
+
+about:
+  home: https://docbook.org/
+  license: OTHER
+  summary: Standard SGML representation system for technical documents
+
+extra:
+  recipe-maintainers:
+    - danielnachun
