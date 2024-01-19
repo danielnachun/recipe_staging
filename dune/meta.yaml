@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/ocaml/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: b9fd6560879f9d340ae8a87c967b0d2bcd3c4120cffcd9fb661f325078f74f6f
+  sha256: 95f7f173bd0265a796600051c79d5f8cd51673a8896608411debd90ca4e15d75
 
 build:
   number: 0
@@ -17,7 +17,7 @@ build:
 
 requirements:
   build:
-    - sysroot_linux-64=2.17
+    - sysroot_linux-64=2.17  #[linux]
     - make  # [unix]
     - m2-make  # [win]
     - posix  # [win]
