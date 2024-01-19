@@ -1,0 +1,94 @@
+{% set name = "semgrep" %}
+{% set version = "1.56.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/returntocorp/semgrep.git
+  git_rev: v{{ version }}
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cmake
+    - gcc  # [linux]
+    - gxx  # [linux]
+    - jinja2
+    - make
+    - opam
+    - pkg-config
+    - rsync
+    - sysroot_linux-64=2.17  # [linux]
+  host:
+    - attrs
+    - boltons
+    - click
+    - click-option-group
+    - colorama
+    - defusedxml
+    - glom
+    - gmp
+    - jsonschema
+    - libev
+    - packaging
+    - peewee
+    - pip
+    - pipenv
+    - python
+    - python-lsp-jsonrpc
+    - requests
+    - rich
+    - ruamel.yaml
+    - setuptools
+    - tomli
+    - libtree-sitter
+    - typing-extensions
+    - urllib3
+    - wcmatch
+    - pcre
+  run:
+    - attrs
+    - boltons
+    - click
+    - click-option-group
+    - colorama
+    - defusedxml
+    - glom
+    - jsonschema
+    - libev
+    - packaging
+    - peewee
+    - python
+    - python-lsp-jsonrpc
+    - requests
+    - rich
+    - ruamel.yaml
+    - tomli
+    - libtree-sitter
+    - typing-extensions
+    - urllib3
+    - wcmatch
+
+test:
+  imports:
+    - semgrep
+  commands:
+    - semgrep --help
+  
+
+about:
+  home: https://semgrep.dev
+  license: LGPL-2.1-only
+  license_file: LICENSE
+  summary: Easily detect and prevent bugs and anti-patterns in your codebase
+  dev_url: https://github.com/returntocorp/semgrep
+
+extra:
+  recipe-maintainers:
+    - danielnachun
