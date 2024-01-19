@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -o xtrace -o nounset -o pipefail -o errexit
+
+export XML_CATALOG_FILES=${PREFIX}/etc/catalog
+./configure --disable-silent \
+    --disable-dependency-tracking \
+    --prefix=${PREFIX} \
+    --libdir=${PREFXI}/lib
+make install

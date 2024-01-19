@@ -1,0 +1,40 @@
+{% set name = "xmlto" %}
+{% set version = "0.0.28" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://releases.pagure.org/xmlto/{{ name }}-{{ version }}.tar.bz2
+  sha256: 1130df3a7957eb9f6f0d29e4aa1c75732a7dfb6d639be013859b5c7ec5421276
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - make
+  host:
+    - sed
+    - util-linux
+  run:
+    - docbook
+    - docbook-xsl
+    - libxslt
+    - sed
+    - util-linux
+
+test:
+  commands:
+    - xmlif -h
+
+about:
+  home: https://pagure.io/xmlto/
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  summary: Convert XML to another format (based on XSL or other tools)
+
+extra:
+  recipe-maintainers:
+    - danielnachun
