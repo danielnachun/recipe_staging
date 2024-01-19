@@ -1,4 +1,4 @@
-{% set version = "3.7.1" %}
+{% set version = "3.12.1" %}
 {% set name = "dune" %}
 
 package:
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/ocaml/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 9ddc1dae09e7be6d0bf22b7d1584d95a1b3d4f5d1bae1d4095dc4e1833fa86b2
+  sha256: b9fd6560879f9d340ae8a87c967b0d2bcd3c4120cffcd9fb661f325078f74f6f
 
 build:
   number: 0
@@ -30,7 +30,6 @@ test:
 about:
   home: https://dune.build/
   license: MIT
-  license_family: MIT
   license_file: LICENSE.md
   summary: A composable build system for OCaml.
   dev_url: https://github.com/ocaml/dune
