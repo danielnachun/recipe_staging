@@ -8,9 +8,9 @@ package:
 
 source:
   url: http://caml.inria.fr/pub/distrib/ocaml-{{ version_major }}.{{ version_minor }}/ocaml-{{ version }}.tar.gz
-  sha256: 57f7b382b3d71198413ede405d95ef3506f1cdc480cda1dca1e26b37cb090e17
+  sha256: 33b8c1df88700ba1f5123aa4bdbc7a125482feafc77e5081ef1725fddf290be1
   patches:
-    - prefix_fix.diff
+    - 0001-prefix-fix.patch
 
 build:
   number: 0
@@ -19,8 +19,14 @@ build:
     - {{ pin_subpackage("ocaml", max_pin="x.x.x") }}
   ignore_prefix_files:
     - bin/ocaml
+    - bin/ocamlcmt
+    - bin/ocamlcp
     - bin/ocamldebug
     - bin/ocamldoc
+    - bin/ocamlmklib
+    - bin/ocamlmktop
+    - bin/ocamloptp
+    - bin/ocamlprof
     - bin/*.byte
 
 requirements:
