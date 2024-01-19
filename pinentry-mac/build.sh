@@ -2,6 +2,8 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+export ACLOCAL_FLAGS="-I ${PREFIX}/share/aclocal"
+export LDFLAGS="-liconv"
 ./autogen.sh
 ./configure --with-ncurses-include-dir=${PREFIX}/include --enable-maintainer-mode
 make

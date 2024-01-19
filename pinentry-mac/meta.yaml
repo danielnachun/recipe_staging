@@ -15,19 +15,17 @@ build:
 
 requirements:
   build:
+    - {{ compiler('c') }}
     - autoconf
     - automake
     - make
     - texinfo
   host:
     - gettext
-    - libiconv
     - libassuan
-    - libtool
-    - ncurses
-  run:
-    - gettext
     - libiconv
+    - libtool
+  run:
     - libassuan
     - libiconv
 
