@@ -9,7 +9,7 @@ source:
   url: https://github.com/hadolint/{{ name }}/archive/v{{ version }}-beta.tar.gz
   sha256: b9461721f689f90e3b1aa691bbf80daaf8bc7e876ba910c45a98b641d9f9dfc2
   patches:
-    - ./0001-fix-ghc-9.8-build.patch
+    - 0001-fix-ghc-9.8-build.patch
 
 build:
   number: 0
