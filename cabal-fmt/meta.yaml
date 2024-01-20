@@ -1,0 +1,40 @@
+{% set name = "cabal-fmt" %}
+{% set version = "0.1.10" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://hackage.haskell.org/package/{{ name }}-{{ version }}/{{ name }}-{{ version }}.tar.gz
+  sha256: b5bc761663596ed4d95b3aef619bda395b99d46158d4c73b76a351c8a407099a
+
+build:
+  number: 0
+  skip: true  # [not unix]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cabal-install
+    - ghc
+  host:
+    - libiconv  # [osx]
+  run:
+    - libiconv  # [osx]
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/phadej/{{ name }}
+  license: BSD-3-Clause
+  license_file: LICENSE
+  summary: An experiment of formatting .cabal files
+  dev_url: https://github.com/phadej/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
