@@ -7,8 +7,10 @@ xcodebuild -arch x86_64 \
     -target terminal-notifier \
     SYMROOT=build \
     -verbose \
-    MACOSX_DEPLOYMENT_TARGET= 12.0 \
+    MACOSX_DEPLOYMENT_TARGET=11.0 \
     CODE_SIGN_IDENTITY=
+
+mkdir -p ${PREFIX}/bin
 mkdir -p ${PREFIX}/libexec/${PKG_NAME}
 cp -r build/Release/terminal-notifier.app ${PREFIX}/libexec/${PKG_NAME}
 
