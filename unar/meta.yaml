@@ -15,30 +15,30 @@ source:
 
 build:
   number: 2
-  skip: True  # [not linux]
+  skip: True  # [win]
 
 requirements:
   build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-    - binutils
+    - {{ compiler('c') }}  # [linux]
+    - {{ compiler('cxx') }}  # [linux]
+    - binutils # [linux]
     - clang  # [linux]
     - clangxx  # [linux]
-    - make
+    - make  # [linux]
   host:
-    - bzip2
-    - gnustep-base #[linux]
-    - icu
-    - libobjc2 #[linux]
-    - wavpack #[linux]
-    - zlib
+    - bzip2  # [linux]
+    - gnustep-base  # [linux]
+    - icu  # [linux]
+    - libobjc2  # [linux]
+    - wavpack  # [linux]
+    - zlib  # [linux]
   run:
-    - bzip2
-    - gnustep-base #[linux]
-    - icu
-    - libobjc2 #[linux]
-    - wavpack #[linux]
-    - libzlib
+    - bzip2  # [linux]
+    - gnustep-base  # [linux]
+    - icu  # [linux]
+    - libobjc2  # [linux]
+    - wavpack  # [linux]
+    - libzlib  # [linux]
 
 test:
   commands:
