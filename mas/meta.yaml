@@ -1,23 +1,21 @@
 {% set name = "mas" %}
-{% set version = "1.8.6" %}
+{% set version = "1.8.7" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/mas-cli/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 648eb6bdd5ae082c5d52c7474dda3f1682cf5d6f2f70719df8480a7edbd6254b
+  git_url: https://github.com/mas-cli/{{ name }}
+  git_rev: v{{ version }}-beta.1
 
 build:
   number: 0
   skip: True  # [not osx]
 
-requirements:
-
 test:
   commands:
-    - {{ name }} --version
+    - {{ name }} version
 
 about:
   home: https://github.com/mas-cli/{{ name }}

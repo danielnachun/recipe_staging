@@ -2,6 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+script/version
 script/build
 script/install ${PREFIX}
 
