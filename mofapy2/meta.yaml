@@ -1,0 +1,49 @@
+{% set name = "mofapy2" %}
+{% set version = "0.7.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/mofapy2-{{ version }}.tar.gz
+  sha256: b89a5fc7ab68ca2a27332ca51b0882d98c2352977ca106079c5edbc82709ae95
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python >=3.8,<4.0
+    - poetry-core
+    - pip
+  run:
+    - python >=3.8.0,<4.0.0
+    - numpy >=1.21.0,<2.0.0
+    - pandas >=1.2.0,<2.0.0
+    - scipy >=1.0.0,<2.0.0
+    - scikit-learn >=1.0.0,<2.0.0
+    - h5py >=3.0.0,<4.0.0
+    - anndata >=0.8,<0.9
+  run_constrained:
+    - anndata >=0.8.0,<0.9.0
+
+test:
+  imports:
+    - mofapy2
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://github.com/bioFAM/mofapy2
+  summary: Multi-omics factor analysis
+  license: LGPL-3.0
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
