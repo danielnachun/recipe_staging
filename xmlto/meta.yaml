@@ -27,7 +27,7 @@ requirements:
 
 test:
   commands:
-    - xmlif -h
+    - xmlto --help
 
 about:
   home: https://pagure.io/xmlto/

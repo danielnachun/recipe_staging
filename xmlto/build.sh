@@ -6,5 +6,5 @@ export XML_CATALOG_FILES=${PREFIX}/etc/catalog
 ./configure --disable-silent \
     --disable-dependency-tracking \
     --prefix=${PREFIX} \
-    --libdir=${PREFXI}/lib
+    --libdir=${PREFIX}/lib
 make install
