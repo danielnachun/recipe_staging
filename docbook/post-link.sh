@@ -8,13 +8,16 @@ create_catalog() {
     catalog_version=$1
     catalog_path="${PREFIX}/share/docbook/xml/${catalog_version}/catalog.xml"
 
-    xmlcatalog --nooout --del file://${catalog_path} ${XML_CATALOG_FILES}
-    xmlcatalog --nooout --add nextCatalog file://${catalog_path} ${XML_CATALOG_FILES}
+    xmlcatalog --noout --del file://${catalog_path} ${XML_CATALOG_FILES}
+    xmlcatalog --noout --add nextCatalog "" file://${catalog_path} ${XML_CATALOG_FILES}
 }
 
-if [ ! -d ${PREFIX}/etc/xml/catalog ]; then
+export -f create_catalog
+
+if [ ! -d "${PREFIX}/etc/xml/catalog" ]; then
+    mkdir -p ${PREFIX}/etc/xml
     xmlcatalog --noout --create ${PREFIX}/etc/xml/catalog
 fi
 
 xml_versions=(42 412 43 44 45 50 51)
-echo ${xml_versions[@]} | tr ' ' '\n' | xargs -I % create_catalog %
+echo ${xml_versions[@]} | tr ' ' '\n' | xargs -I % bash -c "create_catalog %"
