@@ -1,12 +1,12 @@
-{% set version = "0.1.212" %}
+{% set version = "0.1.236" %}
 
 package:
   name: r-susif.alpha
   version: {{ version|replace("-", "_") }}
 
 source:
-  url: https://github.com/stephenslab/susif.alpha/archive/dd4df3668d2ca59dd34a52b6c1b426054a998fbd.zip
-  sha256: ee383462e14fc48730335f89e711b8a5b102a25b777a4f34551f065ac94d10ce
+  url: https://github.com/stephenslab/susif.alpha/archive/ef5b01d99ab6f2a80dfec007c8af91cad5dd9b7f.zip
+  sha256: 664e52eae865c0ee07cf65c669adf8281d149771fd380fdd7997c3fb00fd3d07
 
 build:
   merge_build_host: true  # [win]
