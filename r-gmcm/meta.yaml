@@ -1,0 +1,50 @@
+{% set name = "gmcm" %}
+{% set version = '1.4' %}
+
+package:
+  name: r-{{ name }}
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url:
+    - {{ cran_mirror }}/src/contrib/GMCM_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/GMCM/GMCM_{{ version }}.tar.gz
+  sha256: dd3870981b6da33759b573a165ff4db1ea642b048494f36ba87b627a5443ba8d
+
+build:
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - make
+  host:
+    - r-base=4.2
+    - r-rcpp >=0.10.6
+    - r-rcpparmadillo
+    - r-ellipse
+  run:
+    - r-base>=4.2
+    - r-rcpp >=0.10.6
+    - r-rcpparmadillo
+    - r-ellipse
+
+test:
+  commands:
+    - $R -e "library('GMCM')"           # [not win]
+
+about:
+  home: https://github.com/AEBilgrau/GMCM
+  license: GPL-2.0-or-later
+  summary: Unsupervised Clustering and Meta-analysis using Gaussian Mixture Copula Models.
+  license_file:
+    - '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2'
+  dev_url: https://github.com/AEBilgrau/GMCM
+
+extra:
+  recipe-maintainers:
+    - danielnachun

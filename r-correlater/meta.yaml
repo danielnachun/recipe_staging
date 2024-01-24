@@ -1,0 +1,48 @@
+{% set name = "correlater" %}
+{% set version = "0.1" %}
+
+package:
+  name: r-{{ name }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/aebilgrau/{{ name }}/archive/5d5b4daca042ec4dc37664c8b5a102c36d66e3b3.zip
+  sha256: c09a87ad77693988258e53a62b19d73c8cba87633d1a28525241f28401ddf750
+
+build:
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+    - r-gmcm
+    - r-rcpp
+    - r-rcpparmadillo
+    - r-rcppeigen
+  run:
+    - r-base>=4.2
+    - r-gmcm
+    - r-rcpp
+    - r-rcpparmadillo
+    - r-rcppeigen
+
+test:
+  commands:
+    - $R -e "library('correlateR')"
+
+about:
+  home: https://github.com/aebilgrau/{{ name }}
+  license: GPL-2.0-or-later
+  summary: General purpose correlation and covariance estimation
+  dev_url: https://github.com/aebilgrau/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
