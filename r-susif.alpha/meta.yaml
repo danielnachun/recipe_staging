@@ -1,7 +1,7 @@
 {% set version = "0.2.0" %}
 
 package:
-  name: r-susif.alpha
+  name: r-fsusier
   version: {{ version|replace("-", "_") }}
 
 source:
@@ -40,11 +40,11 @@ requirements:
 
 test:
   commands:
-    - $R -e "library('susiF.alpha')"           # [not win]
-    - "\"%R%\" -e \"library('susiF.alpha')\""  # [win]
+    - $R -e "library('fsusieR')"           # [not win]
+    - "\"%R%\" -e \"library('fsusieR')\""  # [win]
 
 about:
-  home: https://github.com/stephenslab/susif.alpha
+  home: https://github.com/stephenslab/fsusieR
   license: GPL-3.0-or-later
   license_file: LICENSE
   summary: Draft package for "Sum of Single Functions" method.
