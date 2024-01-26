@@ -1,5 +1,5 @@
 {% set name = "joshuto" %}
-{% set version = "0.9.4" %}
+{% set version = "0.9.6" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/kamiyaa/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 5632b0430cee850678e0f004427a3eaf6718e4761f9dd337a920d57919ba50b1
+  sha256: 78d03e0c7971fe715da7e89c6e848112eedb993f04625e720997156c74578d42
 
 build:
   number: 0
