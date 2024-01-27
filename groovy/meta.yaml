@@ -10,11 +10,13 @@ source:
   sha256: 3c3d3dd78c67918d6ed63bdb46a384ed5ab0e24df7a155a7c24d9ac0f3aee759
 
 build:
-  number: 0
+  noarch: generic
+  number: 1
 
 requirements:
   build:
     - graphviz
+    - findutils
     - openjdk >=17,<18
     - unzip
   run:
