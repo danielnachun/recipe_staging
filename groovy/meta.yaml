@@ -16,6 +16,7 @@ build:
 requirements:
   build:
     - graphviz
+    - findutils
     - openjdk >=17,<18
     - unzip
   run:
