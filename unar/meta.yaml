@@ -25,6 +25,7 @@ requirements:
     - clang  # [linux]
     - clangxx  # [linux]
     - make  # [linux]
+    - sed
   host:
     - bzip2  # [linux]
     - gnustep-base  # [linux]

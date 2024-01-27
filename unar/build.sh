@@ -12,8 +12,8 @@ if [[ $target_platform =~ .*linux.* ]]; then
     export CXX=${BUILD_PREFIX}/bin/clang++
     export OBJCFLAGS="-I${PREFIX}/include"
 
-    sed -i -e "s|gcc|${CC}|g" -e "s|g++|${CXX}|g" XADMaster/Makefile.linux
-    sed -i -e "s|gcc|${CC}|g" -e "s|g++|${CXX}|g" UniversalDetector/Makefile.linux
+    sed -i -e "s|gcc|${CC}|g" -e "s|g++|${CXX}|g" Makefile.linux
+    sed -i -e "s|gcc|${CC}|g" -e "s|g++|${CXX}|g" ../UniversalDetector/Makefile.linux
 
     make -f Makefile.linux
 
