@@ -62,6 +62,11 @@ jobs:
           environment-name: boa
           create-args: boa conda-verify mamba
           generate-run-shell: true
+          condarc: |
+            channels:
+              - dnachun
+              - conda-forge
+              - bioconda
 
       - name: Set up working directories
         run: |
@@ -71,14 +76,6 @@ jobs:
             cp -R ${dir} /tmp/recipes
           done
 
-      - name: Set up channels
-        shell: micromamba-shell {0}
-        run: |
-          conda config --file /Users/runner/micromamba-bin/.condarc --append channels bioconda
-          conda config --file /Users/runner/micromamba-bin/.condarc --append channels nodefaults
-          xargs -I % conda config --file /Users/runner/micromamba-bin/.condarc --prepend channels % < .custom_channels
-          conda config --show-sources
-
       - name: Build conda packages
         shell: micromamba-shell {0}
         run: conda mambabuild --output-folder /tmp/conda-bld /tmp/recipes
@@ -86,5 +83,5 @@ jobs:
       - name: Upload packages to GitHub Actions
         uses: actions/upload-artifact@v3
         with:
-          name: packages_${{github.event.pull_request.head.sha}}_osx-64
+          name: conda-bld_${{github.event.pull_request.head.sha}}_osx-64
           path: /tmp/conda-bld
