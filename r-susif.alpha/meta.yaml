@@ -5,7 +5,7 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  url: https://github.com/stephenslab/fsusieR/archive/refs/tags/{{{ version }}}.tar.gz
+  url: https://github.com/stephenslab/fsusieR/archive/refs/tags/{{ version }}.tar.gz
   sha256: 817fc91771ee2cbdb7fa134a3dea0eb52065bd2a1dd9d853a9d2c211201bb3d0
 
 build:
