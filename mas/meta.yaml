@@ -1,0 +1,29 @@
+{% set name = "mas" %}
+{% set version = "1.8.7" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/mas-cli/{{ name }}
+  git_rev: v{{ version }}-beta.1
+
+build:
+  number: 0
+  skip: True  # [not osx]
+
+test:
+  commands:
+    - {{ name }} version
+
+about:
+  home: https://github.com/mas-cli/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: Mac App Store command-line interface
+  dev_url: https://github.com/mas-cli/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
