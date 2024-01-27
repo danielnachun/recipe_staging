@@ -1,0 +1,31 @@
+{% set name = "terminal-notifier" %}
+{% set version = "2.0.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/julienXX/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: 6f22a7626e4e68e88df2005a5f256f7d3b432dbf4c0f8a0c15c968d9e38bf84c
+
+build:
+  number: 0
+  skip: True  # [not osx]
+
+requirements:
+
+test:
+  commands:
+    - {{ name }} -help
+
+about:
+  home: https://github.com/julienXX/{{ name }}
+  license: MIT
+  license_file: LICENSE.md
+  summary: Send macOS User Notifications from the command-line
+  dev_url: https://github.com/julienXX/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
