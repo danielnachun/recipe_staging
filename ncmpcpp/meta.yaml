@@ -27,6 +27,7 @@ requirements:
     - fftw
     - icu
     - libmpdclient
+    - libtool
     - ncurses
     - readline
     - taglib
