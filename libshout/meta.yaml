@@ -1,0 +1,39 @@
+{% set name = "libshout" %}
+{% set version = "2.4.6" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://downloads.xiph.org/releases/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 39cbd4f0efdfddc9755d88217e47f8f2d7108fa767f9d58a2ba26a16d8f7c910
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+    - pkg-config
+  host:
+    - libogg
+    - libvorbis
+    - openssl
+    - speex
+    - libtheora
+
+test:
+  commands:
+    - test -f ${PREFIX}/lib/${PKG_NAME}${SHLIB_EXT}
+
+about:
+  home: https://icecast.org
+  license: LGPL-2.0-or-later
+  license_file: COPYING
+  summary: Data and connectivity library for the icecast server
+
+extra:
+  recipe-maintainers:
+    - danielnachun

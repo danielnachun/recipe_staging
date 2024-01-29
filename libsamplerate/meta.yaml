@@ -1,0 +1,35 @@
+{% set name = "libsamplerate" %}
+{% set version = "0.2.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/libsndfile/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: 16e881487f184250deb4fcb60432d7556ab12cb58caea71ef23960aec6c0405a
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - cmake
+    - make
+    - pkg-config
+
+test:
+  commands:
+    - test -f ${PREFIX}/lib/${PKG_NAME}${SHLIB_EXT}
+
+about:
+  home: https://github.com/libsndfile/${PKG_NAME}
+  license: BSD-2-Clause
+  license_file: COPYING
+  summary: Library for sample rate conversion of audio data
+  dev_url: https://github.com/libsndfile/${PKG_NAME}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
