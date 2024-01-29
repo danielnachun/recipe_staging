@@ -2,6 +2,9 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+export BOOST_INCLUDEDIR=${PREFIX}/include
+export BOOST_LIBRARYDIR=${PREFIX}/lib
+
 meson setup output/release \
     --sysconfdir=${PREFIX}/etc \
     -Dmad=disabled \
