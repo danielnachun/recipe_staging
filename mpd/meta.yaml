@@ -35,7 +35,7 @@ requirements:
     - lame
     - libao
     - libboost-devel
-    - libdbus  # [linux]
+    - dbus  # [linux]
     - libflac
     - libid3tag
     - libmpdclient
@@ -61,7 +61,7 @@ requirements:
     - libao
     - libboost
     - libcurl
-    - libdbus  # [linux]
+    - dbus  # [linux]
     - libexpat
     - libflac
     - libid3tag
