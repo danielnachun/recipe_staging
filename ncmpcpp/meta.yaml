@@ -31,12 +31,14 @@ requirements:
     - ncurses
     - readline
     - taglib
+    - zlib
   run:
     - fftw
     - icu
     - libboost
     - libcurl
     - libmpdclient
+    - libzlib
     - ncurses
     - readline
     - taglib
