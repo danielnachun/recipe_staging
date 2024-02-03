@@ -11,6 +11,8 @@ source:
 
 build:
   number: 0
+  ignore_run_exports:
+    - libjpeg-turbo
 
 requirements:
   build:
@@ -19,6 +21,7 @@ requirements:
     - pkg-config
     - sed
   host:
+    - libjpeg-turbo
     - libsvg-cairo
   run:
     - cairo
