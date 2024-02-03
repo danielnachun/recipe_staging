@@ -19,6 +19,7 @@ requirements:
     - make
     - nasm
     - pkg-config
+    - sed
     - {{ compiler('cxx') }}
   host:
     - zlib
