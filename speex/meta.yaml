@@ -18,9 +18,9 @@ requirements:
   build:
     - {{ compiler('c') }}
     - make
+    - pkg-config
   host:
     - libogg
-
   run:
     - libogg
 
