@@ -31,8 +31,10 @@ requirements:
     - libtool
     - libpng
     - libxml2
+    - zlib
   run:
     - libxml2
+    - libzlib
 
 test:
   commands:

@@ -19,12 +19,10 @@ requirements:
     - pkg-config
     - sed
   host:
-    - zlib
     - libsvg-cairo
   run:
     - cairo
     - libsvg-cairo
-    - libzlib
 
 test:
   commands:
