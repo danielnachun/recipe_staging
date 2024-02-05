@@ -28,7 +28,7 @@ requirements:
 test:
   commands:
     - podman --help
-    - {{ name }} --help 2>&1 | grep -q "This command must be ran as root via sudo or osascript"
+    - {{ name }} --version
 
 about:
   home: https://github.com/containers/{{ name }}
