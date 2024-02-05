@@ -1,0 +1,28 @@
+From 7ec1ece0c17e9982791dc137debac4b7374dbc5b Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Sun, 4 Feb 2024 11:24:32 -0800
+Subject: [PATCH 4/4] handle undefined constants in strace.c
+
+---
+ linux-user/strace.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/linux-user/strace.c b/linux-user/strace.c
+index cf26e5526..14507af52 100644
+--- a/linux-user/strace.c
++++ b/linux-user/strace.c
+@@ -572,9 +572,11 @@ print_socket_protocol(int domain, int type, int protocol)
+         case NETLINK_CRYPTO:
+             qemu_log("NETLINK_CRYPTO");
+             break;
++        #ifdef NETLINK_SMC
+         case NETLINK_SMC:
+             qemu_log("NETLINK_SMC");
+             break;
++        #endif
+         default:
+             qemu_log("%d", protocol);
+             break;
+-- 
+2.43.0
+
