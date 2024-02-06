@@ -1,4 +1,5 @@
 FROM condaforge/linux-anvil-cos7-x86_64
+USER root
 
 SHELL ["/bin/bash", "-c"]
 RUN yum install -y mesa-libGL
