@@ -68,10 +68,19 @@ jobs:
         uses: docker/setup-buildx-action@v2
 
       - name: Build and export docker containers
+        if: !contains(github.event.pull_request.labels.*.name, 'centos7')
         uses: docker/build-push-action@v4
         with:
           load: true
           file: .github/mambaforge_container.df
+          tags: conda_mambabuild:latest
+
+      - name: Build and export docker containers
+        if: contains(github.event.pull_request.labels.*.name, 'centos7')
+        uses: docker/build-push-action@v4
+        with:
+          load: true
+          file: .github/centos7_container.df
           tags: conda_mambabuild:latest
 
       - name: Build conda packages
