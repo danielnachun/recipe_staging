@@ -75,6 +75,10 @@ jobs:
           file: .github/mambaforge_container.df
           tags: conda_mambabuild:latest
 
+      - name: Get host UID
+        if: contains(github.event.pull_request.labels.*.name, 'centos7')
+        run: echo "HOST_USER_ID=$(id -u)" >> $GITHUB_ENV
+
       - name: Build and export docker containers
         if: contains(github.event.pull_request.labels.*.name, 'centos7')
         uses: docker/build-push-action@v4
