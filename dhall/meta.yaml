@@ -1,0 +1,66 @@
+{% set name = "dhall" %}
+{% set version = "1.42.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/dhall-lang/dhall-haskell.git
+  git_tag: {{ version }}
+  patches:
+    - 0001-fix-ghc-9.8-build.patch
+
+build:
+  number: 0
+  skip: true  # [not unix]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cabal-install
+    - ghc
+    - libsodium
+    - ncurses
+    - zlib
+  host:
+    - libsodium
+    - libiconv  # [osx]
+    - ncurses
+    - zlib
+  run:
+    - libiconv  # [osx]
+    - libzlib
+
+test:
+  commands:
+    - dhall --help
+    - dhall-to-json --help
+    - dhall-to-nixpkgs --help
+    - dhall-lsp-server --help
+    - dhall-to-nix --help
+    - yaml-to-dhall --help
+    - dhall-to-bash --help
+    - csv-to-dhall --help
+    - dhall-to-toml --help
+    - openapi-to-dhall --help
+    - dhall-docs --help
+    - dhall-docs --help
+    - json-to-dhall --help
+    - toml-to-dhall --help
+    - dhall-to-yaml-ng --help
+    - dhall-to-yaml --help
+    - dhall-to-csv --help
+
+about:
+  home: https://dhall-lang.org
+  license: BSD-3-Clause
+  license_file: LICENSE
+  summary: Maintainable configuration files
+  doc_url: https://dhall-lang.org
+  dev_url: https://github.com/dhall-lang/dhall-haskell
+
+extra:
+  recipe-maintainers:
+    - danielnachun
