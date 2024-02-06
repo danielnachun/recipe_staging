@@ -2,7 +2,7 @@ FROM condaforge/linux-anvil-cos7-x86_64
 
 SHELL ["/bin/bash", "-c"]
 RUN yum install -y mesa-libGL
-COPY custom_channels /tmp/custom_channels
+COPY .github/custom_channels /tmp/custom_channels
 RUN source /opt/conda/etc/profile.d/conda.sh; \
     conda activate; \
     mamba install boa conda-verify; \
