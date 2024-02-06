@@ -6,6 +6,7 @@ COPY .github/custom_channels /tmp/custom_channels
 RUN source /opt/conda/etc/profile.d/conda.sh; \
     conda activate; \
     mamba install boa conda-verify; \
+    mamba clean -ay; \
     conda config --append channels bioconda; \
     conda config --append channels nodefaults; \
-    xargs -I % conda config --prepend channels % < /tmp/custom_channels
+    xargs -I % conda config --prepend channels % < /tmp/custom_channels 
