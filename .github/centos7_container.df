@@ -1,8 +1,7 @@
 FROM condaforge/linux-anvil-cos7-x86_64
 
 SHELL ["/bin/bash", "-c"]
-RUN apt-get update
-RUN apt-get install -y libgl1-mesa-glx
+RUN yum install -y mesa-libGL
 RUN mamba install boa conda-verify
 RUN conda config --append channels bioconda
 RUN conda config --append channels nodefaults
