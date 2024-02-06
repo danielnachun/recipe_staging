@@ -1,0 +1,38 @@
+{% set name = "hadolint" %}
+{% set version = "2.12.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/hadolint/{{ name }}/archive/v{{ version }}-beta.tar.gz
+  sha256: b9461721f689f90e3b1aa691bbf80daaf8bc7e876ba910c45a98b641d9f9dfc2
+  patches:
+    - 0001-fix-ghc-9.8-build.patch
+
+build:
+  number: 0
+  skip: true  # [not unix]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cabal-install
+    - ghc
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/hadolint/{{ name }}
+  license: GPL-3.0-only
+  license_file: LICENSE
+  summary: Smarter Dockerfile linter to validate best practices
+  dev_url: https://github.com/hadolint/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
