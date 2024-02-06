@@ -1,0 +1,36 @@
+{% set name = "docker" %}
+{% set version = "25.0.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/docker/cli/archive/v{{ version }}.tar.gz
+  sha256: e52557b663d0acedd906d197d0159374dd3e43e29a1c9d01b5f1bfa763d7dd25
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+    - go-licenses
+    - go-md2man
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/docker/cli
+  license: Apache-2.0
+  license_file: 
+    - LICENSE
+    - license-files/
+  summary: Pack, ship and run any application as a lightweight container
+  dev_url: https://github.com/docker/cli
+
+extra:
+  recipe-maintainers:
+    - danielnachun
