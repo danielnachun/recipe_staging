@@ -84,7 +84,7 @@ jobs:
           tags: conda_mambabuild:latest
 
       - name: Build conda packages
-        run: docker run --rm --volume /tmp:/tmp:rw conda_mambabuild conda mambabuild --output-folder /tmp/conda-bld /tmp/recipes
+        run: docker run --privileged --rm --volume /tmp:/tmp:rw,z conda_mambabuild conda mambabuild --output-folder /tmp/conda-bld /tmp/recipes
 
       - name: Upload artifacts to GitHub Actions
         uses: actions/upload-artifact@v3
