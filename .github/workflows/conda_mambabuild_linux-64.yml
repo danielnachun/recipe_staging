@@ -56,6 +56,9 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Free Disk Space (Ubuntu)
+        uses: jlumbroso/free-disk-space@main
+
       - name: Set up working directories
         run: |
           mkdir /tmp/recipes
