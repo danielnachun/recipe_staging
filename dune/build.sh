@@ -5,6 +5,9 @@ set -o xtrace -o nounset -o pipefail -o errexit
 make release
 make PREFIX=${PREFIX} install
 mkdir -p ${PREFIX}/share/emacs/site-lisp/${PKG_NAME}
+mkdir -p ${PREFIX}/share/man/man1
+mkdir -p ${PREFIX}/share/man/man3
+mkdir -p ${PREFIX}/share/man/man5
 mv ${PREFIX}/man/man1/* ${PREFIX}/share/man/man1
 mv ${PREFIX}/man/man3/* ${PREFIX}/share/man/man3
 mv ${PREFIX}/man/man5/* ${PREFIX}/share/man/man5
