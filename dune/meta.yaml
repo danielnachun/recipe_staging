@@ -1,0 +1,39 @@
+{% set version = "3.13.1" %}
+{% set name = "dune" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/ocaml/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: 95d831b6964bf47c60672bfc460c0db392ddbc3dee255129c4a4d5029435153f
+
+build:
+  number: 0
+  skip: true  # [win]
+  ignore_run_exports:
+    - ocaml
+
+requirements:
+  build:
+    - sysroot_linux-64=2.17  #[linux]
+    - make  # [unix]
+    - m2-make  # [win]
+    - posix  # [win]
+    - ocaml
+
+test:
+  commands:
+    - dune --version
+
+about:
+  home: https://dune.build/
+  license: MIT
+  license_file: LICENSE.md
+  summary: A composable build system for OCaml.
+  dev_url: https://github.com/ocaml/dune
+
+extra:
+  recipe-maintainers:
+    - danielnachun
