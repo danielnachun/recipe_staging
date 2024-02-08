@@ -15,19 +15,9 @@ source:
 build:
   number: 0
   skip: true  # [win]
+  binary_relocation: false
   run_exports:
     - {{ pin_subpackage("ocaml", max_pin="x.x.x") }}
-  ignore_prefix_files:
-    - bin/ocaml
-    - bin/ocamlcmt
-    - bin/ocamlcp
-    - bin/ocamldebug
-    - bin/ocamldoc
-    - bin/ocamlmklib
-    - bin/ocamlmktop
-    - bin/ocamloptp
-    - bin/ocamlprof
-    - bin/*.byte
 
 requirements:
   build:
