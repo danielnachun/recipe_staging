@@ -18,6 +18,11 @@ build:
   binary_relocation: false
   run_exports:
     - {{ pin_subpackage("ocaml", max_pin="x.x.x") }}
+  ignore_prefix_files:
+    - bin/ocaml
+    - bin/ocamldebug
+    - bin/ocamldoc
+    - bin/*.byte
 
 requirements:
   build:
