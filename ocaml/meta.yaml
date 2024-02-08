@@ -22,7 +22,7 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
-    - sysroot_linux-64=2.17  # [linux64]
+    - sysroot_linux-64=2.17  # [linux]
     - make  # [unix]
     - m2-make  # [win]
     - posix  # [win]
