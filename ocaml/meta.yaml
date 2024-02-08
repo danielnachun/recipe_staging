@@ -20,8 +20,14 @@ build:
     - {{ pin_subpackage("ocaml", max_pin="x.x.x") }}
   ignore_prefix_files:
     - bin/ocaml
+    - bin/ocamlcmt
+    - bin/ocamlcp
     - bin/ocamldebug
     - bin/ocamldoc
+    - bin/ocamlmklib
+    - bin/ocamlmktop
+    - bin/ocamloptp
+    - bin/ocamlprof
     - bin/*.byte
 
 requirements:
