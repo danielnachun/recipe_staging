@@ -1,4 +1,4 @@
-{% set version = "3.12.1" %}
+{% set version = "3.13.1" %}
 {% set name = "dune" %}
 
 package:
@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/ocaml/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 95f7f173bd0265a796600051c79d5f8cd51673a8896608411debd90ca4e15d75
+  url: https://github.com/ocaml/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: 95d831b6964bf47c60672bfc460c0db392ddbc3dee255129c4a4d5029435153f
 
 build:
   number: 0
