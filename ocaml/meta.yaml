@@ -15,7 +15,6 @@ source:
 build:
   number: 0
   skip: true  # [win]
-  binary_relocation: false
   run_exports:
     - {{ pin_subpackage("ocaml", max_pin="x.x.x") }}
   ignore_prefix_files:
@@ -38,8 +37,10 @@ requirements:
     - m2-make  # [win]
     - posix  # [win]
   host:
+    - zstd
   run:
     - {{ compiler('c') }}
+    - zstd
 
 test:
   commands:
