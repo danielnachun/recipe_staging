@@ -21,6 +21,10 @@ requirements:
     - {{ compiler('cxx') }}
     - cabal-install
     - ghc
+  host:
+    - libiconv  #[osx]
+  run:
+    - libiconv  #[osx]
 
 test:
   commands:
