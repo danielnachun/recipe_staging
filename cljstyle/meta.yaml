@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/greglook/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: d056fe0b511616567bf0cf191d5bc33725dad76165a39ed29f69ec0a2b95bc9d
+  sha256: 4b08de8a530a749562006a484c748dfdaae979b1787ef739bd0c1f3ebd240ee3
 
 build:
   number: 0
