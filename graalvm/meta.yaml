@@ -7,7 +7,7 @@ package:
 
 source:
   - url: https://github.com/oracle/graal/archive/refs/tags/vm-ce-{{ version }}.tar.gz  # [linux]
-    sha256: 4c087b505f8879354cff9d0a90433a397099d92b34ea3789e6a0be4424b8a2ed  # [linux]
+    sha256: f7e6efdb4a9e8ed82f4c624d907180e49cefb91894bc7e4bb143cc745de21823  # [linux]
     folder: graal  # [linux]
     patches:  # [linux]
       - 0001-disable-toolchain-test.patch  # [linux]
@@ -30,7 +30,7 @@ requirements:
     - ninja  # [linux]
     - sed  # [linux]
   host:
-    - zlib  # [linux]
+    - zlib=1.2  # [linux]
   run:
     - alsa-lib  #[linux]
     - giflib  # [linux]
@@ -39,7 +39,7 @@ requirements:
     - lcms2  # [linux]
     - libjpeg-turbo  # [linux]
     - libpng  # [linux]
-    - libzlib  # [linux]
+    - libzlib=1.2  # [linux]
     - xorg-libx11  # [linux]
     - xorg-libxext  # [linux]
     - xorg-libxi  # [linux]
