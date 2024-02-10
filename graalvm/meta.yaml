@@ -1,32 +1,36 @@
 {% set name = "graalvm" %}
-{% set version = "23.0.1" %}
+{% set version = "23.1.2" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/oracle/graal/archive/refs/tags/vm-ce-{{ version }}.tar.gz
-  sha256: 39214d58c2ade625a686fb6e40c2bc529230c995a88fa611186faa7bda4ffbdb
-  folder: graal
+  - url: https://github.com/oracle/graal/archive/refs/tags/vm-ce-{{ version }}.tar.gz  # [linux]
+    sha256: 4c087b505f8879354cff9d0a90433a397099d92b34ea3789e6a0be4424b8a2ed  # [linux]
+    folder: graal  # [linux]
+    patches:  # [linux]
+      - 0001-disable-toolchain-test.patch  # [linux]
+  - url: https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-21.0.2/graalvm-community-jdk-21.0.2_macos-x64_bin.tar.gz  # [osx]
+    sha256: 7a8aa93fa45d1721908477abf4732a32637d420ffcb66ada9fb6456440b0d9e1  # [osx]
 
 build:
   number: 0
 
 requirements:
   build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-    - binutils
+    - {{ compiler('c') }}  # [linux]
+    - {{ compiler('cxx') }}  # [linux]
+    - binutils  # [linux]
     - gcc  # [linux]
     - gxx  # [linux]
-    - make
-    - mx
-    - ninja
-    - labs-openjdk
-    - sed
+    - labs-openjdk  # [linux]
+    - make  # [linux]
+    - mx  # [linux]
+    - ninja  # [linux]
+    - sed  # [linux]
   host:
-    - zlib
+    - zlib  # [linux]
   run:
     - alsa-lib  #[linux]
     - giflib  # [linux]
@@ -35,7 +39,7 @@ requirements:
     - lcms2  # [linux]
     - libjpeg-turbo  # [linux]
     - libpng  # [linux]
-    - libzlib
+    - libzlib  # [linux]
     - xorg-libx11  # [linux]
     - xorg-libxext  # [linux]
     - xorg-libxi  # [linux]
@@ -49,7 +53,9 @@ test:
 about:
   home: http://graalvm.org/
   license: UPL-1.0
-  license_file: graal/LICENSE
+  license_file: 
+    - graal/LICENSE  # [linux]
+    - Contents/Home/LICENSE_NATIVEIMAGE.txt  # [osx]
   summary: "GraalVM: Run Programs Faster Anywhere"
 
 extra:
