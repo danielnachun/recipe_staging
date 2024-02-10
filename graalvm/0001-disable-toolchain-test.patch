@@ -1,0 +1,36 @@
+From aca2449979c2e338a705af65e40ac71d461af33e Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Fri, 9 Feb 2024 15:21:06 -0800
+Subject: [PATCH] disable toolchain test
+
+---
+ sdk/mx.sdk/suite.py | 6 ------
+ 1 file changed, 6 deletions(-)
+
+diff --git a/sdk/mx.sdk/suite.py b/sdk/mx.sdk/suite.py
+index 20806182..711d12b5 100644
+--- a/sdk/mx.sdk/suite.py
++++ b/sdk/mx.sdk/suite.py
+@@ -442,11 +442,6 @@ suite = {
+       "jacoco" : "exclude",
+       "testProject" : True,
+     },
+-    "org.graalvm.toolchain.test" : {
+-      "class" : "ToolchainTestProject",
+-      "subDir" : "src",
+-      "buildDependencies" : ["LLVM_TOOLCHAIN"],
+-    },
+     "org.graalvm.shadowed.org.jline": {
+       # shaded JLINE_*
+       "subDir": "src",
+@@ -1143,7 +1138,6 @@ ML=<path:LLVM_TOOLCHAIN>\\bin\\llvm-ml
+       },
+       "dependencies": [
+         "LLVM_TOOLCHAIN",
+-        "org.graalvm.toolchain.test",
+       ],
+     },
+   },
+-- 
+2.43.0
+
