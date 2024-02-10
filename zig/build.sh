@@ -12,7 +12,8 @@ if [[ ${target_platform} =~ .*linux.* ]]; then
       -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_C_COMPILER=${CC} \
       -DCMAKE_CXX_COMPILER=${CXX} \
-      -DZIG_STATIC_LLVM=OFF
+      -DZIG_STATIC_LLVM=OFF \
+      -DZIG_TARGET_TRIPE=native-linux-2.17
 
     cmake --build .
     cmake --install . -v

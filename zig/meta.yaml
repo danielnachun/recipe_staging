@@ -21,7 +21,7 @@ requirements:
   build:
     - {{ compiler('c') }}  # [linux]
     - {{ compiler('cxx') }}  # [linux]
-    - sysroot_linux-64 2.17  # [linux64]
+    - sysroot_linux-64 2.17  # [linux]
     - cmake >=2.8.12  # [linux]
     - make  # [linux]
   host:
