@@ -1,10 +1,13 @@
 {% set name = "labs-openjdk" %}
-{% set version = "23.0" %}
-{% set boot_version = "20.0.0" %}
-{% set zulu_build = "20.28.85-ca" %}
-{% set zulu_build_arm64 = "20.28.85-ca" %}
-{% set openjdk_revision = "36" %}
-{% set jvmci_revision = "15" %}
+{% set version = "23.1" %}
+{% set jvmci_revision = "33" %}
+
+{% set boot_version = "21.0.2" %}
+{% set openjdk_revision = "13" %}
+
+{% set zulu_build = "21.32.17-ca" %}
+{% set zulu_url = "https://cdn.azul.com/zulu/bin" %}
+{% set zulu_base = "zulu" ~ zulu_build ~ "-jdk" ~ boot_version %}
 
 package:
   name: {{ name|lower }}
@@ -12,28 +15,25 @@ package:
 
 
 source:
-  - url: https://github.com/adoptium/temurin{{ boot_version.split(".")[0] }}-binaries/releases/download/jdk-{{ boot_version.split(".")[0] }}+{{ openjdk_revision }}/OpenJDK{{ boot_version.split(".")[0] }}U-jdk_x64_linux_hotspot_{{ boot_version.split(".")[0] }}_{{ openjdk_revision }}.tar.gz   # [build_platform == "linux-64"]
-    sha256: fb6000faf47fffcda8caf01f60097d582728a6fffb6c1b85c8075c674f0c9281  # [build_platform == "linux-64"]
+  - url: https://github.com/adoptium/temurin{{ boot_version.split(".")[0] }}-binaries/releases/download/jdk-{{ boot_version }}+{{ openjdk_revision }}/OpenJDK{{ boot_version.split(".")[0] }}U-jdk_x64_linux_hotspot_{{ boot_version }}_{{ openjdk_revision }}.tar.gz   # [build_platform == "linux-64"]
+    sha256: 454bebb2c9fe48d981341461ffb6bf1017c7b7c6e15c6b0c29b959194ba3aaa5  # [build_platform == "linux-64"]
 
-  - url: https://cdn.azul.com/zulu/bin/zulu{{ zulu_build }}-jdk{{ boot_version }}-macosx_x64.zip  # [osx and x86_64]
-    sha256: f065f3eb951d15f26856ad8a9c1bb41dfffa9720cf731e13d9a82308ec162fa8  # [osx and x86_64]
+  - url: {{ zulu_url }}/{{ zulu_base }}-macosx_x64.zip  # [osx and x86_64]
+    sha256: 1fde3ae20ad28f9a1820524d7699f4a349382af1dc7d339f27acc75ca0dd27ab  # [osx and x86_64]
    
-  - url: https://cdn.azul.com/zulu/bin/zulu{{ zulu_build_arm64 }}-jdk{{ boot_version }}-macosx_aarch64.zip  # [osx and arm64]
-    sha256: decb073a2030477eda4089e9579df1211c55b4f6b1d6bdd4389f825949b09404  # [osx and arm64]
+  - url: {{ zulu_url }}/{{ zulu_base }}-macosx_aarch64.zip  # [osx and arm64]
+    sha256: 1fde3ae20ad28f9a1820524d7699f4a349382af1dc7d339f27acc75ca0dd27ab  # [osx and arm64]
 
   - url: https://github.com/dejavu-fonts/dejavu-fonts/releases/download/version_2_37/dejavu-fonts-ttf-2.37.zip  # [linux]
     sha256: 7576310b219e04159d35ff61dd4a4ec4cdba4f35c00e002a136f00e96a908b0a  # [linux]
     folder: fonts  # [linux]
 
-  - url: https://github.com/graalvm/labs-openjdk-20/archive/refs/tags/jvmci-{{ version }}-b{{ jvmci_revision }}.tar.gz
-    sha256: d507ed32b16239a7ca8129b6247eb404d4701b457bd4c703a9d2c5e3158e2d18
+  - url: https://github.com/graalvm/labs-openjdk-21/archive/jvmci-{{ version }}-b{{ jvmci_revision }}.tar.gz
+    sha256: 72e37516fcc521bdbb74dcbb655d3903b32213f17ad7681024edb5b3c06c9306
     folder: src
 
 build:
   number: 0
-  rpaths:
-    - lib
-    - lib/jvm/lib
 
 requirements:
   build:
@@ -44,7 +44,7 @@ requirements:
     - unzip             # [unix]
     - zip               # [unix]
     - make !=4.3.*      # [unix]
-    - zlib              # [linux and (build_platform != target_platform)]
+    - zlib=1.2             # [linux and (build_platform != target_platform)]
     - freetype          # [linux and (build_platform != target_platform)]
     - harfbuzz          # [linux and (build_platform != target_platform)]
     - libpng            # [linux and (build_platform != target_platform)]
@@ -67,7 +67,7 @@ requirements:
     - file              # [unix]
     - sed               # [unix]
   host:
-    - zlib              # [unix]
+    - zlib=1.2              # [unix]
     - freetype          # [unix]
     - harfbuzz          # [unix]
     - libpng            # [unix]
