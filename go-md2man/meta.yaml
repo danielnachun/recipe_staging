@@ -1,0 +1,35 @@
+{% set name = "go-md2man" %}
+{% set version = "2.0.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/cpuguy83/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 7ca3a04bb4ab83387538235decc42a535097a05d2fb9f2266d0c47b33119501f
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+    - go-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/cpuguy83/{{ name }}
+  license: MIT
+  license_file: 
+    - LICENSE.md
+    - license-files/
+  summary: Converts markdown into roff (man pages)
+  dev_url: https://github.com/cpuguy83/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun

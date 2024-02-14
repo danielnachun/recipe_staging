@@ -1,0 +1,23 @@
+From 4f676a3a793a870bcc7faf99dd8f4b80698373d7 Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Sun, 4 Feb 2024 11:23:31 -0800
+Subject: [PATCH 3/4] handle undefined constants in elfload.c
+
+---
+ linux-user/elfload.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/linux-user/elfload.c b/linux-user/elfload.c
+index cf9e74468..4d01a0070 100644
+--- a/linux-user/elfload.c
++++ b/linux-user/elfload.c
+@@ -1,5 +1,6 @@
+ /* This is the Linux kernel elf-loading code, ported into user space */
+ #include "qemu/osdep.h"
++#include <linux/mman.h>
+ #include <sys/param.h>
+ 
+ #include <sys/resource.h>
+-- 
+2.43.0
+

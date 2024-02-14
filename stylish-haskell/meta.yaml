@@ -1,0 +1,42 @@
+{% set name = "stylish-haskell" %}
+{% set version = "0.14.5.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/haskell/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 580af1dc2f2cc3089bb255fd0af15dfb795a9ba0d9e76b2d0ce0c9ed2bcd9f07
+  patches:
+    - 630ac1bf035a95cda0295ce669de06da17b91c0f.patch
+
+build:
+  number: 0
+  skip: true  # [not unix]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cabal-install
+    - ghc
+  host:
+    - libiconv  # [osx]
+  run: 
+    - libiconv  # [osx]
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/haskell/{{ name }}
+  license: BSD-3-Clause
+  license_file: LICENSE
+  summary: Haskell code prettifier
+  dev_url: https://github.com/haskell/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun

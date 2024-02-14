@@ -1,0 +1,41 @@
+{% set name = "alex" %}
+{% set version = "3.5.0.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/haskell/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 341fecfe5f74cd53dc771f422805dd4a59903dcd57d9f69a3dc4f69f4ed662a4
+  folder: alex
+
+build:
+  number: 0
+  skip: true  # [not unix]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cabal-install
+    - ghc
+  host:
+    - libiconv  #[osx]
+  host:
+    - libiconv  #[osx]
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/haskell/{{ name }}
+  license: BSD-3-Clause
+  license_file: alex/LICENSE
+  summary: A lexical analyser generator for Haskell
+  dev_url: https://github.com/haskell/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun

@@ -1,0 +1,27 @@
+From 6e270a650f0ccec0dc269106db2a3f2287c4a46e Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Wed, 17 Jan 2024 21:57:11 -0800
+Subject: [PATCH] fix ghc-9.8 build
+
+---
+ cabal.project | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
+
+diff --git a/cabal.project b/cabal.project
+index 8b2b6d6..5ff703f 100644
+--- a/cabal.project
++++ b/cabal.project
+@@ -4,8 +4,5 @@ packages:
+ optional-packages:
+   vendored/**/*.cabal
+ 
+-source-repository-package
+-    type: git
+-    location: https://github.com/lorenzo/shellcheck
+-    tag: 07095b233a60b819df6710b7741a59bac62179e1
+-    --sha256: 114yfgp40klrm32al93j7fh7lzzg7scqqnf8cc953h2m22k0c48q
++package *
++  ghc-options: -XDuplicateRecordFields
+-- 
+2.43.0
+

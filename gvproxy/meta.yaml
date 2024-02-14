@@ -1,0 +1,38 @@
+{% set name = "gvproxy" %}
+{% set version = "0.7.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/containers/gvisor-tap-vsock/archive/v{{ version }}.tar.gz
+  sha256: cbc97a44b6ca8f6c427ac58e193aa39c28674e4f1d2af09b5a9e35d1d3bb7fd3
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+    - go-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/containers/gvisor-tap-vsock
+  license: Apache-2.0
+  license_file: 
+    - LICENSE
+    - license-files_gvproxy/
+    - license-files_sshproxy/  # [win]
+    - license-files_qemu-wrapper/  # [not win]
+    - license-files_vm/  # [linux]
+  summary: A new network stack based on gVisor
+  dev_url: https://github.com/containers/gvisor-tap-vsock
+
+extra:
+  recipe-maintainers:
+    - danielnachun

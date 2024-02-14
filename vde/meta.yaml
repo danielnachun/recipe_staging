@@ -1,0 +1,35 @@
+{% set name = "vde" %}
+{% set version = "2.3.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/virtualsquare/vde-2/archive/v{{ version }}.tar.gz
+  sha256: a7d2cc4c3d0c0ffe6aff7eb0029212f2b098313029126dcd12dc542723972379
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - autoconf
+    - automake
+    - libtool
+    - make
+
+test:
+  commands:
+    - vde_switch -v
+
+about:
+  home: https://github.com/virtualsquare/vde-2
+  license: GPL-2.0-or-later AND LGPL-2.1-or-later
+  license_file: COPYING
+  summary: Ethernet compliant virtual network
+
+extra:
+  recipe-maintainers:
+    - danielnachun

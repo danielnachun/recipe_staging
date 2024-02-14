@@ -1,0 +1,92 @@
+From 99b92696028c8564f54f32bd98cfe4a640f3aea1 Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Thu, 18 Jan 2024 15:54:28 -0800
+Subject: [PATCH] prefix fix
+
+---
+ runtime/dynlink.c            | 1 -
+ stdlib/Makefile              | 9 ++-------
+ tools/ocamlmklib.ml          | 3 +--
+ utils/config.fixed.ml        | 2 +-
+ utils/config.generated.ml.in | 2 +-
+ 5 files changed, 5 insertions(+), 12 deletions(-)
+
+diff --git a/runtime/dynlink.c b/runtime/dynlink.c
+index e259b44..b7c5b92 100644
+--- a/runtime/dynlink.c
++++ b/runtime/dynlink.c
+@@ -82,7 +82,6 @@ CAMLexport char_os * caml_get_stdlib_location(void)
+   char_os * stdlib;
+   stdlib = caml_secure_getenv(T("OCAMLLIB"));
+   if (stdlib == NULL) stdlib = caml_secure_getenv(T("CAMLLIB"));
+-  if (stdlib == NULL) stdlib = OCAML_STDLIB_DIR;
+   return stdlib;
+ }
+ 
+diff --git a/stdlib/Makefile b/stdlib/Makefile
+index ffd472e..5af65a2 100644
+--- a/stdlib/Makefile
++++ b/stdlib/Makefile
+@@ -113,17 +113,12 @@ CAMLHEADERS =\
+ # patterns and $(subst ...) since `camlheader%:` wouldn't match `camlheader`
+ ifeq "$(SHEBANGSCRIPTS)" "true"
+ camlhead%: $(ROOTDIR)/Makefile.config Makefile
+-ifeq "$(LONG_SHEBANG)" "true"
+-	$(V_GEN)echo '#!/bin/sh' > $@ && \
+-	echo 'exec "$(BINDIR)/ocamlrun$(subst er,,$*)" "$$0" "$$@"' >> $@
+-else
+-	$(V_GEN)echo '#!$(BINDIR)/ocamlrun$(subst er,,$*)' > $@
+-endif
++	$(V_GEN)echo '#!/usr/bin/env ocamlrun$(subst er,,$*)' > $@
+ 
+ # TODO This does not take long shebangs into account (since TARGET_BINDIR is not
+ #      yet processed by configure)
+ target_%: $(ROOTDIR)/Makefile.config Makefile
+-	$(V_GEN)echo '#!$(TARGET_BINDIR)/ocamlrun$(subst camlheader,,$*)' > $@
++	$(V_GEN)echo '#!/usr/bin/env ocamlrun$(subst camlheader,,$*)' > $@
+ 
+ camlheader_ur: Makefile
+ 	$(V_GEN)echo '#!' | tr -d '\012' > $@
+diff --git a/tools/ocamlmklib.ml b/tools/ocamlmklib.ml
+index f6bfa96..2c73c8a 100644
+--- a/tools/ocamlmklib.ml
++++ b/tools/ocamlmklib.ml
+@@ -27,8 +27,7 @@ let mklib out files opts =
+ 
+ (* PR#4783: under Windows, don't use absolute paths because we do
+    not know where the binary distribution will be installed. *)
+-let compiler_path name =
+-  if Sys.os_type = "Win32" then name else Filename.concat Config.bindir name
++let compiler_path name = name
+ 
+ let bytecode_objs = ref []  (* .cmo,.cma,.ml,.mli files to pass to ocamlc *)
+ and native_objs = ref []    (* .cmx,.ml,.mli files to pass to ocamlopt *)
+diff --git a/utils/config.fixed.ml b/utils/config.fixed.ml
+index e0ca8d4..93b46fd 100644
+--- a/utils/config.fixed.ml
++++ b/utils/config.fixed.ml
+@@ -21,7 +21,7 @@
+ let boot_cannot_call s = "/ The boot compiler should not call " ^ s
+ 
+ let bindir = "/tmp"
+-let standard_library_default = "/tmp"
++let standard_library_default = (Sys.getenv("OCAML_PREFIX") ^ "/lib/ocaml")
+ let ccomp_type = "n/a"
+ let c_compiler = boot_cannot_call "the C compiler"
+ let c_output_obj = ""
+diff --git a/utils/config.generated.ml.in b/utils/config.generated.ml.in
+index 83d99af..6600999 100644
+--- a/utils/config.generated.ml.in
++++ b/utils/config.generated.ml.in
+@@ -20,7 +20,7 @@
+ 
+ let bindir = {@QS@|@ocaml_bindir@|@QS@}
+ 
+-let standard_library_default = {@QS@|@ocaml_libdir@|@QS@}
++let standard_library_default = (Sys.getenv("OCAML_PREFIX") ^ "/lib/ocaml")
+ 
+ let ccomp_type = {@QS@|@ccomptype@|@QS@}
+ let c_compiler = {@QS@|@CC@|@QS@}
+-- 
+2.43.0
+

@@ -1,0 +1,40 @@
+{% set name = "hlint" %}
+{% set version = "3.8" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/ndmitchell/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 70082004f954acdf63a5c76ccd6ee229295c5667c89d6085bc8c79756b238f2f
+
+build:
+  number: 0
+  skip: true  # [not unix]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cabal-install
+    - ghc
+  host:
+    - libiconv  #[osx]
+  host:
+    - libiconv  #[osx]
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/ndmitchell/{{ name }}
+  license: BSD-3-Clause
+  license_file: LICENSE
+  summary: Haskell source code suggestions
+  dev_url: https://github.com/ndmitchell/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun

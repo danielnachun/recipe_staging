@@ -1,0 +1,46 @@
+{% set name = "haskell-language-server" %}
+{% set version = "2.6.0.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/haskell/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: b23a165121553b59dde8f7e8f9ce24b8eee39d6b6ed5fae20d0882ec16f9da44
+
+build:
+  number: 0
+  skip: true  # [not unix]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cabal-install
+    - ghc
+    - git
+    - ncurses
+    - zlib
+  host:
+    - libiconv  # [osx]
+    - ncurses
+    - zlib
+  run:
+    - libiconv  # [osx]
+    - libzlib
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/haskell/haskell-language-server
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Integration point for ghcide and haskell-ide-engine. One IDE to rule them all
+  dev_url: https://github.com/haskell/haskell-language-server
+
+extra:
+  recipe-maintainers:
+    - danielnachun

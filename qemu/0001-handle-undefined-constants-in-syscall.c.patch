@@ -1,0 +1,40 @@
+From 4cca83ce632a65af6e4d9cc2d5b14e4c8701a876 Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Sun, 4 Feb 2024 11:22:24 -0800
+Subject: [PATCH 1/4] handle undefined constants in syscall.c
+
+---
+ linux-user/syscall.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/linux-user/syscall.c b/linux-user/syscall.c
+index e384e1424..3ce71574b 100644
+--- a/linux-user/syscall.c
++++ b/linux-user/syscall.c
+@@ -122,6 +122,7 @@
+ #ifdef HAVE_BTRFS_H
+ #include <linux/btrfs.h>
+ #endif
++#include <linux/mman.h>
+ #ifdef HAVE_DRM_H
+ #include <libdrm/drm.h>
+ #include <libdrm/i915_drm.h>
+@@ -1805,6 +1806,7 @@ static inline abi_long target_to_host_cmsg(struct msghdr *msgh,
+             __get_user(cred->pid, &target_cred->pid);
+             __get_user(cred->uid, &target_cred->uid);
+             __get_user(cred->gid, &target_cred->gid);
++        #ifdef SOL_ALG
+         } else if (cmsg->cmsg_level == SOL_ALG) {
+             uint32_t *dst = (uint32_t *)data;
+ 
+@@ -1813,6 +1815,7 @@ static inline abi_long target_to_host_cmsg(struct msghdr *msgh,
+             if (len >= sizeof(uint32_t)) {
+                 *dst = tswap32(*dst);
+             }
++        #endif
+         } else {
+             qemu_log_mask(LOG_UNIMP, "Unsupported ancillary data: %d/%d\n",
+                           cmsg->cmsg_level, cmsg->cmsg_type);
+-- 
+2.43.0
+

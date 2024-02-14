@@ -1,0 +1,37 @@
+{% set name = "colima" %}
+{% set version = "0.6.7" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/abiosoft/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: e0ebd208098d4b92d2c37c62f72e7d999b83c10895b620339dca80471c4462d6
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+    - go-licenses
+  run:
+    - lima
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/abiosoft/{{ name }}
+  license: MIT
+  license_file: 
+    - LICENSE
+    - license-files/
+  summary: Container runtimes on MacOS (and Linux) with minimal setup
+  dev_url: https://github.com/abiosoft/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun

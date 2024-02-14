@@ -1,0 +1,82 @@
+{% set name = "qemu" %}
+{% set version = "8.2.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://download.qemu.org/{{ name }}-{{ version }}.tar.xz
+  sha256: bf00d2fa12010df8b0ade93371def58e632cb32a6bfdc5f5a0ff8e6a1fb1bf32
+  patches:
+    - 0001-handle-undefined-constants-in-syscall.c.patch
+    - 0002-handle-undefined-constants-in-mmap.c.patch
+    - 0003-handle-undefined-constants-in-elfload.c.patch
+    - 0004-handle-undefined-constants-in-strace.c.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - bison
+    - flex
+    - gcc  # [linux]
+    - make
+    - meson
+    - ninja
+    - pkg-config
+    - spice-protocol
+    - sysroot_linux-64=2.17  # [linux]
+  host:
+    - capstone
+    - dtc
+    - glib
+    - gnutls
+    - libjpeg-turbo
+    - libslirp
+    - libssh
+    - libtool
+    - libusb
+    - lzo
+    - ncurses
+    - nettle
+    - pixman
+    - snappy 
+    - vde
+    - zlib
+    - zstd
+  run:
+    - bzip2
+    - libcapstone
+    - dtc
+    - gnutls
+    - libfdt
+    - libglib
+    - libiconv
+    - libjpeg-turbo
+    - libslirp
+    - libssh
+    - libusb
+    - libzlib
+    - lzo
+    - ncurses
+    - pixman
+    - snappy 
+    - vde
+    - zstd
+
+test:
+  commands:
+    - qemu-system-x86_64 --version
+
+about:
+  home: https://www.qemu.org/
+  license: GPL-2.0-only
+  license_file: COPYING
+  summary: Generic machine emulator and virtualizer
+
+extra:
+  recipe-maintainers:
+    - danielnachun

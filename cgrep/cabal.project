@@ -1,0 +1,3 @@
+packages: .
+package *
+    ghc-options: -optc=-Wno-implicit-int -optc=-Wno-implicit-function-declaration

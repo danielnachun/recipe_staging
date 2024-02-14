@@ -184,7 +184,7 @@ function source_build
     CONFIGURE_ARGS="$CONFIGURE_ARGS --with-cups=$PREFIX"
     CONFIGURE_ARGS="$CONFIGURE_ARGS --with-x=$PREFIX"
   else
-    CONFIGURE_ARGS="$CONFIGURE_ARGS --with-boot-jdk=$SRC_DIR/zulu-20.jdk/Contents/Home"
+    CONFIGURE_ARGS="$CONFIGURE_ARGS --with-boot-jdk=$SRC_DIR/zulu-21.jdk/Contents/Home"
   fi
 
   ./configure \
@@ -215,6 +215,7 @@ function source_build
     ${CONFIGURE_ARGS} \
     $_TOOLCHAIN_ARGS
 
+  sed -i "61iADLC_LDFLAGS=-Wl,-rpath,${PREFIX}/lib" make/hotspot/gensrc/GensrcAdlc.gmk
   make JOBS=$CPU_COUNT CONF_NAME=labsjdk graal-builder-image $_TOOLCHAIN_ARGS || printerror
 }
 

@@ -1,0 +1,40 @@
+{% set name = "shake" %}
+{% set version = "0.19.8" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/ndmitchell/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 5b208c34b73098c2a53f1342f5a574fdfe37ba0c439ca073df0874241b920014
+
+build:
+  number: 0
+  skip: true  # [not unix]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cabal-install
+    - ghc
+  host:
+    - libiconv  #[osx]
+  host:
+    - libiconv  #[osx]
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/ndmitchell/{{ name }}
+  license: BSD-3-Clause
+  license_file: LICENSE
+  summary: Shake build system
+  dev_url: https://github.com/ndmitchell/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun

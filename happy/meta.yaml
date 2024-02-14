@@ -1,0 +1,40 @@
+{% set name = "happy" %}
+{% set version = "1.20.1.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://hackage.haskell.org/package/{{ name }}-{{ version }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 8b4e7dc5a6c5fd666f8f7163232931ab28746d0d17da8fa1cbd68be9e878881b
+
+build:
+  number: 0
+  skip: true  # [not unix]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cabal-install
+    - ghc
+  host:
+    - libiconv  #[osx]
+  host:
+    - libiconv  #[osx]
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/haskell/{{ name }}
+  license: BSD-2-Clause
+  license_file: LICENSE
+  summary: The Happy parser generator for Haskell
+  dev_url: https://github.com/haskell/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
