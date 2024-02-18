@@ -16,11 +16,10 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
-    - binutils
+    - binutils  # [linux]
     - make
     - perl 5.*
     - sed
-  host:
 
 test:
   commands:
