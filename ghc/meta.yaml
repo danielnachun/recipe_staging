@@ -33,7 +33,7 @@ requirements:
     - gnuconfig
     - gmp
     - ncurses
-    - perl
+    - perl=5.32
     - make
     - automake
     - autoconf
