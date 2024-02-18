@@ -11,8 +11,10 @@ source:
     folder: graal  # [linux]
     patches:  # [linux]
       - 0001-disable-toolchain-test.patch  # [linux]
-  - url: https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-21.0.2/graalvm-community-jdk-21.0.2_macos-x64_bin.tar.gz  # [osx]
-    sha256: 7a8aa93fa45d1721908477abf4732a32637d420ffcb66ada9fb6456440b0d9e1  # [osx]
+  - url: https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-21.0.2/graalvm-community-jdk-21.0.2_macos-x64_bin.tar.gz  # [build_platform == "osx-64"]
+    sha256: 7a8aa93fa45d1721908477abf4732a32637d420ffcb66ada9fb6456440b0d9e1  # [build_platform == "osx-64"]
+  - url: https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-21.0.2/graalvm-community-jdk-21.0.2_macos-aarch64_bin.tar.gz  # [build_platform == "osx-arm64"]
+    sha256: 515e3a93acc7e1938daba83eda4272e5495fd302d7cdd99ec7ebf408ed505ab7  # [build_platform == "osx-arm64"]
 
 build:
   number: 0
