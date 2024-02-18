@@ -20,6 +20,10 @@ sed -i "s/static_assert/_Static_assert/g" rts/include/Rts.h
 if [[ ${target_platform} =~ .*osx.* ]]; then
     sed -i "s/--lflag=-Wl,-no_fixup_chains//g" binary/wrappers/hsc2hs-ghc-9.6.4
     sed -i "s/--lflag=-Wl,-no_fixup_chains//g" binary/bin/hsc2hs-ghc-9.6.4
+    if [[ ${target_platform} == "osx-arm64" ]]; then
+        sed -i "s/--lflag=-Wl,-no_warn_duplicate_libraries//g" binary/wrappers/hsc2hs-ghc-9.6.4
+        sed -i "s/--lflag=-Wl,-no_warn_duplicate_libraries//g" binary/bin/hsc2hs-ghc-9.6.4
+    fi
 fi
 
 case ${target_platform} in 
