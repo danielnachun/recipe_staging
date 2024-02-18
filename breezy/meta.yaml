@@ -15,7 +15,7 @@ build:
 
 requirements:
   build:
-    - binutils
+    - binutils  # [linux]
     - gettext
   host:
     - {{ compiler("c") }}
