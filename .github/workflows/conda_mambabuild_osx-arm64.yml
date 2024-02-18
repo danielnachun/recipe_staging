@@ -1,4 +1,4 @@
-name: osx-64
+name: osx-arm64
 
 on:
   pull_request:
@@ -46,7 +46,7 @@ jobs:
   build_packages:
     needs: setup
     if: needs.setup.outputs.any_changed == 'true'
-    runs-on: macos-latest
+    runs-on: macos-14
     strategy:
       fail-fast: false
 
@@ -83,5 +83,5 @@ jobs:
       - name: Upload packages to GitHub Actions
         uses: actions/upload-artifact@v3
         with:
-          name: conda-bld_${{github.event.pull_request.head.sha}}_osx-64
+          name: conda-bld_${{github.event.pull_request.head.sha}}_osx-arm64
           path: /tmp/conda-bld
