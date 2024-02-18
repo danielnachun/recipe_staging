@@ -4,7 +4,7 @@ set -o xtrace -o nounset -o pipefail -o errexit
 
 mkdir -p ${PREFIX}/bin
 
-if [[ ${target_platform} =~ "osx-64" ]]; then
+if [[ ${target_platform} =~ .*osx.* ]]; then
     mkdir -p ${PREFIX}/lib/jvm
     cp -r Contents/Home/* ${PREFIX}/lib/jvm
     ln -sf ${PREFIX}/lib/jvm/bin/native-image ${PREFIX}/bin
