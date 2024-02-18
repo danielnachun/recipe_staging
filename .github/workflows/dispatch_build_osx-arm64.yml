@@ -37,7 +37,7 @@ jobs:
         run: |
           mkdir /tmp/recipes
           mkdir /tmp/conda-bld
-          cp -R ${{ github.events.inputs.package }} /tmp/recipes
+          cp -R ${{ github.event.inputs.package }} /tmp/recipes
 
       - name: Build conda packages
         shell: micromamba-shell {0}
