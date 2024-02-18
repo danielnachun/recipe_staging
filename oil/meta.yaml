@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://www.oilshell.org/download/{{ name }}-{{ version }}.tar.gz
-  sha256: c124abbda9f55e6244bcfbdd99e2f0168162c06921be8a8541084b34400a53a5
+  sha256: 6095b01d14031ec80458728361b31b65dd1b5cd68b73e18db8f9f26c57d0c361
 
 build:
   number: 0
@@ -15,8 +15,8 @@ build:
 
 requirements:
   build:
-    - binutils
     - {{ compiler('c') }}
+    - binutils  # [linux]
     - gcc  # [linux]
     - make
   host:
