@@ -22,14 +22,14 @@ requirements:
     - xorg-libxmu
     - xorg-libxext
     - xorg-libxmu
-    - xorg-libxcb
+    - libxcb
     - xorg-libxdmcp
   run:
     - xorg-libx11
     - xorg-libxmu
     - xorg-libxext
     - xorg-libxmu
-    - xorg-libxcb
+    - libxcb
     - xorg-libxdmcp
 
 test:
