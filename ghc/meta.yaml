@@ -14,12 +14,18 @@ source:
   - url: https://downloads.haskell.org/ghc/9.6.4/ghc-9.6.4-x86_64-apple-darwin.tar.xz  # [build_platform == "osx-64"]
     folder: binary  # [build_platform == "osx-64"]
     sha256: b897cbd156690f4e6cc4400f6b9465d610ea228d8527f8bd501210d1b93a4eab  # [build_platform == "osx-64"]
+  - url: https://downloads.haskell.org/ghc/9.6.4/ghc-9.6.4-aarch64-apple-darwin.tar.xz  # [build_platform == "osx-arm64"]
+    folder: binary  # [build_platform == "osx-arm64"]
+    sha256: 25affc9ceb6f2032706ec1b4b7ba5d14bd34df3b5223d8060f210aece25feea9  # [build_platform == "osx-arm64"]
   - url: https://downloads.haskell.org/~cabal/cabal-install-3.10.2.0/cabal-install-3.10.2.0-x86_64-linux-centos7.tar.xz # [build_platform == "linux-64"]
     folder: binary/bin  # [build_platform == "linux-64"]
     sha256: cfcdab399380dec7fedda55898bff975ac30b5d5d579433cbf8773b17c15f410  # [build_platform == "linux-64"]
   - url: https://downloads.haskell.org/~cabal/cabal-install-3.10.2.0/cabal-install-3.10.2.0-x86_64-darwin.tar.xz   # [build_platform == "osx-64"]
     folder: binary/bin  # [build_platform == "osx-64"]
     sha256: cd64f2a8f476d0f320945105303c982448ca1379ff54b8625b79fb982b551d90  # [build_platform == "osx-64"]
+  - url: https://downloads.haskell.org/~cabal/cabal-install-3.10.2.0/cabal-install-3.10.2.0-aarch64-darwin.tar.xz   # [build_platform == "osx-arm64"]
+    folder: binary/bin  # [build_platform == "osx-arm64"]
+    sha256: d2bd336d7397cf4b76f3bb0d80dea24ca0fa047903e39c8305b136e855269d7b  # [build_platform == "osx-arm64"]
 
 build:
   number: 0
