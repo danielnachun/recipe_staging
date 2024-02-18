@@ -48,10 +48,10 @@ case ${target_platform} in
         link_name="x86_64-osx"
         ;;
     osx-arm64)
-        build_name="x86_64-apple-darwin"
+        build_name="aarch64-apple-darwin"
         host_name=${build_name}
-        target_name="arm64-apple-darwin"
-        link_name="arm64-osx"
+        target_name="aarch64-apple-darwin"
+        link_name="aarch64-osx"
         ;;
 esac
 
