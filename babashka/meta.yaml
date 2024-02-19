@@ -19,9 +19,9 @@ requirements:
     - graalvm
     - leiningen
   host:
-    - zlib
+    - zlib <1.3
   run:
-    - libzlib
+    - libzlib <1.3
 
 test:
   commands:
