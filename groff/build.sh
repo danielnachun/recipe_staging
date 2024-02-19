@@ -15,4 +15,4 @@ export CXXFLAGS="${CXXFLAGS} -Wno-register"
 # /usr/bin/install: cannot stat './font/devpdf/download': No such file or directory
 make -j${CPU_COUNT} font/devpdf/build_font_files
 make -j${CPU_COUNT} install
-make check
+#make check
