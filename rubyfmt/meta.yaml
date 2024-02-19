@@ -18,7 +18,7 @@ requirements:
     - {{ compiler('c') }}
     - autoconf
     - automake
-    - binutils
+    - binutils  # [linux]
     - bison
     - cargo-bundle-licenses
     - make
