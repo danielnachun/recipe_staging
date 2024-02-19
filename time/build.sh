@@ -1,5 +1,6 @@
 #!/bin/bash
 
+autoreconf --force --verbose --install
 ./configure \
     --prefix=$PREFIX \
     --disable-dependency-tracking \
