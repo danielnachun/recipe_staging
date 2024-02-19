@@ -33,8 +33,9 @@ build:
 
 requirements:
   build:
+    - binutils  # [linux]
     - make
-    - perl
+    - perl=5.32
     - python 3
     - {{ compiler('fortran') }}
     - {{ compiler('c') }}
@@ -101,7 +102,7 @@ test:
     - julia -e 'import Pkg; Pkg.add("CondaPkg"); using CondaPkg; CondaPkg.add_channel("conda-forge"); CondaPkg.status(); CondaPkg.current_packages()'
     - julia -e 'import Pkg; Pkg.add("CondaPkg"); using CondaPkg; CondaPkg.add_channel("conda-forge"); print(CondaPkg.conda_cmd())'
   requires:
-    - perl
+    - perl=5.32
 
 about:
   home: http://julialang.org/
