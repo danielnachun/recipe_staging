@@ -15,11 +15,15 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - autoconf
+    - automake
+    - gettext
     - make
     - pkg-config
     - sed
   host:
     - libarchive
+    - libtool
     - xz
   run:
     - libarchive
