@@ -12,10 +12,11 @@ source:
 build:
   number: 1
   skip: True #[win]
+  binary_relocation: False
 
 requirements:
   build:
-    - {{ compiler('c') }} #[osx]
+    - {{ compiler('c') }}
     - go
     - go-licenses
     - make
