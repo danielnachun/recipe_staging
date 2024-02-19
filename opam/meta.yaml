@@ -8,12 +8,12 @@ package:
 source:
   - url: https://github.com/ocaml/opam/releases/download/{{ version }}/opam-full-{{ version }}.tar.gz  # [linux]
     sha256: 09f8d9e410b2f5723c2bfedbf7970e3b305f5017895fcd91759f05e753ddcea5  # [linux]
-  - url: https://github.com/ocaml/opam/releases/download/{{ version }}/opam-{{ version }}-x86_64-macos  # [osx-64]
-    sha256: 09f8d9e410b2f5723c2bfedbf7970e3b305f5017895fcd91759f05e753ddcea5  # [osx-64]
-    fn: opam  # [osx-64]
-  - url: https://github.com/ocaml/opam/releases/download/{{ version }}/opam-{{ version }}-arm64-macos  # [osx-arm64]
-    sha256: 09f8d9e410b2f5723c2bfedbf7970e3b305f5017895fcd91759f05e753ddcea5  # [osx-arm64]
-    fn: opam  # [osx-arm64]
+  - url: https://github.com/ocaml/opam/releases/download/{{ version }}/opam-{{ version }}-x86_64-macos  # [build_platform == "osx-64"]
+    sha256: daa640191898da7e59b2ab95e0830e58af3efa2a4b600436037377c58fc39c63  # [build_platform == "osx-64"]
+    fn: opam  # [build_platform == "osx-64"]
+  - url: https://github.com/ocaml/opam/releases/download/{{ version }}/opam-{{ version }}-arm64-macos  # [build_platform == "osx-arm64"]
+    sha256: 67ee811dd79ba9a7d9a34ae17bd439bdce2ae32cd2cba35f807ac9f6604f8077  # [build_platform == "osx-arm64"]
+    fn: opam  # [build_platform == "osx-arm64"]
 
 build:
   number: 0
