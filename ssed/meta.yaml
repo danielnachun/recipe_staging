@@ -15,8 +15,12 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - autoconf
+    - automake
     - binutils  # [linux]
     - make
+  host:
+    - libtool
 
 test:
   commands:

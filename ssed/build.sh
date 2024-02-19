@@ -3,6 +3,8 @@
 set -o xtrace -o nounset -o pipefail -o errexit
 
 export CFLAGS="-Wno-implicit-function-declaration"
+autoupdate
+autoreconf --force --install --verbose
 ./configure --disable-debug \
     --disable-dependency-tracking \
     --prefix=${PREFIX} \
