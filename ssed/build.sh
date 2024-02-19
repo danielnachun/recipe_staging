@@ -13,5 +13,6 @@ autoreconf --force --install --verbose
     --infodir=${PREFIX}/share/info \
     --program-prefix=s
 
+make
 make install
 mv ${PREFIX}/share/info/sed.info ${PREFIX}/share/info/ssed.info
