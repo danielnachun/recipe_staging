@@ -1,0 +1,43 @@
+{% set name = "fswatch" %}
+{% set version = "1.17.0" %}
+{% set sha256 = "988d9fca774eb9b2d1b3575ef56c5ce7fdcc718dbabaf727178651eac11bdabc" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/emcrisostomo/fswatch/releases/download/{{ version }}/fswatch-{{ version }}.tar.gz
+  sha256: {{ sha256 }}
+
+build:
+  number: 0
+  skip: true  # [win]
+
+requirements:
+  build:
+    - {{ compiler("c") }}
+    - {{ compiler("cxx") }}
+    - libtool                # [unix]
+    - make                   # [unix]
+  host:
+
+test:
+  commands:
+    - fswatch --help
+    - test -d "${PREFIX}/include/libfswatch"              # [unix]
+    - test -f "${PREFIX}/lib/libfswatch${SHLIB_EXT}"      # [unix]
+
+about:
+  home: https://github.com/emcrisostomo/fswatch
+  license: GPL-3.0-or-later
+  license_family: GPL
+  license_file: COPYING
+  summary: |
+    "A cross-platform file change monitor with multiple backends: Apple OS X
+     File System Events, *BSD kqueue, Solaris/Illumos File Events Notification,
+     Linux inotify, Microsoft Windows and a stat()-based backend."
+
+extra:
+  recipe-maintainers:
+    - jakirkham
