@@ -19,6 +19,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - make
     - posix                        # [win]
     - m2-bison                     # [win]
     - m2-autoconf                  # [win]
@@ -27,6 +28,7 @@ requirements:
     - {{ native }}pkg-config
 
   host:
+    - libxml2
     - python                       # [win]
     - openssl
     - readline                     # [not win]

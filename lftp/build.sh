@@ -38,6 +38,10 @@ if [ -n "$VS_MAJOR" ] ; then
     autoreconf "${autoreconf_args[@]}"
 fi
 
+if [[ ${target_platform} == "osx-arm64" ]]; then
+    autoreconf --force --verbose --install
+fi
+
 export PKG_CONFIG_LIBDIR=$uprefix/lib/pkgconfig:$uprefix/share/pkgconfig
 export LDFLAGS="$LDFLAGS -Wl,-rpath -Wl,$PREFIX/lib -L$PREFIX/lib"
 export CFLAGS="$CFLAGS -I$PREFIX/include"
