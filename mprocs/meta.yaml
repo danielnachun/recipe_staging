@@ -16,7 +16,7 @@ requirements:
   build:
     - {{ compiler('rust') }}
     - {{ compiler('c') }}
-    - binutils
+    - binutils  # [linux]
     - cargo-bundle-licenses
     - make
     - python
