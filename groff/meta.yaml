@@ -28,7 +28,7 @@ requirements:
     - flex
     - bison
   host:
-    - perl
+    - perl=5.32
     - libiconv  # [osx]
   run:
     - perl
