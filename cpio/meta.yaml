@@ -15,7 +15,12 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - autoconf
+    - automake
+    - gettext
     - make
+  host:
+    - libtool
 
 test:
   commands:
