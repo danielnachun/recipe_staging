@@ -10,6 +10,7 @@ find $SRC_DIR -type f | \
         -pe "s,perl -w,perl,;" \
         -pe "s,$PREFIX/bin/perl,/usr/bin/env perl,;"
 
+export CXXFLAGS="${CXXFLAGS} -Wno-register"
 # Workaround for randomly occuring failure due to incorrect dep-graph in Makefile
 # /usr/bin/install: cannot stat './font/devpdf/download': No such file or directory
 make -j${CPU_COUNT} font/devpdf/build_font_files
