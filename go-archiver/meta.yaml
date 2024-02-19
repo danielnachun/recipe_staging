@@ -7,9 +7,7 @@ package:
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
   url: https://github.com/mholt/archiver/archive/v{{ version }}.tar.gz
-  folder: src/github.com/mholt/archiver
   sha256: {{ sha256 }}
 
 build:
@@ -19,8 +17,9 @@ build:
 
 requirements:
   build:
-    - {{ compiler('go') }}
     - git
+    - go
+    - go-licenses
 
 test:
   commands:
@@ -32,8 +31,7 @@ test:
 about:
   home: https://github.com/mholt/archiver
   license: MIT
-  license_family: MIT
-  license_file: src/github.com/mholt/archiver/LICENSE
+  license_file: LICENSE
   summary: Make and extract common archive formats such as .zip, and .tar.gz
   description: |
     Easily create and extract .zip, .tar, .tar.gz, .tar.bz2, .tar.xz,
