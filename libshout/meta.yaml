@@ -15,6 +15,10 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - autoconf
+    - automake
+    - gettext
+    - libtool
     - make
     - pkg-config
   host:
