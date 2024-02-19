@@ -11,10 +11,11 @@ source:
 
 build:
   number: 1
+  binary_relocation: false
 
 requirements:
   build:
-    - {{ compiler('c') }}  # [osx]
+    - {{ compiler('c') }} 
     - go
     - go-licenses
     - make
