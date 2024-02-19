@@ -8,7 +8,7 @@ package:
 
 source:
   fn: {{ name }}-{{ version }}.tar.gz
-  url: http://fallabs.com/tokyocabinet/{{ name }}-{{ version }}.tar.gz
+  url: https://dbmx.net/tokyocabinet/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
 
 build:
