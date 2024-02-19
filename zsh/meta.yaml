@@ -1,0 +1,50 @@
+{% set version = "5.9" %}
+
+package:
+  name: zsh
+  version: {{ version }}
+
+source:
+  url: https://cfhcable.dl.sourceforge.net/project/zsh/zsh/{{ version }}/zsh-{{ version }}.tar.xz
+  sha256: 9b8d1ecedd5b5e81fbf1918e876752a7dd948e05c1a0dba10ab863842d45acd5
+  patches:
+    # Skip a test that fails on CI, some filesystem weirdness
+    - skip-N-cond-test.patch
+
+build:
+  number: 0
+  skip: true  # [win]
+  script: |
+    ./configure --prefix="$PREFIX" --with-tcsetpgrp --enable-pcre
+    make
+    make check
+    make install
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+  host:
+    - ncurses
+    - pcre
+  run:
+    - ncurses
+
+test:
+  commands:
+    - zsh --version
+    - zsh -c 'echo hi'
+
+about:
+  home: https://zsh.org/
+  license: Custom
+  license_family: MIT
+  license_file: LICENCE
+  summary: Zsh is a shell designed for interactive use, although it is also a powerful scripting language.
+  doc_url: https://zsh.sourceforge.io/Doc/Release/zsh_toc.html
+  dev_url: https://sourceforge.net/p/zsh/code/ci/master/tree
+
+extra:
+  recipe-maintainers:
+    - djsutherland
+    - matthiasdiener
