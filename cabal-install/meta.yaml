@@ -12,6 +12,8 @@ source:
     sha256: cfcdab399380dec7fedda55898bff975ac30b5d5d579433cbf8773b17c15f410  # [build_platform == "linux-64"]
   - url: https://downloads.haskell.org/~cabal/{{ name }}-3.10.2.0/{{ name }}-3.10.2.0-x86_64-darwin.tar.xz  # [build_platform == "osx-64"]
     sha256: cd64f2a8f476d0f320945105303c982448ca1379ff54b8625b79fb982b551d90  # [build_platform == "osx-64"]
+  - url: https://downloads.haskell.org/~cabal/{{ name }}-3.10.2.0/{{ name }}-3.10.2.0-aarch64-darwin.tar.xz  # [build_platform == "osx-arm64"]
+    sha256: d2bd336d7397cf4b76f3bb0d80dea24ca0fa047903e39c8305b136e855269d7b  # [build_platform == "osx-arm64"]
        
 build:
   number: 0
