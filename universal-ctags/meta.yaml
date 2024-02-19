@@ -1,0 +1,46 @@
+{% set name = "universal-ctags" %}
+{% set version = "6.1.20240218.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/universal-ctags/ctags/archive/p{{ version }}.tar.gz
+  sha256: 55654a2a6ff189d304673bbe536c5bbd93d0a46eec6583325bb55fb83d4bcbd9
+
+build:
+  number: 0
+  skip: true  # [win]
+
+requirements:
+  build:
+    - autoconf
+    - automake
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - pkg-config
+    - make
+  host:
+    - libiconv
+    - libxml2
+    - jansson
+    - libseccomp  # [linux]
+    - yaml
+  run_constrained:
+    # Contains the same binary ctags
+    - ctags <0a0
+
+test:
+  commands:
+    - ctags --help
+
+about:
+  home: https://github.com/universal-ctags/ctags
+  license: GPL-2.0-only
+  license_file: COPYING
+  summary: A maintained ctags implementation
+
+extra:
+  recipe-maintainers:
+    - xhochy
