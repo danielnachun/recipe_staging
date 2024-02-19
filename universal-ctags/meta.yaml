@@ -26,6 +26,7 @@ requirements:
     - libxml2
     - jansson
     - libseccomp  # [linux]
+    - pcre2
     - yaml
   run_constrained:
     # Contains the same binary ctags
