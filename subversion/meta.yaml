@@ -27,7 +27,7 @@ requirements:
     - boost-cpp
     - libapr
     - libaprutil
-    - libtool  # [unix]
+    - libtool=2.4.6  # [unix]
     - sqlite
     - zlib
     - openssl
