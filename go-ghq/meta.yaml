@@ -11,12 +11,11 @@ source:
 
 build:
   number: 0
-  script:
-    - go install -ldflags "-X main.revision={{ version }}" .
 
 requirements:
   build:
-    - {{ compiler('go') }}
+    - go
+    - go-licenses
 
 test:
   commands:
