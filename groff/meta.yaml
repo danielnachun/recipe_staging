@@ -23,6 +23,7 @@ requirements:
     - {{ compiler('cxx') }}
     - make
     - automake
+    - binutils  # [linux]
     - texinfo
     - pkg-config
     - flex
