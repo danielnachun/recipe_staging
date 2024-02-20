@@ -11,10 +11,11 @@ source:
 
 build:
   number: 0
+  skip: True  # [not osx]
 
 requirements:
   build:
-    - {{ compiler('c') }}
+    - {{ compiler('c') }}  # [linux]
     - go
     - go-licenses
     - make
