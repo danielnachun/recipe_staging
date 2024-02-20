@@ -9,8 +9,10 @@ package:
 source:
   - url: https://github.com/ziglang/{{ name }}/archive/refs/tags/{{ version }}.tar.gz  # [linux]
     sha256: 71de3e958293dffaa17f7ad1438c775389f5406991c96b533bb1501178092b02  # [linux]
-  - url: https://ziglang.org/download/{{ version }}/zig-macos-x86_64-{{ version }}.tar.xz  # [osx]
-    sha256: 1c1c6b9a906b42baae73656e24e108fd8444bb50b6e8fd03e9e7a3f8b5f05686  # [osx]
+  - url: https://ziglang.org/download/{{ version }}/zig-macos-x86_64-{{ version }}.tar.xz  # [build_platform == "osx-64"]
+    sha256: 1c1c6b9a906b42baae73656e24e108fd8444bb50b6e8fd03e9e7a3f8b5f05686  # [build_platform == "osx-64"]
+  - url: https://ziglang.org/download/{{ version }}/zig-macos-aarch64-{{ version }}.tar.xz  # [build_platform == "osx-arm64"]
+    sha256: c6ebf927bb13a707d74267474a9f553274e64906fd21bf1c75a20bde8cadf7b2  # [build_platform == "osx-arm64"]
 
 build:
   number: 0
