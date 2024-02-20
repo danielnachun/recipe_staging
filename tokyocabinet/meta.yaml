@@ -23,10 +23,10 @@ requirements:
     - {{ compiler('cxx') }}
     - make
   host:
-    - zlib
+    - zlib <1.3
     - bzip2
   run:
-    - zlib
+    - zlib <1.3
     - bzip2
 
 test:
