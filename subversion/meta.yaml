@@ -22,7 +22,7 @@ requirements:
     - pkg-config  # [unix]
     - nasm
     - make
-    - python >=2.7,<3
+    - python
   host:
     - boost-cpp
     - libapr
