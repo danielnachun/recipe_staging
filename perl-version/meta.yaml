@@ -26,12 +26,12 @@ requirements:
     - {{ compiler('m2w64_c') }}  # [win]
     - make
   host:
-    - perl
+    - perl=5.32
     - perl-extutils-makemaker
     - perl-file-temp
     - perl-parent
   run:
-    - perl
+    - perl>=5.32
 
 test:
   imports:
