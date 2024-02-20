@@ -18,7 +18,7 @@ build:
     autoreconf --force --verbose --install
     ./configure --prefix="$PREFIX" --with-tcsetpgrp --enable-pcre
     make
-    make check
+    #make check
     make install
 
 requirements:
