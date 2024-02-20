@@ -2,7 +2,7 @@
 set -ex
 
 export CFLAGS="${CFLAGS} -U__USE_XOPEN2K -std=c99"
-autoconf --force --verbose --install
+autoreconf --force --verbose --install
 
 ./configure \
   --prefix="${PREFIX}" \
