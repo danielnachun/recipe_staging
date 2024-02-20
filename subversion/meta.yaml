@@ -18,7 +18,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - autoconf  # [unix]
-    - libtool  # [unix]
+    - autmake  # [unix]
     - pkg-config  # [unix]
     - nasm
     - make
@@ -27,6 +27,7 @@ requirements:
     - boost-cpp
     - libapr
     - libaprutil
+    - libtool  # [unix]
     - sqlite
     - zlib
     - openssl
