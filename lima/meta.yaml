@@ -19,6 +19,7 @@ requirements:
     - go
     - go-licenses
     - make
+    - sed
   run:
     - qemu
 

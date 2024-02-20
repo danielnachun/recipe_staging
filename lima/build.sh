@@ -5,6 +5,8 @@ set -o xtrace -o nounset -o pipefail -o errexit
 mkdir -p ${PREFIX}/bin
 mkdir -p ${PREFIX}/share
 
+sed -i "s/codesign --entitlements/codesign --force --entitlements/" Makefile
+
 make VERSION=${PKG_VERSION}
 cp -r _output/bin/* ${PREFIX}/bin
 cp -r _output/share/* ${PREFIX}/share
