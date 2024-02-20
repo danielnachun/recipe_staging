@@ -89,40 +89,40 @@ outputs:
       license_file: 
         - GPL
         - README.license
-  - name: pylibfdt
-    script: install.sh
-    requirements:
-      build:
-        - {{ compiler('c') }}
-        - make
-        - swig
-      host:
-        - python {{ python }}
-      run:
-        - python {{ python }}
-    test:
-      imports:
-        - libfdt
-      # we can only due extended testing on linux due to GCC-specific assembly being used to
-      # generate the dtb files below
-      source_files:                # [linux]
-        - tests/pylibfdt_tests.py  # [linux]
-        - tests/test_tree1.dtb     # [linux]
-        - tests/test_props.dtb     # [linux]
-        - tests/aliases.dtb        # [linux]
-      commands:  # [linux]
-        - "cd tests && python ./pylibfdt_tests.py"  # [linux]
-    about:
-      summary: 'Python Bindings for Linux Kernel Device Tree library (libfdt)'
-      description: |
-       Python bindings for libfdt, a utility library for reading and manipulating the Linux Kernel
-       Device Tree binary format.
-      license: GPL-2.0-or-later OR BSD-2-Clause
-      license_family: BSD
-      license_file: 
-        - GPL
-        - BSD-2-Clause
-        - README.license
+  #- name: pylibfdt
+    #script: install.sh
+    #requirements:
+      #build:
+        #- {{ compiler('c') }}
+        #- make
+        #- swig
+      #host:
+        #- python {{ python }}
+      #run:
+        #- python {{ python }}
+    #test:
+      #imports:
+        #- libfdt
+      ## we can only due extended testing on linux due to GCC-specific assembly being used to
+      ## generate the dtb files below
+      #source_files:                # [linux]
+        #- tests/pylibfdt_tests.py  # [linux]
+        #- tests/test_tree1.dtb     # [linux]
+        #- tests/test_props.dtb     # [linux]
+        #- tests/aliases.dtb        # [linux]
+      #commands:  # [linux]
+        #- "cd tests && python ./pylibfdt_tests.py"  # [linux]
+    #about:
+      #summary: 'Python Bindings for Linux Kernel Device Tree library (libfdt)'
+      #description: |
+       #Python bindings for libfdt, a utility library for reading and manipulating the Linux Kernel
+       #Device Tree binary format.
+      #license: GPL-2.0-or-later OR BSD-2-Clause
+      #license_family: BSD
+      #license_file: 
+        #- GPL
+        #- BSD-2-Clause
+        #- README.license
   - name: libfdt
     script: install.sh
     build:
