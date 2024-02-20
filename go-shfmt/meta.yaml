@@ -11,12 +11,11 @@ source:
 
 build:
   number: 0
-  script:
-    - go install -a -ldflags "-extldflags '-static'" ./cmd/shfmt
 
 requirements:
   build:
-    - {{ compiler('go') }}
+    - go
+    - go-licenses
 
 test:
   commands:
