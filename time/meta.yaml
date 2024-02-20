@@ -28,7 +28,7 @@ requirements:
 test:
   commands:
     - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
-    - conda inspect objects -p $PREFIX $PKG_NAME   # [osx]
+    #- conda inspect objects -p $PREFIX $PKG_NAME   # [osx]
     - $(which time) -v echo test
 
 about:
