@@ -28,6 +28,7 @@ requirements:
     - make
   host:
     - perl >=5.32
+    - perl-cpan-meta-check
     - perl-datetime-timezone
     - perl-namespace-autoclean
     - perl-dist-checkconflicts >=0.02
