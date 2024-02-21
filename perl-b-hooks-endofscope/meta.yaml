@@ -28,6 +28,7 @@ requirements:
   run:
     - perl>=5.32
     - perl-module-implementation
+    - perl-sub-exporter-progressive
 
 test:
   imports:
