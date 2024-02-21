@@ -1,0 +1,60 @@
+{% set name = "bandit" %}
+{% set version = "1.7.7" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 527906bec6088cb499aae31bc962864b4e77569e9d529ee51df3a93b4b8ab28a
+
+build:
+  number: 0
+  noarch: python
+  entry_points:
+    - bandit=bandit.cli.main:main
+    - bandit-config-generator=bandit.cli.config_generator:main
+    - bandit-baseline=bandit.cli.baseline:main
+  script: {{ PYTHON }} -m pip install . -vv
+
+requirements:
+  host:
+    - pbr >=2.0.0
+    - pip
+    - python
+    - setuptools
+  run:
+    - colorama >=0.3.9  # [win]
+    - GitPython >=1.0.1
+    - python
+    - PyYAML >=5.3.1
+    - rich
+    - stevedore >=1.20.0
+
+test:
+  imports:
+    - bandit
+  commands:
+    - pip check
+    - bandit --help
+  requires:
+    - pip
+
+about:
+  home: https://bandit.readthedocs.io/en/latest/
+  license: Apache-2.0
+  license_family: APACHE
+  license_file: LICENSE
+  summary: |
+    Bandit is a tool designed to find common security issues in Python code. 
+    To do this Bandit processes each file, builds an AST from it, and runs 
+    appropriate plugins against the AST nodes. Once Bandit has finished 
+    scanning all the files it generates a report.
+  doc_url: https://bandit.readthedocs.io/en/latest/
+  dev_url: https://github.com/PyCQA/bandit
+
+extra:
+  recipe-maintainers:
+    - jkornblum
+    - dbast
