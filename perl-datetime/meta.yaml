@@ -13,6 +13,7 @@ build:
   number: 0
   ignore_run_exports:
     - perl-dist-checkconflicts
+    - perl-test-fatal
     - perl-test-without-module
     - perl-test-warnings
   script:
@@ -35,6 +36,7 @@ requirements:
     - perl-datetime-locale
     - perl-specio
     - perl-sub-identify
+    - perl-test-fatal
     - perl-test-without-module
     - perl-test-warnings
   run:
