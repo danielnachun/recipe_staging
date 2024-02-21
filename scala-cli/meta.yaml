@@ -19,7 +19,7 @@ requirements:
     - gcc  # [linux]
     - sed
   host:
-    - graalvm
+    - graalvm=20
     - zlib
   run:
     - libzlib
