@@ -1,0 +1,43 @@
+{% set name = "prsice" %}
+{% set version = "2.3.5" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/choishingwan/PRSice/archive/{{ version }}.tar.gz
+  sha256: 0a7e649ddebe4e969cd8400c5ad977a7b900be4f5c920a84483cb8930367354d
+  patches:
+    - 0001-devendor-eigen.patch
+
+build:
+  number: 0
+  skip: True  # [build_platform == "osx-arm64"]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cmake
+    - make
+  host:
+    - eigen
+    - zlib
+  run:
+    - libzlib
+
+test:
+  commands:
+    - PRSice --help
+
+about:
+  home: https://choishingwan.github.io/PRSice/
+  license: GPL-3.0-or-later
+  license_file: LICENSE
+  summary: A software package for calculating, applying, evaluating and plotting the results of polygenic risk scores.
+  dev_url: https://choishingwan.github.io/PRSice/
+
+extra:
+  recipe-maintainers:
+    - danielnachun

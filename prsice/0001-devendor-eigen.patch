@@ -1,0 +1,31 @@
+From cdc0a1b2fabe8923be1caf7a8fca532cb414f3c0 Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Thu, 22 Feb 2024 12:03:08 -0800
+Subject: [PATCH] devendor eigen
+
+---
+ CMakeLists.txt | 8 --------
+ 1 file changed, 8 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 78cfbea..b27f399 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -21,14 +21,6 @@ if(march)
+ endif()
+ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin)
+ 
+-find_path(EIGEN_INCLUDE_DIR
+-    NAME EIGEN
+-    PATHS ${CMAKE_CURRENT_SOURCE_DIR}/lib/eigen-git-mirror/)
+-if((NOT ${EIGEN_INCLUDE_DIR}) OR (NOT EXISTS ${EIGEN_INCLUDE_DIR}))
+-    execute_process(COMMAND git submodule update --init -- lib/eigen/
+-        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+-    set(EIGEN_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lib/eigen/)
+-endif()
+ include_directories(${EIGEN_INCLUDE_DIR})
+ ################################
+ #           Add zlib
+-- 
+2.43.0
+
