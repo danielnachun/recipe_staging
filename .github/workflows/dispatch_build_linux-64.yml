@@ -9,15 +9,15 @@ on:
       upload:
         description: Upload
         required: true
-        default: true
+        default: 'true'
       free_disk_space:
         description: Free disk space
         required: true
-        default: false
+        default: 'false'
       centos7:
         description: Use CentOS 7
         required: true
-        default: false
+        default: 'false'
 
 jobs:
   build_and_upload:
@@ -34,7 +34,7 @@ jobs:
           fetch-depth: 0
 
       - name: Free Disk Space (Ubuntu)
-        if: ${{ github.event.inputs.free_disk_space == true }}
+        if: ${{ github.event.inputs.free_disk_space == 'true' }}
         uses: jlumbroso/free-disk-space@main
 
       - name: Set up working directories
@@ -47,7 +47,7 @@ jobs:
         uses: docker/setup-buildx-action@v2
 
       - name: Build and export docker containers
-        if: ${{ github.event.inputs.centos7 == false }}
+        if: ${{ github.event.inputs.centos7 == 'false' }}
         uses: docker/build-push-action@v4
         with:
           load: true
@@ -55,7 +55,7 @@ jobs:
           tags: conda_mambabuild:latest
 
       - name: Build and export docker containers
-        if: ${{ github.event.inputs.centos7 == true }}
+        if: ${{ github.event.inputs.centos7 == 'true' }}
         uses: docker/build-push-action@v4
         with:
           load: true
@@ -73,6 +73,6 @@ jobs:
           generate-run-shell: true
 
       - name: Upload package
-        if: ${{ github.event.inputs.upload == true }}
+        if: ${{ github.event.inputs.upload == 'true' }}
         shell: micromamba-shell {0}
         run: anaconda upload --force /tmp/conda-bld/linux-64/*.tar.bz2

@@ -9,7 +9,7 @@ on:
       upload:
         description: Upload
         required: true
-        default: true
+        default: 'true'
 
 jobs:
   build_and_upload:
@@ -48,6 +48,6 @@ jobs:
         run: conda mambabuild --output-folder /tmp/conda-bld /tmp/recipes
 
       - name: Upload package
-        if: ${{ github.event.inputs.upload == true }}
+        if: ${{ github.event.inputs.upload == 'true' }}
         shell: micromamba-shell {0}
         run: anaconda upload --force /tmp/conda-bld/osx-arm64/*.tar.bz2
