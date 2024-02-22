@@ -1,4 +1,4 @@
-name: Build conda package (osx-arm64)
+name: Build conda package (osx-64)
 
 on:
   workflow_dispatch:
@@ -13,7 +13,7 @@ on:
 
 jobs:
   build_and_upload:
-    runs-on: macos-14
+    runs-on: macos-latest
     strategy:
       fail-fast: false
     env:
@@ -50,4 +50,4 @@ jobs:
       - name: Upload package
         if: ${{ github.event.inputs.upload == true }}
         shell: micromamba-shell {0}
-        run: anaconda upload --force /tmp/conda-bld/osx-arm64/*.tar.bz2
+        run: anaconda upload --force /tmp/conda-bld/osx-64/*.tar.bz2
