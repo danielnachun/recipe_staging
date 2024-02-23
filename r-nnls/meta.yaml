@@ -1,0 +1,57 @@
+{% set version = "1.5" %}
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
+
+package:
+  name: r-nnls
+  version: {{ version|replace("-", "_") }}
+
+source:
+  fn: nnls_{{ version }}.tar.gz
+  url:
+    - {{ cran_mirror }}/src/contrib/nnls_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/nnls/nnls_{{ version }}.tar.gz
+  sha256: cd70feb286f86f6dead75da693a8f67c9bd3b91eb738e6e6ac659e3b8c7a3452
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('c') }}        # [not win]
+    - {{ compiler('fortran') }}  # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{ compiler('m2w64_fortran') }}        # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}make
+    - {{ posix }}sed               # [win]
+    - {{ posix }}coreutils         # [win]
+    - {{ posix }}zip               # [win]
+  host:
+    - r-base=4.2
+  run:
+    - r-base>=4.2
+    - {{ native }}gcc-libs         # [win]
+
+test:
+  commands:
+    - $R -e "library('nnls')"           # [not win]
+    - "\"%R%\" -e \"library('nnls')\""  # [win]
+
+about:
+  home: https://CRAN.R-project.org/package=nnls
+  license: GPL-2.0-or-later
+  summary: An R interface to the Lawson-Hanson implementation of an algorithm for non-negative least squares (NNLS).  Also allows the combination of non-negative and non-positive constraints.
+  license_family: GPL2
+  license_file: '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2'
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+    - MathiasHaudgaard
+    - FrodePedersen
+    - ArneKr
