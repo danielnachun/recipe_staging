@@ -44,6 +44,8 @@ requirements:
     - r-rcpp >=0.12.15
     - r-rcpparmadillo
     - r-irlba
+    - libblas
+    - liblapack
     - llvm-openmp  # [osx]
 
 test:
