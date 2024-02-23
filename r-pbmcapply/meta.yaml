@@ -1,0 +1,73 @@
+{% set version = "1.5.1" %}
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
+
+package:
+  name: r-pbmcapply
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url:
+    - {{ cran_mirror }}/src/contrib/pbmcapply_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/pbmcapply/pbmcapply_{{ version }}.tar.gz
+  sha256: 7ffc2854a384962f0dd523aa9ef33ce8fc290997206b71b840a49049d87112dd
+
+build:
+  merge_build_host: true  # [win]
+  number: 2
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('c') }}              # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}make
+    - {{ posix }}sed               # [win]
+    - {{ posix }}coreutils         # [win]
+    - {{ posix }}zip               # [win]
+  host:
+    - r-base=4.2
+  run:
+    - r-base>=4.2
+    - {{ native }}gcc-libs         # [win]
+
+test:
+  commands:
+    - $R -e "library('pbmcapply')"           # [not win]
+    - "\"%R%\" -e \"library('pbmcapply')\""  # [win]
+
+about:
+  home: https://github.com/kvnkuang/pbmcapply
+  license: MIT
+  summary: A light-weight package helps you track and visualize the progress of parallel version of vectorized R functions (mc*apply). Parallelization (mc.core > 1) works only on *nix (Linux, Unix such as macOS) system due to the lack of fork() functionality, which is essential for mc*apply, on Windows.
+  license_family: MIT
+  license_file:
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/MIT
+    - LICENSE
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+    - PertuyF
+
+# Package: pbmcapply
+# Type: Package
+# Title: Tracking the Progress of Mc*pply with Progress Bar
+# Version: 1.5.0
+# Author: Kevin Kuang (aut), Quyu Kong (ctb), Francesco Napolitano (ctb)
+# Maintainer: Kevin kuang <kvn.kuang@mail.utoronto.ca>
+# Description: A light-weight package helps you track and visualize the progress of parallel version of vectorized R functions (mc*apply). Parallelization (mc.core > 1) works only on *nix (Linux, Unix such as macOS) system due to the lack of fork() functionality, which is essential for mc*apply, on Windows.
+# Depends: utils, parallel
+# BugReports: https://github.com/kvnkuang/pbmcapply/issues
+# URL: https://github.com/kvnkuang/pbmcapply
+# License: MIT + file LICENSE
+# LazyData: TRUE
+# RoxygenNote: 6.1.1
+# Encoding: UTF-8
+# NeedsCompilation: yes
+# Packaged: 2019-07-10 20:29:50 UTC; kevin
+# Repository: CRAN
+# Date/Publication: 2019-07-10 21:05:08 UTC
