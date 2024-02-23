@@ -1,0 +1,53 @@
+{% set version = "1.0-9" %}
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
+
+package:
+  name: r-truncnorm
+  version: {{ version|replace("-", "_") }}
+
+source:
+  fn: truncnorm_{{ version }}.tar.gz
+  url:
+    - {{ cran_mirror }}/src/contrib/truncnorm_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/truncnorm/truncnorm_{{ version }}.tar.gz
+  sha256: 5156acc4d63243bf95326d6285b0ba3cdf710697d67c233a12ae56f3d87ec708
+
+build:
+  merge_build_host: true  # [win]
+  number: 1
+  skip: true  # [win32]
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('c') }}        # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}make
+    - {{ posix }}sed               # [win]
+    - {{ posix }}coreutils         # [win]
+    - {{ posix }}zip               # [win]
+  host:
+    - r-base=4.2
+  run:
+    - r-base>=4.2
+    - {{ native }}gcc-libs         # [win]
+
+test:
+  commands:
+    - $R -e "library('truncnorm')"           # [not win]
+    - "\"%R%\" -e \"library('truncnorm')\""  # [win]
+
+about:
+  home: https://github.com/olafmersmann/truncnorm
+  license: GPL (>= 2)
+  summary: Density, probability, quantile and random number generation functions for the truncated normal distribution.
+  license_family: GPL3
+  license_file: {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
