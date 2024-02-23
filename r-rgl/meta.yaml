@@ -1,0 +1,107 @@
+{% set version = "1.2.8" %}
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
+
+package:
+  name: r-rgl
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url:
+    - {{ cran_mirror }}/src/contrib/rgl_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/rgl/rgl_{{ version }}.tar.gz
+  sha256: e535e738702d0babe043c1fec3d358c7bfdfe202ad95d68971b28ad7a81717f4
+
+build:
+  merge_build_host: true  # [win]
+  skip: true  # [ppc64le]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('c') }}              # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{ compiler('cxx') }}            # [not win]
+    - {{ compiler('m2w64_cxx') }}      # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}sed               # [win]
+    - {{ posix }}grep              # [win]
+    - {{ posix }}autoconf
+    - {{ posix }}automake          # [not win]
+    - {{ posix }}automake-wrapper  # [win]
+    - {{ posix }}pkg-config
+    - {{ posix }}make
+    - {{ posix }}coreutils         # [win]
+    - {{ posix }}zip               # [win]
+    - cross-r-base {{ r_base }}    # [build_platform != target_platform]    
+    - {{ cdt('xorg-x11-proto-devel') }}  # [linux]
+    - {{ cdt('mesa-libgl-devel') }}      # [linux]
+    - {{ cdt('libx11-devel') }}          # [linux]
+    - {{ cdt('libxext-devel') }}         # [linux]
+    - {{ cdt('libxrender-devel') }}      # [linux]
+    - {{ cdt('mesa-libgl-devel') }}      # [linux]
+    - {{ cdt('mesa-libegl-devel') }}     # [linux]
+    - {{ cdt('mesa-dri-drivers') }}      # [linux]
+    - {{ cdt('libxau-devel') }}          # [linux]
+    - {{ cdt('libdrm-devel') }}          # [linux]
+    - {{ cdt('libxcomposite-devel') }}   # [linux]
+    - {{ cdt('libxcursor-devel') }}      # [linux]
+    - {{ cdt('libxi-devel') }}           # [linux]
+    - {{ cdt('libxrandr-devel') }}       # [linux]
+    - {{ cdt('libxscrnsaver-devel') }}   # [linux]
+    - {{ cdt('libxtst-devel') }}         # [linux]
+    - {{ cdt('libselinux-devel') }}      # [linux]
+    - {{ cdt('libselinux') }}            # [linux]
+    - {{ cdt('libxdamage') }}            # [linux]
+    - {{ cdt('libxfixes') }}             # [linux]
+    - {{ cdt('libxxf86vm') }}            # [linux]
+    - {{ cdt('libxcb') }}                # [linux]
+    - {{ cdt('libxext') }}               # [linux]
+    - {{ cdt('expat') }}                 # [linux]
+  host:
+    - r-base=4.2
+    - r-htmltools
+    - r-htmlwidgets >=1.6.0
+    - r-jsonlite >=0.9.20
+    - r-knitr >=1.33
+    - r-magrittr
+    - expat                              # [linux]
+    - freetype                           # [not win]
+    - libglu                             # [linux]
+    - libpng                             # [not win]
+    - {{ native }}libpng                 # [win]
+    - xorg-libxfixes                     # [linux]
+  run:
+    - r-base>=4.2
+    - {{ native }}gcc-libs               # [win]
+    - r-htmltools
+    - r-htmlwidgets >=1.6.0
+    - r-jsonlite >=0.9.20
+    - r-knitr >=1.33
+    - r-magrittr
+    - expat                              # [linux]
+    - libglu                             # [linux]
+    - {{ native }}libpng                 # [win]
+
+test:
+  commands:
+    - $R -e "library('rgl')"  # [not win]
+    - "\"%R%\" -e \"library('rgl')\""  # [win]
+
+about:
+  home: https://r-forge.r-project.org/projects/rgl/
+  license: GPL-2.0-or-later
+  summary: Provides medium to high level functions for 3D interactive graphics, including functions modelled on base graphics (plot3d(), etc.) as well as functions for constructing representations of geometric objects (cube3d(), etc.).  Output may be on screen using OpenGL, or to various standard 3D file formats including
+    WebGL, PLY, OBJ, STL as well as 2D image formats, including PNG, Postscript, SVG, PGF.
+  license_family: GPL
+  license_file:
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+    - mingwandroid
