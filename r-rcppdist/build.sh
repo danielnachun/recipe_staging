@@ -1,5 +1,5 @@
 #!/bin/bash
 set -o errexit -o pipefail
-export PKG_CPPFLAGS="-DHAVE_WORKING_LOG1P"
 export DISABLE_AUTOBREW=1
+sed -ie 's/PKG_CPPFLAGS =/PKG_CPPFLAGS = -DHAVE_WORKING_LOG1P/' src/Makevars.in
 ${R} CMD INSTALL --build .
