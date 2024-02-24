@@ -27,7 +27,7 @@ requirements:
     - 'bioconductor-s4arrays >=1.2.0,<1.3.0'
     - 'bioconductor-s4vectors >=0.40.0,<0.41.0'
     - 'bioconductor-xvector >=0.42.0,<0.43.0'
-    - r-base=4.2
+    - r-base=4.3
     - r-matrix
     - r-matrixstats
     - libblas
@@ -39,7 +39,7 @@ requirements:
     - 'bioconductor-s4arrays >=1.2.0,<1.3.0'
     - 'bioconductor-s4vectors >=0.40.0,<0.41.0'
     - 'bioconductor-xvector >=0.42.0,<0.43.0'
-    - r-base>=4.2
+    - r-base>=4.3
     - r-matrix
     - r-matrixstats
   build:
