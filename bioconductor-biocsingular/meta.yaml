@@ -28,7 +28,7 @@ requirements:
     - 'bioconductor-delayedarray >=0.28.0,<0.29.0'
     - 'bioconductor-s4vectors >=0.40.0,<0.41.0'
     - 'bioconductor-scaledmatrix >=1.10.0,<1.11.0'
-    - r-base
+    - r-base=4.3
     - r-irlba
     - r-matrix
     - r-rcpp
@@ -42,7 +42,7 @@ requirements:
     - 'bioconductor-delayedarray >=0.28.0,<0.29.0'
     - 'bioconductor-s4vectors >=0.40.0,<0.41.0'
     - 'bioconductor-scaledmatrix >=1.10.0,<1.11.0'
-    - r-base
+    - r-base>=4.3
     - r-irlba
     - r-matrix
     - r-rcpp
