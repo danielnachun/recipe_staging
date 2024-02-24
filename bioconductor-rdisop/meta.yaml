@@ -12,6 +12,9 @@ source:
     - 'https://bioarchive.galaxyproject.org/{{ name }}_{{ version }}.tar.gz'
     - 'https://depot.galaxyproject.org/software/bioconductor-{{ name|lower }}/bioconductor-{{ name|lower }}_{{ version }}_src_all.tar.gz'
   md5: 508c96aaea70daa872ec75712570f6da
+  patches:
+    - 12441fdc585228fd1f7d7e01fdd83c7265d83eea.patch
+    - 84f57e78e2d2cf221b649c4979a4af574aa60128.patch
 build:
   number: 1
   rpaths:

@@ -1,0 +1,137 @@
+From 84f57e78e2d2cf221b649c4979a4af574aa60128 Mon Sep 17 00:00:00 2001
+From: Steffen Neumann <sneumann@ipb-halle.de>
+Date: Sun, 12 Feb 2023 14:59:41 +0100
+Subject: [PATCH] Fix more C++-17 issues
+
+---
+ src/disop.cpp                                      |  2 +-
+ src/imslib/src/ims/alphabet.cpp                    | 14 ++++++--------
+ src/imslib/src/ims/calib/linearpointsetmatcher.cpp |  2 +-
+ src/imslib/src/ims/calib/linearpointsetmatcher.h   |  6 +++---
+ src/imslib/src/ims/composedelement.cpp             |  2 +-
+ src/imslib/src/ims/decomp/decomputils.h            |  4 ++--
+ 6 files changed, 14 insertions(+), 16 deletions(-)
+
+diff --git a/src/disop.cpp b/src/disop.cpp
+index a325663..88b869c 100644
+--- a/src/disop.cpp
++++ b/src/disop.cpp
+@@ -322,7 +322,7 @@ RcppExport SEXP decomposeIsotopes(SEXP v_masses, SEXP v_abundances, SEXP s_error
+ 				transform(candidate_abundances.begin(),			// begin of source range
+ 					candidate_abundances.begin() + size,		// end of source range
+ 					candidate_abundances.begin(), 			// destination
+-					bind2nd(multiplies<abundance_type>(), scale));	// operation (*scale)
++					[scale](abundance_type a) { return a * scale; }); // operation (*scale)
+ 			}
+ 				
+ 		}
+diff --git a/src/imslib/src/ims/alphabet.cpp b/src/imslib/src/ims/alphabet.cpp
+index 26d0104..cbf64da 100644
+--- a/src/imslib/src/ims/alphabet.cpp
++++ b/src/imslib/src/ims/alphabet.cpp
+@@ -29,9 +29,9 @@ Alphabet::mass_type Alphabet::getMass(const name_type& name) const
+ 
+ 
+ bool Alphabet::hasName(const name_type& name) const {
+-	return std::find_if(elements.begin(), elements.end(),
+-		compose_f_gx(std::bind2nd(std::equal_to<name_type>(), name),
+-		std::mem_fun_ref(&element_type::getName))) < elements.end();
++        return std::find_if(elements.begin(), elements.end(), [name](const auto& elem) {
++	  return std::equal_to<name_type>()(elem.getName(), name);
++	}) != elements.end();
+ }
+ 
+ 
+@@ -68,11 +68,9 @@ Alphabet::masses_type Alphabet::getAverageMasses() const {
+ 
+ 
+ void Alphabet::sortByNames() {
+-	std::sort(elements.begin(), elements.end(),
+-				compose_f_gx_hy(
+-					std::less<name_type>(),
+-					std::mem_fun_ref(&element_type::getName),
+-					std::mem_fun_ref(&element_type::getName)));
++        std::sort(elements.begin(), elements.end(), [](const auto& lhs, const auto& rhs) {
++	  return std::less<name_type>()(lhs.getName(), rhs.getName());
++	});
+ }
+ 
+ 
+diff --git a/src/imslib/src/ims/calib/linearpointsetmatcher.cpp b/src/imslib/src/ims/calib/linearpointsetmatcher.cpp
+index 7158c69..3db2b09 100644
+--- a/src/imslib/src/ims/calib/linearpointsetmatcher.cpp
++++ b/src/imslib/src/ims/calib/linearpointsetmatcher.cpp
+@@ -83,7 +83,7 @@ void LinearPointSetMatcher::swap(double& d1, double& d2) {
+ 
+ std::unique_ptr<std::map<int,int> > LinearPointSetMatcher::getMapping() const {
+ 	if (results.mapping.get() == 0) {
+-		return std::unique_ptr<std::map<int,int> >(0); // TODO throw sth. instead
++		return std::unique_ptr<std::map<int,int> >(new std::map<int,int>()); // TODO throw sth. instead
+ 	} else {
+ 		// aaargh, this syntax is awful, i hate it, hate it, hate it...
+ 		return std::unique_ptr<std::map<int,int> >(new std::map<int,int>(*(results.mapping)));
+diff --git a/src/imslib/src/ims/calib/linearpointsetmatcher.h b/src/imslib/src/ims/calib/linearpointsetmatcher.h
+index 10fa1d3..11e7298 100644
+--- a/src/imslib/src/ims/calib/linearpointsetmatcher.h
++++ b/src/imslib/src/ims/calib/linearpointsetmatcher.h
+@@ -278,7 +278,7 @@ void LinearPointSetMatcher::countMatchesOneToOne(
+ 			#endif
+ 		}
+ 
+-		std::unique_ptr<std::map<int,int> > mapping(0);
++		std::unique_ptr<std::map<int,int> > mapping(new std::map<int,int>());
+ 		// evaluate match matrix: count out score using...
+ 		if (!restrict_oneToOne) {
+ 			// ... greedy counting scheme
+@@ -300,7 +300,7 @@ void LinearPointSetMatcher::countMatchesOneToOne(
+ 			results.centerB = j;
+ 			results.bestscale = (*p).scale;
+ 			results.besttranslation=-results.bestscale*a_first[i] + b_first[j] + diff;
+-			results.mapping=mapping;
++			results.mapping=std::move(mapping);
+ 		}
+ 	}
+ }
+@@ -323,7 +323,7 @@ int LinearPointSetMatcher::match(RandomAccessIterator a_first, RandomAccessItera
+ 	if (oneToOne) {
+ 		results.mapping = std::unique_ptr<std::map<int,int> >(new std::map<int,int>);
+ 	} else {
+-		results.mapping = std::unique_ptr<std::map<int,int> >(0);
++		results.mapping = std::unique_ptr<std::map<int,int> >(new std::map<int,int>());
+ 	}
+ 
+ 	#ifndef NDEBUG
+diff --git a/src/imslib/src/ims/composedelement.cpp b/src/imslib/src/ims/composedelement.cpp
+index aa36c47..652c481 100644
+--- a/src/imslib/src/ims/composedelement.cpp
++++ b/src/imslib/src/ims/composedelement.cpp
+@@ -29,7 +29,7 @@ ComposedElement::ComposedElement(const name_type& sequence, const Alphabet& alph
+ 	} else {
+ 		parser = std::unique_ptr<sequence_parser_type>(new MoleculeSequenceParser);
+ 	}
+-	this->initializeElements(alphabet, parser);
++	this->initializeElements(alphabet, std::move(parser) );
+ }
+ 			
+ ComposedElement::ComposedElement(const std::vector<unsigned int>& decomposition, 
+diff --git a/src/imslib/src/ims/decomp/decomputils.h b/src/imslib/src/ims/decomp/decomputils.h
+index 6d1d834..7cd0793 100644
+--- a/src/imslib/src/ims/decomp/decomputils.h
++++ b/src/imslib/src/ims/decomp/decomputils.h
+@@ -71,14 +71,14 @@ template <typename T>
+ std::vector<T> getPositiveNeighborhoodSet(T middle,
+ 					std::pair<T, T> minMaxElements, T range, T granularity) {
+ 	std::vector<T> valuesRange = getNeighborhoodSet(middle, minMaxElements, range, granularity);
+-	valuesRange.erase(std::remove_if(valuesRange.begin(), valuesRange.end(), std::bind2nd(std::less<T>(), 0)), valuesRange.end());
++	valuesRange.erase(std::remove_if(valuesRange.begin(), valuesRange.end(), [](const T& x) { return x < 0; }, 0), valuesRange.end());
+ 	return valuesRange;
+ }
+ 
+ template <typename T>
+ std::vector<T> getPositiveNeighborhoodSet(T middle, T range, T granularity) {
+ 	std::vector<T> valuesRange = getNeighborhoodSet(middle, range, granularity);
+-	valuesRange.erase(std::remove_if(valuesRange.begin(), valuesRange.end(), std::bind2nd(std::less<T>(), 0)), valuesRange.end());
++	valuesRange.erase(std::remove_if(valuesRange.begin(), valuesRange.end(), [](const T& x) { return x < 0; }), valuesRange.end());
+ 	return valuesRange;
+ }
+ 
