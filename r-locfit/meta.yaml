@@ -1,0 +1,56 @@
+{% set version = "1.5-9.8" %}
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
+
+package:
+  name: r-locfit
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url:
+    - {{ cran_mirror }}/src/contrib/locfit_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/locfit/locfit_{{ version }}.tar.gz
+  sha256: 0d0a9bfb32e50e8f8f97de771f91b17db1db7c5be35027f2d7840a7293e11de3
+
+build:
+  merge_build_host: true  # [win]
+  number: 1
+  skip: true  # [r_base == "4.0"]
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('c') }}              # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}make
+    - {{ posix }}sed               # [win]
+    - {{ posix }}coreutils         # [win]
+    - {{ posix }}zip               # [win]
+    - cross-r-base {{ r_base }}    # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+    - r-lattice
+  run:
+    - r-base>=4.2
+    - {{ native }}gcc-libs         # [win]
+    - r-lattice
+
+test:
+  commands:
+    - $R -e "library('locfit')"           # [not win]
+    - "\"%R%\" -e \"library('locfit')\""  # [win]
+
+about:
+  home: https://CRAN.R-project.org/package=locfit
+  license: GPL-2.0-or-later
+  summary: Local regression, likelihood and density estimation.
+  license_family: GPL2
+  license_file:
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
