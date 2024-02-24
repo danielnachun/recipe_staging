@@ -47,6 +47,8 @@ requirements:
     - r-matrix
     - r-rcpp
     - r-rsvd
+    - libblas
+    - liblapack
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
