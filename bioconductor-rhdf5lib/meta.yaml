@@ -1,4 +1,4 @@
-{% set version = "1.24.0" %}
+{% set version = "1.24.2" %}
 {% set name = "Rhdf5lib" %}
 {% set bioc = "3.18" %}
 
@@ -30,7 +30,6 @@ requirements:
     - r-base>=4.3
   build:
     - {{ compiler('c') }}
-    - autoconf
     - automake
     - make
 test:
