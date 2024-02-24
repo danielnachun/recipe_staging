@@ -32,7 +32,7 @@ requirements:
     - {{ posix }}zip               # [win]
     - cross-r-base {{ r_base }}    # [build_platform != target_platform]
   host:
-    - r-base
+    - r-base=4.2
     - r-ecosolver >=0.5.4
     - r-matrix
     - r-r6
@@ -44,7 +44,7 @@ requirements:
     - r-osqp
     - r-scs >=3.0
   run:
-    - r-base
+    - r-base>=4.2
     - {{ native }}gcc-libs         # [win]
     - r-ecosolver >=0.5.4
     - r-matrix
