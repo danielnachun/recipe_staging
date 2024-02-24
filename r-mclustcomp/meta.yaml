@@ -32,12 +32,12 @@ requirements:
     - {{ posix }}zip               # [win]
     - cross-r-base {{ r_base }}    # [build_platform != target_platform]
   host:
-    - r-base
+    - r-base=4.2
     - r-rcpp
     - r-rcpparmadillo
     - r-rdpack
   run:
-    - r-base
+    - r-base>=4.2
     - {{ native }}gcc-libs         # [win]
     - r-rcpp
     - r-rcpparmadillo
