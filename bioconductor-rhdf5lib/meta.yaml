@@ -25,10 +25,12 @@ requirements:
     - r-base=4.3
     - libblas
     - liblapack
+    - libtool
   run:
     - r-base>=4.3
   build:
     - {{ compiler('c') }}
+    - autoconf
     - automake
     - make
 test:
