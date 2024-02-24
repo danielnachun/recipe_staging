@@ -1,0 +1,67 @@
+{% set version = "0.99.31.7" %}
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
+
+package:
+  name: r-memisc
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url:
+    - {{ cran_mirror }}/src/contrib/memisc_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/memisc/memisc_{{ version }}.tar.gz
+  sha256: b403185850520db18ebd608df85c76df80e6c64af428cdc4e49c2fe487483637
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+  missing_dso_whitelist:
+    - '*/R.dll'            # [win]
+
+requirements:
+  build:
+    - {{ compiler('c') }}          # [not win]
+    - {{ compiler('m2w64_c') }}    # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}make
+    - {{ posix }}sed               # [win]
+    - {{ posix }}coreutils         # [win]
+    - {{ posix }}zip               # [win]
+    - cross-r-base {{ r_base }}    # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+    - r-mass
+    - r-data.table
+    - r-jsonlite
+    - r-lattice
+    - r-yaml
+  run:
+    - r-base>=4.2
+    - {{ native }}gcc-libs         # [win]
+    - r-mass
+    - r-data.table
+    - r-jsonlite
+    - r-lattice
+    - r-yaml
+
+test:
+  commands:
+    - $R -e "library('memisc')"           # [not win]
+    - "\"%R%\" -e \"library('memisc')\""  # [win]
+
+about:
+  home: https://www.elff.eu/software/memisc/
+  dev_url: https://github.com/melff/memisc/
+  license: GPL-2.0-only
+  summary: An infrastructure for the management of survey data including value labels, definable missing values, recoding of variables, production of code books, and import of (subsets of) 'SPSS' and 'Stata' files is provided. Further, the package allows to produce tables and data frames of arbitrary descriptive statistics
+    and (almost) publication-ready tables of regression model estimates, which can be exported to 'LaTeX' and HTML.
+  license_family: GPL2
+  license_file:
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
