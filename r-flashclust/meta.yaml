@@ -1,0 +1,54 @@
+{% set version = '1.01-2' %}
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
+
+package:
+  name: r-flashclust
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url:
+    - {{ cran_mirror }}/src/contrib/flashClust_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/flashClust/flashClust_{{ version }}.tar.gz
+  sha256: 48a7849bb86530465ff3fbfac1c273f0df4b846e67d5eee87187d250c8bf9450
+
+build:
+  merge_build_host: True  # [win]
+  number: 1008
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('c') }}        # [not win]
+    - {{ compiler('fortran') }}  # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{ compiler('m2w64_fortran') }}        # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}make
+    - {{ posix }}sed               # [win]
+    - {{ posix }}coreutils         # [win]
+    - {{ posix }}zip               # [win]
+  host:
+    - r-base=4.2
+  run:
+    - r-base>=4.2
+    - {{ native }}gcc-libs         # [win]
+
+test:
+  commands:
+    - $R -e "library('flashClust')"           # [not win]
+    - "\"%R%\" -e \"library('flashClust')\""  # [win]
+
+about:
+  home: https://CRAN.R-project.org/package=flashClust
+  license: GPL-2.0-or-later
+  summary: Fast implementation of hierarchical clustering
+  license_family: GPL3
+  license_file:
+    - '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3'
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
