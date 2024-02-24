@@ -23,7 +23,7 @@ requirements:
   host:
     - 'bioconductor-biobase >=2.62.0,<2.63.0'
     - 'bioconductor-biocgenerics >=0.48.0,<0.49.0'
-    - r-base
+    - r-base=4.3
     - r-mass
     - r-survival
     - libblas
@@ -31,7 +31,7 @@ requirements:
   run:
     - 'bioconductor-biobase >=2.62.0,<2.63.0'
     - 'bioconductor-biocgenerics >=0.48.0,<0.49.0'
-    - r-base
+    - r-base>=4.3
     - r-mass
     - r-survival
   build:
