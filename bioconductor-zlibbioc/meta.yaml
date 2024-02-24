@@ -21,11 +21,11 @@ build:
 # Suggests: BiocStyle
 requirements:
   host:
-    - r-base
+    - r-base=4.3
     - libblas
     - liblapack
   run:
-    - r-base
+    - r-base>=4.3
   build:
     - {{ compiler('c') }}
     - automake
