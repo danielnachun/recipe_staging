@@ -1,0 +1,55 @@
+{% set version = "1.2.11" %}
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
+
+package:
+  name: r-mapproj
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url:
+    - {{ cran_mirror }}/src/contrib/mapproj_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/mapproj/mapproj_{{ version }}.tar.gz
+  sha256: db2d201cc939de26717566066bf44225a967ccde6fc34731af845f03c086347d
+
+build:
+  merge_build_host: true  # [win]
+  number: 1
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('c') }}              # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}make
+    - {{ posix }}sed               # [win]
+    - {{ posix }}coreutils         # [win]
+    - {{ posix }}zip               # [win]
+    - cross-r-base {{ r_base }}    # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+    - r-maps >=2.3_0
+  run:
+    - r-base>=4.2
+    - {{ native }}gcc-libs         # [win]
+    - r-maps >=2.3_0
+
+test:
+  commands:
+    - $R -e "library('mapproj')"           # [not win]
+    - "\"%R%\" -e \"library('mapproj')\""  # [win]
+
+about:
+  home: https://CRAN.R-project.org/package=mapproj
+  license: LPL-1.02
+  summary: Converts latitude/longitude into projected coordinates.
+  license_family: OTHER
+  license_file:
+    - LICENSE.note
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
