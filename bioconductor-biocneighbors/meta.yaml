@@ -24,7 +24,7 @@ requirements:
   host:
     - 'bioconductor-biocparallel >=1.36.0,<1.37.0'
     - 'bioconductor-s4vectors >=0.40.0,<0.41.0'
-    - r-base
+    - r-base=4.3
     - r-matrix
     - r-rcpp
     - r-rcpphnsw
@@ -33,7 +33,7 @@ requirements:
   run:
     - 'bioconductor-biocparallel >=1.36.0,<1.37.0'
     - 'bioconductor-s4vectors >=0.40.0,<0.41.0'
-    - r-base
+    - r-base>=4.3
     - r-matrix
     - r-rcpp
     - r-rcpphnsw
