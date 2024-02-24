@@ -33,6 +33,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - automake
+    - binutils  # [linux]
     - make
 test:
   commands:
