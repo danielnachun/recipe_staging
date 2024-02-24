@@ -1,0 +1,58 @@
+{% set version = "2.0-4" %}
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
+
+package:
+  name: r-pcapp
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url:
+    - {{ cran_mirror }}/src/contrib/pcaPP_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/pcaPP/pcaPP_{{ version }}.tar.gz
+  sha256: d6c5670611d92ffa11904746a62191e6bcf294fb96afee10cb25ebbbd8458133
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('c') }}        # [not win]
+    - {{ compiler('cxx') }}      # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{ compiler('m2w64_cxx') }}        # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}make
+    - {{ posix }}sed               # [win]
+    - {{ posix }}coreutils         # [win]
+    - {{ posix }}zip               # [win]
+  host:
+    - libblas
+    - liblapack
+    - r-base=4.2
+    - r-mvtnorm
+  run:
+    - r-base>=4.2
+    - {{ native }}gcc-libs         # [win]
+    - r-mvtnorm
+
+test:
+  commands:
+    - $R -e "library('pcaPP')"           # [not win]
+    - "\"%R%\" -e \"library('pcaPP')\""  # [win]
+
+about:
+  home: https://CRAN.R-project.org/package=pcaPP
+  license: GPL-3.0-or-later
+  summary: Provides functions for robust PCA by projection pursuit. The methods are described in Croux et al. (2006) <doi:10.2139/ssrn.968376>, Croux et al. (2013) <doi:10.1080/00401706.2012.727746>, Todorov and Filzmoser (2013) <doi:10.1007/978-3-642-33042-1_31>.
+  license_family: GPL3
+  license_file:
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
