@@ -21,12 +21,12 @@ build:
 requirements:
   host:
     - 'bioconductor-zlibbioc >=1.48.0,<1.49.0'
-    - r-base
+    - r-base=4.3
     - libblas
     - liblapack
   run:
     - 'bioconductor-zlibbioc >=1.48.0,<1.49.0'
-    - r-base
+    - r-base>=4.3
   build:
     - {{ compiler('c') }}
     - automake
