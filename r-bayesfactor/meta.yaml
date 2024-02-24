@@ -31,7 +31,7 @@ requirements:
     - {{ posix }}coreutils         # [win]
     - {{ posix }}zip               # [win]
   host:
-    - r-base
+    - r-base=4.2
     - r-matrix >=1.1_1
     - r-matrixmodels
     - r-rcpp >=0.11.2
@@ -43,7 +43,7 @@ requirements:
     - r-pbapply
     - r-stringr
   run:
-    - r-base
+    - r-base>=4.2
     - {{ native }}gcc-libs         # [win]
     - r-matrix >=1.1_1
     - r-matrixmodels
