@@ -21,7 +21,7 @@ requirements:
     - {{ compiler('cxx') }}
   host:
     - bioconductor-limma
-    - r-base=4.2
+    - r-base=4.3
     - r-data.table
     - r-dplyr
     - r-lcmix
@@ -35,7 +35,7 @@ requirements:
     - bioconductor-limma
     - libopenblas
     - _openmp_mutex  # [linux]
-    - r-base>=4.2
+    - r-base>=4.3
     - r-data.table
     - r-dplyr
     - r-lcmix
