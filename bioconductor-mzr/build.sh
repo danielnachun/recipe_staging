@@ -8,4 +8,5 @@ CXX=$CXX
 CXX98=$CXX
 CXX11=$CXX
 CXX14=$CXX" > ~/.R/Makevars
+export PKG_CXXFLAGS="-Wno-enum-constexpr-conversion"
 $R CMD INSTALL --build .
