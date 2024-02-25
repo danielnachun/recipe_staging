@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://cran.r-project.org/src/contrib/pgenlibr_{{ version }}.tar.gz
-  sha256: 145717350205f5562a01292a0fcbd617b7500758f20cad0393c7cc54665a614e
+  sha256: fe267188953ff108645e54d5faed7b68170e01e9fbb271242703457b85074cda
 
 build:
   merge_build_host: true  # [win]
