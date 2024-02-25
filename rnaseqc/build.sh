@@ -13,7 +13,7 @@ make CXX="${CXX} -std=c++14" \
      INCLUDES="-I${PREFIX}/include" \
      LDFLAGS="-L${PREFIX}/lib" \
      CPPFLAGS="-I${PREFIX}/include" \
-     LIBRARY_PATHS="-L${PREFIX}/lib"
+     LIBRARY_PATHS="-L${PREFIX}/lib" || (cat SeqLib/config.log; exit 1)
 
 mkdir -p ${PREFIX}/bin
 install -m 755 rnaseqc ${PREFIX}/bin
