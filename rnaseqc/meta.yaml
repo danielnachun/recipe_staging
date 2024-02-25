@@ -16,11 +16,14 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - autoconf
+    - automake
     - binutils  # [linux]
     - make
     - sed
   host:
     - bzip2
+    - libtool
     - xz
     - zlib
     - boost-cpp=1.82
