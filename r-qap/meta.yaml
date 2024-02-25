@@ -1,0 +1,55 @@
+{% set version = "0.1-2" %}
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
+
+package:
+  name: r-qap
+  version: {{ version|replace("-", "_") }}
+
+source:
+  fn: qap_{{ version }}.tar.gz
+  url:
+    - {{ cran_mirror }}/src/contrib/qap_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/qap/qap_{{ version }}.tar.gz
+  sha256: 47a4ada3ae7a3a5c9304174bd5291daad60d329d527c0c6bb5ec1ac257584da5
+
+build:
+  merge_build_host: true  # [win]
+  number: 2
+  skip: true  # [win32]
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('c') }}        # [not win]
+    - {{ compiler('fortran') }}  # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{ compiler('m2w64_fortran') }}        # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}make
+    - {{ posix }}sed               # [win]
+    - {{ posix }}coreutils         # [win]
+    - {{ posix }}zip               # [win]
+  host:
+    - r-base=4.2
+  run:
+    - r-base>=4.2
+    - {{ native }}gcc-libs         # [win]
+
+test:
+  commands:
+    - $R -e "library('qap')"           # [not win]
+    - "\"%R%\" -e \"library('qap')\""  # [win]
+
+about:
+  home: https://CRAN.R-project.org/package=qap
+  license: GPL-3
+  summary: Implements heuristics for the Quadratic Assignment Problem (QAP). Currently only a simulated annealing heuristic is available.
+  license_family: GPL3
+  license_file: {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
