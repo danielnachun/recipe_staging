@@ -14,7 +14,7 @@ requirements:
     - make
     - {{ compiler('c') }}
   host:
-    - perl
+    - perl=5.32
     - perl-extutils-makemaker
     - perl-file-temp
     - perl-parent
@@ -28,7 +28,7 @@ requirements:
     - perl-html-parser
 
   run:
-    - perl
+    - perl>=5.32
     - perl-file-temp
     - perl-exporter
     - perl-carp
