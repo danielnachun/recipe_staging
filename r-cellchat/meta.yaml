@@ -24,7 +24,7 @@ requirements:
     - bioconductor-biocgenerics
     - bioconductor-biocneighbors
     - bioconductor-complexheatmap
-    - r-base=4.2
+    - r-base=4.3
     - r-circlize
     - r-colorspace
     - r-cowplot
@@ -60,7 +60,7 @@ requirements:
     - bioconductor-biocgenerics
     - bioconductor-biocneighbors
     - bioconductor-complexheatmap
-    - r-base>=4.2
+    - r-base>=4.3
     - r-circlize
     - r-colorspace
     - r-cowplot
