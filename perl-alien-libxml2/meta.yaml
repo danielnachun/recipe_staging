@@ -25,9 +25,11 @@ requirements:
   host:
     - perl=5.32
     - perl-alien-build
-    - perl-test2
+    - perl-test2-suite
+    - zlib
   run:
     - perl>=5.32
+    - libzlib
 
 test:
   imports:
