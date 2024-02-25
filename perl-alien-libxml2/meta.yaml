@@ -25,7 +25,7 @@ requirements:
   host:
     - perl=5.32
     - perl-alien-build
-    - perl-test2-v0
+    - perl-test2
   run:
     - perl>=5.32
 
