@@ -1,13 +1,12 @@
-{% set version = "0.3.2" %}
-{% set plink_version = "2.00a3.7" %}
+{% set version = "0.3.5" %}
 
 package:
   name: r-pgenlibr
   version: {{ version|replace("-", "_") }}
 
 source:
-  url: https://github.com/chrchang/plink-ng/archive/refs/tags/v{{ plink_version }}.tar.gz
-  sha256: 145717350205f5562a01292a0fcbd617b7500758f20cad0393c7cc54665a614e
+  url: https://cran.r-project.org/src/contrib/pgenlibr_{{ version }}.tar.gz
+  sha256: fe267188953ff108645e54d5faed7b68170e01e9fbb271242703457b85074cda
 
 build:
   merge_build_host: true  # [win]
