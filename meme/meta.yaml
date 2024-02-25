@@ -30,10 +30,10 @@ requirements:
     - libxslt
     - libxml2
     - expat
-    - perl
+    - perl=5.32
   run:
     - python >=3.7
-    - perl
+    - perl>=5.32
     - perl-app-cpanminus
     - perl-module-build
     - perl-yaml
