@@ -20,7 +20,7 @@ requirements:
     - cross-r-base {{ r_base }}  # [build_platform != target_platform]
     - sed
   host:
-    - r-base=4.2
+    - r-base=4.3
     - bioconductor-dirichletmultinomial
     - r-bh
     - r-domc
@@ -48,7 +48,7 @@ requirements:
     - r-tailrank
     - tbb-devel <2021
   run:
-    - r-base>=4.2
+    - r-base>=4.3
     - bioconductor-dirichletmultinomial
     - perl-carp
     - perl-getopt-long
