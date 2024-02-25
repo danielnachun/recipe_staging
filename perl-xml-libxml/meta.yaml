@@ -14,7 +14,7 @@ requirements:
     - make
     - {{ compiler('c') }}
   host:
-    - perl
+    - perl=5.32
     - perl-xml-sax
     - perl-xml-namespacesupport
     - perl-alien-build
@@ -22,7 +22,7 @@ requirements:
     - libxml2
     - zlib
   run:
-    - perl
+    - perl>=5.32
     - perl-xml-sax
     - perl-xml-namespacesupport
     - perl-alien-libxml2
