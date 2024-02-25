@@ -11,8 +11,8 @@ if [[ $(uname) == Darwin ]]; then
   export CXX=clang++
   export LDFLAGS="-L$PREFIX/lib -Wl,-rpath,$PREFIX/lib -headerpad_max_install_names $LDFLAGS"
   export LIBRARY_SEARCH_VAR=DYLD_FALLBACK_LIBRARY_PATH
-  export MACOSX_DEPLOYMENT_TARGET="10.9"
-  export CXXFLAGS="-stdlib=libc++ $CXXFLAGS"
+  export MACOSX_DEPLOYMENT_TARGET="11.0"
+  export CXXFLAGS="-stdlib=libc++ $CXXFLAGS -DHAVE_PTHREAD_TLS"
 fi
 
 cd build_unix
