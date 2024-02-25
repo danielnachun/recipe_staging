@@ -32,7 +32,7 @@ requirements:
     - {{ posix }}coreutils         # [win]
     - {{ posix }}zip               # [win]
   host:
-    - r-base=4.2
+    - r-base=4.3
     - bioconductor-biobase
     - r-biocmanager
     - r-rcolorbrewer
@@ -50,7 +50,7 @@ requirements:
     - r-stringr >=1.0.0
   run:
     - {{native}}gcc-libs         # [win]
-    - r-base>=4.2    
+    - r-base>=4.3    
     - bioconductor-biobase
     - r-biocmanager
     - r-rcolorbrewer
