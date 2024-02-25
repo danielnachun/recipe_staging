@@ -4,7 +4,7 @@ set -o xtrace -o nounset -o pipefail -o errexit
 
 cd rnaseqc
 sed -i 's/CC/CXX/g' Makefile
-sed -i 's?./configure &&?autoreconf --force --verbose --install && ./configure &&?' Makefile
+sed -i 's?./configure &&?./autogen.sh && ./configure &&?' Makefile
 sed -i "s?-lz?-L${PREFIX}/lib -lz?g" SeqLib/bwa/Makefile
 sed -i "s?-lz?-L${PREFIX}/lib -lz?g" SeqLib/fermi-lite/Makefile
 make CXX="${CXX} -std=c++14" \
