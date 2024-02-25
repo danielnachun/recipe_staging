@@ -28,7 +28,7 @@ requirements:
     #- perl-test-more
 
   run:
-    - perl>=5.32
+    - perl>5.32
     - perl-storable
     - perl-exporter
     - perl-parent
