@@ -1,6 +1,7 @@
 #!/bin/bash
 
 export DISABLE_AUTOBREW=1
+export PKG_CPPFLAGS="-DHAVE_WORKING_LOG1P"
 
 # R refuses to build packages that mark themselves as Priority: Recommended
 mv DESCRIPTION DESCRIPTION.old
