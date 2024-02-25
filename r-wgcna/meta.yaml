@@ -22,7 +22,7 @@ requirements:
     - {{ compiler('cxx') }}
     - make
   host:
-    - r-base
+    - r-base=4.3
     - bioconductor-annotationdbi
     - bioconductor-go.db
     - r-hmisc
@@ -37,7 +37,7 @@ requirements:
     - r-robust
     - r-survival
   run:
-    - r-base
+    - r-base>=4.3
     - bioconductor-annotationdbi
     - bioconductor-go.db
     - r-hmisc
