@@ -16,6 +16,7 @@ build:
   script:
     - export CFLAGS="${CFLAGS} -std=c11"
     - export LD="${CC}"
+    - autoreconf --force --verbose --install engine/read_only
     - ${PREFIX}/bin/perl Build.PL
     - ${PREFIX}/bin/perl ./Build
     - ${PREFIX}/bin/perl ./Build test
@@ -32,6 +33,7 @@ requirements:
     - m2-make  # [win]
     - sed  # [not win]
   host:
+    - libtool
     - perl=5.32
     - perl-module-build
     - perl-html-parser
