@@ -1,0 +1,710 @@
+From 12441fdc585228fd1f7d7e01fdd83c7265d83eea Mon Sep 17 00:00:00 2001
+From: Steffen Neumann <sneumann@ipb-halle.de>
+Date: Sun, 12 Feb 2023 12:52:41 +0100
+Subject: [PATCH] search&replace deprecated auto_ptr with unique_ptr
+
+---
+ src/imslib/src/ims/calib/calibrator.h              |  6 +++---
+ src/imslib/src/ims/calib/geometriccalibrator.h     | 12 ++++++------
+ src/imslib/src/ims/calib/linearpointsetmatcher.cpp |  6 +++---
+ src/imslib/src/ims/calib/linearpointsetmatcher.h   | 10 +++++-----
+ src/imslib/src/ims/calib/matchmatrix.cpp           |  8 ++++----
+ src/imslib/src/ims/calib/matchmatrix.h             |  4 ++--
+ .../src/ims/calib/pointsetmatchercalibrator.h      |  4 ++--
+ src/imslib/src/ims/chebyshevfitter.h               |  6 +++---
+ src/imslib/src/ims/composedelement.cpp             |  8 ++++----
+ src/imslib/src/ims/composedelement.h               |  2 +-
+ src/imslib/src/ims/decomp/realmassdecomposer.cpp   |  2 +-
+ src/imslib/src/ims/decomp/realmassdecomposer.h     |  2 +-
+ src/imslib/src/ims/fragmenter.h                    |  4 ++--
+ src/imslib/src/ims/markovsequencegenerator.h       |  4 ++--
+ src/imslib/src/ims/modifier/multimodifier.h        |  4 ++--
+ src/imslib/src/ims/randomsequencegenerator.h       |  4 ++--
+ .../tests/calib/linearpointsetmatchertest.cpp      |  2 +-
+ src/imslib/tests/calib/matchmatrixtest.cpp         |  4 ++--
+ src/imslib/tests/chebyshevfittertest.cpp           |  4 ++--
+ src/imslib/tests/identitytransformationtest.cpp    |  2 +-
+ .../modifier/intensitynormalizermodifiertest.cpp   |  2 +-
+ .../tests/modifier/massrangemodifiertest.cpp       |  2 +-
+ src/imslib/tests/modifier/multimodifiertest.cpp    | 14 +++++++-------
+ src/imslib/tests/modifier/noisemodifiertest.cpp    |  2 +-
+ src/imslib/tests/modifier/shiftmodifiertest.cpp    |  2 +-
+ src/imslib/tests/modifier/sortmodifiertest.cpp     |  2 +-
+ .../tests/modifier/unificationmodifiertest.cpp     |  2 +-
+ src/imslib/tests/modifier/voidmodifiertest.cpp     |  2 +-
+ src/imslib/tests/peakpropertyiteratortest.cpp      | 12 ++++++------
+ src/imslib/tools/imsfrag.cpp                       |  8 ++++----
+ 30 files changed, 73 insertions(+), 73 deletions(-)
+
+diff --git a/src/imslib/src/ims/calib/calibrator.h b/src/imslib/src/ims/calib/calibrator.h
+index e976269..aa71388 100644
+--- a/src/imslib/src/ims/calib/calibrator.h
++++ b/src/imslib/src/ims/calib/calibrator.h
+@@ -54,7 +54,7 @@ class Calibrator {
+ 		/** Returns the actual mapping computed by the last call to match().
+ 		 * @b Only usable for one-to-one mappings.
+ 		 */
+-		virtual std::auto_ptr<std::map<int,int> > getMapping() const = 0;
++		virtual std::unique_ptr<std::map<int,int> > getMapping() const = 0;
+ 	
+ 		virtual LinearTransformation getTransformation() const = 0;
+ 		
+@@ -102,7 +102,7 @@ void Calibrator<ListA,ListB>::reducedLists(
+ 	ListB& b_reduced) const
+ {
+ 	// TODO: use exceptions here
+-	std::auto_ptr<std::map<int,int> > mapping_ptr = getMapping();
++	std::unique_ptr<std::map<int,int> > mapping_ptr = getMapping();
+ 	assert(mapping_ptr.get() != NULL);
+ 	std::map<int,int> &mapping = *mapping_ptr; // TODO
+ 	a_reduced.clear();
+@@ -135,7 +135,7 @@ ListB Calibrator<ListA,ListB>::recalibrated(const ListA& predicted, const ListB&
+ 		ListB measured_reduced;
+ 		reducedLists(predicted, measured, predicted_reduced, measured_reduced);
+ 		ChebyshevFitter fitter(degree);
+-		std::auto_ptr<PolynomialTransformation> transformation = fitter.fit(
++		std::unique_ptr<PolynomialTransformation> transformation = fitter.fit(
+ 			predicted_reduced.template begin<typename ListA::peak_type::MassGetter>(),
+ 			predicted_reduced.template end<typename ListA::peak_type::MassGetter>(),
+ 			measured_reduced.template begin<typename ListB::peak_type::MassGetter>(),
+diff --git a/src/imslib/src/ims/calib/geometriccalibrator.h b/src/imslib/src/ims/calib/geometriccalibrator.h
+index 6f62bd6..4d670b5 100644
+--- a/src/imslib/src/ims/calib/geometriccalibrator.h
++++ b/src/imslib/src/ims/calib/geometriccalibrator.h
+@@ -47,7 +47,7 @@ class GeometricCalibrator : public Calibrator<ListA,ListB> {
+ 			min_pointpaircount = std::max((size_t)2, count);
+ 		}
+ 
+-		virtual std::auto_ptr<std::map<int,int> > getMapping() const;
++		virtual std::unique_ptr<std::map<int,int> > getMapping() const;
+ 
+ 		virtual LinearTransformation getTransformation() const;
+ 
+@@ -63,7 +63,7 @@ class GeometricCalibrator : public Calibrator<ListA,ListB> {
+ 
+ 	private:
+ 		void convertToPoints(const ListA& a, const ListB& b);
+-		std::auto_ptr<std::map<int,int> > realMatch(const ListA& a, const ListB& b, const LinearTransformation& t, double epsilon, bool restricted); // TODO parameters
++		std::unique_ptr<std::map<int,int> > realMatch(const ListA& a, const ListB& b, const LinearTransformation& t, double epsilon, bool restricted); // TODO parameters
+ 
+ 		double epsilon;
+ 		double abslimit;
+@@ -74,7 +74,7 @@ class GeometricCalibrator : public Calibrator<ListA,ListB> {
+ 		size_t min_pointpaircount;
+ 		bool have_mapping;
+ 		bool have_transformation;
+-		std::auto_ptr<std::map<int,int> > mapping;
++		std::unique_ptr<std::map<int,int> > mapping;
+ 		LinearTransformation transformation;
+ };
+ 
+@@ -96,7 +96,7 @@ GeometricCalibrator<ListA,ListB>::GeometricCalibrator(double epsilon) :
+ 
+ 
+ template <typename ListA, typename ListB>
+-std::auto_ptr<std::map<int,int> > GeometricCalibrator<ListA,ListB>::realMatch(const ListA& a, const ListB& b, const LinearTransformation& t, double epsilon, bool restricted)
++std::unique_ptr<std::map<int,int> > GeometricCalibrator<ListA,ListB>::realMatch(const ListA& a, const ListB& b, const LinearTransformation& t, double epsilon, bool restricted)
+ {
+ 	// TODO: one could optimize (similar to calc_pointlist above)
+ 	const double accuracy = 0.0001;
+@@ -176,9 +176,9 @@ int GeometricCalibrator<ListA,ListB>::match(const ListA& a, const ListB& b)
+ 
+ // TODO a bit ugly
+ template <typename ListA, typename ListB>
+-std::auto_ptr<std::map<int,int> > GeometricCalibrator<ListA,ListB>::getMapping() const {
++std::unique_ptr<std::map<int,int> > GeometricCalibrator<ListA,ListB>::getMapping() const {
+ 	assert(have_mapping);
+-	return std::auto_ptr<std::map<int,int> >(new std::map<int,int>(*mapping));
++	return std::unique_ptr<std::map<int,int> >(new std::map<int,int>(*mapping));
+ }
+ 
+ template <typename ListA, typename ListB>
+diff --git a/src/imslib/src/ims/calib/linearpointsetmatcher.cpp b/src/imslib/src/ims/calib/linearpointsetmatcher.cpp
+index 2abe74e..7158c69 100644
+--- a/src/imslib/src/ims/calib/linearpointsetmatcher.cpp
++++ b/src/imslib/src/ims/calib/linearpointsetmatcher.cpp
+@@ -81,12 +81,12 @@ void LinearPointSetMatcher::swap(double& d1, double& d2) {
+ 	d2=h;
+ }
+ 
+-std::auto_ptr<std::map<int,int> > LinearPointSetMatcher::getMapping() const {
++std::unique_ptr<std::map<int,int> > LinearPointSetMatcher::getMapping() const {
+ 	if (results.mapping.get() == 0) {
+-		return std::auto_ptr<std::map<int,int> >(0); // TODO throw sth. instead
++		return std::unique_ptr<std::map<int,int> >(0); // TODO throw sth. instead
+ 	} else {
+ 		// aaargh, this syntax is awful, i hate it, hate it, hate it...
+-		return std::auto_ptr<std::map<int,int> >(new std::map<int,int>(*(results.mapping)));
++		return std::unique_ptr<std::map<int,int> >(new std::map<int,int>(*(results.mapping)));
+ 	}
+ }
+ 
+diff --git a/src/imslib/src/ims/calib/linearpointsetmatcher.h b/src/imslib/src/ims/calib/linearpointsetmatcher.h
+index c071094..10fa1d3 100644
+--- a/src/imslib/src/ims/calib/linearpointsetmatcher.h
++++ b/src/imslib/src/ims/calib/linearpointsetmatcher.h
+@@ -143,7 +143,7 @@ class LinearPointSetMatcher {
+ 	  */
+ 	// TODO: do we need something like this for the many2one case?
+ 	// TODO: int,int -> size_t,size_t
+-	std::auto_ptr<std::map<int,int> > getMapping() const;
++	std::unique_ptr<std::map<int,int> > getMapping() const;
+ 
+ 	/** Returns the transformation previously computed by match().
+ 	  * Apply this transformation to A to map it to B.
+@@ -166,7 +166,7 @@ class LinearPointSetMatcher {
+ 	struct {
+ 		int bestscore, centerA, centerB;
+ 		double bestscale,besttranslation;
+-		std::auto_ptr<std::map<int,int> > mapping;
++		std::unique_ptr<std::map<int,int> > mapping;
+ 	} results;
+ 
+ 
+@@ -278,7 +278,7 @@ void LinearPointSetMatcher::countMatchesOneToOne(
+ 			#endif
+ 		}
+ 
+-		std::auto_ptr<std::map<int,int> > mapping(0);
++		std::unique_ptr<std::map<int,int> > mapping(0);
+ 		// evaluate match matrix: count out score using...
+ 		if (!restrict_oneToOne) {
+ 			// ... greedy counting scheme
+@@ -321,9 +321,9 @@ int LinearPointSetMatcher::match(RandomAccessIterator a_first, RandomAccessItera
+ 	results.bestscale = 0.0;
+ 	results.besttranslation = 0.0;
+ 	if (oneToOne) {
+-		results.mapping = std::auto_ptr<std::map<int,int> >(new std::map<int,int>);
++		results.mapping = std::unique_ptr<std::map<int,int> >(new std::map<int,int>);
+ 	} else {
+-		results.mapping = std::auto_ptr<std::map<int,int> >(0);
++		results.mapping = std::unique_ptr<std::map<int,int> >(0);
+ 	}
+ 
+ 	#ifndef NDEBUG
+diff --git a/src/imslib/src/ims/calib/matchmatrix.cpp b/src/imslib/src/ims/calib/matchmatrix.cpp
+index 4ba2dfd..47bc3c8 100644
+--- a/src/imslib/src/ims/calib/matchmatrix.cpp
++++ b/src/imslib/src/ims/calib/matchmatrix.cpp
+@@ -78,8 +78,8 @@ size_t MatchMatrix::getRows() {
+ 	return rows;
+ }
+ 
+-std::auto_ptr<std::map<int,int> > MatchMatrix::countMatches() {
+-	std::auto_ptr<std::map<int,int> > m(new std::map<int,int>);
++std::unique_ptr<std::map<int,int> > MatchMatrix::countMatches() {
++	std::unique_ptr<std::map<int,int> > m(new std::map<int,int>);
+ 	int last_match=-1;
+ 	int score = 0;
+ 	// iterate over rows
+@@ -99,8 +99,8 @@ std::auto_ptr<std::map<int,int> > MatchMatrix::countMatches() {
+ 	return m;
+ }
+ 
+-std::auto_ptr<std::map<int,int> > MatchMatrix::countMatchesRestrictive() {
+-	std::auto_ptr<std::map<int,int> > m(new std::map<int,int>);
++std::unique_ptr<std::map<int,int> > MatchMatrix::countMatchesRestrictive() {
++	std::unique_ptr<std::map<int,int> > m(new std::map<int,int>);
+ 	
+ 	int last_match=-1;
+ 	int score = 0;
+diff --git a/src/imslib/src/ims/calib/matchmatrix.h b/src/imslib/src/ims/calib/matchmatrix.h
+index 7a917d1..576a9f1 100644
+--- a/src/imslib/src/ims/calib/matchmatrix.h
++++ b/src/imslib/src/ims/calib/matchmatrix.h
+@@ -58,11 +58,11 @@ class MatchMatrix {
+ 	std::size_t getRows();
+ 
+ 	/** Greedily compute one-to-one matches. */
+-	std::auto_ptr<std::map<int,int> > countMatches();
++	std::unique_ptr<std::map<int,int> > countMatches();
+ 	/** Similar to countMatches() with the restriction, to allow only real one2one matches
+ 	 * (i.e. matches that are non-ambiguous).
+ 	 */
+-	std::auto_ptr<std::map<int,int> > countMatchesRestrictive();
++	std::unique_ptr<std::map<int,int> > countMatchesRestrictive();
+ };
+ 
+ }
+diff --git a/src/imslib/src/ims/calib/pointsetmatchercalibrator.h b/src/imslib/src/ims/calib/pointsetmatchercalibrator.h
+index 7df2195..51d91d6 100644
+--- a/src/imslib/src/ims/calib/pointsetmatchercalibrator.h
++++ b/src/imslib/src/ims/calib/pointsetmatchercalibrator.h
+@@ -22,7 +22,7 @@ class PointSetMatcherCalibrator : public Calibrator<ListA,ListB> {
+ 		virtual void setMinPointPairCount(size_t count);
+ 		virtual bool inputValid(const ListA& a, const ListB& b) const;
+ 		virtual int match(const ListA& a, const ListB& b);
+-		virtual std::auto_ptr<std::map<int,int> > getMapping() const;
++		virtual std::unique_ptr<std::map<int,int> > getMapping() const;
+ 		virtual LinearTransformation getTransformation() const;
+ 	private:
+ 		Logger& logger;
+@@ -133,7 +133,7 @@ int PointSetMatcherCalibrator<ListA,ListB>::match(const ListA& a, const ListB& b
+ 
+ 
+ template <typename ListA, typename ListB>
+-std::auto_ptr<std::map<int,int> > PointSetMatcherCalibrator<ListA,ListB>::getMapping() const {
++std::unique_ptr<std::map<int,int> > PointSetMatcherCalibrator<ListA,ListB>::getMapping() const {
+ 	return lpsm.getMapping();
+ }
+ 
+diff --git a/src/imslib/src/ims/chebyshevfitter.h b/src/imslib/src/ims/chebyshevfitter.h
+index 429a2e9..56a952c 100644
+--- a/src/imslib/src/ims/chebyshevfitter.h
++++ b/src/imslib/src/ims/chebyshevfitter.h
+@@ -18,7 +18,7 @@ class ChebyshevFitter {
+ 		double getMaximumError() const;
+ 
+ 		template <typename RandomAccessIteratorA, typename RandomAccessIteratorB>
+-		std::auto_ptr<PolynomialTransformation> fit(
++		std::unique_ptr<PolynomialTransformation> fit(
+ 			RandomAccessIteratorA x,
+ 			RandomAccessIteratorA x_end,
+ 			RandomAccessIteratorB y,
+@@ -56,7 +56,7 @@ inline double ChebyshevFitter::getMaximumError() const {
+  * Size of x and y must be > order+1.
+  */
+ template <typename RandomAccessIteratorA, typename RandomAccessIteratorB>
+-std::auto_ptr<PolynomialTransformation> ChebyshevFitter::fit(
++std::unique_ptr<PolynomialTransformation> ChebyshevFitter::fit(
+ 	const RandomAccessIteratorA x,
+ 	const RandomAccessIteratorA x_end,
+ 	const RandomAccessIteratorB y,
+@@ -206,7 +206,7 @@ std::auto_ptr<PolynomialTransformation> ChebyshevFitter::fit(
+ 	}
+ 
+ 	// Copy estimated coefficients (array a) into a PolynomialTransformation.
+-	std::auto_ptr<PolynomialTransformation> transformation(new PolynomialTransformation(m));
++	std::unique_ptr<PolynomialTransformation> transformation(new PolynomialTransformation(m));
+ 	for (size_t ic = 0; ic <= m; ++ic) {
+ 		transformation->setCoefficient(ic, a[ic]);
+ 	}
+diff --git a/src/imslib/src/ims/composedelement.cpp b/src/imslib/src/ims/composedelement.cpp
+index 2a9af94..aa36c47 100644
+--- a/src/imslib/src/ims/composedelement.cpp
++++ b/src/imslib/src/ims/composedelement.cpp
+@@ -23,11 +23,11 @@ ComposedElement::ComposedElement(const container& elements,
+ ComposedElement::ComposedElement(const name_type& sequence, const Alphabet& alphabet, unsigned sequence_type) 
+ 		/*throw (UnknownCharacterException)*/ {
+ 	this->setSequence(sequence);
+-	std::auto_ptr<sequence_parser_type> parser;
++	std::unique_ptr<sequence_parser_type> parser;
+ 	if (sequence_type == TEX_NOTATION_MOLECULE_SEQUENCE_TYPE) {
+-		parser = std::auto_ptr<sequence_parser_type>(new StandardMoleculeSequenceParser);
++		parser = std::unique_ptr<sequence_parser_type>(new StandardMoleculeSequenceParser);
+ 	} else {
+-		parser = std::auto_ptr<sequence_parser_type>(new MoleculeSequenceParser);
++		parser = std::unique_ptr<sequence_parser_type>(new MoleculeSequenceParser);
+ 	}
+ 	this->initializeElements(alphabet, parser);
+ }
+@@ -113,7 +113,7 @@ ComposedElement::getElementAbundance(const name_type& name) const {
+ }
+ 
+ 
+-void ComposedElement::initializeElements(const Alphabet& alphabet, std::auto_ptr<sequence_parser_type> parser)
++void ComposedElement::initializeElements(const Alphabet& alphabet, std::unique_ptr<sequence_parser_type> parser)
+ 			/*throw (UnknownCharacterException)*/ {
+ 
+ 	typedef sequence_parser_type::container parser_container;
+diff --git a/src/imslib/src/ims/composedelement.h b/src/imslib/src/ims/composedelement.h
+index 980b0ce..ad25cc5 100644
+--- a/src/imslib/src/ims/composedelement.h
++++ b/src/imslib/src/ims/composedelement.h
+@@ -201,7 +201,7 @@ class ComposedElement : public Element {
+ 		 * 
+ 		 * @throws UnknownCharacterException if any error happens while parsing	molecule's sequence.
+ 		 */
+-		void initializeElements(const Alphabet& alphabet, std::auto_ptr<sequence_parser_type> parser)
++		void initializeElements(const Alphabet& alphabet, std::unique_ptr<sequence_parser_type> parser)
+ 			/*throw (UnknownCharacterException)*/;
+ 		
+ 		void initializeElements(const std::vector<unsigned int>& decomposition, 
+diff --git a/src/imslib/src/ims/decomp/realmassdecomposer.cpp b/src/imslib/src/ims/decomp/realmassdecomposer.cpp
+index 914cd14..dfcc67e 100644
+--- a/src/imslib/src/ims/decomp/realmassdecomposer.cpp
++++ b/src/imslib/src/ims/decomp/realmassdecomposer.cpp
+@@ -18,7 +18,7 @@ RealMassDecomposer::RealMassDecomposer(const Weights& weights) :
+ 	rounding_errors =
+ 		DecompUtils::getMinMaxWeightsRoundingErrors(weights);
+ 	precision = weights.getPrecision();
+-	decomposer = std::auto_ptr<integer_decomposer_type>(
++	decomposer = std::unique_ptr<integer_decomposer_type>(
+ 							new integer_decomposer_type(weights));
+ }
+ 
+diff --git a/src/imslib/src/ims/decomp/realmassdecomposer.h b/src/imslib/src/ims/decomp/realmassdecomposer.h
+index 15a1271..6dde614 100644
+--- a/src/imslib/src/ims/decomp/realmassdecomposer.h
++++ b/src/imslib/src/ims/decomp/realmassdecomposer.h
+@@ -100,7 +100,7 @@ class RealMassDecomposer {
+ 		 * Decomposer to be used for exact decomposing using 
+ 		 * integer arithmetics.
+ 		 */
+-		std::auto_ptr<integer_decomposer_type> decomposer;
++		std::unique_ptr<integer_decomposer_type> decomposer;
+ };
+ 
+ } // namespace ims
+diff --git a/src/imslib/src/ims/fragmenter.h b/src/imslib/src/ims/fragmenter.h
+index ebeeb87..0d343c2 100644
+--- a/src/imslib/src/ims/fragmenter.h
++++ b/src/imslib/src/ims/fragmenter.h
+@@ -50,14 +50,14 @@ class Fragmenter {
+ 	 * Sets a new Modifier. Assumes ownership.
+ 	 * @param modifier new Modifier
+ 	 */
+-	virtual void setModifier(std::auto_ptr<Modifier<peaklist_type> > modifier) {
++	virtual void setModifier(std::unique_ptr<Modifier<peaklist_type> > modifier) {
+ 		this->modifier = modifier;
+ 	}
+ 
+ 	virtual ~Fragmenter() { }
+ 
+ protected:
+-	std::auto_ptr<Modifier<peaklist_type> > modifier;
++	std::unique_ptr<Modifier<peaklist_type> > modifier;
+ };
+ 
+ }
+diff --git a/src/imslib/src/ims/markovsequencegenerator.h b/src/imslib/src/ims/markovsequencegenerator.h
+index ca28037..29c23bf 100644
+--- a/src/imslib/src/ims/markovsequencegenerator.h
++++ b/src/imslib/src/ims/markovsequencegenerator.h
+@@ -21,7 +21,7 @@ class MarkovSequenceGenerator : public SequenceGenerator {
+ 
+ private:
+ 	std::vector<Distribution> dists;
+-	std::auto_ptr<Distribution> start_dist;
++	std::unique_ptr<Distribution> start_dist;
+ 	DistributedAlphabetType alphabet;
+ 
+ public:
+@@ -42,7 +42,7 @@ MarkovSequenceGenerator<DistributedAlphabetType>::
+ 	for(size_t i=0; i<alphabet.size(); i++){
+ 		start_p[i] = alphabet.getProbability(alphabet.getName(i));
+ 	}
+-	start_dist = std::auto_ptr<Distribution>(new Distribution(start_p));
++	start_dist = std::unique_ptr<Distribution>(new Distribution(start_p));
+ 
+ 
+ 	/** matrix **/
+diff --git a/src/imslib/src/ims/modifier/multimodifier.h b/src/imslib/src/ims/modifier/multimodifier.h
+index be3983d..dd11dc9 100644
+--- a/src/imslib/src/ims/modifier/multimodifier.h
++++ b/src/imslib/src/ims/modifier/multimodifier.h
+@@ -37,7 +37,7 @@ class MultiModifier : public Modifier<PeakListType> {
+ 		/**
+ 		 * Adds a modifier
+ 		 */
+-		void addModifier(std::auto_ptr<Modifier<PeakListType> >);
++		void addModifier(std::unique_ptr<Modifier<PeakListType> >);
+ 
+ 	private:
+ 		void deleteModifiers();
+@@ -55,7 +55,7 @@ MultiModifier<PeakListType>& MultiModifier<PeakListType>::operator=(const MultiM
+ }
+ 
+ template <typename PeakListType>
+-void MultiModifier<PeakListType>::addModifier(std::auto_ptr<Modifier<PeakListType> > modifier) {
++void MultiModifier<PeakListType>::addModifier(std::unique_ptr<Modifier<PeakListType> > modifier) {
+ 	modifiers.push_back(modifier.release());
+ }
+ 
+diff --git a/src/imslib/src/ims/randomsequencegenerator.h b/src/imslib/src/ims/randomsequencegenerator.h
+index fb20028..ba28461 100644
+--- a/src/imslib/src/ims/randomsequencegenerator.h
++++ b/src/imslib/src/ims/randomsequencegenerator.h
+@@ -17,7 +17,7 @@ template <typename DistributedAlphabetType >
+ class RandomSequenceGenerator : public SequenceGenerator{
+ 
+ private:
+-	std::auto_ptr<Distribution> dist;
++	std::unique_ptr<Distribution> dist;
+ 	DistributedAlphabetType alphabet;
+ 
+ public:
+@@ -33,7 +33,7 @@ RandomSequenceGenerator<DistributedAlphabetType>::RandomSequenceGenerator(Distri
+ 	for(size_t i=0; i<alphabet.size(); i++){
+ 		vec[i] = alphabet.getProbability(alphabet.getName(i));
+ 	}
+-	dist = std::auto_ptr<Distribution>(new Distribution(vec));
++	dist = std::unique_ptr<Distribution>(new Distribution(vec));
+ }
+ 
+ 
+diff --git a/src/imslib/tests/calib/linearpointsetmatchertest.cpp b/src/imslib/tests/calib/linearpointsetmatchertest.cpp
+index 37de6b9..92984b2 100644
+--- a/src/imslib/tests/calib/linearpointsetmatchertest.cpp
++++ b/src/imslib/tests/calib/linearpointsetmatchertest.cpp
+@@ -328,7 +328,7 @@ void LinearPointSetMatcherTest::matchAndVerify(ims::LinearPointSetMatcher& lpsm,
+ 				CPPUNIT_ASSERT(t.getTranslation() <= translation_limit.second + accuracy);
+ 				// in one-to-one case the verification procedure is different...
+ 				if (lpsm.one2One()) {
+-					auto_ptr<map<int,int> > m = lpsm.getMapping();
++					unique_ptr<map<int,int> > m = lpsm.getMapping();
+ 					CPPUNIT_ASSERT( m.get() != 0 );
+ 					verifyOneToOne(pointsets[i], pointsets[j], lpsm.getEpsilon(), t, *m, lpsm.getAbsLimit());
+ 				} else {
+diff --git a/src/imslib/tests/calib/matchmatrixtest.cpp b/src/imslib/tests/calib/matchmatrixtest.cpp
+index b15bde2..8bdf8ae 100644
+--- a/src/imslib/tests/calib/matchmatrixtest.cpp
++++ b/src/imslib/tests/calib/matchmatrixtest.cpp
+@@ -69,7 +69,7 @@ void MatchMatrixTest::testMatchMatrix() {
+ 	mm.unset(1,3);
+ 
+ 	
+-	auto_ptr<std::map<int,int> > m1 = mm.countMatches();
++	unique_ptr<std::map<int,int> > m1 = mm.countMatches();
+ 	CPPUNIT_ASSERT_EQUAL((size_t)5, m1->size());
+ 	CPPUNIT_ASSERT_EQUAL(1, (*m1)[1]);
+ 	CPPUNIT_ASSERT_EQUAL(3, (*m1)[3]);
+@@ -77,7 +77,7 @@ void MatchMatrixTest::testMatchMatrix() {
+ 	CPPUNIT_ASSERT_EQUAL(5, (*m1)[5]);
+ 	CPPUNIT_ASSERT_EQUAL(6, (*m1)[6]);
+ 
+-	auto_ptr<std::map<int,int> > m2 = mm.countMatchesRestrictive();
++	unique_ptr<std::map<int,int> > m2 = mm.countMatchesRestrictive();
+ 	CPPUNIT_ASSERT_EQUAL((size_t)1, m2->size());
+ 	CPPUNIT_ASSERT_EQUAL(5, (*m2)[5]);
+ }
+diff --git a/src/imslib/tests/chebyshevfittertest.cpp b/src/imslib/tests/chebyshevfittertest.cpp
+index e2f38e0..91400c8 100644
+--- a/src/imslib/tests/chebyshevfittertest.cpp
++++ b/src/imslib/tests/chebyshevfittertest.cpp
+@@ -55,7 +55,7 @@ void ChebyshevFitterTest::testFit() {
+ 	a.push_back(2000.0); b.push_back(2000.0);
+ 	a.push_back(3000.0); b.push_back(3000.0);
+ 	
+-	std::auto_ptr<ims::PolynomialTransformation> pt1 = fitter2.fit(a.begin(), a.end(), b.begin(), b.end());
++	std::unique_ptr<ims::PolynomialTransformation> pt1 = fitter2.fit(a.begin(), a.end(), b.begin(), b.end());
+ 	
+ 	std::vector<double>::const_iterator cit;
+ 	for (cit = a.begin(); cit != a.end(); ++cit) {
+@@ -82,7 +82,7 @@ void ChebyshevFitterTest::testFit() {
+ 	
+ 	// estimate 5th degree polynomial
+ 	ims::ChebyshevFitter fitter5(5);
+-	std::auto_ptr<ims::PolynomialTransformation> pt2 = fitter5.fit(a.begin(), a.end(), b.begin(), b.end());
++	std::unique_ptr<ims::PolynomialTransformation> pt2 = fitter5.fit(a.begin(), a.end(), b.begin(), b.end());
+ 	
+ 	// ... and compare to original
+ 	for (size_t i = 0; i <= 5; ++i) {
+diff --git a/src/imslib/tests/identitytransformationtest.cpp b/src/imslib/tests/identitytransformationtest.cpp
+index c8a8046..7370bda 100644
+--- a/src/imslib/tests/identitytransformationtest.cpp
++++ b/src/imslib/tests/identitytransformationtest.cpp
+@@ -41,7 +41,7 @@ void IdentityTransformationTest::testTransform() {
+ void IdentityTransformationTest::testOutput() {
+ 	std::ostringstream oss;
+ 	ims::IdentityTransformation id;
+-	std::auto_ptr<ims::Transformation> idp(new ims::IdentityTransformation);
++	std::unique_ptr<ims::Transformation> idp(new ims::IdentityTransformation);
+ 	oss << id;
+ 	oss << *((ims::IdentityTransformation*)(idp.get())); // TODO hmm ...
+ 	cout << oss;
+diff --git a/src/imslib/tests/modifier/intensitynormalizermodifiertest.cpp b/src/imslib/tests/modifier/intensitynormalizermodifiertest.cpp
+index d13e765..8bbc22f 100644
+--- a/src/imslib/tests/modifier/intensitynormalizermodifiertest.cpp
++++ b/src/imslib/tests/modifier/intensitynormalizermodifiertest.cpp
+@@ -62,7 +62,7 @@ void IntensityNormalizerModifierTest::testModify() {
+ 
+ void IntensityNormalizerModifierTest::testClone() {
+ 	ims::IntensityNormalizerModifier<peaklist_t> modifier(1.0);
+-	std::auto_ptr<ims::Modifier<peaklist_t> > cloned(modifier.clone());
++	std::unique_ptr<ims::Modifier<peaklist_t> > cloned(modifier.clone());
+ 	cloned->modify(peaklist);
+ 	assertHelp();
+ }
+diff --git a/src/imslib/tests/modifier/massrangemodifiertest.cpp b/src/imslib/tests/modifier/massrangemodifiertest.cpp
+index 5dc5871..783e1ad 100644
+--- a/src/imslib/tests/modifier/massrangemodifiertest.cpp
++++ b/src/imslib/tests/modifier/massrangemodifiertest.cpp
+@@ -65,7 +65,7 @@ void MassRangeModifierTest::testModify() {
+ 
+ void MassRangeModifierTest::testClone() {
+ 	ims::MassRangeModifier<peaklist_t> modifier(5.0, 20.0);
+-	std::auto_ptr<ims::Modifier<peaklist_t> > cloned(modifier.clone());
++	std::unique_ptr<ims::Modifier<peaklist_t> > cloned(modifier.clone());
+ 	cloned->modify(peaklist);
+ 	assertHelp();
+ }
+diff --git a/src/imslib/tests/modifier/multimodifiertest.cpp b/src/imslib/tests/modifier/multimodifiertest.cpp
+index a8b8d1d..75213fe 100644
+--- a/src/imslib/tests/modifier/multimodifiertest.cpp
++++ b/src/imslib/tests/modifier/multimodifiertest.cpp
+@@ -66,9 +66,9 @@ void MultiModifierTest::preparePeaklist() {
+ 
+ void MultiModifierTest::testModify() {
+ 	ims::MultiModifier<peaklist_t> modifier;
+-	modifier.addModifier(std::auto_ptr<ims::Modifier<peaklist_t> >(
++	modifier.addModifier(std::unique_ptr<ims::Modifier<peaklist_t> >(
+ 		new ims::SortModifier<peaklist_t>));
+-	modifier.addModifier(std::auto_ptr<ims::Modifier<peaklist_t> >(
++	modifier.addModifier(std::unique_ptr<ims::Modifier<peaklist_t> >(
+ 		new ims::UnificationModifier<peaklist_t>));
+ 	modifier.modify(peaklist);
+ 	assertHelp();
+@@ -77,12 +77,12 @@ void MultiModifierTest::testModify() {
+ 
+ void MultiModifierTest::testClone() {
+         ims::MultiModifier<peaklist_t> modifier;
+-        modifier.addModifier(std::auto_ptr<ims::Modifier<peaklist_t> >(
++        modifier.addModifier(std::unique_ptr<ims::Modifier<peaklist_t> >(
+                 new ims::SortModifier<peaklist_t>));
+-        modifier.addModifier(std::auto_ptr<ims::Modifier<peaklist_t> >(
++        modifier.addModifier(std::unique_ptr<ims::Modifier<peaklist_t> >(
+                 new ims::UnificationModifier<peaklist_t>));
+ 
+-        std::auto_ptr<ims::Modifier<peaklist_t> > cloned(modifier.clone());
++        std::unique_ptr<ims::Modifier<peaklist_t> > cloned(modifier.clone());
+         cloned->modify(peaklist);
+         assertHelp();
+ }
+@@ -90,9 +90,9 @@ void MultiModifierTest::testClone() {
+ 
+ void MultiModifierTest::testAssignment() {
+ 	ims::MultiModifier<peaklist_t> modifier, modifier2;
+-	modifier.addModifier(std::auto_ptr<ims::Modifier<peaklist_t> >(
++	modifier.addModifier(std::unique_ptr<ims::Modifier<peaklist_t> >(
+ 		new ims::SortModifier<peaklist_t>));
+-	modifier.addModifier(std::auto_ptr<ims::Modifier<peaklist_t> >(
++	modifier.addModifier(std::unique_ptr<ims::Modifier<peaklist_t> >(
+ 		new ims::UnificationModifier<peaklist_t>));
+ 	
+ 	modifier2=modifier;
+diff --git a/src/imslib/tests/modifier/noisemodifiertest.cpp b/src/imslib/tests/modifier/noisemodifiertest.cpp
+index e83df59..5ad1fd5 100644
+--- a/src/imslib/tests/modifier/noisemodifiertest.cpp
++++ b/src/imslib/tests/modifier/noisemodifiertest.cpp
+@@ -67,7 +67,7 @@ void NoiseModifierTest::testModify() {
+ 
+ void NoiseModifierTest::testClone() {
+ 	ims::NoiseModifier<peaklist_t> modifier;
+-	std::auto_ptr<ims::Modifier<peaklist_t> > cloned(modifier.clone());
++	std::unique_ptr<ims::Modifier<peaklist_t> > cloned(modifier.clone());
+ 	cloned->modify(peaklist);
+ 	assertHelp();
+ }
+diff --git a/src/imslib/tests/modifier/shiftmodifiertest.cpp b/src/imslib/tests/modifier/shiftmodifiertest.cpp
+index d2346ec..718332b 100644
+--- a/src/imslib/tests/modifier/shiftmodifiertest.cpp
++++ b/src/imslib/tests/modifier/shiftmodifiertest.cpp
+@@ -63,7 +63,7 @@ void ShiftModifierTest::testModify() {
+ 
+ void ShiftModifierTest::testClone() {
+ 	ims::ShiftModifier<peaklist_t> modifier(15.0);
+-	std::auto_ptr<ims::Modifier<peaklist_t> > cloned(modifier.clone());
++	std::unique_ptr<ims::Modifier<peaklist_t> > cloned(modifier.clone());
+ 	cloned->modify(peaklist);
+ 	assertHelp();
+ }
+diff --git a/src/imslib/tests/modifier/sortmodifiertest.cpp b/src/imslib/tests/modifier/sortmodifiertest.cpp
+index 0be9f44..e2514e2 100644
+--- a/src/imslib/tests/modifier/sortmodifiertest.cpp
++++ b/src/imslib/tests/modifier/sortmodifiertest.cpp
+@@ -73,7 +73,7 @@ void SortModifierTest::testModify() {
+ 
+ void SortModifierTest::testClone() {
+ 	ims::SortModifier<peaklist_t> modifier;
+-	std::auto_ptr<ims::Modifier<peaklist_t> > cloned(modifier.clone());
++	std::unique_ptr<ims::Modifier<peaklist_t> > cloned(modifier.clone());
+ 	cloned->modify(peaklist);
+ 	assertHelp();
+ }
+diff --git a/src/imslib/tests/modifier/unificationmodifiertest.cpp b/src/imslib/tests/modifier/unificationmodifiertest.cpp
+index 3a4d3bc..352ea99 100644
+--- a/src/imslib/tests/modifier/unificationmodifiertest.cpp
++++ b/src/imslib/tests/modifier/unificationmodifiertest.cpp
+@@ -61,7 +61,7 @@ void UnificationModifierTest::testModify() {
+ 
+ void UnificationModifierTest::testClone() {
+ 	ims::UnificationModifier<peaklist_t> modifier;
+-	std::auto_ptr<ims::Modifier<peaklist_t> > cloned(modifier.clone());
++	std::unique_ptr<ims::Modifier<peaklist_t> > cloned(modifier.clone());
+ 	cloned->modify(peaklist);
+ 	assertHelp();
+ }
+diff --git a/src/imslib/tests/modifier/voidmodifiertest.cpp b/src/imslib/tests/modifier/voidmodifiertest.cpp
+index 3c7eb8d..02ac01a 100644
+--- a/src/imslib/tests/modifier/voidmodifiertest.cpp
++++ b/src/imslib/tests/modifier/voidmodifiertest.cpp
+@@ -62,7 +62,7 @@ void VoidModifierTest::testModify() {
+ 
+ void VoidModifierTest::testClone() {
+ 	ims::VoidModifier<peaklist_t> modifier;
+-	std::auto_ptr<ims::Modifier<peaklist_t> > cloned(modifier.clone());
++	std::unique_ptr<ims::Modifier<peaklist_t> > cloned(modifier.clone());
+ 	cloned->modify(peaklist);
+ 	assertHelp();
+ }
+diff --git a/src/imslib/tests/peakpropertyiteratortest.cpp b/src/imslib/tests/peakpropertyiteratortest.cpp
+index 22a0b8e..ece4dd2 100644
+--- a/src/imslib/tests/peakpropertyiteratortest.cpp
++++ b/src/imslib/tests/peakpropertyiteratortest.cpp
+@@ -26,13 +26,13 @@ class PeakPropertyIteratorTest : public CppUnit::TestFixture {
+ 	typedef MassPeak<int> peak_type;
+ 	typedef PeakList<peak_type> peaklist_type;
+ 	/** Factory for simple peaklists with masses from 1 to 10. */
+-	std::auto_ptr<peaklist_type> createPeaklist();
++	std::unique_ptr<peaklist_type> createPeaklist();
+ };
+ 
+ CPPUNIT_TEST_SUITE_REGISTRATION( PeakPropertyIteratorTest );
+ 
+-std::auto_ptr<PeakPropertyIteratorTest::peaklist_type> PeakPropertyIteratorTest::createPeaklist() {
+-	std::auto_ptr<peaklist_type> p(new peaklist_type);
++std::unique_ptr<PeakPropertyIteratorTest::peaklist_type> PeakPropertyIteratorTest::createPeaklist() {
++	std::unique_ptr<peaklist_type> p(new peaklist_type);
+ 	for (int i=1; i<=10; ++i) {
+ 		p->push_back(i);
+ 	}
+@@ -40,7 +40,7 @@ std::auto_ptr<PeakPropertyIteratorTest::peaklist_type> PeakPropertyIteratorTest:
+ }
+ 
+ void PeakPropertyIteratorTest::testInputOutput() {
+-	std::auto_ptr<peaklist_type> pl=createPeaklist();
++	std::unique_ptr<peaklist_type> pl=createPeaklist();
+ 	peaklist_type::property_iterator<peak_type::MassGetter>::type it;
+ 	
+ 	int i=1;
+@@ -80,7 +80,7 @@ void PeakPropertyIteratorTest::testInputOutput() {
+ }
+ 
+ void PeakPropertyIteratorTest::testBidirectionality() {
+-	std::auto_ptr<peaklist_type> pl=createPeaklist();
++	std::unique_ptr<peaklist_type> pl=createPeaklist();
+ 	peaklist_type::property_iterator<peak_type::MassGetter>::type it,it2;
+ 	
+ 	int i=10;
+@@ -114,7 +114,7 @@ void PeakPropertyIteratorTest::testBidirectionality() {
+ }
+ 
+ void PeakPropertyIteratorTest::testRandomAccess() {
+-	std::auto_ptr<peaklist_type> pl=createPeaklist();
++	std::unique_ptr<peaklist_type> pl=createPeaklist();
+ 	peaklist_type::property_iterator<peak_type::MassGetter>::type it,it2;
+ 	
+ 	it=pl->begin<peak_type::MassGetter>();
+diff --git a/src/imslib/tools/imsfrag.cpp b/src/imslib/tools/imsfrag.cpp
+index 9cad2c3..c08bdeb 100644
+--- a/src/imslib/tools/imsfrag.cpp
++++ b/src/imslib/tools/imsfrag.cpp
+@@ -318,13 +318,13 @@ int main(int argc, char** argv)
+ 
+ 	//now build some kind of fragmentizer
+ 	cout << "Start building Fragmenter..." << endl;
+-	auto_ptr<Modifier<peaklist_type> > sort_modifier(new SortModifier<peaklist_type>);
+-	auto_ptr<Modifier<peaklist_type> > unification_modifier(new UnificationModifier<peaklist_type>);
+-	auto_ptr<MultiModifier<peaklist_type> > multi_modifier(new MultiModifier<peaklist_type>);
++	unique_ptr<Modifier<peaklist_type> > sort_modifier(new SortModifier<peaklist_type>);
++	unique_ptr<Modifier<peaklist_type> > unification_modifier(new UnificationModifier<peaklist_type>);
++	unique_ptr<MultiModifier<peaklist_type> > multi_modifier(new MultiModifier<peaklist_type>);
+ 	multi_modifier->addModifier(sort_modifier);
+ 	multi_modifier->addModifier(unification_modifier);
+ 	fragmenter_type fragmenter(alphabet, cleavage_chars, prohibition_chars, with_cleavage_char);
+-	fragmenter.setModifier(auto_ptr<Modifier<peaklist_type> >(multi_modifier));
++	fragmenter.setModifier(unique_ptr<Modifier<peaklist_type> >(multi_modifier));
+ 	cout << "...done\n" << endl;
+ 
+ 
