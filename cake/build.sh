@@ -13,5 +13,5 @@ dotnet publish --no-self-contained src/Cake/Cake.csproj --output ${PREFIX}/libex
 rm ${PREFIX}/libexec/${PKG_NAME}/Cake
 tee ${PREFIX}/bin/cake << EOF
 #!/bin/sh
-DOTNET_ROOT=${DOTNET_ROOT} exec ${PREFIX}/libexec/${PKG_NAME}/Cake.dll "\$@"
+DOTNET_ROOT=${DOTNET_ROOT} exec ${DOTNET_ROOT}/dotnet exec ${PREFIX}/libexec/${PKG_NAME}/Cake.dll "\$@"
 EOF
