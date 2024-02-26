@@ -27,6 +27,7 @@ requirements:
     - {{ compiler('c') }}
     - autoconf
     - automake
+    - binutils  # [linux]
     - make
   host:
     - python
