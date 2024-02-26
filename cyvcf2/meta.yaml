@@ -38,7 +38,7 @@ requirements:
     - curl
     - zlib
     - htslib >=1.10
-    - openssl
+    - openssl <3.2
     - numpy=1.24
   run:
     - python
