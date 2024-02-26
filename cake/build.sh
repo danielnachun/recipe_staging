@@ -9,7 +9,8 @@ rm -rf global.json
 framework_version="$(dotnet --version | sed -e 's/\..*//g').0"
 dotnet publish --no-self-contained src/Cake/Cake.csproj --output ${PREFIX}/libexec/${PKG_NAME} --framework net${framework_version}
 
+rm ${PREFIX}/libexec/${PKG_NAME}/Cake
 tee ${PREFIX}/bin/cake << EOF
 #!/bin/sh
-DOTNET_ROOT=${DOTNET_ROOT} exec ${PREFIX}/libexec/${PKG_NAME}/Cake "\$@"
+DOTNET_ROOT=${DOTNET_ROOT} exec ${PREFIX}/libexec/${PKG_NAME}/Cake.dll "\$@"
 EOF
