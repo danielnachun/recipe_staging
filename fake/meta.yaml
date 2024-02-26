@@ -10,11 +10,10 @@ source:
   sha256: 371b06ae8ca2b545400d0256aef93dd88d2680761d71854d400c6ef10210e322
 
 build:
-  number: 0
+  noarch: generic
+  number: 1
 
 requirements:
-  build:
-    - {{ compiler('cxx') }}
   host:
     - dotnet
   run:
