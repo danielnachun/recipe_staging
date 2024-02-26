@@ -38,7 +38,7 @@ requirements:
     - zlib
     - htslib >=1.10
     - openssl
-    - numpy
+    - numpy=1.24
   run:
     - python
     - coloredlogs
