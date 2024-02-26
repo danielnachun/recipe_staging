@@ -22,7 +22,7 @@ requirements:
     - make
   host:
     - cython
-    - python
+    - python=3.10
     - setuptools
     - zlib
     - xz
@@ -31,7 +31,7 @@ requirements:
     - libcurl
     - openssl  # [not osx]
   run:
-    - python
+    - python=3.10
     - zlib
     - xz
     - bzip2
