@@ -11,5 +11,5 @@ dotnet publish --no-self-contained "source/Nuke.GlobalTool/Nuke.GlobalTool.cspro
 rm -rf ${PREFIX}/libexec/${PKG_NAME}/Nuke.GlobalTool
 tee ${PREFIX}/bin/nuke << EOF
 #!/bin/sh
-DOTNET_ROOT=${DOTNET_ROOT} exec ${PREFIX}/libexec/${PKG_NAME}/Nuke.GlobalTool.dll "\$@"
+DOTNET_ROOT=${DOTNET_ROOT} exec ${DOTNET_ROOT}/dotnet exec ${PREFIX}/libexec/${PKG_NAME}/Nuke.GlobalTool.dll "\$@"
 EOF
