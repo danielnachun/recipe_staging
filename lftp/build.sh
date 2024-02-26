@@ -48,7 +48,7 @@ export CFLAGS="$CFLAGS -I$PREFIX/include"
 export CXXFLAGS="$CXXFLAGS -O2 -g"
 configure_args=(
     --prefix=$PREFIX
-    --with-sysroot=$PREFIX
+    --with-sysroot=${CONDA_BUILD_SYSROOT}
     --disable-dependency-tracking
     --disable-silent-rules
     --without-gnutls
