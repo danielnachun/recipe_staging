@@ -18,12 +18,14 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - libtool
+    - autoconf
+    - automake
     - make
     - pkg-config
     - python
   host:
     - gnutls
+    - libtool
     - pcre
   run:
     - gnutls
