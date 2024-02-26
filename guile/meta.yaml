@@ -33,6 +33,7 @@ requirements:
     - libtool
     - pkg-config
     - gettext
+    - libxcrypt  # [linux]
   run:
     - libunistring
     - libtool
@@ -42,6 +43,7 @@ requirements:
     - libiconv
     - readline
     - gettext
+    - libxcrypt  # [linux]
 
 test:
   commands:
