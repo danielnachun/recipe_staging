@@ -27,6 +27,7 @@ dotnet tool restore
 dotnet tool update paket
 dotnet publish --no-self-contained src/Paket/Paket.fsproj --output ${PREFIX}/libexec/${PKG_NAME} --framework net${framework_version}
 
+rm -rf ${PREFIX}/libexec/${PKG_NAME}/${PKG_NAME}
 tee ${PREFIX}/bin/paket << EOF
 #!/bin/sh
 DOTNET_ROOT=${DOTNET_ROOT} exec ${DOTNET_ROOT}/dotnet exec ${PREFIX}/libexec/${PKG_NAME}/paket.dll "\$@"
