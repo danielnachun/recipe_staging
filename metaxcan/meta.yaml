@@ -10,6 +10,7 @@ source:
   sha256: de4072ce81c98b014d53d1a066995dbc2ee1790ab5fcdb959ed3b0e885db220e
 
 build:
+  noarch: generic
   number: 0
 
 requirements:
@@ -24,7 +25,7 @@ requirements:
     - pandas
     - pyarrow
     - pyliftover
-    - python =3.10
+    - python =3.11
     - scipy
     - statsmodels
   run:
@@ -36,7 +37,7 @@ requirements:
     - pandas
     - pyarrow
     - pyliftover
-    - python =3.10
+    - python =3.11
     - scipy
     - statsmodels
 
