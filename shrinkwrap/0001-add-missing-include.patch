@@ -1,0 +1,71 @@
+From faf4927cd9bf40d1957cde0d2c22ed5937d43f50 Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Tue, 27 Feb 2024 12:14:02 -0800
+Subject: [PATCH] add missing include
+
+---
+ include/shrinkwrap/gz.hpp   | 3 ++-
+ include/shrinkwrap/xz.hpp   | 3 ++-
+ include/shrinkwrap/zstd.hpp | 3 ++-
+ 3 files changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/include/shrinkwrap/gz.hpp b/include/shrinkwrap/gz.hpp
+index 8d4a052..b546cc6 100644
+--- a/include/shrinkwrap/gz.hpp
++++ b/include/shrinkwrap/gz.hpp
+@@ -10,6 +10,7 @@
+ #include <iostream>
+ #include <limits>
+ #include <cstring>
++#include <cstdint>
+ 
+ namespace shrinkwrap
+ {
+@@ -793,4 +794,4 @@ namespace shrinkwrap
+   }
+ }
+ 
+-#endif //SHRINKWRAP_GZ_HPP
+\ No newline at end of file
++#endif //SHRINKWRAP_GZ_HPP
+diff --git a/include/shrinkwrap/xz.hpp b/include/shrinkwrap/xz.hpp
+index 40326ee..d8e74a2 100644
+--- a/include/shrinkwrap/xz.hpp
++++ b/include/shrinkwrap/xz.hpp
+@@ -10,6 +10,7 @@
+ #include <iostream>
+ #include <limits>
+ #include <cstring>
++#include <cstdint>
+ 
+ namespace shrinkwrap
+ {
+@@ -588,4 +589,4 @@ namespace shrinkwrap
+   }
+ }
+ 
+-#endif //SHRINKWRAP_XZ_HPP
+\ No newline at end of file
++#endif //SHRINKWRAP_XZ_HPP
+diff --git a/include/shrinkwrap/zstd.hpp b/include/shrinkwrap/zstd.hpp
+index af47e46..e99b645 100644
+--- a/include/shrinkwrap/zstd.hpp
++++ b/include/shrinkwrap/zstd.hpp
+@@ -10,6 +10,7 @@
+ #include <streambuf>
+ #include <stdio.h>
+ #include <vector>
++#include <cstdint>
+ 
+ namespace shrinkwrap
+ {
+@@ -443,4 +444,4 @@ namespace shrinkwrap
+   }
+ }
+ 
+-#endif //SHRINKWRAP_ZSTD_HPP
+\ No newline at end of file
++#endif //SHRINKWRAP_ZSTD_HPP
+-- 
+2.43.0
+
