@@ -15,12 +15,15 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - autoconf
+    - automake
     - coreutils
     - make
     - pkg-config
     - sed
   host:
     - guile
+    - libtool
     - libxml2
   run:
     - guile
