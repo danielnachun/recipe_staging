@@ -1,0 +1,23 @@
+##
+## GEMMA Version = 0.95alpha
+##
+## Command Line Input = ./bin/DPR -g ./example/mouse_hs1940.geno.txt.gz -p ./example/mouse_hs1940.pheno.txt -n 2 -a ./example/mouse_hs1940.anno.txt -k ./example/mouse_hs1940.cXX.txt -dpr 2 -o mouse_hs1940_CD8_mcmc -m 100000 -t 1 -w 1000 -s 1000 
+##
+## Date = Tue Jul 25 08:17:36 2017
+##
+## Summary Statistics:
+## number of total individuals = 1940
+## number of analyzed individuals = 757
+## number of covariates = 1
+## number of phenotypes = 1
+## number of total SNPs = 12226
+## number of analyzed SNPs = 10775
+## number of the truncated normal distributions = 4
+##  pD = 2.66181
+## DIC = 1714.36
+## estimated mean = 0.130217
+##
+## Computation Time:
+## total computation time = 2.3131 min 
+## computation time break down: 
+##
