@@ -7,6 +7,9 @@ package:
 
 source:
   path: DPR
+  patches:
+    - 0001-fix-duplicated-symbols.patch
+    - 0002-fix-cstdint.patch
 
 build:
   number: 0
