@@ -1,0 +1,45 @@
+From 3856fa67596ac167d8a9e3c868589743f23d9dd7 Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Tue, 27 Feb 2024 10:00:30 -0800
+Subject: [PATCH] fix Eigen templating
+
+---
+ dpr/DPR/src/ldr.cpp | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/dpr/DPR/src/ldr.cpp b/dpr/DPR/src/ldr.cpp
+index f8a6ce77..a8cd815c 100644
+--- a/dpr/DPR/src/ldr.cpp
++++ b/dpr/DPR/src/ldr.cpp
+@@ -581,10 +581,10 @@ void LDR::call_sig_allsnp_no(gsl_matrix *W, vector<int> *sig_subsnp_no, PARAM &c
+ 		sig_index(i)=(lm_pvalue[i]<cutoff)*1;
+ 		}
+ 	VectorXd sig_allsnp_no(lm_pvalue.size());
+-	VectorXd sig_subsnp_no_index(sig_index.sum());
+-	VectorXd nonsig_subsnp_no(lm_pvalue.size()-sig_index.sum());
++	VectorXd sig_subsnp_no_index(static_cast<int>(sig_index.sum()));
++	VectorXd nonsig_subsnp_no(lm_pvalue.size()-static_cast<int>(sig_index.sum()));
+ 	//VectorXd sig_subsnp_se(sig_index.sum());
+-	VectorXd nonsig_subsnp_se(lm_pvalue.size()-sig_index.sum());
++	VectorXd nonsig_subsnp_se(lm_pvalue.size()-static_cast<int>(sig_index.sum()));
+ 	int icount1=0;
+ 	int icount2=0;
+ 	for (size_t i=0; i<lm_pvalue.size(); ++i) {
+@@ -662,10 +662,10 @@ void LDR::call_sig_index(gsl_matrix *W, vector<int> *sig_index, PARAM &cPar)
+ 		}
+ 
+ 	VectorXd sig_allsnp_no(lm_pvalue.size());
+-	VectorXd sig_subsnp_no_index(sig_index0.sum());
+-	VectorXd nonsig_subsnp_no(lm_pvalue.size()-sig_index0.sum());
+-	VectorXd sig_subsnp_se(sig_index0.sum());
+-	VectorXd nonsig_subsnp_se(lm_pvalue.size()-sig_index0.sum());
++	VectorXd sig_subsnp_no_index(static_cast<int>(sig_index0.sum()));
++	VectorXd nonsig_subsnp_no(lm_pvalue.size()-static_cast<int>(sig_index0.sum()));
++	VectorXd sig_subsnp_se(static_cast<int>(sig_index0.sum()));
++	VectorXd nonsig_subsnp_se(lm_pvalue.size()-static_cast<int>(sig_index0.sum()));
+ 	int icount1=0;
+ 	int icount2=0;
+ 	for (size_t i=0; i<lm_pvalue.size(); ++i) {
+-- 
+2.43.0
+
