@@ -18,11 +18,14 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - autoconf
+    - automake
     - make                # [unix]
   host:
     - sed  # [osx]
     - libunistring
     - libffi
+    - libtool
     - bdw-gc
     - gmp
     - libiconv
@@ -30,6 +33,7 @@ requirements:
     - libtool
     - pkg-config
     - gettext
+    - libxcrypt  # [linux]
   run:
     - libunistring
     - libtool
@@ -39,6 +43,7 @@ requirements:
     - libiconv
     - readline
     - gettext
+    - libxcrypt  # [linux]
 
 test:
   commands:
