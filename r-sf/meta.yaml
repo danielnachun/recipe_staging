@@ -1,0 +1,80 @@
+{% set version = "1.0-15" %}
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
+
+package:
+  name: r-sf
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url:
+    - {{ cran_mirror }}/src/contrib/sf_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/sf/sf_{{ version }}.tar.gz
+  sha256: c81d9291c7528b70b8a061959db7f9aa7c1fe24475e649f59ff22570a2833c2d
+
+build:
+  merge_build_host: true  # [win]
+  skip: true  # [win]
+  number: 1
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('c') }}          # [not win]
+    - {{ compiler('m2w64_c') }}    # [win]
+    - {{ compiler('cxx') }}        # [not win]
+    - {{ compiler('m2w64_cxx') }}  # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}sed               # [win]
+    - {{ posix }}grep              # [win]
+    - {{ posix }}autoconf
+    - {{ posix }}automake          # [not win]
+    - {{ posix }}automake-wrapper  # [win]
+    - {{ posix }}pkg-config
+    - {{ posix }}make
+    - {{ posix }}coreutils         # [win]
+    - {{ posix }}zip               # [win]
+    - sysroot_linux-64 2.17        # [linux64]
+  host:
+    - r-base=4.2
+    - r-classint >=0.4_1
+    - r-dbi >=0.8
+    - r-magrittr
+    - r-rcpp >=0.12.18
+    - r-s2 >=1.1.0
+    - r-units >=0.7_0
+    - geos     # [not win]
+    - libgdal  # [not win]
+    - proj     # [not win]
+  run:
+    - r-base>=4.2
+    - {{ native }}gcc-libs         # [win]
+    - r-classint >=0.4_1
+    - r-dbi >=0.8
+    - r-magrittr
+    - r-rcpp >=0.12.18
+    - r-s2 >=1.1.0
+    - r-units >=0.7_0
+
+test:
+  commands:
+    - $R -e "library('sf')"           # [not win]
+    - "\"%R%\" -e \"library('sf')\""  # [win]
+
+about:
+  home: https://r-spatial.github.io/sf/
+  dev_url: https://github.com/r-spatial/sf/
+  license: GPL-2.0-only OR MIT
+  summary: Support for simple features, a standardized way to encode spatial vector data. Binds to 'GDAL' for reading and writing data, to 'GEOS' for geometrical operations, and to 'PROJ' for projection conversions and datum transformations.
+  license_family: GPL2
+  license_file:
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/MIT
+    - LICENSE
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+    - mingwandroid
