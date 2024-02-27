@@ -23,13 +23,13 @@ requirements:
   host:
     - boost-cpp
     - openmpi
-    - mkl-devel  # [target_platform != osx-arm64]
+    - mkl-devel  # [target_platform != "osx-arm64"]
     - zlib
   run:
     - boost-cpp
     - libzlib
     - openmpi
-    - mkl  # [target_platform != osx-arm64]
+    - mkl  # [target_platform != "osx-arm64"]
     - _openmp_mutex  # [linux]
     - llvm-openmp  # [osx]
 
