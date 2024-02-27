@@ -30,7 +30,7 @@ requirements:
     - binutils  # [linux]
     - make
   host:
-    - python
+    - python=3.11
     - cython
     - pip
     - setuptools
@@ -38,10 +38,10 @@ requirements:
     - curl
     - zlib
     - htslib >=1.10
-    - openssl <3.2
+    - openssl
     - numpy=1.24
   run:
-    - python
+    - python=3.11
     - coloredlogs
     - click
     - {{ pin_compatible('numpy') }}
