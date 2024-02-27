@@ -18,7 +18,7 @@ requirements:
     - dpr
     - numpy =1.24
     - pandas
-    - python =3.10
+    - python =3.11
     - scipy
     - scikit-learn
     - statsmodels
@@ -27,7 +27,7 @@ requirements:
     - dpr
     - numpy =1.24
     - pandas
-    - python =3.10
+    - python =3.11
     - scipy
     - scikit-learn
     - statsmodels
