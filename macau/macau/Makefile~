@@ -1,0 +1,119 @@
+#Makefile
+
+# Supported platforms
+#       Unix / Linux               	LNX
+#       Mac                        	MAC
+# Compilation options
+#       32-bit binary        		FORCE_32BIT
+#       Link to LAPACK              	WITH_LAPACK
+#       Link to ARPACK              	WITH_ARPACK
+
+# Set this variable to either LNX or MAC
+SYS = LNX
+# Leave blank after "=" to disable; put "= 1" to enable
+# Disable WITH_LAPACK option can slow computation speed significantly and is not recommended
+# Disable WITH_ARPACK option only disable -apprx option in the software
+FORCE_32BIT = 
+WITH_LAPACK = 1
+WITH_ARPACK = 
+FORCE_DYNAMIC = 
+#DOUBLE_PREC = 1
+
+
+# --------------------------------------------------------------------
+# Edit below this line with caution
+# --------------------------------------------------------------------
+
+
+OUTPUT = macau
+
+CPP = g++
+#/sw/bin/gcc-4
+
+CPPFLAGS = -Wall -O3
+
+SOURCES = main.cpp macau.cpp param.cpp bmm.cpp pmm.cpp io.cpp gzstream.cpp
+
+HDR = macau.h param.h bmm.h pmm.h io.h gzstream.h
+
+
+ifdef FORCE_DYNAMIC
+LIBS = -lgsl -lgslcblas -lblas -pthread -lz
+else
+LIBS = -lgsl -lgslcblas -pthread -lz
+endif
+
+
+# Detailed libary paths, D for dynamic and S for static
+LIBS_LNX_D_LAPACK = -llapack
+LIBS_MAC_D_LAPACK = -framework Veclib
+LIBS_LNX_S_LAPACK = /usr/lib/lapack/liblapack.a -lgfortran  /usr/lib/atlas-base/libatlas.a /usr/lib/libblas/libblas.a -Wl,--allow-multiple-definition -fopenmp
+LIBS_MAC_S_LAPACK = /sw/lib/liblapack.a -lgfortran  /sw/lib/libf77blas.a /sw/lib/libatlas.a
+
+#ifdef DOUBLE_PREC
+#  CPPFLAGS += -DWITH_DOUBLE
+#  SOURCES += model.cpp
+#  HDR += model.h
+#else
+#  SOURCES += model_float.cpp
+#  HDR += model_float.h
+#endif
+
+ifdef WITH_ARPACK
+  CPPFLAGS += -DWITH_ARPACK
+  LIBS += $(LIBS_LNX_S_ARPACK)
+  HEADERS = $(LIBS_LNX_ARPACK_HEADER)
+endif
+
+
+ifdef WITH_LAPACK
+  OBJS +=lapack.o
+  CPPFLAGS += -DWITH_LAPACK
+ifeq ($(SYS), MAC)
+ifdef FORCE_DYNAMIC
+  LIBS += $(LIBS_MAC_D_LAPACK)
+else
+  LIBS += $(LIBS_MAC_S_LAPACK)
+endif
+else
+ifdef FORCE_DYNAMIC
+  LIBS += $(LIBS_LNX_D_LAPACK)
+else
+  LIBS += $(LIBS_LNX_S_LAPACK)
+endif
+endif
+  SOURCES += lapack.cpp
+  HDR += lapack.h
+endif
+
+ifdef FORCE_32BIT
+  CPPFLAGS += -m32
+else
+  CPPFLAGS += -m64
+endif
+
+ifdef FORCE_DYNAMIC
+else
+  CPPFLAGS += -static
+endif
+
+OBJS = $(SOURCES:.cpp=.o)
+
+all: $(OUTPUT)
+
+$(OUTPUT): $(OBJS)
+	$(CPP) $(CPPFLAGS) $(OBJS) $(LIBS) -o $(OUTPUT)
+
+$(OBJS) : $(HDR)
+
+.cpp.o: 
+	$(CPP) $(CPPFLAGS) $(HEADERS) -c $*.cpp
+.SUFFIXES : .cpp .c .o $(SUFFIXES)
+
+
+
+clean:
+		rm -rf *.o *.*~
+tar:
+	tar cfv $(OUTPUT).tar $(SOURCES) $(HDR) Makefile README.txt
+
