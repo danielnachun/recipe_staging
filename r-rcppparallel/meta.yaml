@@ -38,9 +38,12 @@ requirements:
     - {{ posix }}zip               # [win]
   host:
     - r-base=4.2
+    - tbb
+    - tbb-devel
   run:
     - r-base>=4.2
     - {{ native }}gcc-libs         # [win]
+    - tbb
 
 test:
   commands:
