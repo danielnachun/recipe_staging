@@ -7,7 +7,7 @@ mkdir "${SRC_DIR}/src/args"
 ln -sf "${BUILD_PREFIX}/include/args.hxx" "${SRC_DIR}/src/args"
 
 export CXXFLAGS="${CXXFLAGS} -I${BUILD_PREFIX}/include -I${BUILD_PREFIX}/include/eigen3" 
-make CXX="${CXX}"
+make CXX="${CXX} -fpermissive"
 
 mkdir -p ${PREFIX}/bin
 install -m 755 bin/apex ${PREFIX}/bin/apex
