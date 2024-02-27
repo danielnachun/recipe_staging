@@ -2,6 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+# Remake bin directory
 mkdir -p bin
 make CPP="${CXX} -I${PREFIX}/include -L${PREFIX}/lib -Wno-narrowing" FORCE_DYNAMIC=1
 
