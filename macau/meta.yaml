@@ -6,8 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: http://www.xzlab.org/software/{{ name }}/{{ name }}-v{{ version }}.rar
-  sha256: 2c200fcf9eb0593eddf63bb1548ae27dffd150abbc94656c4e9e0fb5bcb5c50b
+  path: macau
 
 build:
   number: 0
@@ -15,7 +14,6 @@ build:
 requirements:
   build:
     - {{ compiler('cxx') }}
-    - go-archiver
     - make
   host:
     - boost-cpp
