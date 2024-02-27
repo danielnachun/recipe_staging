@@ -19,7 +19,7 @@ requirements:
   build:
     - {{ compiler('cxx') }}
     - {{ compiler('c') }}
-    - binutils
+    - binutils  # [linux]
     - boost
     - curl
     - eigen
