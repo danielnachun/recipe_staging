@@ -12,6 +12,8 @@ fi
 sed -i 's/${CFLAGS} -D$d/${CFLAGS} ${LDFLAGS} ${LIBS} -D$d/' autoopts/test/defs.in
 sed -i 's/${CFLAGS} ${INC} -o ${testname}/${CFLAGS} ${LDFLAGS} ${LIBS} ${INC} -o ${testname}/' autoopts/test/library.test
 sed -i 's/CC="${CC} ${CFLAGS} ${INC}"/CC="${CC} ${CFLAGS} ${INC} ${LDFLAGS}"/' autoopts/test/getopt.test
+#sed -i 's/#elif GUILE_VERSION < 203000'
+sed -i 's/"2.2 2.0 1.8"/"3.0 2.2 2.0 1.8"/' configure
 
 autoreconf --force --install --verbose
 ./configure ac_cv_func_utimensat=no \
