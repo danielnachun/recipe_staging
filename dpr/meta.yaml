@@ -6,8 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: http://www.xzlab.org/software/dpr/DPR.rar
-  sha256: 75c92172e1bf8dd63cfeba28076a25bc05d36839b11d4af282a20e8ec68d904a
+  path: DPR
 
 build:
   number: 0
@@ -16,7 +15,6 @@ requirements:
   build:
     - {{ compiler('cxx') }}
     - make
-    - go-archiver
     - patch
   host:
     - blas
