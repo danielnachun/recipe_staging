@@ -18,7 +18,7 @@ if [[ ${target_platform} == "osx-arm64" ]]; then
     sed -i 's/-lmkl_rt/-lopenblas/' Makefile
 fi
 
-make CC=${CXX}
+make CC="${CXX} -DSIMDE_ENABLE_NATIVE_ALIASES"
 
 mkdir -p ${PREFIX}/inb
 install -m 755 SDPR ${PREFIX}/bin
