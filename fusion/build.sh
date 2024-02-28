@@ -5,7 +5,6 @@ set -o xtrace -o nounset -o pipefail -o errexit
 mkdir -p ${PREFIX}/bin 
 mkdir -p ${PREFIX}/libexec/fusion_twas
 cp *.R ${PREFIX}/libexec/fusion_twas
-cp gcta_nr_robust ${PREFIX}/libexec/fusion_twas
 cp glist-hg19 ${PREFIX}/libexec/fusion_twas
 cp -r utils ${PREFIX}/libexec/fusion_twas
 
