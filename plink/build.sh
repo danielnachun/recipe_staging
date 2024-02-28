@@ -8,7 +8,7 @@ sed -i 's/Rconnection.o//' Makefile
 
 if [[ ${target_platform} =~ .*linux.* ]]; then
     export BLASFLAGS="-L${PREFIX}/lib -lmkl_core -lmkl_intel_thread -lmkl_intel_lp64 -liomp5 -lpthread -lm"
-    make CXX="${CC} ${EXTRA_CFLAGS} -DUSE_MKL" CC="${CC} ${EXTRA_CFLAGS} -DUSE_MKL" BLASFLAGS="${BLASFLAGS}" ZLIB="${ZLIB}"
+    make CXX="${CC} ${EXTRA_CFLAGS} -DUSE_MKL -D_GNU_SOURCE" CC="${CC} ${EXTRA_CFLAGS} -DUSE_MKL -D_GNU_SOURCE" BLASFLAGS="${BLASFLAGS}" ZLIB="${ZLIB}"
 else
     if [[ ${target_platform} == "osx-arm64" ]]; then
         export EXTRA_CFLAGS="${EXTRA_CFLAGS} -I${PREFIX}/include/simde"
