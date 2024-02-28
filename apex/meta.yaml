@@ -19,7 +19,7 @@ requirements:
   build:
     - {{ compiler('cxx') }}
     - {{ compiler('c') }}
-    - binutils
+    - binutils  # [linux]
     - boost
     - curl
     - eigen
@@ -30,13 +30,14 @@ requirements:
     - spectralib==0.9.0
     - taywee-args
   host:
-    - htslib
+    - htslib=1.19
     - xz
-    - zlib
+    - zlib=1.2
   run:
     - htslib
     - _openmp_mutex  # [linux]
     - llvm-openmp  # [osx]
+    - libzlib >=1.2
 
 test:
   commands:
