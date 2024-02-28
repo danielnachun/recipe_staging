@@ -3,8 +3,8 @@
 set -o xtrace -o nounset -o pipefail -o errexit
 
 export EXTRA_CFLAGS="-DDYNAMIC_ZLIB"
-#export EXTRA_CXXFLAGS="${EXTRA_CFLAGS} -Wno-c++11-narrowing"
 export ZLIB="${PREFIX}/lib/libz${SHLIB_EXT}"
+sed -i 's/Rconnection.o//' Makefile
 
 if [[ ${target_platform} =~ .*linux.* ]]; then
     export BLASFLAGS="${BLASFLAGS} -lmkl_core -lmkl_intel_thread -lmkl_intel_lp64 -liomp5"
