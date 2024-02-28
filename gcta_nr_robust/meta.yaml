@@ -1,0 +1,30 @@
+{% set name = "gcta_nr_robust" %}
+{% set version = "1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/gusevlab/fusion_twas/archive/e1ba5f7f3907e6f586f7fb5bb115b35cc0d3c0c2.zip
+  sha256: dedbce2698da1cdd568cb576b00d3174f8e20a46e4e1d4c7367c9dd2a7205df0
+
+build:
+  number: 0
+  skip: True  # [not linux]
+
+requirements:
+
+test:
+  commands:
+    - gcta_nr_robust --help
+
+about:
+  home: https://github.com/gusevlab/fusion_twas
+  license: GPL-3.0-or-later
+  license_file: LICENSE
+  summary: Robust version of GCTA for heritability estimation in FUSION
+
+extra:
+  recipe-maintainers:
+    - danielnachun

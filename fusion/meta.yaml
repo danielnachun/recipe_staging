@@ -10,8 +10,8 @@ source:
   sha256: dedbce2698da1cdd568cb576b00d3174f8e20a46e4e1d4c7367c9dd2a7205df0
 
 build:
+  noarch: generic
   number: 0
-  skip: True  # [not linux]
 
 requirements:
   host:
