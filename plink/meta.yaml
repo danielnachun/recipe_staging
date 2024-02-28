@@ -6,14 +6,23 @@ build:
   number: 5
 
 source:
-  url: http://s3.amazonaws.com/plink1-assets/plink_linux_x86_64_20201019.zip # [linux]
-  sha256: fa8825c4329ccb1f80acdd3eb9b03a62a4e79573b1d9cdb810cac61db1c4a9d4 # [linux]
-  url: http://s3.amazonaws.com/plink1-assets/plink_mac_20201019.zip # [osx]
-  sha256: c7c1de7fb47e436eea3509547ac907f64545e1bbeb0a0ddb5db7cc073926e62d # [osx]
+  url: https://www.cog-genomics.org/static/bin/plink/plink_src.zip
+  sha256: 40d736260c8a4176e61f9b64d3a434a67b4abc83570eacb9fb82eea2a78327b5 
 
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
+    - mkl-devel  # [target_platform != "osx-arm64"]
+    - openblas  # [target_platform == "osx-arm64"]
+    - zlib =1.2
+  run: 
+    - libzlib >=1.2
+    - mkl  # [target_platform != "osx-arm64"]
+    - openblas  # [target_platform == "osx-arm64"]
+    - llvm-openmp  # [osx]
+    - _openmp_mutex  # [linux]
 
 test:
   commands:
