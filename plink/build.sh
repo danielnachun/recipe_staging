@@ -3,18 +3,18 @@
 set -o xtrace -o nounset -o pipefail -o errexit
 
 export EXTRA_CFLAGS="-DDYNAMIC_ZLIB"
-export EXTRA_CXXFLAGS="${EXTRA_CFLAGS} -Wno-c++11-narrowing"
+#export EXTRA_CXXFLAGS="${EXTRA_CFLAGS} -Wno-c++11-narrowing"
 export ZLIB="${PREFIX}/lib/libz${SHLIB_EXT}"
 
 if [[ ${target_platform} =~ .*linux.* ]]; then
     export BLASFLAGS="${BLASFLAGS} -lmkl_core -lmkl_intel_thread -lmkl_intel_lp64 -liomp5"
-    make CXX="${CXX} ${EXTRA_CXXFLAGS} -DUSE_MKL" CC="${CC} ${EXTRA_CFLAGS} -DUSE_MKL" BLASFLAGS="${BLASFLAGS}" ZLIB="${ZLIB}"
+    make CXX="${CC} ${EXTRA_CFLAGS} -DUSE_MKL" CC="${CC} ${EXTRA_CFLAGS} -DUSE_MKL" BLASFLAGS="${BLASFLAGS}" ZLIB="${ZLIB}"
 else
     if [[ ${target_platform} == "osx-arm64" ]]; then
         export EXTRA_CFLAGS="${EXTRA_CFLAGS} -I${PREFIX}/include/simde"
-        export EXTRA_CXXFLAGS="${EXTRA_CXXFLAGS} -I${PREFIX}/include/simde"
+        #export EXTRA_CXXFLAGS="${EXTRA_CXXFLAGS} -I${PREFIX}/include/simde"
     fi
-    make CXX="${CXX} ${EXTRA_CXXFLAGS}" CC="${CC} ${EXTRA_CFLAGS}" ZLIB="${ZLIB}"
+    make CXX="${CC} ${EXTRA_CFLAGS}" CC="${CC} ${EXTRA_CFLAGS}" ZLIB="${ZLIB}"
 fi
 
 mkdir -p ${PREFIX}/bin
