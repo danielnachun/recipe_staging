@@ -13,9 +13,11 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - make
   host:
     - mkl-devel  # [target_platform != "osx-arm64"]
     - openblas  # [target_platform == "osx-arm64"]
+    - simde  # [target_platform != "osx-arm64"]
     - zlib =1.2
   run: 
     - libzlib >=1.2
