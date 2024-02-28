@@ -12,7 +12,6 @@ source:
 requirements:
   build:
     - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
     - make
     - sed
   host:
@@ -22,7 +21,6 @@ requirements:
   run: 
     - libzlib >=1.2
     - mkl  # [linux]
-    - llvm-openmp  # [osx]
     - _openmp_mutex  # [linux]
 
 test:
