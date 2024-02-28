@@ -24,10 +24,10 @@ requirements:
     - blas
     - eigen
     - gsl
-    - zlib
+    - zlib =1.2
   run:
     - libopenblas
-    - libzlib
+    - libzlib >=1.2
  
 test:
   commands:
