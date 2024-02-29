@@ -22,7 +22,7 @@ requirements:
     - {{ compiler('cxx') }}
   host:
     - pkgconfig ## needed for viennarna version checks in dependent packages
-    - perl
+    - perl=5.32
     - python =3.11
     - xorg-libx11
     - zlib =1.2
