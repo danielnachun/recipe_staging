@@ -10,14 +10,17 @@ source:
   sha256: 14589dd9d1eb0d95d2bb0d245e72fd4e998207d3101ae4ce33dcdf790745ed26
 
 build:
+  noarch: generic
   number: 0
 
 requirements:
+  build:
+    - sed
   host:
     - dpr
     - numpy =1.24
     - pandas
-    - python =3.10
+    - python =3.11
     - scipy
     - scikit-learn
     - statsmodels
@@ -26,7 +29,7 @@ requirements:
     - dpr
     - numpy =1.24
     - pandas
-    - python =3.10
+    - python =3.11
     - scipy
     - scikit-learn
     - statsmodels
