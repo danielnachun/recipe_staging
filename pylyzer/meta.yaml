@@ -17,7 +17,7 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
-    - rust >=1.66
+    - rust =1.75
   host:
     - python
     - maturin >=0.12
