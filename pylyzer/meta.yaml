@@ -1,0 +1,46 @@
+{% set name = "pylyzer" %}
+{% set version = "0.0.51" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/mtshiba/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 23e9486f08165187b67e7ca11cbbeeeb16c2f8c1993f7e1724ce60f702d0c448
+
+build:
+  skip: true  # [py<37]
+  script: {{ PYTHON }} -m pip install . -vv
+  number: 1
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - rust =1.75
+  host:
+    - python
+    - maturin >=0.12
+    - pip
+    - setuptools-rust
+  run:
+    - python
+
+test:
+  commands:
+    - pip check
+    - pylyzer -h
+  requires:
+    - pip
+
+about:
+  home: https://github.com/mtshiba/pylyzer
+  summary: A fast static code analyzer & language server for Python
+  license: MIT
+  license_file:
+    - LICENSE
+    - extension/LICENSE
+
+extra:
+  recipe-maintainers:
+    - thewchan
