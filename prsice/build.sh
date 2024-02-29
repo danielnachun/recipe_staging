@@ -2,6 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+export CXXFLAGS="${CXXFLAGS} -DDYNAMIC_ZLIB"
 cmake -S . -B build -DEIGEN_INCLUDE_DIR=${PREFIX}/include/eigen3 -DCMAKE_VERBOSE_MAKEFILE=ON ${CMAKE_ARGS}
 cmake --build build -- -j ${CPU_COUNT}
 cmake --install build

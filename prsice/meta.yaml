@@ -10,6 +10,8 @@ source:
   sha256: 0a7e649ddebe4e969cd8400c5ad977a7b900be4f5c920a84483cb8930367354d
   patches:
     - 0001-devendor-eigen.patch
+    - 0002-update-plink-header.h
+    - 0003-add-SFMT.h.patch
 
 build:
   number: 0
