@@ -10,7 +10,10 @@ if [[ ${target_platform} =~ .*osx.* ]]; then
     sed -i 's/-f elf64/-f macho64/' configure.ac
 fi
 autoreconf --force --install --verbose
-./configure --prefix=$PREFIX 
+configure_args=""
+if [[ ${target_platform} == "osx-arm64" ]]; then
+    configure_args="--disable-asm"
+fi
+./configure --prefix=$PREFIX ${configure_args}
 make V=1 SHELL=bash
 make install
-
