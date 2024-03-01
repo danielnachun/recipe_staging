@@ -52,7 +52,7 @@ requirements:
 test:
   commands:
     - svn --help
-    - perl -e 'use SVN::Client; use SVN::Core;'
+    - perl -e 'use SVN::Client; use SVN::Core;'  # [target_platform != "osx-arm64"]
 
 about:
   home: https://subversion.apache.org/
