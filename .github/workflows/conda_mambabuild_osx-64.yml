@@ -56,6 +56,12 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Setup upterm session
+        if: contains(github.event.pull_request.labels.*.name, 'ssh')
+        uses: lhotari/action-upterm@v1
+        with:
+          limit-access-to-actor: true
+
       - name: Setup micromamba
         uses: mamba-org/setup-micromamba@v1
         with:
