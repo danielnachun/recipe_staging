@@ -18,9 +18,12 @@ requirements:
     - autoconf
     - automake
     - binutils  # [linux]
-    - gettext
+    - bison
+    - coreutils
+    - flex
     - make
   host:
+    - gettext
     - libtool
 
 test:
