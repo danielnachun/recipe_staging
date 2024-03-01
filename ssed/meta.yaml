@@ -14,9 +14,17 @@ build:
 
 requirements:
   build:
-    - binutils
     - {{ compiler('c') }}
+    - autoconf
+    - automake
+    - binutils  # [linux]
+    - bison
+    - coreutils
+    - flex
     - make
+  host:
+    - gettext
+    - libtool
 
 test:
   commands:
