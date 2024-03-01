@@ -4,6 +4,7 @@ set -o xtrace -o nounset -o pipefail -o errexit
 
 export GOPROXY=https://proxy.golang.org
 go mod init flint
+go mod edit -replace github.com/codegangsta/cli=github.com/urfave/cli@v1
 go mod tidy
 go mod vendor
 export CGO_ENABLED=0
