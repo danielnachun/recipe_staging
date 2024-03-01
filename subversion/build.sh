@@ -11,11 +11,12 @@ autoreconf --force --verbose --install
   --with-sqlite="${PREFIX}" \
   --disable-static
 
-make -j ${CPU_COUNT}
+#make -j ${CPU_COUNT}
+make -j 1
 #make -j ${CPU_COUNT} check CLEANUP=true TESTS=subversion/tests/cmdline/basic_tests.py
 make install
 
-make swig-pl-lib
+make --trace swig-pl-lib || cat Makefile
 make install-swig-pl-lib
 pushd subversion/bindings/swig/perl/native
 ${PERL} Makefile.PL INSTALLDIRS=vendor NO_PERLLOCAL=1 NO_PACKLIST=1
