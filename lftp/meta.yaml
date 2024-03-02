@@ -1,0 +1,79 @@
+{% set version = "4.9.2" %}
+{% set am_version = "1.15" %}
+{% set native = 'm2w64-' if win else '' %}
+
+package:
+  name: lftp
+  version: {{ version }}
+
+source:
+  url: http://lftp.yar.ru/ftp/lftp-{{ version }}.tar.gz
+  sha256: a37589c61914073f53c5da0e68bd233b41802509d758a022000e1ae2076da733
+
+build:
+  number: 1
+  # Windows build fails due to missing [n]curses.h or terminfo.h
+  skip: true  # [win]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - autoconf
+    - automake
+    - coreutils                    # [not win]
+    - make
+    - posix                        # [win]
+    - m2-bison                     # [win]
+    - m2-autoconf                  # [win]
+    - m2-automake{{ am_version }}  # [win]
+    - m2-libtool                   # [win]
+    - {{ native }}pkg-config
+
+  host:
+    - libtool
+    - libxml2
+    - python                       # [win]
+    - openssl
+    - readline                     # [not win]
+    - ncurses                      # [not win]
+    - {{ native }}openssl
+    - expat
+    - zlib
+    - m2-libreadline               # [win]
+    - m2-ncurses                   # [win]
+    - {{ native }}libiconv
+    - {{ native }}gettext
+    - {{ native }}xz
+
+  run:
+    - python                       # [win]
+    - {{ native }}openssl
+    - expat
+    - zlib
+    - {{ native }}libiconv
+    - {{ native }}gettext
+    - readline                     # [not win]
+    - ncurses                      # [not win]
+    - m2-libreadline               # [win]
+    - m2-ncurses                   # [win]
+
+test:
+  commands:
+    - lftp --version
+
+about:
+  home: https://lftp.yar.ru/
+  license: GPL-3.0-or-later
+  license_family: GPL
+  license_file: COPYING
+  summary: |
+    LFTP is a sophisticated file transfer program supporting a number of network protocols
+    (ftp, http, sftp, fish, torrent). Like BASH, it has job control and uses the readline
+    library for input. It has bookmarks, a built-in mirror command, and can transfer
+    several files in parallel. It was designed with reliability in mind.
+
+extra:
+  recipe-maintainers:
+    - epruesse
+    - croth1
