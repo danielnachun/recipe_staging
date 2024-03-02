@@ -17,6 +17,8 @@ build:
 
 requirements:
   build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - cross-r-base {{ r_base }}  # [build_platform != target_platform]
   host:
     - r-base=4.2
