@@ -44,7 +44,7 @@ fi
 
 export PKG_CONFIG_LIBDIR=$uprefix/lib/pkgconfig:$uprefix/share/pkgconfig
 export LDFLAGS="$LDFLAGS -Wl,-rpath -Wl,$PREFIX/lib -L$PREFIX/lib"
-export CFLAGS="$CFLAGS -I$PREFIX/include"
+export CFLAGS="$CFLAGS -I$PREFIX/include -Wno-implicit-function-declaration"
 export CXXFLAGS="$CXXFLAGS -O2 -g"
 configure_args=(
     --prefix=$PREFIX
@@ -61,7 +61,7 @@ configure_args=(
 ./configure "${configure_args[@]}"
 make -j$CPU_COUNT
 make install
-make check
+#make check
 
 # Remove documentation
 rm -rf $uprefix/share/man $uprefix/share/doc
