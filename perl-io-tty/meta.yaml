@@ -16,7 +16,7 @@ build:
   skip: true  # [win]
   script:
     - perl Makefile.PL INSTALLDIRS=vendor NO_PERLLOCAL=1 NO_PACKLIST=1
-    - make CCFLAGS="${CFLAGS} -Wno-implicit-int"
+    - make CCFLAGS="${CFLAGS} -Wno-implicit-int -DHAVE_STRLCPY"
     - make test
     - make install VERBINST=1
 
