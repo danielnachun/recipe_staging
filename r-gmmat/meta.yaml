@@ -33,7 +33,7 @@ requirements:
   host:
     - r-base=4.3
     - bioconductor-seqarray
-    - bioconductor-seqvartools
+    - bioconductor-seqvartools=1.40.0
     - r-compquadform
     - r-data.table
     - r-foreach
@@ -44,7 +44,7 @@ requirements:
     - r-base>=4.3
     - {{native}}gcc-libs         # [win]
     - bioconductor-seqarray
-    - bioconductor-seqvartools
+    - bioconductor-seqvartools>=1.40.0
     - r-compquadform
     - r-data.table
     - r-foreach
