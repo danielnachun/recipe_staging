@@ -21,6 +21,7 @@ requirements:
     - {{ compiler('cxx') }}
     - autoconf
     - automake
+    - coreutils                    # [not win]
     - make
     - posix                        # [win]
     - m2-bison                     # [win]

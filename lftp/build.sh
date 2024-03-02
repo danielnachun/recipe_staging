@@ -38,9 +38,9 @@ if [ -n "$VS_MAJOR" ] ; then
     autoreconf "${autoreconf_args[@]}"
 fi
 
-if [[ ${target_platform} == "osx-arm64" ]]; then
+#if [[ ${target_platform} == "osx-arm64" ]]; then
     autoreconf --force --verbose --install
-fi
+#fi
 
 export PKG_CONFIG_LIBDIR=$uprefix/lib/pkgconfig:$uprefix/share/pkgconfig
 export LDFLAGS="$LDFLAGS -Wl,-rpath -Wl,$PREFIX/lib -L$PREFIX/lib"
@@ -60,7 +60,7 @@ configure_args=(
 
 ./configure "${configure_args[@]}"
 make -j$CPU_COUNT
-make install
+make install MKDIR_P="${BUILD_PREFIX}/bin/mkdir -p"
 #make check
 
 # Remove documentation
