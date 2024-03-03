@@ -17,7 +17,7 @@ build:
   script:
     - perl Makefile.PL INSTALLDIRS=vendor NO_PERLLOCAL=1 NO_PACKLIST=1
     - export CFLAGS="${CFLAGS} -Wno-implicit-int"
-    - export CFALGS="${CFLAGS} -DHAVE_STRLCPY"  # [osx]
+    - export CFLAGS="${CFLAGS} -DHAVE_STRLCPY"  # [osx]
     - make CCFLAGS="${CFLAGS}"
     #- make test
     - make install VERBINST=1
