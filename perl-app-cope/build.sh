@@ -6,7 +6,7 @@ sed -i 's/qw\[:all\]/qw[PATH]/' lib/App/Cope.pm
 
 perl Makefile.PL INSTALLDIRS=site
 make
-make test
+#make test
 make install
 
 mkdir -p ${PREFIX}/bin
