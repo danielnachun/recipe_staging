@@ -1,5 +1,5 @@
 {% set name = "sbcl" %}
-{% set version = "2.3.4" %}
+{% set version = "2.4.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://downloads.sourceforge.net/project/{{ name }}/{{ name }}/{{ version }}/{{ name }}-{{ version }}-source.tar.bz2
-  sha256: f11b4764c6eabdb27e5a9c46b217204d11bcda534e73bf97073d57831d209c4e
+  sha256: da4f9486fad413d3af7abb1b09269325fdb4bff7e7b88f2195ddee743263cf7e
 
 build:
   number: 0
@@ -17,7 +17,7 @@ requirements:
     - {{ compiler('c') }}
     - ecl
     - make
-    - sysroot_linux-64=2.17
+    - sysroot_linux-64=2.17  # [linux]
   host:
     - zstd
   run:
