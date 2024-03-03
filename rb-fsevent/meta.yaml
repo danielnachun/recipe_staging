@@ -16,6 +16,7 @@ requirements:
   build:
     - {{ compiler('c') }}  # [osx]
     - make  # [osx]
+    - sed
   host:
     - ruby=3.2
   run:
