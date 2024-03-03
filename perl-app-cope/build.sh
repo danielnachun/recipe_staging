@@ -10,4 +10,4 @@ make
 make install
 
 mkdir -p ${PREFIX}/bin
-install -Dm 755 bin/cope_path.pl ${PREFIX}/bin/cope_path
+install -m 755 bin/cope_path.pl ${PREFIX}/bin/cope_path
