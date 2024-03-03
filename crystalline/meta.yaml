@@ -1,5 +1,5 @@
 {% set name = "crystalline" %}
-{% set version = "0.10.0" %}
+{% set version = "0.12.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/elbywan/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 26c926ba423e4b04fc52af501cd842c8255312014fc4aa1bc3735a8cd0df3426
+  sha256: 32d137f1e4edd29c74381cc010e9080379346b23646ca5f0806f64d2e05628fb
 
 build:
   number: 0
@@ -19,12 +19,12 @@ requirements:
     - shards
     - crystal
     - libffi
-    - llvmdev =15
+    - llvmdev
   host:
     - bdw-gc
     - libevent
     - libiconv
-    - libllvm15
+    - libllvm17
     - pcre2
     - yaml
   run:
@@ -32,7 +32,7 @@ requirements:
     - crystal
     - libevent
     - libiconv
-    - libllvm15
+    - libllvm17
     - pcre2
     - yaml
 
