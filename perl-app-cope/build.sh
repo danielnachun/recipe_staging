@@ -3,6 +3,7 @@
 set -o xtrace -o nounset -o pipefail -o errexit
 
 sed -i 's/qw\[:all\]/qw[PATH]/' lib/App/Cope.pm
+find . ./ -type f -exec bash -c "sed -i 's?/usr/bin/env perl?${PREFIX}/bin/perl?g' {}" \;
 
 perl Makefile.PL INSTALLDIRS=site
 make
