@@ -10,13 +10,14 @@ source:
   sha256: 733768d3254a840c364bec8d914e753bc3741feaa8e50306592c2638f15371f2
 
 build:
-  number: 0
+  number: 1
   ignore_run_exports:
     - perl-module-install
 
 requirements:
   build:
     - make
+    - sed
   host:
     - perl=5.32
     - perl-class-inspector
