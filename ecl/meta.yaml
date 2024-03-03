@@ -1,4 +1,4 @@
-{% set version = "21.2.1" %}
+{% set version = "23.9.9" %}
 {% set name = "ecl" %}
 
 package:
@@ -7,14 +7,10 @@ package:
 
 source:
   url: https://common-lisp.net/project/ecl/static/files/release/{{ name }}-{{ version }}.tgz
-  sha256: b15a75dcf84b8f62e68720ccab1393f9611c078fcd3afdd639a1086cad010900
-  patches:
-    # from https://github.com/sagemath/sage/blob/master/build/pkgs/ecl/patches/write_error.patch
-    - write_error.patch
-    - fixnum.patch
+  sha256: c51bdab4ca6c1173dd3fe9cfe9727bcefb97bb0a3d6434b627ca6bdaeb33f880
 
 build:
-  number: 2
+  number: 0
   skip: true  # [win]
 
 requirements:
