@@ -80,6 +80,7 @@ jobs:
         shell: micromamba-shell {0}
         run: |
           export GIT_LFS_SKIP_SMUDGE=1
+          git lfs install --skip-smudge
           conda mambabuild --output-folder /tmp/conda-bld /tmp/recipes
 
       - name: Upload packages to GitHub Actions
