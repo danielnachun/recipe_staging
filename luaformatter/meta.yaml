@@ -16,7 +16,7 @@ requirements:
   build:
     - {{ compiler('cxx') }}
     - cmake
-    - git-lfs <3
+    - git
     - make
 
 test:
