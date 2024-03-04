@@ -16,7 +16,6 @@ requirements:
   build:
     - {{ compiler('cxx') }}
     - cmake
-    - git
     - make
 
 test:
