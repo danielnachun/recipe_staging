@@ -6,8 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  git_url: https://github.com/Koihik/LuaFormatter.git
-  git_rev: {{ version }}
+  path: LuaFormatter
 
 build:
   number: 0

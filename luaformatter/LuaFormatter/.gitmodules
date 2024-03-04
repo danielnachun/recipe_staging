@@ -1,0 +1,12 @@
+[submodule "third_party/antlr4"]
+	path = third_party/antlr4
+	url = https://github.com/antlr/antlr4.git
+[submodule "third_party/args"]
+	path = third_party/args
+	url = https://github.com/Taywee/args.git
+[submodule "third_party/yaml-cpp"]
+	path = third_party/yaml-cpp
+	url = https://github.com/jbeder/yaml-cpp.git
+[submodule "third_party/Catch2"]
+	path = third_party/Catch2
+	url = https://github.com/catchorg/Catch2.git
