@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  path: LuaFormatter
+  path: luaformatter.tar.gz
 
 build:
   number: 0
