@@ -22,18 +22,18 @@ build:
 # SystemRequirements: gsl
 requirements:
   host:
-    - 'bioconductor-biocgenerics >=0.48.0,<0.49.0'
+    - 'bioconductor-biocgenerics >=0.44.0,<0.45.0'
     - 'bioconductor-iranges >=2.36.0,<2.37.0'
     - 'bioconductor-s4vectors >=0.40.0,<0.41.0'
-    - r-base=4.3
+    - r-base=4.2
     - libblas
     - liblapack
     - gsl
   run:
-    - 'bioconductor-biocgenerics >=0.48.0,<0.49.0'
+    - 'bioconductor-biocgenerics >=0.44.0,<0.48.0'
     - 'bioconductor-iranges >=2.36.0,<2.37.0'
     - 'bioconductor-s4vectors >=0.40.0,<0.41.0'
-    - r-base>=4.3
+    - r-base>=4.2
     - gsl
   build:
     - {{ compiler('c') }}
