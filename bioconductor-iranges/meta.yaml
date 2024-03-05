@@ -21,15 +21,15 @@ build:
 # Suggests: XVector, GenomicRanges, Rsamtools, GenomicAlignments, GenomicFeatures, BSgenome.Celegans.UCSC.ce2, pasillaBamSubset, RUnit, BiocStyle
 requirements:
   host:
-    - 'bioconductor-biocgenerics >=0.48.0,<0.49.0'
+    - 'bioconductor-biocgenerics >=0.44.0,<0.45.0'
     - 'bioconductor-s4vectors >=0.40.0,<0.41.0'
-    - r-base=4.3
+    - r-base=4.2
     - libblas
     - liblapack
   run:
-    - 'bioconductor-biocgenerics >=0.48.0,<0.49.0'
+    - 'bioconductor-biocgenerics >=0.44.0,<0.45.0'
     - 'bioconductor-s4vectors >=0.40.0,<0.41.0'
-    - r-base>=4.3
+    - r-base>=4.2
   build:
     - {{ compiler('c') }}
     - make
