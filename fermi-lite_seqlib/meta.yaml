@@ -18,6 +18,7 @@ requirements:
     - make
     - sed
   host:
+    - simde  # [target_platform == "osx-arm64"]
     - zlib =1.2
   run:
     - libzlib >=1.2
