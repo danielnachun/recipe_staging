@@ -16,7 +16,8 @@ sed -i "s?htslib/htslib?htslib?" SeqLib/BamHeader.h
 sed -i "s?htslib/htslib?htslib?" SeqLib/RefGenome.h
 
 if [[ ${target_platform} == "osx-arm64" ]]; then
-    sed -i "s?emmintrin.h?simde/x86/sse2.h?" SeqLib/RefGenome.h
+    sed -i "s?emmintrin.h?simde/x86/sse2.h?" SeqLib/ssw.h
+    sed -i "s?emmintrin.h?simde/x86/sse2.h?" src/ssw.c
     export CFLAGS="${CFLAGS} -DSIMDE_ENABLE_NATIVE_ALIASES"
 fi
 
