@@ -26,6 +26,7 @@ requirements:
     - fermi-lite_seqlib
     - htslib
     - libtool
+    - simde  # [target_platform == "osx-arm64"]
     - zlib
   run:
     - bwa_seqlib
