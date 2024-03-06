@@ -26,10 +26,12 @@ requirements:
     - fermi-lite_seqlib
     - htslib
     - libtool
+    - zlib
   run:
     - bwa_seqlib
     - fermi-lite_seqlib
     - htslib
+    - libzlib
 
 test:
   commands:
