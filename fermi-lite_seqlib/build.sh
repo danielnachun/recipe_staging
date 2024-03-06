@@ -2,11 +2,12 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+export CFLAGS="${CFLAGS} -fcommon"
 if [[ ${target_platform} == "osx-arm64" ]]; then
     sed -i 's?emmintrin.h?simde/x86/sse2.h?' f_ksw.c
+    export CFLAGS="${CFLAGS} -DSIMDE_ENABLE_NATIVE_ALIASES"
 fi
 
-export CFLAGS="${CFLAGS} -fcommon"
 sed -i 's/libfml.a/libfml$(SHLIB_EXT)/g' Makefile
 sed -i 's/$(AR) -csru $@ $(OBJS)/$(CC) $(CFLAGS) -shared -o $@ -lz $(OBJS)/g' Makefile
 
