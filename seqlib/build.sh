@@ -15,13 +15,18 @@ sed -i "s?htslib/htslib?htslib?" SeqLib/BamRecord.h
 sed -i "s?htslib/htslib?htslib?" SeqLib/BamHeader.h
 sed -i "s?htslib/htslib?htslib?" SeqLib/RefGenome.h
 
+if [[ ${target_platform} == "osx-arm64" ]]; then
+    sed -i "s?emmintrin.h?simde/x86/sse2.h?" SeqLib/RefGenome.h
+    export CFLAGS="${CFLAGS} -DSIMDE_ENABLE_NATIVE_ALIASES"
+fi
+
 export ACLOCAL_PATH="${PREFIX}/share/aclocal"
 autoreconf --force --verbose --install
 ./configure --disable-silent \
     --disable-dependency-tracking \
     --prefix=${PREFIX} 
-make LIBTOOL="${PREFIX}/bin/libtool"
-make seqtools LIBTOOL="${PREFIX}/bin/libtool"
+make CXX=${CXX} LIBTOOL="${PREFIX}/bin/libtool"
+make seqtools CXX=${CXX} LIBTOOL="${PREFIX}/bin/libtool"
 make install
 
 mkdir -p ${PREFIX}/bin
