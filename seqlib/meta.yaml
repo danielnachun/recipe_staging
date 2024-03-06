@@ -1,0 +1,48 @@
+{% set name = "seqlib" %}
+{% set version = "1.2.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/walaj/SeqLib/archive/{{ version }}.tar.gz
+  sha256: 6892bdb5cae88d8d8acbbfadd351cfa00004bc7c0fd1ae912dc1ff1ccfd61a70
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - autoconf
+    - automake
+    - m4
+    - make
+    - sed
+  host:
+    - bwa_seqlib
+    - fermi-lite_seqlib
+    - htslib
+    - libtool
+  run:
+    - bwa_seqlib
+    - fermi-lite_seqlib
+    - htslib
+
+test:
+  commands:
+    - test -f ${PREFIX}/lib/libseqlib${SHLIB_EXT}
+    - seqtools
+
+about:
+  home: https://github.com/walaj/SeqLib
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: C++ htslib/bwa-mem/fermi interface for interrogating sequence data
+  dev_url: https://github.com/walaj/SeqLib
+
+extra:
+  recipe-maintainers:
+    - danielnachun
