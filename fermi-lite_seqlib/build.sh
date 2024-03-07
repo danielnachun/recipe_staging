@@ -8,9 +8,6 @@ if [[ ${target_platform} == "osx-arm64" ]]; then
     export CFLAGS="${CFLAGS} -DSIMDE_ENABLE_NATIVE_ALIASES"
 fi
 
-sed -i 's/libfml.a/libfml$(SHLIB_EXT)/g' Makefile
-sed -i 's/$(AR) -csru $@ $(OBJS)/$(CC) $(CFLAGS) -shared -o $@ -lz $(OBJS)/g' Makefile
-
 make all CC="${CC} ${CFLAGS} ${LDFLAGS}"
 mkdir -p ${PREFIX}/bin
 mkdir -p ${PREFIX}/lib

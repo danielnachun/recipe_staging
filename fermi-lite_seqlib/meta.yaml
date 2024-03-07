@@ -8,6 +8,8 @@ package:
 source:
   url: https://github.com/walaj/fermi-lite/archive/5bc90f8d70e2b66184eccbd223a3be714c914365.zip
   sha256: 0744ec15fc006b8934b93270a5334d0cdf257980dcb7d01ed305e476a05300aa
+  patches:
+    - 0001-make-shared-library.patch
 
 build:
   number: 0
