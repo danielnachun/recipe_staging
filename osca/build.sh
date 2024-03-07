@@ -11,6 +11,7 @@ fi
 if [[ ${target_platform} != "osx-arm64" ]]; then
     blas_arg="-Dmkl_path=${PREFIX}"
 else
+    export GSL_CBLAS_LIBRARY="-L${PREFIX}/lib -lopenblas"
     blas_arg="-Dblas_path=${PREFIX}"
 fi
 
