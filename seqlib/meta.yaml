@@ -8,6 +8,9 @@ package:
 source:
   url: https://github.com/walaj/SeqLib/archive/{{ version }}.tar.gz
   sha256: 6892bdb5cae88d8d8acbbfadd351cfa00004bc7c0fd1ae912dc1ff1ccfd61a70
+  patches:
+    - 0001-make-shared-library.patch
+    - 0002-devendor-htslib.patch
 
 build:
   number: 0
