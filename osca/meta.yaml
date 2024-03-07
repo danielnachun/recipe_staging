@@ -8,6 +8,8 @@ package:
 source:
   url: https://github.com/jianyangqt/osca/archive/refs/tags/v{{ version }}.tar.gz
   sha256: a3b60d8caf0e6cdb5f4adf79c24e8df414f3832122c97fcfa7dcfd4b23c73366
+  patches:
+    - 0001-enable-BLAS-support.patch
 
 build:
   number: 0
@@ -22,15 +24,17 @@ requirements:
     - boost-cpp
     - gsl
     - eigen
-    - mkl
-    - mkl-include
+    - mkl  # [target_platform != "osx-arm64"]
+    - mkl-include  # [target_platform != "osx-arm64"]
+    - openblas  # [target_platform == "osx-arm64"]
     - r-base-rmath
     - zlib
   run:
     - _openmp_mutex  # [linux]
     - llvm-openmp  # [osx]
     - libzlib
-    - mkl
+    - mkl  # [target_platform != "osx-arm64"]
+    - openblas  # [target_platform == "osx-arm64"]
     - r-base-rmath
 
 test:
