@@ -8,6 +8,8 @@ package:
 source:
   url: https://github.com/walaj/bwa/archive/c02766e3c34ac3f4af9842e20a54b7f9f4b36d0b.zip
   sha256: 56e59cf5b24056b645638bceb0877b591c1090bfa2c92c60abd2908dc7cd96c1
+  patches:
+    - 0001-make-shared-library.patch
 
 build:
   number: 0

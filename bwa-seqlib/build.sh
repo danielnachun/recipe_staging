@@ -8,9 +8,6 @@ if [[ ${target_platform} == "osx-arm64" ]]; then
     export CFLAGS="${CFLAGS} -DSIMDE_ENABLE_NATIVE_ALIASES"
 fi
 
-sed -i 's/libbwa.a/libbwa$(SHLIB_EXT)/g' Makefile
-sed -i 's/$(AR) -csru $@ $(LOBJS)/$(CC) $(CFLAGS) $(DFLAGS) -shared -o $@ -lz $(LOBJS)/g' Makefile
-
 make all CC="${CC} ${CFLAGS} ${LDFLAGS}"
 mkdir -p ${PREFIX}/bin
 mkdir -p ${PREFIX}/lib
