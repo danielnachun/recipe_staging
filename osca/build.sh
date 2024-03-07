@@ -9,9 +9,9 @@ if [[ ${target_platform} == "osx-64" ]]; then
 fi
 
 if [[ ${target_platform} != "osx-arm64" ]]; then
-    blas_arg = "-Dmkl_path=${PREFIX}"
+    blas_arg="-Dmkl_path=${PREFIX}"
 else
-    blas_arg = "-Dblas_path=${PREFIX}"
+    blas_arg="-Dblas_path=${PREFIX}"
 fi
 
 cmake -S . -B build \
