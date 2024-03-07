@@ -1,0 +1,76 @@
+From a81f86b2d31d1214af96637883f0bd9e7d4f8675 Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Thu, 7 Mar 2024 11:22:42 -0800
+Subject: [PATCH] enable ARM
+
+---
+ CMakeLists.txt | 50 +++++++++++++++++++++++---------------------------
+ 1 file changed, 23 insertions(+), 27 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index b111fcd..ed3fc2b 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -109,36 +109,32 @@ add_executable(smr
+     ${PRJ_SOURCE_DIR}/StrFunc.cpp
+     )
+ 
+-if (CMAKE_HOST_SYSTEM_PROCESSOR STREQUAL "x86_64")
+-    if (system STREQUAL "UNIX-like")
+-        if (CMAKE_C_COMPILER_ID STREQUAL "GNU")
+-            target_compile_options(smr PRIVATE "-fopenmp")
+-            target_include_directories(smr PRIVATE ${zlib_include_dir} PRIVATE ${eigen_dir})
+-            target_link_directories(smr PRIVATE ${zlib_lib_dir})
+-            if (NOT BUILD_STATIC)
+-                target_link_libraries(smr z gomp pthread)
+-            else()
+-                message(WARNING "You now try to link libs staticlly, You need make sure all static lib was installed.")
+-                target_link_libraries(smr -static z gomp pthread dl)
+-            endif()
+-        elseif (CMAKE_C_COMPILER_ID STREQUAL "Clang")
+-            target_include_directories(smr PRIVATE ${zlib_include_dir} PRIVATE ${eigen_dir})
+-            target_link_directories(smr PRIVATE ${zlib_lib_dir})
+-            if (NOT BUILD_STATIC)
+-                target_link_libraries(smr z omp pthread)
+-            else()
+-                message(WARNING "You now try to link libs staticlly, You need make sure all static lib was installed.")
+-                target_link_libraries(smr -static z omp pthread dl)
+-            endif()
+-
++if (system STREQUAL "UNIX-like")
++    if (CMAKE_C_COMPILER_ID STREQUAL "GNU")
++        target_compile_options(smr PRIVATE "-fopenmp")
++        target_include_directories(smr PRIVATE ${zlib_include_dir} PRIVATE ${eigen_dir})
++        target_link_directories(smr PRIVATE ${zlib_lib_dir})
++        if (NOT BUILD_STATIC)
++            target_link_libraries(smr z gomp pthread)
++        else()
++            message(WARNING "You now try to link libs staticlly, You need make sure all static lib was installed.")
++            target_link_libraries(smr -static z gomp pthread dl)
+         endif()
+-    elseif (system STREQUAL "macOS")
+-    elseif (system STREQUAL "windows")
+-    else()
+-        message(FATAL_ERROR "OS not recgnized.")
++    elseif (CMAKE_C_COMPILER_ID STREQUAL "Clang")
++        target_include_directories(smr PRIVATE ${zlib_include_dir} PRIVATE ${eigen_dir})
++        target_link_directories(smr PRIVATE ${zlib_lib_dir})
++        if (NOT BUILD_STATIC)
++            target_link_libraries(smr z omp pthread)
++        else()
++            message(WARNING "You now try to link libs staticlly, You need make sure all static lib was installed.")
++            target_link_libraries(smr -static z omp pthread dl)
++        endif()
++
+     endif()
++elseif (system STREQUAL "macOS")
++elseif (system STREQUAL "windows")
+ else()
+-    message(STATUS "Until now, only x86_64 architecture was tested.")
++    message(FATAL_ERROR "OS not recgnized.")
+ endif()
+ 
+ 
+-- 
+2.43.0
+
