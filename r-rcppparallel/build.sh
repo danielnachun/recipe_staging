@@ -2,7 +2,7 @@
 
 export TBB_INC=${PREFIX}/include
 export TBB_LIB=${PREFIX}/lib
-export TBB_USE_SYMLINKS=FALSE
+export TBB_USE_SYMLINKS=TRUE
 export DISABLE_AUTOBREW=1
 
 # shellcheck disable=SC2086
