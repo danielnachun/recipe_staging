@@ -6,26 +6,37 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/getzlab/{{ name }}/releases/download/v{{ version }}/{{ name }}.v{{ version }}.full_source.tar.gz
-  sha256: b214151408696430aead56921b255e2b09efe5f6087a68446deae399227a1303
+  - url: https://github.com/getzlab/rnaseqc/archive/v{{ version }}.tar.gz
+    sha256: 544e7e68fb6c589fe9abb9df89b9641df68a28c3a1ecca516a375b11b484a6e6
+    patches:
+      - 0001-use-dynamic-linking.patch
+  - url: https://github.com/samtools/htslib/archive/1.19.1.tar.gz
+    sha256: 41d7d203f939ee1359e06192c7fedeed1fbac021db1c2589502cdb812e22fb42
+    folder: htslib
 
 build:
-  number: 2
+  number: 3
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - binutils
+    - binutils  # [linux]
     - make
     - sed
   host:
-    - bzip2
-    - xz
-    - zlib
     - boost-cpp=1.82
+    - bzip2
+    - htslib
+    - jsoncpp
+    - xz
+    - seqlib
+    - zlib =1.2
   run:
     - boost-cpp=1.82
+    - json-c
+    - seqlib
+    - libzlib >=1.2
 
 test:
   commands:
@@ -34,7 +45,7 @@ test:
 about:
   home: https://github.com/getzlab/rnaseqc
   license: BSD-3-Clause
-  license_file: rnaseqc/LICENSE
+  license_file: LICENSE
   summary: Efficient RNA-seq quality control and quantification for large cohorts
   dev_url: https://github.com/getzlab/rnaseqc
 

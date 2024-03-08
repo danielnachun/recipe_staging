@@ -2,17 +2,11 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-cd rnaseqc
-sed -i 's/CC/CXX/g' Makefile
-sed -i "s?-lz?-L${PREFIX}/lib -lz?g" SeqLib/bwa/Makefile
-sed -i "s?-lz?-L${PREFIX}/lib -lz?g" SeqLib/fermi-lite/Makefile
+sed -i 's/realloc(b->data, len)/(unsigned char*)realloc(b->data, len)/' htslib/cram/cram_io.h
+
 make CXX="${CXX} -std=c++14" \
-     CC="${CC} -fcommon" \
-     STDLIB="-I${PREFIX}/include" \
-     INCLUDES="-I${PREFIX}/include" \
-     LDFLAGS="-L${PREFIX}/lib" \
-     CPPFLAGS="-I${PREFIX}/include" \
-     LIBRARY_PATHS="-L${PREFIX}/lib"
+     INCLUDE_DIRS="-I${PREFIX}/include" \
+     LIBRARY_PATHS="-L${PREFIX}/lib -Wl,-rpath,${PREFIX}/lib"
 
 mkdir -p ${PREFIX}/bin
 install -m 755 rnaseqc ${PREFIX}/bin
