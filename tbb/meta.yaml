@@ -71,7 +71,7 @@ outputs:
         # unset option that ninja complains about
         - set CMAKE_GENERATOR_TOOLSET=   # [win]
         - set CMAKE_GENERATOR_PLATFORM=  # [win]
-        - export CXXFLAGS="${CXXFLAGS} -Wno-error=stringop-overflow"
+        - export CXXFLAGS="${CXXFLAGS} -Wno-error=stringop-overflow"  # [linux]
         - cmake {{ cmake_args }} -DTBB_TEST=OFF -S . -B build
         - cmake --build build --parallel
         - cmake -DCOMPONENT=runtime -P build/cmake_install.cmake
@@ -100,6 +100,7 @@ outputs:
         - set CMAKE_GENERATOR=Ninja      # [win]
         - set CMAKE_GENERATOR_TOOLSET=   # [win]
         - set CMAKE_GENERATOR_PLATFORM=  # [win]
+        - export CXXFLAGS="${CXXFLAGS} -Wno-error=stringop-overflow"  # [linux]
         - cmake {{ cmake_args }} -DTBB_TEST=OFF -S . -B build
         - cmake --build build --parallel
         - cmake -DCOMPONENT=devel -P build/cmake_install.cmake
