@@ -1,0 +1,42 @@
+{% set name = "bwa_seqlib" %}
+{% set version = "0.7.15" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/walaj/bwa/archive/c02766e3c34ac3f4af9842e20a54b7f9f4b36d0b.zip
+  sha256: 56e59cf5b24056b645638bceb0877b591c1090bfa2c92c60abd2908dc7cd96c1
+  patches:
+    - 0001-make-shared-library.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+    - sed
+  host:
+    - simde  # [target_platform == "osx-arm64"]
+    - zlib =1.2
+  run:
+    - libzlib >=1.2
+
+test:
+  commands:
+    - bwa 2>&1 | grep -q "bwa (alignment via Burrows-Wheeler transformation)"
+    - test -f ${PREFIX}/lib/libbwa${SHLIB_EXT}
+
+about:
+  home: https://github.com/walaj/bwa
+  license: Apache-2.0
+  license_file: LICENSE.txt
+  summary: Burrow-Wheeler Aligner for pairwise alignment between DNA sequences (fork for SeqLib)
+  dev_url: https://github.com/walaj/bwa
+
+extra:
+  recipe-maintainers:
+    - danielnachun

@@ -1,0 +1,81 @@
+From 03f008d7eabfb31f27ac84e468564bef5b8644e0 Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Wed, 6 Mar 2024 18:18:02 -0800
+Subject: [PATCH 2/2] devendor htslib
+
+---
+ SeqLib/BamHeader.h |  8 ++++----
+ SeqLib/BamRecord.h | 10 +++++-----
+ SeqLib/RefGenome.h |  2 +-
+ src/ReadFilter.cpp |  2 +-
+ 4 files changed, 11 insertions(+), 11 deletions(-)
+
+diff --git a/SeqLib/BamHeader.h b/SeqLib/BamHeader.h
+index 12a2281..eabf4bb 100644
+--- a/SeqLib/BamHeader.h
++++ b/SeqLib/BamHeader.h
+@@ -1,10 +1,10 @@
+ #ifndef SEQLIB_BAM_HEADER_H__
+ #define SEQLIB_BAM_HEADER_H__
+ 
+-#include "htslib/htslib/hts.h"
+-#include "htslib/htslib/sam.h"
+-#include "htslib/htslib/bgzf.h"
+-#include "htslib/htslib/kstring.h"
++#include "htslib/hts.h"
++#include "htslib/sam.h"
++#include "htslib/bgzf.h"
++#include "htslib/kstring.h"
+ 
+ #include "SeqLib/SeqLibUtils.h"
+ #include <string>
+diff --git a/SeqLib/BamRecord.h b/SeqLib/BamRecord.h
+index 3ad3b4e..c281712 100644
+--- a/SeqLib/BamRecord.h
++++ b/SeqLib/BamRecord.h
+@@ -10,11 +10,11 @@
+ #include <algorithm>
+ 
+ extern "C" {
+-#include "htslib/htslib/hts.h"
+-#include "htslib/htslib/sam.h"
+-#include "htslib/htslib/bgzf.h"
+-#include "htslib/htslib/kstring.h"
+-#include "htslib/htslib/faidx.h"
++#include "htslib/hts.h"
++#include "htslib/sam.h"
++#include "htslib/bgzf.h"
++#include "htslib/kstring.h"
++#include "htslib/faidx.h"
+ 
+ }
+ 
+diff --git a/SeqLib/RefGenome.h b/SeqLib/RefGenome.h
+index d76065a..2e587c9 100644
+--- a/SeqLib/RefGenome.h
++++ b/SeqLib/RefGenome.h
+@@ -5,7 +5,7 @@
+ #include <cstdlib>
+ #include <iostream>
+ 
+-#include "htslib/htslib/faidx.h"
++#include "htslib/faidx.h"
+ 
+ namespace SeqLib {
+   
+diff --git a/src/ReadFilter.cpp b/src/ReadFilter.cpp
+index 8c7de47..b212ffa 100644
+--- a/src/ReadFilter.cpp
++++ b/src/ReadFilter.cpp
+@@ -1,7 +1,7 @@
+ #include "SeqLib/ReadFilter.h"
+ 
+ #include <cassert>
+-#include "htslib/htslib/khash.h"
++#include "htslib/khash.h"
+ 
+ //#define QNAME "D0EN0ACXX111207:7:2306:6903:136511"
+ //#define QFLAG -1
+-- 
+2.43.0
+
