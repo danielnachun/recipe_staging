@@ -147,47 +147,47 @@ outputs:
         - cd test_build
         - ctest -R "{{ ctest_regex }}" --output-on-failure
 
-  - name: tbb4py
-    about:
-      summary: TBB module for Python
-      license_file:
-        - LICENSE.txt
-        - third-party-programs.txt
-    build:
-      skip: true  # [py>=312]
-      script:
-        - set CMAKE_GENERATOR=Ninja      # [win]
-        - set CMAKE_GENERATOR_TOOLSET=   # [win]
-        - set CMAKE_GENERATOR_PLATFORM=  # [win]
-        - cmake {{ cmake_tbb4py_args }} -DTBB4PY_BUILD=ON -DTBB_TEST=OFF -S . -B {{ tbb4py_build_dir }}
-        - cmake --build {{ tbb4py_build_dir }} --target python_build --parallel
-        - cmake -DCOMPONENT=tbb4py -P {{ tbb4py_build_dir }}/cmake_install.cmake
-    requirements:
-      build:
-        - python                                 # [build_platform != target_platform]
-        - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-        - {{ compiler('cxx') }}
-        - ninja  # [win]
-        - make   # [not win]
-        - cmake
-        - swig
-      host:
-        - python
-        - {{ pin_subpackage('tbb-devel', exact=True) }}
-      run:
-        - tbb >={{ version }}                            # while python module works with any compatible tbb...
-        - python
-    test:
-      requires:
-        - python
-        - {{ pin_subpackage('tbb', exact=True) }}        # we want to test with this specific tbb package
-      imports:
-        - tbb
-        - TBB
-      commands:
-        - python -m TBB -h
-        - python -m tbb -h
-        - python -m tbb test
+  #- name: tbb4py
+    #about:
+      #summary: TBB module for Python
+      #license_file:
+        #- LICENSE.txt
+        #- third-party-programs.txt
+    #build:
+      #skip: true  # [py>=312]
+      #script:
+        #- set CMAKE_GENERATOR=Ninja      # [win]
+        #- set CMAKE_GENERATOR_TOOLSET=   # [win]
+        #- set CMAKE_GENERATOR_PLATFORM=  # [win]
+        #- cmake {{ cmake_tbb4py_args }} -DTBB4PY_BUILD=ON -DTBB_TEST=OFF -S . -B {{ tbb4py_build_dir }}
+        #- cmake --build {{ tbb4py_build_dir }} --target python_build --parallel
+        #- cmake -DCOMPONENT=tbb4py -P {{ tbb4py_build_dir }}/cmake_install.cmake
+    #requirements:
+      #build:
+        #- python                                 # [build_platform != target_platform]
+        #- cross-python_{{ target_platform }}     # [build_platform != target_platform]
+        #- {{ compiler('cxx') }}
+        #- ninja  # [win]
+        #- make   # [not win]
+        #- cmake
+        #- swig
+      #host:
+        #- python
+        #- {{ pin_subpackage('tbb-devel', exact=True) }}
+      #run:
+        #- tbb >={{ version }}                            # while python module works with any compatible tbb...
+        #- python
+    #test:
+      #requires:
+        #- python
+        #- {{ pin_subpackage('tbb', exact=True) }}        # we want to test with this specific tbb package
+      #imports:
+        #- tbb
+        #- TBB
+      #commands:
+        #- python -m TBB -h
+        #- python -m tbb -h
+        #- python -m tbb test
 
 about:
   home: https://github.com/oneapi-src/oneTBB
