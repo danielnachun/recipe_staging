@@ -35,7 +35,7 @@ index d1b6d3a..3bd8db9 100644
  
  AC_OUTPUT
 +LT_INIT(shared)
-+LT_LANG([C++])
++LT_OUTPUT
 diff --git a/src/Makefile.am b/src/Makefile.am
 index 448e524..adcec2a 100644
 --- a/src/Makefile.am

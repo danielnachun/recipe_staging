@@ -13,8 +13,8 @@ autoreconf --force --verbose --install
 ./configure --disable-silent \
     --disable-dependency-tracking \
     --prefix=${PREFIX} 
-make LIBTOOL="${PREFIX}/bin/libtool"
-make seqtools LIBTOOL="${PREFIX}/bin/libtool"
+make LIBTOOL="${SRC_DIR}/libtool"
+make seqtools LIBTOOL="${SRC_DIR}/libtool"
 make install
 
 mkdir -p ${PREFIX}/bin
