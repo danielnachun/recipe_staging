@@ -8,6 +8,8 @@ package:
 source:
   - url: https://github.com/getzlab/rnaseqc/archive/v{{ version }}.tar.gz
     sha256: 544e7e68fb6c589fe9abb9df89b9641df68a28c3a1ecca516a375b11b484a6e6
+    patches:
+      - 0001-use-dynamic-linking.patch
   - url: https://github.com/samtools/htslib/archive/1.19.1.tar.gz
     sha256: 41d7d203f939ee1359e06192c7fedeed1fbac021db1c2589502cdb812e22fb42
     folder: htslib
