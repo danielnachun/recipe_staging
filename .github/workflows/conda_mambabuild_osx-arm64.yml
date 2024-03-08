@@ -78,7 +78,7 @@ jobs:
 
       - name: Build conda packages
         shell: micromamba-shell {0}
-        run: conda mambabuild --prefix-length 10 --output-folder /tmp/conda-bld /tmp/recipes
+        run: conda mambabuild --output-folder /tmp/conda-bld /tmp/recipes
 
       - name: Upload packages to GitHub Actions
         uses: actions/upload-artifact@v3
