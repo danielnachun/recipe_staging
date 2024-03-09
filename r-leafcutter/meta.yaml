@@ -46,7 +46,6 @@ requirements:
     - r-stanheaders =2.21.0
     - r-stringr
     - r-tailrank
-    - tbb-devel <2021
   run:
     - r-base>=4.3
     - bioconductor-dirichletmultinomial
