@@ -56,6 +56,12 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Setup upterm session
+        if: contains(github.event.pull_request.labels.*.name, 'ssh')
+        uses: lhotari/action-upterm@v1
+        with:
+          limit-access-to-actor: true
+
       - name: Setup micromamba
         uses: mamba-org/setup-micromamba@v1
         with:
@@ -78,10 +84,7 @@ jobs:
 
       - name: Build conda packages
         shell: micromamba-shell {0}
-        run: |
-          export GIT_LFS_SKIP_SMUDGE=1
-          git lfs install --skip-smudge
-          conda mambabuild --output-folder /tmp/conda-bld /tmp/recipes
+        run: conda mambabuild --output-folder /tmp/conda-bld /tmp/recipes
 
       - name: Upload packages to GitHub Actions
         uses: actions/upload-artifact@v3
