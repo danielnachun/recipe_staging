@@ -56,10 +56,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup tmate session
-        if: contains(github.event.pull_request.labels.*.name, 'ssh')
-        uses: mxschmitt/action-tmate@v3
-
       - name: Setup micromamba
         uses: mamba-org/setup-micromamba@v1
         with:
@@ -79,6 +75,10 @@ jobs:
           for dir in ${{ needs.setup.outputs.changed_directories }}; do
             cp -R ${dir} /tmp/recipes
           done
+
+      - name: Setup tmate session
+        if: contains(github.event.pull_request.labels.*.name, 'ssh')
+        uses: mxschmitt/action-tmate@v3
 
       - name: Build conda packages
         shell: micromamba-shell {0}
