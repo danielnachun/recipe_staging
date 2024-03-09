@@ -56,6 +56,7 @@ requirements:
     - r-rcppeigen >=0.3.3.9.3
     - r-rcppparallel >=5.1.4
     - r-stanheaders >=2.32.0
+    - tbb-devel
   run:
     - r-base>=4.2
     - {{ native }}gcc-libs         # [win]
