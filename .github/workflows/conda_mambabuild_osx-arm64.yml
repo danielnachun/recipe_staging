@@ -56,11 +56,9 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup upterm session
+      - name: Setup tmate session
         if: contains(github.event.pull_request.labels.*.name, 'ssh')
-        uses: lhotari/action-upterm@v1
-        with:
-          limit-access-to-actor: true
+        uses: mxschmitt/action-tmate@v3
 
       - name: Setup micromamba
         uses: mamba-org/setup-micromamba@v1
