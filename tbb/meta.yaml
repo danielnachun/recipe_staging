@@ -4,7 +4,7 @@
 {% set vminor = version.split('.')[1]|int %}
 {% set vbinary = vmajor - 2009 %}
 
-{% set vtag = "v%d.%d.%d" % (vmajor, vminor) %}
+{% set vtag = "v%d.%d" % (vmajor, vminor) %}
 
 # Official patch version for the first release of 2021 is 1,
 # but internal patch version is 0, handle it for interface version.
