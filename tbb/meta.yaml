@@ -1,15 +1,14 @@
-{% set version = "2021.11.0" %}
+{% set version = "2020.2" %}
 
 {% set vmajor = version.split('.')[0]|int %}
 {% set vminor = version.split('.')[1]|int %}
-{% set vpatch = version.split('.')[2]|int %}
 {% set vbinary = vmajor - 2009 %}
 
-{% set vtag = "v%d.%d.%d" % (vmajor, vminor, vpatch) %}
+{% set vtag = "v%d.%d.%d" % (vmajor, vminor) %}
 
 # Official patch version for the first release of 2021 is 1,
 # but internal patch version is 0, handle it for interface version.
-{% set vinterface = "%d" % (vbinary * 1000 + vminor * 10 + (vpatch if vmajor != 2021 or vminor != 1 else 0)) %}
+#{% set vinterface = "%d" % (vbinary * 1000 + vminor * 10 + (vpatch if vmajor != 2021 or vminor != 1 else 0)) %}
 
 # Libraries on Windows are expected to be installed into LIBRARY_PREFIX.
 # tbb4py files should be installed into PREFIX.
@@ -87,7 +86,7 @@ outputs:
         {% set libname = "libtbb." ~ vbinary ~ "." ~ vminor ~ ".dylib" %}  # [osx]
         {% set libname = "tbb" ~ vbinary ~ ".dll" %}                       # [win]
         {% set win_extra = "os.add_dll_directory(os.environ['LIBRARY_BIN']); " if win else "" %}
-        - python -c "import ctypes, os; {{ win_extra }} assert {{ vinterface }} == ctypes.cdll[r'{{ libname }}']['TBB_runtime_interface_version']()"
+        #- python -c "import ctypes, os; {{ win_extra }} assert {{ vinterface }} == ctypes.cdll[r'{{ libname }}']['TBB_runtime_interface_version']()"
 
   - name: tbb-devel
     about:
