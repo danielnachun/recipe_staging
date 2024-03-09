@@ -32,6 +32,7 @@ requirements:
     - {{ posix }}sed               # [win]
     - {{ posix }}coreutils         # [win]
     - {{ posix }}zip               # [win]
+    - sed
   host:
     - r-base=4.2
     - r-bh >=1.72.0_2
