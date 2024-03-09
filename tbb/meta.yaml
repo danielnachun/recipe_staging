@@ -62,14 +62,14 @@ outputs:
         - python *
         - {{ compiler('cxx') }}
         - m2w64-make                                     # [win]
-        - make                                           # [unix]
+        - make                                           # [linux]
         - cmake
       run:
         - {{ pin_subpackage('tbb', exact=True) }}        # development package is for specific version of tbb
     test:
       requires:
         - {{ compiler('cxx') }}
-        - make                                           # [unix]
+        - make                                           # [linux]
         - cmake >=3.13
       source_files:
         - examples/test_all/fibonacci
@@ -79,36 +79,36 @@ outputs:
         - cmake --build test-bld --config release        # [not win]    XXX fix it
         - cmake -E env test-bld/fibonacci                # [not win or not py2k]
 
-  - name: tbb4py
-    build:
-      script: {{ build }} --no-rebuild --install-python
-    requirements:
-      build:
-        - {{ compiler('cxx') }}
-        - m2w64-make                                     # [win]
-        - make                                           # [unix]
-        - swig
-      host:
-        - python
-        - {{ pin_subpackage('tbb-devel', exact=True) }}
-      run:
-        - tbb >={{ version }}                            # while python module works with any compatible tbb...
-        - python
-    test:
-      requires:
-        - python
-        - {{ pin_subpackage('tbb', exact=True) }}        # we want to test with this specific tbb package
-      imports:
-        - tbb
-        - TBB
-      commands:
-        - python -m TBB -h
-        - python -m tbb -h
-        - python -m tbb test                             # [linux]  # XXX fix it
-    about:
-      summary: TBB module for Python
-      license: Apache 2.0
-      dev_url: https://github.com/01org/tbb
+  #- name: tbb4py
+    #build:
+      #script: {{ build }} --no-rebuild --install-python
+    #requirements:
+      #build:
+        #- {{ compiler('cxx') }}
+        #- m2w64-make                                     # [win]
+        #- make                                           # [unix]
+        #- swig
+      #host:
+        #- python
+        #- {{ pin_subpackage('tbb-devel', exact=True) }}
+      #run:
+        #- tbb >={{ version }}                            # while python module works with any compatible tbb...
+        #- python
+    #test:
+      #requires:
+        #- python
+        #- {{ pin_subpackage('tbb', exact=True) }}        # we want to test with this specific tbb package
+      #imports:
+        #- tbb
+        #- TBB
+      #commands:
+        #- python -m TBB -h
+        #- python -m tbb -h
+        #- python -m tbb test                             # [linux]  # XXX fix it
+    #about:
+      #summary: TBB module for Python
+      #license: Apache 2.0
+      #dev_url: https://github.com/01org/tbb
 
 about:
   home: http://www.threadingbuildingblocks.org
