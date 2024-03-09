@@ -1,0 +1,93 @@
+{% set version = "2.32.6" %}
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
+
+package:
+  name: r-rstan
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url:
+    - {{ cran_mirror }}/src/contrib/rstan_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/rstan/rstan_{{ version }}.tar.gz
+  sha256: 3390d00191bbd3b0739dd19fe437b99a041a6b04be208877b48419d1348a1a70
+
+build:
+  merge_build_host: true  # [win]
+  skip: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}    # [build_platform != target_platform]
+    - r-bh                         # [build_platform != target_platform]
+    - r-ggplot2                    # [build_platform != target_platform]
+    - r-gridextra                  # [build_platform != target_platform]
+    - r-inline                     # [build_platform != target_platform]
+    - r-loo                        # [build_platform != target_platform]
+    - r-pkgbuild                   # [build_platform != target_platform]
+    - r-quickjsr                   # [build_platform != target_platform]
+    - r-rcpp                       # [build_platform != target_platform]
+    - r-rcppeigen                  # [build_platform != target_platform]
+    - r-rcppparallel               # [build_platform != target_platform]
+    - r-stanheaders                # [build_platform != target_platform]
+    - {{ compiler('c') }}          # [not win]
+    - {{ compiler('m2w64_c') }}    # [win]
+    - {{ compiler('cxx') }}        # [not win]
+    - {{ compiler('m2w64_cxx') }}  # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}make
+    - {{ posix }}sed               # [win]
+    - {{ posix }}coreutils         # [win]
+    - {{ posix }}zip               # [win]
+  host:
+    - r-base=4.2
+    - r-bh >=1.75.0_0
+    - r-ggplot2 >=3.3.5
+    - r-gridextra >=2.3
+    - r-inline >=0.3.19
+    - r-loo >=2.4.1
+    - r-pkgbuild >=1.2.0
+    - r-quickjsr
+    - r-rcpp >=1.0.7
+    - r-rcppeigen >=0.3.3.9.3
+    - r-rcppparallel >=5.1.4
+    - r-stanheaders >=2.32.0
+  run:
+    - r-base>=4.2
+    - {{ native }}gcc-libs         # [win]
+    - r-bh >=1.75.0_0
+    - r-ggplot2 >=3.3.5
+    - r-gridextra >=2.3
+    - r-inline >=0.3.19
+    - r-loo >=2.4.1
+    - r-pkgbuild >=1.2.0
+    - r-quickjsr
+    - r-rcpp >=1.0.7
+    - r-rcppeigen >=0.3.3.9.3
+    - r-rcppparallel >=5.1.4
+    - r-stanheaders >=2.32.0
+
+test:
+  commands:
+    - $R -e "library('rstan')"           # [not win]
+    - "\"%R%\" -e \"library('rstan')\""  # [win]
+
+about:
+  home: http://discourse.mc-stan.org, http://mc-stan.org
+  license: GPL-3.0-or-later
+  summary: User-facing R functions are provided to parse, compile, test, estimate, and analyze Stan models by accessing the header-only Stan library provided by the 'StanHeaders' package. The Stan project develops a probabilistic programming language that implements full Bayesian statistical inference via Markov Chain Monte
+    Carlo, rough Bayesian inference via 'variational' approximation, and (optionally penalized) maximum likelihood estimation via optimization. In all three cases, automatic differentiation is used to quickly and accurately evaluate gradients without burdening the user with the need to derive the partial derivatives.
+  license_family: GPL3
+  license_file:
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+    - rluria14
+    - oblute
+    - ndmaxar
