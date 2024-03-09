@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export DISABLE_AUTOBREW=1
-sed -i "s?-DBOOST_DISABLE_ASSERTS?-I${PREFIX}/lib/R/library/RcppParallel/include -DBOOST_DISABLE_ASSERTS -D_REENTRANT?" leafcutter/src/Makevars
+sed -i "s?-DBOOST_DISABLE_ASSERTS?-I${PREFIX}/lib/R/library/RcppParallel/include -DHAVE_WORKING_LOG1P -DBOOST_DISABLE_ASSERTS -D_REENTRANT?" leafcutter/src/Makevars
 
 # shellcheck disable=SC2086
 ${R} CMD INSTALL --build leafcutter ${R_ARGS}
