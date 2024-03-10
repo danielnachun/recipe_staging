@@ -6,9 +6,9 @@ package:
   version: {{ version }}
 
 source:
-  url: https://ftp.gnu.org/gnu/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://github.com/tmate-io/{{ name }}/archive/{{ version }}.tar.gz
   sha256: 62b61eb12ab394012c861f6b48ba0bc04ac8765abca13bdde5a4d9105cb16138
-  sources:
+  patches:
     - a5c6e80d3c54cd7faed52de5283b4f96bea86c13.patch
 
 build:
@@ -22,19 +22,20 @@ requirements:
     - make
     - pkg-config
   host:
+    - libevent
     - libssh
     - libtool
     - msgpack-c
     - ncurses
   run:
+    - libevent
     - libssh
-    - libtool
     - msgpack-c
     - ncurses
 
 test:
   commands:
-    - hello 
+    - tmate -V 
 
 about:
   home: https://www.gnu.org/software/hello/
