@@ -4,7 +4,7 @@ set -o xtrace -o nounset -o pipefail -o errexit
 
 sh autogen.sh
 
-export LDFLAGS="${LDFLAGS} -liconv"
+export LDFLAGS="${LDFLAGS} -lresolv"
 
 ./configure --disable-silent \
     --disable-dependency-tracking \
