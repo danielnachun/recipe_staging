@@ -1,0 +1,47 @@
+{% set name = "tmate" %}
+{% set version = "2.4.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://ftp.gnu.org/gnu/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 62b61eb12ab394012c861f6b48ba0bc04ac8765abca13bdde5a4d9105cb16138
+  sources:
+    - a5c6e80d3c54cd7faed52de5283b4f96bea86c13.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - autoconf
+    - automake
+    - make
+    - pkg-config
+  host:
+    - libssh
+    - libtool
+    - msgpack-c
+    - ncurses
+  run:
+    - libssh
+    - libtool
+    - msgpack-c
+    - ncurses
+
+test:
+  commands:
+    - hello 
+
+about:
+  home: https://www.gnu.org/software/hello/
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  summary: Program providing model for GNU coding standards and practices
+
+extra:
+  recipe-maintainers:
+    - danielnachun
