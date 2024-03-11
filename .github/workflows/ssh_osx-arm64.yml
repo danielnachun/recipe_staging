@@ -1,0 +1,39 @@
+name: Create runner with SSH access
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: Branch to checkout
+        required: true
+        default: 'main'
+
+jobs:
+  build_and_upload:
+    runs-on: macos-14
+    strategy:
+      fail-fast: false
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup micromamba
+        uses: mamba-org/setup-micromamba@v1
+        with:
+          environment-name: boa
+          create-args: anaconda-client boa conda-verify mamba tmate
+          generate-run-shell: true
+          condarc: |
+            channels:
+              - dnachun
+              - conda-forge
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        shell: micromamba-shell {0}
+        with:
+          limit-access-to-actor: true
+          install-dependencies: false
