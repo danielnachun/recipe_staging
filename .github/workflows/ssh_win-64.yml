@@ -10,13 +10,10 @@ jobs:
       fail-fast: false
 
     steps:
-      - name: Disable NTFS protection
-        run: git config core.protectNTFS false
-
-      - name: Checkout main
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+      #- name: Checkout main
+        #uses: actions/checkout@v3
+        #with:
+          #fetch-depth: 0
 
       - name: Setup micromamba
         uses: mamba-org/setup-micromamba@v1
