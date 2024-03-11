@@ -15,7 +15,7 @@ source:
     folder: htslib
 
 build:
-  number: 3
+  number: 4
 
 requirements:
   build:
@@ -33,7 +33,7 @@ requirements:
     - seqlib
     - zlib =1.2
   run:
-    - boost-cpp=1.82
+    - libboost=1.82
     - json-c
     - seqlib
     - libzlib >=1.2
