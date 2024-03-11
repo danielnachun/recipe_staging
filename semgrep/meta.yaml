@@ -40,7 +40,7 @@ requirements:
     - peewee
     - pip
     - pipenv
-    - python
+    - python=3.11
     - python-lsp-jsonrpc
     - requests
     - rich
@@ -64,7 +64,7 @@ requirements:
     - libev
     - packaging
     - peewee
-    - python
+    - python=3.11
     - python-lsp-jsonrpc
     - requests
     - rich
