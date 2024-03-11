@@ -1,12 +1,12 @@
-{% set version = "0.2.51" %}
+{% set version = "1.0.21" %}
 
 package:
   name: r-flashier
   version: {{ version }}
 
 source:
-  url: https://github.com/willwerscheid/flashier/archive/{{ version }}.tar.gz
-  sha256: c70f5d84cbcc56d4ba19dfccc2fa98bf40a965bdb154366d6ad6b9d6ccc71a4f
+  url: https://github.com/willwerscheid/flashier/archive/4b9749052d9c840abbc93d3ff8f47812a267dbe9.zip
+  sha256: 21c1ad1f33884a4b65f111f3520213c109cc217efe5954395aec3d9e3fef1db5
 
 build:
   merge_build_host: true  # [win]
@@ -23,15 +23,19 @@ requirements:
     - r-base=4.2
     - r-ebnm
     - r-irlba
+    - r-snow
     - r-softimpute
     - r-stringr
+    - r-tictoc
     - r-tidyr
   run:
     - r-base>=4.2
     - r-ebnm
     - r-irlba
+    - r-snow
     - r-softimpute
     - r-stringr
+    - r-tictoc
     - r-tidyr
 
 test:
