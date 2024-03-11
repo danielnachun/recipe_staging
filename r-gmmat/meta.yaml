@@ -30,8 +30,9 @@ requirements:
     - {{ posix }}sed               # [win]
     - {{ posix }}coreutils         # [win]
     - {{ posix }}zip               # [win]
+    - sed
   host:
-    - r-base=4.2
+    - r-base=4.3
     - bioconductor-seqarray
     - bioconductor-seqvartools
     - r-compquadform
@@ -41,7 +42,7 @@ requirements:
     - r-rcpp
     - r-rcpparmadillo
   run:
-    - r-base
+    - r-base>=4.3
     - {{native}}gcc-libs         # [win]
     - bioconductor-seqarray
     - bioconductor-seqvartools
