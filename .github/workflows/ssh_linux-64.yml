@@ -28,12 +28,6 @@ jobs:
         if: ${{ github.event.inputs.free_disk_space == 'true' }}
         uses: jlumbroso/free-disk-space@main
 
-      - name: Set up working directories
-        run: |
-          mkdir /tmp/recipes
-          mkdir /tmp/conda-bld
-          cp -R ${{ github.event.inputs.package }} /tmp/recipes
-
       - name: Setup up docker buildx
         uses: docker/setup-buildx-action@v2
 
