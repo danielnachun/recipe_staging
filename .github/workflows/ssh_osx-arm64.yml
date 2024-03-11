@@ -2,11 +2,6 @@ name: Create runner (osx-arm64)
 
 on:
   workflow_dispatch:
-    inputs:
-      branch:
-        description: Branch to checkout
-        required: true
-        default: 'main'
 
 jobs:
   create_runner:
