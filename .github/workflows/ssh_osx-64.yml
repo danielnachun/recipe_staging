@@ -1,11 +1,11 @@
-name: Create runner (osx-arm64)
+name: Create runner (osx-64)
 
 on:
   workflow_dispatch:
 
 jobs:
   create_runner:
-    runs-on: macos-14
+    runs-on: macos-latest
     strategy:
       fail-fast: false
 
