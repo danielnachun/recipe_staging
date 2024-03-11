@@ -1,4 +1,4 @@
-name: Create runner with SSH access
+name: Create runner with SSH access (osx-arm64)
 
 on:
   workflow_dispatch:
@@ -24,7 +24,7 @@ jobs:
         uses: mamba-org/setup-micromamba@v1
         with:
           environment-name: boa
-          create-args: anaconda-client boa conda-verify mamba tmate
+          create-args: anaconda-client boa conda-verify mamba
           generate-run-shell: true
           condarc: |
             channels:
@@ -33,7 +33,5 @@ jobs:
 
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
-        shell: micromamba-shell {0}
         with:
           limit-access-to-actor: true
-          install-dependencies: false
