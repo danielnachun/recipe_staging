@@ -50,6 +50,7 @@ requirements:
   run:
     - perl>=5.32
     - perl-package-deprecationmanager
+    - perl-devel-overloadinfo
 
 test:
   imports:
