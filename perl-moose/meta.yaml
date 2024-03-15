@@ -49,6 +49,7 @@ requirements:
     - perl-scalar-list-utils # for List::Util. It's in core, but too old.
   run:
     - perl>=5.32
+    - perl-package-deprecationmanager
 
 test:
   imports:
