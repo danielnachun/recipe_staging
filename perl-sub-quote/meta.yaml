@@ -13,6 +13,7 @@ source:
 build:
   skip: true   # [win]
   number: 0
+  noarch: generic
   run_exports:
     weak:
       - {{ name }} ={{ version }}
@@ -21,10 +22,10 @@ requirements:
   build:
     - make
   host:
-    - perl
+    - perl=5.32
     - perl-test-fatal
   run:
-    - perl
+    - perl>=5.32
 
 test:
   imports:
