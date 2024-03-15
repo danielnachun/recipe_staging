@@ -29,6 +29,7 @@ requirements:
     - perl-test-fatal
   run:
     - perl>=5.32
+    - perl-role-tiny
 
 test:
   imports:
