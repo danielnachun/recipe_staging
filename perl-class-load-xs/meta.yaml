@@ -24,6 +24,7 @@ requirements:
   host:
     - perl=5.32
     - perl-class-load
+    - perl-test-fatal
     - perl-test-needs
   run:
     - perl>=5.32
