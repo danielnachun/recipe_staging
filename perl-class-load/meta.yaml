@@ -27,6 +27,7 @@ requirements:
     - perl-module-runtime
     - perl-module-implementation
     - perl-package-stash
+    - perl-test-fatal
     - perl-test-needs
     - perl-try-tiny
   run:
