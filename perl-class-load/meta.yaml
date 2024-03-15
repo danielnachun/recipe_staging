@@ -35,6 +35,7 @@ requirements:
     - perl-class-load-xs
     - perl-data-optlist
     - perl-module-implementation
+    - perl-package-stash
 
 test:
   imports:
