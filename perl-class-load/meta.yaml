@@ -33,6 +33,7 @@ requirements:
   run:
     - perl>=5.32
     - perl-data-optlist
+    - perl-module-implementation
 
 test:
   imports:
