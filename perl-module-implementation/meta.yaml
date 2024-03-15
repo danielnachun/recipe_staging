@@ -28,6 +28,7 @@ requirements:
     - perl-module-runtime
     - perl-try-tiny
   run:
+    - perl-module-runtime
     - perl>=5.32
 
 test:
