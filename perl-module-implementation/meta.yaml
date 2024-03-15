@@ -30,6 +30,7 @@ requirements:
   run:
     - perl-module-runtime
     - perl>=5.32
+    - perl-try-tiny
 
 test:
   imports:
