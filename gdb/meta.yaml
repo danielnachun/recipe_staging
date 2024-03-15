@@ -1,0 +1,76 @@
+{% set name = "gdb" %}
+{% set version = "14.2" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://ftp.gnu.org/gnu/gdb/gdb-{{ version }}.tar.xz
+  sha256: 2d4dd8061d8ded12b6c63f55e45344881e8226105f4d2a9b234040efa5ce7772
+  patches:
+
+build:
+  number: 0
+  skip: true  # [win]
+  # needed by macOS codesigning script
+  script_env:
+    - TMPDIR
+
+requirements:
+  build:
+    - {{ compiler('fortran') }}
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - make >=3.82
+    - sysroot_linux-64 2.17  # [linux64]
+  host:
+    - python
+    - ncurses
+    - texinfo
+    - xz
+    - zlib
+    - readline
+    - libiconv  # [osx]
+    - expat     # [osx]
+    - gmp
+    - mpfr
+  run:
+    - python
+    - ncurses
+    - xz
+    - zlib
+    - six
+    - libiconv  # [osx]
+    - expat     # [osx]
+    - pygments
+
+test:
+  commands:
+    - gdb --version
+  requires:
+    - {{ compiler('c') }}
+
+about:
+  home: https://www.gnu.org/software/gdb/
+  license: GPL-3.0-only
+  license_family: GPL
+  license_file: gdb/COPYING
+  summary: GDB, the GNU Project debugger, allows you to see what is going on inside another program while it executes -- or what another program was doing at the moment it crashed.
+  description: |
+    GDB, the GNU Project debugger, allows you to see what is going on `inside'
+    another program while it executes -- or what another program was doing at
+    the moment it crashed.
+    The program being debugged can be written in Ada, C, C++, Objective-C,
+    Pascal (and many other languages). Those programs might be executing on the
+    same machine as GDB (native) or on another machine (remote).
+    GDB can run on most popular UNIX and Microsoft Windows variants.
+  doc_url: https://sourceware.org/gdb/current/onlinedocs/gdb/
+  dev_url: git://sourceware.org/git/binutils-gdb.git
+
+extra:
+  recipe-maintainers:
+    - gqmelo
+    - marcelotrevisani
+    - phil-blain
+    - matthiasdiener
