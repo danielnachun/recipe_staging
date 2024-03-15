@@ -27,6 +27,7 @@ requirements:
     - perl-params-util
   run:
     - perl>=5.32
+    - perl-params-util
     - perl-sub-install
 
 test:
