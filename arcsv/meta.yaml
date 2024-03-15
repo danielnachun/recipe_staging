@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/SUwonglab/arcsv/archive/86da1bc54f68729e9003e8af64d07335e471aefc.zip
-  sha256: d9a8c5aa7b328fa5d8c72954d272a6ff2a815fa42795a06fa2f6848d58f46994
+  sha256: f4234ef5e986a905cc7f5ad42b6b891cdef4995685fc974c5b8346e25c87499c
 
 build:
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
