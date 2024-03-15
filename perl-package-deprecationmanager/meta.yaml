@@ -32,6 +32,7 @@ requirements:
   run:
     - perl>=5.32
     - perl-package-stash
+    - perl-params-util
     - perl-sub-install  # has no run export
 
 test:
