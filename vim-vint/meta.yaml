@@ -18,7 +18,7 @@ build:
 
 requirements:
   host:
-    - ansicolors
+    - ansicolor
     - chardet >=2.3.0
     - pathlib >=1.0.1
     - pip
@@ -27,7 +27,7 @@ requirements:
     - setuptools >=36.2.2
     - typing >=3.6.2
   run:
-    - ansicolors
+    - ansicolor
     - chardet >=2.3.0
     - pathlib >=1.0.1
     - python
