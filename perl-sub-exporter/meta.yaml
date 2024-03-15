@@ -29,6 +29,7 @@ requirements:
   run:
     - perl>=5.32
     - perl-sub-install  # has no run export
+    - perl-data-optlist
 
 test:
   imports:
