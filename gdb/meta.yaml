@@ -22,6 +22,7 @@ requirements:
     - {{ compiler('fortran') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - curl
     - make >=3.82
     - sysroot_linux-64 2.17  # [linux64]
   host:
