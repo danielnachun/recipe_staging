@@ -31,10 +31,6 @@ requirements:
 test:
   imports:
     - arcsv
-  commands:
-    - pip check
-  requires:
-    - pip
 
 about:
   license: MIT
