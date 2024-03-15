@@ -72,7 +72,6 @@ jobs:
             channels:
               - dnachun
               - conda-forge
-              - bioconda
 
       - name: Set up working directories
         run: |
