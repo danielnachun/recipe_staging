@@ -1,0 +1,40 @@
+{% set name = "pyinter" %}
+{% set version = "0.2.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pyinter-{{ version }}.tar.gz
+  sha256: c0c1717bef2b8c781776f97861133b27224d558169aa4bd2845d26868d7957bd
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python
+    - pip
+  run:
+    - python
+
+test:
+  imports:
+    - pyinter
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://github.com/intiocean/pyinter
+  summary: An interval package for Python.
+  license: MIT
+  license_file: LICENSE.txt
+
+extra:
+  recipe-maintainers:
+    - danielnachun
