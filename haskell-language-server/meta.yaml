@@ -10,7 +10,7 @@ source:
   sha256: b23a165121553b59dde8f7e8f9ce24b8eee39d6b6ed5fae20d0882ec16f9da44
 
 build:
-  number: 0
+  number: 1
   skip: true  # [not unix]
 
 requirements:
@@ -21,14 +21,14 @@ requirements:
     - ghc
     - git
     - ncurses
-    - zlib
+    - zlib=1.2
   host:
     - libiconv  # [osx]
     - ncurses
-    - zlib
+    - zlib=1.2
   run:
     - libiconv  # [osx]
-    - libzlib
+    - libzlib>=1.2
 
 test:
   commands:
