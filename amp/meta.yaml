@@ -10,7 +10,7 @@ source:
   sha256: 9279efcecdb743b8987fbedf281f569d84eaf42a0eee556c3447f3dc9c9dfe3b
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -18,15 +18,15 @@ requirements:
     - {{ compiler('c') }}
     - cargo-bundle-licenses
     - cmake
-    - libxcb  # [linux]
+    - libxcb=1.15  # [linux]
     - make
     - python
   host:
-    - libxcb  # [linux]
-    - zlib
+    - libxcb=1.15  # [linux]
+    - zlib=1.2
   run:
-    - libxcb  # [linux]
-    - libzlib
+    - libxcb>=1.15  # [linux]
+    - libzlib>=1.2
 
 test:
   commands:
