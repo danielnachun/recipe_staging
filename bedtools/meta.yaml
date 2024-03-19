@@ -25,7 +25,7 @@ requirements:
     - zlib=1.2
     - bzip2
     - xz
-  runtime:
+  run:
     - libzlib>=1.2
 
 test:
