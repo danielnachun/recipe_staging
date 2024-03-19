@@ -22,9 +22,11 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
-    - zlib
+    - zlib=1.2
     - bzip2
     - xz
+  runtime:
+    - libzlib>=1.2
 
 test:
   commands:
