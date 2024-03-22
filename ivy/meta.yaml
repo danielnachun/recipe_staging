@@ -15,7 +15,7 @@ build:
 
 requirements:
   build:
-    - apache-ant
+    - ant
     - openjdk =11
   run:
     - openjdk
