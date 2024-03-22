@@ -10,7 +10,6 @@ source:
 
 build:
   number: 1
-  noarch: generic
 
 requirements:
   host:
@@ -27,18 +26,6 @@ outputs:
         - openjdk
       run:
         - openjdk
-    test:
-      commands:
-        - ant -help
-        - ant -version
-
-  # compatibility output for previous name of package in conda-forge
-  - name: apache-ant
-    build:
-      noarch: generic
-    requirements:
-      run:
-        - {{ pin_subpackage('ant', exact=True) }}
     test:
       commands:
         - ant -help
