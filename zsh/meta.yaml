@@ -14,12 +14,6 @@ source:
 build:
   number: 0
   skip: true  # [win]
-  script: |
-    autoreconf --force --verbose --install
-    ./configure --prefix="$PREFIX" --with-tcsetpgrp --enable-pcre
-    make
-    #make check
-    make install
 
 requirements:
   build:
