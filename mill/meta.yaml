@@ -11,11 +11,12 @@ source:
 
 build:
   number: 0
+  noarch: generic
 
 requirements:
   build:
     - curl
-    - openjdk
+    - openjdk=17
   run:
     - openjdk
 
