@@ -8,6 +8,8 @@ package:
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/qvalue-{{ version }}.tar.gz
   sha256: 9b0a5de3ec07270ca0a36fb18f18ccef2b1f438eda28a630e76e2754f17f5b29
+  patches:
+    - 0001-use-numpy-import.patch
 
 build:
   noarch: python
