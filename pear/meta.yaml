@@ -13,7 +13,6 @@ source:
 
 build:
   number: 10
-  skip: True  # [osx]
 
 requirements:
   build:
@@ -21,10 +20,10 @@ requirements:
     - {{ compiler('c') }}
     - pkgconfig
   host:
-    - zlib
+    - zlib=1.2
     - bzip2
   run:
-    - zlib
+    - libzlib>=1.2
     - bzip2
 
 test:
