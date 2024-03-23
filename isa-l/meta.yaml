@@ -13,6 +13,7 @@ source:
         # This patch also makes sure the nasm executable from the BUILD_PREFIX is used.
     - nasm-filter.patch
     - 0001-fix-rodata-definition.patch
+    - 0002-replace-x18-register.patch
 
 build:
   number: 1
