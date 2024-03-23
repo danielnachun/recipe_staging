@@ -1,0 +1,53 @@
+From 9715660ea5e22c907947cc7cd049afe7fcfe95cc Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Sat, 23 Mar 2024 13:08:40 -0700
+Subject: [PATCH] fix rodata definition
+
+---
+ crc/aarch64/crc16_t10dif_copy_pmull.S | 3 ++-
+ crc/aarch64/crc16_t10dif_pmull.S      | 3 ++-
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/crc/aarch64/crc16_t10dif_copy_pmull.S b/crc/aarch64/crc16_t10dif_copy_pmull.S
+index afb98f1..37b7bf5 100644
+--- a/crc/aarch64/crc16_t10dif_copy_pmull.S
++++ b/crc/aarch64/crc16_t10dif_copy_pmull.S
+@@ -379,13 +379,14 @@ v_br1	.req	v5
+ 	.size	crc16_t10dif_copy_pmull, .-crc16_t10dif_copy_pmull
+ #endif
+ 
+-ASM_DEF_RODATA
+ 	.align	4
+ fold_constant:
+ 	.word 0x87e70000
+ 	.word 0x00000000
+ 	.word 0x371d0000
+ 	.word 0x00000000
++
++ASM_DEF_RODATA
+ .shuffle_mask_lanchor = . + 0
+ #ifndef __APPLE__
+ 	.type	shuffle_mask, %object
+diff --git a/crc/aarch64/crc16_t10dif_pmull.S b/crc/aarch64/crc16_t10dif_pmull.S
+index aa0b206..55c6855 100644
+--- a/crc/aarch64/crc16_t10dif_pmull.S
++++ b/crc/aarch64/crc16_t10dif_pmull.S
+@@ -364,13 +364,14 @@ v_br1			.req	v5
+ 	.size	crc16_t10dif_pmull, .-crc16_t10dif_pmull
+ #endif
+ 
+-ASM_DEF_RODATA
+ 	.align	4
+ fold_constant:
+ 	.word 0x87e70000
+ 	.word 0x00000000
+ 	.word 0x371d0000
+ 	.word 0x00000000
++
++ASM_DEF_RODATA
+ .shuffle_mask_lanchor = . + 0
+ #ifndef __APPLE__
+ 	.type	shuffle_mask, %object
+-- 
+2.44.0
+
