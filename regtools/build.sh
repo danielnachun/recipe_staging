@@ -5,6 +5,7 @@ export LDFLAGS="-L$PREFIX/lib"
 export LIBRARY_PATH="${PREFIX}/lib"
 export LD_LIBRARY_PATH="${PREFIX}/lib"
 export CPATH=${PREFIX}/include
+export CXXFLAGS="${CXXFLAGS} -Wno-register"
 mv src/utils/bedtools/gzstream/version src/utils/bedtools/gzstream/version.txt
 
 mkdir build
