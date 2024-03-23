@@ -20,6 +20,7 @@ requirements:
     - {{ compiler('cxx') }}
     - autoconf
     - automake
+    - sed
   host:
     - bzip2
     - hdf5
