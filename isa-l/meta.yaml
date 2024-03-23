@@ -12,6 +12,7 @@ source:
         # filtered by the original nasm-filter.sh
         # This patch also makes sure the nasm executable from the BUILD_PREFIX is used.
     - nasm-filter.patch
+    - 0001-fix-rodata-definition.patch
 
 build:
   number: 1
