@@ -8,8 +8,8 @@ sed -i 's|-L/usr/local/lib||' build_dynamic/Makefile
 export EXTRA_FLAGS=""
 if [[ ${target_platform} =~ .*linux.* ]]; then
     export EXTRA_FLAGS="${EXTRA_FLAGS} DYNAMIC_MKL=1"
-    export CFLAGS="${CFLAGS} -DUSE_MKL -DLAPACK_ILP64"
-    export CXXFLAGS="${CXXFLAGS} -DUSE_MKL -DLAPACK_ILP64"
+    export CFLAGS="${CFLAGS} -DUSE_MKL -DYNAMIC_MKL -DLAPACK_ILP64"
+    export CXXFLAGS="${CXXFLAGS} -DUSE_MKL -DYNAMIC_MKL -DLAPACK_ILP64"
 fi
 if [[ ${target_platform} == "osx-arm64" ]]; then
     export EXTRA_FLAGS="${EXTRA_FLAGS} NO_SSE42=1"
