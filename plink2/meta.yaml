@@ -1,6 +1,6 @@
 package:
   name: plink2
-  version: "2.00a5"
+  version: "2.00a6"
 
 build:
   number: 0
@@ -29,7 +29,7 @@ requirements:
 
 test:
   commands:
-    - plink2 --help | grep "PLINK v2.00a5"
+    - plink2 --help | grep "PLINK v2.00a6"
 
 about:
   home: https://www.cog-genomics.org/plink2
