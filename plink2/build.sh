@@ -13,6 +13,6 @@ if [[ ${target_platform} == "osx-64" ]]; then
     export EXTRA_FLAGS="${EXTRA_FLAGS} NO_SSE42=1"
 fi
 cd build_dynamic
-make CXX="${CXX}" CC=${CC} CXXFLAGS="${CXXFLAGS} -std=c++11" CFLAGS="${CFLAGS} -O2 -std=gnu99" LINKFLAGS="${LDFLAGS} -lm -pthread -lzstd -lz" STATIC_ZSTD=""
+make CXX="${CXX}" CC=${CC} CXXFLAGS="${CXXFLAGS} -I. -std=c++11" CFLAGS="${CFLAGS} -I. -O2 -std=gnu99" LINKFLAGS="${LDFLAGS} -lm -pthread -lzstd -lz" STATIC_ZSTD=""
 mkdir -p ${PREFIX}/bin
 install -m 755 plink2 ${PREFIX}/bin

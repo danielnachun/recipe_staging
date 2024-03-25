@@ -18,11 +18,11 @@ requirements:
     - make
     - sed
   host:
-    - mkl-devel  #[linux]
+    - mkl-devel  # [linux]
     - zlib=1.2
     - zstd
   run:
-    - mkl  #[linux]
+    - mkl  # [linux]
     - zlib>=1.2
     - zstd
 
