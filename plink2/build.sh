@@ -8,6 +8,8 @@ sed -i 's|-L/usr/local/lib||' build_dynamic/Makefile
 export EXTRA_FLAGS=""
 if [[ ${target_platform} =~ .*linux.* ]]; then
     export EXTRA_FLAGS="${EXTRA_FLAGS} DYNAMIC_MKL=1"
+    export CFLAGS="${CFLAGS} USE_MKL=1"
+    export CXXFLAGS="${CXXFLAGS} USE_MKL=1"
 fi
 if [[ ${target_platform} == "osx-64" ]]; then
     export EXTRA_FLAGS="${EXTRA_FLAGS} NO_SSE42=1"
