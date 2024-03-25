@@ -2,7 +2,17 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-sed -i 's|-I/opt/homebrew/include -I/usr/local/include||g' Makefile
-sed -i 's|-L/opt/homebrew/lib -L/usr/local/lib||g' Makefile
+sed -i 's|-I/usr/local/include||' build_dynamic/Makefile
+sed -i 's|-L/usr/local/lib||' build_dynamic/Makefile
 
-make CXX=${CXX} CC=${CC} CXXFLAGS="${CXXFLAGS}" CFLAGS="${CFLAGS}" LDFLAGS="${LDFLAGS}"
+export EXTRA_FLAGS=""
+if [[ ${target_platform} =~ .*linux.* ]]; then
+    export EXTRA_FLAGS="${EXTRA_FLAGS} DYNAMIC_MKL=1"
+fi
+if [[ ${target_platform} == "osx-64" ]]; then
+    export EXTRA_FLAGS="${EXTRA_FLAGS} NO_SSE42=1"
+fi
+cd build_dynamic
+make CXX="${CXX}" CC=${CC} CXXFLAGS="${CXXFLAGS} -std=c++11" CFLAGS="${CFLAGS} -O2 -std=gnu99" LINKFLAGS="${LDFLAGS} -lm -pthread -lzstd -lz" STATIC_ZSTD=""
+mkdir -p ${PREFIX}/bin
+install -m 755 plink2 ${PREFIX}/bin

@@ -8,14 +8,22 @@ build:
       - {{ pin_subpackage('plink2', max_pin=None) }}
 
 source:
-  url: https://s3.amazonaws.com/plink2-assets/alpha5/plink2_linux_x86_64_20230923.zip # [linux]
-  sha256: f0537f5b90315028de0f3c6be3aaa384a2aa7cd74b0d4d5b6f4d2916c262db40     # [linux]
-  url: https://s3.amazonaws.com/plink2-assets/alpha5/plink2_mac_20230923.zip   # [osx]
-  sha256: 4a4264ff57abe7191a9244617d86069c370336aa726ced9a6369c0d8318e1f7c     # [osx]
+  url: https://www.cog-genomics.org/static/bin/plink2_src_240318.zip
+  sha256: badb51fb122e6c3c448c140066e46f0ac1ae2ae5d36af26769e7b4127164ae6c
 
 requirements:
   build:
+    - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - make
+  host:
+    - mkl-devel  #[linux]
+    - zlib=1.2
+    - zstd
+  run:
+    - mkl  #[linux]
+    - zlib>=1.2
+    - zstd
 
 test:
   commands:
