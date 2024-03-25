@@ -26,6 +26,7 @@ requirements:
     - perl=5.32
     - perl-module-build
     - htslib
+    - zlib
   run:
     - bioconductor-biobase
     - bioconductor-ebseq
