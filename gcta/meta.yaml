@@ -6,13 +6,28 @@ package:
   version: "{{ version }}"
 
 source:
-  - url: https://github.com/jianyangqt/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-    sha256: f2fc3f46b98f5eb2bbe0886a2c60268c6b634583f7a3fed51cfeb15e9f33fb0d 
+  git_url: https://github.com/jianyangqt/{{ name }}
+  git_rev: v{{ version }}
 
 build:
   number: 0
 
-
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cmake
+    - make
+  host:
+    - boost
+    - eigen
+    - mkl-devel  # [build_platform != "osx-arm64"]
+    - openblas  # [build_platform == "osx-arm64"]
+    - spectralib
+  run:
+    - boost-cpp
+    - mkl  # [build_platform != "osx-arm64"]
+    - openblas  # [build_platform == "osx-arm64"]
 
 test:
   commands:
