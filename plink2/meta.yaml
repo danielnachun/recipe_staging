@@ -16,6 +16,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - make
+    - sed
   host:
     - mkl-devel  #[linux]
     - zlib=1.2
