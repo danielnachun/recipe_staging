@@ -29,10 +29,10 @@ requirements:
   run:
     - bioconductor-biobase
     - bioconductor-ebseq
-    - ucsc-bigwigsummary
+    #- ucsc-bigwigsummary
     - perl>=5.32
     - perl-module-build
-    - r-base=4.3
+    - r-base>=4.3
     - samtools
     - htslib
 
