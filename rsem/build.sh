@@ -13,6 +13,9 @@ case `uname` in
 	exit 1
 esac
 
+# Delete vendored boost
+rm -rf ./boost
+
 # main binaries
 make \
     CXX=$CXX \
@@ -21,6 +24,7 @@ make \
     SAMLIBS=$PREFIX/lib/libhts.$DSOSUF \
     SAMHEADERS=$PREFIX/include/htslib/sam.h \
     LDFLAGS="$LDFLAGS -L$PREFIX/lib" \
+    BOOST=${PREFIX}/include \
     prefix="$PREFIX" \
     install
 

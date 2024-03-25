@@ -23,6 +23,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
+    - boost
     - perl=5.32
     - perl-module-build
     - htslib
@@ -30,6 +31,7 @@ requirements:
   run:
     - bioconductor-biobase
     - bioconductor-ebseq
+    - boost-cpp
     #- ucsc-bigwigsummary
     - perl>=5.32
     - perl-module-build
