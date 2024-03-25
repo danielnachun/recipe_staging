@@ -19,6 +19,7 @@ requirements:
     - sed
   host:
     - mkl-devel  # [linux]
+    - simde 
     - zlib=1.2
     - zstd
   run:
