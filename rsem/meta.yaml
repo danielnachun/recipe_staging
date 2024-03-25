@@ -26,7 +26,7 @@ requirements:
     - perl=5.32
     - perl-module-build
     - htslib
-    - zlib
+    - zlib=1.2
   run:
     - bioconductor-biobase
     - bioconductor-ebseq
@@ -36,6 +36,7 @@ requirements:
     - r-base>=4.3
     - samtools
     - htslib
+    - libzlib>=1.2
 
 test:
   commands:
