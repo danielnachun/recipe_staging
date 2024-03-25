@@ -11,7 +11,7 @@ if [[ ${target_platform} =~ .*linux.* ]]; then
     export CFLAGS="${CFLAGS} -DUSE_MKL=1"
     export CXXFLAGS="${CXXFLAGS} -DUSE_MKL=1"
 fi
-if [[ ${target_platform} == "osx-64" ]]; then
+if [[ ${target_platform} == "osx-arm64" ]]; then
     export EXTRA_FLAGS="${EXTRA_FLAGS} NO_SSE42=1"
     export CFLAGS="${CFLAGS} -DIGNORE_BUNDLED_SIMDE=1"
     export CXXFLAGS="${CXXFLAGS} -DIGNORE_BUNDLED_SIMDE=1"
