@@ -20,7 +20,7 @@ requirements:
   build:
     - cross-r-base {{ r_base }}  # [build_platform != target_platform]
   host:
-    - r-base=4.2
+    - r-base=4.3
     - bioconductor-singlecellexperiment
     - bioconductor-variancepartition
     - r-ggplot2
@@ -31,7 +31,7 @@ requirements:
     - r-tidytree
     - r-viridis
   run:
-    - r-base>=4.2
+    - r-base>=4.3
     - bioconductor-singlecellexperiment
     - bioconductor-variancepartition
     - r-ggplot2
