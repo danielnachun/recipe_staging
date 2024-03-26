@@ -26,7 +26,6 @@ requirements:
     - r-e1071
     - r-lattice
     - r-pamr
-    - r-tcltk
     - r-tcltk2
     - r-tsne
   run:
@@ -36,7 +35,6 @@ requirements:
     - r-e1071
     - r-lattice
     - r-pamr
-    - r-tcltk
     - r-tcltk2
     - r-tsne
 
