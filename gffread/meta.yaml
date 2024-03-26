@@ -19,9 +19,9 @@ requirements:
     - {{ compiler('cxx') }}
     - make
   host:
-    - zlib
+    - zlib=1.2
   run:
-    - zlib
+    - libzlib>=1.2
     
 test:
   commands:
