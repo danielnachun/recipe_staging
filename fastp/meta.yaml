@@ -18,10 +18,10 @@ requirements:
     - {{ compiler('cxx') }}
   host:
     - isa-l
-    - libdeflate
+    - libdeflate=1.19
   run:
     - isa-l
-    - libdeflate
+    - libdeflate>=1.19
 
 test:
   commands:
