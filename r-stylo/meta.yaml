@@ -1,4 +1,5 @@
 {% set name = "stylo" %}
+{% version = "0.7.4" }
 
 package:
   name: r-{{ name }}
