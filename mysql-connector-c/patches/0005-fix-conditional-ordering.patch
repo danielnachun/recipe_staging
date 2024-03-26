@@ -1,0 +1,24 @@
+From 2a207a3c1d213444e05cfdba7d6643827cfe747b Mon Sep 17 00:00:00 2001
+From: Mervin Fansler <mmfansler@gmail.com>
+Date: Wed, 18 Oct 2023 10:16:46 -0400
+Subject: [PATCH 5/6] fix conditional ordering
+
+---
+ cmake/install_macros.cmake | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/cmake/install_macros.cmake b/cmake/install_macros.cmake
+index f39dfb6..8a1bb16 100644
+--- a/cmake/install_macros.cmake
++++ b/cmake/install_macros.cmake
+@@ -362,8 +362,8 @@ FUNCTION(INSTALL_DEBUG_TARGET target)
+         CONFIGURATIONS Release RelWithDebInfo
+         COMPONENT ${ARG_COMPONENT}
+         OPTIONAL)
+-    ENDIF()
+-  ENDFOREACH()
++    ENDFOREACH()
++  ENDIF()
+ 
+ ENDFUNCTION()
+ 
