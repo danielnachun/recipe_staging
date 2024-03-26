@@ -10,13 +10,22 @@ build:
 source:
   url: https://github.com/bedops/bedops/archive/v{{ version }}.tar.gz
   sha256: 3b868c820d59dd38372417efc31e9be3fbdca8cf0a6b39f13fb2b822607d6194
+  patches:
+    - 0001-devendor-dependencies.patch
 
 requirements:
   build:
     - binutils  # [linux]
     - make
     - {{ compiler('cxx') }}
+  host:
+    - bzip2
+    - jansson
+    - zlib=1.2
   run:
+    - bzip2
+    - jansson
+    - libzlib=1.2
     # seems to be needed for bam2bed
     - samtools
 

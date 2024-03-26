@@ -1,6 +1,37 @@
-#!/bin/bash
-set -eu -o pipefail
-make all CC=$CC CXX=$CXX SFLAGS=
-make install_all
-mkdir -p $PREFIX/bin
-cp bin/* $PREFIX/bin
+#!/usr/bin/env bash
+
+set -o xtrace -o nounset -o pipefail -o errexit
+
+make typical CC="$CC ${CFLAGS} ${LDFLAGS}" \
+    CXX="$CXX ${CXXFLAGS} ${LDFLAGS}" \
+    BINDIR="${PREFIX}/bin" \
+    DISTDIR="${PREFIX}/bin" \
+    DIST_DIR="${PREFIX}/bin" \
+    JPARALLEL=${CPU_COUNT} \
+    SFLAGS= \
+    LOCALBZIP2LIB="-lbz2" \
+    LOCALZLIBLIB="-lz" \
+    LOCALJANSSONLIB="-ljansson" 
+make megarow CC="$CC ${CFLAGS} ${LDFLAGS}" \
+    CXX="$CXX ${CXXFLAGS} ${LDFLAGS}" \
+    BINDIR="${PREFIX}/bin" \
+    DISTDIR="${PREFIX}/bin" \
+    DIST_DIR="${PREFIX}/bin" \
+    JPARALLEL=${CPU_COUNT} \
+    SFLAGS= \
+    LOCALBZIP2LIB="-lbz2" \
+    LOCALZLIBLIB="-lz" \
+    LOCALJANSSONLIB="-ljansson" 
+make float128 CC="$CC ${CFLAGS} ${LDFLAGS}" \
+    CXX="$CXX ${CXXFLAGS} ${LDFLAGS}" \
+    BINDIR="${PREFIX}/bin" \
+    DISTDIR="${PREFIX}/bin" \
+    DIST_DIR="${PREFIX}/bin" \
+    JPARALLEL=${CPU_COUNT} \
+    SFLAGS= \
+    LOCALBZIP2LIB="-lbz2" \
+    LOCALZLIBLIB="-lz" \
+    LOCALJANSSONLIB="-ljansson" 
+#make install_all
+#mkdir -p $PREFIX/bin
+#cp bin/* $PREFIX/bin
