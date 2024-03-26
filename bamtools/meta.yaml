@@ -19,8 +19,9 @@ requirements:
     - cmake
     - make
   host:
-    - zlib
+    - zlib=1.2
   run:
+    - libzlib>=1.2
 
 test:
   commands:
