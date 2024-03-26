@@ -2,8 +2,15 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+if [[ ${target_platform} == "osx-arm64" ]]; then
+    BUILD_ARCH="arm64"
+else
+    BUILD_ARCH="x86_64"
+fi
+
 make typical CC="$CC ${CFLAGS} ${LDFLAGS}" \
     CXX="$CXX ${CXXFLAGS} ${LDFLAGS}" \
+    BUILD_ARCH="${BUILD_ARCH}" \
     BINDIR="${PREFIX}/bin" \
     DISTDIR="${PREFIX}/bin" \
     DIST_DIR="${PREFIX}/bin" \
@@ -14,6 +21,7 @@ make typical CC="$CC ${CFLAGS} ${LDFLAGS}" \
     LOCALJANSSONLIB="-ljansson" 
 make megarow CC="$CC ${CFLAGS} ${LDFLAGS}" \
     CXX="$CXX ${CXXFLAGS} ${LDFLAGS}" \
+    BUILD_ARCH="${BUILD_ARCH}" \
     BINDIR="${PREFIX}/bin" \
     DISTDIR="${PREFIX}/bin" \
     DIST_DIR="${PREFIX}/bin" \
@@ -24,6 +32,7 @@ make megarow CC="$CC ${CFLAGS} ${LDFLAGS}" \
     LOCALJANSSONLIB="-ljansson" 
 make float128 CC="$CC ${CFLAGS} ${LDFLAGS}" \
     CXX="$CXX ${CXXFLAGS} ${LDFLAGS}" \
+    BUILD_ARCH="${BUILD_ARCH}" \
     BINDIR="${PREFIX}/bin" \
     DISTDIR="${PREFIX}/bin" \
     DIST_DIR="${PREFIX}/bin" \
