@@ -23,9 +23,9 @@ requirements:
   run:
     - python
     - requests
-    - httpx
+    - httpx >=0.23.0,<0.24.0
     - asyncio
-    - backoff
+    - backoff >=1.10.0,<2.0.0
 
 test:
   imports:

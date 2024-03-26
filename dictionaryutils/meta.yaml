@@ -23,15 +23,15 @@ requirements:
   run:
     - python
     - pyyaml
-    - jsonschema
+    - jsonschema >=2.5,<4
     - cdislogging
     - requests
 
 test:
   imports:
     - dictionaryutils
-  #commands:
-    #- pip check
+  commands:
+    - pip check
   requires:
     - pip
 
