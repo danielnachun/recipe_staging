@@ -29,8 +29,8 @@ requirements:
     - r-tcltk2
     - r-tsne
   run:
-    - r-ape>=4.2
-    - r-base
+    - r-ape
+    - r-base>=4.2
     - r-class
     - r-e1071
     - r-lattice
