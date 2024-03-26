@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/DiseaseNeuroGenomics/crumblr/archive/7aea7ac1d8e0f280e10d64f59e4faf1fb755c5eb.zip
-  sha256: c62c507a7fa47a6aea8a83cfdd0e62ceca0400dffdd82e40666dc74f8dd16783
+  sha256: 492566d07250b99947dbefd19c1035a653e6913ce732757285898ea2c5e144dd
 
 build:
   merge_build_host: true  # [win]
