@@ -8,13 +8,19 @@ else
     BUILD_ARCH="x86_64"
 fi
 
+if [[ ${target_platform} =~ .*linux.* ]]; then
+    NCPU=1
+else
+    NCPU=${CPU_COUNT}
+fi
+
 make typical CC="$CC ${CFLAGS} ${LDFLAGS}" \
     CXX="$CXX ${CXXFLAGS} ${LDFLAGS}" \
     BUILD_ARCH="${BUILD_ARCH}" \
     BINDIR="${PREFIX}/bin" \
     DISTDIR="${PREFIX}/bin" \
     DIST_DIR="${PREFIX}/bin" \
-    JPARALLEL=${CPU_COUNT} \
+    JPARALLEL=${NCPU} \
     SFLAGS= \
     LOCALBZIP2LIB="-lbz2" \
     LOCALZLIBLIB="-lz" \
@@ -25,7 +31,7 @@ make megarow CC="$CC ${CFLAGS} ${LDFLAGS}" \
     BINDIR="${PREFIX}/bin" \
     DISTDIR="${PREFIX}/bin" \
     DIST_DIR="${PREFIX}/bin" \
-    JPARALLEL=${CPU_COUNT} \
+    JPARALLEL=${NCPU} \
     SFLAGS= \
     LOCALBZIP2LIB="-lbz2" \
     LOCALZLIBLIB="-lz" \
@@ -36,7 +42,7 @@ make float128 CC="$CC ${CFLAGS} ${LDFLAGS}" \
     BINDIR="${PREFIX}/bin" \
     DISTDIR="${PREFIX}/bin" \
     DIST_DIR="${PREFIX}/bin" \
-    JPARALLEL=${CPU_COUNT} \
+    JPARALLEL=${NCPU} \
     SFLAGS= \
     LOCALBZIP2LIB="-lbz2" \
     LOCALZLIBLIB="-lz" \
