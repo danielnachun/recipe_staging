@@ -1,0 +1,93 @@
+From 637efadd792ada620bb10ff630b6aa644a205205 Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Wed, 27 Mar 2024 12:15:46 -0700
+Subject: [PATCH] use SIMDE
+
+---
+ src/FMI_search.h | 5 ++++-
+ src/bandedSWA.h  | 7 +++++--
+ src/ksw.cpp      | 2 +-
+ src/ksw.h        | 2 +-
+ src/kswv.h       | 5 ++++-
+ 5 files changed, 15 insertions(+), 6 deletions(-)
+
+diff --git a/src/FMI_search.h b/src/FMI_search.h
+index 25c4d0d..002a79f 100644
+--- a/src/FMI_search.h
++++ b/src/FMI_search.h
+@@ -34,7 +34,10 @@ Authors: Sanchit Misra <sanchit.misra@intel.com>; Vasimuddin Md <vasimuddin.md@i
+ #include <stdlib.h>
+ #include <stdint.h>
+ #include <string.h>
+-#include <immintrin.h>
++#include <simde/x86/avx.h>
++#include <simde/x86/fma.h>
++#include <simde/x86/avx2.h>
++#include <simde/x86/avx512.h>
+ #include <limits.h>
+ #include <fstream>
+ 
+diff --git a/src/bandedSWA.h b/src/bandedSWA.h
+index c81552b..ae365b1 100644
+--- a/src/bandedSWA.h
++++ b/src/bandedSWA.h
+@@ -37,9 +37,12 @@ Authors: Vasimuddin Md <vasimuddin.md@intel.com>; Sanchit Misra <sanchit.misra@i
+ #include "macro.h"
+ 
+ #if (__AVX512BW__ || __AVX2__)
+-#include <immintrin.h>
++#include <simde/x86/avx.h>
++#include <simde/x86/fma.h>
++#include <simde/x86/avx2.h>
++#include <simde/x86/avx512.h>
+ #else
+-#include <smmintrin.h>  // for SSE4.1
++#include <simde/x86/sse4.1.h>  // for SSE4.1
+ #define __mmask8 uint8_t
+ #define __mmask16 uint16_t
+ #endif
+diff --git a/src/ksw.cpp b/src/ksw.cpp
+index ad9bc50..5408583 100644
+--- a/src/ksw.cpp
++++ b/src/ksw.cpp
+@@ -30,7 +30,7 @@
+ #include <stdlib.h>
+ #include <stdint.h>
+ #include <assert.h>
+-#include <emmintrin.h>
++#include <simde/x86/sse2.h>
+ #include "ksw.h"
+ #include "macro.h"
+ 
+diff --git a/src/ksw.h b/src/ksw.h
+index 54bcef8..4a377e3 100644
+--- a/src/ksw.h
++++ b/src/ksw.h
+@@ -26,7 +26,7 @@
+ #define __AC_KSW_H
+ 
+ #include <stdint.h>
+-#include <emmintrin.h>
++#include <simde/x86/sse2.h>
+ 
+ #define KSW_XBYTE  0x10000
+ #define KSW_XSTOP  0x20000
+diff --git a/src/kswv.h b/src/kswv.h
+index 11da4d7..b4adcf3 100644
+--- a/src/kswv.h
++++ b/src/kswv.h
+@@ -39,7 +39,10 @@ Authors: Vasimuddin Md <vasimuddin.md@intel.com>; Sanchit Misra <sanchit.misra@i
+ #include "ksw.h"
+ #include "bandedSWA.h"
+ #else
+-#include <immintrin.h>
++#include <simde/x86/avx.h>
++#include <simde/x86/fma.h>
++#include <simde/x86/avx2.h>
++#include <simde/x86/avx512.h>
+ #endif
+ 
+ #ifdef __GNUC__
+-- 
+2.44.0
+
