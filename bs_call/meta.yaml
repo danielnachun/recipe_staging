@@ -21,12 +21,14 @@ requirements:
     - gsl
     - bzip2
     - zlib=1.2
-    - openmp 
+    - llvm-openmp  # [osx]
+    - _openmp_mutex  # [linux]
   run:
     - gsl
     - bzip2
     - libzlib>=1.2
-    - openmp 
+    - llvm-openmp  # [osx]
+    - _openmp_mutex  # [linux]
 
 test:
   commands:
