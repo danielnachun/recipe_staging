@@ -17,7 +17,7 @@ source:
     folder: loftee
 
 build:
-  number: 4
+  number: 5
   noarch: generic
   
 requirements:
@@ -27,7 +27,7 @@ requirements:
   host:
     - perl=5.32
     - perl-archive-zip
-    - perl-lwp-simple
+    - perl-libwww-perl
     - unzip
     - perl-dbi
   run:
@@ -46,7 +46,7 @@ requirements:
     - perl-dbd-sqlite
     - perl-io-compress
     - perl-json
-    - perl-lwp-simple
+    - perl-libwww-perl
     - perl-perlio-gzip
     - perl-sereal
     - perl-set-intervaltree
