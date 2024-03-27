@@ -25,9 +25,11 @@ requirements:
   host:
     - htslib
     - gsl
+    - zlib=1.2
   run:
     - htslib
     - gsl
+    - libzlib>=1.2
 
 about:
   home: https://github.com/smithlabcode/dnmtools
