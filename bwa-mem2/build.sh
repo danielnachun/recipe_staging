@@ -9,7 +9,8 @@ if [[ $OSTYPE == "darwin"* ]]; then
     sed -i.bak 's/memset_s/memset8_s/g' ext/safestringlib/safeclib/memset_s.c
     sed -i.bak 's/memset_s/memset8_s/g' ext/safestringlib/safeclib/wmemset_s.c
 fi
-LIBS="${LDFLAGS}" make CC="${CC}" CXX="${CXX}" MEM_FLAGS="-DSAIS=1 -DSIMDE_ENABLE_NATIVE_ALIASES" multi
+export CXXFLAGS="${CXXFLAGS} -DSIMDE_ENABLE_NATIVE_ALIASES"
+LIBS="${LDFLAGS}" make CC="${CC}" CXX="${CXX}" multi
 
 mkdir -p $PREFIX/bin
 cp bwa-mem2* $PREFIX/bin
