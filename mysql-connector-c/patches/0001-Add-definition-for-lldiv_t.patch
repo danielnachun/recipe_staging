@@ -1,0 +1,28 @@
+From a2f71070976e46d3594d6f019e1eb2c96d0e5875 Mon Sep 17 00:00:00 2001
+From: Nehal J Wani <nehaljw.kkd1@gmail.com>
+Date: Mon, 16 Apr 2018 07:09:52 -0400
+Subject: [PATCH] Add definition for lldiv_t
+
+---
+ include/decimal.h | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/include/decimal.h b/include/decimal.h
+index f963b6f..abd7657 100644
+--- a/include/decimal.h
++++ b/include/decimal.h
+@@ -16,6 +16,11 @@
+ #ifndef DECIMAL_INCLUDED
+ #define DECIMAL_INCLUDED
+ 
++typedef struct {
++  long long quot;
++  long long rem;
++} lldiv_t;
++
+ typedef enum
+ {TRUNCATE=0, HALF_EVEN, HALF_UP, CEILING, FLOOR}
+   decimal_round_mode;
+-- 
+2.15.1 (Apple Git-101)
+

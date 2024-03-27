@@ -1,0 +1,49 @@
+From 1dd59231acf54d06a9b045c814fa969ee6eaa760 Mon Sep 17 00:00:00 2001
+From: Nehal J Wani <nehaljw.kkd1@gmail.com>
+Date: Thu, 19 Apr 2018 03:29:55 -0500
+Subject: [PATCH 2/2] [GCC 7] Fix empty string comparison error
+
+xref: https://gitweb.gentoo.org/repo/gentoo.git/tree/dev-db/mysql-connector-c/files/20028_all_mysql-5.6-gcc7.patch?id=e8c5b876c36e2dd221aa26edd577c296fbef39f8
+---
+ scripts/CMakeLists.txt              | 4 ++--
+ sql-common/client_authentication.cc | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/scripts/CMakeLists.txt b/scripts/CMakeLists.txt
+index 69d19b8..1c2a37e 100644
+--- a/scripts/CMakeLists.txt
++++ b/scripts/CMakeLists.txt
+@@ -40,7 +40,7 @@ ENDIF()
+ 
+ # Use cmake variables to inspect dependencies for 
+ # mysqlclient library (add -l stuff)
+-SET(CLIENT_LIBS "")
++SET(CONFIG_CLIENT_LIBS "")
+ 
+ # Avoid compatibility warning about lists with empty elements
+ IF(POLICY CMP0011)
+@@ -78,7 +78,7 @@ MACRO(EXTRACT_LINK_LIBRARIES target var)
+   ENDIF()
+ ENDMACRO()
+ 
+-EXTRACT_LINK_LIBRARIES(mysqlclient CLIENT_LIBS)
++EXTRACT_LINK_LIBRARIES(mysqlclient CONFIG_CLIENT_LIBS)
+ 
+ SET(LIBMYSQLD_LIBS_USAGE "
+         --libmysqld-libs [$embedded_libs]")
+diff --git a/sql-common/client_authentication.cc b/sql-common/client_authentication.cc
+index a6ff23e..336dafa 100644
+--- a/sql-common/client_authentication.cc
++++ b/sql-common/client_authentication.cc
+@@ -83,7 +83,7 @@ RSA *rsa_init(MYSQL *mysql)
+ 
+   if (mysql->options.extension != NULL &&
+       mysql->options.extension->server_public_key_path != NULL &&
+-      mysql->options.extension->server_public_key_path != '\0')
++      mysql->options.extension->server_public_key_path[0] != '\0')
+   {
+     pub_key_file= fopen(mysql->options.extension->server_public_key_path,
+                         "r");
+-- 
+2.16.1
+

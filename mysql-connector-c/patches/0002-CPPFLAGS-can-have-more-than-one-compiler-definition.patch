@@ -1,0 +1,29 @@
+From 043fb207dd1bdf3e7801dfcec1c583f49b938ed1 Mon Sep 17 00:00:00 2001
+From: Nehal J Wani <nehaljw.kkd1@gmail.com>
+Date: Wed, 18 Apr 2018 03:53:45 -0500
+Subject: [PATCH] CPPFLAGS can have more than one compiler definition
+
+---
+ CMakeLists.txt | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 77da509..55b4441 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -157,7 +157,11 @@ ENDFOREACH()
+ # Following autotools tradition, add preprocessor definitions
+ # specified in environment variable CPPFLAGS
+ IF(DEFINED ENV{CPPFLAGS})
+-  ADD_DEFINITIONS($ENV{CPPFLAGS})
++  SET(_CPPFLAGS $ENV{CPPFLAGS})
++  SEPARATE_ARGUMENTS(_CPPFLAGS)
++  FOREACH(_CPPFLAG ${_CPPFLAGS})
++    ADD_DEFINITIONS(${_CPPFLAG})
++  ENDFOREACH()
+ ENDIF()
+ 
+ IF(CMAKE_SYSTEM_NAME MATCHES "SunOS")
+-- 
+1.9.5 (Apple Git-50.3)
+
