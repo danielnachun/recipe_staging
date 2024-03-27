@@ -18,6 +18,7 @@ requirements:
   build:
     - binutils  # [linux]
     - make
+    - sed
     - {{ compiler('c') }}
   host:
     - simde
