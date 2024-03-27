@@ -20,6 +20,7 @@ requirements:
     - make
   host:
     - python
+    - simde
     - zlib=1.2
     - zstd
     - tbb-devel
