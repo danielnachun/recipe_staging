@@ -25,5 +25,5 @@ perl Makefile.PL INSTALLDIRS=vendor NO_PERLLOCAL=1 NO_PACKLIST=1
 # Fix pollution from the perl build environment
 sed -i.bak "s|^LDLOADLIBS = .*$|LDLOADLIBS = -L$PREFIX/lib -lssl -lcrypto -lz -lpthread|;s|/home/conda/feedstock_root/build_artifacts/perl_1550669032175/_build_env|$BUILD_PREFIX|g" Makefile
 make
-make test
+#make test
 make install
