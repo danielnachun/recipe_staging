@@ -13,9 +13,12 @@ build:
 source:
   url: https://github.com/smithlabcode/dnmtools/releases/download/v{{ version }}/dnmtools-{{ version }}.tar.gz
   sha256: 0b712d4635a6924f0f230206b999db3d6e3a98b0d330640f3fd5cf4930eaf127
+  patches:
+    - 0001-use-sse2neon.patch
 
 requirements:
   build:
+    - binutils # [linux]
     - make
     - {{ compiler('cxx') }}
     - autoconf
@@ -24,7 +27,7 @@ requirements:
     - libgomp      # [linux]
   host:
     - htslib
-    - libpopcnt
+    - sse2neon
     - gsl
     - zlib=1.2
   run:
