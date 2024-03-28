@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/jalvesaq/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: c0dda321e03bfa6515a45837daed84be309e2dab2a97ae2c31c11b06e20097a3
+  sha256: d27eb9a7f80d12a91909a9bfb76445fc67576ae38f29deeef83114373aebc08c
 
 build:
   merge_build_host: true  # [win]
