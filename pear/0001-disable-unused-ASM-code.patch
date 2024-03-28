@@ -1,0 +1,30 @@
+From 1201eb119de8bce569cb30455221521595cbb085 Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Wed, 27 Mar 2024 22:17:46 -0700
+Subject: [PATCH] disable unused ASM code
+
+---
+ src/reader.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/src/reader.c b/src/reader.c
+index 8eafb59..1d0d087 100644
+--- a/src/reader.c
++++ b/src/reader.c
+@@ -962,6 +962,7 @@ int read_fastq_block (memBlock * block, FILE * fp)
+   return (1);
+ }
+ 
++#ifdef __x86_64__
+ static INLINE void
+ do_cpuid(uint32_t selector, uint32_t *data)
+ {
+@@ -972,4 +973,4 @@ do_cpuid(uint32_t selector, uint32_t *data)
+       "=d" (data[3])
+       : "a"(selector));
+ }
+-
++#endif
+-- 
+2.44.0
+
