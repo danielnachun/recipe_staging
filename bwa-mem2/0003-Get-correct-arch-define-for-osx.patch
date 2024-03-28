@@ -1,0 +1,25 @@
+From 45edf5fcf436ae6536892c181ee8648a21670f3d Mon Sep 17 00:00:00 2001
+From: David Lecomber <david.lecomber@arm.com>
+Date: Wed, 31 May 2023 10:00:20 +0100
+Subject: [PATCH 03/10] Get correct arch define for osx
+
+---
+ src/bandedSWA.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/bandedSWA.h b/src/bandedSWA.h
+index aa12a2a..af16dbb 100644
+--- a/src/bandedSWA.h
++++ b/src/bandedSWA.h
+@@ -39,7 +39,7 @@ Authors: Vasimuddin Md <vasimuddin.md@intel.com>; Sanchit Misra <sanchit.misra@i
+ #if (__AVX512BW__ || __AVX2__)
+ #include <immintrin.h>
+ #else
+-#if defined(__aarch64__) or defined(__arm__)
++#if defined(__arm64__) or defined(__aarch64__)
+ #include <sse2neon.h>
+ #else
+ #include <smmintrin.h>  // for SSE4.1
+-- 
+2.44.0
+
