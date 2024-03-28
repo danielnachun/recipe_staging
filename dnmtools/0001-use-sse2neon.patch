@@ -1,6 +1,6 @@
-From 6acbe642e67fef5d1b5132511eea4a2d2073d8f0 Mon Sep 17 00:00:00 2001
+From 64bbb733ac3459f4b8c2e8e26ff832281e943bc9 Mon Sep 17 00:00:00 2001
 From: danielnachun <daniel.nachun@gmail.com>
-Date: Wed, 27 Mar 2024 18:36:54 -0700
+Date: Wed, 27 Mar 2024 19:00:21 -0700
 Subject: [PATCH] use sse2neon
 
 ---
@@ -8,13 +8,13 @@ Subject: [PATCH] use sse2neon
  1 file changed, 3 insertions(+)
 
 diff --git a/src/abismal/src/abismal.cpp b/src/abismal/src/abismal.cpp
-index e0fb4f2..3e069fb 100644
+index 59e1479..3cffefc 100644
 --- a/src/abismal/src/abismal.cpp
 +++ b/src/abismal/src/abismal.cpp
-@@ -42,6 +42,9 @@
+@@ -41,6 +41,9 @@
+ #include "sam_record.hpp"
  #include "smithlab_os.hpp"
  #include "smithlab_utils.hpp"
- #include "bamxx.hpp"
 +#ifdef __arm64__
 +#include "sse2neon.h"
 +#endif
