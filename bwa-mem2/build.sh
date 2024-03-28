@@ -12,6 +12,10 @@ fi
 sed -i 's/LIBS=/LIBS+=/' Makefile
 export CXXFLAGS="${CXXFLAGS} -I${PREFIX}/include/sse2neon"
 export CFLAGS="${CFLAGS} -I${PREFIX}/include/sse2neon"
+if [[ ${target_platform} == "osx-arm64" ]];
+    export CXXFLAGS="${CXXFLAGS} -D__SSE2__=1 -D__AVX__=1 -D__SSE4_1__=1"
+    export CFLAGS="${CFLAGS} -D__SSE2__=1 -D__AVX__=1 -D__SSE4_1__=1"
+fi
 LIBS="${LDFLAGS}" make CC="${CC}" CXX="${CXX}"  multi
 
 mkdir -p $PREFIX/bin
