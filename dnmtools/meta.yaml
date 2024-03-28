@@ -24,6 +24,7 @@ requirements:
     - libgomp      # [linux]
   host:
     - htslib
+    - libpopcnt
     - gsl
     - zlib=1.2
   run:
