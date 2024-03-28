@@ -1,26 +1,36 @@
-From 64bbb733ac3459f4b8c2e8e26ff832281e943bc9 Mon Sep 17 00:00:00 2001
+From 7e73b72206a7a1a74b57660baa6f83049c974b2f Mon Sep 17 00:00:00 2001
 From: danielnachun <daniel.nachun@gmail.com>
-Date: Wed, 27 Mar 2024 19:00:21 -0700
+Date: Wed, 27 Mar 2024 21:54:36 -0700
 Subject: [PATCH] use sse2neon
 
 ---
- src/abismal/src/abismal.cpp | 3 +++
- 1 file changed, 3 insertions(+)
+ src/abismal/src/abismal.cpp | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
 diff --git a/src/abismal/src/abismal.cpp b/src/abismal/src/abismal.cpp
-index 59e1479..3cffefc 100644
+index 59e1479..eafc45e 100644
 --- a/src/abismal/src/abismal.cpp
 +++ b/src/abismal/src/abismal.cpp
-@@ -41,6 +41,9 @@
- #include "sam_record.hpp"
+@@ -42,6 +42,10 @@
  #include "smithlab_os.hpp"
  #include "smithlab_utils.hpp"
+ 
 +#ifdef __arm64__
 +#include "sse2neon/sse2neon.h"
 +#endif
- 
++
  using std::begin;
  using std::cerr;
+ using std::cout;
+@@ -1002,7 +1006,7 @@ check_hits(const uint32_t offset, const PackedRead::const_iterator read_st,
+            vector<uint32_t>::const_iterator start_idx, result_type &res) {
+   for (; start_idx != end_idx && !res.sure_ambig; ++start_idx) {
+     // GS: adds the next candidate to L1d cache while current is compared
+-    _mm_prefetch(&(*(genome_st + ((*(start_idx + 10) - offset) >> 4))),
++    _mm_prefetch((const char *)&(*(genome_st + ((*(start_idx + 10) - offset) >> 4))),
+                  _MM_HINT_T0);
+     const uint32_t the_pos = *start_idx - offset;
+     /* GS: the_pos & 15u tells if the position is a multiple of 16, in
 -- 
 2.44.0
 
