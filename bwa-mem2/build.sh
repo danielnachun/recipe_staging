@@ -15,6 +15,7 @@ export CFLAGS="${CFLAGS} -I${PREFIX}/include/sse2neon"
 if [[ ${target_platform} == "osx-arm64" ]]; then
     export CXXFLAGS="${CXXFLAGS} -D__SSE2__=1 -D__AVX__=1 -D__SSE4_1__=1"
     export CFLAGS="${CFLAGS} -D__SSE2__=1 -D__AVX__=1 -D__SSE4_1__=1"
+    sedi -i 's/-lsafestringlib//g' Makefile
 fi
 LIBS="${LDFLAGS}" make CC="${CC}" CXX="${CXX}"  multi
 
