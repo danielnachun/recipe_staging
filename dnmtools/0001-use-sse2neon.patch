@@ -16,7 +16,7 @@ index 59e1479..3cffefc 100644
  #include "smithlab_os.hpp"
  #include "smithlab_utils.hpp"
 +#ifdef __arm64__
-+#include "sse2neon.h"
++#include "sse2neon/sse2neon.h"
 +#endif
  
  using std::begin;
