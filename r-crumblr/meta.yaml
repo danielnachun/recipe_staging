@@ -1,0 +1,56 @@
+{% set version = "0.99.6" %}
+
+package:
+  name: r-crumblr
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/DiseaseNeuroGenomics/crumblr/archive/7aea7ac1d8e0f280e10d64f59e4faf1fb755c5eb.zip
+  sha256: 492566d07250b99947dbefd19c1035a653e6913ce732757285898ea2c5e144dd
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  noarch: generic
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.3
+    - bioconductor-singlecellexperiment
+    - bioconductor-variancepartition
+    - bioconductor-ggtree
+    - r-ggplot2
+    - r-mass
+    - r-rfast
+    - r-stylo
+    - r-tidytree
+    - r-viridis
+  run:
+    - r-base>=4.3
+    - bioconductor-singlecellexperiment
+    - bioconductor-variancepartition
+    - bioconductor-ggtree
+    - r-ggplot2
+    - r-mass
+    - r-rfast
+    - r-stylo
+    - r-tidytree
+    - r-viridis
+
+test:
+  commands:
+    - $R -e "library('crumblr')"           # [not win]
+
+about:
+  home: https://github.com/DiseaseNeuroGenomics/crumblr/
+  license: Artistic-2.0
+  summary: Count ratio uncertainty modeling base linear regression
+
+extra:
+  recipe-maintainers:
+    - danielnachun
