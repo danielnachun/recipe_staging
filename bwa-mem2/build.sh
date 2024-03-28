@@ -10,8 +10,7 @@ if [[ $OSTYPE == "darwin"* ]]; then
     sed -i.bak 's/memset_s/memset8_s/g' ext/safestringlib/safeclib/wmemset_s.c
 fi
 sed -i 's/LIBS=/LIBS+=/' Makefile
-export CXXFLAGS="${CXXFLAGS} -DSIMDE_ENABLE_NATIVE_ALIASES"
-LIBS="${LDFLAGS}" make CC="${CC}" CXX="${CXX}" multi
+LIBS="${LDFLAGS}" make CC="${CC}" CXX="${CXX}" SSE2NEON_INCLUDES="-I${PREFIX}/includes/sse2neon" multi
 
 mkdir -p $PREFIX/bin
 cp bwa-mem2* $PREFIX/bin
