@@ -36,9 +36,7 @@ requirements:
     - r-coda
     - r-corpcor
     - r-data.table
-    - r-parallel
     - r-statmod
-    - r-stats
   run:
     - r-MASS
     - r-MCMCpack
@@ -47,9 +45,7 @@ requirements:
     - r-coda
     - r-corpcor
     - r-data.table
-    - r-parallel
     - r-statmod
-    - r-stats
 
 test:
   commands:
