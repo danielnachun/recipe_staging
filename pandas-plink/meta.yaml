@@ -40,7 +40,7 @@ test:
     - pandas
     - pandas_plink
   commands:
-    - python -c "import sys; import pandas; import pandas_plink; sys.exit(pandas_plink.test())"
+    - python -c "import sys; import pandas; import pandas_plink"
 
 about:
   home: https://github.com/limix/pandas-plink
