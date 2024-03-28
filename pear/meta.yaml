@@ -10,10 +10,11 @@ about:
 source:
   md5: 5ed68d50c1620cd55c58681e38771799
   url: https://depot.galaxyproject.org/software/pear/pear_0.9.6_src_all.tar.gz
+  patches:
+    - 0001-disable-unused-ASM-code.patch
 
 build:
   number: 10
-  skip: True  # [osx]
 
 requirements:
   build:
@@ -21,10 +22,10 @@ requirements:
     - {{ compiler('c') }}
     - pkgconfig
   host:
-    - zlib
+    - zlib=1.2
     - bzip2
   run:
-    - zlib
+    - libzlib>=1.2
     - bzip2
 
 test:
