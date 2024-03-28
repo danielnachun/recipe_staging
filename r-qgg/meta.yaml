@@ -1,0 +1,65 @@
+{% set name = "qgg" %}
+{% set posix = "m2-" if win else "" %}
+{% set native = "m2w64-" if win else "" %}
+
+package:
+  name: r-{{ name }}
+  version: '{{ version }}'
+
+source:
+  url: https://cran.r-project.org/src/contrib/qgg_{{ version }}.tar.gz
+  sha256: 4301a8bf390bdfe6b68ac87a7d084d28f917edb0b35049b46dc27790d9772505
+
+build:
+  number: 0
+  merge_build_host: true
+  script: R CMD INSTALL --build .
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+    - autoconf  # [unix]
+    - "{{ compiler('c') }}"  # [unix]
+    - "{{ compiler('m2w64_c') }}"  # [win]
+    - "{{ compiler('cxx') }}"  # [unix]
+    - "{{ compiler('m2w64_cxx') }}"  # [win]
+    - posix  # [win]
+  host:
+    - r-MASS
+    - r-MCMCpack
+    - r-Rcpp >=1.0.5
+    - r-base=4.2
+    - r-coda
+    - r-corpcor
+    - r-data.table
+    - r-parallel
+    - r-statmod
+    - r-stats
+  run:
+    - r-MASS
+    - r-MCMCpack
+    - r-Rcpp >=1.0.5
+    - r-base>=4.2
+    - r-coda
+    - r-corpcor
+    - r-data.table
+    - r-parallel
+    - r-statmod
+    - r-stats
+
+test:
+  commands:
+    - $R -e "library('qgg')"  # [not win]
+    - "\"%R%\" -e \"library('qgg')\""  # [win]
+
+about:
+  home: https://github.com/psoerensen/qgg
+  summary: 'Provides an infrastructure for efficient processing of large-scale genetic and phenotypic data including core functions for: 1) fitting linear mixed models, 2) constructing marker-based genomic relationship matrices, 3) estimating genetic parameters (heritability and correlation), 4) performing genomic prediction and genetic risk profiling, and 5) single or multi-marker association analyses. Rohde et al. (2019) <doi:10.1101/503631>.'
+  license: GPL-3.0-or-later
+
+extra:
+  recipe-maintainers:
+    - danielnachun
