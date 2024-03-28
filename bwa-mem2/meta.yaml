@@ -11,6 +11,7 @@ source:
       - ./0001-First-compiling-version-with-OS-X-and-sse2neon.patch
       - ./0003-Get-correct-arch-define-for-osx.patch
       - ./0006-Use-arch-flags-directly-so-that-Make-options-on-cmd-.patch
+      - ./0007-return-AVX-SIMD-on-ARM64.patch
       #- Makefile.patch
 
 build:
