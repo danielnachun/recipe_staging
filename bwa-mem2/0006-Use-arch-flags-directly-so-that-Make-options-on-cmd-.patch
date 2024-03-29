@@ -1,0 +1,33 @@
+From e554805cc1bd90ed1c811f3a1b935d0e4653c0e4 Mon Sep 17 00:00:00 2001
+From: David Lecomber <david.lecomber@arm.com>
+Date: Wed, 31 May 2023 10:12:04 +0100
+Subject: [PATCH 06/10] Use arch flags directly so that Make options on cmd
+ line can override internally set ones
+
+---
+ Makefile | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index add10b3..4d0e7fa 100644
+--- a/Makefile
++++ b/Makefile
+@@ -113,13 +113,13 @@ myall:multi
+ endif
+ 
+ 
+-CXXFLAGS+=	-g -O3 -fpermissive $(ARCH_FLAGS) #-Wall ##-xSSE2
++CXXFLAGS+=	-g -O3 -fpermissive #-Wall ##-xSSE2
+ 
+ .PHONY:all clean depend multi
+ .SUFFIXES:.cpp .o
+ 
+ .cpp.o:
+-	$(CXX) -c $(CXXFLAGS) $(CPPFLAGS) $(INCLUDES) $< -o $@
++	$(CXX) -c $(CXXFLAGS) $(CPPFLAGS) $(INCLUDES)  $(ARCH_FLAGS) $< -o $@
+ 
+ all:$(EXE)
+ 
+-- 
+2.44.0
+

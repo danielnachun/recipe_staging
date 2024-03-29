@@ -1,0 +1,47 @@
+From de0d8f211e2515803efbc4def31f4769480d4c19 Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Thu, 28 Mar 2024 00:03:15 -0700
+Subject: [PATCH] return AVX SIMD on ARM64
+
+---
+ src/runsimd.cpp | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/src/runsimd.cpp b/src/runsimd.cpp
+index 03c0e91..1368b76 100644
+--- a/src/runsimd.cpp
++++ b/src/runsimd.cpp
+@@ -54,6 +54,7 @@ extern "C" {
+ #define SIMD_AVX512BW 0x200
+ 
+ #ifndef _MSC_VER
++#ifndef __arm64__
+ // adapted from https://github.com/01org/linux-sgx/blob/master/common/inc/internal/linux/cpuid_gnu.h
+ void __cpuidex(int cpuid[4], int func_id, int subfunc_id)
+ {
+@@ -68,10 +69,12 @@ void __cpuidex(int cpuid[4], int func_id, int subfunc_id)
+ #endif
+ }
+ #endif
++#endif
+ 
+ static int x86_simd(void)
+ {
+ 	int flag = 0, cpuid[4], max_id;
++#ifndef __arm64__
+ 	__cpuidex(cpuid, 0, 0);
+ 	max_id = cpuid[0];
+ 	if (max_id == 0) return 0;
+@@ -89,6 +92,9 @@ static int x86_simd(void)
+ 		if (cpuid[1]>>16&1) flag |= SIMD_AVX512F;
+ 		if (cpuid[1]>>30&1) flag |= SIMD_AVX512BW;
+ 	}
++#else
++    flag = SIMD_AVX;
++#endif
+ 	return flag;
+ }
+ 
+-- 
+2.44.0
+
