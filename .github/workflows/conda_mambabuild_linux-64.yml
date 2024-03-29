@@ -57,7 +57,14 @@ jobs:
           fetch-depth: 0
 
       - name: Free Disk Space (Ubuntu)
+        if: contains(github.event.pull_request.labels.*.name, 'free-disk-space')
         uses: jlumbroso/free-disk-space@main
+
+      - name: Setup upterm session
+        if: contains(github.event.pull_request.labels.*.name, 'ssh')
+        uses: lhotari/action-upterm@v1
+        with:
+          limit-access-to-actor: true
 
       - name: Set up working directories
         run: |

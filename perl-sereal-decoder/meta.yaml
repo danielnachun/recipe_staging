@@ -22,6 +22,7 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - binutils  # [linux]
     - make
   host:
     - perl >=5.32

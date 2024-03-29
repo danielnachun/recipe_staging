@@ -20,6 +20,10 @@ sed -i "s/static_assert/_Static_assert/g" rts/include/Rts.h
 if [[ ${target_platform} =~ .*osx.* ]]; then
     sed -i "s/--lflag=-Wl,-no_fixup_chains//g" binary/wrappers/hsc2hs-ghc-9.6.4
     sed -i "s/--lflag=-Wl,-no_fixup_chains//g" binary/bin/hsc2hs-ghc-9.6.4
+    if [[ ${target_platform} == "osx-arm64" ]]; then
+        sed -i "s/--lflag=-Wl,-no_warn_duplicate_libraries//g" binary/wrappers/hsc2hs-ghc-9.6.4
+        sed -i "s/--lflag=-Wl,-no_warn_duplicate_libraries//g" binary/bin/hsc2hs-ghc-9.6.4
+    fi
 fi
 
 case ${target_platform} in 
@@ -48,10 +52,10 @@ case ${target_platform} in
         link_name="x86_64-osx"
         ;;
     osx-arm64)
-        build_name="x86_64-apple-darwin"
+        build_name="aarch64-apple-darwin"
         host_name=${build_name}
-        target_name="arm64-apple-darwin"
-        link_name="arm64-osx"
+        target_name="aarch64-apple-darwin"
+        link_name="aarch64-osx"
         ;;
 esac
 

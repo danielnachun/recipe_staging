@@ -9,7 +9,8 @@ cargo-bundle-licenses \
 if [[ ${target_platform} =~ .*osx.* ]]; then
     export CFLAGS="-Wno-implicit-function-declaration"
     # HACK - clang -print-resource-dir returns the wrong directory on macOS for some reason
-    export RUSTFLAGS="-L${BUILD_PREFIX}/lib/clang/16.0.6/lib/darwin"
+    clang_version=$(${BUILD_PREFIX}/bin/clang++ -v 2>&1 >/dev/null | grep "clang version" | cut -d ' ' -f 3)
+    export RUSTFLAGS="-L${BUILD_PREFIX}/lib/clang/${clang_version}/lib/darwin"
 fi
 
 # build statically linked binary with Rust

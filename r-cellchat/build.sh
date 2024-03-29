@@ -8,6 +8,7 @@
 # these 'system' dependencies. See:
 # https://github.com/jeroen/autobrew/issues/3
 export DISABLE_AUTOBREW=1
+export PKG_CPPFLAGS="-DHAVE_WORKING_LOG1P"
 
 # R refuses to build packages that mark themselves as Priority: Recommended
 mv DESCRIPTION DESCRIPTION.old

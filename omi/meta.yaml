@@ -1,5 +1,5 @@
 {% set name = "omi" %}
-{% set version = "1.7.0_0" %}
+{% set version = "1.7.3_0" %}
 {% set version_dash = version.replace("_", "-") %}
 
 package:
@@ -8,7 +8,9 @@ package:
 
 source:
   url: https://github.com/microsoft/{{ name }}/archive/v{{ version_dash }}.tar.gz
-  sha256: 96a6a02a5d97681ebbe7724c985852e1eab582f6680952224f1d21f204cc3f38
+  sha256: 8e3dd69cee7f4968ef185d850a586c40bce8ac5cc39889d39e2c89f35c02b3c2
+  patches:
+    - 0001-support-Apple-Silicon.patch
 
 build:
   number: 0
@@ -17,9 +19,9 @@ build:
 
 requirements:
   build:
-    - binutils
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - binutils  # [linux]
     - gcc  # [linux]
     - make
     - pkg-config

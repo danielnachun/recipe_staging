@@ -1,15 +1,19 @@
 {% set name = "ldc" %}
-{% set version = "1.35.0" %}
+{% set version = "1.36.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/ldc-developers/ldc/releases/download/v{{ version }}/ldc-{{ version }}-src.tar.gz  # [unix]
-  sha256: 6e296993706c76c093e609139aa0b3f8704355fa0f3756f6758d78d44226dfa0  # [unix]
-  patches:
-    - 0001-fix-lto.patch
+  - url: https://github.com/ldc-developers/ldc/releases/download/v{{ version }}/ldc-{{ version }}-src.tar.gz  # [unix]
+    sha256: a00c79073123a887c17f446c7782a49556a3512a3d35ab676b7d53ae1bb8d6ef  # [unix]
+  - url: https://github.com/ldc-developers/ldc/releases/download/v{{ version }}/ldc2-{{ version }}-osx-arm64.tar.xz # [build_platform == "osx-arm64"]
+    sha256: ba8440e2b235b3584bc129de136563996db91cd0a35e10bcccf316bee3f23a98  # [build_platform == "osx-arm64"]
+    folder: binary  # [build_platform == "osx-arm64"]
+  - url: https://github.com/ldc-developers/ldc/releases/download/v{{ version }}/ldc2-{{ version }}-osx-x86_64.tar.xz # [build_platform == "osx-64"]
+    sha256: 7740fefcb32c19c23bf5ce4dea6e5412329f27ffa511c4101dd96b1f44999429  # [build_platform == "osx-64"]
+    folder: binary  # [build_platform == "osx-64"]
 
 build:
   number: 0

@@ -1,0 +1,45 @@
+{% set version = "1.37.0" %}
+{% set sha256 = "8e7021c6d5e8f8240c9cc19482e0c8589540836747744724d86bf8af5a21f0e8" %}
+
+package:
+  name: aria2
+  version: {{ version }}
+
+source:
+  url: https://github.com/aria2/aria2/releases/download/release-{{ version }}/aria2-{{ version }}.tar.gz
+  sha256: {{ sha256 }}
+
+build:
+  number: 1
+  skip: true  # [win]
+
+requirements:
+  build:
+    - make
+    - {{ compiler('cxx') }}
+    - pkg-config  # [unix]
+
+  host:
+    - zlib
+    - openssl  # [linux]
+    - sqlite
+    - libssh2
+    - c-ares
+    - libxml2
+    - gmp  # [osx]
+
+test:
+  commands:
+    - aria2c -v
+
+about:
+  home: https://aria2.github.io/
+  summary: aria2 is a lightweight multi-protocol & multi-source, cross platform download utility operated in command-line. It supports HTTP/HTTPS, FTP, SFTP, BitTorrent and Metalink.
+  license: GPL-2.0-only
+  license_family: GPL
+  license_file: COPYING
+  dev_url: https://github.com/aria2/aria2/
+
+extra:
+  recipe-maintainers:
+    - acaprez

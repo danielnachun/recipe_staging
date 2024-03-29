@@ -1,0 +1,99 @@
+{% set version = "2.9" %}
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
+
+package:
+  name: r-factominer
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url:
+    - {{ cran_mirror }}/src/contrib/FactoMineR_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/FactoMineR/FactoMineR_{{ version }}.tar.gz
+  sha256: 882698d399a641c80f63ffae69c334fc5306238fb8592e9b760e17d4621f5230
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('c') }}              # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}make
+    - {{ posix }}sed               # [win]
+    - {{ posix }}coreutils         # [win]
+    - {{ posix }}zip               # [win]
+    - cross-r-base {{ r_base }}    # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+    - r-dt
+    - r-mass
+    - r-car
+    - r-cluster
+    - r-ellipse
+    - r-emmeans
+    - r-flashclust
+    - r-ggplot2
+    - r-ggrepel
+    - r-lattice
+    - r-leaps
+    - r-multcompview
+    - r-scatterplot3d
+  run:
+    - r-base>=4.2
+    - {{ native }}gcc-libs         # [win]
+    - r-dt
+    - r-mass
+    - r-car
+    - r-cluster
+    - r-ellipse
+    - r-emmeans
+    - r-flashclust
+    - r-ggplot2
+    - r-ggrepel
+    - r-lattice
+    - r-leaps
+    - r-multcompview
+    - r-scatterplot3d
+
+test:
+  commands:
+    - $R -e "library('FactoMineR')"           # [not win]
+    - "\"%R%\" -e \"library('FactoMineR')\""  # [win]
+
+about:
+  home: http://factominer.free.fr
+  license: GPL-2.0-or-later
+  summary: 'Exploratory data analysis methods to summarize, visualize and describe datasets. The main principal component methods are available, those with the largest potential in terms of applications: principal component analysis (PCA) when variables are quantitative, correspondence analysis (CA) and multiple correspondence
+    analysis (MCA) when variables are categorical, Multiple Factor Analysis when variables are structured in groups, etc. and hierarchical cluster analysis. F. Husson, S. Le and J. Pages (2017).'
+  license_family: GPL2
+  license_file:
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+
+# Package: FactoMineR
+# Version: 2.0
+# Date: 2019-11-15
+# Title: Multivariate Exploratory Data Analysis and Data Mining
+# Author: Francois Husson, Julie Josse, Sebastien Le, Jeremy Mazet
+# Maintainer: Francois Husson <francois.husson@agrocampus-ouest.fr>
+# Depends: R (>= 3.5.0)
+# Imports: car,cluster,ellipse,flashClust,graphics,grDevices,lattice,leaps,MASS,scatterplot3d,stats,utils,ggplot2,ggrepel
+# Suggests: missMDA,knitr,Factoshiny
+# Description: Exploratory data analysis methods to summarize, visualize and describe datasets. The main principal component methods are available, those with the largest potential in terms of applications: principal component analysis (PCA) when variables are quantitative, correspondence analysis (CA) and multiple correspondence analysis (MCA) when variables are categorical, Multiple Factor Analysis when variables are structured in groups, etc. and hierarchical cluster analysis. F. Husson, S. Le and J. Pages (2017).
+# License: GPL (>= 2)
+# URL: http://factominer.free.fr
+# Encoding: latin1
+# VignetteBuilder: knitr
+# NeedsCompilation: no
+# Packaged: 2019-11-21 16:51:38 UTC; husson
+# Repository: CRAN
+# Date/Publication: 2019-11-25 15:50:02 UTC

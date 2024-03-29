@@ -1,0 +1,87 @@
+{% set version = "2023.12-4" %}
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
+
+package:
+  name: r-ordinal
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url:
+    - {{ cran_mirror }}/src/contrib/ordinal_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/ordinal/ordinal_{{ version }}.tar.gz
+  sha256: f5582ad983dfd2ffbaf1e90b49af6f2cc319953d1fcb33f31c6c6f335cbd9fa2
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('c') }}              # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}make
+    - {{ posix }}sed               # [win]
+    - {{ posix }}coreutils         # [win]
+    - {{ posix }}zip               # [win]
+    - cross-r-base {{ r_base }}    # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+    - r-mass
+    - r-matrix
+    - r-nlme
+    - r-numderiv
+    - r-ucminf
+  run:
+    - r-base>=4.2
+    - {{ native }}gcc-libs         # [win]
+    - r-mass
+    - r-matrix
+    - r-nlme
+    - r-numderiv
+    - r-ucminf
+
+test:
+  commands:
+    - $R -e "library('ordinal')"           # [not win]
+    - "\"%R%\" -e \"library('ordinal')\""  # [win]
+
+about:
+  home: https://github.com/runehaubo/ordinal
+  license: GPL-2.0-or-later
+  summary: Implementation of cumulative link (mixed) models also known as ordered regression models, proportional odds models, proportional hazards models for grouped survival times and ordered logit/probit/... models. Estimation is via maximum likelihood and mixed models are fitted with the Laplace approximation and adaptive
+    Gauss-Hermite quadrature. Multiple random effect terms are allowed and they may be nested, crossed or partially nested/crossed. Restrictions of symmetry and equidistance can be imposed on the thresholds (cut-points/intercepts). Standard model methods are available (summary, anova, drop-methods, step, confint, predict
+    etc.) in addition to profile methods and slice methods for visualizing the likelihood function and checking convergence.
+  license_family: GPL3
+  license_file:
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+
+# Package: ordinal
+# Type: Package
+# Title: Regression Models for Ordinal Data
+# Version: 2019.4-25
+# Date: 2019-04-25
+# Authors@R: person(given="Rune Haubo Bojesen", family="Christensen", email="rune.haubo@gmail.com", role=c("aut", "cre"))
+# LazyData: true
+# ByteCompile: yes
+# Depends: R (>= 2.13.0), stats, methods
+# Imports: ucminf, MASS, Matrix, numDeriv
+# Suggests: lme4, nnet, xtable, testthat (>= 0.8), tools
+# Description: Implementation of cumulative link (mixed) models also known as ordered regression models, proportional odds models, proportional hazards models for grouped survival times and ordered logit/probit/... models. Estimation is via maximum likelihood and mixed models are fitted with the Laplace approximation and adaptive Gauss-Hermite quadrature. Multiple random effect terms are allowed and they may be nested, crossed or partially nested/crossed. Restrictions of symmetry and equidistance can be imposed on the thresholds (cut-points/intercepts). Standard model methods are available (summary, anova, drop-methods, step, confint, predict etc.) in addition to profile methods and slice methods for visualizing the likelihood function and checking convergence.
+# License: GPL (>= 2)
+# NeedsCompilation: yes
+# URL: https://github.com/runehaubo/ordinal
+# BugReports: https://github.com/runehaubo/ordinal/issues
+# Packaged: 2019-04-25 18:44:48 UTC; rhbc
+# Author: Rune Haubo Bojesen Christensen [aut, cre]
+# Maintainer: Rune Haubo Bojesen Christensen <rune.haubo@gmail.com>
+# Repository: CRAN
+# Date/Publication: 2019-04-25 20:30:04 UTC

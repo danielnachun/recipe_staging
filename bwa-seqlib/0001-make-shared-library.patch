@@ -1,0 +1,35 @@
+From e294d691f67b0dd26ec73e0a5f63d38d88eb2eb8 Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Wed, 6 Mar 2024 17:50:40 -0800
+Subject: [PATCH] make shared library
+
+---
+ Makefile | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 7151435..2eaef5b 100644
+--- a/Makefile
++++ b/Makefile
+@@ -26,14 +26,14 @@ endif
+ 
+ all:$(PROG)
+ 
+-bwa:libbwa.a $(AOBJS) main.o
++bwa:libbwa$(SHLIB_EXT) $(AOBJS) main.o
+ 		$(CC) $(CFLAGS) $(DFLAGS) $(AOBJS) main.o -o $@ -L. -lbwa $(LIBS)
+ 
+-bwamem-lite:libbwa.a example.o
++bwamem-lite:libbwa$(SHLIB_EXT) example.o
+ 		$(CC) $(CFLAGS) $(DFLAGS) example.o -o $@ -L. -lbwa $(LIBS)
+ 
+-libbwa.a:$(LOBJS)
+-		$(AR) -csru $@ $(LOBJS)
++libbwa$(SHLIB_EXT):$(LOBJS)
++		$(CC) $(CFLAGS) $(DFLAGS) -shared -o $@ -lz $(LOBJS)
+ 
+ clean:
+ 		rm -f gmon.out *.o a.out $(PROG) *~ *.a
+-- 
+2.43.0
+

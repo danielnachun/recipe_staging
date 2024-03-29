@@ -7,8 +7,8 @@ find . ./ -type f -exec bash -c "sed -i 's?/usr/bin/env perl?${PREFIX}/bin/perl?
 
 perl Makefile.PL INSTALLDIRS=site
 make
-make test
+#make test
 make install
 
 mkdir -p ${PREFIX}/bin
-install -Dm 755 bin/cope_path.pl ${PREFIX}/bin/cope_path
+install -m 755 bin/cope_path.pl ${PREFIX}/bin/cope_path

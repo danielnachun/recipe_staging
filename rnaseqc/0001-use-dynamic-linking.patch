@@ -1,0 +1,52 @@
+From cd5dc38e3afa239bb85e8716274f2134c876a749 Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Thu, 7 Mar 2024 19:21:10 -0800
+Subject: [PATCH] use dynamic linking
+
+---
+ Makefile | 15 ++++++---------
+ 1 file changed, 6 insertions(+), 9 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 9a73064..ff87b28 100644
+--- a/Makefile
++++ b/Makefile
+@@ -7,9 +7,9 @@ ABI=1
+ #Provide full paths here to .a archives for libraries which should be statically linked
+ STATIC_LIBS=
+ #List of remaining libraries that will be dynamically linked
+-LIBS= -lboost_filesystem -lboost_regex -lboost_system -lz -llzma -lbz2 -lpthread
++LIBS= -lboost_filesystem -lboost_regex -lboost_system -lz -llzma -lbz2 -lpthread -lseqlib -lhts -lbwa -lfml
+ 
+-CC=g++
++CXX=g++
+ STDLIB=-std=c++14
+ CFLAGS=-Wall $(STDLIB) -D_GLIBCXX_USE_CXX11_ABI=$(ABI) -O3
+ SOURCES=BED.cpp Expression.cpp GTF.cpp RNASeQC.cpp Metrics.cpp Fasta.cpp BamReader.cpp
+@@ -17,19 +17,16 @@ SRCDIR=src
+ OBJECTS=$(SOURCES:.cpp=.o)
+ SEQFLAGS=$(STDLIB) -D_GLIBCXX_USE_CXX11_ABI=$(ABI)
+ 
+-rnaseqc: $(foreach file,$(OBJECTS),$(SRCDIR)/$(file)) SeqLib/lib/libseqlib.a SeqLib/lib/libhts.a
+-	$(CC) -O3 $(LIBRARY_PATHS) -o $@ $^ $(STATIC_LIBS) $(LIBS)
++rnaseqc: $(foreach file,$(OBJECTS),$(SRCDIR)/$(file))
++	$(CXX) -O3 $(LIBRARY_PATHS) -o $@ $^ $(STATIC_LIBS) $(LIBS)
+ 
+ .PHONY: lib
+ 
+ lib: $(foreach file,$(OBJECTS),$(SRCDIR)/$(file))
+-	ar -rcs rnaseqc.a $^
++	$(CXX) -O3 $(LIBRARY_PATHS) -o librnaseqc$(SHLIB_EXT) $^ $(LIBS)
+ 
+ %.o: %.cpp
+-	$(CC) $(CFLAGS) -I. $(INCLUDE_DIRS) -c -o $@ $<
+-
+-SeqLib/lib/libseqlib.a SeqLib/lib/libhts.a:
+-	cd SeqLib && ./configure && make CXXFLAGS="$(SEQFLAGS)" && make install
++	$(CXX) $(CFLAGS) -I. $(INCLUDE_DIRS) -c -o $@ $<
+ 
+ .PHONY: clean
+ 
+-- 
+2.43.0
+

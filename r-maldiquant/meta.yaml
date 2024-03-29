@@ -1,0 +1,57 @@
+{% set version = "1.22.2" %}
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
+
+package:
+  name: r-maldiquant
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url:
+    - {{ cran_mirror }}/src/contrib/MALDIquant_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/MALDIquant/MALDIquant_{{ version }}.tar.gz
+  sha256: 6051b07019003c698ae016d79f13945bfe2edec26f8a688126b978cb90adcfff
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('c') }}              # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}make
+    - {{ posix }}sed               # [win]
+    - {{ posix }}coreutils         # [win]
+    - {{ posix }}zip               # [win]
+    - cross-r-base {{ r_base }}    # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+  run:
+    - r-base>=4.2
+    - {{ native }}gcc-libs         # [win]
+
+test:
+  commands:
+    - $R -e "library('MALDIquant')"           # [not win]
+    - "\"%R%\" -e \"library('MALDIquant')\""  # [win]
+
+about:
+  home: https://cran.r-project.org/web/packages/MALDIquant/index.html
+  license: GPL-3.0-or-later
+  summary: A complete analysis pipeline for matrix-assisted laser desorption/ionization-time-of-flight (MALDI-TOF) and other two-dimensional mass spectrometry data. In addition to commonly used plotting and processing methods it includes distinctive features, namely baseline subtraction methods such as morphological filters
+    (TopHat) or the statistics-sensitive non-linear iterative peak-clipping algorithm (SNIP), peak alignment using warping functions, handling of replicated measurements as well as allowing spectra with different resolutions.
+  license_family: GPL3
+  license_file:
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+    - MathiasHaudgaard
+    - FrodePedersen
+    - ArneKr

@@ -13,24 +13,16 @@ build:
   number: 0
   ignore_run_exports:
     - perl-canary-stability
-  script_env:
-    - PERL_CANARY_STABILITY_NOPROMPT=1
-  script:
-    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
-    - make
-    - make test
-    - make install
 
 requirements:
   build:
     - {{ compiler('c') }}
     - make
-
+    - sed
   host:
     - perl=5.32
     - perl-canary-stability
     - perl-common-sense
-
   run:
     - perl>=5.32
     - perl-common-sense

@@ -17,6 +17,7 @@ build:
 requirements:
   build:
     - make
+    - sed
   host:
     - perl=5.32
     - perl-class-inspector

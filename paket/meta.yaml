@@ -10,11 +10,11 @@ source:
   sha256: e40fabb15f47d40c9bac69c95aa05679ec2f0d62f236906aa25a51963418d4f7
 
 build:
-  number: 1
+  noarch: generic
+  number: 2
 
 requirements:
   build:
-    - {{ compiler('cxx') }}
     - sed
   host:
     - dotnet

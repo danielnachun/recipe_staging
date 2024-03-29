@@ -1,0 +1,91 @@
+{% set version = "2.6-4" %}
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
+
+package:
+  name: r-vegan
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url:
+    - {{ cran_mirror }}/src/contrib/vegan_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/vegan/vegan_{{ version }}.tar.gz
+  sha256: 5d8ad4bebe79ae2bbd840a34100cf54c62f089c66ea484a542a201afcba21d06
+
+build:
+  merge_build_host: true  # [win]
+  number: 1
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+    - r-permute                  # [build_platform != target_platform]
+    - r-lattice                  # [build_platform != target_platform]
+    - r-mass                     # [build_platform != target_platform]
+    - r-cluster                  # [build_platform != target_platform]
+    - r-mgcv                     # [build_platform != target_platform]
+    - {{ compiler('c') }}              # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{ compiler('fortran') }}        # [not win]
+    - {{ compiler('m2w64_fortran') }}  # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}make
+    - {{ posix }}sed               # [win]
+    - {{ posix }}coreutils         # [win]
+    - {{ posix }}zip               # [win]
+  host:
+    - libblas
+    - liblapack
+    - r-base=4.2
+    - r-mass
+    - r-cluster
+    - r-lattice
+    - r-mgcv
+    - r-permute >=0.9_0
+  run:
+    - r-base>=4.2
+    - {{ native }}gcc-libs         # [win]
+    - r-mass
+    - r-cluster
+    - r-lattice
+    - r-mgcv
+    - r-permute >=0.9_0
+
+test:
+  commands:
+    - $R -e "library('vegan')"           # [not win]
+    - "\"%R%\" -e \"library('vegan')\""  # [win]
+
+about:
+  home: https://cran.r-project.org, https://github.com/vegandevs/vegan
+  license: GPL-2.0-only
+  summary: Ordination methods, diversity analysis and other functions for community and vegetation ecologists.
+  license_family: GPL2
+  license_file:
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+
+
+# Package: vegan
+# Title: Community Ecology Package
+# Version: 2.5-6
+# Author: Jari Oksanen, F. Guillaume Blanchet, Michael Friendly, Roeland Kindt, Pierre Legendre, Dan McGlinn, Peter R. Minchin, R. B. O'Hara, Gavin L. Simpson, Peter Solymos, M. Henry H. Stevens, Eduard Szoecs, Helene Wagner
+# Maintainer: Jari Oksanen <jhoksane@gmail.com>
+# Depends: permute (>= 0.9-0), lattice, R (>= 3.4.0)
+# Suggests: parallel, tcltk, knitr
+# Imports: MASS, cluster, mgcv
+# VignetteBuilder: utils, knitr
+# Description: Ordination methods, diversity analysis and other functions for community and vegetation ecologists.
+# License: GPL-2
+# BugReports: https://github.com/vegandevs/vegan/issues
+# URL: https://cran.r-project.org, https://github.com/vegandevs/vegan
+# NeedsCompilation: yes
+# Packaged: 2019-08-31 07:21:37 UTC; jarioksa
+# Repository: CRAN
+# Date/Publication: 2019-09-01 14:30:02 UTC

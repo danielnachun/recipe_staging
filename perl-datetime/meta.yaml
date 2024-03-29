@@ -13,6 +13,7 @@ build:
   number: 0
   ignore_run_exports:
     - perl-dist-checkconflicts
+    - perl-test-fatal
     - perl-test-without-module
     - perl-test-warnings
   script:
@@ -27,6 +28,7 @@ requirements:
     - make
   host:
     - perl >=5.32
+    - perl-cpan-meta-check
     - perl-datetime-timezone
     - perl-namespace-autoclean
     - perl-dist-checkconflicts >=0.02
@@ -35,6 +37,7 @@ requirements:
     - perl-datetime-locale
     - perl-specio
     - perl-sub-identify
+    - perl-test-fatal
     - perl-test-without-module
     - perl-test-warnings
   run:

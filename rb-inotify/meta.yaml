@@ -11,6 +11,7 @@ source:
 
 build:
   number: 1
+  noarch: generic
   script:
     - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
     - gem unpack {{ name }}-{{ version }}.gem

@@ -1,0 +1,32 @@
+From 6227198baa14726addf20d65506e74cfd2877fdf Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Thu, 28 Mar 2024 18:36:43 -0700
+Subject: [PATCH] enable safestringlib on ARM
+
+---
+ Makefile | 6 ------
+ 1 file changed, 6 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index c02e3c6..c1c259d 100644
+--- a/Makefile
++++ b/Makefile
+@@ -50,15 +50,9 @@ ARCH_FLAGS=	-msse -msse2 -msse3 -mssse3 -msse4.1
+ MEM_FLAGS=	-DSAIS=1
+ CPPFLAGS+=	-DENABLE_PREFETCH -DV17=1 -DMATE_SORT=0 $(MEM_FLAGS) 
+ 
+-ifeq ($(uname_arch),arm64)	# OS/X has memset_s etc already
+-INCLUDES=   -Isrc
+-LIBS=		-lpthread -lm -lz -L. -lbwa $(STATIC_GCC)
+-SAFE_STR_LIB=
+-else
+ INCLUDES=   -Isrc -Iext/safestringlib/include
+ LIBS=		-lpthread -lm -lz -L. -lbwa -Lext/safestringlib -lsafestring $(STATIC_GCC)
+ SAFE_STR_LIB=    ext/safestringlib/libsafestring.a
+-endif
+ 
+ OBJS=		src/fastmap.o src/bwtindex.o src/utils.o src/memcpy_bwamem.o src/kthread.o \
+ 			src/kstring.o src/ksw.o src/bntseq.o src/bwamem.o src/profiling.o src/bandedSWA.o \
+-- 
+2.44.0
+

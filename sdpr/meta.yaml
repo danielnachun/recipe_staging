@@ -18,10 +18,13 @@ requirements:
     - make
     - sed
   host:
-    - mkl
+    - mkl  # [target_platform != "osx-arm64"]
+    - openblas  # [target_platform == "osx-arm64"]
+    - simde
     - gsl
   run:
-    - mkl
+    - mkl  # [target_platform != "osx-arm64"]
+    - openblas  # [target_platform == "osx-arm64"]
  
 test:
   commands:

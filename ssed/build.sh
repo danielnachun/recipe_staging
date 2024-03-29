@@ -3,6 +3,8 @@
 set -o xtrace -o nounset -o pipefail -o errexit
 
 export CFLAGS="-Wno-implicit-function-declaration"
+
+autoreconf --force --install --verbose
 ./configure --disable-debug \
     --disable-dependency-tracking \
     --prefix=${PREFIX} \
@@ -11,5 +13,5 @@ export CFLAGS="-Wno-implicit-function-declaration"
     --infodir=${PREFIX}/share/info \
     --program-prefix=s
 
-make install
+make install MKDIR_P="${BUILD_PREFIX}/bin/mkdir -p"
 mv ${PREFIX}/share/info/sed.info ${PREFIX}/share/info/ssed.info

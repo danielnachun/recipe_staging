@@ -2,7 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-export CGO_ENABLED=0
+export CGO_ENABLED=1
 make build-tags
 go-licenses save ./cmd/micro --save_path=license-files
 

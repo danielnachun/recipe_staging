@@ -3,7 +3,7 @@
 set -o xtrace -o nounset -o pipefail -o errexit
 
 export LDFLAGS="-s -w"
-go build -buildmode=pie -trimpath -o=${PREFIX}/bin/${PKG_NAME} -ldflags="${LDFLAGS}" ./cmd/gotop
+CGO_CFLAGS="-Wno-undef-prefix" go build -buildmode=pie -trimpath -o=${PREFIX}/bin/${PKG_NAME} -ldflags="${LDFLAGS}" ./cmd/gotop
 go-licenses save ./cmd/gotop --save_path=license-files \
     --ignore github.com/xxxserxxx/gotop/v4 \
     --ignore github.com/xxxserxxx/gotop/v4/colorschemes \

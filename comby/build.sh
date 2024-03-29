@@ -4,11 +4,11 @@ set -o xtrace -o nounset -o pipefail -o errexit
 
 export OPAMROOT=${SRC_DIR}/.opam
 export OPAMYES=1
-export OPAMDOWNLOADJOBS=${CPU_COUNT}
-export OPAMJOBS=${CPU_COUNT}
+export OPAMDOWNLOADJOBS=1
+export OPAMJOBS=1
 
 opam init --no-setup --disable-sandboxing
-opam exec -- opam install . --deps-only -y --no-depexts
+opam exec -- opam install . --deps-only -y --no-depexts -vvv
 
 export LIBRARY_PATH="${OPAMROOT}/default/lib/hack_parallel"
 opam exec -- make release

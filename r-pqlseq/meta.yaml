@@ -31,14 +31,14 @@ requirements:
     - {{ posix }}coreutils         # [win]
     - {{ posix }}zip               # [win]
   host:
-    - r-base
+    - r-base=4.2
     - r-matrix
     - r-rcpp >=0.12.14
     - r-rcpparmadillo
     - r-doparallel
     - r-foreach
   run:
-    - r-base
+    - r-base>=4.2
     - {{native}}gcc-libs         # [win]
     - r-matrix
     - r-rcpp >=0.12.14

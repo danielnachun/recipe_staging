@@ -1,0 +1,82 @@
+{% set version = "0.7-4" %}
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
+
+package:
+  name: r-robust
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url:
+    - {{ cran_mirror }}/src/contrib/robust_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/robust/robust_{{ version }}.tar.gz
+  sha256: 630d552772fd9965739d559ee53b90bed23b835592311604b060a3a0a0090862
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('c') }}              # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{ compiler('fortran') }}        # [not win]
+    - {{ compiler('m2w64_fortran') }}  # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}make
+    - {{ posix }}sed               # [win]
+    - {{ posix }}coreutils         # [win]
+    - {{ posix }}zip               # [win]
+  host:
+    - libblas
+    - liblapack
+    - r-base=4.2
+    - r-mass
+    - r-fit.models
+    - r-lattice
+    - r-robustbase
+    - r-rrcov
+  run:
+    - r-base>=4.2
+    - {{ native }}gcc-libs         # [win]
+    - r-mass
+    - r-fit.models
+    - r-lattice
+    - r-robustbase
+    - r-rrcov
+
+test:
+  commands:
+    - $R -e "library('robust')"           # [not win]
+    - "\"%R%\" -e \"library('robust')\""  # [win]
+
+about:
+  home: https://CRAN.R-project.org/package=robust
+  license: GPL-2.0-only
+  summary: Methods for robust statistics, a state of the art in the early 2000s, notably for robust regression and robust multivariate analysis.
+  license_family: GPL2
+  license_file:
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+    - rvalieris
+
+# Package: robust
+# Version: 0.4-18.1
+# Date: 2017-04-26
+# Title: Port of the S+ "Robust Library"
+# Description: Methods for robust statistics, a state of the art in the early 2000s, notably for robust regression and robust multivariate analysis.
+# Author: Jiahui Wang, Ruben Zamar <ruben@stat.ubc.ca>, Alfio Marazzi <Alfio.Marazzi@inst.hospvd.ch>, Victor Yohai <vyohai@dm.uba.ar>, Matias Salibian-Barrera <matias@stat.ubc.ca>, Ricardo Maronna <maron@mate.unlp.edu.ar>, Eric Zivot <ezivot@u.washington.edu>, David Rocke <dmrocke@ucdavis.edu>, Doug Martin, Martin Maechler <maechler@stat.math.ethz.ch>, Kjell Konis <kjell.konis@me.com>.
+# Maintainer: Kjell Konis <kjell.konis@me.com>
+# Depends: fit.models
+# Imports: graphics, stats, utils, lattice, MASS, robustbase, rrcov
+# License: GPL-2
+# NeedsCompilation: yes
+# Packaged: 2019-07-02 14:46:25 UTC; ripley
+# Repository: CRAN
+# Date/Publication: 2019-07-02 14:52:19 UTC

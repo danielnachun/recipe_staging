@@ -1,0 +1,31 @@
+From 110a6fa6752c16ae18527926f6c661f17c874066 Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Wed, 6 Mar 2024 18:03:28 -0800
+Subject: [PATCH] make shared library
+
+---
+ Makefile | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index edda713..8d06ea3 100644
+--- a/Makefile
++++ b/Makefile
+@@ -16,11 +16,11 @@ LIBS=		-lm -lz -lpthread
+ 
+ all:$(PROG)
+ 
+-fml-asm:libfml.a example.o
++fml-asm:libfml$(SHLIB_EXT) example.o
+ 		$(CC) $(CFLAGS) $^ -o $@ -L. -lfml $(LIBS)
+ 
+-libfml.a:$(OBJS)
+-		$(AR) -csru $@ $(OBJS)
++libfml$(SHLIB_EXT):$(OBJS)
++		$(CC) $(CFLAGS) -shared -o $@ -lz $(OBJS)
+ 
+ clean:
+ 		rm -fr gmon.out *.o ext/*.o a.out $(PROG) *~ *.a *.dSYM session*
+-- 
+2.43.0
+

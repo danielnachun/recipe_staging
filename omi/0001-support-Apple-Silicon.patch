@@ -1,0 +1,183 @@
+From 7c0762042f73c5dedd0890ddfbaf65a144e7da3a Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Mon, 19 Feb 2024 21:18:19 -0800
+Subject: [PATCH] support Apple Silicon
+
+---
+ Unix/buildtool | 41 ++++++++++++++++++++++++-----------------
+ 1 file changed, 24 insertions(+), 17 deletions(-)
+
+diff --git a/Unix/buildtool b/Unix/buildtool
+index b93bbeb..b71ff4c 100755
+--- a/Unix/buildtool
++++ b/Unix/buildtool
+@@ -267,6 +267,13 @@ if [ -z "$target" ]; then
+             distro=`uname -s`
+             distro_version=`uname -v`
+             ;;
++        arm64:Darwin:*:Darwin*)
++            os=DARWIN
++            arch=ARM
++            compiler=GNU
++            distro=`uname -s`
++            distro_version=`uname -v`
++            ;;
+         ppc*:Linux:*)
+             os=LINUX
+             arch=PPC
+@@ -329,7 +336,7 @@ case "$platform" in
+         compiler_minor_version=`echo $compiler_version | awk -F' ' '{ print $5}' | awk -F"." '{ print $2}'`
+         compiler_revision=`echo $compiler_version | awk -F' ' '{ print $5}' | awk -F"." '{ print $3}'`
+         ;;
+-    DARWIN_IX86_GNU)
++    DARWIN_IX86_GNU|DARWIN_ARM_GNU)
+         compiler_version=`clang --version | awk -F" " 'match($0, /version [0-9]*\.[0-9]*\.[0-9]*/){ print $4 }'`
+         compiler_major_version=`echo $compiler_version | awk -F'.' '{ print $1}'`
+         compiler_minor_version=`echo $compiler_version | awk -F'.' '{ print $2}'`
+@@ -591,7 +598,7 @@ if [ "$arg1" = "cc" ]; then
+         HPUX_IA64_HP|HPUX_PARISC_HP)
+             echo aCC -Ae
+             ;;
+-        DARWIN_IX86_GNU)
++        DARWIN_IX86_GNU|DARWIN_ARM_GNU)
+             echo clang
+             ;;
+     esac
+@@ -632,7 +639,7 @@ if [ "$arg1" = "cxx" ]; then
+         HPUX_IA64_HP|HPUX_PARISC_HP)
+             echo aCC -AA
+             ;;
+-        DARWIN_IX86_GNU)
++        DARWIN_IX86_GNU|DARWIN_ARM_GNU)
+             echo clang++
+             ;;
+     esac
+@@ -711,7 +718,7 @@ if [ "$arg1" = "size" ]; then
+         HPUX_IA64_HP|HPUX_PARISC_HP)
+             echo size
+             ;;
+-        DARWIN_IX86_GNU)
++        DARWIN_IX86_GNU|DARWIN_ARM_GNU)
+             echo size
+             ;;
+ 	*)
+@@ -923,7 +930,7 @@ if [ "$arg1" = "cflags" -o "$arg1" = "cxxflags" ]; then
+             r="$r -D__STDC_EXT__"
+             r="$r -D_XOPEN_SOURCE_EXTENDED"
+             ;;
+-        DARWIN_IX86_GNU)
++        DARWIN_IX86_GNU|DARWIN_ARM_GNU)
+             test -z "$debug_opt" && r="$r -O2"
+             test -n "$pic_opt" && r="$r -fPIC"
+             ## treat warnings as errors.
+@@ -1057,7 +1064,7 @@ if [ "$arg1" = "cshlibflags" -o "$arg1" = "cxxshlibflags" ]; then
+             r="$r -Bhidden"
+             r="$r -Wl,+s"
+             ;;
+-        DARWIN_IX86_GNU)
++        DARWIN_IX86_GNU|DARWIN_ARM_GNU)
+             r="$r -dynamiclib"
+             r="$r -fvisibility=hidden"
+             test -n "$libpath_opt" && r="$r -R$libpath_opt"
+@@ -1163,7 +1170,7 @@ if [ "$arg1" = "cprogflags" -o "$arg1" = "cxxprogflags" ]; then
+             r="$r -lrt"
+             r="$r -D_PSTAT64"
+             ;;
+-        DARWIN_IX86_GNU)
++        DARWIN_IX86_GNU|DARWIN_ARM_GNU)
+             test -n "$libpath_opt" && r="$r -R$libpath_opt"
+             ;;
+     esac
+@@ -1207,7 +1214,7 @@ if [ "$arg1" = "mkdep" ]; then
+         HPUX_IA64_HP|HPUX_PARISC_HP)
+             r="aCC +make -E"
+             ;;
+-        DARWIN_IX86_GNU)
++        DARWIN_IX86_GNU|DARWIN_ARM_GNU)
+             r="gcc -M"
+             ;;
+     esac
+@@ -1254,7 +1261,7 @@ if [ "$arg1" = "syslibs" ]; then
+         HPUX_PARISC_HP)
+             r="-lpthread -lpam"
+             ;;
+-        DARWIN_IX86_GNU)
++        DARWIN_IX86_GNU|DARWIN_ARM_GNU)
+             r="-lpthread -ldl -lpam"
+             ;;
+     esac
+@@ -1339,7 +1346,7 @@ if [ "$arg1" = "libpath" ]; then
+                 fi
+             done
+             ;;
+-        DARWIN_IX86_GNU)
++        DARWIN_IX86_GNU|DARWIN_ARM_GNU)
+             for path in $args
+             do
+                 r="$r -R$path"
+@@ -1382,7 +1389,7 @@ if [ "$arg1" = "libname" ]; then
+             ;;
+         HPUX_PARISC_HP)
+             ;;
+-        DARWIN_IX86_GNU)
++        DARWIN_IX86_GNU|DARWIN_ARM_GNU)
+             r="$r -Wl,-install_name -Wl,$arg2"
+             ;;
+     esac
+@@ -1426,7 +1433,7 @@ if [ "$arg1" = "exports" ]; then
+         HPUX_PARISC_HP)
+             r="$r -Bextern:$arg2"
+             ;;
+-        DARWIN_IX86_GNU)
++        DARWIN_IX86_GNU|DARWIN_ARM_GNU)
+             ;;
+     esac
+ 
+@@ -1470,7 +1477,7 @@ if [ "$arg1" = "shlibname" ]; then
+         HPUX_PARISC_HP)
+             echo "lib$arg2.sl"
+             ;;
+-        DARWIN_IX86_GNU)
++        DARWIN_IX86_GNU|DARWIN_ARM_GNU)
+             echo "lib$arg2.dylib"
+             ;;
+     esac
+@@ -1514,7 +1521,7 @@ if [ "$arg1" = "shlibext" ]; then
+         HPUX_PARISC_HP)
+             echo "sl"
+             ;;
+-        DARWIN_IX86_GNU)
++        DARWIN_IX86_GNU|DARWIN_ARM_GNU)
+             echo "dylib"
+             ;;
+         *)
+@@ -1560,7 +1567,7 @@ if [ "$arg1" = "openssllibdir" ]; then
+                 HPUX_PARISC_HP)
+                     shlibext="sl"
+                     ;;
+-                DARWIN_IX86_GNU)
++                DARWIN_IX86_GNU|DARWIN_ARM_GNU)
+                     shlibext="dylib"
+                     ;;
+                 *)
+@@ -1615,7 +1622,7 @@ if [ "$arg1" = "openssllibdir" ]; then
+                     libdir=/usr/local/lib
+                 fi
+                 ;;
+-            DARWIN_IX86_GNU)
++            DARWIN_IX86_GNU|DARWIN_ARM_GNU)
+                 if [ -f "/usr/lib/libssl.dylib" ]; then
+                     libdir=/usr/lib
+                 fi
+@@ -1648,7 +1655,7 @@ if [ "$arg1" = "ldlibrarypath" ]; then
+         HPUX_IA64_HP|HPUX_PARISC_HP)
+             echo "SHLIB_PATH"
+             ;;
+-        DARWIN_IX86_GNU)
++        DARWIN_IX86_GNU|DARWIN_ARM_GNU)
+             echo "DYLD_LIBRARY_PATH"
+             ;;
+         *)
+-- 
+2.43.0
+

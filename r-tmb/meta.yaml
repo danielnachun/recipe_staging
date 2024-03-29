@@ -1,0 +1,63 @@
+{% set version = "1.9.10" %}
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
+
+package:
+  name: r-tmb
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url:
+    - {{ cran_mirror }}/src/contrib/TMB_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/TMB/TMB_{{ version }}.tar.gz
+  sha256: 91dfae2d28f51bc1f85cdcd376c18800203354fceb5146e072087561fb2783b1
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('c') }}          # [not win]
+    - {{ compiler('m2w64_c') }}    # [win]
+    - {{ compiler('cxx') }}        # [not win]
+    - {{ compiler('m2w64_cxx') }}  # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}make
+    - {{ posix }}sed               # [win]
+    - {{ posix }}coreutils         # [win]
+    - {{ posix }}zip               # [win]
+    - libgomp                      # [linux]
+    - llvm-openmp                  # [osx]
+  host:
+    - libblas
+    - liblapack
+    - r-base=4.2
+    - r-matrix >=1.0_12
+    - r-rcppeigen
+  run:
+    - r-base>=4.2
+    - {{ native }}gcc-libs         # [win]
+    - r-matrix >=1.0_12
+    - r-rcppeigen
+
+test:
+  commands:
+    - $R -e "library('TMB')"           # [not win]
+    - "\"%R%\" -e \"library('TMB')\""  # [win]
+
+about:
+  home: http://tmb-project.org
+  license: GPL-2.0-only
+  summary: "With this tool, a user should be able to quickly implement complex random effect models through simple C++ templates. The package combines 'CppAD' (C++ automatic differentiation), 'Eigen' (templated matrix-vector library) and 'CHOLMOD' (sparse matrix routines available from R) to obtain an efficient implementation
+    of the applied Laplace approximation with exact derivatives. Key features are: Automatic sparseness detection, parallelism through 'BLAS' and parallel user templates."
+  license_family: GPL2
+  license_file:
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r

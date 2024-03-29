@@ -1,0 +1,57 @@
+{% set version = '0.9.5' %}
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
+
+package:
+  name: r-grr
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url:
+    - {{ cran_mirror }}/src/contrib/grr_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/grr/grr_{{ version }}.tar.gz
+  sha256: 292606de2983ac5840c90d3e0977441b482c9e73c1674b662f8b4fb8f3632b2b
+
+build:
+  merge_build_host: True  # [win]
+  number: 1006
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('c') }}              # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{ compiler('cxx') }}            # [not win]
+    - {{ compiler('m2w64_cxx') }}      # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}make
+    - {{ posix }}sed               # [win]
+    - {{ posix }}coreutils         # [win]
+    - {{ posix }}zip               # [win]
+    - cross-r-base {{ r_base }}    # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+  run:
+    - r-base>=4.2
+    - {{ native }}gcc-libs         # [win]
+
+test:
+  commands:
+    - $R -e "library('grr')"           # [not win]
+    - "\"%R%\" -e \"library('grr')\""  # [win]
+
+about:
+  home: https://CRAN.R-project.org/package=grr
+  license: GPL-3.0-only
+  summary: Alternative implementations of some base R functions, including sort, order, and match.  Functions
+    are simplified but can be faster or have other advantages.
+  license_family: GPL3
+  license_file:
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+    - roryk

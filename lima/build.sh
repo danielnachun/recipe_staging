@@ -4,9 +4,8 @@ set -o xtrace -o nounset -o pipefail -o errexit
 
 mkdir -p ${PREFIX}/bin
 mkdir -p ${PREFIX}/share
-if [[ ${target_platform} =~ .*osx.* ]]; then
-    export CC=/usr/bin/clang
-fi
+
+sed -i "s/codesign --entitlements/codesign --force --entitlements/" Makefile
 
 make VERSION=${PKG_VERSION}
 cp -r _output/bin/* ${PREFIX}/bin

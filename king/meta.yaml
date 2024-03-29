@@ -16,11 +16,13 @@ requirements:
   build:
     - {{ compiler('cxx') }}
   host:
-    - zlib
-    - openmp
+    - zlib=1.2
+    - llvm-openmp  # [osx]
+    - _openmp_mutex  # [linux]
   run:
-    - zlib
-    - openmp
+    - libzlib>=1.2
+    - llvm-openmp  # [osx]
+    - _openmp_mutex  # [linux]
 
 test:
   commands:

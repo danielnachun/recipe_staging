@@ -1,0 +1,56 @@
+{% set version = "4.7.2" %}
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
+
+package:
+  name: r-wavethresh
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url:
+    - {{ cran_mirror }}/src/contrib/wavethresh_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/wavethresh/wavethresh_{{ version }}.tar.gz
+  sha256: 9a9774ca23496df4ecaa2bf9bff345a2ae40ded07f6afd81dd8847d48b43b656
+
+build:
+  merge_build_host: true  # [win]
+  number: 1
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('c') }}              # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}make
+    - {{ posix }}sed               # [win]
+    - {{ posix }}coreutils         # [win]
+    - {{ posix }}zip               # [win]
+    - cross-r-base {{ r_base }}    # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+    - r-mass
+  run:
+    - r-base>=4.2
+    - {{ native }}gcc-libs         # [win]
+    - r-mass
+
+test:
+  commands:
+    - $R -e "library('wavethresh')"           # [not win]
+    - "\"%R%\" -e \"library('wavethresh')\""  # [win]
+
+about:
+  home: https://CRAN.R-project.org/package=wavethresh
+  license: GPL-2.0-or-later
+  summary: Performs 1, 2 and 3D real and complex-valued wavelet transforms, nondecimated transforms, wavelet packet transforms, nondecimated wavelet packet transforms, multiple wavelet transforms, complex-valued wavelet transforms, wavelet shrinkage for various kinds of data, locally stationary wavelet time series, nonstationary
+    multiscale transfer function modeling, density estimation.
+  license_family: GPL3
+  license_file:
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r

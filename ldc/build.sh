@@ -2,8 +2,12 @@
 set -eu -o pipefail
 set -x
 
-mamba install -c conda-forge -y ldc -p ${BUILD_PREFIX}
-DCMP=${BUILD_PREFIX}/bin/ldmd2
+if [[ ${target_platform} =~ .*linux.* ]]; then
+    mamba install -c conda-forge -y ldc -p ${BUILD_PREFIX}
+    DCMP=${BUILD_PREFIX}/bin/ldmd2
+else
+    DCMP=${SRC_DIR}/binary/bin/ldmd2
+fi 
 
 # Build latest version
 cmake -S . -B build -G Ninja \

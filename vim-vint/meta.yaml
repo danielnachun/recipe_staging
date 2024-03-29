@@ -10,7 +10,7 @@ source:
   sha256: 5dc59b2e5c2a746c88f5f51f3fafea3d639c6b0fdbb116bb74af27bf1c820d97
 
 build:
-  number: 0
+  number: 1
   noarch: python
   entry_points:
     - vint = vint:main

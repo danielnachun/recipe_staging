@@ -9,7 +9,7 @@ on:
 jobs:
   setup:
     if: ${{ !contains(github.event.pull_request.labels.*.name, 'ci-skip') }}
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
     outputs:
@@ -55,6 +55,12 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
+      - name: Setup upterm session
+        if: contains(github.event.pull_request.labels.*.name, 'ssh')
+        uses: lhotari/action-upterm@v1
+        with:
+          limit-access-to-actor: true
 
       - name: Setup micromamba
         uses: mamba-org/setup-micromamba@v1

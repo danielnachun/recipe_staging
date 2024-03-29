@@ -17,7 +17,7 @@ requirements:
     - {{ compiler('c') }}
     - autoconf
     - automake
-    - binutils
+    - binutils  # [linux]
     - make
     - pkg-config
   host:

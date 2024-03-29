@@ -1,0 +1,95 @@
+From 36db7f097dbc957b2a67e5beddc9fe397977beb7 Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Sat, 23 Mar 2024 13:50:37 -0700
+Subject: [PATCH 2/2] replace x18 register
+
+---
+ erasure_code/aarch64/gf_6vect_mad_neon.S                | 2 +-
+ igzip/aarch64/igzip_decode_huffman_code_block_aarch64.S | 2 +-
+ igzip/aarch64/igzip_deflate_body_aarch64.S              | 2 +-
+ igzip/aarch64/igzip_deflate_finish_aarch64.S            | 2 +-
+ igzip/aarch64/isal_deflate_icf_body_hash_hist.S         | 2 +-
+ igzip/aarch64/isal_deflate_icf_finish_hash_hist.S       | 2 +-
+ 6 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/erasure_code/aarch64/gf_6vect_mad_neon.S b/erasure_code/aarch64/gf_6vect_mad_neon.S
+index 3b1b1b4..6853496 100644
+--- a/erasure_code/aarch64/gf_6vect_mad_neon.S
++++ b/erasure_code/aarch64/gf_6vect_mad_neon.S
+@@ -61,7 +61,7 @@ x_tbl3		.req	x15
+ x_tbl4		.req	x16
+ x_tbl5		.req	x17
+ x_tbl6		.req	x_tbl
+-x_const		.req	x18
++x_const		.req	x0
+ 
+ /* vectors */
+ v_mask0f	.req	v0
+diff --git a/igzip/aarch64/igzip_decode_huffman_code_block_aarch64.S b/igzip/aarch64/igzip_decode_huffman_code_block_aarch64.S
+index b5bdf5d..1420c88 100644
+--- a/igzip/aarch64/igzip_decode_huffman_code_block_aarch64.S
++++ b/igzip/aarch64/igzip_decode_huffman_code_block_aarch64.S
+@@ -273,7 +273,7 @@ declare Macros
+ 	declare_generic_reg	arg2,		2, x
+ 
+ 	declare_generic_reg	state,		11,x
+-	declare_generic_reg	start_out,	18,x
++	declare_generic_reg	start_out,	29,x
+ 
+ 	declare_generic_reg	read_in,	3,x
+ 	declare_generic_reg	read_in_length,	4,w
+diff --git a/igzip/aarch64/igzip_deflate_body_aarch64.S b/igzip/aarch64/igzip_deflate_body_aarch64.S
+index 9a7e1a9..b784d97 100644
+--- a/igzip/aarch64/igzip_deflate_body_aarch64.S
++++ b/igzip/aarch64/igzip_deflate_body_aarch64.S
+@@ -95,7 +95,7 @@ skip_has_hist:
+ 	declare_generic_reg	m_out_start,	15,x
+ 	declare_generic_reg	m_out_end,	16,x
+ 	declare_generic_reg	m_bits,		17,x
+-	declare_generic_reg	m_bit_count,	18,w
++	declare_generic_reg	m_bit_count,	2,w
+ 
+ 	declare_generic_reg	start_in,	19,x
+ 	declare_generic_reg	end_in,		20,x
+diff --git a/igzip/aarch64/igzip_deflate_finish_aarch64.S b/igzip/aarch64/igzip_deflate_finish_aarch64.S
+index a90e225..6f66573 100644
+--- a/igzip/aarch64/igzip_deflate_finish_aarch64.S
++++ b/igzip/aarch64/igzip_deflate_finish_aarch64.S
+@@ -97,7 +97,7 @@ skip_has_hist:
+ 	declare_generic_reg	m_out_start,	15,x
+ 	declare_generic_reg	m_out_end,	16,x
+ 	declare_generic_reg	m_bits,		17,x
+-	declare_generic_reg	m_bit_count,	18,w
++	declare_generic_reg	m_bit_count,	2,w
+ 
+ 	declare_generic_reg	start_in,	19,x
+ 	declare_generic_reg	end_in,		20,x
+diff --git a/igzip/aarch64/isal_deflate_icf_body_hash_hist.S b/igzip/aarch64/isal_deflate_icf_body_hash_hist.S
+index 178d91c..c1cd125 100644
+--- a/igzip/aarch64/isal_deflate_icf_body_hash_hist.S
++++ b/igzip/aarch64/isal_deflate_icf_body_hash_hist.S
+@@ -107,7 +107,7 @@ void isal_deflate_icf_body_hash_hist_base(struct isal_zstream *stream);
+ 	declare_generic_reg	param2,		2,x
+ 
+ 	/* local varibale */
+-	declare_generic_reg	level_buf,	18,x
++	declare_generic_reg	level_buf,	17,x
+ 	declare_generic_reg	avail_in,	13,w
+ 	declare_generic_reg	end_in,		13,x
+ 	declare_generic_reg	start_in,	19,x
+diff --git a/igzip/aarch64/isal_deflate_icf_finish_hash_hist.S b/igzip/aarch64/isal_deflate_icf_finish_hash_hist.S
+index e1a6d21..9e10330 100644
+--- a/igzip/aarch64/isal_deflate_icf_finish_hash_hist.S
++++ b/igzip/aarch64/isal_deflate_icf_finish_hash_hist.S
+@@ -117,7 +117,7 @@ void isal_deflate_icf_finish_hash_hist_aarch64(struct isal_zstream *stream);
+ 	declare_generic_reg	next_in,		8,x
+ 	declare_generic_reg	next_out,		10,x
+ 	declare_generic_reg	next_out_iter,		5,x
+-	declare_generic_reg	file_start,		18,x
++	declare_generic_reg	file_start,		17,x
+ 	declare_generic_reg	last_seen,		14,x
+ 
+ 	declare_generic_reg	literal_code,		9,w
+-- 
+2.44.0
+

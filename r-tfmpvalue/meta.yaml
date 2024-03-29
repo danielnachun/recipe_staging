@@ -1,0 +1,64 @@
+{% set version = "0.0.9" %}
+
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
+
+package:
+  name: r-tfmpvalue
+  version: {{ version|replace("-", "_") }}
+
+source:
+  fn: TFMPvalue_{{ version }}.tar.gz
+  url:
+    - {{ cran_mirror }}/src/contrib/TFMPvalue_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/TFMPvalue/TFMPvalue_{{ version }}.tar.gz
+  sha256: b9db56e75e2cee840d8b7861686dec07ee2c40cbc7d55361e5d04f1bf0c65de7
+
+build:
+  merge_build_host: true  # [win]
+  number: 1
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+# Suggests: testthat
+requirements:
+  build:
+    - {{ compiler('c') }}        # [not win]
+    - {{ compiler('cxx') }}      # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{ compiler('m2w64_cxx') }}        # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}make
+    - {{ posix }}sed               # [win]
+    - {{ posix }}coreutils         # [win]
+    - {{ posix }}zip               # [win]
+
+  host:
+    - r-base=4.2
+    - r-rcpp >=0.11.1
+
+  run:
+    - r-base>=4.2
+    - {{ native }}gcc-libs         # [win]
+    - r-rcpp >=0.11.1
+
+test:
+  commands:
+    - $R -e "library('TFMPvalue')"           # [not win]
+    - "\"%R%\" -e \"library('TFMPvalue')\""  # [win]
+
+about:
+  home: https://github.com/ge11232002/TFMPvalue
+  license: GPL-2
+  summary: In putative Transcription Factor Binding Sites (TFBSs)  identification from sequence/alignments, we are interested in the significance of certain match score. TFMPvalue provides the accurate calculation of P-value with  score threshold for Position Weight Matrices,  or the score with given P-value.  It is an interface
+    to code originally made available by  Helene Touzet and Jean-Stephane Varre, 2007,  Algorithms Mol Biol:2, 15. Touzet and Varre (2007) <DOI:10.1186/1748-7188-2-15>.
+  license_family: GPL2
+  license_file: {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+    - MathiasHaudgaard
+    - FrodePedersen
+    - ArneKr

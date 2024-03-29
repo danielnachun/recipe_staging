@@ -8,8 +8,13 @@ if [[ ${target_platform} =~ .*osx.* ]]; then
     export LDFLAGS_LD="-pie -headerpad_max_install_names -rpath,${PREFIX}/lib -L${PREFIX}/lib"
 fi
 
+MKL_ARG=""
+if [[ ${target_platform} != "osx-arm64" ]]; then
+    MKL_ARG=-DMKL_ROOT=${PREFIX}
+fi
+
 cmake -S . -B build \
-    -DMKL_ROOT=${PREFIX} \
+    ${MKL_ARG} \
     ${CMAKE_ARGS} 
 cmake --build build
 

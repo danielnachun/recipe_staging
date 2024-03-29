@@ -1,0 +1,76 @@
+{% set version = "1.2-10" %}
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
+
+package:
+  name: r-ksamples
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url:
+    - {{ cran_mirror }}/src/contrib/kSamples_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/kSamples/kSamples_{{ version }}.tar.gz
+  sha256: 2d66cc0511fb1be3190c5a285dcd93d02419468ee1ff5ae6d0838f16df2b578d
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('c') }}              # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}make
+    - {{ posix }}sed               # [win]
+    - {{ posix }}coreutils         # [win]
+    - {{ posix }}zip               # [win]
+    - cross-r-base {{ r_base }}    # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+    - r-suppdists
+  run:
+    - r-base>=4.2
+    - {{ native }}gcc-libs         # [win]
+    - r-suppdists
+
+test:
+  commands:
+    - $R -e "library('kSamples')"           # [not win]
+    - "\"%R%\" -e \"library('kSamples')\""  # [win]
+
+about:
+  home: https://CRAN.R-project.org/package=kSamples
+  license: GPL-2.0-or-later
+  summary: Compares k samples using the Anderson-Darling test, Kruskal-Wallis type tests  with different rank score criteria, Steel's multiple comparison test, and the  Jonckheere-Terpstra (JT) test. It computes asymptotic, simulated or (limited) exact  P-values, all valid under randomization, with or without ties, or conditionally  under
+    random sampling from populations, given the observed tie pattern.  Except for  Steel's test and the JT test it also combines these tests across several blocks of  samples.  Also analyzed are 2 x t contingency tables and their blocked combinations  using the Kruskal-Wallis criterion.  Steel's test is inverted to provide
+    simultaneous  confidence bounds for shift parameters.  A plotting function compares tail probabilities obtained under asymptotic approximation with those obtained via simulation or exact  calculations.
+  license_family: GPL3
+  license_file:
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+    - apcamargo
+
+# Package: kSamples
+# Type: Package
+# Title: K-Sample Rank Tests and their Combinations
+# Version: 1.2-9
+# Date: 2019-05-20
+# Authors@R: c(person("Fritz", "Scholz",role=c("aut","cre"),email = "fscholz@u.washington.edu"), person("Angie", "Zhu", role=c("aut"), email= "a.zhu.stat@gmail.com"))
+# Author: Fritz Scholz [aut, cre], Angie Zhu [aut]
+# Maintainer: Fritz Scholz <fscholz@u.washington.edu>
+# Depends: SuppDists
+# Imports: methods, graphics, stats
+# Description: Compares k samples using the Anderson-Darling test, Kruskal-Wallis type tests  with different rank score criteria, Steel's multiple comparison test, and the  Jonckheere-Terpstra (JT) test. It computes asymptotic, simulated or (limited) exact  P-values, all valid under randomization, with or without ties, or conditionally  under random sampling from populations, given the observed tie pattern.  Except for  Steel's test and the JT test it also combines these tests across several blocks of  samples.  Also analyzed are 2 x t contingency tables and their blocked combinations  using the Kruskal-Wallis criterion.  Steel's test is inverted to provide simultaneous  confidence bounds for shift parameters.  A plotting function compares tail probabilities obtained under asymptotic approximation with those obtained via simulation or exact  calculations.
+# License: GPL (>= 2)
+# LazyLoad: yes
+# NeedsCompilation: yes
+# Packaged: 2019-05-20 21:03:07 UTC; fritz
+# Repository: CRAN
+# Date/Publication: 2019-05-20 21:50:03 UTC

@@ -1,17 +1,8 @@
-:: check licenses
+echo ON
 cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
-
-:: build
-cargo install --locked --root "%PREFIX%" --path . || goto :error
-
-:: strip debug symbols
-strip "%PREFIX%\bin\%PKG_NAME%.exe" || goto :error
-
-:: remove extra build file
-del /F /Q "%PREFIX%\.crates.toml"
-
-goto :EOF
-
-:error
-echo Failed with error #%errorlevel%.
-exit 1
+if errorlevel 1 exit 1
+cargo build --release --locked
+if errorlevel 1 exit 1
+cargo install --path . --root %PREFIX% --locked
+del %PREFIX%\.crates2.json
+del %PREFIX%\.crates.toml

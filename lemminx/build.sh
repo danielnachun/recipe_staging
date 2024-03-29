@@ -11,6 +11,9 @@ sed -i "/--no-fallback/i --native-compiler-options=-L${PREFIX}/lib\n" org.eclips
 if [[ ${target_platform} == "osx-64" ]]; then
     install -m 755 org.eclipse.lemminx/target/lemminx-osx-x86_64-${PKG_VERSION} ${PREFIX}/bin/lemminx
 fi
+if [[ ${target_platform} == "osx-arm64" ]]; then
+    install -m 755 org.eclipse.lemminx/target/lemminx-osx-aarch_64-${PKG_VERSION} ${PREFIX}/bin/lemminx
+fi
 if [[ ${target_platform} == "linux-64" ]]; then
     install -m 755 org.eclipse.lemminx/target/lemminx-linux-x86_64-${PKG_VERSION} ${PREFIX}/bin/lemminx
 fi

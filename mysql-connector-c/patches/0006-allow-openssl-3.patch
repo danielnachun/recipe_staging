@@ -1,0 +1,43 @@
+From f251701147bd86dc788f33e602d9e7d5a196bfbd Mon Sep 17 00:00:00 2001
+From: Mervin Fansler <mmfansler@gmail.com>
+Date: Wed, 18 Oct 2023 10:19:51 -0400
+Subject: [PATCH 6/6] allow openssl 3
+
+---
+ cmake/ssl.cmake | 15 +++++++--------
+ 1 file changed, 7 insertions(+), 8 deletions(-)
+
+diff --git a/cmake/ssl.cmake b/cmake/ssl.cmake
+index 19ac9a6..8c5ba23 100644
+--- a/cmake/ssl.cmake
++++ b/cmake/ssl.cmake
+@@ -161,22 +161,21 @@ MACRO (MYSQL_CHECK_SSL)
+       LIST(REVERSE CMAKE_FIND_LIBRARY_SUFFIXES)
+     ENDIF()
+ 
+-    # Verify version number. Version information looks like:
+-    #   #define OPENSSL_VERSION_NUMBER 0x1000103fL
+-    # Encoded as MNNFFPPS: major minor fix patch status
++    # Verify major version number.
+     FILE(STRINGS "${OPENSSL_INCLUDE_DIR}/openssl/opensslv.h"
+-      OPENSSL_VERSION_NUMBER
+-      REGEX "^#[ ]*define[\t ]+OPENSSL_VERSION_NUMBER[\t ]+0x[0-9].*"
++      OPENSSL_VERSION_MAJOR
++      REGEX "^#[ ]*define[\t ]+OPENSSL_VERSION_MAJOR[\t ]+[0-9].*"
+     )
+     STRING(REGEX REPLACE
+-      "^.*OPENSSL_VERSION_NUMBER[\t ]+0x([0-9]).*$" "\\1"
+-      OPENSSL_MAJOR_VERSION "${OPENSSL_VERSION_NUMBER}"
++      "^.*OPENSSL_VERSION_MAJOR[\t ]+([0-9]).*$" "\\1"
++      OPENSSL_MAJOR_VERSION "${OPENSSL_VERSION_MAJOR}"
+     )
+ 
+     IF(OPENSSL_INCLUDE_DIR AND
+        OPENSSL_LIBRARY   AND
+        CRYPTO_LIBRARY      AND
+-       OPENSSL_MAJOR_VERSION STREQUAL "1"
++       (OPENSSL_MAJOR_VERSION STREQUAL "1" OR
++        OPENSSL_MAJOR_VERSION STREQUAL "3")
+       )
+       SET(OPENSSL_FOUND TRUE)
+     ELSE()

@@ -30,7 +30,7 @@ requirements:
     - {{ compiler('c') }}
     - autoconf
     - automake
-    - binutils
+    - binutils  # [linux]
     - make
     - patch
     - sed

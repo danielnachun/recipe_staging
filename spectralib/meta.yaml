@@ -1,0 +1,38 @@
+{% set version = "0.9.0" %}
+
+package:
+  name: spectralib
+  version: {{ version }}
+
+source:
+  fn: spectralib-{{ version }}.tar.gz
+  url: https://github.com/yixuan/spectra/archive/v{{ version }}.tar.gz
+  sha256: 2966757d432e8fba5958c2a05ad5674ce34eaae3718dd546c1ba8760b80b7a3d
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - cmake
+    - {{ compiler('cxx') }}
+    - make  # [unix]
+  host:
+    - eigen
+  run:
+    - eigen
+
+test:
+  commands:
+    - test -f ${PREFIX}/include/Spectra/GenEigsSolver.h  # [unix]
+    - if not exist %LIBRARY_PREFIX%\\include\\Spectra\\GenEigsSolver.h exit 1  # [win]
+
+about:
+  home: https://spectralib.org/
+  license: MPL-2.0
+  license_file: LICENSE
+  summary: A header-only C++ library for large scale eigenvalue problems
+
+extra:
+  recipe-maintainers:
+    - jschueller

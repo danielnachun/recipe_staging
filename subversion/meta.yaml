@@ -1,0 +1,69 @@
+{% set name = "subversion" %}
+{% set version = "1.14.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://downloads.apache.org/subversion/subversion-{{ version }}.tar.bz2
+  sha256: 949efd451a09435f7e8573574c71c7b71b194d844890fa49cd61d2262ea1a440
+
+build:
+  number: 0
+  skip: true  # [win]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - autoconf  # [unix]
+    - automake  # [unix]
+    - pkg-config  # [unix]
+    - nasm
+    - make
+    - python
+  host:
+    - boost-cpp
+    - libapr
+    - libaprutil
+    - libtool=2.4.6  # [unix]
+    - sqlite
+    - zlib
+    - openssl
+    - libdb
+    - lz4-c
+    - libutf8proc
+    - gettext
+    - expat
+    - gnupg  # [unix]
+    - cyrus-sasl  # [unix]
+    - libmagic  # [unix]
+    - serf  # [linux]
+    - swig
+    - perl=5.32
+  run:
+    - libapr
+    - libaprutil
+    - gettext
+    - expat
+    - perl>=5.32
+
+test:
+  commands:
+    - svn --help
+    - perl -e 'use SVN::Client; use SVN::Core;'  # [target_platform != "osx-arm64"]
+
+about:
+  home: https://subversion.apache.org/
+  license: Apache-2.0
+  license_family: APACHE
+  license_file: LICENSE
+  summary: Enterprise-class centralized version control for the masses
+  doc_url: https://subversion.apache.org/docs/
+  dev_url: https://subversion.apache.org/source-code.html
+
+extra:
+  recipe-maintainers:
+    - scopatz
+    - zklaus

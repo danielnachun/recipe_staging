@@ -1,0 +1,38 @@
+{% set name = "miller" %}
+{% set version = "6.11.0" %}
+{% set sha256 = "ff9a646db5c4bf7f9af837dae62574e1d3cd12857116522bc5a5f09dec873cda" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  fn: {{ name }}-{{ version }}.tar.gz
+  url: https://github.com/johnkerl/miller/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: {{ sha256 }}
+
+build:
+  number: 0
+  skip: true  # [win]
+
+requirements:
+  build:
+    - go-nocgo
+    - make
+
+test:
+  commands:
+    - mlr --version
+
+about:
+  home: http://johnkerl.org/miller/doc/index.html
+  license: BSD-2-Clause
+  license_family: BSD
+  license_file: LICENSE.txt
+  summary: Miller is like awk, sed, cut, join, and sort for name-indexed data such as CSV, TSV, and tabular JSON. You get to work with your data using named fields, without needing to count positional column indices.
+
+extra:
+  recipe-maintainers:
+    - BEFH
+    - cbrueffer
+    - zachcp

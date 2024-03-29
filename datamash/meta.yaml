@@ -1,0 +1,36 @@
+{% set version = "1.8" %}
+
+package:
+  name: datamash
+  version: {{ version }}
+
+source:
+  url: http://ftpmirror.gnu.org/datamash/datamash-{{ version }}.tar.gz
+  sha256: 7ad97e8c7ef616dd03aa5bd67ae24c488272db3e7d1f5774161c18b75f29f6fd
+
+build:
+  number: 0
+  skip: true  # [win]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+
+test:
+  commands:
+    - datamash --version
+    - seq 1 10 | datamash sum 1
+
+about:
+  home: https://www.gnu.org/software/datamash/
+  license: GPL-3.0
+  license_family: GPL
+  license_file: COPYING
+  summary: GNU datamash is a command-line program which performs basic numeric,textual and statistical operations on input textual data files.
+  doc_url: https://www.gnu.org/software/datamash/manual/
+
+extra:
+  recipe-maintainers:
+    - bgruening
+    - rvalieris
