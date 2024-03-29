@@ -8,10 +8,11 @@ source:
   - url: https://github.com/bwa-mem2/bwa-mem2/releases/download/v{{ version }}/Source_code_including_submodules.tar.gz
     sha256: 9b001bdc7666ee3f14f3698b21673714d429af50438b894313b05bc4688b1f6d
     patches:
-      - ./0001-First-compiling-version-with-OS-X-and-sse2neon.patch
-      - ./0003-Get-correct-arch-define-for-osx.patch
-      - ./0006-Use-arch-flags-directly-so-that-Make-options-on-cmd-.patch
-      - ./0007-return-AVX-SIMD-on-ARM64.patch
+      - 0001-First-compiling-version-with-OS-X-and-sse2neon.patch
+      - 0003-Get-correct-arch-define-for-osx.patch
+      - 0006-Use-arch-flags-directly-so-that-Make-options-on-cmd-.patch
+      - 0007-return-AVX-SIMD-on-ARM64.patch
+      - 0008-enable-safestringlib-on-ARM.patch
       #- Makefile.patch
 
 build:
