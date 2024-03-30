@@ -6,6 +6,11 @@ export EIGEN3_INCLUDE_DIR="${PREFIX}/include/eigen3"
 export SPECTRA_LIB="${PREFIX}"
 export BOOST_LIB="${PREFIX}"
 export MKLROOT="${PREFIX}"
+export LDFLAGS="${LDFLAGS} -lgsl"
+export LDFLAGS=$(echo $LDFLAGS | sed 's/-Wl,-dead_strip_dylibs//g')
+
+sed -i 's/CMAKE_EXE_LINKER_FLAGS "/CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}/g' CMakeLists.txt
+sed -i 's/zstd_s/zstd/' CMakeLists.txt
 
 cmake -S . -B build ${CMAKE_ARGS}
 cmake --build build
