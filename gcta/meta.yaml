@@ -8,6 +8,8 @@ package:
 source:
   git_url: https://github.com/jianyangqt/{{ name }}
   git_rev: v{{ version }}
+  patches:
+    - 0001-fix-openmp-pragma.patch
 
 build:
   number: 0
