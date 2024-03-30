@@ -1,4 +1,4 @@
-From 9472cc5d696a3e2362109947de631db3dd195857 Mon Sep 17 00:00:00 2001
+From 15e3c1b8a8b522067b71814c60bbf1da8436554b Mon Sep 17 00:00:00 2001
 From: danielnachun <daniel.nachun@gmail.com>
 Date: Fri, 29 Mar 2024 23:30:52 -0700
 Subject: [PATCH] add missing include
@@ -8,7 +8,8 @@ Subject: [PATCH] add missing include
  include/Marker.h        | 1 +
  include/OptionIO.h      | 1 +
  include/Pheno.h         | 1 +
- 4 files changed, 4 insertions(+)
+ include/utils.hpp       | 1 +
+ 5 files changed, 5 insertions(+)
 
 diff --git a/include/AsyncBuffer.hpp b/include/AsyncBuffer.hpp
 index 4927e2d..4ae64d6 100644
@@ -58,6 +59,18 @@ index 9241d07..48cb658 100644
  #include <vector>
  #include <string>
  #include <map>
+diff --git a/include/utils.hpp b/include/utils.hpp
+index 70045e0..e0705c5 100644
+--- a/include/utils.hpp
++++ b/include/utils.hpp
+@@ -31,6 +31,7 @@
+ #include <numeric>
+ #include <algorithm>
+ #include <sstream>
++#include <cstdint>
+ 
+ std::string getHostName();
+ std::string getLocalTime();
 -- 
 2.44.0
 
