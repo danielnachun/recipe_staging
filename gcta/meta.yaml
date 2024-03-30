@@ -10,6 +10,7 @@ source:
   git_rev: v{{ version }}
   patches:
     - 0001-fix-openmp-pragma.patch
+    - 0002-add-missing-include.patch
 
 build:
   number: 0
