@@ -11,7 +11,7 @@ export LDFLAGS=$(echo $LDFLAGS | sed 's/-Wl,-dead_strip_dylibs//g')
 
 sed -i 's/CMAKE_EXE_LINKER_FLAGS "/CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /g' CMakeLists.txt
 sed -i 's/zstd_s/zstd/' CMakeLists.txt
-sed -i '?link_directories(/usr/local/lib)?d' CMakeLists.txt
+sed -i '/link_directories(\/usr\/local\/lib)/d' CMakeLists.txt
 if [[ ${target_platform} == "osx-arm64" ]]; then
     sed -i 's/"aarch64"/"arm64"/' CMakelists.txt
 fi
