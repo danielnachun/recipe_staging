@@ -21,13 +21,19 @@ requirements:
   host:
     - boost
     - eigen
+    - gsl
     - mkl-devel  # [build_platform != "osx-arm64"]
     - openblas  # [build_platform == "osx-arm64"]
     - spectralib
+    - zlib=1.2
+    - zstd
   run:
     - boost-cpp
+    - gsl
+    - libzlib>=1.2
     - mkl  # [build_platform != "osx-arm64"]
     - openblas  # [build_platform == "osx-arm64"]
+    - zstd
 
 test:
   commands:
