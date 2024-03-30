@@ -6,12 +6,15 @@ package:
   version: "{{ version }}"
 
 source:
-  git_url: https://github.com/jianyangqt/{{ name }}
-  git_rev: v{{ version }}
-  patches:
-    - 0001-fix-openmp-pragma.patch
-    - 0002-add-missing-include.patch
-    - 0003-fix-lapack-call.patch
+  - git_url: https://github.com/jianyangqt/{{ name }}
+    git_rev: v{{ version }}
+    patches:
+      - 0001-fix-openmp-pragma.patch
+      - 0002-add-missing-include.patch
+      - 0003-fix-lapack-call.patch
+  - url: https://www.cog-genomics.org/static/bin/plink2_src_240318.zip
+    sha256: badb51fb122e6c3c448c140066e46f0ac1ae2ae5d36af26769e7b4127164ae6c
+    folder: plink2
 
 build:
   number: 0
