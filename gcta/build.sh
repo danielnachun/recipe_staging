@@ -16,9 +16,9 @@ if [[ ${target_platform} == "osx-arm64" ]]; then
     export OPENBLAS="${PREFIX}"
     rm -rf submods/plink-ng
     mv plink2 submods/plink-ng
-    sed -i 's|pgenlib_misc.h|include/pgenlib_misc.h' submods/Pgenlib/PgenReader.cpp
-    sed -i 's|plink2_baseh.h|include/plink2_base.h' submods/Pgenlib/PgenReader.cpp
-    sed -i 's|pgenlib_read.h|include/pgenlib_read.h' submods/Pgenlib/PgenReader.h
+    sed -i 's|pgenlib_misc.h|include/pgenlib_misc.h|' submods/Pgenlib/PgenReader.cpp
+    sed -i 's|plink2_baseh.h|include/plink2_base.h|' submods/Pgenlib/PgenReader.cpp
+    sed -i 's|pgenlib_read.h|include/pgenlib_read.h|' submods/Pgenlib/PgenReader.h
 else
     export MKLROOT="${PREFIX}"
 fi
