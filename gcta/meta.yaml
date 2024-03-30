@@ -33,6 +33,7 @@ requirements:
     - gsl
     - mkl-devel  # [build_platform != "osx-arm64"]
     - openblas  # [build_platform == "osx-arm64"]
+    - simde
     - spectralib
     - zlib=1.2
     - zstd
