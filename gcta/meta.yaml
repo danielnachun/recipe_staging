@@ -32,9 +32,12 @@ requirements:
   run:
     - boost-cpp
     - gsl
+    - libsqlite
     - libzlib>=1.2
+    - llvm-openmp  # [osx]
     - mkl  # [build_platform != "osx-arm64"]
     - openblas  # [build_platform == "osx-arm64"]
+    - _openmp_mutex  # [linux]
     - zstd
 
 test:
