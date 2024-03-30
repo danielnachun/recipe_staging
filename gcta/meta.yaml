@@ -11,6 +11,7 @@ source:
   patches:
     - 0001-fix-openmp-pragma.patch
     - 0002-add-missing-include.patch
+    - 0003-fix-lapack-call.patch
 
 build:
   number: 0
