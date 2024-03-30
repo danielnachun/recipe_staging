@@ -14,6 +14,8 @@ sed -i '/link_directories(\/usr\/local\/lib)/d' CMakeLists.txt
 if [[ ${target_platform} == "osx-arm64" ]]; then
     sed -i 's/"aarch64"/"arm64"/' CMakelists.txt
     export OPENBLAS="${PREFIX}"
+    export CXXFLAGS="${CXXFLAGS} -DIGNORE_BUNDLED_SIMDE"
+    export CFLAGS="${CFLAGS} -DIGNORE_BUNDLED_SIMDE"
     rm -rf submods/plink-ng/2.0
     mv plink2 submods/plink-ng/2.0
 else
