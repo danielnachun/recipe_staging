@@ -1,4 +1,4 @@
-{% set version = "0.1.0" %}
+{% set version = "0.1.6" %}
 
 package:
   name: r-mvsusier
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/stephenslab/mvsusieR/archive/{{ version }}.tar.gz
-  sha256: a7b4fd910013c9344ce7a1acd245b952ddfda456529303b2999e9a2c54df168e
+  sha256: e1c724222c783ea9d0ecf1d5df8b408cbf864967eaa1e4defe95353dd283cd7f
 
 build:
   merge_build_host: true  # [win]
@@ -20,7 +20,7 @@ requirements:
   build:
     - cross-r-base {{ r_base }}  # [build_platform != target_platform]
   host:
-    - r-base=4.2
+    - r-base>=4.2
     - r-abind
     - r-ashr
     - r-cowplot
