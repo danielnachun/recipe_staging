@@ -16,16 +16,16 @@ requirements:
   build:
     - {{ compiler('c') }}
   host:
-    - python=3.11
+    - python=3.12
     - setuptools
     - curl
     - libcurl
-    - zlib
-    - numpy=1.24
+    - zlib=1.2
+    - numpy=1.26
   run:
-    - python=3.11
+    - python=3.12
     - libcurl
-    - zlib
+    - libzlib>=1.2
     - {{ pin_compatible('numpy') }}
 
 test:
