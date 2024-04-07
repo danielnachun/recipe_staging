@@ -20,7 +20,7 @@ requirements:
     - {{ compiler('c') }}
   host:
     - almosthere
-    - bgen
+    - bgen>=4.1
     - elapsed
     - python=3.12
     - poetry-core >=1.0.8
@@ -29,7 +29,7 @@ requirements:
     - zlib=1.2
   run:
     - python=3.12
-    - bgen
+    - bgen>=4.1
     - appdirs
     - cffi
     - numpy
