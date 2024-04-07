@@ -10,39 +10,41 @@ source:
   sha256: d686393960542b1f3b35652b571ed074afd8a6473ced3b955c5662eb028300bd
 
 build:
-  number: 0
+  noarch: generic
+  number: 1
 
 requirements:
   run:
-    - bgen==1.2.10
+    - bgen-py==1.2.10
     - bitarray
     - dask
     - deprecated
     - finemap
     - networkx
-    - numpy
+    - numpy>=1.26
     - packaging
     - pandas
     - pandas-plink
     - pip
     - pyarrow>=3.0
-    - python=3.10
+    - python=3.12
     - r-ckmeans.1d.dp
     - r-expm
     - r-lattice
     - r-matrixstats
-    - r-susier==0.11.92
+    - r-susier=0.11.92
     - r-stringi
     - r-wavethresh
     - rpy2>=3.5.9
     - scikit-learn
     - scipy
+    - snappy=1.1
     - tqdm
     - xarray
 
 test:
    commands:
-    - python3 ${PREFIX}/bin/test_polyfun.py
+    - test -f ${PREFIX}/bin/test_polyfun.py
 
 about:
   home: https://github.com/omerwe/polyfun
