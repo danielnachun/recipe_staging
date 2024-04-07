@@ -16,13 +16,13 @@ build:
 
 requirements:
   host:
-    - numpy =1.24
+    - numpy =1.26
     - matplotlib
-    - python
+    - python=3.12
   run:
-    - numpy =1.24
+    - numpy =1.26
     - matplotlib
-    - python
+    - python=3.12
 
 test:
   imports:
