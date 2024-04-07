@@ -1,0 +1,57 @@
+{% set name = "pysnptools" %}
+{% set version = "0.5.11" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pysnptools-{{ version }}.tar.gz
+  sha256: 3643f8a58b65a77a9b536450b13f8d6908d0854aaf03fb0124b1cf2d414fc774
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python
+    - numpy >=1.17.0
+    - setuptools
+    - pip
+  run:
+    - python
+    - scipy >=1.1.0
+    - numpy >=1.17.0
+    - pandas >=1.1.1
+    - psutil >=5.6.3
+    - h5py >=2.10.0
+    - cloudpickle >=2.2.0
+    - more-itertools >=8.7.0
+    - cbgen >=1.0.4
+    - bgen-reader >=4.0.8
+    - bed-reader >=1.0.0
+    - cachetools
+    - dask
+    - texttable
+    - tqdm
+    - xarray
+
+test:
+  imports:
+    - pysnptools
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://fastlmm.github.io/
+  summary: PySnpTools
+  license: Apache-2.0
+  license_file: LICENSE.md
+
+extra:
+  recipe-maintainers:
+    - danielnachun
