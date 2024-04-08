@@ -22,11 +22,11 @@ requirements:
     - cython
     - packaging
     - pip
-    - python=3.12
+    - python=3.11
     - zlib
   run:
     - cython
-    - python=3.12
+    - python=3.11
 
 test:
   imports:
