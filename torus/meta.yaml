@@ -22,7 +22,7 @@ requirements:
     - gsl
     - zlib
   run:
-    - boost-cpp=1.84
+    - libboost=1.84
     - libopenblas
 
 test:
