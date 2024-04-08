@@ -18,13 +18,13 @@ requirements:
     - make
   host:
     - blas
-    - boost-cpp =1.80
+    - boost-cpp =1.84
     - gsl
     - zlib
   run:
     - _openmp_mutex  # [linux]
     - llvm-openmp  # [osx]
-    - boost-cpp =1.80
+    - boost-cpp =1.84
     - libopenblas
     - libzlib
 
