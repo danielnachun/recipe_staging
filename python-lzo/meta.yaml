@@ -19,11 +19,11 @@ requirements:
   build:
     - {{ compiler('c') }}
   host:
-    - python=3.11
+    - python=3.12
     - pip
     - lzo 2.10.*
   run:
-    - python=3.11
+    - python=3.12
     - lzo 2.10.*
 
 test:
