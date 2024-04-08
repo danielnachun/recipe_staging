@@ -1,4 +1,4 @@
-{% set name = "bgen" %}
+{% set name = "bgen-py" %}
 {% set version = "1.2.10" %}
 
 package:
@@ -22,11 +22,11 @@ requirements:
     - cython
     - packaging
     - pip
-    - python=3.10
+    - python=3.12
     - zlib
   run:
     - cython
-    - python
+    - python=3.12
 
 test:
   imports:
