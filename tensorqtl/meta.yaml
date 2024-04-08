@@ -11,18 +11,18 @@ source:
 
 build:
   noarch: python
-  number: 2
+  number: 3
   entry_points:
     - tensorqtl = tensorqtl:__main__
 
 requirements:
   host:
-    - numpy =1.24
+    - numpy=1.26
     - pandas
     - pandas-plink
     - pip
     - pyarrow
-    - python >=3.10,<3.11
+    - python=3.12
     - qtl
     - rpy2
     - scipy
@@ -30,11 +30,11 @@ requirements:
     - sed
   run:
     - bioconductor-qvalue
-    - numpy =1.24
+    - numpy=1.26
     - pandas
     - pandas-plink
     - pyarrow
-    - python >=3.10,<3.11
+    - python=3.12
     - qtl
     - rpy2
     - scipy
