@@ -1,4 +1,4 @@
-{% set name = "bgen" %}
+{% set name = "bgen-py" %}
 {% set version = "1.2.10" %}
 
 package:
@@ -6,7 +6,7 @@ package:
   version: "{{ version }}"
 
 source:
-  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  url: "https://pypi.io/packages/source/{{ name[0] }}/bgen/bgen-{{ version }}.tar.gz"
   sha256: 10acc957670f5d05b58922d4b922496a8cc333414b3c07923bf113c4684e2964
 
 build:
@@ -22,11 +22,11 @@ requirements:
     - cython
     - packaging
     - pip
-    - python=3.10
+    - python=3.12
     - zlib
   run:
     - cython
-    - python
+    - python=3.12
 
 test:
   imports:
