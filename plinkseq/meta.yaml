@@ -16,7 +16,9 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - gcc  # [linux]
     - make
+    - sed
   host:
     #- protobuf
     - zlib=1.2
