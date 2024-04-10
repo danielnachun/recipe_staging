@@ -1,0 +1,295 @@
+From 01ae54ea344921805f5cec3f150a86e651905e16 Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Tue, 9 Apr 2024 19:26:19 -0700
+Subject: [PATCH] build fixes
+
+---
+ Cpp/DoMkl_linux.sh   | 109 +++++++++++++++++++------------------------
+ Cpp/Inc/BlasLapack.h |  86 +---------------------------------
+ Cpp/Inc/FastLmmC.h   |   1 -
+ Cpp/Inc/Utils.h      |   3 +-
+ Cpp/Src/Startup.cpp  |   2 +-
+ 5 files changed, 52 insertions(+), 149 deletions(-)
+
+diff --git a/Cpp/DoMkl_linux.sh b/Cpp/DoMkl_linux.sh
+index 17dd74e..ad39e96 100644
+--- a/Cpp/DoMkl_linux.sh
++++ b/Cpp/DoMkl_linux.sh
+@@ -1,12 +1,6 @@
+ #!/bin/bash
+ 
+-if [ "$1" = "v2.x" ]; then
+-  LINUX_KERNEL=-DUSE_LINUX_V2x_KERNEL
+-  echo "Compiling for RedHat Enterprise Linux with v2.x kernel (LINUX_KERNEL=$LINUX_KERNEL)"
+-else
+-  LINUX_KERNEL=
+-  echo "Compiling for Linux with V3.x kernel (LINUX_KERNEL=$LINUX_KERNEL)"
+-fi
++set -o errexit -o xtrace
+ 
+ echo "Generating Inc/BuildVer.h"
+ echo "// Generated File  ** DO NOT EDIT **" >Inc/BuildVer.h
+@@ -14,48 +8,53 @@ echo "int wVerBuild = `date +%Y%m%d`;"     >>Inc/BuildVer.h
+ echo "#define szBuildHost \"`uname -n`\""  >>Inc/BuildVer.h
+ 
+ echo "Compiling sources with MKL Library"
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/AutoSelectSnps.cpp       -o ./obj-mkl/AutoSelectSnps.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/Beta.cpp                 -o ./obj-mkl/Beta.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/BrentC.cpp               -o ./obj-mkl/BrentC.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/CCovariatesData.cpp      -o ./obj-mkl/CCovariatesData.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/CKernelData.cpp          -o ./obj-mkl/CKernelData.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/CLexer.cpp               -o ./obj-mkl/CLexer.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/CLogisticRegression.cpp  -o ./obj-mkl/CLogisticRegression.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/CPhenData.cpp            -o ./obj-mkl/CPhenData.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/CPlinkAlternatePhenotypeFile.cpp -o ./obj-mkl/CPlinkAlternatePhenotypeFile.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/CPlinkBedFile.cpp        -o ./obj-mkl/CPlinkBedFile.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/CPlinkBigFile.cpp        -o ./obj-mkl/CPlinkBigFile.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/CPlinkBimFile.cpp        -o ./obj-mkl/CPlinkBimFile.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/CPlinkDatFile.cpp        -o ./obj-mkl/CPlinkDatFile.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/CPlinkFamFile.cpp        -o ./obj-mkl/CPlinkFamFile.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/CPlinkFile.cpp           -o ./obj-mkl/CPlinkFile.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/CPlinkLexer.cpp          -o ./obj-mkl/CPlinkLexer.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/CPlinkMapFile.cpp        -o ./obj-mkl/CPlinkMapFile.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/CSnpData.cpp             -o ./obj-mkl/CSnpData.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/CSnpFilterOptions.cpp    -o ./obj-mkl/CSnpFilterOptions.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/EigenStratImputation.cpp -o ./obj-mkl/EigenStratImputation.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/EigenSym.cpp             -o ./obj-mkl/EigenSym.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/FastLMM.cpp              -o ./obj-mkl/FastLMM.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/FastLMM_fullrank.cpp     -o ./obj-mkl/FastLMM_fullrank.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/FastLMM_lowrank.cpp      -o ./obj-mkl/FastLMM_lowrank.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/FastLMM_woodbury.cpp     -o ./obj-mkl/FastLMM_woodbury.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/FastLmmC.cpp             -o ./obj-mkl/FastLmmC.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/FisherF.cpp              -o ./obj-mkl/FisherF.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/Gamma.cpp                -o ./obj-mkl/Gamma.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/GroupSim.cpp             -o ./obj-mkl/GroupSim.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/LinReg.cpp               -o ./obj-mkl/LinReg.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/LmmGwas.cpp              -o ./obj-mkl/LmmGwas.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/MathFunctions.cpp        -o ./obj-mkl/MathFunctions.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/MatrixIO.cpp             -o ./obj-mkl/MatrixIO.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/Qval.cpp                 -o ./obj-mkl/Qval.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/Splash.cpp               -o ./obj-mkl/Splash.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/Startup.cpp              -o ./obj-mkl/Startup.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/StudyData.cpp            -o ./obj-mkl/StudyData.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/TsvLexer.cpp             -o ./obj-mkl/TsvLexer.o
+-g++ -c -O3 -std=c++0x -DUSE_MKL $LINUX_KERNEL -I./Inc -I/opt/intel/mkl/include -I/opt/intel/mkl/include/intel64/lp64 Src/Utils.cpp                -o ./obj-mkl/Utils.o
++mkdir -p ./obj-mkl
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/AutoSelectSnps.cpp       -o ./obj-mkl/AutoSelectSnps.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/Beta.cpp                 -o ./obj-mkl/Beta.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/BrentC.cpp               -o ./obj-mkl/BrentC.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/CCovariatesData.cpp      -o ./obj-mkl/CCovariatesData.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/CKernelData.cpp          -o ./obj-mkl/CKernelData.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/CLexer.cpp               -o ./obj-mkl/CLexer.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/CLogisticRegression.cpp  -o ./obj-mkl/CLogisticRegression.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/CPhenData.cpp            -o ./obj-mkl/CPhenData.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/CPlinkAlternatePhenotypeFile.cpp -o ./obj-mkl/CPlinkAlternatePhenotypeFile.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/CPlinkBedFile.cpp        -o ./obj-mkl/CPlinkBedFile.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/CPlinkBigFile.cpp        -o ./obj-mkl/CPlinkBigFile.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/CPlinkBimFile.cpp        -o ./obj-mkl/CPlinkBimFile.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/CPlinkDatFile.cpp        -o ./obj-mkl/CPlinkDatFile.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/CPlinkFamFile.cpp        -o ./obj-mkl/CPlinkFamFile.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/CPlinkFile.cpp           -o ./obj-mkl/CPlinkFile.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/CPlinkLexer.cpp          -o ./obj-mkl/CPlinkLexer.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/CPlinkMapFile.cpp        -o ./obj-mkl/CPlinkMapFile.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/CSnpData.cpp             -o ./obj-mkl/CSnpData.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/CSnpFilterOptions.cpp    -o ./obj-mkl/CSnpFilterOptions.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/EigenStratImputation.cpp -o ./obj-mkl/EigenStratImputation.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/EigenSym.cpp             -o ./obj-mkl/EigenSym.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/FastLMM.cpp              -o ./obj-mkl/FastLMM.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/FastLMM_fullrank.cpp     -o ./obj-mkl/FastLMM_fullrank.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/FastLMM_lowrank.cpp      -o ./obj-mkl/FastLMM_lowrank.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/FastLMM_woodbury.cpp     -o ./obj-mkl/FastLMM_woodbury.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/FastLmmC.cpp             -o ./obj-mkl/FastLmmC.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/FisherF.cpp              -o ./obj-mkl/FisherF.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/Gamma.cpp                -o ./obj-mkl/Gamma.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/GroupSim.cpp             -o ./obj-mkl/GroupSim.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/LinReg.cpp               -o ./obj-mkl/LinReg.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/LmmGwas.cpp              -o ./obj-mkl/LmmGwas.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/MathFunctions.cpp        -o ./obj-mkl/MathFunctions.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/MatrixIO.cpp             -o ./obj-mkl/MatrixIO.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/Qval.cpp                 -o ./obj-mkl/Qval.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/Splash.cpp               -o ./obj-mkl/Splash.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/Startup.cpp              -o ./obj-mkl/Startup.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/StudyData.cpp            -o ./obj-mkl/StudyData.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/TsvLexer.cpp             -o ./obj-mkl/TsvLexer.o
++${CXX} ${CXXFLAGS} -c -O3 -std=c++0x -DUSE_MKL -I./Inc  Src/Utils.cpp                -o ./obj-mkl/Utils.o
+ 
+ echo "Linking fastlmmc_mkl"
+-g++ -o ./fastlmmc_mkl		\
++mkl_ldflags="-lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -liomp5"
++if [ ! -z ${LINUX} ]; then
++    mkl_ldflags="-Wl,--start-group ${mkl_ldflags} -Wl,--end-group -lrt"
++fi
++${CXX} ${LDFLAGS} -o ./fastlmmc_mkl		\
+ 	obj-mkl/AutoSelectSnps.o	\
+ 	obj-mkl/Beta.o			\
+ 	obj-mkl/BrentC.o		\
+@@ -95,20 +94,10 @@ g++ -o ./fastlmmc_mkl		\
+ 	obj-mkl/StudyData.o     \
+ 	obj-mkl/TsvLexer.o		\
+ 	obj-mkl/Utils.o			\
+-	-Wl,--start-group		\
+-	/opt/intel/mkl/lib/intel64/libmkl_blas95_lp64.a		\
+-	/opt/intel/mkl/lib/intel64/libmkl_lapack95_lp64.a	\
+-	/opt/intel/mkl/lib/intel64/libmkl_intel_lp64.a		\
+-	/opt/intel/mkl/lib/intel64/libmkl_intel_thread.a	\
+-	/opt/intel/mkl/lib/intel64/libmkl_core.a		\
+-	/opt/intel/lib/intel64/libiomp5.a	\
+-	-Wl,--end-group	\
++    ${mkl_ldflags} \
+ 	-lpthread	\
+ 	-lz		\
+-	-ldl	\
+-	-lrt	\
+-	-static
++	-ldl	
+ 
+-echo "Copy to fastlmmc and zip the executable file"
++echo "Copy to fastlmmc"
+ cp fastlmmc_mkl fastlmmc
+-bzip2 -k -f fastlmmc 
+diff --git a/Cpp/Inc/BlasLapack.h b/Cpp/Inc/BlasLapack.h
+index 8fe231c..95c8db7 100644
+--- a/Cpp/Inc/BlasLapack.h
++++ b/Cpp/Inc/BlasLapack.h
+@@ -419,91 +419,7 @@ inline void SetReproducibleFP( bool fDoReproducibleFP )
+ 
+ inline string MathLibName()
+    {
+-   void Fatal( const char *szFmt, ... );
+-   void Warn( const char *szFmt, ... );
+-#if defined( USE_MKL )
+-   char szMklVersion[ 64 ];
+-   MKLVersion version;
+-   
+-   mkl_get_version( &version );
+-   sprintf( szMklVersion, "MKL v%d.%02d.%02d - Build: %s", 
+-            version.MajorVersion, 
+-            version.MinorVersion, 
+-            version.UpdateVersion, 
+-            version.Build );
+-
+-#if defined( USE_LINUX_V2x_KERNEL )
+-   if ( (version.MajorVersion != 10)
+-     || (version.MinorVersion != 3)
+-     || (version.UpdateVersion != 7)
+-     || (_strcmpi( version.Build, "20111003" ) != 0)
+-      )
+-      {
+-      Warn( "Unexpected MKL Version Found.  "
+-          "\n          Expecting: MKL v10.03.07 - Build: 20111003"
+-          "\n              Found: %s", szMklVersion );
+-      if (getenv( "FastLmmUseAnyMklLib" ) == nullptr )
+-         {
+-         Fatal( "Exit due to MKL version mismatch"
+-              "\n              To bypass this check, Set FastLmmUseAnyMklLib=1" );
+-         }
+-      else
+-         {
+-         Warn( "FastLmmUseAnyMklLib set.  Continuing execution.\n\n" );
+-         }
+-      }
+-#else
+-   if ( (version.MajorVersion != 11)
+-     || (version.MinorVersion != 0)
+-     || (version.UpdateVersion != 4)
+-     || (_strcmpi( version.Build, "20130517" ) != 0)
+-      )
+-      {
+-      Warn( "Unexpected MKL Version Found.  "
+-          "\n          Expecting: MKL v11.00.04 - Build: 20130517"
+-          "\n              Found: %s", szMklVersion );
+-      if (getenv( "FastLmmUseAnyMklLib" ) == nullptr )
+-         {
+-         Fatal( "Exit due to MKL version mismatch"
+-              "\n              To bypass this check, Set FastLmmUseAnyMklLib=1" );
+-         }
+-      else
+-         {
+-         Warn( "FastLmmUseAnyMklLib set.  Continuing execution.\n\n" );
+-         }
+-      }
+-#endif
+-
+-   return( szMklVersion );
+-
+-#elif defined( USE_ACML )
+-   char szAcmlVersion[ 32 ];
+-   int  acmlMajor;
+-   int  acmlMinor;
+-   int  acmlPatch;
+-
+-   acmlversion( &acmlMajor, &acmlMinor, &acmlPatch );
+-   sprintf( szAcmlVersion, "ACML v%d.%02d.%02d", acmlMajor, acmlMinor, acmlPatch );
+-   if ( (acmlMajor != 4)
+-     || (acmlMinor != 4)
+-     || (acmlPatch != 0)
+-      )
+-      {
+-      Warn( "Unexpected ACML Version Found.  "
+-          "\n          Expecting: ACML v4.04.00"
+-          "\n              Found: %s", szAcmlVersion );
+-      if (getenv( "FastLmmUseAnyAcmlLib" ) == nullptr )
+-         {
+-         Fatal( "Exit due to version mismatch"
+-              "\n              To bypass this check, Set FastLmmUseAnyAcmlLib=1" );
+-         }
+-      else
+-         {
+-         Warn( "FastLmmUseAnyAcmlLib set.  Continuing execution.\n\n" );
+-         }
+-      }
+-   return( szAcmlVersion );
+-#endif
++       return("0");
+    }
+ 
+ #endif      //BlasLapack_h
+diff --git a/Cpp/Inc/FastLmmC.h b/Cpp/Inc/FastLmmC.h
+index b91ecde..960d497 100644
+--- a/Cpp/Inc/FastLmmC.h
++++ b/Cpp/Inc/FastLmmC.h
+@@ -51,7 +51,6 @@
+                                  //   _CrtMemDumpAllObjectsSince()
+                                  //   _CrtDumpMemoryLeaks()
+ #elif defined( COMPILE_FOR_LINUX )
+-#define  nullptr        NULL           // gcc does not yet support nullptr
+ typedef  unsigned char  BYTE;          // common Windows types not found in gcc
+ typedef  long long      __int64;
+ typedef  long long      LARGE_INTEGER;
+diff --git a/Cpp/Inc/Utils.h b/Cpp/Inc/Utils.h
+index 69cd496..aeeadc7 100644
+--- a/Cpp/Inc/Utils.h
++++ b/Cpp/Inc/Utils.h
+@@ -97,7 +97,7 @@ const  int NewLine = '\n';
+  *   a bit of cross platform operation
+  */
+ #if defined( COMPILE_FOR_LINUX )
+-#include <linux/limits.h>
++#include <limits>
+ #include <time.h>
+ #include <libgen.h>
+ 
+@@ -113,7 +113,6 @@ inline int  _isnan( real x ) { return( x != x ); }
+ inline int  _isnan( real x ) { return( std::isnan( x ) ); }
+ #endif
+ 
+-inline real abs( real x ) { return( fabs(x) ); }
+ inline int min( int m1, int m2 ) { return( ( m1 < m2 ) ? m1 : m2 ); }
+ inline real min( real m1, real m2 ) { return( (m1 < m2 ) ? m1 : m2 ); }
+ inline int max( int m1, int m2 ) { return( ( m1 > m2 ) ? m1 : m2 ); }
+diff --git a/Cpp/Src/Startup.cpp b/Cpp/Src/Startup.cpp
+index 445b011..0a7a963 100644
+--- a/Cpp/Src/Startup.cpp
++++ b/Cpp/Src/Startup.cpp
+@@ -1053,7 +1053,7 @@ void ProcessCommandLine( int argc, char* argv[] )
+    for ( iArg=1; iArg<argc; ++iArg )
+       {
+       pch = argv[ iArg ];
+-      if ( !__isascii(*pch) )
++      if ( !isascii(*pch) )
+          {
+          Error( "Encountered non-ASCII character '%c' [0x%02X] in command line argument %d [%s]", *pch, (unsigned char)*pch, iArg, pch );
+          }
+-- 
+2.44.0
+

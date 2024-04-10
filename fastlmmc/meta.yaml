@@ -1,0 +1,40 @@
+{% set name = "fastlmmc" %}
+{% set version = "2.07" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://download.microsoft.com/download/B/0/9/B095C9A0-C08B-41F7-9C7E-76097E875235/FaSTLMM.207.zip
+  sha256: 63ffb9bd6ce4b3b270c4f4b674dd8f9ac352547f2b69b8b333e43fbdccdc6606
+  patches:
+    - 0001-build-fixes.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
+    - mkl-devel
+    - zlib=1.2
+  run:
+    - mkl
+    - libzlib>=1.2
+
+test:
+  commands:
+    - fastlmmc 2>&1 | grep -q "FastLmmC"
+
+about:
+  home: https://www.microsoft.com/en-us/download/details.aspx?id=52559
+  license: Microsoft Research License Agreement
+  license_file: LICENSE.txt
+  summary: Factored Spectrally Transformed Linear Mixed Model
+
+extra:
+  recipe-maintainers:
+    - danielnachun
