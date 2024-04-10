@@ -21,14 +21,14 @@ requirements:
     - make
     - sed
   host:
-    #- protobuf
+    - protobuf
     - zlib=1.2
   run:
     - libzlib>=1.2
 
 test:
   commands:
-    - "pseq -h"
+    - pseq -h
 
 about:
   home: https://zzz.bwh.harvard.edu/plinkseq/index.shtml
