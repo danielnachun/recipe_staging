@@ -1,4 +1,4 @@
-From 01ae54ea344921805f5cec3f150a86e651905e16 Mon Sep 17 00:00:00 2001
+From 2dbc026562074d7c049b43437823ca22d1fa9d4d Mon Sep 17 00:00:00 2001
 From: danielnachun <daniel.nachun@gmail.com>
 Date: Tue, 9 Apr 2024 19:26:19 -0700
 Subject: [PATCH] build fixes
@@ -257,7 +257,7 @@ index b91ecde..960d497 100644
  typedef  long long      __int64;
  typedef  long long      LARGE_INTEGER;
 diff --git a/Cpp/Inc/Utils.h b/Cpp/Inc/Utils.h
-index 69cd496..aeeadc7 100644
+index 69cd496..2515332 100644
 --- a/Cpp/Inc/Utils.h
 +++ b/Cpp/Inc/Utils.h
 @@ -97,7 +97,7 @@ const  int NewLine = '\n';
@@ -265,7 +265,7 @@ index 69cd496..aeeadc7 100644
   */
  #if defined( COMPILE_FOR_LINUX )
 -#include <linux/limits.h>
-+#include <limits>
++#include <limits.h>
  #include <time.h>
  #include <libgen.h>
  
