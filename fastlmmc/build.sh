@@ -9,3 +9,4 @@ cd Cpp
 sh DoMkl_linux.sh
 mkdir -p ${PREFIX}/bin
 install -m 755 fastlmmc_mkl ${PREFIX}/bin/fastlmmc
+ln -sf ${PREFIX}/bin/fastlmmc ${PREFIX}/bin/fastlmm
