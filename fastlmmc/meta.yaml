@@ -32,7 +32,7 @@ test:
 about:
   home: https://www.microsoft.com/en-us/download/details.aspx?id=52559
   license: Microsoft Research License Agreement
-  license_file: LICENSE.txt
+  license_file: LICENSE.TXT
   summary: Factored Spectrally Transformed Linear Mixed Model
 
 extra:
