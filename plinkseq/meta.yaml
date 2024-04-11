@@ -6,8 +6,10 @@ package:
   version: {{ version }}
 
 source:
-  git_url:  https://bitbucket.org/statgen/{{ name }}.git
+  git_url: https://bitbucket.org/statgen/{{ name }}.git
   git_rev: 5d071291075ccbc4798b087b759e7455cfb4a825
+  patches:
+    - 0001-build-fixes.patch
 
 build:
   number: 0
@@ -22,9 +24,13 @@ requirements:
     - sed
   host:
     - protobuf
+    - sqlite
     - zlib=1.2
   run:
+    - libabseil
+    - libprotobuf=4.25
     - libzlib>=1.2
+    - libsqlite
 
 test:
   commands:

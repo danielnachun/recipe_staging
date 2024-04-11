@@ -1,0 +1,159 @@
+From f8fa6d46dfa527d7ef699ed135822e865a79a44a Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Wed, 10 Apr 2024 16:40:58 -0700
+Subject: [PATCH] build fixes
+
+---
+ Makefile                                  | 29 +++++++++--------------
+ sources/plinkseq/sources/lib/matdb.cpp    |  4 ++--
+ sources/plinkseq/sources/lib/matrix.proto | 12 +++++-----
+ sources/plinkseq/sources/lib/r8lib.cpp    |  2 +-
+ 4 files changed, 20 insertions(+), 27 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index dc9cb64..b699ed0 100644
+--- a/Makefile
++++ b/Makefile
+@@ -36,13 +36,6 @@ ZIP_INCLUDES = config_rules.Makefile config_defs.Makefile
+ #Static Libraries
+ ########################
+ 
+-# protobuf
+-PROTOBUF_LIB_BASE_DIR =./sources/ext
+-PROTOBUF_LIB_DIR=$(PROTOBUF_LIB_BASE_DIR)/$(BLD_LIB_DIR)/
+-PROTOBUF_LIBS =libprotobuf.a
+-PROTOBUF_INC =$(PROTOBUF_LIB_BASE_DIR)/$(INC_DIR)/
+-PROTOBUF_LIB_FULL_PATH =$(PROTOBUF_LIB_DIR)$(PROTOBUF_LIBS)
+-
+ # plinkseq library:
+ PLINKSEQ_LIB_BASE_DIR =./sources/plinkseq
+ PLINKSEQ_LIB_DIR =$(PLINKSEQ_LIB_BASE_DIR)/$(BLD_LIB_DIR)/
+@@ -90,20 +83,20 @@ PDAS_LIB_FULL_PATH =$(PDAS_LIB_DIR)$(PDAS_LIBS)
+ ########################
+ 
+ #For example: -L./
+-LIB_LINK_DIRS =$(PLINKSEQ_LIB_DIR) $(PSEQ_LIB_DIR) $(UTIL_LIB_DIR) $(MONGOOSE_LIB_DIR) $(BROWSER_LIB_DIR) $(PDAS_LIB_DIR) $(PROTOBUF_LIB_DIR)
++LIB_LINK_DIRS =$(PLINKSEQ_LIB_DIR) $(PSEQ_LIB_DIR) $(UTIL_LIB_DIR) $(MONGOOSE_LIB_DIR) $(BROWSER_LIB_DIR) $(PDAS_LIB_DIR)
+ LIB_LINK_FLAGS =$(LIB_LINK_DIRS:%=-L%)
+ 
+ #For example: -I./
+-LIB_INCLUDE_DIRS += $(PLINKSEQ_INC) $(PSEQ_INC) $(UTIL_INC) $(MONGOOSE_INC) $(BROWSER_INC) $(PDAS_INC) $(PROTOBUF_INC)
++LIB_INCLUDE_DIRS += $(PLINKSEQ_INC) $(PSEQ_INC) $(UTIL_INC) $(MONGOOSE_INC) $(BROWSER_INC) $(PDAS_INC)
+ 
+ #All directories with relevant libraries' makefiles
+-LIB_MAKE_DIRS =$(PLINKSEQ_LIB_BASE_DIR) $(PSEQ_LIB_BASE_DIR) $(UTIL_LIB_BASE_DIR) $(MONGOOSE_LIB_BASE_DIR) $(BROWSER_LIB_BASE_DIR) $(PDAS_LIB_BASE_DIR) $(PROTOBUF_LIB_BASE_DIR)
++LIB_MAKE_DIRS =$(PLINKSEQ_LIB_BASE_DIR) $(PSEQ_LIB_BASE_DIR) $(UTIL_LIB_BASE_DIR) $(MONGOOSE_LIB_BASE_DIR) $(BROWSER_LIB_BASE_DIR) $(PDAS_LIB_BASE_DIR)
+ 
+ 
+ #For example: ./sources/hmm++/build/lib/libhmm++.a
+-PSEQ_EXEC_LIB_DEPENDS =$(PSEQ_LIB_FULL_PATH) $(PLINKSEQ_LIB_FULL_PATH) $(PROTOBUF_LIB_FULL_PATH)
++PSEQ_EXEC_LIB_DEPENDS =$(PSEQ_LIB_FULL_PATH) $(PLINKSEQ_LIB_FULL_PATH)
+ PSEQ_EXEC_LIB_DEPENDS_NO_PATH =$(notdir $(PSEQ_EXEC_LIB_DEPENDS))
+-PSEQ_EXEC_LIB_LINKS =-lpthread -lz
++PSEQ_EXEC_LIB_LINKS =-lprotobuf -labsl_log_internal_message -labsl_log_internal_check_op -lsqlite3 -lpthread -lz
+ 
+ 
+ #For example: ./sources/hmm++/build/lib/libhmm++.a
+@@ -122,9 +115,9 @@ MM_EXEC_LIB_DEPENDS_NO_PATH =$(notdir $(MM_EXEC_LIB_DEPENDS))
+ MM_EXEC_LIB_LINKS =
+ 
+ # smp
+-SMP_EXEC_LIB_DEPENDS =$(UTIL_LIB_FULL_PATH) $(PLINKSEQ_LIB_FULL_PATH)  $(PROTOBUF_LIB_FULL_PATH)
++SMP_EXEC_LIB_DEPENDS =$(UTIL_LIB_FULL_PATH) $(PLINKSEQ_LIB_FULL_PATH)
+ SMP_EXEC_LIB_DEPENDS_NO_PATH =$(notdir $(SMP_EXEC_LIB_DEPENDS))
+-SMP_EXEC_LIB_LINKS =-lz -lpthread
++SMP_EXEC_LIB_LINKS =-lprotobuf -labsl_log_internal_message -labsl_log_internal_check_op -lsqlite3 -lz -lpthread
+ 
+ # tab2vcf
+ TAB2VCF_EXEC_LIB_DEPENDS =$(UTIL_LIB_FULL_PATH) 
+@@ -137,14 +130,14 @@ MONGOOSE_EXEC_LIB_DEPENDS_NO_PATH =$(notdir $(MONGOOSE_EXEC_LIB_DEPENDS))
+ MONGOOSE_EXEC_LIB_LINKS =-lpthread -ldl
+ 
+ # browser
+-BROWSER_EXEC_LIB_DEPENDS = $(BROWSER_LIB_FULL_PATH) $(PLINKSEQ_LIB_FULL_PATH)  $(PROTOBUF_LIB_FULL_PATH)
++BROWSER_EXEC_LIB_DEPENDS = $(BROWSER_LIB_FULL_PATH) $(PLINKSEQ_LIB_FULL_PATH)
+ BROWSER_EXEC_LIB_DEPENDS_NO_PATH =$(notdir $(BROWSER_EXEC_LIB_DEPENDS))
+-BROWSER_EXEC_LIB_LINKS =-lz -lpthread -ldl
++BROWSER_EXEC_LIB_LINKS =-lprotobuf -labsl_log_internal_message -labsl_log_internal_check_op -lsqlite3 -lz -lpthread -ldl
+ 
+ # pdas
+-PDAS_EXEC_LIB_DEPENDS = $(PDAS_LIB_FULL_PATH) $(PLINKSEQ_LIB_FULL_PATH) $(PROTOBUF_LIB_FULL_PATH)
++PDAS_EXEC_LIB_DEPENDS = $(PDAS_LIB_FULL_PATH) $(PLINKSEQ_LIB_FULL_PATH)
+ PDAS_EXEC_LIB_DEPENDS_NO_PATH =$(notdir $(PDAS_EXEC_LIB_DEPENDS))
+-PDAS_EXEC_LIB_LINKS =-lz -lpthread -ldl 
++PDAS_EXEC_LIB_LINKS =-lprotobuf -labsl_log_internal_message -labsl_log_internal_check_op -lsqlite3 -lz -lpthread -ldl 
+ 
+ ##########################################
+ #Compiler, Compilation flags:
+diff --git a/sources/plinkseq/sources/lib/matdb.cpp b/sources/plinkseq/sources/lib/matdb.cpp
+index 4e79c0a..f4492de 100644
+--- a/sources/plinkseq/sources/lib/matdb.cpp
++++ b/sources/plinkseq/sources/lib/matdb.cpp
+@@ -131,7 +131,7 @@ blob MatDBase::make_blob( const Data::Vector<double> & x , int col )
+   // if not symmetric, col == -1 
+   // else is col number (0..ncol-1)
+ 
+-  double_t pbCol;
++  Double_t pbCol;
+ 
+   const int upr = col == -1 ? x.size() : ( col + 1 ) ; 
+     
+@@ -149,7 +149,7 @@ Data::Vector<double> MatDBase::read_blob( blob & b , int nrow )
+   // if matrix is symmetric, take nrow from'r'
+   // otherwise, r==0, so just read what is here
+ 
+-  double_t pbCol;  
++  Double_t pbCol;  
+   pbCol.ParseFromString( b.get_string() );
+   
+   const int nrow_stored = pbCol.data_size();      
+diff --git a/sources/plinkseq/sources/lib/matrix.proto b/sources/plinkseq/sources/lib/matrix.proto
+index 59bf51f..475d866 100644
+--- a/sources/plinkseq/sources/lib/matrix.proto
++++ b/sources/plinkseq/sources/lib/matrix.proto
+@@ -1,13 +1,13 @@
+ 
+-message double_t {
++message Double_t {
+ 	repeated double data     = 1 [packed=true];
+ }
+ 
+-message int_t {
++message Int_t {
+ 	repeated int32  data     = 1 [packed=true];
+ }
+ 
+-message bool_t {
++message Bool_t {
+ 	repeated bool  data     = 1 [packed=true];
+ }
+ 
+@@ -23,9 +23,9 @@ message MatrixBuffer {
+ 	required  int32    nrow   = 4 ;
+   	required  int32    ncol   = 5 ;
+ 
+-	repeated double_t  d_double = 6;
+-	repeated int_t     d_int    = 7;
+-	repeated bool_t    d_bool   = 8;
++	repeated Double_t  d_double = 6;
++	repeated Int_t     d_int    = 7;
++	repeated Bool_t    d_bool   = 8;
+    
+ }
+ 
+diff --git a/sources/plinkseq/sources/lib/r8lib.cpp b/sources/plinkseq/sources/lib/r8lib.cpp
+index 2d5276f..7662233 100644
+--- a/sources/plinkseq/sources/lib/r8lib.cpp
++++ b/sources/plinkseq/sources/lib/r8lib.cpp
+@@ -31828,7 +31828,7 @@ void r8vec_index_sorted_range ( int n, double r[], int indx[], double r_lo,
+   if ( r_hi < r[indx[*i_hi]] )
+   {
+     *i_hi = *i_hi - 1;
+-    if ( i_hi < 0 )
++    if ( *i_hi < 0 )
+     {
+       *i_lo = *i_hi + 1;
+     }
+-- 
+2.44.0
+
