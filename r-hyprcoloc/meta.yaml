@@ -1,0 +1,58 @@
+{% set version = "1.0" %}
+{% set name = "hyprcoloc" %}
+
+package:
+  name: r-{{ name }}
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/cnfoley/hyprcoloc/archive/26ea5953a46b3e204dfa8eadd202f746244afa13.zip
+  sha256: b93d6b1839dc8a41a45646b13638695a18ebcbb2faf893a3d71db45ade611a69
+  patches:
+    - 0001-fix-Eigen-templating.patch
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+    - r-iterpc
+    - r-knitr
+    - r-pheatmap
+    - r-rcolorbrewer
+    - r-rcpp
+    - r-rcppeigen
+    - r-rmarkdown
+    - r-rmpfr
+  run:
+    - r-base>=4.2
+    - r-iterpc
+    - r-knitr
+    - r-pheatmap
+    - r-rcolorbrewer
+    - r-rcpp
+    - r-rcppeigen
+    - r-rmarkdown
+    - r-rmpfr
+
+test:
+  commands:
+    - $R -e "library('hyprcoloc')"
+
+about:
+  home: https://github.com/cnfoley/hyprcoloc
+  license: GPL-2.0-or-later
+  summary: Hypothesis Prioritisation in multi-trait Colocalization (HyPrColoc)
+
+extra:
+  recipe-maintainers:
+    - danielnachun
