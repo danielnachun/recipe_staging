@@ -3,6 +3,7 @@ mv DESCRIPTION DESCRIPTION.old
 grep -v '^Priority: ' DESCRIPTION.old > DESCRIPTION
 mkdir -p ~/.R
 echo -e "CC=$CC
+autoreconf --force --verbose --install
 FC=$FC
 CXX=$CXX
 CXX98=$CXX

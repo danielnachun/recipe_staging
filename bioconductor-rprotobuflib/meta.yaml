@@ -22,6 +22,7 @@ build:
 # SystemRequirements: GNU make
 requirements:
   host:
+    - libtool
     - r-base=4.3
     - libblas
     - liblapack
@@ -30,6 +31,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - autoconf
     - automake
     - make
 test:
