@@ -8,5 +8,5 @@ CXX=$CXX
 CXX98=$CXX
 CXX11=$CXX
 CXX14=$CXX" > ~/.R/Makevars
-sed -i 's?#./autogen.sh?autoreconf --force --verbose --install?' ./configure
+sed -i 's?#./autogen.sh?autoreconf --force --verbose --install?' configure
 $R CMD INSTALL --build .
