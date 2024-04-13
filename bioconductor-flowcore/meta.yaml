@@ -27,7 +27,7 @@ requirements:
     - 'bioconductor-cytolib >=2.14.0,<2.15.0'
     - 'bioconductor-rprotobuflib >=2.14.0,<2.15.0'
     - 'bioconductor-s4vectors >=0.40.0,<0.41.0'
-    - r-base=4.2
+    - r-base=4.3
     - 'r-bh >=1.81.0.0'
     - r-cpp11
     - r-matrixstats
@@ -40,7 +40,7 @@ requirements:
     - 'bioconductor-cytolib >=2.14.0,<2.15.0'
     - 'bioconductor-rprotobuflib >=2.14.0,<2.15.0'
     - 'bioconductor-s4vectors >=0.40.0,<0.41.0'
-    - r-base>=4.2
+    - r-base>=4.3
     - 'r-bh >=1.81.0.0'
     - r-cpp11
     - r-matrixstats
