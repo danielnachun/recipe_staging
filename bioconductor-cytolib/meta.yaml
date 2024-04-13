@@ -25,14 +25,14 @@ requirements:
     - 'bioconductor-rhdf5lib >=1.24.0,<1.25.0'
     - 'bioconductor-rprotobuflib >=2.14.0,<2.15.0'
     - r-base=4.3
-    - 'r-bh >=1.81.0.0'
+    - 'r-bh==1.81.0.0'
     - libblas
     - liblapack
   run:
     - 'bioconductor-rhdf5lib >=1.24.0,<1.25.0'
     - 'bioconductor-rprotobuflib >=2.14.0,<2.15.0'
     - r-base>=4.3
-    - 'r-bh >=1.81.0.0'
+    - 'r-bh==1.81.0.0'
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
