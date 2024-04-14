@@ -23,7 +23,7 @@ requirements:
     - cross-r-base {{ r_base }}  # [build_platform != target_platform]
   host:
     - bioconductor-flowcore
-    - r-base=4.2
+    - r-base=4.3
     - r-doparallel
     - r-dplyr
     - r-foreach
@@ -45,7 +45,7 @@ requirements:
     - r-yardstick
   run:
     - bioconductor-flowcore
-    - r-base>=4.2
+    - r-base>=4.3
     - r-doparallel
     - r-dplyr
     - r-foreach
