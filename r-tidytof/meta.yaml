@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/keyes-timothy/{{ name }}/archive/4fce362df3f0193b14f263a4788dc2ab0f711bf9.zip
-  sha256: 6f216f476e91516e066c1d28661337eaf2579c9fb41b7862bc090dbb0a6d7d13
+  sha256: d98cace5d75807afd3565d4964ec5c9eccd4e1ac2861b2e32d1eec43e356a8d4
 
 build:
   merge_build_host: true  # [win]
