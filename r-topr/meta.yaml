@@ -1,0 +1,63 @@
+{% set version = "2.0.1" %}
+{% set name = "topr" %}
+
+package:
+  name: r-{{ name }}
+  version: '{{ version }}'
+
+source:
+  url: https://cran.r-project.org/src/contrib/topr_{{ version }}.tar.gz
+  sha256: 85a8843166f495f947a4edc9ab496447aa4672558f736de3838836704645c1a6
+
+build:
+  number: 0
+  merge_build_host: true
+  noarch: generic
+  script: R CMD INSTALL --build .
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  host:
+    - r-base=4.2
+    - r-dplyr >=1.0.2
+    - r-egg
+    - r-enshuman
+    - r-ggplot2 >=3.3.2
+    - r-ggrepel
+    - r-grid
+    - r-gridExtra
+    - r-magrittr >=1.5
+    - r-scales >=1.1.1
+    - r-stringr >=1.4.0
+    - r-tidyr
+    - r-utils
+  run:
+    - r-base>=4.2
+    - r-dplyr >=1.0.2
+    - r-egg
+    - r-enshuman
+    - r-ggplot2 >=3.3.2
+    - r-ggrepel
+    - r-grid
+    - r-gridExtra
+    - r-magrittr >=1.5
+    - r-scales >=1.1.1
+    - r-stringr >=1.4.0
+    - r-tidyr
+    - r-utils
+
+test:
+  commands:
+    - $R -e "library('topr')"  # [not win]
+    - "\"%R%\" -e \"library('topr')\""  # [win]
+
+about:
+  home: https://github.com/totajuliusd/topr
+  summary: A collection of functions for visualizing,exploring and annotating genetic association results.Association results from multiple traits can be viewed simultaneously along with gene annotation, over the entire genome (Manhattan plot) or in the more detailed regional view.
+  license: LGPLLR
+
+extra:
+  recipe-maintainers:
+    - danielnachun
