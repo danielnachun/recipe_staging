@@ -18,11 +18,10 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
-    - binutils  # [linux]
     - make
   host:
     - cython
-    - python=3.10
+    - python=3.12
     - setuptools
     - zlib
     - xz
@@ -31,7 +30,7 @@ requirements:
     - libcurl
     - openssl  # [not osx]
   run:
-    - python=3.10
+    - python=3.12
     - zlib
     - xz
     - bzip2
