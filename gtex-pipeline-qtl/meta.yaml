@@ -56,7 +56,7 @@ test:
     - combine_signif_pairs.py -h
     - convert_vep.py -h
     - eqtl_prepare_expression.py -h
-    - map_clusters_to_genes.R -h
+    - test -f ${PREFIX}/bin/map_clusters_to_genes.R
     - metasoft_postprocess.py -h
     - metasoft_prepare_input.py -h
     - run_GATK_ASEReadCounter.py -h
