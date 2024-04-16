@@ -10,13 +10,15 @@ source:
   sha256: 78a2a157eb059f6c5ac96ff0c68cc2f3fa1737d2c2f5d5b8545021f705c6174c
 
 build:
+  noarch: generic
   number: 0
 
 requirements:
   build:
     - sed
   run:
-    - numpy
+    - python >=3.6
+    - numpy >=1.26
     - pytables
     - pandas
     - scipy
@@ -28,13 +30,13 @@ requirements:
     - scikit-learn
     - qtl
     - pybigwig
-    - r-argparser
-    - r-dplyr
-    - r-foreach
-    - r-leafcutter 
-    - bioconductor-qvalue
-    - bioconductor-sva
-    - bioconductor-edgeR
+    #- r-argparser
+    #- r-dplyr
+    #- r-foreach
+    #- r-leafcutter 
+    #- bioconductor-qvalue
+    #- bioconductor-sva
+    #- bioconductor-edgeR
     #- gatk
     #- tensorqtl
     #- htslib
@@ -54,7 +56,7 @@ test:
     - combine_signif_pairs.py -h
     - convert_vep.py -h
     - eqtl_prepare_expression.py -h
-    - map_clusters_to_genes.R -h
+    - test -f ${PREFIX}/bin/map_clusters_to_genes.R
     - metasoft_postprocess.py -h
     - metasoft_prepare_input.py -h
     - run_GATK_ASEReadCounter.py -h
