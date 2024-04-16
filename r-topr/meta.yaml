@@ -26,13 +26,11 @@ requirements:
     - r-enshuman
     - r-ggplot2 >=3.3.2
     - r-ggrepel
-    - r-grid
     - r-gridExtra
     - r-magrittr >=1.5
     - r-scales >=1.1.1
     - r-stringr >=1.4.0
     - r-tidyr
-    - r-utils
   run:
     - r-base>=4.2
     - r-dplyr >=1.0.2
@@ -40,13 +38,11 @@ requirements:
     - r-enshuman
     - r-ggplot2 >=3.3.2
     - r-ggrepel
-    - r-grid
     - r-gridExtra
     - r-magrittr >=1.5
     - r-scales >=1.1.1
     - r-stringr >=1.4.0
     - r-tidyr
-    - r-utils
 
 test:
   commands:
