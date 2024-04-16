@@ -10,7 +10,7 @@ source:
   sha256: e6273addff0e48ce24f8f7e67833d6ee8fe1c84e4e595109b583986ff7376e1d
 
 build:
-  number: 2
+  number: 3
 
 requirements:
   build:
@@ -24,7 +24,7 @@ requirements:
   run:
     - _openmp_mutex  # [linux]
     - llvm-openmp  # [osx]
-    - boost-cpp =1.84
+    - libboost =1.84
     - libopenblas
     - libzlib
 
