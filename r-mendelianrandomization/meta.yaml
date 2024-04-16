@@ -1,4 +1,4 @@
-{% set version = '0.6.0' %}
+{% set version = '0.9.0' %}
 
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
@@ -11,18 +11,19 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/MendelianRandomization_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/MendelianRandomization/MendelianRandomization_{{ version }}.tar.gz
-  sha256: 6f85f289f91a9758e194d91512df116316ab3c8f9f0cbdb56ab9a848c09ac261
+  sha256: 368c20e55dffbe5712790cf9d91bcaeb59d13fe67835af4fc51bd24928ae7780
 
 build:
   merge_build_host: True  # [win]
-  noarch: generic
-  number: 2
+  number: 0
   rpaths:
     - lib/R/lib/
     - lib/
 
 requirements:
   build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - {{ posix }}zip               # [win]
   host:
     - r-base=4.2
