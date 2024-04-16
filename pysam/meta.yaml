@@ -22,17 +22,17 @@ requirements:
     - make
   host:
     - cython
-    - python=3.10
+    - python=3.12
     - setuptools
-    - zlib
+    - zlib=1.2
     - xz
     - bzip2
     - libdeflate
     - libcurl
     - openssl  # [not osx]
   run:
-    - python=3.10
-    - zlib
+    - python=3.12
+    - zlib>=1.2
     - xz
     - bzip2
     - libdeflate
