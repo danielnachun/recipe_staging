@@ -1,4 +1,4 @@
-{% set version = "0.14.6" %}
+{% set version = "0.14.7" %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://github.com/gaow/susieR/archive/{{ version }}.tar.gz
-  sha256: 8a04cd595f2f7facadd4550d3b3393800c562e3bd79f328ca465c29bd8a875c1
+  sha256: 14e8c52b120ac075abb27f232d433b50119b07422ac0f47097b3316f5a7ef249
 
 build:
   merge_build_host: true  # [win]
