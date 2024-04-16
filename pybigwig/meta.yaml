@@ -21,7 +21,7 @@ requirements:
     - curl
     - libcurl
     - zlib=1.2
-    - numpy=1.24
+    - numpy>=1.24
   run:
     - python=3.10
     - libcurl
