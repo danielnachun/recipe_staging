@@ -18,12 +18,13 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - binutils  # [linux]
     - make
   host:
     - cython
     - python=3.12
     - setuptools
-    - zlib
+    - zlib=1.2
     - xz
     - bzip2
     - libdeflate
@@ -31,7 +32,7 @@ requirements:
     - openssl  # [not osx]
   run:
     - python=3.12
-    - zlib
+    - zlib>=1.2
     - xz
     - bzip2
     - libdeflate
