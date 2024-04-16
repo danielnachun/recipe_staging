@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/MRCIEU/MRInstruments/archive/efa2ca0d7a57cd51067be8e445a0f46bb6060a2e.zip
-  sha256: 0a86061adc12c388b9a3f103181ab96c1b4296d12f054462b3071e302835eeac
+  sha256: 41baf9bfd44ea0e7fe22b550e0a2f3120df036d89cb8d043cf2801289c4d4cf0
 
 build:
   merge_build_host: true  # [win]
