@@ -1,0 +1,58 @@
+{% set name = "fastlmm" %}
+{% set version = "0.6.7" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/fastlmm-{{ version }}.tar.gz
+  sha256: f9f53999d4939ae07ac054128e5d5e99b90083e3e27fd92426a9c65eadb236ad
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python
+    - numpy >=1.11.3
+    - setuptools >=46.1.3
+    - cython
+    - wheel
+    - scipy
+    - pip
+  run:
+    - python
+    - pandas >=1.1.1
+    - matplotlib-base >=1.5.1
+    - scikit-learn >=0.19.1
+    - pysnptools >=0.5.7
+    - cloudpickle >=2.2.0
+    - statsmodels >=0.10.1
+    - psutil >=5.6.7
+    - fastlmmclib >=0.0.3
+    - cachetools
+    - dask
+    - texttable
+    - tqdm
+    - xarray
+
+test:
+  imports:
+    - fastlmm
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://fastlmm.github.io/
+  summary: Fast GWAS
+  license: Apache-2.0
+  license_file: LICENSE.md
+
+extra:
+  recipe-maintainers:
+    - danielnachun

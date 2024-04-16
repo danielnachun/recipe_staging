@@ -21,16 +21,16 @@ requirements:
   build:
     - {{ compiler('cxx') }}
   host:
-    - python=3.11
+    - python=3.12
     - cython
     - pip
     - setuptools
     - wheel
     - python-lzo
-    - numpy=1.24
+    - numpy=1.26
     - zlib=1.2
   run:
-    - python=3.11
+    - python=3.12
     - {{ pin_compatible('numpy') }}
     - libzlib>=1.2
 
