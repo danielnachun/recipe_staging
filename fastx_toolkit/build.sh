@@ -2,7 +2,7 @@
 
 export GTEXTUTILS_CFLAGS="-I $PREFIX/include/gtextutils"
 export GTEXTUTILS_LIBS="$PREFIX/lib/libgtextutils.a"
-export CXXFLAGS="${CXXFLAGS} -std=c++11 -Wall -Wno-implicit-fallthrough"
+export CXXFLAGS="${CXXFLAGS} -std=c++11 -Wall -Wno-implicit-fallthrough -Wno-unused-but-set-variable"
 sed -i.bak 's/#pragma pack(1)//g' src/libfastx/fastx.h
 
 if [ "$(uname)" == "Darwin" ]; then
