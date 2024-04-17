@@ -3,6 +3,9 @@
 set -o xtrace -o nounset -o pipefail -o errexit
 
 mkdir -p ${PREFIX}/libexec/${PKG_NAME}
+rm -rf polypred_example
+rm -rf example_data
+rm -rf *.parquet
 cp -r "${SRC_DIR}"/* "${PREFIX}/libexec/${PKG_NAME}"
 
 mkdir -p ${PREFIX}/bin
