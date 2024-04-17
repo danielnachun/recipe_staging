@@ -7,6 +7,7 @@
     #MACOSX_DEPLOYMENT_TARGET=10.9
 #fi
 
+autoreconf --force --verbose --install
 ./configure --prefix=$PREFIX
 make
 make install
