@@ -14,12 +14,15 @@ build:
 
 requirements:
   build:
+    - autoconf
+    - automake
     - make
     - {{ compiler('cxx') }}
     - {{ compiler('c') }}
     - pkg-config
   host:
     - cython
+    - libtool
     - nose
     - libgtextutils
   run:

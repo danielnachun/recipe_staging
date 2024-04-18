@@ -12,6 +12,7 @@ if [ "$(uname)" == "Darwin" ]; then
     CXXFLAGS="${CXXFLAGS} -std=c++11 -stdlib=libc++"
 fi
 
+autoreconf --force --verbose --install
 ./configure --prefix=$PREFIX
 make
 make install
