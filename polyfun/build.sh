@@ -18,16 +18,16 @@ EOF
 }
 
 mkdir -p ${PREFIX}/bin
-env_script aggregate_finemapper_results.py
-env_script compute_ldscores.py
-env_script compute_ldscores_ld.py
-env_script create_finemapper_jobs.py
-env_script extract_annotations.py
-env_script extract_snpvar.py
-env_script finemapper.py
-env_script ldsc.py
-env_script munge_polyfun_sumstats.py
-env_script polyfun.py
-env_script polyloc.py
-env_script polypred.py
-env_script test_polyfun.py
+env_script ${PREFIX}/libexec/${PKG_NAME}/aggregate_finemapper_results.py
+env_script ${PREFIX}/libexec/${PKG_NAME}/compute_ldscores.py
+env_script ${PREFIX}/libexec/${PKG_NAME}/compute_ldscores_ld.py
+env_script ${PREFIX}/libexec/${PKG_NAME}/create_finemapper_jobs.py
+env_script ${PREFIX}/libexec/${PKG_NAME}/extract_annotations.py
+env_script ${PREFIX}/libexec/${PKG_NAME}/extract_snpvar.py
+env_script ${PREFIX}/libexec/${PKG_NAME}/finemapper.py
+env_script ${PREFIX}/libexec/${PKG_NAME}/ldsc.py
+env_script ${PREFIX}/libexec/${PKG_NAME}/munge_polyfun_sumstats.py
+env_script ${PREFIX}/libexec/${PKG_NAME}/polyfun.py
+env_script ${PREFIX}/libexec/${PKG_NAME}/polyloc.py
+env_script ${PREFIX}/libexec/${PKG_NAME}/polypred.py
+env_script ${PREFIX}/libexec/${PKG_NAME}/test_polyfun.py
