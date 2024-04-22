@@ -46,7 +46,7 @@ test:
    commands:
     - aggregate_finemapper_results.py -h
     - compute_ldscores.py -h
-    - compute_ldscores_ld.py -h
+    - compute_ldscores_from_ld.py -h
     - create_finemapper_jobs.py -h
     - extract_annotations.py -h
     - extract_snpvar.py -h
