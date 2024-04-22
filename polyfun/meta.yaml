@@ -44,7 +44,18 @@ requirements:
 
 test:
    commands:
-    - test -f ${PREFIX}/bin/test_polyfun.py
+    - aggregate_finemapper_results.py -h
+    - compute_ldscores.py -h
+    - compute_ldscores_ld.py -h
+    - create_finemapper_jobs.py -h
+    - extract_annotations.py -h
+    - extract_snpvar.py -h
+    - finemapper.py -h
+    - ldsc.py -h
+    - munge_polyfun_sumstats.py -h
+    - polyfun.py -h
+    - polyloc.py -h
+    - polypred.py -h
 
 about:
   home: https://github.com/omerwe/polyfun

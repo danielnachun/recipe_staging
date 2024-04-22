@@ -9,6 +9,7 @@ rm -rf *.parquet
 cp -r "${SRC_DIR}"/* "${PREFIX}/libexec/${PKG_NAME}"
 
 env_script() {
+chmod +x ${1}
 bin_name=$(basename $1)
 tee ${PREFIX}/bin/${bin_name} << EOF
 #!/bin/sh
