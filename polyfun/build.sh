@@ -20,7 +20,7 @@ EOF
 mkdir -p ${PREFIX}/bin
 env_script ${PREFIX}/libexec/${PKG_NAME}/aggregate_finemapper_results.py
 env_script ${PREFIX}/libexec/${PKG_NAME}/compute_ldscores.py
-env_script ${PREFIX}/libexec/${PKG_NAME}/compute_ldscores_ld.py
+env_script ${PREFIX}/libexec/${PKG_NAME}/compute_ldscores_from_ld.py
 env_script ${PREFIX}/libexec/${PKG_NAME}/create_finemapper_jobs.py
 env_script ${PREFIX}/libexec/${PKG_NAME}/extract_annotations.py
 env_script ${PREFIX}/libexec/${PKG_NAME}/extract_snpvar.py
