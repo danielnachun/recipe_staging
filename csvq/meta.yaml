@@ -1,5 +1,5 @@
 {% set name = "csvq" %}
-{% set version = "1.17.11" %}
+{% set version = "1.18.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://github.com/mithrandie/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 0186d1571af9cebb4c0d3c5e733c0a96bb735c7988f9c148b0a852301fcc89ba
+  sha256: 69f98d0d26c055cbe4ebfe2cedf79c744bebafac604ea55fb0081826b1ac7b74
 
 build:
-  number: 1
+  number: 0
 
 requirements:
   build:
