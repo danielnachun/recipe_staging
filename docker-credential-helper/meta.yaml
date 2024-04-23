@@ -1,5 +1,5 @@
 {% set name = "docker-credential-helper" %}
-{% set version = "0.8.0" %}
+{% set version = "0.8.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/docker/docker-credential-helpers/archive/v{{ version }}.tar.gz
-  sha256: ca0eb4680ae171828672ea3761a2319d21aeccccbb7c7e67832fed8a91c5af56
+  sha256: c9006b2acf159d54fd00a1713422ab70914dae87270b4f44d05edab526199e20
 
 build:
   number: 0
