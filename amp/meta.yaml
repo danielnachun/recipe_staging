@@ -1,5 +1,5 @@
 {% set name = "amp" %}
-{% set version = "0.6.2" %}
+{% set version = "0.7.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://github.com/jmacdonald/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: 9279efcecdb743b8987fbedf281f569d84eaf42a0eee556c3447f3dc9c9dfe3b
+  sha256: d77946c042df6c27941f6994877e0e62c71807f245b16b41cf00dbf8b3553731
 
 build:
-  number: 1
+  number: 0
 
 requirements:
   build:
@@ -18,15 +18,15 @@ requirements:
     - {{ compiler('c') }}
     - cargo-bundle-licenses
     - cmake
-    - libxcb=1.15  # [linux]
+    - libxcb # [linux]
     - make
     - python
   host:
-    - libxcb=1.15  # [linux]
-    - zlib=1.2
+    - libxcb # [linux]
+    - zlib
   run:
-    - libxcb>=1.15  # [linux]
-    - libzlib>=1.2
+    - libxcb  # [linux]
+    - libzlib
 
 test:
   commands:
