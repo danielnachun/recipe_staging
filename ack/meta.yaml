@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://cpan.metacpan.org/authors/id/P/PE/PETDANCE/ack-v{{ version }}.tar.gz
-  sha256: dd5a7c2df81ee15d97b6bf6b3ff84ad2529c98e1571817861c7d4fd8d48af908
+  sha256: ea7caa14f757de083310ed2cba298661ddcca5dee06ec8f18043ea625a79df20
 
 build:
   noarch: generic
