@@ -1,5 +1,5 @@
 {% set name = "efm-langserver" %}
-{% set version = "0.0.44" %}
+{% set version = "0.0.53" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/mattn/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 825aef5815fb6eff656370e9f01fc31f91e5b2ab9d2b1f080881839676020dac
+  sha256: 2e315b6c563a994d8f5b3d2d8e5be629628b1f6dc7e4a82d9ea1a5deb8c81be6
 
 build:
   number: 0
