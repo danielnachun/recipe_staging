@@ -1,5 +1,5 @@
 {% set name = "dasel" %}
-{% set version = "2.4.1" %}
+{% set version = "2.7.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://github.com/TomWright/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: eb44263c792ff3b31e5a5086d01b471d07a4282af6716932f12f76bb8cd4eebd
+  sha256: 93546e10971ca74c3192940fe9435b48368cefa677cef8a7532b214c6d8b6c39
 
 build:
-  number: 1
+  number: 0
 
 requirements:
   build:
