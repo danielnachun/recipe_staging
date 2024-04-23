@@ -1,5 +1,5 @@
 {% set name = "code-minimap" %}
-{% set version = "0.6.4" %}
+{% set version = "0.6.7" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/wfxr/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 4e2f15e4a0f7bd31e33f1c423e3120318e13de1b6800ba673037e38498b3a423
+  sha256: 9c16d269c83a628d38ce0e02f2759b5aa6d55d81d20f4f30383191d365e53b73
 
 build:
   number: 0
