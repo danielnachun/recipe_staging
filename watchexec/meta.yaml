@@ -1,5 +1,5 @@
 {% set name = "watchexec" %}
-{% set version = "1.20.6" %}
+{% set version = "2.0.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/watchexec/{{ name }}/archive/cli-v{{ version}}.tar.gz
-  sha256: fa490944bbc8eafdc585454d27ec6f75988ce7d159db8ee1244b1fc5bbd86935
+  sha256: a613143f9cc8a1ec2a917ae2dd0c03156bf79e6a2dc1ee1ae76419ed47bc8d29
 
 build:
   number: 0
