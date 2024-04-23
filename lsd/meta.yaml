@@ -1,5 +1,5 @@
 {% set name = "lsd" %}
-{% set version = "1.0.0" %}
+{% set version = "1.1.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/lsd-rs/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: ab34e9c85bc77cfa42b43bfb54414200433a37419f3b1947d0e8cfbb4b7a6325
+  sha256: cd80dae9a8f6c4c2061f79084468ea6e04c372e932e3712a165119417960e14e
 
 build:
   number: 0
