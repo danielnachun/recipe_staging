@@ -1,5 +1,5 @@
 {% set name = "curlie" %}
-{% set version = "1.7.1" %}
+{% set version = "1.7.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/rs/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 24f34e0a21848a54750cea366ca15f6b4c1ab255b4b46942e4e09b2ebde55931
+  sha256: b2ced685c6d2cde951cbd894ecc16df2f987f9d680830bcf482a7dcd22165116
 
 build:
   number: 1
