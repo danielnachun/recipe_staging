@@ -1,4 +1,4 @@
-{% set version = "0.1.6" %}
+{% set version = "0.1.7" %}
 
 package:
   name: r-mvsusier
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/stephenslab/mvsusieR/archive/{{ version }}.tar.gz
-  sha256: e1c724222c783ea9d0ecf1d5df8b408cbf864967eaa1e4defe95353dd283cd7f
+  sha256: 7bf074af239d2b7a3cdb63809a498ada36d10306db9aa46d2b6b2305ad1121f1
 
 build:
   merge_build_host: true  # [win]
