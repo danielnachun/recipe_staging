@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/shenwei356/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 8046a0ac9ed10d2adff250ab5b95a95c895cae3b43d2a25bd95979f319146cb9
+  sha256: fe1d1a453b1ce64f6d27d1e89bef253ef7be2938cb901508d2845d71329b8ec5
 
 build:
   number: 0
