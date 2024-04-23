@@ -1,5 +1,5 @@
 {% set name = "reposurgeon" %}
-{% set version = "4.35" %}
+{% set version = "4.38" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://gitlab.com/esr/{{ name }}/-/archive/{{ version }}/reposurgeon-{{ version }}.tar.gz
-  sha256: 7a93f58bd6025c9c2dffac90c58ea7e3bbda8b17c51a181b0a969abe2a6a5081
+  sha256: 6849cad6f0a3bb5d627af5f65de0ce6a3185c224f80d0c0b2189636c41c7e168
 
 build:
-  number: 1
+  number: 0
 
 requirements:
   build:
