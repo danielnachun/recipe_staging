@@ -1,5 +1,5 @@
 {% set name = "mx" %}
-{% set version = "6.27.3" %}
+{% set version = "7.22.6" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/graalvm/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: c27375395382b3ef73d5dfcaaaca905150c681d0b3201b6e01cba50045e4bcf7
+  sha256: f1fad0fbe47faa6819474c5b5aacd676ca0627b1e417865c18c6c93bda54ca48
 
 build:
   number: 0
