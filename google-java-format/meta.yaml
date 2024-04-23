@@ -7,11 +7,11 @@ package:
 
 source:
   url: https://github.com/google/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 1de4c36ad4d89a18fcda976fee4a51630d7e8bc61a05f5939171ea339d07fde5
+  sha256: 769c2ecfd8162fc37518705a7d5ffad8eb388ca793b70a10da0870913e49d1a6
 
 build:
   noarch: generic
-  number: 1
+  number: 0
 
 requirements:
   build:
