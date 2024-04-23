@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/checkstyle/{{ name }}/archive/{{ name }}-{{ version }}.tar.gz
-  sha256: f69f495e392408718274d22cfca87f23f25d53ac4e56e73c15fd5664447188ce
+  sha256: 22e43999d0034fb0c3e718f971b4a20be5338f9e165dc9bc222ca52407641625
   folder: checkstyle
 
 build:
