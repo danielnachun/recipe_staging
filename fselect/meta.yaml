@@ -1,5 +1,5 @@
 {% set name = "fselect" %}
-{% set version = "0.8.4" %}
+{% set version = "0.8.5" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/jhspetersson/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: db720310ff265012f283f9fdfb4ac99188bb4a3cbfe5550171c7e2ab55a36420
+  sha256: e5742da80606630e310bb1567f2d72d7874f0b2537440e2800507abd786d912d
 
 build:
   number: 0
@@ -26,7 +26,6 @@ test:
 about:
   home: https://github.com/jhspetersson/{{ name }}
   license: MIT
-  license_family: MIT
   license_file:
     - LICENSE-MIT
     - THIRDPARTY.yml
