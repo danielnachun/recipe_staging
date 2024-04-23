@@ -1,5 +1,5 @@
 {% set name = "mdcat" %}
-{% set version = "2.1.0" %}
+{% set version = "2.1.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/swsnr/{{ name }}/archive/refs/tags/{{ name }}-{{ version }}.tar.gz
-  sha256: 96ed4b74c202514987610a69af7fc71afd3b826d0449f9326661fd5244c5d5ee
+  sha256: 332c8e659a668ceeae70b0d268a46f00bf8bab696dbf7f84faa69b3c509da286
 
 build:
   number: 0
