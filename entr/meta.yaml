@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://eradman.com/entrproject/code/{{ name }}-{{ version }}.tar.gz
-  sha256: 237e309d46b075210c0e4cb789bfd0c9c777eddf6cb30341c3fe3dbcc658c380
+  sha256: 128c0ce2efea5ae6bd3fd33c3cd31e161eb0c02609d8717ad37e95b41656e526
 
 build:
   number: 0
