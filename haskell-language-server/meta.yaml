@@ -1,5 +1,5 @@
 {% set name = "haskell-language-server" %}
-{% set version = "2.6.0.0" %}
+{% set version = "2.7.0.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://github.com/haskell/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: b23a165121553b59dde8f7e8f9ce24b8eee39d6b6ed5fae20d0882ec16f9da44
+  sha256: f84394954ed29ff5f99a3710e4581809d0a0641ba726a41bf031e7bc7e9d3455
 
 build:
-  number: 1
+  number: 0
   skip: true  # [not unix]
 
 requirements:
@@ -21,14 +21,14 @@ requirements:
     - ghc
     - git
     - ncurses
-    - zlib=1.2
+    - zlib
   host:
     - libiconv  # [osx]
     - ncurses
-    - zlib=1.2
+    - zlib
   run:
     - libiconv  # [osx]
-    - libzlib>=1.2
+    - libzlib
 
 test:
   commands:
