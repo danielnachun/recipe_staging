@@ -1,18 +1,18 @@
 {% set name = "cmake-language-server" %}
-{% set version = "0.1.7" %}
+{% set version = "0.1.10" %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
-  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
-  sha256: 40943df341d4278d99114223be86f874077a4462c52779dd178edaefa2d76fc5
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: dbc627dc1e549fc7414f459bdb340812acd84a0c8727b92e73c4bd348e6311bf
 
 build:
   noarch: python
   number: 0
-  script: "{{ PYTHON }} -m pip install . -vv"
+  script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
@@ -26,10 +26,10 @@ requirements:
     - python
 
 about:
-  home: "https://github.com/regen100/cmake-language-server"
+  home: https://github.com/regen100/cmake-language-server
   license: MIT
   summary: CMake LSP Implementation.
-  dev_url: "https://github.com/regen100/cmake-language-server"
+  dev_url: https://github.com/regen100/cmake-language-server
 
 extra:
   recipe-maintainers:
