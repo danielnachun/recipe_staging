@@ -1,5 +1,5 @@
 {% set name = "gpg-tui" %}
-{% set version = "0.10.0" %}
+{% set version = "0.11.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://github.com/orhun/{{ name }}/archive/v{{ version}}.tar.gz
-  sha256: 838a8f29acb646bdfef7e8efcd1d6c93ccd69b0e491e5fa855df779a75122fe7
+  sha256: 741def01fe84ee20c3eac1cbbe2533e1a9c387832cab31b5d233062338254ce1
 
 build:
-  number: 1
+  number: 0
 
 requirements:
   build:
