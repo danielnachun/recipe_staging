@@ -1,13 +1,13 @@
 {% set name = "astyle" %}
-{% set version = "3.4.10" %}
+{% set version = "3.4.13" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://downloads.sourceforge.net/project/astyle/astyle/astyle%203.4/astyle-3.4.10.tar.bz2
-  sha256: 6f67ec872b437bd3c51e0f75e112e4dbfdb26d5fb7bd9cf8a480f10af5557063
+  url: https://downloads.sourceforge.net/project/astyle/astyle/astyle%203.4/astyle-{{ version }}.tar.bz2
+  sha256: 78a610abd39e94e0f913e9ee5cda1e85bb62cd633553decb9e00d3d9201019ce
 
 build:
   number: 0
