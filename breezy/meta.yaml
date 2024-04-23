@@ -1,17 +1,17 @@
 {% set name = "breezy" %}
-{% set version = "3.3.3" %}
+{% set version = "3.3.7" %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
-  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
-  sha256: 5ab5e6c69eb7ba36b995f3c83e33e7be1d5dfcac2b9283888e1e0c61e47030e7
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: e70e03277ffa97e1bc27a24b30539bd3132e6d0ad9512b91db6dd499c254980d
 
 build:
   number: 0
-  script: "{{ PYTHON }} -m pip install . -vv"
+  script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   build:
@@ -48,10 +48,10 @@ test:
     - breezy
 
 about:
-  home: "https://github.com/breezy-team/breezy"
+  home: https://github.com/breezy-team/breezy
   license: GPL-2.0-or-later
   license_file: 
-  summary: "Friendly distributed version control system"
+  summary: Friendly distributed version control system
 
 extra:
   recipe-maintainers:
