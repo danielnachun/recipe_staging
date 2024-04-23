@@ -1,5 +1,5 @@
 {% set name = "ack" %}
-{% set version = "3.6.0" %}
+{% set version = "3.7.0" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://cpan.metacpan.org/authors/id/P/PE/PETDANCE/ack-v{{ version }}.tar.gz
-  sha256: 03144d1070649e92f6a1b7d20bdc535e2bb1ac258daabe482e9aa8277b48f005
+  sha256: dd5a7c2df81ee15d97b6bf6b3ff84ad2529c98e1571817861c7d4fd8d48af908
 
 build:
   noarch: generic
