@@ -1,5 +1,5 @@
 {% set name = "actionlint" %}
-{% set version = "1.6.26" %}
+{% set version = "1.6.27" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/rhysd/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 507d771f4c863bf98dfe1db3500a4c9344e3a35592a6e2ac4183f00a63291feb
+  sha256: 211618132974a864e3451ecd5c81a6dc7a361456b5e7d97a23f212ad8f6abb2d
 
 build:
   number: 1
