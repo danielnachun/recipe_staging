@@ -1,5 +1,5 @@
 {% set name = "ncftp" %}
-{% set version = "3.2.6" %}
+{% set version = "3.2.7" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://mirrorservice.org/sites/ftp.ncftp.com/ncftp/ncftp-{{ version }}-src.tar.gz
-  sha256: 129e5954850290da98af012559e6743de193de0012e972ff939df9b604f81c23
+  sha256: d41c5c4d6614a8eae2ed4e4d7ada6b6d3afcc9fb65a4ed9b8711344bef24f7e8
   patches:
     - 0001-fix-macOS-version-detection.patch
 
