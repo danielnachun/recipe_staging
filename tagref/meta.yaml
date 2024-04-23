@@ -1,5 +1,5 @@
 {% set name = "tagref" %}
-{% set version = "1.8.3" %}
+{% set version = "1.10.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/stepchowfun/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 72c5b78619561b22b7079a1d6286a27f9c0dcb258f2da53367a1a886070234b3
+  sha256: 47d18c8fe3b037fd32fbeeeb91cf763840a809050a82a386dd56f73505a375fd
 
 build:
   number: 0
@@ -25,7 +25,6 @@ test:
 about:
   home: https://github.com/stepchowfun/{{ name }}
   license: MIT
-  license_family: MIT
   license_file: LICENSE.md
   summary: Refer to other locations in your codebase
   dev_url: https://github.com/stepchowfun/{{ name }}
