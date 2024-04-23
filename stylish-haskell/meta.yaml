@@ -1,5 +1,5 @@
 {% set name = "stylish-haskell" %}
-{% set version = "0.14.5.0" %}
+{% set version = "0.14.6.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,9 +7,9 @@ package:
 
 source:
   url: https://github.com/haskell/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 580af1dc2f2cc3089bb255fd0af15dfb795a9ba0d9e76b2d0ce0c9ed2bcd9f07
-  patches:
-    - 630ac1bf035a95cda0295ce669de06da17b91c0f.patch
+  sha256: 0c0f34271670c23cc4feec7da04487a169a3cd0fde995721503bb5379755b91a
+  #patches:
+    #- 630ac1bf035a95cda0295ce669de06da17b91c0f.patch
 
 build:
   number: 0
