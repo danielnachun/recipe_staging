@@ -1,5 +1,5 @@
 {% set name = "sql-language-server" %}
-{% set version = "1.6.0" %}
+{% set version = "1.7.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://registry.npmjs.org/{{ name }}/-/{{ name }}-{{ version }}.tgz
-  sha256: 7b8f5e0fdb33eca26e23f6746d83bda049aeb30f61e14e0f43008a7b50f19dff
+  sha256: c66e8d94863c52c34cab0865be3bac61f152e8029ba32d95778d984c8e0a49b1
 
 build:
-  number: 2
+  number: 0
 
 requirements:
   build:
