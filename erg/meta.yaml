@@ -1,5 +1,5 @@
 {% set name = "erg" %}
-{% set version = "0.6.24" %}
+{% set version = "0.6.34" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/erg-lang/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: ab445ab68f2c38d963c6a71c2d0be0e64cb313b1ff92b7e54fd99d3038d9dc09
+  sha256: 2536aff4faaf5e8110e2c9830ab029a8d34c449beb5d251c64042076ba6df759
 
 build:
   number: 0
