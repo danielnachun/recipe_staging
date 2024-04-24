@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/watchexec/{{ name }}/archive/cli-v{{ version}}.tar.gz
+  url: https://github.com/watchexec/{{ name }}/archive/v{{ version}}.tar.gz
   sha256: a613143f9cc8a1ec2a917ae2dd0c03156bf79e6a2dc1ee1ae76419ed47bc8d29
 
 build:
