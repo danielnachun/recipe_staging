@@ -1,5 +1,5 @@
 {% set name = "teip" %}
-{% set version = "2.3.0" %}
+{% set version = "2.3.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/greymd/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 4c39466613f39d27fa22ae2a6309ac732ea94fdbc8711ecd4149fc1ecdfbaedf
+  sha256: c9e45d9f5fb263a67c42907d05d8a20dd62b910175270a59decc475e66ea6031
 
 build:
   number: 0
