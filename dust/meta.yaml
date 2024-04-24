@@ -1,5 +1,5 @@
 {% set name = "dust" %}
-{% set version = "0.8.6" %}
+{% set version = "1.0.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/bootandy/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: feede818e814011207c5bfeaf06dd9fc95825c59ab70942aa9b9314791c5d6b6
+  sha256: 34b72116ab6db9bdb97bc1e49dadf392a1619838204b44b0a4695539d54ffbe8
 
 build:
   number: 0
@@ -25,8 +25,7 @@ test:
 
 about:
   home: https://github.com/bootandy/{{ name }}
-  license: Apache 2.0
-  license_family: APACHE
+  license: Apache-2.0
   license_file:
     - LICENSE
     - THIRDPARTY.yml
