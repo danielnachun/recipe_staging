@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/errata-ai/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 5a355957a3b5da88a1b785d19dd9232a64a2c649ef9c95939cbce4b3f871e11b
+  sha256: cbadae7347fb6ba45eaeb9ace367d21b6665aacdc50ee744b76bddd3d7a84baa
 
 build:
   number: 0
