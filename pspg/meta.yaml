@@ -1,5 +1,5 @@
 {% set name = "pspg" %}
-{% set version = "5.8.1" %}
+{% set version = "5.8.4" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/okbob/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: 57f086f91927e0c1c2cfe1660049d7bed03b075c742a40c16bea5702a22169d0
+  sha256: 64e25d5ae42a84d6e19985002b2006cc553e9d1a3a083edd8ab77be6c657a1ea
 
 build:
   number: 0
