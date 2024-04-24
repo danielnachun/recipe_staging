@@ -1,5 +1,5 @@
 {% set name = "fx" %}
-{% set version = "31.0.0" %}
+{% set version = "34.0.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://github.com/antonmedv/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 8408047ef42506aac44aa805de209dd64ae4fc084e76bee8e24112ffbdc2d5dc
+  sha256: a1d436a8951a753488adda02fe9fb1091fabfe928eafce73f3b1e690a9dccbee
 
 build:
-  number: 1
+  number: 0
 
 requirements:
   build:
