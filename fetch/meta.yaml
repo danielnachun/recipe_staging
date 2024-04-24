@@ -1,5 +1,5 @@
 {% set name = "fetch" %}
-{% set version = "0.4.5" %}
+{% set version = "0.4.6" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/gruntwork-io/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: baa14d521cf0c59668dd5e84451579f48b623e16bb4d3b2254fa3c54b504fc9b
+  sha256: 81086290cc82a990a7369c710179869e3d1a5b3fea60df5997138a96688e9899
 
 build:
   number: 0
