@@ -22,7 +22,7 @@ jobs:
         id: download-packages
         uses: dawidd6/action-download-artifact@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.PAT_TOKEN }}
           workflow: conda_mambabuild_${{ matrix.platform }}.yml
           name: conda-bld_${{ github.event.pull_request.head.sha }}_${{ matrix.platform }}
           path: /tmp/conda-bld
