@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/jonas/{{ name }}/archive/refs/tags/{{ name }}-{{ version }}.tar.gz
-  sha256: 0cb4d9e3de00dc92aaa7996e1517845bd9b9a0d4368f3206f618d813e8db8b39
+  sha256: f759ec005bb918cab224df7e2a538b55b38f79762e925c359c13bfe2bc8fe48b
 
 build:
   number: 0
