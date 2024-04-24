@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/walles/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 51a26349f637452fef8d808fa5ad611befd49df0bd32779ef57ffe14b37d9e2b
+  sha256: 1b1731b65d5dd32324eca826efb6f762d79e51b7dae7bbfc8f0e5460f8d370ac
 
 build:
   number: 0
