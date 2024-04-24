@@ -1,5 +1,5 @@
 {% set name = "fq" %}
-{% set version = "0.1.0" %}
+{% set version = "0.11.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/wader/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 156ad8b9fd8ede40ab4c12c7c7ef6ca0558a9cb5260c546863a6e96425caf9b2
+  sha256: 8b3a7d112323a11be5559959ff141f0ef9fca2b29f7cc34f060d5f360187dcde
 
 build:
   number: 0
