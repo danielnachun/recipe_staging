@@ -1,5 +1,5 @@
 {% set name = "helix" %}
-{% set version = "22.12" %}
+{% set version = "24.03" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/helix-editor/{{ name }}/releases/download/{{ version }}/{{ name }}-{{ version }}-source.tar.xz
-  sha256: 295b42a369fbc6282693eb984a77fb86260f7baf3ba3a8505d62d1c619c2f3f4
+  sha256: c59a5988f066c2ab90132e03a0e6b35b3dd89f48d3d78bf0ec81bd7d88c7677e
 
 build:
   number: 0
@@ -16,6 +16,7 @@ requirements:
   build:
     - {{ compiler('rust') }}
     - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - cargo-bundle-licenses
 
 test:
