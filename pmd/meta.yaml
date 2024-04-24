@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/pmd/{{ name }}/archive/refs/tags/pmd_releases/{{ version }}.tar.gz
-  sha256: 24be4bde2846cabea84e75e790ede1b86183f85f386cb120a41372f2b4844a54
+  sha256: 49cd07cd425532c69e720a78096f48fba8b1a0a7ae17071815829fcbd8aeddfe
 
 build:
   noarch: generic
