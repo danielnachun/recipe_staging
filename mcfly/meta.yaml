@@ -1,5 +1,5 @@
 {% set name = "mcfly" %}
-{% set version = "0.8.3" %}
+{% set version = "0.8.4" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/cantino/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 1d9f4e3b55fdac8b9c3007c19875bd308eb79dd473d371647e82250a52446d53
+  sha256: 637f50756366604d4d19a6f623cfd490c38e1b971708ec8ccdb39887a0e9c1f1
 
 build:
   number: 0
