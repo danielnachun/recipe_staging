@@ -1,5 +1,5 @@
 {% set name = "gdu" %}
-{% set version = "5.25.0" %}
+{% set version = "5.28.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://github.com/dundee/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 83fe876d953b4f2f7a856552e758aae4aa0cd9569dcf1aded61bdc834b834275
+  sha256: b184046e76a97f4205b745d431655b7910f8c7b41a8592d68c4cbf61e3b14125
 
 build:
-  number: 1
+  number: 0
 
 requirements:
   build:
