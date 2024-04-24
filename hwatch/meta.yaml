@@ -1,5 +1,5 @@
 {% set name = "hwatch" %}
-{% set version = "0.3.9" %}
+{% set version = "0.3.12" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/blacknon/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 1e9c1edb79c1a57830356641b0a2d232f15585416fd1dc8200b4ff808db118ee
+  sha256: f8db316a3b186f0dbf863ce285c8d5642f709a8527022fd2c18162f26c5b6f3d
 
 build:
   number: 0
