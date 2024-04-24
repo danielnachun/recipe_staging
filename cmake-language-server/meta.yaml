@@ -18,6 +18,7 @@ requirements:
   host:
     - pygls
     - pdm
+    - pdm-backend
     - pdm-pep517
     - pip
     - python
