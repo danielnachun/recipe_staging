@@ -1,5 +1,5 @@
 {% set name = "xh" %}
-{% set version = "0.17.0" %}
+{% set version = "0.22.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/ducaale/{{ name }}/archive/v{{ version}}.tar.gz
-  sha256: 31a944b1932fb785a191932944ff662a33ad99724cb5bc260acdaf821fb2e088
+  sha256: 72f4d5e24165d8749433167e3ad3df8f26faafb250f1232acbe5192843e4157c
 
 build:
   number: 0
