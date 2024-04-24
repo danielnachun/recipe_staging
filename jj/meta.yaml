@@ -1,5 +1,5 @@
 {% set name = "jj" %}
-{% set version = "0.12.0" %}
+{% set version = "0.16.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/martinvonz/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: da90259cd1003d9f87af277c8b20625f3b07c3fe785fb490fe17659f2082852f
+  sha256: e6094982c8e5902c33b0505bbb0e4e4c35c249f2a36108655002dc7d06de7d4a
 
 build:
   number: 0
