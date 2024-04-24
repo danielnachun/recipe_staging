@@ -1,5 +1,5 @@
 {% set name = "kalker" %}
-{% set version = "2.0.4" %}
+{% set version = "2.2.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/PaddiM8/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: f9ea40521f8e435adfc5db7f811c63bab7276407c6c0a95a40673f777f57c3bd
+  sha256: 4f34d34e922308e586fd9f7077e1cba126f3e75d269f4859d0472bb565ce1d4d
 
 build:
   number: 0
