@@ -1,5 +1,5 @@
 {% set name = "rbspy" %}
-{% set version = "0.17.0" %}
+{% set version = "0.19.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/rbspy/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 4b5b64a42c1a307c06886b2686d9496e0df205fe5e1e98ef9e3ca6ed226753c2
+  sha256: e9ceff68994d5c264a40fc4a27e188f52190b2fd56c2d1513f7e82f092b9bf2d
 
 build:
   number: 0
