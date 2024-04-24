@@ -1,5 +1,5 @@
 {% set name = "tuc" %}
-{% set version = "1.1.0" %}
+{% set version = "1.2.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/riquito/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: d5dc8f9a7739450707e3f630038fa83d97c080c7397e7afbcec44682646c497e
+  sha256: bb6d16772ed0728f396d32066d391206420497a4f902071b0229790a8c844307
 
 build:
   number: 0
