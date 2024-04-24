@@ -1,5 +1,5 @@
 {% set name = "gojq" %}
-{% set version = "0.12.14" %}
+{% set version = "0.12.15" %}
 
 package:
   name: {{ name|lower }}
