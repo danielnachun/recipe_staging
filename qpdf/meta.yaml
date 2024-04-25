@@ -17,16 +17,16 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - cmake
     - make
-    - automake
-    - autoconf
-    - coreutils  # [osx]
   host:
     - zlib
     - libjpeg-turbo
+    - openssl
   run:
-    - libzlib
     - libjpeg-turbo
+    - libzlib
+    - openssl
 
 test:
   commands:
