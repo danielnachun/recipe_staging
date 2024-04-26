@@ -46,7 +46,7 @@ jobs:
   build_packages:
     needs: setup
     if: needs.setup.outputs.any_changed == 'true'
-    runs-on: macos-latest
+    runs-on: macos-13
     strategy:
       fail-fast: false
 
