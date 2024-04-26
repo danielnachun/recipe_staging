@@ -1,28 +1,28 @@
 {% set name = "pmd" %}
-{% set version = "6.55.0" %}
+{% set version = "7.0.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/pmd/{{ name }}/archive/refs/tags/pmd_releases/{{ version }}.tar.gz
-  sha256: cdc7442777988d7221d652fb01e4d5248311cf2bf4dd25aa1c0d3e114f88b6f1
+  git_url: https://github.com/pmd/{{ name }}.git
+  git_ref: pmd_releases/{{ version }}
 
 build:
   noarch: generic
-  number: 1
+  number: 0
 
 requirements:
   build:
-    - openjdk >=17,<18
+    - openjdk >=21,<22
     - unzip
   run:
     - openjdk
 
 test:
   commands:
-    - pmd pmd --help
+    - pmd --help
 
 about:
   home: https://pmd.github.io
