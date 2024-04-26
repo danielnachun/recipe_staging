@@ -1,5 +1,5 @@
 {% set name = "semgrep" %}
-{% set version = "1.56.0" %}
+{% set version = "1.69.0" %}
 
 package:
   name: {{ name|lower }}
@@ -16,6 +16,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - binutils  # [linux]
     - cmake
     - gcc  # [linux]
     - gxx  # [linux]
@@ -31,6 +32,7 @@ requirements:
     - click
     - click-option-group
     - colorama
+    - curl
     - defusedxml
     - glom
     - gmp
@@ -61,6 +63,7 @@ requirements:
     - defusedxml
     - glom
     - jsonschema
+    - libcurl
     - libev
     - packaging
     - peewee

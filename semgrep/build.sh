@@ -8,14 +8,14 @@ export SETUPTOOLS_USE_DISTUTILS=stdlib
 
 opam init --no-setup --disable-sandboxing
 opam update -y
-opam install -vvv -j ${CPU_COUNT} -y --deps-only --no-depexts ./libs/ocaml-tree-sitter-core
-opam install -vvv -j ${CPU_COUNT} -y --deps-only --no-depexts ./
+opam install -v -j ${CPU_COUNT} -y --deps-only --no-depexts ./libs/ocaml-tree-sitter-core
+opam install -v -j ${CPU_COUNT} -y --deps-only --no-depexts ./
 
 pushd ./libs/ocaml-tree-sitter-core
 	./configure --prefix ${PREFIX}
 popd
 
-opam install -vvv -j ${CPU_COUNT} --deps-only --no-depexts -y .
+opam install -v -j ${CPU_COUNT} --deps-only --no-depexts -y .
 opam exec -- make core
 opam exec -- make copy-core-for-cli
 
