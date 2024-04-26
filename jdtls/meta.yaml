@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/eclipse/eclipse.jdt.ls/archive/v{{ version }}.tar.gz
-  sha256: 3bfeb7ea24319bdc43877413e6396b2b80adb35b2bf63808845d3bf38f6163b0
+  sha256: b9baa124cfe82bfaa30b46c91f7e5c7a7948a6ce448b10ba7dc20c3d756a29f7
 
 build:
   noarch: generic
