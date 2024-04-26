@@ -1,8 +1,9 @@
 #!/bin/bash
 
-export CFLAGS="-I$PREFIX/include"
-export LDFLAGS="-L$PREFIX/lib"
+cmake -S . -B build \
+    -DUSE_IMPLICIT_CRYPTO=0 \
+    -DREQUIRE_CRYPTO_OPENSSL=1 \
+    ${CMAKE_ARGS}
+cmake --build build
+cmake --install build
 
-./autogen.sh
-./configure --prefix="${PREFIX}"
-make install

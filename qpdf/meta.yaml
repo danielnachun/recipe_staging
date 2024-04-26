@@ -1,32 +1,32 @@
 {% set name = "qpdf" %}
-{% set version = "10.6.3" %}
+{% set version = "11.9.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/qpdf/qpdf/archive/release-qpdf-{{ version }}.tar.gz
-  sha256: 64bbb654ec19b6812284ef1bc40c57b091de5281f265f1c3c83dd8ccf6bedcf5
+  url: https://github.com/qpdf/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 8407560029772d736a50a519116eee3e213ab83c319ed110773c4227fafcab28
 
 build:
-  number: 2
+  number: 0
   skip: true  # [win]
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - cmake
     - make
-    - automake
-    - autoconf
-    - coreutils  # [osx]
   host:
     - zlib
     - libjpeg-turbo
+    - openssl
   run:
-    - zlib
     - libjpeg-turbo
+    - libzlib
+    - openssl
 
 test:
   commands:
