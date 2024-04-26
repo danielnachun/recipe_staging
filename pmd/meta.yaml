@@ -22,7 +22,7 @@ requirements:
 
 test:
   commands:
-    - pmd pmd --help
+    - pmd --help
 
 about:
   home: https://pmd.github.io
