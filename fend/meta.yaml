@@ -1,5 +1,5 @@
 {% set name = "fend" %}
-{% set version = "1.3.3" %}
+{% set version = "1.4.6" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/printfn/{{ name }}/archive/v{{ version}}.tar.gz
-  sha256: 90364fab29b51e1c359ff72f8ccfc3e8a3c96bbc8b38d0646c28c489a8071084
+  sha256: 88fe4abf2caf96241a2964f510fd8801ac22f5c1511a4817361e676e931b0ce0
 
 build:
   number: 0
@@ -17,8 +17,15 @@ requirements:
     - {{ compiler('rust') }}
     - {{ compiler('c') }}
     - cargo-bundle-licenses
+    - openssl
     - pandoc
+    - pkg-config
     - sysroot_linux-64=2.17  # [linux]
+  host:
+    - openssl
+  run:
+    - openssl
+
 test:
   commands:
     - {{ name }} --help
