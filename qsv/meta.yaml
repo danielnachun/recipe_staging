@@ -1,5 +1,5 @@
 {% set name = "qsv" %}
-{% set version = "0.122.0" %}
+{% set version = "0.126.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/jqnatividad/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 4e2bfb128972b5b2a47e25be5ea680e6c39cc6295f24c6bb40e79ce58232dbda 
+  sha256: ee38f1ca972c6bf50ad3e973a0b0fd11b784d9abf8a6eaf97cc5c1a582c9fac1
 
 build:
   number: 0
@@ -20,16 +20,16 @@ requirements:
     - clangdev
     - libiconv  # [osx]
     - pkg-config
-    - python =3.11
+    - python
     - rust
   host:
     - libiconv  # [osx]
     - openssl
-    - python =3.11
+    - python
   run:
     - openssl
     - libiconv  # [osx]
-    - python =3.11
+    - python
 
 test:
   commands:
