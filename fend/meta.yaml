@@ -21,6 +21,11 @@ requirements:
     - pandoc
     - pkg-config
     - sysroot_linux-64=2.17  # [linux]
+  host:
+    - openssl
+  run:
+    - openssl
+
 test:
   commands:
     - {{ name }} --help
