@@ -2,6 +2,8 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+sed -i 's/(struct iovec \*, int, char \*, int)/(struct iovec *, int, const char *, int)/' src/syslogd.c
+
 ./configure --disable-debug \
     --disable-dependency-tracking \
     --disable-silent-rules \

@@ -1,5 +1,5 @@
 {% set name = "inetutils" %}
-{% set version = "2.4" %}
+{% set version = "2.5" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://ftp.gnu.org/gnu/inetutils/inetutils-{{ version }}.tar.xz
-  sha256: 1789d6b1b1a57dfe2a7ab7b533ee9f5dfd9cbf5b59bb1bb3c2612ed08d0f68b2
+  sha256: 87697d60a31e10b5cb86a9f0651e1ec7bee98320d048c0739431aac3d5764fb6
 
 build:
   number: 0
@@ -15,7 +15,9 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - help2man
     - make
+    - sed
   host:
     - libidn2
     - libxcrypt
