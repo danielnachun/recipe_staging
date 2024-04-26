@@ -6,7 +6,7 @@ mkdir -p ${PREFIX}/bin
 mkdir -p ${PREFIX}/libexec/${PKG_NAME}
 mkdir -p ${PREFIX}/etc/bash_completion.d
 
-sed -i "/add_debug_prefix(self.suite.vc_dir)/d" mx_native.py
+sed -i "/add_debug_prefix(self.suite.vc_dir)/d" src/mx/_impl/mx_native.py
 cp -r * ${PREFIX}/libexec/${PKG_NAME}
 
 tee ${PREFIX}/bin/${PKG_NAME} << EOF
