@@ -17,6 +17,7 @@ requirements:
     - {{ compiler('c') }}
     - help2man
     - make
+    - sed
   host:
     - libidn2
     - libxcrypt
