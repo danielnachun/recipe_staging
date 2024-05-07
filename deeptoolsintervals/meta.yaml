@@ -18,11 +18,11 @@ requirements:
   build:
     - {{ compiler('c') }}
   host:
-    - python=3.11
+    - python=3.12
     - setuptools
     - zlib=1.2
   run:
-    - python=3.11
+    - python=3.12
     - libzlib>=1.2
 
 test:
