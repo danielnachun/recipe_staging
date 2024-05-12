@@ -8,8 +8,8 @@ package:
   version: '{{ version }}'
 
 source:
-  url: https://cran.r-project.org/src/contrib/qgg_{{ version }}.tar.gz
-  sha256: 4301a8bf390bdfe6b68ac87a7d084d28f917edb0b35049b46dc27790d9772505
+  url: https://github.com/psoerensen/qgg/archive/9a3a52e367d28d917ca124fa91eb8cbe357af805.zip
+  sha256: 1e72319b0c0b8c4c41b928578d4cbf9c3a7eabe4740221ce55e3a52efca344eb
 
 build:
   number: 0
