@@ -1,5 +1,5 @@
 {% set name = "yamlfmt" %}
-{% set version = "0.11.0" %}
+{% set version = "0.12.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/google/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 15148a9ab8562a5514dbdb22348ac10d1ac9a63f57fc9e5e4138bbf6146767dc
+  sha256: 7ae88b90849b249a3cd97857796cc3a7ce2df408e3861c5f1d9ff24fade70b96
 
 build:
   number: 0
