@@ -1,5 +1,5 @@
 {% set name = "lychee" %}
-{% set version = "0.14.3" %}
+{% set version = "0.15.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/lycheeverse/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: b2ce1bd57040ab9d1719b9540e8c2905327f6a71674a0e5f2297f00bb4410651
+  sha256: 21c52aab5eefb0fda578f8192dffc5b776954e585f5692b87079cbb52ac1d89c
 
 build:
   number: 0
