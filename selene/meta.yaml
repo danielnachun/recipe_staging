@@ -1,5 +1,5 @@
 {% set name = "selene" %}
-{% set version = "0.26.1" %}
+{% set version = "0.27.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/Kampfkarren/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: 44a4485b880aca3a70970167faa6cd467418cb49ddfb3b87fe616af7462180fd
+  sha256: f12579907c019bebcc3830e320614409217096e63d80b4704989bbd65394b530
 
 build:
   number: 0
