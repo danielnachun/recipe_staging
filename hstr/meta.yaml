@@ -1,5 +1,5 @@
 {% set name = "hstr" %}
-{% set version = "2.6" %}
+{% set version = "3.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/dvorka/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: 085f8a087481bcdf33e75e2fa5aaa9289931782c0bee2db3e02425b9a7d83cdf
+  sha256: e5293d4fe2502662f19c793bef416e05ac020490218e71c75a5e92919c466071
 
 build:
   number: 0
