@@ -1,5 +1,5 @@
 {% set name = "rbspy" %}
-{% set version = "0.19.1" %}
+{% set version = "0.20.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/rbspy/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: e9ceff68994d5c264a40fc4a27e188f52190b2fd56c2d1513f7e82f092b9bf2d
+  sha256: 65c4a4f9e283b917ba2c84bd98a8ec14d3e67b7edf5fec2db9b047ecc4eecd80
 
 build:
   number: 0
@@ -15,7 +15,7 @@ build:
 requirements:
   build:
     - {{ compiler('rust') }}
-    - clangdev <16
+    - clangdev
     - cargo-bundle-licenses
     - sysroot_linux-64=2.17  # [linux]
 
