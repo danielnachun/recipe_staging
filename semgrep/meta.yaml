@@ -8,6 +8,8 @@ package:
 source:
   git_url: https://github.com/returntocorp/semgrep.git
   git_rev: v{{ version }}
+  patches:
+    - 0001-fix-macOS-flags.patch
 
 build:
   number: 0

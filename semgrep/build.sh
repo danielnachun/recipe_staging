@@ -5,6 +5,7 @@ set -o xtrace -o nounset -o pipefail -o errexit
 export OPAMROOT=${SRC_DIR}/opamroot
 export OPAMYES=1
 export SETUPTOOLS_USE_DISTUTILS=stdlib
+export SEMGREP_LIBEV_ARCHIVE_PATH="-lev"
 
 opam init --no-setup --disable-sandboxing
 opam update -y
