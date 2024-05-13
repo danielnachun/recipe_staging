@@ -1,5 +1,5 @@
 {% set name = "lima" %}
-{% set version = "0.21.0" %}
+{% set version = "0.22.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/lima-vm/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 86ecdc2758b6afd55faa06918b7a506108e95fbdfd93aa18a0ef5e7b59b4e7b4
+  sha256: 9ea5b439cf71bb8fc4d831c3a71540baaa4c4420152addf1e32de57a4dc8af96
 
 build:
   number: 0
@@ -20,8 +20,6 @@ requirements:
     - go-licenses
     - make
     - sed
-  run:
-    - qemu
 
 test:
   commands:
