@@ -1,5 +1,5 @@
 {% set name = "semgrep" %}
-{% set version = "1.69.0" %}
+{% set version = "1.72.0" %}
 
 package:
   name: {{ name|lower }}
@@ -54,6 +54,7 @@ requirements:
     - urllib3
     - wcmatch
     - pcre
+    - pcre2
   run:
     - attrs
     - boltons
