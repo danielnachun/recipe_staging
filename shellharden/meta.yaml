@@ -1,5 +1,5 @@
 {% set name = "shellharden" %}
-{% set version = "4.3.0" %}
+{% set version = "4.3.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/anordal/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: d17bf55bae4ed6aed9f0d5cea8efd11026623a47b6d840b826513ab5b48db3eb
+  sha256: 3c16a98502df01a2fa2b81467d5232cc1aa4c80427e2ecf9f7e74591d692e22c
 
 build:
   number: 0
