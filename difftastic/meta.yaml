@@ -1,5 +1,5 @@
 {% set name = "difftastic" %}
-{% set version = "0.57.0" %}
+{% set version = "0.58.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/Wilfred/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 7ecc69f9cfa88259f7d6aef9309b03d00db8d2bf314c71807fe8b4f07a386063
+  sha256: 2f180ff34e969880613a3cdcd6f2feb53af310180817075199690048d6e23af6
 
 build:
   number: 0
@@ -18,6 +18,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - cargo-bundle-licenses
+    - sysroot_linux-64=2.17  # [linux]
 
 test:
   commands:
