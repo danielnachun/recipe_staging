@@ -1,5 +1,5 @@
 {% set name = "rospo" %}
-{% set version = "0.12.0" %}
+{% set version = "0.12.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/ferama/{{ name }}/archive/refs/tags/v{{ version}}.tar.gz
-  sha256: 2a3988b6d94e1c41c729d1a8da1820605c570b0e88194ad726af56d7bace1b44
+  sha256: 9e9343b60fa4cfb1507e3fc8ef3b3a30499a68081c6efdccaa4a5d47ceadd210
 
 build:
   number: 0
