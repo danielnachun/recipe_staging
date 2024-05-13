@@ -1,5 +1,5 @@
 {% set name = "bash-language-server" %}
-{% set version = "5.1.2" %}
+{% set version = "5.2.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://registry.npmjs.org/bash-language-server/-/{{ name }}-{{ version }}.tgz
-  sha256: 4a951fbbe6d7df7f5ed6e6facd9ba1856bddec6b3e0d25517495f68a014fb052
+  sha256: 2bb7e5fa5cfcf1c3847a24a1b896fb920c6d8afcfda213af2b909f70715d7b5e
 
 build:
   noarch: generic
