@@ -1,5 +1,5 @@
 {% set name = "nushell" %}
-{% set version = "0.88.1" %}
+{% set version = "0.93.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://github.com/{{ name }}/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: 19f5a46799142117f61989a76f85fdd24361fe9e5068565d7fff36b91a7a7a39
+  sha256: 00dcd5ab112d8afd683aa0b87b65b2e47a45487857a6d2481ce7eeb0045c2c00
 
 build:
-  number: 1
+  number: 0
   ignore_run_exports:
     - xorg-libx11
     - xorg-libxcb
