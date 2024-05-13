@@ -1,5 +1,5 @@
 {% set name = "xplr" %}
-{% set version = "0.21.7" %}
+{% set version = "0.21.8" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/sayanarijit/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: d38f94cc46044dac3cfc96d89dec81989b69a66a98c2f960ea3abe44313675a6
+  sha256: 6fa6ab87cd9f48e531146e2f04c980f2ec90259b3e7b874bf9e165e613be0789
 
 build:
   number: 0
