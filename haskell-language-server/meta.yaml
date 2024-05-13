@@ -1,5 +1,5 @@
 {% set name = "haskell-language-server" %}
-{% set version = "2.7.0.0" %}
+{% set version = "2.8.0.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/haskell/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: f84394954ed29ff5f99a3710e4581809d0a0641ba726a41bf031e7bc7e9d3455
+  sha256: af6c76d21d577c2712ed7106d8ba00ec734c9285de58293f78e1cc1cc203d154
 
 build:
   number: 0
