@@ -6,6 +6,9 @@ cargo-bundle-licenses \
     --format yaml \
     --output THIRDPARTY.yml
 
+#export RUSTFLAGS="-C link-args=-L${PREFIX}/lib"
+export LIBGIT2_NO_VENDOR=1
+
 # build statically linked binary with Rust
 cargo install --locked --root ${PREFIX} --path .
 
