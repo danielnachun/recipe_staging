@@ -1,5 +1,5 @@
 {% set name = "cpio" %}
-{% set version = "2.13" %}
+{% set version = "2.15" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://ftp.gnu.org/gnu/cpio/cpio-{{ version }}.tar.bz2
-  sha256: eab5bdc5ae1df285c59f2a4f140a98fc33678a0bf61bdba67d9436ae26b46f6d
+  sha256: 937610b97c329a1ec9268553fb780037bcfff0dcffe9725ebc4fd9c1aa9075db
 
 build:
   number: 0
@@ -15,12 +15,7 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
-    - autoconf
-    - automake
-    - gettext
     - make
-  host:
-    - libtool
 
 test:
   commands:
