@@ -2,10 +2,10 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-export "CFLAGS=${CFLAGS} -fcommon -Wno-incompatible-function-pointer-types"
+#export "CFLAGS=${CFLAGS} -fcommon -Wno-incompatible-function-pointer-types"
 
-autoupdate
-autoreconf --force --install --verbose
+#autoupdate
+#autoreconf --force --install --verbose
 
 ./configure --disable-debug \
     --disable-dependency-tracking \
