@@ -1,0 +1,38 @@
+{% set name = "erubi" %}
+{% set version = "1.7.0" %}
+
+package:
+  name: rb-{{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: e921f78547824cc1de0a55bc99a641bd695d474b8723e5c4fa8a84fdd1c26afe
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  license_file: {{ name }}-{{ version }}/MIT-LICENSE
+  summary: Erubi is a ERB template engine for ruby. It is a simplified fork of Erubis
+  dev_url: https://github.com/jeremyevans/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
