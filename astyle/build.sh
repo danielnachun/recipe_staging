@@ -2,8 +2,6 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-cd src
-make CXX=${CXX} -f ../build/gcc/Makefile
-
-mkdir -p ${PREFIX}/bin
-install -m 755 bin/astyle ${PREFIX}/bin
+cmake -S . -B build ${CMAKE_ARGS}
+cmake --build build
+cmake --install build
