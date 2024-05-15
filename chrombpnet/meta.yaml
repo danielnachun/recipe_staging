@@ -11,7 +11,7 @@ source:
 
 build:
   noarch: python
-  number: 2
+  number: 3
   entry_points:
     - chrombpnet = chrombpnet.CHROMBPNET:main
     - print_meme_motif_file = chrombpnet.data.__init__:print_meme_motif_file
