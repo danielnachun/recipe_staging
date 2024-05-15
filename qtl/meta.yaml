@@ -11,13 +11,13 @@ source:
 
 build:
   noarch: python
-  number: 1
+  number: 2
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - bx-python
-    - matplotlib
+    - matplotlib-base
     - numpy =1.26
     - pandas
     - pip
@@ -27,7 +27,7 @@ requirements:
     - seaborn
   run:
     - bx-python
-    - matplotlib
+    - matplotlib-base
     - numpy =1.26
     - pandas
     - pybigwig
