@@ -10,7 +10,7 @@ source:
   sha256: 0269759677ae8a71544e34168c680588703c2e983a20ff8bce93cd73dc6004ff
 
 build:
-  number: 0
+  number: 1
   script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
@@ -19,7 +19,7 @@ requirements:
     - {{ compiler('cxx') }}
   host:
     - ipython
-    - matplotlib
+    - matplotlib-base
     - pandas
     - pip
     - python ==3.10.*
@@ -29,7 +29,7 @@ requirements:
     - tqdm >4.25.0
   run:
     - ipython
-    - matplotlib
+    - matplotlib-base
     - pandas
     - python ==3.10.*
     - scikit-image
