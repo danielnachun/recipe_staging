@@ -22,7 +22,7 @@ requirements:
     - pytables
     - pandas
     - scipy
-    - matplotlib
+    - matplotlib-base
     - h5py
     - pysam
     - statsmodels
