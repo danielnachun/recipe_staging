@@ -11,7 +11,7 @@ source:
 
 build:
   noarch: python
-  number: 2
+  number: 3
   entry_points:
     - chrombpnet = chrombpnet.CHROMBPNET:main
     - print_meme_motif_file = chrombpnet.data.__init__:print_meme_motif_file
@@ -23,7 +23,7 @@ requirements:
     - deeplift >=0.6.13.0
     - h5py >=2.10.0
     - kundajelab-shap
-    - matplotlib >=3.3.1
+    - matplotlib-base >=3.3.1
     - matplotlib-venn >=0.11.6
     - modisco
     - modisco-lite
@@ -45,7 +45,7 @@ requirements:
     - h5py >=2.10.0
     - kent-tools
     - kundajelab-shap
-    - matplotlib >=3.3.1
+    - matplotlib-base >=3.3.1
     - matplotlib-venn >=0.11.6
     - meme
     - modisco 
