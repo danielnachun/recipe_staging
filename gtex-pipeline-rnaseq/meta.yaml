@@ -11,7 +11,7 @@ source:
 
 build:
   noarch: python
-  number: 1
+  number: 2
 
 requirements:
   build:
@@ -24,7 +24,7 @@ requirements:
     - scipy
     - pyarrow
     - pybigwig
-    - matplotlib
+    - matplotlib-base
     - seaborn
     #- bedtools
     #- kent-tools
