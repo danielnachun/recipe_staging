@@ -19,7 +19,7 @@ requirements:
     - {{ compiler('cxx') }}
   host:
     - ipython
-    - matplotlib
+    - matplotlib-base
     - pandas
     - pip
     - python ==3.10.*
@@ -29,7 +29,7 @@ requirements:
     - tqdm >4.25.0
   run:
     - ipython
-    - matplotlib
+    - matplotlib-base
     - pandas
     - python ==3.10.*
     - scikit-image
