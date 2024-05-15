@@ -11,17 +11,17 @@ source:
 
 build:
   noarch: python
-  number: 0
-  script: "{{ PYTHON }} -m pip install . -vv"
+  number: 1
+  script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - numpy =1.26
-    - matplotlib
+    - matplotlib-base
     - python=3.12
   run:
     - numpy =1.26
-    - matplotlib
+    - matplotlib-base
     - python=3.12
 
 test:
@@ -31,9 +31,8 @@ test:
 about:
   home: https://github.com/puolival/multipy
   license: BSD-3-Clause
-  license_family: BSD
   license_file: LICENSE
-  summary: "Multiple hypothesis testing in Python"
+  summary: Multiple hypothesis testing in Python
   dev_url: https://github.com/puolival/multipy
 
 extra:
