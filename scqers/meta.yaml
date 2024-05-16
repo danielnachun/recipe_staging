@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/maurermaggie/scQers/commit/22b281991a5a5e9db6e83e79a93fd953d51b1a9b.zip
-  sha256: d686393960542b1f3b35652b571ed074afd8a6473ced3b955c5662eb028300bd
+  url: https://github.com/maurermaggie/scQers/archive/22b281991a5a5e9db6e83e79a93fd953d51b1a9b.zip
+  sha256: 4861a96aa171c4e0b432397a3261db7f06ff547e2364776d6603cbb88624a84c
 
 build:
   noarch: python
@@ -15,7 +15,7 @@ build:
 
 requirements:
   run:
-    - python >= 3.6
+    - python >=3.6
     - pysam
     - r-argparser
     - r-igraph
