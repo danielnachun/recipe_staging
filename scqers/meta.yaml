@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/omerwe/polyfun/archive/082d9fabc54a3fe80c2b315291e206bbf4673900.zip
+  url: https://github.com/maurermaggie/scQers/commit/22b281991a5a5e9db6e83e79a93fd953d51b1a9b.zip
   sha256: d686393960542b1f3b35652b571ed074afd8a6473ced3b955c5662eb028300bd
 
 build:
@@ -15,7 +15,9 @@ build:
 
 requirements:
   run:
+    - python >= 3.6
     - pysam
+    - r-argparser
     - r-igraph
     - r-tictoc
     - r-tidyverse
@@ -23,11 +25,11 @@ requirements:
 
 test:
   commands:
-    - test -f ${PREFIX}/bin/clean_up_umi_counts
-    - get_barcode_fixed_pos -h
+    - clean_up_umi_counts --help
+    - get_barcode_fixed_pos --help
 
 about:
-  home: https://github.com/omerwe/polyfun
+  home: https://github.com/maurermaggie/scQers
   license: MIT
   license_file: LICENSE
   summary: Multiplex profiling of developmental enhancers with quantitative, single-cell expression reporters
