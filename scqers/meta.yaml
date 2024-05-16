@@ -1,0 +1,41 @@
+{% set name = "scqers" %}
+{% set version = "1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/maurermaggie/scQers/archive/22b281991a5a5e9db6e83e79a93fd953d51b1a9b.zip
+  sha256: 4861a96aa171c4e0b432397a3261db7f06ff547e2364776d6603cbb88624a84c
+
+build:
+  noarch: python
+  number: 0
+
+requirements:
+  build:
+    - sed
+  run:
+    - python >=3.6
+    - pysam
+    - r-argparser
+    - r-igraph
+    - r-tictoc
+    - r-tidyverse
+    - r-stringdist
+
+test:
+  commands:
+    - clean_up_umi_counts --help
+    - get_barcode_fixed_pos --help
+
+about:
+  home: https://github.com/maurermaggie/scQers
+  license: MIT
+  license_file: LICENSE
+  summary: Multiplex profiling of developmental enhancers with quantitative, single-cell expression reporters
+
+extra:
+  recipe-maintainers:
+    - danielnachun
