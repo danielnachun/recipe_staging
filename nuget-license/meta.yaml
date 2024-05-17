@@ -23,7 +23,7 @@ requirements:
 
 test:
   commands:
-    - dotnet-project-licenses --help 2>& | grep -q "dotnet-project-licenses"
+    - dotnet-project-licenses --help 2>&1 | grep -q "dotnet-project-licenses"
 
 about:
   home: https://github.com/tomchavakis/{{ name }}
