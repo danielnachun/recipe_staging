@@ -18,20 +18,20 @@ requirements:
   host:
     - bx-python
     - matplotlib-base
-    - numpy =1.26
+    - numpy >=1.22
     - pandas
     - pip
     - pybigwig
-    - python =3.12
+    - python >=3.8
     - scipy
     - seaborn
   run:
     - bx-python
     - matplotlib-base
-    - numpy =1.26
+    - numpy >=1.22
     - pandas
     - pybigwig
-    - python =3.12
+    - python >=3.8
     - scipy
     - seaborn
 
