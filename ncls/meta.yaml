@@ -17,12 +17,12 @@ requirements:
   build:
     - {{ compiler('c') }}
   host:
-    - python=3.12
+    - python=3.11
     - cython
     - pip
     - setuptools
   run:
-    - python=3.12
+    - python=3.11
     - setuptools
     - numpy>=1.26
 
