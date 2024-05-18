@@ -18,13 +18,13 @@ requirements:
     - python=3.12
     - setuptools
     - cython>=0.29.3
-    - numpy
+    - numpy=1.26
   run:
     - python=3.12
     - click
     - h5py
     - matplotlib-base
-    - numpy
+    - numpy=1.26
     - pandas
     - plotly
     - pyfaidx
