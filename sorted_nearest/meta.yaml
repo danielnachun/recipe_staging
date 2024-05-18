@@ -21,11 +21,11 @@ requirements:
   build:
     - {{ compiler('c') }}
   host:
-    - python=3.12
+    - python=3.11
     - setuptools
     - cython
   run:
-    - python=3.12
+    - python=3.11
     - numpy
 
 test:
