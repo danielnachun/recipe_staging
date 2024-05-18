@@ -1,0 +1,41 @@
+{% set name = "puffin" %}
+{% set version = "1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/jzhoulab/{{ name }}/archive/12d95d80887d7d96336f791882f6961cc548ba6a.zip
+  sha256: 4861a96aa171c4e0b432397a3261db7f06ff547e2364776d6603cbb88624a84c
+
+build:
+  noarch: python
+  number: 0
+
+requirements:
+  build:
+    - sed
+  run:
+    - python>=3.8
+    - numpy>=1.24
+    - pandas
+    - pytorch
+    - docopt
+    - selene-sdk
+    - fft-conf-pytorch
+
+test:
+  commands:
+    - puffin --help
+    - puffin_D --help
+
+about:
+  home: https://github.com/jzhoulab/{{ name }}
+  license: BSD-3-Clause
+  license_file: LICENSE
+  summary: Deep learning-inspired explainable sequence model for transcription initiation
+
+extra:
+  recipe-maintainers:
+    - danielnachun
