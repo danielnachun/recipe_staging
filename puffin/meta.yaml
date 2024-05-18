@@ -23,7 +23,7 @@ requirements:
     - pytorch
     - docopt
     - selene-sdk
-    - fft-conf-pytorch
+    - fft-conv-pytorch
 
 test:
   commands:
