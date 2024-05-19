@@ -13,3 +13,7 @@ tee ${PREFIX}/bin/dotnet-project-licenses << EOF
 #!/bin/sh
 DOTNET_ROOT=${DOTNET_ROOT} exec ${DOTNET_ROOT}/dotnet exec ${PREFIX}/libexec/${PKG_NAME}/NugetUtility.dll "\$@"
 EOF
+
+chmod +x ${PREFIX}/bin/dotnet-project-licenses
+
+${PREFIX}/bin/dotnet-project-licenses -e --input . -f license-files
