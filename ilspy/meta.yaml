@@ -11,13 +11,14 @@ source:
 
 build:
   noarch: generic
-  number: 1
+  number: 2
 
 requirements:
   build:
     - sed
   host:
     - dotnet
+    - nuget-license
     - powershell
   run:
     - dotnet
@@ -29,6 +30,9 @@ test:
 about:
   home: https://github.com/icsharpcode/{{ name }}
   license: MIT
+  license_file:
+    - doc/license.txt
+    - license-files/
   summary: .NET Decompiler with support for PDB generation, ReadyToRun, Metadata (&more) - cross-platform!
   dev_url: https://github.com/icsharpcode/{{ name }}
 
