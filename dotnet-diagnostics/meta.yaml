@@ -11,13 +11,14 @@ source:
 
 build:
   noarch: generic
-  number: 1
+  number: 2
 
 requirements:
   build:
     - jq
   host:
     - dotnet
+    - nuget-license
   run:
     - dotnet
 
@@ -34,7 +35,9 @@ test:
 about:
   url: https://github.com/dotnet/diagnostics
   license: MIT
-  license_file: LICENSE.TXT
+  license_file: 
+    - LICENSE.TXT
+    - license-files/
   summary: .NET Core runtime diagnostic tools
   dev_url: https://github.com/dotnet/diagnostics
 

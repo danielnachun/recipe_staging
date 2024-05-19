@@ -30,3 +30,5 @@ tools=(dotnet-counters dotnet-dsrouter dotnet-dump dotnet-gcdump dotnet-sos dotn
 
 printf "%s\n" "${tools[@]}" | xargs -I % bash -c "build %"
 printf "%s\n" "${tools[@]}" | xargs -I % bash -c "env_script %"
+
+dotnet-project-licenses -e --input . -f license-files
