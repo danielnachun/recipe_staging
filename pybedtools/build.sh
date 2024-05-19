@@ -1,5 +1,6 @@
 #!/bin/bash
 export CPATH=${PREFIX}/include
+export CXXFLAGS="-Wno-register"
 $PYTHON setup.py install --single-version-externally-managed --record=rec.txt
 
 # Add more build steps here, if they are necessary.
