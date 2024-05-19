@@ -28,7 +28,9 @@ test:
 about:
   home: https://github.com/tomchavakis/{{ name }}
   license: Apache-2.0
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: .NET Core tool to print or save all the licenses of a project
   dev_url: https://github.com/tomchavakis/{{ name }}
 
