@@ -32,3 +32,5 @@ tee ${PREFIX}/bin/paket << EOF
 #!/bin/sh
 DOTNET_ROOT=${DOTNET_ROOT} exec ${DOTNET_ROOT}/dotnet exec ${PREFIX}/libexec/${PKG_NAME}/paket.dll "\$@"
 EOF
+
+dotnet-project-licenses -e --input . -f license-files
