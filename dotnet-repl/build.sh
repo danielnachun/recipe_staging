@@ -24,3 +24,5 @@ tee ${PREFIX}/bin/dotnet-repl << EOF
 #!/bin/sh
 DOTNET_ROOT=${DOTNET_ROOT} exec ${PREFIX}/libexec/${PKG_NAME}/dotnet-repl "\$@"
 EOF
+
+dotnet-project-licenses -e --input . -f license-files
