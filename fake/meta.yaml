@@ -11,11 +11,12 @@ source:
 
 build:
   noarch: generic
-  number: 1
+  number: 2
 
 requirements:
   host:
     - dotnet
+    - nuget-license
   run:
     - dotnet
 
@@ -26,7 +27,9 @@ test:
 about:
   home: https://fake.build
   license: Apache-2.0
-  license_file: License.txt
+  license_file: 
+    - License.txt
+    - license-files/
   summary: FAKE - F# Make
   dev_url: https://github.com/fsprojects/{{ name }}
 
