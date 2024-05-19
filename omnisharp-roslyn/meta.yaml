@@ -11,7 +11,7 @@ source:
 
 build:
   noarch: generic
-  number: 1
+  number: 2
   ignore_run_exports:
     - icu
 
@@ -20,6 +20,7 @@ requirements:
     - sed
   host:
     - dotnet
+    - nuget-license
   run:
     - dotnet
 
@@ -30,7 +31,9 @@ test:
 about:
   home: https://github.com/OmniSharp/{{ name }}
   license: MIT
-  license_file: license.md
+  license_file: 
+    - license.md
+    - license-files/
   summary: OmniSharp server (HTTP, STDIO) based on Roslyn workspaces
 
 extra:

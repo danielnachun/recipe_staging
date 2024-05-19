@@ -20,3 +20,5 @@ tee ${PREFIX}/bin/OmniSharp << EOF
 #!/bin/sh
 DOTNET_ROOT=${DOTNET_ROOT} exec ${DOTNET_ROOT}/dotnet exec ${PREFIX}/libexec/${PKG_NAME}/OmniSharp.dll "\$@"
 EOF
+
+dotnet-project-licenses -e --input . -f license-files
