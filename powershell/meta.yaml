@@ -21,6 +21,7 @@ requirements:
     - dotnet
     - icu  # [linux]
     - libpsl-native
+    - nuget-license
     - omi
   run:
     - dotnet
@@ -34,7 +35,9 @@ test:
 about:
   home: https://github.com/PowerShell/PowerShell
   license: MIT
-  license_file: LICENSE.txt
+  license_file: 
+    - LICENSE.txt
+    - license-files/
   summary: PowerShell for every system!
   dev_rul: https://github.com/PowerShell/PowerShell
 

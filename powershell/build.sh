@@ -46,3 +46,5 @@ tee ${PREFIX}/bin/pwsh << EOF
 #!/bin/sh
 DOTNET_ROOT=${DOTNET_ROOT} exec ${PREFIX}/libexec/powershell/7/pwsh "\$@"
 EOF
+
+dotnet-project-licenses -e --input . -f license-files
