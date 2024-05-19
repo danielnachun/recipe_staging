@@ -11,13 +11,14 @@ source:
 
 build:
   noarch: generic
-  number: 2
+  number: 3
 
 requirements:
   build:
     - sed
   host:
     - dotnet
+    - nuget-license
   run:
     - dotnet
 
@@ -28,7 +29,9 @@ test:
 about:
   home: https://github.com/fsharp/{{ name }}
   license: Apache-2.0
-  license_file: LICENSE.md
+  license_file: 
+    - LICENSE.md
+    - license-files/
   summary: F# language server using Language Server Protocol
 
 extra:
