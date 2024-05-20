@@ -11,7 +11,7 @@ source:
 
 build:
   noarch: generic
-  number: 1
+  number: 2
 
 requirements:
   build:
@@ -31,7 +31,9 @@ test:
 about:
   home: https://github.com/valentjn/{{ name }}
   license: MPL-2.0
-  license_file: LICENSE.md
+  license_file: 
+    - LICENSE.md
+    - target/generated-resources/license/
   summary: LSP language server for LanguageTool with support for LaTeX, Markdown, and others
 
 extra:
