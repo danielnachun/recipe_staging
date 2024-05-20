@@ -33,7 +33,7 @@ about:
   license: MPL-2.0
   license_file: 
     - LICENSE.md
-    - target/generated-resources/license/
+    - target/generated-resources/licenses/
   summary: LSP language server for LanguageTool with support for LaTeX, Markdown, and others
 
 extra:
