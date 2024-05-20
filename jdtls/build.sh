@@ -13,3 +13,5 @@ tee ${PREFIX}/bin/jdtls << EOF
 #!/bin/sh
 JAVA_HOME=${JAVA_HOME} exec ${PREFIX}/libexec/${PKG_NAME}/bin/jdtls "\$@"
 EOF
+
+mvn license:download-licenses -Dgoal=download-licenses
