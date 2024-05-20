@@ -18,4 +18,8 @@ if [[ ${target_platform} == "linux-64" ]]; then
     install -m 755 org.eclipse.lemminx/target/lemminx-linux-x86_64-${PKG_VERSION} ${PREFIX}/bin/lemminx
 fi
 
-./mvnw license:download-licenses -Dgoal=download-licenses
+pushd org.eclipse.lemminx
+    ./mvnw license:download-licenses -Dgoal=download-licenses
+popd
+mkdir -p target/generated-resources
+mv org.eclipe.lemminx/target/generated-resources/licenses target/generated-resources
