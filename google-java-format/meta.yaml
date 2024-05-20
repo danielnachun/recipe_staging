@@ -30,7 +30,7 @@ about:
   license: Apache-2.0
   license_file: 
     - LICENSE
-    - targets/generated-resources/licenses/
+    - target/generated-resources/licenses/
   summary: Reformats Java source code to comply with Google Java Style
 
 extra:
