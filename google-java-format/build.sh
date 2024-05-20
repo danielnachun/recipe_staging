@@ -16,3 +16,8 @@ JAVA_HOME=${JAVA_HOME} exec ${JAVA_HOME}/bin/java -jar ${PREFIX}/libexec/${PKG_N
 EOF
 
 install -m 755 scripts/google-java-format-diff.py ${PREFIX}/bin/google-java-format-diff
+pushd core
+    mvn license:download-licenses -Dgoal=download-licenses
+popd
+mkdir -p target/generated-resources
+mv core/target/generated-resources/licenses target/generated-resources
