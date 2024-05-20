@@ -32,7 +32,7 @@ about:
   license: EPL-2.0
   license_file: 
     - LICENSE
-    - targets/generated-resources/licenses/
+    - target/generated-resources/licenses/
   summary: XML Language Server
   dev_url: https://github.com/eclipse/{{ name }}
 
