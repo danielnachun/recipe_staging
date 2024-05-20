@@ -17,3 +17,5 @@ fi
 if [[ ${target_platform} == "linux-64" ]]; then
     install -m 755 org.eclipse.lemminx/target/lemminx-linux-x86_64-${PKG_VERSION} ${PREFIX}/bin/lemminx
 fi
+
+mvn license:download-licenses -Dgoal=download-licenses
