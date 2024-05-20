@@ -19,7 +19,7 @@ if [[ ${target_platform} == "linux-64" ]]; then
 fi
 
 pushd org.eclipse.lemminx
-    ./mvnw license:download-licenses -Dgoal=download-licenses
+    ../mvnw license:download-licenses -Dgoal=download-licenses
 popd
 mkdir -p target/generated-resources
 mv org.eclipe.lemminx/target/generated-resources/licenses target/generated-resources
