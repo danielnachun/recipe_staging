@@ -22,4 +22,4 @@ pushd org.eclipse.lemminx
     ../mvnw license:download-licenses -Dgoal=download-licenses
 popd
 mkdir -p target/generated-resources
-mv org.eclipe.lemminx/target/generated-resources/licenses target/generated-resources
+mv org.eclipse.lemminx/target/generated-resources/licenses target/generated-resources
