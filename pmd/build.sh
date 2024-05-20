@@ -12,3 +12,5 @@ cp -r pmd-bin-7.2.0-SNAPSHOT/* ${PREFIX}/libexec/${PKG_NAME}
 tee ${PREFIX}/bin/pmd << EOF
 JAVA_HOME=${JAVA_HOME} exec ${PREFIX}/libexec/${PKG_NAME}/bin/pmd "\$@"
 EOF
+
+./mvnw license:download-licenses -Dgoal=download-licenses
