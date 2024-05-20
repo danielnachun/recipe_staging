@@ -15,6 +15,7 @@ build:
 
 requirements:
   build:
+    - findutils
     - openjdk >=21,<22
     - unzip
   run:
