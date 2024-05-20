@@ -21,4 +21,5 @@ tee ${PREFIX}/bin/OmniSharp << EOF
 DOTNET_ROOT=${DOTNET_ROOT} exec ${DOTNET_ROOT}/dotnet exec ${PREFIX}/libexec/${PKG_NAME}/OmniSharp.dll "\$@"
 EOF
 
+rm test-assets/test-projects/ProjectWithWildcardPackageReference/._ProjectWithWildcardPackageReference.csproj
 dotnet-project-licenses -e --input . -f license-files
