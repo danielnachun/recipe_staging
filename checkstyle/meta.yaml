@@ -31,6 +31,7 @@ about:
   license_file: 
     - checkstyle/LICENSE
     - checkstyle/LICENSE.apache20
+    - checkstyle/target/generated-resources/licenses/
   summary: Checkstyle is a development tool to help programmers write Java code that adheres to a coding standard
   dev_url: https://github.com/checkstyle/{{ name }}
 

@@ -12,3 +12,5 @@ tee ${PREFIX}/bin/checkstyle << EOF
 #!/bin/sh
 JAVA_HOME=${JAVA_HOME} exec ${JAVA_HOME}/bin/java -jar ${PREFIX}/libexec/${PKG_NAME}/checkstyle-${PKG_VERSION}-all.jar "\$@"
 EOF
+
+mvn license:download-licenses -Dgoal=download-licenses
