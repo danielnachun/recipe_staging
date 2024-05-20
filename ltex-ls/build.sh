@@ -20,3 +20,5 @@ EOF
 tee ${PREFIX}/bin/ltex-ls << EOF
 JAVA_HOME=${JAVA_HOME} exec ${PREFIX}/libexec/${PKG_NAME}/bin/ltex-ls "\$@"
 EOF
+
+mvn license:download-licenses -Dgoal=download-licenses
