@@ -11,10 +11,11 @@ source:
 
 build:
   noarch: generic
-  number: 2
+  number: 3
 
 requirements:
   build:
+    - maven
     - sbt
     - openjdk >=11,<12
   run:
