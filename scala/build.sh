@@ -4,6 +4,8 @@ set -o xtrace -o nounset -o pipefail -o errexit
 
 sbt dist/packArchive
 
+sbt makePom
+
 mkdir -p ${PREFIX}/bin
 mkdir -p ${PREFIX}/libexec/${PKG_NAME}
 
@@ -31,3 +33,4 @@ tee ${PREFIX}/bin/scaladoc << EOF
 #!/bin/sh
 JAVA_HOME=${PREFIX}/lib/jvm exec ${PREFIX}/libexec/${PKG_NAME}/bin/scaladoc "\$@"
 EOF
+exit 1

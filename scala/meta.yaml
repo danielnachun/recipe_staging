@@ -15,6 +15,7 @@ build:
 
 requirements:
   build:
+    - maven
     - sbt
     - openjdk >=17,<18
   run:
