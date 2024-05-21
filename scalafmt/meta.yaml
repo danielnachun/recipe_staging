@@ -16,6 +16,7 @@ requirements:
   build:
     - findutils
     - gcc  # [linux]
+    - maven
     - sbt
     - sed
   host:
