@@ -15,8 +15,10 @@ build:
 
 requirements:
   build:
+    - findutils
     - maven
     - sbt
+    - sed
     - openjdk >=17,<18
   run:
     - openjdk
@@ -28,7 +30,9 @@ test:
 about:
   home: https://dotty.epfl.ch
   license: Apache-2.0
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - target/generated-resources/licenses/
   summary: The Scala 3 compiler, also known as Dotty.
   dev_url: https://github.com/lampepfl/dotty
 
