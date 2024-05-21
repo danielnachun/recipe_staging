@@ -20,7 +20,7 @@ sbt makePom
 
 find -name "*.pom" | xargs -I % bash -c 'download_licenses %'
 mkdir -p ${SRC_DIR}/target/generated-resources/licenses
-find -type d -name "licenses" | grep generated-resources | grep -v "./target" | xargs -I % bash -c 'cp %/* ./target/generated-resources/licenses'
+find -type d -name "licenses" | grep generated-resources | grep -v "^./target" | xargs -I % bash -c 'cp %/* ./target/generated-resources/licenses'
 
 mkdir -p ${PREFIX}/bin
 mkdir -p ${PREFIX}/libexec/${PKG_NAME}
@@ -49,4 +49,3 @@ tee ${PREFIX}/bin/scaladoc << EOF
 #!/bin/sh
 JAVA_HOME=${PREFIX}/lib/jvm exec ${PREFIX}/libexec/${PKG_NAME}/bin/scaladoc "\$@"
 EOF
-exit 1
