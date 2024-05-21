@@ -10,11 +10,12 @@ source:
   git_rev: v{{ version }}
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - findutils
+    - gcc  # [linux]
     - sbt
     - sed
   host:
