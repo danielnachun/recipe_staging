@@ -15,6 +15,7 @@ build:
 
 requirements:
   build:
+    - findutils
     - maven
     - sbt
     - openjdk >=11,<12
