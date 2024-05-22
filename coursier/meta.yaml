@@ -1,5 +1,5 @@
 {% set name = "coursier" %}
-{% set version = "2.1.5" %}
+{% set version = "2.1.10" %}
 
 package:
   name: {{ name|lower }}
@@ -17,6 +17,7 @@ requirements:
     - {{ compiler('c') }}
     - curl
     - gcc  # [linux]
+    - maven
     - sed
   host:
     - graalvm
