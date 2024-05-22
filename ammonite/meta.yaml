@@ -16,6 +16,7 @@ build:
 requirements:
   build:
     - curl
+    - findutils
     - maven
     - openjdk =17
   run:
