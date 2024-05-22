@@ -16,6 +16,7 @@ build:
 requirements:
   build:
     - curl
+    - maven
     - openjdk =17
   run:
     - openjdk
@@ -27,7 +28,9 @@ test:
 about:
   home: https://github.com/com-lihaoyi/Ammonite
   license: MIT
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - target/generated-resources/licenses/
   summary: Scala Scripting
   dev_rul: https://github.com/com-lihaoyi/Ammonite
 
