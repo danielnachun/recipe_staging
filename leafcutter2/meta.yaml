@@ -1,0 +1,37 @@
+package:
+  name: leafcutter2
+  version: 2.0.2
+
+source:
+  url: https://github.com/davidaknowles/leafcutter/archive/c78788b3a62e52529f6895c95d904faeb88290d1.tar.gz
+  sha256: b38a2c87cc74ffa592482569e462926e6d6270d0697ccb426876f1377d790188
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  build:
+    - python
+    - setuptools
+    - numpy>=1.21
+  run:
+    - python
+    - pytorch 
+    - pyro-ppl 
+    - scipy>=1.11
+    - pandas
+    - scikit-learn
+    - numpy>=1.21
+
+test:
+  commands:
+    - leafcutter-cluster --help
+    - leafcutter-ds --help
+
+about:
+  home: https://github.com/davidaknowles/leafcutter
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Alternative Splicing Quantification, Differential Splicing and Splicing QTL Mapping
