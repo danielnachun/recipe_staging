@@ -1,0 +1,24 @@
+From a40487bddce6336d655d74dedfca2f9b801662a1 Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Wed, 22 May 2024 19:10:11 -0700
+Subject: [PATCH] fix setup.py
+
+---
+ setup.py | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/setup.py b/setup.py
+index 73dbd1d..f8bd8db 100644
+--- a/setup.py
++++ b/setup.py
+@@ -4,6 +4,7 @@ import setuptools
+ 
+ if __name__ == "__main__":
+     setuptools.setup(py_modules = ["leafcutter"])
++    packages=find_packages()
+ 
+ if False: 
+     setup(
+-- 
+2.45.0
+

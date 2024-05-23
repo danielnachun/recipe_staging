@@ -5,6 +5,8 @@ package:
 source:
   url: https://github.com/davidaknowles/leafcutter/archive/c78788b3a62e52529f6895c95d904faeb88290d1.tar.gz
   sha256: b38a2c87cc74ffa592482569e462926e6d6270d0697ccb426876f1377d790188
+  patches:
+    - 0001-fix-setup.py.patch
 
 build:
   noarch: python
