@@ -10,7 +10,7 @@ source:
   git_rev: v{{ version }}
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -20,7 +20,7 @@ requirements:
     - maven
     - sed
   host:
-    - graalvm
+    - graalvm=20
     - zlib
   run:
     - libzlib
@@ -32,7 +32,9 @@ test:
 about:
   home: https://get-coursier.io
   license: Apache-2.0
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - target/generated-resources/licenses/
   summary: Pure Scala Artifact Fetching
   dev_url: https://github.com/coursier/{{ name }}
 
