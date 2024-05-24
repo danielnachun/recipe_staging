@@ -1,5 +1,5 @@
 {% set name = "cljstyle" %}
-{% set version = "0.15.0" %}
+{% set version = "0.16.626" %}
 
 package:
   name: {{ name|lower }}
@@ -7,19 +7,20 @@ package:
 
 source:
   url: https://github.com/greglook/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: 4b08de8a530a749562006a484c748dfdaae979b1787ef739bd0c1f3ebd240ee3
+  sha256: 5b62022e0875b8726d9998f3d0950fbe603bd05b63817b09273c7e1bdde76116
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - {{ compiler('c') }}
     - gcc  # [linux]
-    - graalvm
-    - leiningen
+    - maven
     - sed
   host:
+    - graalvm
+    - leiningen
     - zlib
   run:
     - libzlib

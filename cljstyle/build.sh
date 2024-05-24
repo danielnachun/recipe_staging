@@ -20,5 +20,13 @@ native-image \
     -J-Xmx4500m \
     --verbose
 
+clojure -T:build pom
+
+pushd target/classes/META-INF/maven/mvxcvi/cljstyle
+    mvn license:download-licenses -Dgoal=download-licenses
+    mv target ${SRC_DIR}
+popd
+
 mkdir -p ${PREFIX}/bin
 install -m 755 cljstyle ${PREFIX}/bin
+exit 1
