@@ -2,10 +2,12 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-lein uberjar
+export GRAALVM_HOME=${PREFIX}/lib/jvm
+
+clojure -T:build uberjar
 
 native-image \
-    -jar target/uberjar/cljstyle.jar \
+    -jar target/cljstyle.jar \
     --native-image-info \
     --native-compiler-options="-L${PREFIX}/lib" \
     --initialize-at-build-time \
@@ -24,9 +26,8 @@ clojure -T:build pom
 
 pushd target/classes/META-INF/maven/mvxcvi/cljstyle
     mvn license:download-licenses -Dgoal=download-licenses
-    mv target ${SRC_DIR}
+    mv target/generated-resources ${SRC_DIR}/target
 popd
 
 mkdir -p ${PREFIX}/bin
 install -m 755 cljstyle ${PREFIX}/bin
-exit 1

@@ -6,15 +6,17 @@ package:
   version: {{ version.replace("-", "_") }}
 
 source:
-  url: https://github.com/greglook/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: 5b62022e0875b8726d9998f3d0950fbe603bd05b63817b09273c7e1bdde76116
+  git_url: https://github.com/greglook/{{ name }}
+  git_rev: {{ version }}
 
 build:
-  number: 1
+  number: 0
 
 requirements:
   build:
     - {{ compiler('c') }}
+    - clojure
+    - findutils
     - gcc  # [linux]
     - maven
     - sed
@@ -32,7 +34,9 @@ test:
 about:
   home: https://github.com/greglook/{{ name }}
   license: EPL-1.0
-  license_file: LICENSE.txt
+  license_file: 
+    - LICENSE.txt
+    - target/generated-resources/licenses/
   summary: A tool for formatting Clojure code
   dev_url: https://github.com/greglook/{{ name }}
 
