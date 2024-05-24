@@ -9,3 +9,6 @@ sed -i "s?\${HOMEBREW_RUBY_PATH}?${BUILD_PREFIX}/bin/ruby?g" install.sh
 sed -i "s?libexec?libexec/${PKG_NAME}?g" install.sh
 sed -i "s?libexec?libexec/${PKG_NAME}?g" clojure
 ./install.sh ${PREFIX}
+
+mvn license:download-licenses -Dgoal=download-licenses
+exit 1

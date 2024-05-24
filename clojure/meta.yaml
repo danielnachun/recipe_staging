@@ -11,10 +11,11 @@ source:
 
 build:
   noarch: generic
-  number: 0
+  number: 1
 
 requirements:
   build:
+    - maven
     - ruby
     - sed
   run:
@@ -27,7 +28,9 @@ test:
 
 about:
   home: https://clojure.org
-  license: EPL-1.0
+  license: 
+    - EPL-1.0
+    - target/generated-resources/licenses/
   summary: Dynamic, general-purpose programming language
   dev_url: https://github.com/babashka/{{ name }}
 
