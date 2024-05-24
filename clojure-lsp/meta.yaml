@@ -10,17 +10,18 @@ source:
   sha256: d056fe0b511616567bf0cf191d5bc33725dad76165a39ed29f69ec0a2b95bc9d
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - {{ compiler('c') }}
     - gcc  # [linux]
-    - graalvm
     - babashka
-    - leiningen
+    - maven
     - sed
   host:
+    - graalvm
+    - leiningen
     - zlib
   run:
     - libzlib
@@ -32,7 +33,9 @@ test:
 about:
   home: https://github.com/babashka/{{ name }}
   license: EPL-1.0
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - target/generated-resources/licenses/
   summary: Native, fast starting Clojure interpreter for scripting
   dev_url: https://github.com/babashka/{{ name }}
 

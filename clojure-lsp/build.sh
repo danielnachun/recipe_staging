@@ -9,3 +9,5 @@ sed -i "s?\"--native-image-info\"?\"--native-image-info\" \"--native-compiler-op
 bb native-cli
 
 install -m 755 clojure-lsp ${PREFIX}/bin
+
+
