@@ -20,3 +20,7 @@ native-image \
 
 mkdir -p ${PREFIX}/bin
 install -m 755 zprintl ${PREFIX}/bin
+
+lein pom
+mvn license:download-licenses -Dgoal=download-licenses
+exit 1
