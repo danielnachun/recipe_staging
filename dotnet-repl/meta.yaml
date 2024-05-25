@@ -10,11 +10,12 @@ source:
   sha256: 204c065e63a28300b016dd08ad0dd19f9e7a09d9ad67b26cb322519f407c5cfa
 
 build:
-  number: 1
+  number: 2
 
 requirements:
   build:
     - {{ compiler('cxx') }}
+    - nuget-license
   host:
     - dotnet <8
     - libpsl-native
@@ -35,7 +36,9 @@ test:
 about:
   home: https://github.com/jonsequitur/{{ name }}
   license: MIT
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: A polyglot REPL built on .NET Interactive
   dev_url: https://github.com/jonsequitur/{{ name }}
 
