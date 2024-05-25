@@ -1,5 +1,5 @@
 {% set name = "graalvm" %}
-{% set version = "23.1.2" %}
+{% set version = "20.0.2" %}
 
 package:
   name: {{ name|lower }}
