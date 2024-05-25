@@ -27,8 +27,9 @@ test:
 
 about:
   home: https://clojure.org
-  license: 
-    - EPL-1.0
+  license: EPL-1.0
+  license_file:
+    - epl-v10.html
     - target/generated-resources/licenses/
   summary: Dynamic, general-purpose programming language
   dev_url: https://github.com/babashka/{{ name }}
