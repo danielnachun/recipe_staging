@@ -22,7 +22,7 @@ rm -rf ${PREFIX}/libexec/${PKG_NAME}/runtimes
 
 tee ${PREFIX}/bin/dotnet-repl << EOF
 #!/bin/sh
-DOTNET_ROOT=${DOTNET_ROOT} exec ${PREFIX}/libexec/${PKG_NAME}/dotnet-repl "\$@"
+DOTNET_ROOT=${PREFIX}/lib/dotnet exec ${PREFIX}/libexec/${PKG_NAME}/dotnet-repl "\$@"
 EOF
 
 dotnet-project-licenses -e --input . -f license-files
