@@ -1,22 +1,21 @@
 {% set name = "clojure" %}
-{% set version = "1.11.3.1463" %}
+{% set version = "1.11.3" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://download.clojure.org/install/clojure-tools-{{ version }}.tar.gz
-  sha256: dba419de3e785f3b695b6589d7183419cf8ec2bb2f99f2b88afd06b0b57c1487
+  url: https://github.com/clojure/clojure/archive/refs/tags/clojure-{{ version }}.tar.gz
+  sha256: 0ae8327335fd48125263acc85d388ac81ddc0cdbb872e0f6743e0dffd904a1d2
 
 build:
   noarch: generic
-  number: 1
+  number: 0
 
 requirements:
   build:
     - maven
-    - ruby
     - sed
   run:
     - openjdk
