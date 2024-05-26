@@ -13,14 +13,6 @@ download_licenses() {
 
 export -f download_licenses
 
-./gradlew clean dist
-mv subprojects/groovy-binary/build/distributions/apache-groovy-binary-${PKG_VERSION}.zip .
-unzip apache-groovy-binary-${PKG_VERSION}.zip
-
-mkdir -p ${PREFIX}/libexec/${PKG_NAME}
-mkdir -p ${PREFIX}/bin
-cp -r groovy-${PKG_VERSION}/* ${PREFIX}/libexec/${PKG_NAME}
-
 env_script() {
 bin_name=$(basename $1)
 tee ${PREFIX}/bin/${bin_name} << EOF
@@ -31,9 +23,17 @@ EOF
 
 export -f env_script
 
+./gradlew clean dist
+mv subprojects/groovy-binary/build/distributions/apache-groovy-binary-${PKG_VERSION}.zip .
+unzip apache-groovy-binary-${PKG_VERSION}.zip
+
+mkdir -p ${PREFIX}/libexec/${PKG_NAME}
+mkdir -p ${PREFIX}/bin
+cp -r groovy-${PKG_VERSION}/* ${PREFIX}/libexec/${PKG_NAME}
+
 find ${PREFIX}/libexec/${PKG_NAME}/bin -type f | grep -v ".bat" | grep -v ".ico" | sort -u | xargs -I % bash -c "env_script %"
 ./gradlew publishMavenPublicationToLocalFileRepository --no-build-cache --no-scan --refresh-dependencies
 
 find -name "*.pom" | xargs -I % bash -c 'download_licenses %'
 mkdir -p ${SRC_DIR}/target/generated-resources/licenses
-find -type d -name "licenses" | grep generated-resources | grep -v "^./target" | xargs -I % bash -c 'cp %/* ./target/generated-resources/licenses'
+find -type d -name "licenses" | grep generated-resources | grep -v "^./target" | grep -v "groovy-bom" | xargs -I % bash -c 'cp %/* ./target/generated-resources/licenses'
