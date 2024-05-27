@@ -4,7 +4,7 @@ set -o xtrace -o nounset -o pipefail -o errexit
 
 export CABAL_DIR=${SRC_DIR}/.cabal
 cabal v2-update
-cabal --store-dir=${SRC_DIR}/.cabal v2-install all \
+cabal v2-install all \
     --minimize-conflict-set \
     --allow-newer=base,bytestring,text,aeson,hnix,free,algebraic-graphs \
     --extra-lib-dirs=${PREFIX}/lib \
