@@ -12,7 +12,7 @@ source:
     - 0001-fix-macOS-flags.patch
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -24,6 +24,7 @@ requirements:
     - gxx  # [linux]
     - jinja2
     - make
+    - odig
     - opam
     - pkg-config
     - rsync
@@ -91,7 +92,9 @@ test:
 about:
   home: https://semgrep.dev
   license: LGPL-2.1-only
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: Easily detect and prevent bugs and anti-patterns in your codebase
   dev_url: https://github.com/returntocorp/semgrep
 
