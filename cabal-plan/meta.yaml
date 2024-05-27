@@ -1,0 +1,45 @@
+{% set name = "cabal-plan" %}
+{% set version = "0.7.3.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/haskell-hvr/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: cc67545508f1900feafb9ccf8237ba7cc7dcc9d3cfd95a8897a06e47d4ace782
+
+build:
+  number: 0
+  skip: true  # [not unix]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cabal-install
+    - ghc
+    - zlib  #[linux]
+  host:
+    - libiconv  #[osx]
+    - zlib  #[linux]
+  host:
+    - libiconv  #[osx]
+    - libzlib  #[linux]
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/haskell-hvr/{{ name }}
+  license: GPL-3.0-or-later
+  license_file: 
+    - LICENSE.GPLv3
+    - license-files/
+  summary: Library and utility for processing cabal's plan.json file
+  dev_url: https://github.com/haskell-hvr/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
