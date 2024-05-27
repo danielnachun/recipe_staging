@@ -32,7 +32,7 @@ about:
   license: Apache-2.0
   license_file: 
     - LICENSE
-    - target/generated-resources/license/
+    - target/generated-resources/licenses/
   summary: Java-based scripting language
   dev_url: https://github.com/apache/groovy
 
