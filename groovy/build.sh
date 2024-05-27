@@ -34,6 +34,6 @@ cp -r groovy-${PKG_VERSION}/* ${PREFIX}/libexec/${PKG_NAME}
 find ${PREFIX}/libexec/${PKG_NAME}/bin -type f | grep -v ".bat" | grep -v ".ico" | sort -u | xargs -I % bash -c "env_script %"
 ./gradlew publishMavenPublicationToLocalFileRepository --no-build-cache --no-scan --refresh-dependencies
 
-find -name "*.pom" | xargs -I % bash -c 'download_licenses %'
+find -name "*.pom" | grep -v "groovy\-binary" | xargs -I % bash -c 'download_licenses %'
 mkdir -p ${SRC_DIR}/target/generated-resources/licenses
-find -type d -name "licenses" | grep generated-resources | grep -v "^./target" | grep -v "groovy\-bom" | grep -v "groovy\-binary" | xargs -I % bash -c 'cp %/* ./target/generated-resources/licenses'
+find -type d -name "licenses" | grep generated-resources | grep -v "^./target" | grep -v "groovy-bom" |  xargs -I % bash -c 'cp %/* ./target/generated-resources/licenses'
