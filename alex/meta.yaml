@@ -11,7 +11,7 @@ source:
   folder: alex
 
 build:
-  number: 0
+  number: 1
   skip: true  # [not unix]
 
 requirements:
@@ -19,6 +19,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - cabal-install
+    - cabal-plan
     - ghc
   host:
     - libiconv  #[osx]
@@ -32,7 +33,9 @@ test:
 about:
   home: https://github.com/haskell/{{ name }}
   license: BSD-3-Clause
-  license_file: alex/LICENSE
+  license_file: 
+    - alex/LICENSE
+    - alex/license-files/
   summary: A lexical analyser generator for Haskell
   dev_url: https://github.com/haskell/{{ name }}
 
