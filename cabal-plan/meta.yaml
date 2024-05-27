@@ -19,13 +19,13 @@ requirements:
     - {{ compiler('cxx') }}
     - cabal-install
     - ghc
-    - zlib  #[linux]
+    - zlib=1.2  #[linux]
   host:
     - libiconv  #[osx]
-    - zlib  #[linux]
+    - zlib=1.2  #[linux]
   host:
     - libiconv  #[osx]
-    - libzlib  #[linux]
+    - libzlib>=1.2  #[linux]
 
 test:
   commands:
