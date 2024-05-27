@@ -4,7 +4,7 @@ set -o xtrace -o nounset -o pipefail -o errexit
 
 export CABAL_DIR=${SRC_DIR}/.cabal
 cabal v2-update
-cabal --store-dir=${SRC_DIR}/.cabal v2-install \
+cabal v2-install \
     --extra-lib-dirs=${PREFIX}/lib \
     --allow-newer=base,Cabal,deepseq \
 	--jobs=${CPU_COUNT} \
