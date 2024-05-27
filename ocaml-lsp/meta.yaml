@@ -10,17 +10,19 @@ source:
   git_rev: {{ version }}
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
 
 requirements:
   build:
     - {{ compiler('c') }}
+    - binutils # [linux]
     - gcc # [linux64]
     - sysroot_linux-64=2.17  # [linux64]
     - make  # [unix]
     - m2-make  # [win]
     - posix  # [win]
+    - odig
     - opam
     - pkg-config
   host:
@@ -33,7 +35,9 @@ test:
 about:
   home: https://github.com/ocaml/{{ name }}
   license: ISC
-  license_file: LICENSE.md
+  license_file: 
+    - LICENSE.md
+    - license-files/
   summary: OCaml Language Server Protocol implementation
   dev_url: https://github.com/ocaml/{{ name }}
 
