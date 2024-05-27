@@ -6,7 +6,7 @@ cp ${RECIPE_DIR}/cabal.project ${SRC_DIR}
 
 export CABAL_DIR=${SRC_DIR}/.cabal
 cabal v2-update
-cabal --store-dir=${SRC_DIR}/.cabal v2-install \
+cabal v2-install \
     --extra-lib-dirs=${PREFIX}/lib \
 	--jobs=${CPU_COUNT} \
 	--max-backjumps=100000 \
