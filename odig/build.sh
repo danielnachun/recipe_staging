@@ -33,4 +33,4 @@ popd
 
 mkdir -p license-files
 ${PREFIX}/bin/odig show license-files --lib-dir=${OPAMROOT}/default/lib --doc-dir=${OPAMROOT}/default/doc -l | cut -f 2 -d ' ' | \
-    xargs -I % bash -c 'mkdir license-files/$(basename $(dirname %)); cp -r % license-files/$(basename $(dirname %))'
+    xargs -I % bash -c 'copy_license %'
