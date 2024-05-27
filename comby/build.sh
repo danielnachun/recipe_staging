@@ -25,6 +25,8 @@ opam exec -- make release
 mkdir -p ${PREFIX}/bin
 install -m 755 _build/default/src/main.exe ${PREFIX}/bin/comby
 
+opam switch default
+eval $(opam env)
 mkdir -p license-files
 odig show license-files --lib-dir=${OPAMROOT}/default/lib --doc-dir=${OPAMROOT}/default/doc -l | cut -f 2 -d ' ' | \
     xargs -I % bash -c 'copy_license %'
