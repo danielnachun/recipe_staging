@@ -6,7 +6,6 @@ export CABAL_DIR=${SRC_DIR}/.cabal
 cabal v2-update
 cabal v2-install \
     --extra-lib-dirs=${PREFIX}/lib \
-    --extra-include-dirs=${PREFIX}/include \
     --allow-newer=base,aeson \
 	--jobs=${CPU_COUNT} \
 	--max-backjumps=100000 \
