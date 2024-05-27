@@ -36,4 +36,4 @@ find ${PREFIX}/libexec/${PKG_NAME}/bin -type f | grep -v ".bat" | grep -v ".ico"
 
 find -name "*.pom" | xargs -I % bash -c 'download_licenses %'
 mkdir -p ${SRC_DIR}/target/generated-resources/licenses
-find -type d -name "licenses" | grep generated-resources | grep -v "^./target" | grep -v "groovy-bom" | grep -v "groovy-binary" | xargs -I % bash -c 'cp %/* ./target/generated-resources/licenses'
+find -type d -name "licenses" | grep generated-resources | grep -v "^./target" | grep -v "groovy\-bom" | grep -v "groovy\-binary" | xargs -I % bash -c 'cp %/* ./target/generated-resources/licenses'
