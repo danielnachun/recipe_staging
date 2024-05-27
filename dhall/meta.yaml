@@ -12,7 +12,7 @@ source:
     - 0001-fix-ghc-9.8-build.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [not unix]
 
 requirements:
@@ -20,6 +20,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - cabal-install
+    - cabal-plan
     - ghc
     - libsodium
     - ncurses
@@ -56,7 +57,9 @@ test:
 about:
   home: https://dhall-lang.org
   license: BSD-3-Clause
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - license-files/
   summary: Maintainable configuration files
   doc_url: https://dhall-lang.org
   dev_url: https://github.com/dhall-lang/dhall-haskell

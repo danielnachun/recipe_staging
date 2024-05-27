@@ -2,6 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+export CABAL_DIR=${SRC_DIR}/.cabal
 cabal v2-update
 cabal --store-dir=${SRC_DIR}/.cabal v2-install all \
     --minimize-conflict-set \
@@ -17,3 +18,5 @@ echo "   ghc-options: -XDuplicateRecordFields" >> cabal.project
 
 mkdir -p ${PREFIX}/share/man/man1
 install -m 644 dhall/man/dhall.1 ${PREFIX}/share/man/man1/dhall.1
+
+cabal-plan license-report --licensedir=${SRC_DIR}/license-files exe:${PKG_NAME}
