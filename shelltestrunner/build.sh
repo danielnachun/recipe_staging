@@ -10,4 +10,4 @@ cabal v2-install \
 	--max-backjumps=100000 \
 	--install-method=copy \
 	--installdir=${PREFIX}/bin
-cabal-plan license-report --licensedir=${SRC_DIR}/license-files exe:${PKG_NAME}
+cabal-plan license-report --licensedir=${SRC_DIR}/license-files exe:shelltest
