@@ -23,6 +23,8 @@ opam exec -- make install
 mkdir -p ${PREFIX}/bin
 install -m 755 _build/default/ocaml-lsp-server/bin/main.exe ${PREFIX}/bin/ocamllsp
 
+opam switch default
+eval $(opam env)
 mkdir -p license-files
 odig show license-files --lib-dir=${OPAMROOT}/default/lib --doc-dir=${OPAMROOT}/default/doc -l | cut -f 2 -d ' ' | \
     xargs -I % bash -c 'copy_license %'
