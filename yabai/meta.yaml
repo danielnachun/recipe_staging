@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/koekeishiya/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 65089d4cc9c45389f4fcc21dbecb4482073e0d30b9cc0b5b467a89e13b870afe
+  sha256: a1845ce2a7c0e40abb89958925ab45c2ffba0bf81a59a01fa16956868e91c9b6
 
 build:
   number: 0
