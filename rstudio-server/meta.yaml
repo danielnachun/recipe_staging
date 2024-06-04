@@ -1,0 +1,148 @@
+{% set version = "2024.04.1+748" %}
+{% set pkg_version = version.split("+")[0] %}
+# reset the below to 0 when bumping upstream build num.
+{% set build = 0 %}
+{% set upstream_build_num = version.split("+")[1] | int %}
+
+
+package:
+  name: rstudio
+  version: {{ pkg_version }}
+
+source:
+  url: https://github.com/rstudio/rstudio/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 5c1190ae22e3a25740727ff1f341ef568f47359a0d1358958ec22f7e5b59b75b
+  #patches:
+
+
+build:
+  number: {{ upstream_build_num + build }}
+  skip: true  # [win]
+  rpaths:
+    - lib/R/lib/
+    - lib/rstudio/lib
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - bzip2
+    - make
+    - cmake
+    - ant
+    - yarn
+    - wget
+    - coreutils  # [osx]
+    - unzip
+    - nodejs
+    - ripgrep
+  host:
+    - r-base=4.3
+    - r-purrr
+    - r-rmarkdown
+    - r-renv
+    - r-testthat
+    - r-xml2
+    - r-yaml
+    - r-rstudioapi
+    - gin-config
+    - openjdk
+    - libboost-devel
+    - soci-postgresql
+    - soci-core
+    - soci-sqlite
+    - libpq
+    - bzip2
+    - zlib
+    - pango
+    - sqlite
+    - openssl
+    - hunspell
+    - hunspell-en
+    - pandoc
+    - mathjax <3.0
+    - yaml-cpp <0.7
+    - libjpeg-turbo   # [osx]
+    - libpng  # [osx]
+    - quarto
+  run:
+    - r-base>=4.3
+    - r-purrr
+    - r-rmarkdown
+    - r-renv
+    - r-testthat
+    - r-xml2
+    - r-yaml
+    - r-rstudioapi
+    - boost-cpp
+    - gin-config
+    - openjdk
+    - soci-postgresql
+    - soci-core
+    - soci-sqlite
+    - libpq
+    - linux-pam  # [linux]
+    - bzip2
+    - zlib
+    - pango
+    - sqlite
+    - openssl
+    - hunspell
+    - hunspell-en
+    - pandoc
+    - mathjax <3.0
+    - yaml-cpp <0.7
+    - libjpeg-turbo   # [osx]
+    - libpng  # [osx]
+    - {{ pin_compatible("quarto", max_pin="x.x") }}
+test:
+  commands:
+    - test -f ${PREFIX}/lib/rstudio/bin/rstudio  # [linux]
+    - sh -c "xvfb-run -s '-screen 0 1200x800x24' ${PREFIX}/bin/rstudio --no-sandbox --run-diagnostics; cat ~/rstudio-diagnostics/diagnostics-report.txt"  # [linux]
+    - test -f ${PREFIX}/lib/rstudio/RStudio.app/Contents/MacOS/RStudio  # [osx]
+
+#outputs:
+  #- name: rstudio-server
+    #script: build-server.sh
+    #build:
+      #skip: true  # [win]
+      #rpaths:
+        #- lib/R/lib/
+        #- lib/rstudio/lib
+        #- lib/
+    #requirements:
+      #build:
+        #- {{ compiler('c') }}
+        #- {{ compiler('cxx') }}
+        #- make
+        #- cmake
+        #- ant
+        #- yarn
+        #- wget
+        #- ripgrep
+        #- coreutils  # [osx]
+        #- unzip
+        #- nodejs
+
+about:
+  home: https://www.rstudio.com/
+  license: AGPL-3.0-only
+  license_family: GPL
+  license_file: COPYING
+  summary: RStudio is an integrated development environment (IDE) for R
+  description: |
+    RStudio is an integrated development environment (IDE)
+    for R. It includes a console, syntax-highlighting
+    editor that supports direct code execution, as well
+    as tools for plotting, history, debugging and
+    workspace management.
+  doc_url: https://support.rstudio.com/hc/en-us/sections/200107586-Using-RStudio
+  dev_url: https://github.com/rstudio/rstudio
+
+
+extra:
+  recipe-maintainers:
+    - izahn
+    - h-vetinari
+  feedstock-name: rstudio
