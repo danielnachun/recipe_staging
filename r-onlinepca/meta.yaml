@@ -1,0 +1,48 @@
+{% set version = "1.3.2" %}
+{% set name = "onlinepca" %}
+
+package:
+  name: r-{{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cran.r-project.org/src/contrib/onlinePCA_{{ version }}.tar.gz
+  sha256: 28267f5c289a97bea19344f2e64974837812b8257c7af5b9affeeabbb19c89f5
+
+build:
+  number: 0
+  merge_build_host: true
+  script: R CMD INSTALL --build .
+  script_env:
+    - PKG_CPPFLAGS="-DHAVE_WORKING_LOG1P"
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
+    - r-base=4.2
+    - r-rcpp
+    - r-rcpparmadillo
+    - r-rspectra
+  run:
+    - r-base>=4.2
+    - r-rcpp
+    - r-rcpparmadillo
+    - r-rspectra
+
+test:
+  commands:
+    - $R -e "library(onlinePCA)"
+
+about:
+  home: https://cran.r-project.org/web/packages/onlinepca/index.html
+  summary: Online Principal Component Analysis
+  license: GPL-3.0-or-later
+
+extra:
+  recipe-maintainers:
+    - danielnachun
