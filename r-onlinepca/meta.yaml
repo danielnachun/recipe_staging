@@ -13,6 +13,8 @@ build:
   number: 0
   merge_build_host: true
   script: R CMD INSTALL --build .
+  script_env:
+    - PKG_CPPFLAGS="-DHAVE_WORKING_LOG1P"
   rpaths:
     - lib/R/lib/
     - lib/
