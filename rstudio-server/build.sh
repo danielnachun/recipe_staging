@@ -8,10 +8,7 @@ export RSTUDIO_VERSION_PATCH=$(echo ${PKG_VERSION} | cut -d. -f3)
 export RSTUDIO_VERSION_SUFFIX=+$(echo ${PKG_BUILDNUM})
 export GIT_COMMIT=8aaa5d4
 
-[[ $(uname) == Linux ]] && export PACKAGE_OS=$(uname -om)
-[[ $(uname) == Darwin ]] && export PACKAGE_OS=$(uname)
-[[ $(uname) == Linux ]] && SONAME=so
-[[ $(uname) == Darwin ]] && SONAME=dylib
+export PACKAGE_OS=$(uname -om)
 
 export BUILD_TYPE=Release
 export RSTUDIO_TARGET=Server
@@ -31,12 +28,14 @@ export RSTUDIO_CRASHPAD_ENABLED=FALSE
 export YAML_CPP_INCLUDE_DIR=${PREFIX}/include
 export OPENSSL_ROOT_DIR=$PREFIX
 
+sed -i 's/return afterResponse_;/return static_cast<bool>(afterResponse_);/g' src/cpp/core/json/JsonRpc.cpp
+
 ## Instead of installing dependencies as instructed by the upstream
 ## build documentation we create symlinks in the expected locations
 ## to the conda-forge equivalents
 pushd dependencies/common
 _pandocver=$(rg -o --pcre2 "(?<=PANDOC_VERSION=\").*(?=\"$)" install-pandoc)
-_nodever=$(rg -o --pcre2 "(?<=NODE_VERSION=\").*(?=\"$)" ../tools/rstudio-tools.sh)
+_nodever=$(rg -o --pcre2 "(?<=RSTUDIO_INSTALLED_NODE_VERSION=\").*(?=\"$)" ../tools/rstudio-tools.sh)
 install -d pandoc/${_pandocver}
 install -d node
 ln -sfT ${PREFIX}/bin/pandoc pandoc/${_pandocver}/pandoc
@@ -54,14 +53,17 @@ install -d quarto/share
 ln -sfT ${PREFIX}/bin/quarto quarto/bin/quarto
 ln -sfT ${PREFIX}/bin/pandoc quarto/bin/tools/pandoc
 ln -sfT ${PREFIX}/bin/pandoc pandoc/${_pandocver}/pandoc
-ln -sfT ${BUILD_PREFIX} node/${_nodever}
+ln -sfT ${PREFIX} node/${_nodever}
 ln -sfT ${PREFIX}/share/hunspell_dictionaries dictionaries
 ln -sfT ${PREFIX}/lib/mathjax mathjax-27
 popd
 
-if [[ $target_platform =~ .*osx.* ]]; then
-	CMAKE_ARGS+=" -DLIBR_LIBRARIES=${PREFIX}/lib/R/lib -DLIBR_HOME=${PREFIX}/lib/R "
-fi
+git clone https://github.com/quarto-dev/quarto
+ln -sf ${SRC_DIR}/quarto src/gwt/lib
+pushd quarto
+	rm -rf apps/vscode
+	yarn
+popd
 
 cmake -S . -B build ${CMAKE_ARGS} \
       -DRSTUDIO_TARGET=Server \
@@ -78,24 +80,15 @@ cmake -S . -B build ${CMAKE_ARGS} \
       -DRSTUDIO_DISABLE_CRASHPAD=1 \
       -DRSTUDIO_CRASHPAD_ENABLED=FALSE \
       -DRSTUDIO_USE_SYSTEM_SOCI=yes \
-      -DSOCI_CORE_LIB=${PREFIX}/lib/libsoci_core.$SONAME \
-      -DSOCI_POSTGRESQL_LIB=${PREFIX}/lib/libsoci_postgresql.$SONAME \
-      -DSOCI_SQLITE_LIB=${PREFIX}/lib/libsoci_sqlite3.$SONAME
+      -DSOCI_CORE_LIB=${PREFIX}/lib/libsoci_core.so \
+      -DSOCI_POSTGRESQL_LIB=${PREFIX}/lib/libsoci_postgresql.so \
+      -DSOCI_SQLITE_LIB=${PREFIX}/lib/libsoci_sqlite3.so
 
 make -j${CPU_COUNT} -C build install
 
 ## Put executable symlinks in bin and fixup some resource locations.
-if [[ $(uname) == Linux ]]
-then
-    ln -sfTr ${PREFIX}/lib/rstudio/resources ${PREFIX}/lib/rstudio/bin/resources
-    ln -sfTr ${PREFIX}/lib/rstudio/bin/rstudio ${PREFIX}/bin/rstudio
-fi
-if [[ $(uname) == Darwin ]]
-then
-    ln -sfr ${PREFIX}/lib/rstudio/RStudio.app/Contents/MacOS/RStudio ${PREFIX}/bin/rstudio
-    ln -sfr ${PREFIX}/lib/rstudio/RStudio.app/Contents/Resources/resources/* ${PREFIX}/lib/rstudio/RStudio.app/Contents/Resources/
-    ln -sfr ${PREFIX}/lib/rstudio/RStudio.app/Contents/MacOS ${PREFIX}/lib/rstudio/RStudio.app/Contents/session
-fi
+ln -sfTr ${PREFIX}/lib/rstudio/resources ${PREFIX}/lib/rstudio/bin/resources
+ln -sfTr ${PREFIX}/lib/rstudio/bin/rstudio-server ${PREFIX}/bin/rstudio-server
 
 ## Cleanup
 rm -rf ${PREFIX}/opt/rstudio-tools
