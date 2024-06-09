@@ -1,0 +1,72 @@
+{% set name = "epiout" %}
+{% set version = "0.0.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 203c77982deb679453981a0f57ec978e6e3d90771f02760d54313c242e54dc56
+
+build:
+  entry_points:
+    - epicount=epiout.main:cli_epicount
+    - epiout=epiout.main:cli_epiout
+    - epiannot=epiout.main:cli_epiannot
+    - epiannot_create=epiout.main:cli_epiannot_create
+    - epiannot_list=epiout.main:cli_epiannot_list
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python
+    - pytest-runner
+    - setuptools
+    - pip
+  run:
+    - python >=3.8
+    - tqdm
+    - pyyaml
+    - click
+    - numpy <=1.23
+    - onnxruntime
+    - hic-straw
+    - pooch
+    - anndata
+    - pandas
+    - pyarrow
+    - pyranges
+    - scipy
+    - matplotlib
+    - seaborn
+    - pysam
+    - joblib
+    - scikit-learn
+    - pybigwig
+    - statsmodels
+    - tensorflow
+    - tensorflow-probability
+
+test:
+  imports:
+    - epiout
+  commands:
+    - epicount --help
+    - epiout --help
+    - epiannot --help
+    - epiannot_create --help
+    - epiannot_list --help
+  requires:
+    - pip
+
+about:
+  home: https://github.com/ubi-cbcl/EpiOut
+  summary: A statistical method to detect, analyze and visualize aberrations in chromatin accessibility (ATAC-seq, DNase-Seq) and quantify its effect on gene expression.
+  license: MIT
+
+extra:
+  recipe-maintainers:
+    - danielnachun
