@@ -95,7 +95,7 @@ requirements:
     - {{ pin_compatible("quarto", max_pin="x.x") }}
 test:
   commands:
-    - rstudio-bin version 
+    - rstudio-server version 
 
 about:
   home: https://www.rstudio.com/
