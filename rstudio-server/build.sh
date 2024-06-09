@@ -39,7 +39,7 @@ _nodever=$(rg -o --pcre2 "(?<=RSTUDIO_INSTALLED_NODE_VERSION=\").*(?=\"$)" ../to
 install -d pandoc/${_pandocver}
 install -d node
 ln -sfT ${PREFIX}/bin/pandoc pandoc/${_pandocver}/pandoc
-ln -sfT ${BUILD_PREFIX} node/${_nodever}
+ln -sfT ${PREFIX} node/${_nodever}
 ln -sfT ${PREFIX}/share/hunspell_dictionaries dictionaries
 ln -sfT ${PREFIX}/lib/mathjax mathjax-27
 popd
