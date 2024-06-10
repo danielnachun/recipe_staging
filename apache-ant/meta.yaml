@@ -31,6 +31,18 @@ outputs:
         - ant -help
         - ant -version
 
+  # compatibility output for previous name of package in conda-forge
+  - name: apache-ant
+    build:
+      noarch: generic
+    requirements:
+      run:
+        - {{ pin_subpackage('ant', exact=True) }}
+    test:
+      commands:
+        - ant -help
+        - ant -version
+
 about:
   home: https://ant.apache.org/
   license: Apache-2.0
