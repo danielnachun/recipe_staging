@@ -1,0 +1,18 @@
+--- proj4.orig/src/Makevars.win	2012-08-05 01:54:10.000000000 +0000
++++ proj4/src/Makevars.win	2019-06-17 16:24:17.118428700 +0000
+@@ -1,13 +1,2 @@
+-## use local winbuilder libraries if present - no need to set any paths in that case
+-ifeq ($(strip $(shell if test -e "$(LOCAL_SOFT)/include/proj_api.h"; then echo 1; fi)),1)
+-PKG_LIBS = -lproj
+-else
+-## detect 64-bit Windows
+-ifeq ($(WIN),64)
+-PKG_LIBS = -Lwin64 -lproj
+-PKG_CPPFLAGS = -Iwin64
+-else
+-PKG_LIBS = -Lwin32 -lproj
+-PKG_CPPFLAGS = -Iwin32
+-endif
+-endif
++PKG_LIBS = -L$(LIBRARY_LIB) -Lwin64 -lproj
++PKG_CPPFLAGS = -Iwin64 -I$(LIBRARY_INC)
