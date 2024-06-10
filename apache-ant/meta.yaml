@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://archive.apache.org/dist/ant/source/apache-ant-{{ version }}-src.tar.gz
-  sha256: 9a5fe31f44d1eb62590cbe38e4fab25b25e2f68643b38a54b66498e0bf621b54
+  sha256: 0d10dc97031882ccdcadf47163a5ee9bc4f0104a694a1399c2eda1b93f9a739b
 
 build:
   number: 1
