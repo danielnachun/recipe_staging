@@ -1,0 +1,38 @@
+diff -Naur geoR.orig/NAMESPACE geoR/NAMESPACE
+--- geoR.orig/NAMESPACE	2015-04-23 06:56:35.000000000 -0300
++++ geoR/NAMESPACE	2018-01-31 11:57:03.673713728 -0200
+@@ -6,7 +6,10 @@
+ #
+ # Import all packages listed as Imports or Depends
+ import(graphics)
+-import(tcltk)
++#import(tcltk)
++  importFrom("grDevices", "chull", "gray", "heat.colors",
++             "terrain.colors")
++  importFrom("utils", "getS3method", "read.table")
+ 
+ #importFrom(graphics,plot)
+ #importFrom(graphics,persp)
+diff -Naur geoR.orig/R/eyefit.R geoR/R/eyefit.R
+--- geoR.orig/R/eyefit.R	2015-04-17 16:33:50.000000000 -0300
++++ geoR/R/eyefit.R	2018-01-31 11:44:32.837774809 -0200
+@@ -38,7 +38,7 @@
+ }
+ 
+ eyefit <- function(vario, silent=FALSE){  
+-  if(!requireNamespace("tcltk", quietly=TRUE)) stop("package tcltk is required to run eyefit()")
++  if(requireNamespace("tcltk", quietly=TRUE)) {
+ 
+   geterrmessage()  
+   done <- tclVar(0)
+@@ -253,7 +253,9 @@
+   tkbind(base, "<Destroy>", function() tclvalue(done)<-2)
+   
+   tkwait.variable(done)
+-    
++   } else {
++     stop("package tcltk is required to run eyefit()")
++   }
+   tkdestroy(base)
+   
+   if (!silent){
