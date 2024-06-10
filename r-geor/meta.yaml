@@ -32,13 +32,13 @@ requirements:
     - {{ posix }}coreutils         # [win]
     - {{ posix }}zip               # [win]
   host:
-    - r-base
+    - r-base=4.2
     - r-mass
     - r-randomfields
     - r-sp
     - r-splancs
   run:
-    - r-base
+    - r-base>=4.2
     - {{ native }}gcc-libs         # [win]
     - r-mass
     - r-randomfields
