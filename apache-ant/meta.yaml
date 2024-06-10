@@ -13,9 +13,9 @@ build:
 
 requirements:
   host:
-    - openjdk=11
+    - openjdk>=11
   run:
-    - openjdk=11
+    - openjdk>=11
 
 outputs:
   - name: ant
@@ -23,9 +23,9 @@ outputs:
     script: build-pkg.bat  # [win]
     requirements:
       host:
-        - openjdk=11
+        - openjdk>=11
       run:
-        - openjdk=11
+        - openjdk>=11
     test:
       commands:
         - ant -help
