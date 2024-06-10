@@ -1,0 +1,83 @@
+{% set version = "1.9-4" %}
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
+
+package:
+  name: r-geor
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url:
+    - {{ cran_mirror }}/src/contrib/geoR_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/geoR/geoR_{{ version }}.tar.gz
+  sha256: ae9d977cebe0f93b2593542f8d6d060467984dcf174e84ba632307c035d7ebbd
+  patches:
+    # https://github.com/rocker-org/rocker/issues/213#issuecomment-278909502
+    - no_tcltk.patch
+
+build:
+  merge_build_host: true  # [win]
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('c') }}              # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}make
+    - {{ posix }}sed               # [win]
+    - {{ posix }}coreutils         # [win]
+    - {{ posix }}zip               # [win]
+  host:
+    - r-base
+    - r-mass
+    - r-randomfields
+    - r-sp
+    - r-splancs
+  run:
+    - r-base
+    - {{ native }}gcc-libs         # [win]
+    - r-mass
+    - r-randomfields
+    - r-sp
+    - r-splancs
+
+test:
+  commands:
+    - $R -e "library('geoR')"           # [not win]
+    - "\"%R%\" -e \"library('geoR')\""  # [win]
+
+about:
+  home: http://www.leg.ufpr.br/geoR
+  license: GPL-2.0-or-later
+  summary: Geostatistical analysis including variogram-based, likelihood-based and Bayesian methods. Software companion for Diggle and Ribeiro (2007) <doi:10.1007/978-0-387-48536-2>.
+  license_family: GPL2
+  license_file:
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+    - ocefpaf
+
+# Package: geoR
+# Version: 1.8-1
+# Date: 2020-02-08
+# Title: Analysis of Geostatistical Data
+# LazyLoad: yes
+# LazyData: yes
+# Author: Paulo J. Ribeiro Jr [aut, cre] <paulojus@ufpr.br>, Peter J. Diggle [aut, cre] <p.diggle@lancaster.ac.uk> Ole Christensen [ctb], Martin Schlather [ctb], Roger Bivand [ctb], Brian Ripley [ctb]
+# Maintainer: Paulo J. Ribeiro Jr <paulojus@ufpr.br>
+# Depends: R (>= 2.10), stats, methods
+# Imports: MASS, sp, splancs, RandomFields, graphics
+# Suggests: scatterplot3d, lattice, tcltk
+# Description: Geostatistical analysis including variogram-based, likelihood-based and Bayesian methods. Software companion for Diggle and Ribeiro (2007) <doi:10.1007/978-0-387-48536-2>.
+# License: GPL (>= 2)
+# URL: http://www.leg.ufpr.br/geoR
+# NeedsCompilation: yes
+# Packaged: 2020-02-10 15:55:46 UTC; paulojus
+# Repository: CRAN
+# Date/Publication: 2020-02-10 21:00:02 UTC
