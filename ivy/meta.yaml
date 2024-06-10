@@ -15,7 +15,7 @@ build:
 
 requirements:
   build:
-    - apache-ant
+    - ant
     - maven
     - openjdk =11
     - sed
