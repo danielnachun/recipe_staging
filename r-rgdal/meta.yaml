@@ -1,0 +1,62 @@
+{% set version = "1.6-7" %}
+
+package:
+  name: r-rgdal
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url:                                                                        # [not win]
+    - {{ cran_mirror }}/src/contrib/rgdal_{{ version }}.tar.gz                # [not win]
+    - {{ cran_mirror }}/src/contrib/Archive/rgdal/rgdal_{{ version }}.tar.gz  # [not win]
+  sha256: 555cedfdadb05db90b061d4b056f96d8b7010c00ea54bc6c1bbcc7684fadae33    # [not win]
+  url: https://cran.r-project.org/bin/windows/contrib/{{ r_base[0:3] }}/rgdal_{{ version }}.zip  # [win]
+  sha256: 5a7c4e994c4e50a1a77f38bac699cf029dffab5e344a52e931d9b3f19f2c0f04                       # [win and r_base=="4.1"]
+
+build:
+  number: 5
+  skip: true              # [win or ppc64le]
+  merge_build_host: true  # [win]
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - posix                  # [win]
+    - {{ compiler('c') }}    # [not win]
+    - {{ compiler('cxx') }}  # [not win]
+  host:
+    - r-base=4.2
+    - r-sp >=1.1_0
+    - libgdal                # [not win]
+    - proj                   # [not win]
+  run:
+    - r-base>=4.2
+    - r-sp >=1.1_0
+    - libgdal                # [not win]
+    - proj                   # [not win]
+
+test:
+  commands:
+    - R -e "library('rgdal')"    # [not win]
+    - R -e \"library('rgdal')\"  # [win]
+
+about:
+  home: http://www.gdal.org
+  dev_url: https://r-forge.r-project.org/projects/rgdal/
+  license: GPL-2.0-or-later
+  license_file: 
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3
+  summary: 'Provides bindings to Frank Warmerdam''s Geospatial Data Abstraction Library (GDAL)
+    (>= 1.6.3) and access to projection/transformation operations from the PROJ.4 library.
+    The GDAL and PROJ.4 libraries are external to the package, and, when installing
+    the package from source, must be correctly installed first. Both GDAL raster and
+    OGR vector map data can be imported into R, and GDAL raster data and OGR vector
+    data exported. Use is made of classes defined in the sp package. Windows and Mac
+    Intel OS X binaries (including GDAL, PROJ.4 and Expat) are provided on CRAN. '
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+    - ocefpaf
