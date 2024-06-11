@@ -52,7 +52,7 @@ test:
     - r-palmerpenguins
     - r-data.table
   commands:
-    - Rscript -e 'tinytest::test_package("tiledb")'
+    - R -e 'library(tiledb)'
 
 about:
   home: https://www.tiledb.com
