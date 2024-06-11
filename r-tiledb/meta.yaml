@@ -22,7 +22,6 @@ build:
 requirements:
   build:
     - {{ compiler('cxx') }}
-    - {{ stdlib("c") }}
     - pkg-config
     - make
     - cross-r-base {{ r_base }}  # [build_platform != target_platform]
