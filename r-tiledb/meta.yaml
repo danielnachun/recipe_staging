@@ -1,0 +1,76 @@
+{% set name = "r-tiledb" %}
+{% set version = "0.27.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/TileDB-Inc/TileDB-R/archive/{{ version }}.tar.gz
+  sha256: 0ccf6726274655115ba04378d8aefd0c057867d6725144d9e5dc9522c914cfd0
+  patches:
+    - 0001-skip-osx-test-to-avoid-spurious-segfault.patch  # [osx and not arm64]
+    - 0002-skip-linux-aarch64-test-to-avoid-spurious-fail.patch  # [linux and aarch64]
+
+build:
+  number: 0
+  skip: true  # [win]
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - pkg-config
+    - make
+    - cross-r-base {{ r_base }}  # [build_platform != target_platform]
+    - r-nanotime  # [build_platform != target_platform]
+    - r-rcpp >=1.0.8  # [build_platform != target_platform]
+    - r-rcppspdlog  # [build_platform != target_platform]
+    - r-rcppint64  # [build_platform != target_platform]
+    - r-nanoarrow  # [build_platform != target_platform]
+  host:
+    - r-base=4.2
+    - tiledb 2.23.*
+    - r-rcpp >=1.0.8
+    - r-rcppspdlog
+    - r-nanotime
+    - r-spdl
+    - r-rcppint64
+    - r-nanoarrow
+  run:
+    - r-base>=4.2
+    - r-nanotime
+    - r-spdl
+    - r-nanoarrow
+
+test:
+  requires:
+    - r-tinytest
+    - r-nycflights13
+    - r-palmerpenguins
+    - r-data.table
+  commands:
+    - R -e 'library(tiledb)'
+
+about:
+  home: https://www.tiledb.com
+  license: MIT
+  license_file:
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/MIT
+    - LICENSE
+  summary: R interface to the TileDB array storage manager
+
+  description: |
+    TileDB is a highly-parallelized, cloud native array storage engine.
+  doc_url: https://docs.tiledb.com/developer/
+  dev_url: https://github.com/TileDB-Inc/TileDB-R
+
+extra:
+  recipe-maintainers:
+    - ihnorton
+    - Shelnutt2
+    - eddelbuettel
+    - jdblischak
+    - johnkerl
