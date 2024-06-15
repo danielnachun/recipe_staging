@@ -20,24 +20,24 @@ requirements:
     - bgen-reader
     - cyvcf2
     - h5py
-    - numpy =1.24
+    - numpy >1.24
     - pip
     - pandas
     - pyarrow
     - pyliftover
-    - python =3.11
+    - python =3.12
     - scipy
     - statsmodels
   run:
     - bgen-reader
     - cyvcf2
     - h5py
-    - numpy =1.24
+    - numpy >1.24
     - pip
     - pandas
     - pyarrow
     - pyliftover
-    - python =3.11
+    - python =3.12
     - scipy
     - statsmodels
 
