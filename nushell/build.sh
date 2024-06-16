@@ -7,7 +7,7 @@ cargo-bundle-licenses \
     --output THIRDPARTY.yml
 
 # build statically linked binary with Rust
-cargo install --features=dataframe --locked --root ${PREFIX} --path .
+cargo install --locked --root ${PREFIX} --path .
 
 install_plugin() {
     plugin_folder=$1
