@@ -2,12 +2,12 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-export CGO_ENABLED=0
+export CGO_ENABLED=1
 export LDFLAGS="-s -w"
 go mod init github.com/docker/cli
 go mod edit -replace github.com/imdario/mergo@v1.0.0=github.com/imdario/mergo@v0.3.16
-go mod tidy
-go mod vendor
+go mod tidy -e
+go mod vendor -e
 go build -buildmode=pie -trimpath -o=${PREFIX}/bin/${PKG_NAME} -ldflags="${LDFLAGS}" ./cmd/docker
 
 mkdir -p ${PREFIX}/etc/bash_completion.d
