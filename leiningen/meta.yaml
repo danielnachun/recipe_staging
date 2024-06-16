@@ -1,5 +1,5 @@
 {% set name = "leiningen" %}
-{% set version = "2.10.0" %}
+{% set version = "2.11.2" %}
 
 package:
   name: {{ name|lower }}
