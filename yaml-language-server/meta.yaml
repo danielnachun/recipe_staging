@@ -1,5 +1,5 @@
 {% set name = "yaml-language-server" %}
-{% set version = "1.14.0" %}
+{% set version = "1.15.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,11 +7,11 @@ package:
 
 source:
   url: https://registry.npmjs.org/yaml-language-server/-/{{ name }}-{{ version }}.tgz
-  sha256: 3a5b8ca99da8fe99602770967825bb6cd456ebd5b4eba013dda4ec8542409a60
+  sha256: b93db2a985437355eb124d44ae60c0569f22cf19473eb0b6f41b8b0d7af579bd
 
 build:
   noarch: generic
-  number: 2
+  number: 0
 
 requirements:
   host:
