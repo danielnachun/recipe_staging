@@ -1,5 +1,5 @@
 {% set name = "colima" %}
-{% set version = "0.6.8" %}
+{% set version = "0.6.9" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/abiosoft/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: cfac3e086bbf706b550592fdac787f13b05cc43e361277cf06da59429afb6ea5
+  sha256: 97e04f0f28effcf519d76e5307a14e5d87da038946be0da980d9d7c9d95b3c11
 
 build:
   number: 0
