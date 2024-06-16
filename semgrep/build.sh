@@ -11,6 +11,9 @@ copy_license() {
 
 export -f copy_license
 
+sed -i 's/macosx)/ignore)/' src/main/flags.sh
+sed -i 's/linux)/linux | macosx)/' src/main/flags.sh
+
 export OPAMROOT=${SRC_DIR}/opamroot
 export OPAMYES=1
 export SETUPTOOLS_USE_DISTUTILS=stdlib
