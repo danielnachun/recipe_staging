@@ -1,5 +1,5 @@
 {% set name = "sad" %}
-{% set version = "0.4.28" %}
+{% set version = "0.4.29" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/ms-jpq/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: efda19aecec408095bb515975a1a6ed9e66d0ab985c2b580087b031261f71cfc
+  sha256: 2f66d3031a662c197dba1758ccc9f670694e825b7f90b20fa32c1670c4ae9ee4
 
 build:
   number: 0
