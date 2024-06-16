@@ -1,5 +1,5 @@
 {% set name = "oil" %}
-{% set version = "0.20.0" %}
+{% set version = "0.22.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://www.oilshell.org/download/{{ name }}-{{ version }}.tar.gz
-  sha256: f19e055679571e7c3da32d53c479e5a9acc8547ae28c2e03983109cc7b84fdca
+  sha256: 69b3f66d2d54059513355522198365038629eb5961216cd8481686cf818a7131
 
 build:
   number: 0
