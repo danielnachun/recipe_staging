@@ -1,5 +1,5 @@
 {% set name = "tmuxinator" %}
-{% set version = "3.2.0" %}
+{% set version = "3.2.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
-  sha256: 68b76b1a6b83636fde360889f278dd4729de58b111e6e068cb5a49feed455bd2
+  sha256: fbc335926d9ba28028e82034703489965d6ef93983044631552c7776d07826da
 
 build:
   noarch: generic
