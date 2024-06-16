@@ -7,9 +7,9 @@ package:
 
 source:
   - url: https://github.com/technomancy/{{ name }}/archive/{{ version }}.tar.gz
-    sha256: 5f4ae6ef2a9665176138730f00ce008b17de96af99a2ce5e4c3f017b2d4d5659
+    sha256: fe9ee17786be6c3cf4615688a2a82c173369657d84c1b2ffc00b7cd5fd7df1bc
   - url: https://github.com/technomancy/{{ name }}/releases/download/{{ version }}/leiningen-{{ version }}-standalone.jar
-    sha256: d27299bad34075ac2864d0bd0559f835c6e2c476c0b0a283bcbdb574fdadbb34
+    sha256: 7d31ae23ae769e927438b0cd55d15a93e7dabab09fd4fc15877979161e108774
 
 build:
   noarch: generic
