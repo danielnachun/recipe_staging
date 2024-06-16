@@ -1,5 +1,5 @@
 {% set name = "croc" %}
-{% set version = "9.6.15" %}
+{% set version = "10.0.8" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/schollz/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: ca118155cdf3ceb7496928b1c76387ba74f39b774372d30543e6cbd23d2c0a97
+  sha256: 9dde7d5114b4466a7351f9117e5ffc0b2866e5dae5d094bd1bc65c83787528c1
 
 build:
   number: 0
