@@ -1,5 +1,5 @@
 {% set name = "qemu" %}
-{% set version = "8.2.0" %}
+{% set version = "9.0.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,28 +7,23 @@ package:
 
 source:
   url: https://download.qemu.org/{{ name }}-{{ version }}.tar.xz
-  sha256: bf00d2fa12010df8b0ade93371def58e632cb32a6bfdc5f5a0ff8e6a1fb1bf32
-  patches:
-    - 0001-handle-undefined-constants-in-syscall.c.patch
-    - 0002-handle-undefined-constants-in-mmap.c.patch
-    - 0003-handle-undefined-constants-in-elfload.c.patch
-    - 0004-handle-undefined-constants-in-strace.c.patch
+  sha256: d0f4db0fbd151c0cf16f84aeb2a500f6e95009732546f44dafab8d2049bbb805
 
 build:
   number: 0
+  skip: True  # [not osx]
 
 requirements:
   build:
     - {{ compiler('c') }}
     - bison
     - flex
-    - gcc  # [linux]
     - make
     - meson
     - ninja
+    - packaging
     - pkg-config
     - spice-protocol
-    - sysroot_linux-64=2.17  # [linux]
   host:
     - capstone
     - dtc
