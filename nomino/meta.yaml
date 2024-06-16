@@ -1,5 +1,5 @@
 {% set name = "nomino" %}
-{% set version = "1.3.4" %}
+{% set version = "1.3.5" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/yaa110/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: a4a75307c29ea5f729fbce8836db6302b9b298fcd9b23cf71d626878ce1dfad7
+  sha256: 35df10b30608c6ce733fe57625247621f8b2c51d99dc68421114b54880424ed2
 
 build:
   number: 0
