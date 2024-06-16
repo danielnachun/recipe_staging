@@ -21,6 +21,7 @@ requirements:
     - make
     - meson
     - ninja
+    - packaging
     - pkg-config
     - spice-protocol
   host:
