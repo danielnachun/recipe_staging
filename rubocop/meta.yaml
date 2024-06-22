@@ -1,5 +1,5 @@
 {% set name = "rubocop" %}
-{% set version = "1.52.0" %}
+{% set version = "1.64.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,11 +7,11 @@ package:
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
-  sha256: a9860af191f6d51696de9ece6ca8c072643ee6c04af4310242b13e642b11ef91
+  sha256: 3145bf1863771e400a1c041060e751e5ff0edd9ceb99d01df36db1902f611f3b
 
 build:
   noarch: generic
-  number: 2
+  number: 0
 
 requirements:
   host:
