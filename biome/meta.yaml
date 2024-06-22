@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/biomejs/{{ name }}/archive/refs/tags/cli/v{{ version }}.tar.gz
-  sha256: 3012aef73b3ef5e8b100824af0db2131f81771338fec5f9fe47dc71bf3782506
+  sha256: 8f90b36de4aa65b671ff9f09df72b35ae97c0429be48b2bd51fe4423d9f2a0f2
 
 build:
   number: 0
