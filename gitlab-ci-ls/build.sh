@@ -10,7 +10,7 @@ cargo-bundle-licenses \
 cargo install --locked --root ${PREFIX} --path .
 
 # strip debug symbols
-"$STRIP" "$PREFIX/bin/bingrep"
+"$STRIP" "$PREFIX/bin/${PKG_NAME}"
 
 # remove extra build file
 rm -f "${PREFIX}/.crates.toml"
