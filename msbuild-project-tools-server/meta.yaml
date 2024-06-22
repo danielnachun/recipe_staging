@@ -22,7 +22,7 @@ requirements:
 
 test:
   commands:
-    - msbuild-project-tools-server --help 
+    - test -f ${PREFIX}/bin/msbuild-project-tools-server
 
 about:
   home: https://github.com/tintoy/{{ name }}
