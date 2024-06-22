@@ -20,7 +20,7 @@ requirements:
 
 test:
   commands:
-    - {{ name }} --help
+    - {{ name }}-cli --help
 
 about:
   home: https://github.com/elijah-potter/{{ name }}

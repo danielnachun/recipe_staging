@@ -10,7 +10,7 @@ cargo-bundle-licenses \
 cargo install --locked --root ${PREFIX} --path harper-cli
 
 # strip debug symbols
-"$STRIP" "$PREFIX/bin/${PKG_NAME}"
+"$STRIP" "$PREFIX/bin/${PKG_NAME}-cli"
 
 # remove extra build file
 rm -f "${PREFIX}/.crates.toml"
