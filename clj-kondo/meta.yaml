@@ -1,0 +1,42 @@
+{% set name = "clj-kondo" %}
+{% set version = "2024.05.24" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version.replace("-", "_") }}
+
+source:
+  url: https://github.com/clj-kondo/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: 80ddf806262a8451f58af70b9acde9c2b03eb0c7ad680476a053ad56e6c0da42
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - gcc  # [linux]
+    - maven
+  host:
+    - graalvm
+    - leiningen
+    - zlib
+  run:
+    - libzlib
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/clj-kondo/{{ name }}
+  license: EPL-1.0
+  license_file: 
+    - LICENSE
+    - target/generated-resources/licenses/
+  summary: Static analyzer and linter for Clojure code that sparks joy
+  dev_url: https://github.com/clj-kondo/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
