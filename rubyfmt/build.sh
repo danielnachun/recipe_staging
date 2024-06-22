@@ -12,6 +12,7 @@ cargo install --locked --root ${PREFIX} --path .
 
 mkdir -p ${PREFIX}/bin
 install -m 755 target/**/release/rubyfmt-main ${PREFIX}/bin
+ln -sf ${PREFIX}/bin/rubyfmt-main ${PREFIX}/bin/rubyfmt
 
 # strip debug symbols
 "$STRIP" "$PREFIX/bin/rubyfmt-main"
