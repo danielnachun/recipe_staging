@@ -1,0 +1,36 @@
+{% set name = "tree-sitter-cli" %}
+{% set version = "0.22.6" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/tree-sitter/tree-sitter/archive/v{{ version }}.tar.gz
+  sha256: b7f8157e309efc17a7ec44de28d2ad7f42a752f37a022685b2d92e873cd5a39f
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - tree-sitter --help
+
+about:
+  home: https://github.com/tree-sitter/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: An incremental parsing system for programming tools
+  dev_url: https://github.com/tree-sitter/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
