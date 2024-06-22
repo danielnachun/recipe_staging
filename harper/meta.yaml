@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/eijah-potter/{{ name }}/archive/v{{ version }}.tar.gz
+  url: https://github.com/elijah-potter/{{ name }}/archive/v{{ version }}.tar.gz
   sha256: 4a616db8a304c3be3a91a41d51a729ffac07a4436955b720dd668bd30274f39e
 
 build:
@@ -23,13 +23,13 @@ test:
     - {{ name }} --help
 
 about:
-  home: https://github.com/eijah-potter/{{ name }}
+  home: https://github.com/elijah-potter/{{ name }}
   license: Apache-2.0
   license_file:
     - LICENSE
     - THIRDPARTY.yml
   summary: The Grammar Checker for Developers
-  dev_url: https://github.com/eijah-potter/{{ name }}
+  dev_url: https://github.com/elijah-potter/{{ name }}
 
 extra:
   recipe-maintainers:
