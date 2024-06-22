@@ -24,9 +24,10 @@ test:
 
 about:
   home: https://github.com/biomejs/{{ name }}
-  license: MIT
+  license: MIT AND Apache-2.0
   license_file:
-    - LICENSE
+    - LICENSE-MIT
+    - LICENSE-APACHE
     - THIRDPARTY.yml
   summary: A toolchain for web projects, aimed to provide functionalities to maintain them.
   dev_url: https://github.com/biomejs/{{ name }}
