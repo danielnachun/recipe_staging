@@ -20,7 +20,7 @@ requirements:
 
 test:
   commands:
-    - {{ name }} --help
+    - {{ name }} --version
 
 about:
   home: https://github.com/tekumara/{{ name }}
