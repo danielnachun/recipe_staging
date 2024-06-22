@@ -1,5 +1,5 @@
 {% set name = "vale" %}
-{% set version = "3.4.2" %}
+{% set version = "3.5.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,15 +7,18 @@ package:
 
 source:
   url: https://github.com/errata-ai/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: e1696739f13c8b579d96a9e4df4592f0bbda167aa74872eede6cc9482374d32b
+  sha256: 13a3b0ef4ba9f0e89f663d7f6ba65facd2fca37333e97512c03ac807e413afe0
 
 build:
   number: 0
 
 requirements:
   build:
-    - go
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - go-cgo=1.22
     - go-licenses
+    - sysroot_linux-64=2.17  # [linux]
 
 test:
   commands:
