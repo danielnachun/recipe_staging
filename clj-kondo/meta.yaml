@@ -6,7 +6,7 @@ package:
   version: {{ version.replace("-", "_") }}
 
 source:
-  url: https://github.com/clj-kondo/{{ name }}/archive/{{ version }}.tar.gz
+  url: https://github.com/clj-kondo/{{ name }}/archive/v{{ version }}.tar.gz
   sha256: 80ddf806262a8451f58af70b9acde9c2b03eb0c7ad680476a053ad56e6c0da42
 
 build:
