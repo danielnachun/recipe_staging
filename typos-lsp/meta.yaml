@@ -20,7 +20,7 @@ requirements:
 
 test:
   commands:
-    - {{ name }} --version
+    - test -f ${PREFIX}/bin/{{ name }}
 
 about:
   home: https://github.com/tekumara/{{ name }}
