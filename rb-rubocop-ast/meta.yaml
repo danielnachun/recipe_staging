@@ -1,5 +1,5 @@
 {% set name = "rubocop-ast" %}
-{% set version = "1.29.0" %}
+{% set version = "1.31.3" %}
 
 package:
   name: rb-{{ name|lower }}
@@ -7,11 +7,11 @@ package:
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
-  sha256: d1da2ab279a074baefc81758ac430c5768a8da8c7438dd4e5819ce5984d00ba1
+  sha256: 1b07d618d8776993ec6053a706d1c09f0bf15139fd69415924656cbff07e7818
 
 build:
   noarch: generic
-  number: 1
+  number: 0
   script:
     - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
     - gem unpack {{ name }}-{{ version }}.gem
