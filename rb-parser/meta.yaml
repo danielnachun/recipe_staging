@@ -1,5 +1,5 @@
 {% set name = "parser" %}
-{% set version = "3.2.2.3" %}
+{% set version = "3.3.3.0" %}
 
 package:
   name: rb-{{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
-  sha256: 10685f358ab36ffea2252dc4952e5b8fad3a297a8152a85f59adc982747b91eb
+  sha256: a2e23c90918d9b7e866b18dca2b6835f227769dd2fa8e59c5841f3389cf53eeb
 
 build:
   noarch: generic
