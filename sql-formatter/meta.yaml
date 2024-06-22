@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://registry.npmjs.org/sql-formatter/-/{{ name }}-{{ version }}.tgz
-  sha256: 8c981e8e279bf8943329e0511f50cc83a03f09571eca7d52722bfb7c3c688966
+  url: https://github.com/sql-formatter-org/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: df7c2e28aeaa08b8c0040b9692832fdcf48a18eac37b1b27c4d2e75e94bd7046
 
 build:
   noarch: generic
