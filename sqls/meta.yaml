@@ -14,7 +14,8 @@ build:
 
 requirements:
   build:
-    - go
+    - {{ compiler('c' )}}
+    - {{ compiler('go-cgo' )}}
     - go-licenses
 
 test:
