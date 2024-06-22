@@ -2,7 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-lein uberjar
+lein with-profiles +clojure-1.10.2 "do" clean, uberjar
 
 native-image \
     --native-compiler-options="-L${PREFIX}/lib" \
