@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/clj-kondo/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 80ddf806262a8451f58af70b9acde9c2b03eb0c7ad680476a053ad56e6c0da42
+  sha256: a54276901c0e85c01b12e729745a3444492cb853444b18ed300d29fbf6332071
 
 build:
   number: 0
