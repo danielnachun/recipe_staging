@@ -17,6 +17,7 @@ requirements:
   host:
     - nodejs
     - typescript
+    - yarn
   run:
     - nodejs
 
