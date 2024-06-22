@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/alesbrelih/{{ name }}/archive/v{{ version }}.tar.gz
+  url: https://github.com/alesbrelih/{{ name }}/archive/{{ version }}.tar.gz
   sha256: c667f75b151e873149514885e223f396d2175aaad23cdcbd0b82911b39988055
 
 build:
