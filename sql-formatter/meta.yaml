@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://registry.npmjs.org/sql-formatter/-/{{ name }}-{{ version }}.tgz
-  sha256: 398971fee90b72014d72ca63b163e8f19d3c7db9528de8e43075c2ffa579b7b2
+  sha256: 8c981e8e279bf8943329e0511f50cc83a03f09571eca7d52722bfb7c3c688966
 
 build:
   noarch: generic
