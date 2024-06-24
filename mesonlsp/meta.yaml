@@ -18,9 +18,10 @@ requirements:
     - {{ compiler('cxx') }}
     - meson
     - ninja
+    - sed
   host:
     - libarchive
-    - libcurl
+    - curl
     - fmt  # [osx]
     - lsprotocol
     - nlohmann_json
