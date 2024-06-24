@@ -1,13 +1,13 @@
-{% set name = "libsixel" %}
-{% set version = "1.10.3" %}
+{% set name = "mesonlsp" %}
+{% set version = "4.2.2" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/libsixel/libsixel/archive/v{{ version }}.tar.gz
-  sha256: 028552eb8f2a37c6effda88ee5e8f6d87b5d9601182ddec784a9728865f821e0
+  url: https://github.com/JCWasmx86/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 4f67325d48ab26ac1c53bf95d5e1e0e9e48091e4a5aaa47cbb4c3b96c1a2cb4d
 
 build:
   number: 0
@@ -15,39 +15,36 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
-    #- git
-    #- mercurial
+    - {{ compiler('cxx') }}
     - meson
     - ninja
-    #- patch
-    #- subversion
   host:
     - libarchive
     - libcurl
+    - fmt  # [osx]
     - lsprotocol
-    - nlohmann-json
+    - nlohmann_json
     - pkgconf
     - pygls
+    - libuuid
   run:
+    - fmt  # [osx]
     - libarchive
     - libcurl
-    - nlohmann-json
+    - nlohmann_json
     - pkgconf
-    #- git
-    #- mercurial
-    #- patch
-    #- subversion
+    - libuuid
 
 test:
   commands:
-    - mesonlsp --help
+    - {{ name }} --help
 
 about:
-  home: https://github.com/saitoha/sixel
-  license: MIT
-  license_file: LICENSE
-  summary: SIXEL encoder/decoder implementation
-  dev_url: https://github.com/saitoha/sixel
+  home: https://github.com/JCWasmx86/{{ name }}
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  summary: An unofficial, unendorsed language server for meson written in C++
+  dev_url: https://github.com/JCWasmx86/{{ name }}
 
 extra:
   recipe-maintainers:
