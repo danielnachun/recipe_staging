@@ -1,0 +1,44 @@
+{% set name = "pgformatter" %}
+{% set version = "1.18" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/darold/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: f900cb39505eb6e168a9ca51a10b73f1bbde1914b923a09ecd72d9c02e6ec2ef
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl-autodie
+    - perl=5.32
+  run:
+    - perl-autodie
+    - perl>=5.32
+
+test:
+  imports:
+    - pgFormatter::Beautify
+    - pgFormatter::CGI
+    - pgFormatter::CLI
+
+about:
+  home: https://github.com/darold/{{ name }}
+  license: PostgreSQL
+  license_file: LICENSE
+  summary: A PostgreSQL SQL syntax beautifier that can work as a console program or as a CGI. 
+
+maintainers:
+  - danielnachun
