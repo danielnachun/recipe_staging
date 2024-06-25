@@ -1,0 +1,40 @@
+{% set name = "reline" %}
+{% set version = "0.5.9" %}
+
+package:
+  name: rb-{{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: 5d2dd7ed0fd078e79a05e4eaa47dc91b8dacec7358e9e1dd6d9c4636cff7d378
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - rb-io-console
+    - ruby=3.2
+  run:
+    - rb-io-console
+    - ruby>=3.2
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  license_file: {{ name }}-{{ version }}/COPYING
+  summary: Alternative GNU Readline or Editline implementation by pure Ruby.
+  dev_url: https://github.com/ruby/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
