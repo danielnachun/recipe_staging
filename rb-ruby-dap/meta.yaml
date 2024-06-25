@@ -1,0 +1,38 @@
+{% set name = "ruby-dap" %}
+{% set version = "0.1.3" %}
+
+package:
+  name: rb-{{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: 3153f8121fc77e8bc2ecb80b939b8e47a118544b85830a08e7efdf78a3dd3629
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+test:
+  commands:
+    - ruby -r dap -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: Apache-2.0
+  license_file: {{ name }}-{{ version }}/LICENSE
+  summary: Debug Adapter Protocol parsers and formatters
+  dev_url: https://github.com/jwt/ruby-{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
