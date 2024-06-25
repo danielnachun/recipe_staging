@@ -1,0 +1,75 @@
+{% set name = "perl-neovim-ext" %}
+{% set version = "0.06" %}
+{% set sha256 = "6d2ceb3062c96737dba556cb20463130fc4006871b25b7c4f66cd3819d4504b8" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/J/JA/JACQUESG/Neovim-Ext-{{ version }}.tar.gz
+  sha256: {{ sha256 }}
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    #- make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-msgpack-raw
+    - perl-eval-safe
+    - perl-class-accessor
+    - perl-io-async
+    - perl-file-which
+    - perl-archive-zip
+    - perl-proc-background
+  run:
+    - perl>=5.32
+    - perl-class-accessor
+    - perl-msgpack-raw
+    - perl-eval-safe
+    - perl-io-async
+
+test:
+  imports:
+    - Neovim::Ext
+    - Neovim::Ext::Buffer
+    - Neovim::Ext::Buffers
+    - Neovim::Ext::Common
+    - Neovim::Ext::Current
+    - Neovim::Ext::ErrorResponse
+    - Neovim::Ext::Funcs
+    - Neovim::Ext::LuaFuncs
+    - Neovim::Ext::MsgPack::RPC
+    - Neovim::Ext::MsgPack::RPC::AsyncSession
+    - Neovim::Ext::MsgPack::RPC::EventLoop
+    - Neovim::Ext::MsgPack::RPC::Response
+    - Neovim::Ext::MsgPack::RPC::Session
+    - Neovim::Ext::MsgPack::RPC::Stream
+    - Neovim::Ext::Plugin
+    - Neovim::Ext::Plugin::Host
+    - Neovim::Ext::Plugin::ScriptHost
+    - Neovim::Ext::Range
+    - Neovim::Ext::Remote
+    - Neovim::Ext::RemoteApi
+    - Neovim::Ext::RemoteMap
+    - Neovim::Ext::RemoteSequence
+    - Neovim::Ext::Tabpage
+    - Neovim::Ext::Tie::Stream
+    - Neovim::Ext::VIMCompat
+    - Neovim::Ext::VIMCompat::Buffer
+    - Neovim::Ext::VIMCompat::Window
+    - Neovim::Ext::Window
+
+about:
+  home: http://metacpan.org/pod/Neovim-Ext
+  license: perl_5
+  summary: 'Perl bindings for neovim'
