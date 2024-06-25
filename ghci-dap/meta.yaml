@@ -1,5 +1,5 @@
 {% set name = "ghci-dap" %}
-{% set version = "0.0.21.0" %}
+{% set version = "0.0.22.0" %}
 
 package:
   name: {{ name|lower }}
