@@ -27,7 +27,7 @@ requirements:
 
 test:
   commands:
-    - {{ name }} --help
+    - '{{ name }} --help 2>&1 | grep -q "usage: fast-tags"'
 
 about:
   home: https://github.com//{{ name }}
