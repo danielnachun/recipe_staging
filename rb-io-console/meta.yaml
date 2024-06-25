@@ -1,0 +1,40 @@
+{% set name = "io-console" %}
+{% set version = "0.7.2" %}
+
+package:
+  name: rb-{{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: f0dccff252f877a4f60d04a4dc6b442b185ebffb4b320ab69212a92b48a7a221
+
+build:
+  number: 0
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  build:
+    - make
+    - {{ compiler('c') }}
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: BSD-2-Clause
+  license_file: {{ name }}-{{ version }}/LICENSE.txt
+  summary: add console capabilities to IO instances.
+  dev_url: https://github.com/jwt/ruby-{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
