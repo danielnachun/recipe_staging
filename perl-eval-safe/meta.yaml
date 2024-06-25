@@ -1,0 +1,37 @@
+{% set name = "perl-eval-safe" %}
+{% set version = "0.02" %}
+{% set sha256 = "55a52c233e2dae86113f9f19b34f617edcfc8416f9bece671267bd1811b12111" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/M/MA/MATHIAS/Eval-Safe/Eval-Safe-{{ version }}.tar.gz
+  sha256: {{ sha256 }}
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+test:
+  imports:
+    - Eval::Safe
+
+about:
+  home: http://metacpan.org/pod/Eval-Safe
+  license: mit
+  summary: 'Simplified safe evaluation of Perl code'
