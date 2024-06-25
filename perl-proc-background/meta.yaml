@@ -1,0 +1,39 @@
+{% set name = "perl-proc-background" %}
+{% set version = "1.32" %}
+{% set sha256 = "5b1a780ddb929ca42725eb90b518321425ff778b4a137f86fac95d9fb9cd2967" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/N/NE/NERDVANA/Proc-Background-{{ version }}.tar.gz
+  sha256: {{ sha256 }}
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+test:
+  imports:
+    - Proc::Background
+    - Proc::Background::Unix
+
+about:
+  home: http://metacpan.org/pod/Proc-Background
+  license: perl_5
+  summary: 'Run asynchronous child processes under Unix or Windows'
