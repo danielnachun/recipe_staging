@@ -21,6 +21,7 @@ requirements:
     - binutils  # [linux]
     - bison
     - cargo-bundle-licenses
+    - libxcrypt  # [linux]
     - make
     - ruby
     - sed
