@@ -1,0 +1,37 @@
+{% set name = "rdbg" %}
+{% set version = "1.9.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://rubygems.org/downloads/debug-{{ version }}.gem
+  sha256: 48e026c0852c7a10c60263e2e527968308958e266231e36d64e3efcabec7e7fc
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  host:
+    - rb-reline
+    - ruby
+  run:
+    - rb-reline
+    - ruby
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: BSD-2-Clause
+  license_file: debug-{{ version }}/LICENSE.txt
+  summary: Debugging functionality for Ruby
+  dev_url: https://github.com/ruby/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
