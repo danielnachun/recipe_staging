@@ -1,0 +1,44 @@
+{% set name = "haskell-debug-adapter" %}
+{% set version = "0.0.39.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/phoityne/{{ name }}/archive//{{ name }}-{{ version }}.tar.gz
+  sha256: 7145f6ec5710f1435dfb9b52d1a452c64bbdbc00943b8458a60402376f22f40f
+
+build:
+  number: 0
+  skip: true  # [not unix]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cabal-install
+    - cabal-plan
+    - ghc
+    - sed
+  host:
+    - libiconv  # [osx]
+  run: 
+    - libiconv  # [osx]
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/phoityne/{{ name }}
+  license: BSD-3-Clause
+  license_file: 
+    - LICENSE
+    - license-files/
+  summary: Debug Adapter for Haskell debugging system.
+  dev_url: https://github.com/phoityne/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
