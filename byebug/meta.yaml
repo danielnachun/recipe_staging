@@ -10,10 +10,12 @@ source:
   sha256: 2485944d2bb21283c593d562f9ae1019bf80002143cc3a255aaffd4e9cf4a35b
 
 build:
-  noarch: generic
   number: 0
 
 requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
   host:
     - ruby=3.2
   run:
