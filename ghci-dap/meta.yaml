@@ -1,0 +1,44 @@
+{% set name = "ghci-dap" %}
+{% set version = "0.0.21.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/phoityne/{{ name }}/archive/{{ name }}-{{ version }}.tar.gz
+  sha256: 0c0f34271670c23cc4feec7da04487a169a3cd0fde995721503bb5379755b91a
+
+build:
+  number: 0
+  skip: true  # [not unix]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cabal-install
+    - cabal-plan
+    - ghc
+    - sed
+  host:
+    - libiconv  # [osx]
+  run: 
+    - libiconv  # [osx]
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/phoityne/{{ name }}
+  license: BSD-3-Clause
+  license_file: 
+    - LICENSE
+    - license-files/
+  summary: ghci with DAP interface.
+  dev_url: https://github.com/phoityne/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
