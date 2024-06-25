@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/phoityne/{{ name }}/archive/{{ name }}-{{ version }}.tar.gz
-  sha256: c0f2b1ba4caffbe495746ed51de0a56833912c2821d87f6e46551acb54c7f17e
+  sha256: 9a947f554dbccd18526925309e4caa607b2c50533fe4c78e202535ec98e71007
 
 build:
   number: 0
