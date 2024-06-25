@@ -23,9 +23,11 @@ requirements:
     - sed
   host:
     - libiconv  # [osx]
+    - ncurses
     - zlib
   run: 
     - libiconv  # [osx]
+    - ncurses
     - libzlib
 
 test:
