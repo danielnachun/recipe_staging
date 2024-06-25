@@ -31,7 +31,7 @@ test:
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: MIT
-  license_file: {{ name }}-{{ version }}/LICENSE
+  license_file: {{ name }}-{{ version }}/COPYING
   summary: Alternative GNU Readline or Editline implementation by pure Ruby.
   dev_url: https://github.com/ruby/{{ name }}
 
