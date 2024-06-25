@@ -23,8 +23,10 @@ requirements:
     - sed
   host:
     - libiconv  # [osx]
+    - ncurses
   run: 
     - libiconv  # [osx]
+    - ncurses
 
 test:
   commands:
