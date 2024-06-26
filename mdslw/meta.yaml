@@ -26,7 +26,7 @@ about:
   home: https://github.com/razziel89/{{ name }}
   license: MIT
   license_file:
-    - LICENSE
+    - LICENCE
     - THIRDPARTY.yml
   summary: Prepare your markdown for easy diff'ing!
   dev_url: https://github.com/razziel89/{{ name }}
