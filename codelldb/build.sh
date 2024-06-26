@@ -4,6 +4,10 @@ set -o xtrace -o nounset -o pipefail -o errexit
 
 cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
 
+if [[ ${target_platform} ]]; then
+    exprt LLVM_TRIPLE="arm64-apple-darwin"
+fi
+
 cmake -S . -B build \
     -DCMAKE_INSTALL_PREFIX=${PREFIX} \
     -DCMAKE_INSTALL_LIBDIR=${PREFIX}/lib \
