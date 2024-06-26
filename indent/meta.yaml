@@ -1,0 +1,39 @@
+{% set name = "indent" %}
+{% set version = "2.2.13" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://ftp.gnu.org/gnu/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 9e64634fc4ce6797b204bcb8897ce14fdd0ab48ca57696f78767c59cae578095
+
+build:
+  number: 0
+  skip: true
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+    - pkg-config
+    - texinfo
+  host:
+    - gettext
+  run:
+    - gettext
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://www.gnu.org/software/{{ name }}
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  summary: C code prettifier
+
+extra:
+  recipe-maintainers:
+    - danielnachun
