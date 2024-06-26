@@ -1,0 +1,41 @@
+{% set name = "readapt" %}
+{% set version = "2.0.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: 8ae2ed624cca47df6e966d6450474a46d8c071de82e940c753854dcd2ff043b6
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c')}}
+    - make
+  host:
+    - rb-backport
+    - rb-thor
+    - ruby=3.2
+  run:
+    - rb-backport
+    - rb-thor
+    - ruby>=3.2
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  license_file: {{ name }}-{{ version }}/LICENSE.txt
+  summary: A Ruby debugger for the Debug Adapter Protocol.
+  dev_url: https://github.com/castwide/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
