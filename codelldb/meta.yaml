@@ -20,6 +20,7 @@ requirements:
     - cargo-bundle-licenses
     - cmake
     - lldb
+    - nodejs
     - make
 
 test:
