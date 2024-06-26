@@ -1,0 +1,38 @@
+{% set name = "multi_json" %}
+{% set version = "1.0.4" %}
+
+package:
+  name: rb-{{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: 996d3a3349b7d944e259da33df67e44650de621337044cea9cbac1c63acd5e38
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  license_file: {{ name }}-{{ version }}/LICENSE.md
+  summary: A generic swappable back-end for JSON handling.
+  dev_url: https://github.com/intridea/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
