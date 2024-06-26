@@ -8,9 +8,11 @@ cargo-bundle-licenses \
 
 # build statically linked binary with Rust
 cargo install --locked --root ${PREFIX} --path harper-cli
+cargo install --locked --root ${PREFIX} --path harper-ls
 
 # strip debug symbols
 "$STRIP" "$PREFIX/bin/${PKG_NAME}-cli"
+"$STRIP" "$PREFIX/bin/${PKG_NAME}-ls"
 
 # remove extra build file
 rm -f "${PREFIX}/.crates.toml"
