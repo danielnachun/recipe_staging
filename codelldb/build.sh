@@ -4,8 +4,8 @@ set -o xtrace -o nounset -o pipefail -o errexit
 
 cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
 
-if [[ ${target_platform} == "osx-arm64 " ]]; then
-    exprt LLVM_TRIPLE="arm64-apple-darwin"
+if [[ ${target_platform} == "osx-arm64" ]]; then
+    export CMAKE_ARGS="-DLLVM_TRIPLE='arm64-apple-darwin' ${CMAKE_ARGS}"
 fi
 
 cmake -S . -B build \
