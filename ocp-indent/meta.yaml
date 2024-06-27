@@ -1,13 +1,13 @@
 {% set name = "ocp-indent" %}
-{% set version = "1.5" %}
+{% set version = "1.8.2" %}
 
 package:
   name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://github.com/OCamlPro/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 60f899b327b619b3cfc1e92f1bd78309f32101989a6c7b920da88bd723ebd45b
+  url: https://github.com/OCamlPro/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: 013069cf0b2219593351077e7eb11379879310e7e3e09f4f1c399bb40f24388f
 
 build:
   number: 0

@@ -19,16 +19,18 @@ export OPAMJOBS=${CPU_COUNT}
 mkdir -p ${PREFIX}/bin
 mkdir -p ${PREFIX}/lib
 
+sed -i '1i [@@@alert "-all--all+unix@window"]' src/indentArgs.mli
+sed -i '1i [@@@alert "-all--all+unix@window"]' src/indentArgs.ml
+sed -i '1i [@@@alert "-all--all+unix@window"]' src/indentMain.ml
+
 opam init --no-setup --disable-sandboxing
 opam exec -- opam install ${PKG_NAME} -y --deps-only --no-depexts
 opam switch default
 eval $(opam env)
-pushd src
 dune build
-popd
 
 mkdir -p ${PREFIX}/bin
-install -m 755 src/_build/default/src/main/main.exe ${PREFIX}/bin/${PKG_NAME}
+install -m 755 src/_build/default/src/indentMain.exe ${PREFIX}/bin/${PKG_NAME}
 
 mkdir -p license-files
 odig show license-files --lib-dir=${OPAMROOT}/default/lib --doc-dir=${OPAMROOT}/default/doc -l | cut -f 2 -d ' ' | \
