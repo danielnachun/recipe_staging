@@ -2,7 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-export CFLAGS="${CFLAGS} -Wimplicit-function-declaration"
+export CFLAGS="${CFLAGS} -Wno-implicit-function-declaration"
 
 ./configure --disable-debug \
     --disable-dependency-tracking \
