@@ -22,6 +22,7 @@ requirements:
     - make  # [unix]
     - odig
     - opam
+    - sed
 
 test:
   commands:

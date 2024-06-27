@@ -30,7 +30,7 @@ eval $(opam env)
 dune build
 
 mkdir -p ${PREFIX}/bin
-install -m 755 src/_build/default/src/indentMain.exe ${PREFIX}/bin/${PKG_NAME}
+install -m 755 _build/default/src/indentMain.exe ${PREFIX}/bin/${PKG_NAME}
 
 mkdir -p license-files
 odig show license-files --lib-dir=${OPAMROOT}/default/lib --doc-dir=${OPAMROOT}/default/doc -l | cut -f 2 -d ' ' | \
