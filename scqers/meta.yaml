@@ -6,12 +6,12 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/maurermaggie/scQers/archive/22b281991a5a5e9db6e83e79a93fd953d51b1a9b.zip
-  sha256: 4861a96aa171c4e0b432397a3261db7f06ff547e2364776d6603cbb88624a84c
+  url: https://github.com/maurermaggie/scQers/archive/442b0ee2335034d56c89b3734d788cc61f2d9480.zip
+  sha256: b37b67e831e9bad41be30a6391b68aae98df8d8f0968091591d5d6b8fad20f3e
 
 build:
   noarch: python
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -20,7 +20,9 @@ requirements:
     - python >=3.6
     - pysam
     - r-argparser
+    - bioconductor-dropletutils
     - r-igraph
+    - r-seurat
     - r-tictoc
     - r-tidyverse
     - r-stringdist
@@ -29,6 +31,7 @@ test:
   commands:
     - clean_up_umi_counts --help
     - get_barcode_fixed_pos --help
+    - seurat --help
 
 about:
   home: https://github.com/maurermaggie/scQers
