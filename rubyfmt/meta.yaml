@@ -10,7 +10,7 @@ source:
   git_rev: v{{ version }}
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -21,8 +21,10 @@ requirements:
     - binutils  # [linux]
     - bison
     - cargo-bundle-licenses
+    - libxcrypt  # [linux]
     - make
     - ruby
+    - sed
   run:
     - ruby
 
