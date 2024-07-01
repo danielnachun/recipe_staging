@@ -1,5 +1,5 @@
 {% set name = "docker" %}
-{% set version = "26.1.2" %}
+{% set version = "26.1.4" %}
 
 package:
   name: {{ name|lower }}
@@ -7,14 +7,15 @@ package:
 
 source:
   url: https://github.com/docker/cli/archive/v{{ version }}.tar.gz
-  sha256: 2f704795dc97a382e9689bab6a41492d6584cae763d8ec66dd1bd219a51687c4
+  sha256: 73f914421db873d1a19d4d15e8ae21bebc35079f3034f574dfc6cd0449edcf89
 
 build:
   number: 0
 
 requirements:
   build:
-    - go
+    - {{ compiler('c') }}
+    - go-cgo=1.22
     - go-licenses
     - go-md2man
 
