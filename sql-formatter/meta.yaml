@@ -1,0 +1,36 @@
+{% set name = "sql-formatter" %}
+{% set version = "15.3.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://registry.npmjs.org/sql-formatter/-/{{ name }}-{{ version }}.tgz
+  sha256: 8c981e8e279bf8943329e0511f50cc83a03f09571eca7d52722bfb7c3c688966
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  host:
+    - nodejs
+    - typescript
+    - yarn
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/sql-formatter-org/{{ name }}
+  license: MIT
+  summary: A whitespace formatter for different query languages
+  dev_url: https://github.com/sql-formatter-org/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
