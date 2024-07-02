@@ -13,7 +13,7 @@ install_script() {
 tee ${PREFIX}/bin/${script_name} << EOF
     #!/usr/bin/env bash
 
-    exec ${PREFIX}/libexec/${PKG_NAME}/${script_name}.py
+    exec ${PREFIX}/libexec/${PKG_NAME}/${script_name}.py "\$@"
 EOF
 }
 
