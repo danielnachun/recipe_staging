@@ -19,7 +19,7 @@ requirements:
   run:
     - bx-python
     - dask
-    - gseapy
+    - gseapy >=1.1
     - lxml
     - matplotlib-base
     - mygene
