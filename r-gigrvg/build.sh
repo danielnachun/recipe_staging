@@ -16,6 +16,10 @@ grep -va '^Priority: ' DESCRIPTION.old > DESCRIPTION
 # shellcheck disable=SC2086
 ${R} CMD INSTALL --build . ${R_ARGS}
 
+if [[ ${target_platform} =~ .*osx.* ]]; then
+    ln -sf ${PREFIX}/lib/R/library/GIGrvg/libs/GIGrvg.dylib ${PREFIX}/lib/R/library/GIGrvg/libs/GIGrvg.so
+fi
+
 # Add more build steps here, if they are necessary.
 
 # See
