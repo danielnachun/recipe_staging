@@ -1,5 +1,5 @@
 {% set name = "mariadb" %}
-{% set version = "11.1.2" %}
+{% set version = "11.4.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,8 +7,7 @@ package:
 
 source:
   url: https://downloads.mariadb.com/MariaDB/{{ name }}-{{ version }}/source/{{ name }}-{{ version }}.tar.gz
-  sha256: 19a9e980e57fa332931f643b48ad7390528c889ff6ea8b0e16fd306aa3088238
-    
+  sha256: 7ba372bd87638e56f881bcd8878ee3819f2dab28589cbf088857e76bd0db0a64
 
 build:
   number: 0
@@ -23,31 +22,36 @@ requirements:
     - cmake
     - make
   host:
+    - boost-cpp
     - bzip2
     - curl
-    - fmt=10.0
+    - fmt
     - krb5
     - libxcrypt #[linux]
     - ncurses
     - openssl
     - pcre2
     - libedit
-    - lz4  #[osx]
-    - snappy  #[osx]
+    - lz4-c
+    - lzo
+    - snappy
     - xz
     - zlib
     - zstd
   run:
     - bzip2
+    - libboost
     - libcurl
     - krb5
-    - libxcrypt #[linux]
-    - lz4  #[osx]
+    - libxcrypt  # [linux]
     - ncurses
     - openssl>=3.0
     - pcre2
     - libedit
     - libzlib
+    - lz4-c
+    - lzo
+    - snappy
     - xz
     - zstd
 
