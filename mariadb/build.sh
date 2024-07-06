@@ -26,5 +26,6 @@ cmake -S . -B build \
 	-Wno-dev \
 	-DBUILD_TESTING=OFF
 
+# -DWITH_LIBFMT=system \
 cmake --build build -- -j ${CPU_COUNT}
 cmake --install build
