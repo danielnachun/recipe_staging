@@ -13,6 +13,7 @@ cmake -S . -B build \
 	-DINSTALL_INFODIR=share/info \
 	-DINSTALL_MYSQLSHAREDIR=share/mysql \
 	-DWITH_SSL=system \
+	-DWITH_LIBFMT=system \
 	-DWITH_UNIT_TESTS=OFF \
 	-DDEFAULT_CHARSET=utf8mb4 \
 	-DDEFAULT_COLLATION=utf8mb4_general_ci \
@@ -22,8 +23,6 @@ cmake -S . -B build \
 	-Wno-dev \
 	-DBUILD_TESTING=OFF \
 	${CMAKE_ARGS}
-
-# -DWITH_LIBFMT=system \
 #
 cmake --build build -- -j ${CPU_COUNT}
 cmake --install build

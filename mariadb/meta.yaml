@@ -15,26 +15,28 @@ source:
 build:
   number: 0
   ignore_run_exports:
+    - boost-cpp
     - fmt
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - bison
+    - bison  # [unix]
     - cmake
-    - make
+    - make  # [unix]
+    - ninja  # [win]
   host:
     - boost-cpp
     - bzip2
     - curl
-    - fmt=10.0
+    - fmt=9.1
     - krb5
-    - libxcrypt #[linux]
-    - ncurses
+    - libxcrypt # [linux]
+    - ncurses  # [unix]
     - openssl
     - pcre2
-    - libedit
+    - libedit  # [unix]
     - lz4-c
     - lzo
     - snappy
@@ -43,14 +45,12 @@ requirements:
     - zstd
   run:
     - bzip2
-    - libboost
     - libcurl
     - krb5
     - libxcrypt  # [linux]
-    - ncurses
     - openssl>=3.0
     - pcre2
-    - libedit
+    - libedit  # [unix]
     - libzlib
     - lz4-c
     - lzo
