@@ -11,6 +11,7 @@ source:
   patches:
     - 0001-fix-o_direct-usage.patch
     - 0002-fix-o_direct-usage.patch
+    - 0003-fix-windows.patch
 
 build:
   number: 0
@@ -24,6 +25,7 @@ requirements:
     - {{ compiler('cxx') }}
     - bison  # [unix]
     - cmake
+    - git
     - make  # [unix]
     - ninja  # [win]
   host:
@@ -32,28 +34,28 @@ requirements:
     - curl
     - fmt=9.1
     - krb5
-    - libxcrypt # [linux]
+    - libedit  # [unix]
+    - libxml2
+    - lz4-c
+    - lzo
     - ncurses  # [unix]
     - openssl
     - pcre2
-    - libedit  # [unix]
-    - lz4-c
-    - lzo
     - snappy
     - xz
     - zlib
     - zstd
   run:
     - bzip2
-    - libcurl
     - krb5
-    - libxcrypt  # [linux]
-    - openssl>=3.0
-    - pcre2
+    - libcurl
     - libedit  # [unix]
+    - libxml2
     - libzlib
     - lz4-c
     - lzo
+    - openssl>=3.0
+    - pcre2
     - snappy
     - xz
     - zstd

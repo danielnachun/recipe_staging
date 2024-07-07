@@ -1,7 +1,7 @@
 From 03c062bbf3daaeccf05d7c8bca7622080ad831f7 Mon Sep 17 00:00:00 2001
 From: danielnachun <daniel.nachun@gmail.com>
 Date: Fri, 5 Jul 2024 16:57:14 -0700
-Subject: [PATCH 2/2] fix o_direct usage
+Subject: [PATCH 2/3] fix o_direct usage
 
 ---
  extra/mariabackup/xtrabackup.cc | 7 ++++++-
