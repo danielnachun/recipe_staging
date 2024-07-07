@@ -4,8 +4,8 @@ Date: Sat, 6 Jul 2024 17:05:52 -0700
 Subject: [PATCH 3/3] fix windows
 
 ---
- .../hashicorp_key_management_plugin.cc        | 27 +++----------------
- 1 file changed, 4 insertions(+), 23 deletions(-)
+ .../hashicorp_key_management_plugin.cc        | 29 ++++---------------
+ 1 file changed, 5 insertions(+), 24 deletions(-)
 
 diff --git a/plugin/hashicorp_key_management/hashicorp_key_management_plugin.cc b/plugin/hashicorp_key_management/hashicorp_key_management_plugin.cc
 index bdc2f734..fcd8253f 100644
@@ -45,8 +45,9 @@ index bdc2f734..fcd8253f 100644
      bool not_equal= token_env != NULL && strcmp(token_env, token) != 0;
      if (token_env == NULL || not_equal)
      {
+-      setenv("VAULT_TOKEN", token, 1);
 +#if defined(HAVE_SETENV) || !defined(_WIN32)
-         setenv("VAULT_TOKEN", token, 1);
++        setenv("VAULT_TOKEN", token, 1);
 +#else
 +        _putenv_s("VAULT_TOKEN", token);
 +#endif
