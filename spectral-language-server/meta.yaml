@@ -1,0 +1,35 @@
+{% set name = "spectral-language-server" %}
+{% set version = "1.0.8" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/luizcorreia/{{ name }}/archive/v{{ version }}.tar.gz
+sha256: 9f9376cc0b4b962bf246bae929e11e8293e6a4b13a9ac5be6d2bf89bf35215dc
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  host:
+    - nodejs
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/luizcorreia/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: Language Server for Spectral
+  dev_url: https://github.com/luizcorreia/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
