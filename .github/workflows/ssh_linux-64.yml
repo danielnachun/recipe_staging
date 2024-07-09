@@ -20,7 +20,7 @@ jobs:
 
     steps:
       - name: Checkout main
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -29,11 +29,11 @@ jobs:
         uses: jlumbroso/free-disk-space@main
 
       - name: Setup up docker buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
 
       - name: Build and export docker containers
         if: ${{ github.event.inputs.centos7 == 'false' }}
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v6
         with:
           load: true
           file: .github/mambaforge_container.df
@@ -41,7 +41,7 @@ jobs:
 
       - name: Build and export docker containers
         if: ${{ github.event.inputs.centos7 == 'true' }}
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v6
         with:
           load: true
           file: .github/centos7_container.df
