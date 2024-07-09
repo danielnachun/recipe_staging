@@ -7,7 +7,8 @@ if [ `uname` == Darwin ] ; then
     extra_config_options="LDFLAGS=-Wl,-headerpad_max_install_names"
 fi
 
-export CXXFLAGS="-Wno-register"
+export CXXFLAGS="${CXXFLAGS} -Wno-register"
+export CFLAGS="${CFLAGS} -Wno-int-conversion -Wno-implicit-function-declaration"
 
 ## Configure and make
 ./configure --prefix=$PREFIX \
