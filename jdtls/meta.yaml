@@ -1,5 +1,5 @@
 {% set name = "jdtls" %}
-{% set version = "1.35.0" %}
+{% set version = "1.37.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/eclipse/eclipse.jdt.ls/archive/v{{ version }}.tar.gz
-  sha256: b9baa124cfe82bfaa30b46c91f7e5c7a7948a6ce448b10ba7dc20c3d756a29f7
+  sha256: fa4a32f427fcc9dc8a071fbb6d3a28bff5185dea21357d035e6f7e02c34001ea
 
 build:
   noarch: generic
@@ -15,7 +15,8 @@ build:
 
 requirements:
   build:
-    - openjdk >=21,<22
+    - findutils
+    - openjdk
   run:
     - openjdk
     - python
@@ -27,7 +28,9 @@ test:
 about:
   home: https://github.com/eclipse/eclipse.jdt.ls
   license: EPL-2.0
-  license_file: LICENSE
+  license_file: 
+    - LICENSE
+    - target/generated-resources/licenses/
   summary: Java language specific implementation of the Language Server Protocol
 
 extra:
