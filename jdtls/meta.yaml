@@ -29,7 +29,7 @@ about:
   license: EPL-2.0
   license_file: 
     - LICENSE
-    - targets/generated-resources/licenses/
+    - target/generated-resources/licenses/
   summary: Java language specific implementation of the Language Server Protocol
 
 extra:
