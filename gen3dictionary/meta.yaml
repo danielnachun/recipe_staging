@@ -28,7 +28,7 @@ requirements:
 
 test:
   imports:
-    - gen3dictionary
+    - gdcdictionary
   commands:
     - pip check
   requires:

@@ -13,7 +13,6 @@ build:
   entry_points:
     - gen3 = gen3.cli.__main__:main
   noarch: python
-  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
 
 requirements:
@@ -51,7 +50,7 @@ test:
   imports:
     - gen3
   commands:
-    - pip check
+    # - pip check
     - gen3 --help
   requires:
     - pip

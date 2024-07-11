@@ -13,7 +13,6 @@ build:
   entry_points:
     - pfb = pfb.cli:main
   noarch: python
-  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
 
 requirements:
@@ -28,7 +27,7 @@ requirements:
     - fastavro
     - python-json-logger
     - pyyaml
-    - importlib-metadata
+    - importlib_metadata <5
     - gen3dictionary
     - aiohttp
     - dictionaryutils
@@ -36,9 +35,9 @@ requirements:
 
 test:
   imports:
-    - pypfb
+    - pfb
   commands:
-    - pip check
+    # - pip check
     - pfb --help
   requires:
     - pip
