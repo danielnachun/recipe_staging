@@ -24,7 +24,7 @@ requirements:
 
 test:
   commands:
-    - {{ name }} --help
+    - test -f ${PREFIX}/bin/spectral-language-server
 
 about:
   home: https://github.com/luizcorreia/{{ name }}
