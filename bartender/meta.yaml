@@ -1,0 +1,36 @@
+{% set name = "bartender" %}
+{% set version = "1.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/LaoZZZZZ/{{ name }}-1.1/archive/c458f6446a4a69e901ec54bd1bea5c40bf358f3e.tar.gz
+  sha256: a48ad3f8a4691745eb37f358c22ed855898ce3538bfc9ee03abef11eebe886fe
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - make
+
+test:
+  commands:
+    - bartender_single_com
+    - bartender_extractor_com
+    - bartender_combiner_com
+
+about:
+  home: https://github.com/LaoZZZZZ/bartender-1.1
+  license: MIT
+  license_file: LICENSE
+  summary: Tool to process random barcode data
+  dev_url: https://github.com/LaoZZZZZ/bartender-1.1
+
+extra:
+  recipe-maintainers:
+    - danielnachun
