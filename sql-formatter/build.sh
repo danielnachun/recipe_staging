@@ -19,4 +19,4 @@ npm pack
 npm install -g ${PKG_NAME}-${PKG_VERSION}.tgz
 
 # generate license disclaimer for the package
-pnpm-licenses generate-disclaimer --prod --output-file=third-party-licenses.txt
+# pnpm-licenses generate-disclaimer --prod --output-file=third-party-licenses.txt
