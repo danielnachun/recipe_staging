@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  git_url: https://github.com/luizcorreia/{{ name }}
-  git_rev: v{{ version }}
+  url: https://github.com/luizcorreia/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 9f9376cc0b4b962bf246bae929e11e8293e6a4b13a9ac5be6d2bf89bf35215dc
 
 build:
   noarch: generic
