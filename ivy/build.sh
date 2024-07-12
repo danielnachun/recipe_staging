@@ -13,6 +13,10 @@ tee ${PREFIX}/bin/ivy << EOF
 JAVA_HOME=${JAVA_HOME} exec ${JAVA_HOME}/bin/java -jar "${PREFIX}/libexec/${PKG_NAME}/ivy.jar" "\$@"
 EOF
 
+tee ${PREFIX}/bin/ivy.cmd << EOF
+call %JAVA_HOME%/bin/java -jar "${PREFIX}/libexec/${PKG_NAME}/ivy.jar" %*
+EOF
+
 chmod +x ${PREFIX}/bin/ivy
 ${PREFIX}/bin/ivy -makepom ${SRC_DIR}/pom.xml -properties ${SRC_DIR}/version.properties
 sed -i 's?<artifactId>jsch.agentproxy</artifactId>?<artifactId>jsch.agentproxy</artifactId><type>pom</type>?' pom.xml
