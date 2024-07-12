@@ -1,0 +1,44 @@
+{% set name = "gen3dictionary" %}
+{% set version = "2.0.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/gen3dictionary-{{ version }}.tar.gz
+  sha256: 46a704e202a79be96ec08969d28885794d4825b94394103dca08e3637bd6cb82
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python
+    - poetry
+    - poetry-core
+    - pip
+  run:
+    - python
+    - pyyaml
+    - jsonschema
+    - dictionaryutils
+
+test:
+  imports:
+    - gdcdictionary
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  summary: ''
+  license: Apache-2.0
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
