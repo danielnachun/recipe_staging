@@ -16,7 +16,8 @@ build:
 requirements:
   host:
     - nodejs
-    - typescript
+    - pnpm
+    - pnpm-licenses
     - yarn
   run:
     - nodejs
@@ -28,6 +29,9 @@ test:
 about:
   home: https://github.com/sql-formatter-org/{{ name }}
   license: MIT
+  license_files:
+    - LICENSE
+    - third-party-licenses.txt
   summary: A whitespace formatter for different query languages
   dev_url: https://github.com/sql-formatter-org/{{ name }}
 
