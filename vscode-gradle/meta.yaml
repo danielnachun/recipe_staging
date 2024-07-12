@@ -15,6 +15,7 @@ build:
 
 requirements:
   host:
+    - nodejs
     - openjdk=11
   run:
     - openjdk
