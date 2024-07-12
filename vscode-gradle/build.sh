@@ -3,14 +3,16 @@
 set -o xtrace -o nounset -o pipefail -o errexit
 
 ./gradlew build
-exit 1
 
 mkdir -p ${PREFIX}/libexec/${PKG_NAME}
 mkdir -p ${PREFIX}/bin
-install -m 644 build/libs/work-all.jar ${PREFIX}/libexec/${PKG_NAME}/groovy-language-server-all.jar
+cp -r extension/lib/* ${PREFIX}/libexec/${PKG_NAME}
 
-tee ${PREFIX}/bin/groovy-language-server << EOF
+tee ${PREFIX}/bin/gradle-language-server << EOF
 #!/bin/sh
-export JAVA_HOME=${JAVA_HOME}
-exec ${JAVA_HOME}/bin/java -jar ${PREFIX}/libexec/${PKG_NAME}/groovy-language-server-all.jar "\$@"
+exec \${CONDA_PREFIX}/libexec/gradle-language-server/gradle-server "\$@"
+EOF
+
+tee ${PREFIX}/bin/gradle-language-server.bat << EOF
+call %CONDA_PREFIX%\libexec\gradle-language-server\gradle-server.bat %*
 EOF

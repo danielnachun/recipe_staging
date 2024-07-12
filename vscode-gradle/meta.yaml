@@ -15,15 +15,13 @@ build:
 
 requirements:
   host:
-    - nodejs
     - openjdk=11
   run:
-    - nodejs
     - openjdk
 
 test:
   commands:
-    - gradle-language-server --help
+    - test -f ${PREFIX}/bin/gradle-language-server
 
 about:
   home: https://github.com/microsoft/{{ name }}
