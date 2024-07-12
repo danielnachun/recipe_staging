@@ -1,0 +1,35 @@
+{% set name = "vscode-go-debug-adapter" %}
+{% set version = "0.41.4" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/golang/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 6c6642600c26b5701014f22d4ebff2069318f8bee27c1eac2c7edccea473cd57
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  host:
+    - nodejs
+  run:
+    - nodejs
+
+test:
+  commands:
+    - test -f ${PREFIX}/bin/vscode-go-debug-adapter
+
+about:
+  home: https://github.com/golang/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: Go extension for Visual Studio Code
+  dev_url: https://github.com/golang/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
