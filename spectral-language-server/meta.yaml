@@ -18,7 +18,7 @@ requirements:
     - nodejs
     - pnpm
     - pnpm-licenses
-    # - typescript
+    - typescript
   run:
     - nodejs
 
