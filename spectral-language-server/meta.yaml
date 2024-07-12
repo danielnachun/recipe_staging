@@ -16,6 +16,8 @@ build:
 requirements:
   host:
     - nodejs
+    - pnpm
+    - pnpm-licenses
   run:
     - nodejs
 
