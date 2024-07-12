@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/luizcorreia/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 9f9376cc0b4b962bf246bae929e11e8293e6a4b13a9ac5be6d2bf89bf35215dc
+  sha256: f3c1edc80463c1e270b58af60fe2e47cc5432e01c3b9e89b30655edbc7e49905
 
 build:
   noarch: generic
@@ -18,7 +18,7 @@ requirements:
     - nodejs
     - pnpm
     - pnpm-licenses
-    - yarn
+    # - typescript
   run:
     - nodejs
 
