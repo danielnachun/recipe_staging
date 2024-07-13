@@ -11,7 +11,7 @@ sed -i "s?<TargetFramework>.*</TargetFramework>?<TargetFramework>net${framework_
     src/OpenDebugAD7/OpenDebugAD7.csproj
 
 # Build package with dotnet build
-dotnet build ${SRC_DIR}/src/MiDebugEngine-Unix.sln --configuration Release
+dotnet build ${SRC_DIR}/src/MIDebugEngine-Unix.sln --configuration Release
 dotnet publish --no-self-contained ${SRC_DIR}/src/OpenDebugAD7/OpenDebugAD7.csproj --configuration Release --output ${PREFIX}/libexec/${PKG_NAME}
 rm -rf ${PREFIX}/libexec/opendebugad7/OpenDebugAD7
 
