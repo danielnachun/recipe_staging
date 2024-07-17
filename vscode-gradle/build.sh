@@ -2,7 +2,10 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+sed -i "s/id 'java'/id 'java'\nid('com.github.jk1.dependency-license-report') version 'latest.release'/" build.gradle
+
 ./gradlew build
+./gradlew generateLicenseReport
 
 mkdir -p ${PREFIX}/libexec/${PKG_NAME}
 mkdir -p ${PREFIX}/bin
