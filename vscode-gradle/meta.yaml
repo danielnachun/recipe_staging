@@ -11,9 +11,11 @@ source:
 
 build:
   noarch: generic
-  number: 0
+  number: 1
 
 requirements:
+  build:
+    - sed
   host:
     - nodejs
     - openjdk=11
@@ -27,7 +29,9 @@ test:
 about:
   home: https://github.com/microsoft/{{ name }}
   license: MIT
-  license_file: LICENSE.md
+  license_file: 
+    - LICENSE.md
+    - build/reports/dependency-license/
   summary: Manage Gradle Projects, run Gradle tasks and provide better Gradle file authoring experience
   dev_url: https://github.com/microsoft/{{ name }}
 
