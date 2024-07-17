@@ -1,5 +1,5 @@
 {% set name = "standard" %}
-{% set version = "1.29.0" %}
+{% set version = "1.39.2" %}
 
 package:
   name: {{ name|lower }}rb
@@ -11,7 +11,7 @@ source:
 
 build:
   noarch: generic
-  number: 2
+  number: 0
 
 requirements:
   build:
@@ -21,14 +21,14 @@ requirements:
     - rb-lint_roller
     - rb-standard-custom
     - rb-standard-performance
-    - rubocop=1.52.0
+    - rubocop
     - ruby >=3.2
   run:
     - rb-language_server-protocol
     - rb-lint_roller
     - rb-standard-custom
     - rb-standard-performance
-    - rubocop=1.52.0
+    - rubocop
     - ruby >=3.2
 
 test:
