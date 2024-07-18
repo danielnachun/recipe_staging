@@ -1,5 +1,5 @@
 {% set name = "standard-performance" %}
-{% set version = "1.1.0" %}
+{% set version = "1.4.0" %}
 
 package:
   name: rb-{{ name|lower }}
@@ -7,11 +7,11 @@ package:
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
-  sha256: 2c649ca69d3fae7f2c685ae187780d22760c9066041ad944e87f2ccb1db66b53
+  sha256: de9f72b65964826cd55db59e51916d969b19ca2c62b12727cbc763cf256fa194
 
 build:
   noarch: generic
-  number: 1
+  number: 0
   script:
     - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
     - gem unpack {{ name }}-{{ version }}.gem
