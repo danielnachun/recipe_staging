@@ -1,5 +1,5 @@
 {% set name = "rubocop-performance" %}
-{% set version = "1.18.0" %}
+{% set version = "1.21.1" %}
 
 package:
   name: rb-{{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
-  sha256: 4c9d74f1b5bfaffb5b1cdb843279364198ac804e2644ae194615834dd011e02e
+  sha256: 5cf20002a544275ad6aa99abca4b945d2a2ed71be925c38fe83700360ed8734e
 
 build:
   noarch: generic
