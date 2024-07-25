@@ -1,0 +1,41 @@
+{% set name = "opera" %}
+{% set version = "1.21" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/wuyangf7/OPERA/archive/371934906eb230a0fe3c290ab5649135cce635a5.tar.gz
+  sha256: 8b4d6af2b5178bc6eebe86adc7011933bf6754b8fdc94e4aa736c49e34a52eef
+
+build:
+  number: 0
+  ignore_run_exports:
+    - libboost
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - {{ compiler('c') }}
+    - make
+  host:
+    - boost-cpp
+    - zlib
+    - eigen
+    - llvm-openmp  # [osx]
+  run:
+    - _openmp_mutex  # [linux]
+
+test:
+  commands:
+    - {{ name }} 2>&1 | grep -q "Omics pleiotropic association"
+
+about:
+  home: https://yanglab.westlake.edu.cn/software/{{ name }}
+  license: OTHER
+  summary: Omics Pleiotropic Association
+
+extra:
+  recipe-maintainers:
+    - danielnachun
