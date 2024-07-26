@@ -2,8 +2,19 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-export COURSIER_CACHE=${SRC_DIR}/.coursier
+download_licenses() {
+    pom_file=$1
+    pom_xml=$(dirname ${pom_file})/pom.xml
+    mv ${pom_file} ${pom_xml}
+    sed -i 's:\-SNAPSHOT.*</version>:</version>:g' ${pom_xml}
+    pushd $(dirname ${pom_xml})
+    mvn license:download-licenses -Dgoal=download-licenses
+    popd
+}
 
+export -f download_licenses
+
+export COURSIER_CACHE=${SRC_DIR}/.coursier
 mkdir -p .ivy2
 mkdir -p .sbt
 mkdir -p .coursier
@@ -20,7 +31,15 @@ sbt -sbt-dir $SRC_DIR/.sbt -ivy $SRC_DIR/.ivy2 compile 'show metals/dependencyCl
     grep .jar | \
     xargs -I % cp -r % ${PREFIX}/libexec/${PKG_NAME}
 
+find .ivy2/local/org.scalameta -name "*.pom" | xargs -I % bash -c 'download_licenses %'
+mkdir -p ${SRC_DIR}/target/generated-resources/licenses
+find -type d -name "licenses" | grep generated-resources | grep -v "^./target" | xargs -I % bash -c 'cp %/* ./target/generated-resources/licenses'
+
 tee ${PREFIX}/bin/metals << EOF
 #!/bin/sh
-JAVA_HOME=${PREFIX}/lib/jvm exec \${JAVA_HOME}/bin/java -cp "${PREFIX}/libexec/${PKG_NAME}/*" scala.meta.metals.Main "\$@"
+exec \${JAVA_HOME}/bin/java -cp "\${CONDA_PREFIX}/libexec/metals/*" scala.meta.metals.Main "\$@"
+EOF
+
+tee ${PREFIX}/bin/metals.cmd << EOF
+call %JAVA_HOME%\bin\java -cp %CONDA_PREFIX%\libexec\metals\* scala.meta.metals.Main %*
 EOF
