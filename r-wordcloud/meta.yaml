@@ -34,7 +34,7 @@ requirements:
     - r-rcolorbrewer
     - r-rcpp >=0.9.4
   run:
-    - r-base>=4.3
+    - r-base=4.3
     - r-rcolorbrewer
     - r-rcpp >=0.9.4
 
