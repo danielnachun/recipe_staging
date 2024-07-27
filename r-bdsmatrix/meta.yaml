@@ -28,9 +28,9 @@ requirements:
     - {{ posix }}coreutils         # [win]
     - {{ posix }}zip               # [win]
   host:
-    - r-base
+    - r-base=4.3
   run:
-    - r-base
+    - r-base>=4.3
 
 test:
   commands:
