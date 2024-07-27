@@ -1,0 +1,68 @@
+{% set version = "1.3-7" %}
+{% set posix = 'm2-' if win else '' %}
+
+package:
+  name: r-bdsmatrix
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url:
+    - {{ cran_mirror }}/src/contrib/bdsmatrix_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/bdsmatrix/bdsmatrix_{{ version }}.tar.gz
+  sha256: c3505e5ac06d5e01b3a6bad94177f8375cd9867bb0146cc9c63d92424ecb7922
+
+build:
+  number: 1
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('c') }}              # [not win]
+    - {{ stdlib("c") }}                # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{ stdlib("m2w64_c") }}          # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}make
+    - {{ posix }}sed               # [win]
+    - {{ posix }}coreutils         # [win]
+    - {{ posix }}zip               # [win]
+  host:
+    - r-base
+  run:
+    - r-base
+
+test:
+  commands:
+    - $R -e "library('bdsmatrix')"           # [not win]
+    - "\"%R%\" -e \"library('bdsmatrix')\""  # [win]
+
+about:
+  home: https://CRAN.R-project.org/package=bdsmatrix
+  license: LGPL-2.0-only
+  summary: This is a special case of sparse matrices, used by coxme.
+  license_family: LGPL
+  license_file:
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/LGPL-2
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+
+# Package: bdsmatrix
+# Title: Routines for Block Diagonal Symmetric Matrices
+# Maintainer: Terry Therneau <therneau@mayo.edu>
+# Version: 1.3-4
+# Date: 2020-01-07-13
+# Depends: methods, R (>= 2.0.0)
+# LazyData: Yes
+# LazyLoad: Yes
+# Author: Terry Therneau
+# Description: This is a special case of sparse matrices, used by coxme.
+# License: LGPL-2
+# Collate: bdsmatrix.R gchol.R gchol.bdsmatrix.R as.matrix.bdsmatrix.R bdsBlock.R bdsI.R bdsmatrix.ibd.R bdsmatrix.reconcile.R diag.bdsmatrix.R listbdsmatrix.R multiply.bdsmatrix.R solve.bdsmatrix.R solve.gchol.R solve.gchol.bdsmatrix.R backsolve.R
+# NeedsCompilation: yes
+# Packaged: 2020-01-13 20:10:02 UTC; therneau
+# Repository: CRAN
+# Date/Publication: 2020-01-13 21:10:09 UTC
