@@ -30,11 +30,11 @@ requirements:
     - {{ posix }}coreutils         # [win]
     - {{ posix }}zip               # [win]
   host:
-    - r-base
+    - r-base=4.3
     - r-rcolorbrewer
     - r-rcpp >=0.9.4
   run:
-    - r-base
+    - r-base>=4.3
     - r-rcolorbrewer
     - r-rcpp >=0.9.4
 
