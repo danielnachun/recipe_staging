@@ -30,7 +30,7 @@ requirements:
   host:
     - r-base=4.3
   run:
-    - r-base>=4.3
+    - r-base=4.3
 
 test:
   commands:
