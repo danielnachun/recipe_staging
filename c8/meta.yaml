@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/bcoe/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: c66e8d94863c52c34cab0865be3bac61f152e8029ba32d95778d984c8e0a49b1
+  sha256: 2d653934719e99231b390e380f55373e9d46667914fddc8d3317920df62473f8
 
 build:
   noarch: generic
