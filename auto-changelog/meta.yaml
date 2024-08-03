@@ -1,0 +1,39 @@
+{% set name = "auto-changelog" %}
+{% set version = "2.4.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/cookpete/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: a7a73f195e0477b1cfdf880b2373df73382cd415dd3b1f08c1da6910dd99668f
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/cookpete/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE.md
+    - third-party-licenses.txt
+  summary: Command line tool for generating a changelog from git tags and commit history
+  dev_url: https://github.com/cookpete/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
