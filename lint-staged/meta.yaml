@@ -1,0 +1,39 @@
+{% set name = "lint-staged" %}
+{% set version = "15.2.8" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/lint-staged/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: d972464c986fdaeca0a25b9094b8b6c36e7d3bcdc30eb51ad78434299d14faff
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/lint-staged/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Run linters on git staged files
+  dev_url: https://github.com/lint-staged/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
