@@ -1,0 +1,39 @@
+{% set name = "nx" %}
+{% set version = "19.5.6" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/nrwl/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: 1974408e726a58ae6de9e860d89debc45bf454a531df044252f815f9e57687a0
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/nrwl/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Smart Monorepos · Fast CI
+  dev_url: https://github.com/nrwl/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
