@@ -1,0 +1,40 @@
+{% set name = "typedoc" %}
+{% set version = "0.26.5" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/TypeStrong/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: df0f92bd85f1382d74e71540aecf2a4c0fe397ef01857a28d7e7dc87121e5601
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+    - yarn
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/TypeStrong/{{ name }}
+  license: Apache-2.0
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Documentation generator for TypeScript projects.
+  dev_url: https://github.com/TypeStrong/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
