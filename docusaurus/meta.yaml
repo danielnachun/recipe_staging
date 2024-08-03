@@ -1,0 +1,40 @@
+{% set name = "docusaurus" %}
+{% set version = "3.4.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/facebook/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 86a69344e0eeb44a88c0e76d63fd730b4b6919bfb4d293c40c4b840614bbe138
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+    - yarn
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/facebook/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Easy to maintain open source documentation websites.
+  dev_url: https://github.com/facebook/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun 
