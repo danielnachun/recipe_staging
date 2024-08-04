@@ -1,0 +1,39 @@
+{% set name = "tsup" %}
+{% set version = "8.2.4" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/egoist/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 8dd40ede567693ddf751eee4c2de4e2db02ad25ea64a5755b24c6370aaf7a29b
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/egoist/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: The simplest and fastest way to bundle your TypeScript libraries.
+  dev_url: https://github.com/egoist/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
