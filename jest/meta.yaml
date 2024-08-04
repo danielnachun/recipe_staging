@@ -1,0 +1,40 @@
+{% set name = "jest" %}
+{% set version = "29.7.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/jestjs/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 2c6b5272b1367a5c0d39a3f2d3e8fa935ad8b059f4b02ae1863bf893faa32b1b
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+    - yarn
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/jestjs/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Delightful JavaScript Testing.
+  dev_url: https://github.com/jestjs/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
