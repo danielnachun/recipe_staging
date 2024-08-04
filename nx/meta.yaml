@@ -10,11 +10,12 @@ source:
   sha256: 1974408e726a58ae6de9e860d89debc45bf454a531df044252f815f9e57687a0
 
 build:
-  noarch: generic
   number: 0
 
 requirements:
   build:
+    - {{ compiler('c') }}
+    - {{ compiler('rust') }}
     - nodejs
     - pnpm
     - pnpm-licenses
@@ -23,7 +24,7 @@ requirements:
 
 test:
   commands:
-    - {{ name }} --help
+    - {{ name }} 2>&1 | grep -q "The current directory isn't part of an Nx workspace."
 
 about:
   home: https://github.com/nrwl/{{ name }}
