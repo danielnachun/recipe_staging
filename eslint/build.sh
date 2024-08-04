@@ -3,8 +3,8 @@
 set -o xtrace -o nounset -o pipefail -o errexit
 
 # Run pnpm so that pnpm-licenses can create report
-pnpm install
-pnpm pack
+# pnpm install
+# pnpm pack
 
 # Create package archive and install globally
 npm pack --ignore-scripts
@@ -14,7 +14,7 @@ npm install -ddd \
     ${SRC_DIR}/${PKG_NAME}-${PKG_VERSION}.tgz
 
 # Create license report for dependencies
-pnpm-licenses generate-disclaimer --prod --output-file=third-party-licenses.txt
+# pnpm-licenses generate-disclaimer --prod --output-file=third-party-licenses.txt
 
 tee ${PREFIX}/bin/${PKG_NAME}.cmd << EOF
 call %CONDA_PREFIX%\bin\node %PREFIX%\bin\eslint %*

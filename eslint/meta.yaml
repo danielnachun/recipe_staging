@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/eslint/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: c66e8d94863c52c34cab0865be3bac61f152e8029ba32d95778d984c8e0a49b1
+  sha256: 8d51d7a3a8831c12ec35ff773d2f9f6bf47deae997e824689f27ca0266278830
 
 build:
   noarch: generic
@@ -30,7 +30,7 @@ about:
   license: MIT
   license_file:
     - LICENSE
-    - third-party-licenses.txt
+    # - third-party-licenses.txt
   summary: Find and fix problems in your JavaScript code.
   dev_url: https://github.com/eslint/{{ name }}
 
