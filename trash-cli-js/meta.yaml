@@ -1,0 +1,35 @@
+{% set name = "trash-cli-js" %}
+{% set version = "6.0.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/sindresorhus/trash-cli/archive/v{{ version }}.tar.gz
+  sha256: 99afde49fd1419acafd611bd986bec442d87f00e2b3531aca727688af06cb45b
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+  run:
+    - nodejs
+
+test:
+  commands:
+    - trash --help
+
+about:
+  home: https://github.com/sindresorhus/{{ name }}
+  license: MIT
+  license_file: license
+  summary: Move files and folders to the trash
+  dev_url: https://github.com/sindresorhus/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
