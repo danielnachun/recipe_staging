@@ -1,0 +1,38 @@
+{% set name = "changesets" %}
+{% set version = "2.27.7" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/changesets/{{ name }}/archive/@changesets/cli@{{ version }}.tar.gz
+  sha256: 025830c8317e353c5d300593649ec185ee236bdac14b1700fde13d2e46dd3c22
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+test:
+  commands:
+    - changeset --help
+
+about:
+  home: https://github.com/changesests/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: A way to manage your versioning and changelogs with a focus on monorepos
+  dev_url: https://github.com/changesets/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
