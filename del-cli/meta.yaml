@@ -1,0 +1,39 @@
+{% set name = "del-cli" %}
+{% set version = "5.1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/sindresorhus/{{ name }}/archive/v{{ version }}.tar.gz 
+  sha256: c66e8d94863c52c34cab0865be3bac61f152e8029ba32d95778d984c8e0a49b1
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/sindresorhus/{{ name }}
+  license: MIT
+  license_file:
+    - license
+    - third-party-licenses.txt
+  summary: Delete files and directories
+  dev_url: https://github.com/sindresorhus/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
