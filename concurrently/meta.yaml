@@ -1,0 +1,39 @@
+{% set name = "concurrently" %}
+{% set version = "8.2.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/open-cli-tools/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: c47e3f3bda1344a1ccbfa1fbab6b24af384ef532a12963bff9a930f262806740
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/open-cli-tools/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Run commands concurrently.
+  dev_url: https://github.com/open-cli-tools/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
