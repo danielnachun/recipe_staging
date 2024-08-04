@@ -15,10 +15,10 @@ build:
 
 requirements:
   build:
-    - make
     - nodejs
     - pnpm
     - pnpm-licenses
+    - yarn
   run:
     - nodejs
 

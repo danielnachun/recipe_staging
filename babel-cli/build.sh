@@ -2,10 +2,11 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+yarn
 npm run bootstrap
-cd packages/babel-cli
 
 # Run pnpm so that pnpm-licenses can create report
+cd packages/babel-cli
 pnpm install
 pnpm pack
 
