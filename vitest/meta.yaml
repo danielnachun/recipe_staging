@@ -1,0 +1,38 @@
+{% set name = "vitest" %}
+{% set version = "2.0.5" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/vitest-dev/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 2d9e01e4b7f4c2f12f0ccb78ec6c4ec760eed245a793d651070e510ab7248935
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/vitest-dev/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE
+    # - third-party-licenses.txt
+  summary: Next generation testing framework powered by Vite.
+  dev_url: https://github.com/vitest-dev/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
