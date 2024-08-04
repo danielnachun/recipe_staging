@@ -1,0 +1,40 @@
+{% set name = "babel-cli" %}
+{% set version = "7.25.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/babel/babel/archive/v{{ version }}.tar.gz
+  sha256: e6bbfc9f9ac6ec96f33103bad01564bb382b194c1dfa9b043c658bdfb90fb0cf
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - make
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+test:
+  commands:
+    - babel --help
+
+about:
+  home: https://github.com/babel/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Babel is a compiler for writing next generation JavaScript.
+  dev_url: https://github.com/babel/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
