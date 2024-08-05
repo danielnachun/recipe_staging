@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/jestjs/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 2c6b5272b1367a5c0d39a3f2d3e8fa935ad8b059f4b02ae1863bf893faa32b1b
+  url: https://registry.npmjs.org/{{ name }}/-/{{ name }}-{{ version }}.tgz
+  sha256: f65aeb744ee062f250b62a1831e03389f39870414e73291eac1dc2b51770fc08
 
 build:
   noarch: generic
@@ -18,7 +18,6 @@ requirements:
     - nodejs
     - pnpm
     - pnpm-licenses
-    - yarn
   run:
     - nodejs
 
