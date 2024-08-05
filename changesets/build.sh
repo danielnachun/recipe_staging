@@ -19,7 +19,3 @@ npm install -ddd \
 
 # Create license report for dependencies
 pnpm-licenses generate-disclaimer --prod --output-file=${SRC_DIR}/third-party-licenses.txt
-
-tee ${PREFIX}/bin/changeset.cmd << EOF
-call %CONDA_PREFIX%\bin\node %PREFIX%\bin\changeset %*
-EOF
