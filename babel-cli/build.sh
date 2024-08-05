@@ -2,11 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-yarn
-npm run bootstrap
-
 # Run pnpm so that pnpm-licenses can create report
-cd packages/babel-cli
 pnpm install
 pnpm pack
 
@@ -15,10 +11,10 @@ npm pack --ignore-scripts
 npm install -ddd \
     --global \
     --build-from-source \
-    ${SRC_DIR}/packages/${PKG_NAME}/${PKG_NAME}-${PKG_VERSION}.tgz
+    ${SRC_DIR}/${PKG_NAME}-${PKG_VERSION}.tgz
 
 # Create license report for dependencies
-pnpm-licenses generate-disclaimer --prod --output-file=${SRC_DIR}/third-party-licenses.txt
+pnpm-licenses generate-disclaimer --prod --output-file=third-party-licenses.txt
 
 tee ${PREFIX}/bin/babel.cmd << EOF
 call %CONDA_PREFIX%\bin\node %PREFIX%\bin\babel %*
