@@ -1,4 +1,4 @@
-{% set name = "gts" %}
+{% set name = "gtsjs" %}
 {% set version = "5.3.1" %}
 
 package:
@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/google/{{ name }}/archive/v{{ version }}.tar.gz
+  url: https://github.com/google/gts/archive/v{{ version }}.tar.gz
   sha256: 54a161898bc4d610bd4ed677363333ebe9468839d9cee47f21e00324355c38a3
 
 build:
@@ -23,16 +23,16 @@ requirements:
 
 test:
   commands:
-    - {{ name }} --help
+    - gts --help
 
 about:
-  home: https://github.com/google/{{ name }}
+  home: https://github.com/google/gts
   license: Apache-2.0
   license_file:
     - LICENSE
     - third-party-licenses.txt
   summary: TypeScript style guide, formatter, and linter.
-  dev_url: https://github.com/google/{{ name }}
+  dev_url: https://github.com/google/gts
 
 extra:
   recipe-maintainers:
