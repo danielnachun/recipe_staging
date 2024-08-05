@@ -19,3 +19,7 @@ npm install -ddd \
 
 # Create license report for dependencies
 pnpm-licenses generate-disclaimer --prod --output-file=${SRC_DIR}/third-party-licenses.txt
+
+tee ${PREFIX}/bin/create-remix.cmd << EOF
+call %CONDA_PREFIX%\bin\node %PREFIX%\bin\create-remix %*
+EOF
