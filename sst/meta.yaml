@@ -1,0 +1,38 @@
+{% set name = "sst" %}
+{% set version = "2.43.4" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/sst/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 7adeac0f4402c31a57d44304fabb5ea84596b9c75fe5de6f787ca9eac05206cb
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/sst/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Build modern full-stack applications on AWS
+  dev_url: https://github.com/sst/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
