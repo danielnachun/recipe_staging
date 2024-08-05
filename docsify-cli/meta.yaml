@@ -1,0 +1,38 @@
+{% set name = "docsify-cli" %}
+{% set version = "4.4.4" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/docsifyjs/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 89e627c366e600b64f811495c0487ff8e38071dbec5f9a24aa660a77613dd0b8
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+test:
+  commands:
+    - docsify --help
+
+about:
+  home: https://github.com/docsifyjs/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: docsify cli tool - A magical documentation generator.
+  dev_url: https://github.com/docsifyjs/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
