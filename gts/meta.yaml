@@ -1,4 +1,4 @@
-{% set name = "gts" %}
+{% set name = "gtsjs" %}
 {% set version = "5.3.1" %}
 
 package:
@@ -23,7 +23,7 @@ requirements:
 
 test:
   commands:
-    - {{ name }} --help
+    - gts --help
 
 about:
   home: https://github.com/google/{{ name }}
