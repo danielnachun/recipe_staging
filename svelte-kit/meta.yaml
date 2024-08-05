@@ -1,0 +1,38 @@
+{% set name = "svelte-kit" %}
+{% set version = "2.5.20" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/sveltejs/kit/archive/@sveltejs/kit@{{ version }}.tar.gz
+  sha256: 5ca608161cd5a5b92bf3007a6c02f55305f4d90f99c131fc145f3b57cd5c95f3
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/sveltejs/kit
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: web development, streamlined
+  dev_url: https://github.com/sveltejs/kit
+
+extra:
+  recipe-maintainers:
+    - danielnachun
