@@ -2,6 +2,8 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+mv package.json package_old.json
+jq 'del(.engines.pnpm)' package_old.json > package.json
 pnpm install
 pnpm run build
 
