@@ -1,0 +1,36 @@
+{% set name = "jiti" %}
+{% set version = "1.21.6" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/unjs/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 97da1aa16d113450e89cdb4c198ad5c29235217edb9bfa3e18ff8f74f2c6faa3
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - pnpm
+    - nodejs
+  run:
+    - nodejs
+
+test:
+  commands:
+    - '{{ name }} 2>&1 | grep -q "Usage: jiti <path> \[...arguments\]"'
+
+about:
+  home: https://github.com/unjs/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: Runtime Typescript and ESM support for Node.js
+  dev_url: https://github.com/unjs/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
