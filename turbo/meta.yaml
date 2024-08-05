@@ -1,0 +1,36 @@
+{% set name = "turbo" %}
+{% set version = "2.0.11" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/vercel/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 864365e10036136959915a556e9099b7fd8ef268556e8728b2247b758e5c9f3e
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/vercel/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Incremental bundler and build system optimized for JavaScript and TypeScript, written in Rust – including Turbopack and Turborepo.
+  dev_url: https://github.com/vercel/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
