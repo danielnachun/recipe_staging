@@ -1,0 +1,40 @@
+{% set name = "gatsby" %}
+{% set version = "5.13.7" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/gatsbyjs/{{ name }}/archive/{{ name }}@{{ version }}.tar.gz
+  sha256: 6b41c63b96213c79f258520054d513894b61d62362b5fe964d7e9cbe3e5da2eb
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+    - yarn
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/gatsbyjs/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: The best React-based framework with performance, scalability and security built in.
+  dev_url: https://github.com/gatsbyjs/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
