@@ -1,0 +1,35 @@
+{% set name = "eclint" %}
+{% set version = "0.5.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://gitlab.com/greut/{{ name }}/-/archive/v{{ version }}/{{ name }}-v{{ version }}.tar.gz
+  sha256: 0db3e023fdc0c8fa3487faf7daf4e021e32820cd4ae6ab3a2b51b770142ee72e
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('go-nocgo') }}
+    - go-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/greut/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: A faster alternative to the JavaScript eclint written in Go.
+  dev_url: https://github.com/greut/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
