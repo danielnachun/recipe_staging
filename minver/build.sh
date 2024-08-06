@@ -21,9 +21,4 @@ tee ${PREFIX}/bin/minver.cmd << EOF
 exec %DOTNET_ROOT%\dotnet exec %CONDA_PREFIX%\libexec\minver\minver-cli.dll %*
 EOF
 
-# Download dependency licenses wtih dotnet-project-licenses
-# tee ignored_packages.json << EOF
-# ["Microsoft.DotNet.PlatformAbstractions"]
-# EOF
-# dotnet-project-licenses --input src/Dotnet.Script/Dotnet.Script.csproj -t -d license-files -ignore ignored_packages.json
 dotnet-project-licenses --input minver-cli/minver-cli.csproj -t -d license-files
