@@ -24,8 +24,4 @@ exec %DOTNET_ROOT%\dotnet exec %CONDA_PREFIX%\libexec\t4\t4.dll %*
 EOF
 
 # Download dependency licenses wtih dotnet-project-licenses
-# tee ignored_packages.json << EOF
-# ["Microsoft.DotNet.PlatformAbstractions"]
-# EOF
-# dotnet-project-licenses --input dotnet-t4/dotnet-t4.csproj -t -d license-files -ignore ignored_packages.json
 dotnet-project-licenses --input dotnet-t4/dotnet-t4.csproj -t -d license-files
