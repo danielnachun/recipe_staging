@@ -16,6 +16,7 @@ build:
 requirements:
   host:
     - dotnet
+    - jq
     - nuget-license
   run:
     - dotnet
