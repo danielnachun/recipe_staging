@@ -22,7 +22,7 @@ requirements:
 
 test:
   commands:
-    - {{ name }} --help
+    - changelog --help 2>&1 | grep -q "Credfeto.ChangeLog.Cmd"
 
 about:
   home: https://github.com/credfeto/{{ name }}
