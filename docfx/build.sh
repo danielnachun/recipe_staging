@@ -10,6 +10,7 @@ rm -rf global.json
 framework_version="$(dotnet --version | sed -e 's/\..*//g').0"
 dotnet publish --no-self-contained src/docfx/docfx.csproj --output ${PREFIX}/libexec/${PKG_NAME} --framework "net${framework_version}"
 rm ${PREFIX}/libexec/${PKG_NAME}/docfx
+rm -rf ${PREFIX}/libexec/${PKG_NAME}/.playwright
 
 # Create bash and batch wrappers
 tee ${PREFIX}/bin/docfx << EOF
