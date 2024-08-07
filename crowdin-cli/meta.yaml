@@ -15,20 +15,21 @@ build:
 
 requirements:
   build:
-    - openjdk
+    - openjdk=21
+    - sed
   run:
     - openjdk
 
 test:
   commands:
-    - crowdin --help
+    - {{ name }} --help
 
 about:
   home: https://github.com/crowdin/{{ name }}
   license: MIT
   license_file:
     - LICENSE
-    - third-party-licenses.txt
+    - build/reports/dependency-license/
   summary: A command-line client for the Crowdin API
   dev_url: https://github.com/crowdin/{{ name }}
 
