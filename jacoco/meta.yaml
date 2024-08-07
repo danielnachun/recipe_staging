@@ -15,6 +15,7 @@ build:
 
 requirements:
   build:
+    - findutils
     - maven
     - openjdk=17
     - unzip
