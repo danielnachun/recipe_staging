@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/vercel/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: d0e3b93d29f40e04b441132189b1341376cc8d302800059e2685e31f671231fd
+  url: https://registry.npmjs.org/next/-/next-{{ version }}.tgz
+  sha256: 0f719b2251fd58f08fb0a1dc637789e83bd049870348f298b8f282b96d1be615
 
 build:
   number: 0
@@ -30,7 +30,7 @@ about:
   license: MIT
   license_file:
     - license.md
-    - third-party-licenses.txt
+    # - third-party-licenses.txt
   summary: The React Framework
   dev_url: https://github.com/vercel/{{ name }}
 
