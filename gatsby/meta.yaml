@@ -1,4 +1,4 @@
-{% set name = "gatsby" %}
+{% set name = "gatsby-cli" %}
 {% set version = "5.13.7" %}
 
 package:
@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/gatsbyjs/{{ name }}/archive/{{ name }}@{{ version }}.tar.gz
+  url: https://github.com/gatsbyjs/gatsby/archive/gatsby@{{ version }}.tar.gz
   sha256: 6b41c63b96213c79f258520054d513894b61d62362b5fe964d7e9cbe3e5da2eb
 
 build:
