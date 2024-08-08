@@ -1,0 +1,40 @@
+{% set name = "bigdecimal" %}
+{% set version = "3.1.8" %}
+
+package:
+  name: rb-{{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: a89467ed5a44f8ae01824af49cbc575871fa078332e8f77ea425725c1ffe27be
+
+build:
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+  host:
+    - ruby=3.3
+  run:
+    - ruby=3.3
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: BSD-2-Clause
+  license_file: {{ name }}-{{ version }}/LICENSE
+  summary: This library provides arbitrary-precision decimal floating-point number class.
+  dev_url: https://github.com/ruby/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
