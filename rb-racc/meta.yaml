@@ -1,5 +1,5 @@
 {% set name = "racc" %}
-{% set version = "1.7.1" %}
+{% set version = "1.8.1" %}
 
 package:
   name: rb-{{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
-  sha256: af64124836fdd3c00e830703d7f873ea5deabde923f37006a39f5a5e0da16387
+  sha256: 4a7f6929691dbec8b5209a0b373bc2614882b55fc5d2e447a21aaa691303d62f
 
 build:
-  number: 1
+  number: 0
   script:
     - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
     - gem unpack {{ name }}-{{ version }}.gem
@@ -20,9 +20,9 @@ requirements:
     - {{ compiler('c') }}
     - make
   host:
-    - ruby=3.2
+    - ruby=3.3
   run:
-    - ruby>=3.2
+    - ruby=3.3
 
 test:
   commands:
