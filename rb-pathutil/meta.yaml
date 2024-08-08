@@ -18,9 +18,9 @@ build:
 
 requirements:
   host:
-    - rb-forwardable-extended
     - ruby=3.2
   run:
+    - rb-forwardable-extended
     - ruby>=3.2
 
 test:
