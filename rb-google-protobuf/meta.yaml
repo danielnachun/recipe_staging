@@ -20,6 +20,7 @@ requirements:
   host:
     - ruby=3.2
   run:
+    - rb-bigdecimal
     - ruby>=3.2
 
 test:
