@@ -23,7 +23,7 @@ requirements:
 
 test:
   commands:
-    - {{ name }} --help
+    - MSBuild --help
 
 about:
   home: https://github.com/dotnet/{{ name }}
