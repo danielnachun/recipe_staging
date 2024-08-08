@@ -19,6 +19,7 @@ requirements:
   host:
     - ruby=3.2
   run:
+    - rb-google-protobuf
     - ruby>=3.2
 
 test:
