@@ -18,6 +18,8 @@ build:
 
 requirements:
   host:
+    - rb-eventmachine
+    - rb-http_parser.rb
     - ruby=3.2
   run:
     - ruby>=3.2
