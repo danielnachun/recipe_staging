@@ -1,5 +1,5 @@
 {% set name = "liquid" %}
-{% set version = "2.4.2" %}
+{% set version = "5.5.1" %}
 
 package:
   name: rb-{{ name|lower }}
