@@ -1,5 +1,5 @@
 {% set name = "ffi" %}
-{% set version = "1.15.5" %}
+{% set version = "1.17.0" %}
 
 package:
   name: rb-{{ name|lower }}
@@ -10,7 +10,7 @@ source:
   sha256: 6f2ed2fa68047962d6072b964420cba91d82ce6fa8ee251950c17fca6af3c2a0
 
 build:
-  number: 1
+  number: 0
   script:
     - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem -- --enable-system-libffi
     - gem unpack {{ name }}-{{ version }}.gem
@@ -21,10 +21,10 @@ requirements:
     - make
   host:
     - libffi
-    - ruby=3.2
+    - ruby=3.3
   run:
     - libffi
-    - ruby>=3.2
+    - ruby=3.3
 
 test:
   commands:
