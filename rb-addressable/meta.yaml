@@ -20,6 +20,7 @@ requirements:
   host:
     - ruby=3.2
   run:
+    - rb-public_suffix
     - ruby>=3.2
 
 test:
