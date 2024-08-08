@@ -21,7 +21,7 @@ requirements:
     - {{ compiler('c') }}
     - cmake
     - make
-    - pkg-configt 
+    - pkg-config
   host:
     - ruby=3.3
   run:
