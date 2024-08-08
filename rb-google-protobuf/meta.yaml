@@ -20,10 +20,10 @@ requirements:
     - {{ compiler('c') }}
     - make
   host:
-    - ruby=3.2
+    - ruby=3.3
   run:
     - rb-bigdecimal
-    - ruby>=3.2
+    - ruby=3.3
 
 test:
   commands:
