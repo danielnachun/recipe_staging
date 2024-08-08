@@ -22,8 +22,4 @@ exec %DOTNET_ROOT%\dotnet exec %CONDA_PREFIX%\libexec\msbuild\MSBuild.dll %*
 EOF
 
 # Download dependency licenses wtih dotnet-project-licenses
-# tee ignored_packages.json << EOF
-# ["Microsoft.DotNet.PlatformAbstractions"]
-# EOF
-# dotnet-project-licenses --input src/MSBuild/MSBuild.csproj -t -d license-files -ignore ignored_packages.json
 dotnet-project-licenses --input src/MSBuild/MSBuild.csproj -t -d license-files
