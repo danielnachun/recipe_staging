@@ -22,9 +22,9 @@ requirements:
     - make
   host:
     - openssl
-    - ruby=3.2
+    - ruby=3.3
   run:
-    - ruby>=3.2
+    - ruby=3.3
 
 test:
   commands:
