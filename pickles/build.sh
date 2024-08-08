@@ -10,7 +10,7 @@ rm -rf global.json
 framework_version="$(dotnet --version | sed -e 's/\..*//g').0"
 sed -i "s?<TargetFramework>.*</TargetFramework>?<TargetFramework>net${framework_version}</TargetFramework>?" \
     src/Pickles.CommandLine/Pickles.CommandLine.csproj
-sed -i "s/basedhtmlfiles/BaseDhtmlFiles/g" src/Pickles.DocumentationBuilders.Dhtml/Pickles.DocumentationBuilders.Dhtml.csproj
+sed -i "s/pickles.basedhtmlfiles/Pickles.BaseDhtmlFiles/g" src/Pickles.DocumentationBuilders.Dhtml/Pickles.DocumentationBuilders.Dhtml.csproj
 dotnet publish --no-self-contained src/Pickles.CommandLine/Pickles.CommandLine.csproj --output ${PREFIX}/libexec/${PKG_NAME}
 rm ${PREFIX}/libexec/${PKG_NAME}/pickles
 
