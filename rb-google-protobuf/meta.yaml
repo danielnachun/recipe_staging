@@ -10,13 +10,15 @@ source:
   sha256: e780c9e9a70ff13d919dc1284d74d446134150263a44c05126e122cd0737c017
 
 build:
-  noarch: generic
   number: 0
   script:
     - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
     - gem unpack {{ name }}-{{ version }}.gem
 
 requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
   host:
     - ruby=3.2
   run:
