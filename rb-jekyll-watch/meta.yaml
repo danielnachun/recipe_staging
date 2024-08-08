@@ -18,9 +18,9 @@ build:
 
 requirements:
   host:
-    - rb-listen
     - ruby=3.2
   run:
+    - rb-listen
     - ruby>=3.2
 
 test:
