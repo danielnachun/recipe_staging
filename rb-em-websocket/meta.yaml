@@ -1,0 +1,38 @@
+{% set name = "em-websocket" %}
+{% set version = "0.5.3" %}
+
+package:
+  name: rb-{{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: f56a92bde4e6cb879256d58ee31f124181f68f8887bd14d53d5d9a292758c6a8
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  license_file: {{ name }}-{{ version }}/LICENSE
+  summary: EventMachine based WebSocket server
+  dev_url: https://github.com/igrigorik/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
