@@ -31,7 +31,7 @@ test:
 about:
   home: https://rubygems.org/gems/{{ name }}
   license: MIT
-  license_file: {{ name }}-{{ version }}/LICENSE
+  license_file: {{ name }}-{{ version }}/LICENCE
   summary: EventMachine based WebSocket server
   dev_url: https://github.com/igrigorik/{{ name }}
 
