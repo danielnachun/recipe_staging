@@ -1,5 +1,5 @@
 {% set name = "nokogiri" %}
-{% set version = "1.15.3" %}
+{% set version = "1.16.7" %}
 
 package:
   name: rb-{{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
-  sha256: 876631295a85315dac37e7a71386d62d9eb452a891083cfe7505cca4805088cb
+  sha256: f819cbfdfb0a7b19c9c52c6f2ca63df0e58a6125f4f139707b586b9511d7fe95
 
 build:
-  number: 2
+  number: 0
   script:
     - export CPPFLAGS="-Igumbo_parser/src"
     - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem --platform=ruby -- --use-system-libraries
@@ -24,17 +24,12 @@ requirements:
   host:
     - libxml2
     - libxslt
-    - rb-mini_portile2
-    - rb-racc
-    - ruby >=3.2
-    - zlib=1.2
+    - ruby =3.3
+    - zlib
   run:
-    - libxml2
-    - libxslt
-    - libzlib>=1.2
     - rb-mini_portile2
     - rb-racc
-    - ruby >=3.2
+    - ruby =3.3
 
 test:
   commands:
