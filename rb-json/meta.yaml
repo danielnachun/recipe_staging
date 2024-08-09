@@ -10,7 +10,7 @@ source:
   sha256: 86aaea16adf346a2b22743d88f8dcceeb1038843989ab93cda44b5176c845459
 
 build:
-  number: 1
+  number: 2
   script:
     - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
     - gem unpack {{ name }}-{{ version }}.gem
@@ -20,9 +20,9 @@ requirements:
     - {{ compiler('c') }}
     - make
   host:
-    - ruby=3.2
+    - ruby=3.3
   run:
-    - ruby>=3.2
+    - ruby=3.3
 
 test:
   commands:
