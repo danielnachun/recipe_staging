@@ -20,6 +20,10 @@ requirements:
   host:
     - ruby=3.2
   run:
+    - rb-bigdecimal
+    - rb-imagen
+    - rb-rainbow
+    - rb-rugged
     - ruby>=3.2
 
 test:
