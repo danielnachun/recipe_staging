@@ -1,0 +1,35 @@
+{% set name = "perl-devel-cover" %}
+{% set version = "1.44" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/P/PJ/PJCJ/Devel-Cover-{{ version }}.tar.gz
+  sha256: f40c1543992e5d65a6f78003d462d59acd79ae6d30d38047b1c69d999d2b1fd8
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl-html-parser
+    - perl>=5.32
+
+test:
+  commands:
+    - cover -h
+
+about:
+  home: http://www.pjcj.net/perl.html
+  license: perl_5
+  summary: 'Code coverage metrics for Perl'
+
+maintainers:
+  - danielnachun
