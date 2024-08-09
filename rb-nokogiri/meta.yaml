@@ -1,5 +1,5 @@
 {% set name = "nokogiri" %}
-{% set version = "1.16.7" %}
+{% set version = "1.15.3" %}
 
 package:
   name: rb-{{ name|lower }}
