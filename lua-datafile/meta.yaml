@@ -1,0 +1,36 @@
+{% set name = "datafile" %}
+{% set version = "0.10" %}
+
+package:
+  name: lua-{{ name }}
+  version: {{ version|replace("_", ".") }}
+
+source:
+  url: https://github.com/hishamhm/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: e187ed49f3cdc77cabd575a6a86b5ea175721b484ea109495665d05d68f00fff
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  host:
+    - luarocks
+    - lua
+  run:
+    - lua
+
+test:
+  commands:
+    - lua -e "require 'datafile'"
+
+about:
+  home: https://github.com/hishamhm/{{ name }}
+  license: MIT
+  license_file: LICENSE
+  summary: A Lua library for handling paths when loading data files
+  dev_url: https://github.com/hishamhm/datafile
+
+extra:
+  recipe-maintainers:
+    - danielnachun
