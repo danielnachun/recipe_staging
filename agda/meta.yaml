@@ -21,8 +21,9 @@ requirements:
     - cabal-plan
     - ghc
   host:
-    - ncurses
     - libiconv  #[osx]
+    - ncurses
+    - zlib
 
 test:
   commands:
