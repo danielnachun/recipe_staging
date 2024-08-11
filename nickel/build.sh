@@ -8,6 +8,8 @@ cargo-bundle-licenses \
 
 # build statically linked binary with Rust
 cargo install --no-track --locked --root ${PREFIX} --path cli
+cargo install --no-track --locked --root ${PREFIX} --path lsp/nls
 
 # strip debug symbols
 "$STRIP" "$PREFIX/bin/$PKG_NAME"
+"$STRIP" "$PREFIX/bin/nls"
