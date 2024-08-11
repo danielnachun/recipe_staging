@@ -1,0 +1,36 @@
+{% set name = "jinja-lsp" %}
+{% set version = "0.1.81" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/uros-5/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 054a098c75a243c4f7dd91b005fd37b076979094a0aaf3a6c35c3ac2920e9931
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/uros-5/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Language Server for jinja
+  dev_url: https://github.com/uros-5/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
