@@ -22,6 +22,7 @@ requirements:
     - ghc
   host:
     - libiconv  #[osx]
+    - ncurses
 
 test:
   commands:
