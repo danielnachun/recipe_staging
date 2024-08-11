@@ -1,0 +1,43 @@
+{% set name = "koka" %}
+{% set version = "3.1.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/koka-lang/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: e11cde4032862c50440ad548e4d4f0eac9eded761b451f02db831d0e4355c78a
+
+build:
+  number: 0
+  skip: true  # [not unix]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cabal-install
+    - cabal-plan
+    - ghc
+  host:
+    - libiconv  #[osx]
+  host:
+    - libiconv  #[osx]
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/koka-lang/{{ name }}
+  license: Apache-2.0
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: Koka language compiler and interpreter
+  dev_url: https://github.com/koka-lang/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
