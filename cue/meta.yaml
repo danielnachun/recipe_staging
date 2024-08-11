@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/cue-lang/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 97e04f0f28effcf519d76e5307a14e5d87da038946be0da980d9d7c9d95b3c11
+  sha256: 949084a037dce6af09072d5b3acd9e6e004b49b2b24e1e3bf93e71bcd1ca99e0
 
 build:
   number: 0
