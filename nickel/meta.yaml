@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/tweag/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 3012aef73b3ef5e8b100824af0db2131f81771338fec5f9fe47dc71bf3782506
+  url: https://github.com/tweag/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: 0a187cb5e4d34fb485ae7ceca77e18b27f22860cf79c03f92e12fc5c2c59c01e
 
 build:
   number: 0
