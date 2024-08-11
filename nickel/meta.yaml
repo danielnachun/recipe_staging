@@ -1,0 +1,36 @@
+{% set name = "nickel" %}
+{% set version = "1.7.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/tweag/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 3012aef73b3ef5e8b100824af0db2131f81771338fec5f9fe47dc71bf3782506
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/tweag/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Better configuration for less
+  dev_url: https://github.com/tweag/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
