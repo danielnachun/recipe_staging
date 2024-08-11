@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/unisonweb/{{ name }}/archive/release/{{ version }}.tar.gz
-  sha256: 70082004f954acdf63a5c76ccd6ee229295c5667c89d6085bc8c79756b238f2f
+  sha256: ea6ea6ff0c08bb330063dba870dae3c89f0b43fe026c7913d058c9de40d83bb8
 
 build:
   number: 0
