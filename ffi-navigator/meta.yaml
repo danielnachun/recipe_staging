@@ -35,7 +35,7 @@ about:
   home: https://github.com/tqchen/ffi-navigator
   summary: Language server for navigating FFI calls
   license: Apache-2.0
-  license_file: PLEASE_ADD_LICENSE_FILE
+  license_file: LICENSE
 
 extra:
   recipe-maintainers:
