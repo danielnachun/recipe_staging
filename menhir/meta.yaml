@@ -19,6 +19,7 @@ requirements:
     - binutils # [linux]
     - gcc # [linux]
     - sysroot_linux-64=2.17  # [linux]
+    - make
     - opam
 
 test:
