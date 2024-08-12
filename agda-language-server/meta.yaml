@@ -26,7 +26,7 @@ requirements:
 
 test:
   commands:
-    - {{ name }} --help
+    - als --help
 
 about:
   home: https://github.com/agda/{{ name }}
