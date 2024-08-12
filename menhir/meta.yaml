@@ -1,0 +1,37 @@
+{% set name = "menhir" %}
+{% set version = "20231231" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/LexiFi/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: 783e95e1ce7f1082c5c693810732344ac3e443a255b822acfca46dd985cfedae
+
+build:
+  number: 0
+  skip: true  # [win]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - binutils # [linux]
+    - gcc # [linux]
+    - sysroot_linux-64=2.17  # [linux]
+    - opam
+
+test:
+  commands:
+    - menhir --help
+
+about:
+  home: https://github.com/LexiFi/{{ name }}
+  license: GPL-2.0-or-later
+  license_file: LICENSE
+  summary: Menhir is an LR(1) parser generator for OCaml.
+  dev_url: https://github.com/LexiFi/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
