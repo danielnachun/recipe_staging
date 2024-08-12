@@ -20,7 +20,7 @@ requirements:
     - cabal-install
     - cabal-plan
     - ghc
-  run:
+  host:
     - libiconv  #[osx]
     - zlib
 
