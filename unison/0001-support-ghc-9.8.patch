@@ -1,0 +1,246 @@
+From 089c4b7bad140f2c156b18b2a29dc15f200eee81 Mon Sep 17 00:00:00 2001
+From: Daniel Nachun <daniel.nachun@gmail.com>
+Date: Sun, 11 Aug 2024 15:06:20 -0700
+Subject: [PATCH] support ghc-9.8
+
+---
+ lib/unison-pretty-printer/src/Unison/Util/Pretty.hs           | 2 +-
+ lib/unison-sqlite/src/Unison/Sqlite/Sql.hs                    | 1 +
+ .../Codebase/SqliteCodebase/Migrations/MigrateSchema1To2.hs   | 2 +-
+ parser-typechecker/src/Unison/KindInference/Generate.hs       | 1 +
+ parser-typechecker/src/Unison/Runtime/ANF.hs                  | 4 ++--
+ parser-typechecker/src/Unison/Runtime/Builtin.hs              | 2 +-
+ parser-typechecker/src/Unison/Syntax/TermParser.hs            | 2 +-
+ parser-typechecker/src/Unison/Syntax/TermPrinter.hs           | 3 ++-
+ parser-typechecker/src/Unison/Typechecker/Context.hs          | 3 ++-
+ unison-cli/src/Unison/Codebase/Editor/HandleInput.hs          | 1 +
+ unison-cli/src/Unison/Codebase/Editor/HandleInput/Merge2.hs   | 2 +-
+ unison-cli/src/Unison/CommandLine/OutputMessages.hs           | 1 +
+ unison-core/src/Unison/ABT.hs                                 | 4 ++--
+ unison-hashing-v2/src/Unison/Hashing/V2/ABT.hs                | 4 ++--
+ 14 files changed, 19 insertions(+), 13 deletions(-)
+
+diff --git a/lib/unison-pretty-printer/src/Unison/Util/Pretty.hs b/lib/unison-pretty-printer/src/Unison/Util/Pretty.hs
+index 6f04fc1..0c59f16 100644
+--- a/lib/unison-pretty-printer/src/Unison/Util/Pretty.hs
++++ b/lib/unison-pretty-printer/src/Unison/Util/Pretty.hs
+@@ -162,7 +162,7 @@ import Unison.Util.AnnotatedText qualified as AT
+ import Unison.Util.ColorText qualified as CT
+ import Unison.Util.Monoid (intercalateMap)
+ import Unison.Util.SyntaxText qualified as ST
+-import Prelude hiding (lines, map)
++import Prelude hiding (lines, map, unzip)
+ 
+ newtype Width = Width {widthToInt :: Int}
+   deriving stock (Eq, Ord, Show, Generic)
+diff --git a/lib/unison-sqlite/src/Unison/Sqlite/Sql.hs b/lib/unison-sqlite/src/Unison/Sqlite/Sql.hs
+index 475cb03..0dccf84 100644
+--- a/lib/unison-sqlite/src/Unison/Sqlite/Sql.hs
++++ b/lib/unison-sqlite/src/Unison/Sqlite/Sql.hs
+@@ -21,6 +21,7 @@ import Database.SQLite.Simple.ToField qualified as Sqlite.Simple
+ import Language.Haskell.TH qualified as TH
+ import Language.Haskell.TH.Quote qualified as TH
+ import Language.Haskell.TH.Syntax qualified as TH
++import Prelude hiding (unzip)
+ import Text.Builder qualified
+ import Text.Builder qualified as Text (Builder)
+ import Text.Megaparsec qualified as Megaparsec
+diff --git a/parser-typechecker/src/Unison/Codebase/SqliteCodebase/Migrations/MigrateSchema1To2.hs b/parser-typechecker/src/Unison/Codebase/SqliteCodebase/Migrations/MigrateSchema1To2.hs
+index 066c4c0..9d963a5 100644
+--- a/parser-typechecker/src/Unison/Codebase/SqliteCodebase/Migrations/MigrateSchema1To2.hs
++++ b/parser-typechecker/src/Unison/Codebase/SqliteCodebase/Migrations/MigrateSchema1To2.hs
+@@ -81,7 +81,7 @@ import Unison.Type (Type)
+ import Unison.Type qualified as Type
+ import Unison.Util.Monoid (foldMapM)
+ import Unison.Util.Set qualified as Set
+-import Prelude hiding (log)
++import Prelude hiding (log, unzip)
+ 
+ verboseOutput :: Bool
+ verboseOutput =
+diff --git a/parser-typechecker/src/Unison/KindInference/Generate.hs b/parser-typechecker/src/Unison/KindInference/Generate.hs
+index ab67553..0e09bc3 100644
+--- a/parser-typechecker/src/Unison/KindInference/Generate.hs
++++ b/parser-typechecker/src/Unison/KindInference/Generate.hs
+@@ -10,6 +10,7 @@ where
+ 
+ import Data.Foldable (foldlM)
+ import Data.Set qualified as Set
++import Prelude hiding (unzip)
+ import U.Core.ABT qualified as ABT
+ import Unison.Builtin.Decls (rewriteTypeRef)
+ import Unison.Codebase.BuiltinAnnotation (BuiltinAnnotation (builtinAnnotation))
+diff --git a/parser-typechecker/src/Unison/Runtime/ANF.hs b/parser-typechecker/src/Unison/Runtime/ANF.hs
+index 0c2fa20..fea10fe 100644
+--- a/parser-typechecker/src/Unison/Runtime/ANF.hs
++++ b/parser-typechecker/src/Unison/Runtime/ANF.hs
+@@ -87,7 +87,7 @@ import Data.Bifoldable (Bifoldable (..))
+ import Data.Bitraversable (Bitraversable (..))
+ import Data.Bits (shiftL, shiftR, (.&.), (.|.))
+ import Data.Functor.Compose (Compose (..))
+-import Data.List hiding (and, or)
++import Data.List hiding (and, or, unsnoc, unzip)
+ import Data.Map qualified as Map
+ import Data.Primitive qualified as PA
+ import Data.Set qualified as Set
+@@ -114,7 +114,7 @@ import Unison.Util.Pretty qualified as Pretty
+ import Unison.Util.Text qualified as Util.Text
+ import Unison.Var (Var, typed)
+ import Unison.Var qualified as Var
+-import Prelude hiding (abs, and, or, seq)
++import Prelude hiding (abs, and, or, seq, unzip)
+ import Prelude qualified
+ 
+ -- For internal errors
+diff --git a/parser-typechecker/src/Unison/Runtime/Builtin.hs b/parser-typechecker/src/Unison/Runtime/Builtin.hs
+index f9c827f..06cab2f 100644
+--- a/parser-typechecker/src/Unison/Runtime/Builtin.hs
++++ b/parser-typechecker/src/Unison/Runtime/Builtin.hs
+@@ -86,7 +86,7 @@ import Network.Socket as SYS
+     accept,
+     socketPort,
+   )
+-import Network.TLS as TLS
++import Network.TLS as TLS hiding (HashAlgorithm, Ticket)
+ import Network.TLS.Extra.Cipher as Cipher
+ import Network.UDP as UDP
+   ( ClientSockAddr,
+diff --git a/parser-typechecker/src/Unison/Syntax/TermParser.hs b/parser-typechecker/src/Unison/Syntax/TermParser.hs
+index 635a974..4335f6c 100644
+--- a/parser-typechecker/src/Unison/Syntax/TermParser.hs
++++ b/parser-typechecker/src/Unison/Syntax/TermParser.hs
+@@ -60,7 +60,7 @@ import Unison.Util.Bytes qualified as Bytes
+ import Unison.Util.List (intercalateMapWith, quenchRuns)
+ import Unison.Var (Var)
+ import Unison.Var qualified as Var
+-import Prelude hiding (and, or, seq)
++import Prelude hiding (and, or, seq, unzip)
+ 
+ {-
+ Precedence of language constructs is identical to Haskell, except that all
+diff --git a/parser-typechecker/src/Unison/Syntax/TermPrinter.hs b/parser-typechecker/src/Unison/Syntax/TermPrinter.hs
+index faeda76..f0d1176 100644
+--- a/parser-typechecker/src/Unison/Syntax/TermPrinter.hs
++++ b/parser-typechecker/src/Unison/Syntax/TermPrinter.hs
+@@ -17,7 +17,7 @@ import Control.Lens (unsnoc)
+ import Control.Monad.State (evalState)
+ import Control.Monad.State qualified as State
+ import Data.Char (isPrint)
+-import Data.List
++import Data.List hiding (unsnoc, unzip)
+ import Data.List qualified as List
+ import Data.List.NonEmpty qualified as NEL
+ import Data.Map qualified as Map
+@@ -25,6 +25,7 @@ import Data.Set qualified as Set
+ import Data.Text (unpack)
+ import Data.Text qualified as Text
+ import Data.Vector ()
++import Prelude hiding (unzip)
+ import Text.Show.Unicode qualified as U
+ import Unison.ABT (annotation, reannotateUp, pattern AbsN')
+ import Unison.ABT qualified as ABT
+diff --git a/parser-typechecker/src/Unison/Typechecker/Context.hs b/parser-typechecker/src/Unison/Typechecker/Context.hs
+index 89eb193..44b8352 100644
+--- a/parser-typechecker/src/Unison/Typechecker/Context.hs
++++ b/parser-typechecker/src/Unison/Typechecker/Context.hs
+@@ -58,7 +58,7 @@ import Control.Monad.State
+ import Data.Foldable qualified as Foldable
+ import Data.Function (on)
+ import Data.Functor.Compose
+-import Data.List
++import Data.List hiding (unzip)
+ import Data.List.NonEmpty (NonEmpty)
+ import Data.List.NonEmpty qualified as Nel
+ import Data.Map qualified as Map
+@@ -68,6 +68,7 @@ import Data.Sequence.NonEmpty (NESeq)
+ import Data.Sequence.NonEmpty qualified as NESeq
+ import Data.Set qualified as Set
+ import Data.Text qualified as Text
++import Prelude hiding (unzip)
+ import Unison.ABT qualified as ABT
+ import Unison.Blank qualified as B
+ import Unison.Builtin.Decls qualified as DDB
+diff --git a/unison-cli/src/Unison/Codebase/Editor/HandleInput.hs b/unison-cli/src/Unison/Codebase/Editor/HandleInput.hs
+index e85879c..16fe4e1 100644
+--- a/unison-cli/src/Unison/Codebase/Editor/HandleInput.hs
++++ b/unison-cli/src/Unison/Codebase/Editor/HandleInput.hs
+@@ -23,6 +23,7 @@ import Data.Set.NonEmpty qualified as NESet
+ import Data.Text qualified as Text
+ import Data.Time (UTCTime)
+ import Data.Tuple.Extra (uncurry3)
++import Prelude hiding (unzip)
+ import Text.Megaparsec qualified as Megaparsec
+ import U.Codebase.Branch.Diff qualified as V2Branch.Diff
+ import U.Codebase.Causal qualified as V2Causal
+diff --git a/unison-cli/src/Unison/Codebase/Editor/HandleInput/Merge2.hs b/unison-cli/src/Unison/Codebase/Editor/HandleInput/Merge2.hs
+index eca5b51..beebf43 100644
+--- a/unison-cli/src/Unison/Codebase/Editor/HandleInput/Merge2.hs
++++ b/unison-cli/src/Unison/Codebase/Editor/HandleInput/Merge2.hs
+@@ -111,7 +111,7 @@ import Unison.NameSegment.Internal (NameSegment (NameSegment))
+ import Unison.NameSegment.Internal qualified as NameSegment
+ import Unison.Names (Names)
+ import Unison.Names qualified as Names
+-import Unison.Prelude
++import Unison.Prelude hiding (unzip)
+ import Unison.PrettyPrintEnv (PrettyPrintEnv (..))
+ import Unison.PrettyPrintEnv.Names qualified as PPE
+ import Unison.PrettyPrintEnvDecl (PrettyPrintEnvDecl (..))
+diff --git a/unison-cli/src/Unison/CommandLine/OutputMessages.hs b/unison-cli/src/Unison/CommandLine/OutputMessages.hs
+index d061f37..8603324 100644
+--- a/unison-cli/src/Unison/CommandLine/OutputMessages.hs
++++ b/unison-cli/src/Unison/CommandLine/OutputMessages.hs
+@@ -26,6 +26,7 @@ import Data.Tuple.Extra (dupe)
+ import Data.Void (absurd)
+ import Debug.RecoverRTTI qualified as RTTI
+ import Network.HTTP.Types qualified as Http
++import Prelude hiding (unzip)
+ import Servant.Client qualified as Servant
+ import System.Console.ANSI qualified as ANSI
+ import System.Console.Haskeline.Completion qualified as Completion
+diff --git a/unison-core/src/Unison/ABT.hs b/unison-core/src/Unison/ABT.hs
+index fe9a8f9..7af2b39 100644
+--- a/unison-core/src/Unison/ABT.hs
++++ b/unison-core/src/Unison/ABT.hs
+@@ -105,7 +105,7 @@ where
+ import Control.Lens (Lens', lens, (%%~))
+ import Control.Monad.State (MonadState, evalState, get, put, runState)
+ import Data.Foldable qualified as Foldable
+-import Data.List hiding (cycle, find)
++import Data.List hiding (cycle, find, unzip)
+ import Data.Map qualified as Map
+ import Data.Set qualified as Set
+ import U.Core.ABT
+@@ -139,7 +139,7 @@ import U.Core.ABT qualified
+ import U.Core.ABT.Var (Var (freshIn))
+ import Unison.Prelude
+ import Unison.Util.Components qualified as Components
+-import Prelude hiding (abs, cycle)
++import Prelude hiding (abs, cycle, unzip)
+ 
+ abt_ :: Lens' (Term f v a) (ABT f v (Term f v a))
+ abt_ = lens out setter
+diff --git a/unison-hashing-v2/src/Unison/Hashing/V2/ABT.hs b/unison-hashing-v2/src/Unison/Hashing/V2/ABT.hs
+index bc5a15f..d587eed 100644
+--- a/unison-hashing-v2/src/Unison/Hashing/V2/ABT.hs
++++ b/unison-hashing-v2/src/Unison/Hashing/V2/ABT.hs
+@@ -9,7 +9,7 @@
+ 
+ module Unison.Hashing.V2.ABT (Unison.ABT.Term, hash, hashComponents) where
+ 
+-import Data.List hiding (cycle, find)
++import Data.List hiding (cycle, find, unzip)
+ import Data.List qualified as List (sort)
+ import Data.Map qualified as Map
+ import Data.Set qualified as Set
+@@ -18,7 +18,7 @@ import Unison.Hash (Hash)
+ import Unison.Hashing.V2.Tokenizable (Hashable1, hash1)
+ import Unison.Hashing.V2.Tokenizable qualified as Hashable
+ import Unison.Prelude
+-import Prelude hiding (abs, cycle)
++import Prelude hiding (abs, cycle, unzip)
+ 
+ -- Hash a strongly connected component and sort its definitions into a canonical order.
+ hashComponent ::
+-- 
+2.45.2
+
