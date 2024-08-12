@@ -19,7 +19,7 @@ export OPAMJOBS=${CPU_COUNT}
 
 opam init --no-setup --disable-sandboxing
 opam exec -- opam install . -y --deps-only --no-depexts
-opam exec -- dune build --only-packages=esy --profile release
+opam exec -- dune build --only-packages=esy --profile release @install
 opam exec -- dune install --prefix ${PREFIX}
 
 mkdir -p license-files
