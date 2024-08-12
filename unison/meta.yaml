@@ -8,6 +8,8 @@ package:
 source:
   url: https://github.com/unisonweb/{{ name }}/archive/release/{{ version }}.tar.gz
   sha256: ea6ea6ff0c08bb330063dba870dae3c89f0b43fe026c7913d058c9de40d83bb8
+  patches:
+  - 0001-support-ghc-9.8.patch
 
 build:
   number: 0
@@ -20,10 +22,11 @@ requirements:
     - cabal-install
     - cabal-plan
     - ghc
+    - go-yq
   host:
+    - ncurses
     - libiconv  #[osx]
-  host:
-    - libiconv  #[osx]
+    - zlib
 
 test:
   commands:
