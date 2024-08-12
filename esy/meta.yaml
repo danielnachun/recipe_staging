@@ -26,6 +26,7 @@ requirements:
     - opam
     - pkg-config
   host:
+    - bzip2
     - zlib
 
 test:
