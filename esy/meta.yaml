@@ -1,0 +1,45 @@
+{% set name = "esy" %}
+{% set version = "0.7.2" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/esy/{{ name }}
+  git_rev: {{ version }}
+
+build:
+  number: 0
+  skip: true  # [win]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - binutils # [linux]
+    - gcc # [linux]
+    - sysroot_linux-64=2.17  # [linux]
+    - make
+    - opam
+    - pkg-config
+  host:
+    - zlib
+
+test:
+  commands:
+    - {{ name }} &
+    - exe_pid=$!
+    - trap "kill -SIGTERM ${exe_pid}" SIGTERM
+
+about:
+  home: https://github.com/esy/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: package.json workflow for native development with Reason/OCaml
+  dev_url: https://github.com/esy/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
