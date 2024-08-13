@@ -23,6 +23,7 @@ requirements:
     - pkg-config
   host:
     - libiconv  #[osx]
+    - ncurses
     - zlib
 
 test:
