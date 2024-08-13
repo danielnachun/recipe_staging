@@ -7,6 +7,7 @@ cabal v2-update
 cabal v2-install \
     --extra-include-dirs=${PREFIX}/include \
     --extra-lib-dirs=${PREFIX}/lib \
+    --constraint "zlib +pkg-config" \
 	--jobs=${CPU_COUNT} \
 	--max-backjumps=100000 \
 	--install-method=copy \
