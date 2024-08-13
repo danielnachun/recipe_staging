@@ -21,6 +21,8 @@ requirements:
     - gcc # [linux]
     - gxx # [linux]
     - sysroot_linux-64=2.17  # [linux]
+    - bzip2
+    - zlib
     - make
     - odig
     - opam
