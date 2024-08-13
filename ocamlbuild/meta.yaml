@@ -1,0 +1,41 @@
+{% set name = "ocamlbuild" %}
+{% set version = "0.15.0" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/ocaml/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: d3f6ee73100b575d4810247d10ed8f53fccef4e90daf0e4a4c5f3e6a3030a9c9
+
+build:
+  number: 0
+  skip: true  # [win]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - binutils # [linux]
+    - gcc # [linux]
+    - sysroot_linux-64=2.17  # [linux]
+    - make  # [unix]
+    - odig
+    - opam
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/ocaml/{{ name }}
+  license: GPL-2.0-or-later
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: The legacy OCamlbuild build manager
+  dev_url: https://github.com/ocaml/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
