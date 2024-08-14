@@ -23,12 +23,14 @@ requirements:
     - rsync
     - zlib
   host:
+    - gettext
     - libpng
     - mariadb
     - openssl
     - util-linux #[linux]
     - zlib
   run:
+    - gettext
     - libpng
     - mariadb
     - openssl
