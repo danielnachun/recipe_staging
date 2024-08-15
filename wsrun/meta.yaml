@@ -1,0 +1,39 @@
+{% set name = "wsrun" %}
+{% set version = "5.2.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/hfour/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: ac1135a360c9d14cf7940e533dce85ad4b164c9c72392e81e8561e352f352153
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/hfour/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Command runner for Yarn workspaces. Dependency aware.
+  dev_url: https://github.com/hfour/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
