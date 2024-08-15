@@ -1,0 +1,39 @@
+{% set name = "ts-node" %}
+{% set version = "10.9.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/TypeStrong/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: bc43e9d99293e81845c7362bfc6275bf0c486387bb01edb4bda7b95a713171d5
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/TypeStrong/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: TypeScript execution and REPL for node.js
+  dev_url: https://github.com/TypeStrong/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
