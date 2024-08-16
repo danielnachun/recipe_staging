@@ -1,0 +1,41 @@
+{% set name = "flow" %}
+{% set version = "0.243.0" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/facebook/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 6d8b77958e17923f5b1f5fab8b9bf46e082c9227ed9d9471959ff6eb87e26807
+
+build:
+  number: 0
+  skip: true  # [win]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - binutils # [linux]
+    - gcc # [linux]
+    - sysroot_linux-64=2.17  # [linux]
+    - make
+    - odig
+    - opam
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/facebook/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: Adds static typing to JavaScript to improve developer productivity and code quality.
+  dev_url: https://github.com/facebook/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
