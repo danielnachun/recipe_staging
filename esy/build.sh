@@ -12,10 +12,16 @@ copy_license() {
 
 export -f copy_license
 
+mkdir -p ${SRC_DIR}/sbin
+tee ${SRC_DIR}/sbin/cc << EOF
+exec \${CC} \${CFLAGS} \${LDLFAGS} \$@
+EOF
+
 export OPAMROOT=${SRC_DIR}/.opam
 export OPAMYES=1
 export OPAMDOWNLOADJOBS=${CPU_COUNT}
 export OPAMJOBS=${CPU_COUNT}
+export PATH="${SRC_DIR}/sbin:${PATH}"
 
 opam init --no-setup --disable-sandboxing
 opam exec -- opam install . -y --deps-only --no-depexts
