@@ -1,0 +1,43 @@
+{% set name = "dolmen" %}
+{% set version = "0.10" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/Gbury/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: d5df9e7610276e55c136de80d518c5e73fed4cd623ed24237544fdc8cc9e9126
+
+build:
+  number: 0
+  skip: true  # [win]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - binutils # [linux]
+    - gcc # [linux]
+    - sysroot_linux-64=2.17  # [linux]
+    - make
+    - odig
+    - opam
+  host:
+    - gmp
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/Gbury/{{ name }}
+  license: BSD-2-Clause
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: Dolmen provides a library and a binary to parse, typecheck, and evaluate languages used in automated deduction
+  dev_url: https://github.com/Gbury/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
