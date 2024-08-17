@@ -16,7 +16,7 @@ export OPAMROOT=${SRC_DIR}/.opam
 export OPAMYES=1
 export OPAMDOWNLOADJOBS=${CPU_COUNT}
 export OPAMJOBS=${CPU_COUNT}
-export CFLAGS="${CFLAGS} -Wno-unused-function -Wno-unused-const-variable="
+export CFLAGS="${CFLAGS} -Wno-unused-function -Wno-unused-const-variable"
 
 opam init --no-setup --disable-sandboxing
 opam exec -- opam install . -y --deps-only --no-depexts
