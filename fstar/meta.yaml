@@ -1,0 +1,45 @@
+{% set name = "fstar" %}
+{% set version = "2024.08.14" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/FStarLang/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 12efc811ac9b4dace71631d44c4c779273af22d10dd49f1f2f7feb9453806c37
+
+build:
+  number: 0
+  skip: true  # [win]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - binutils # [linux]
+    - gcc # [linux]
+    - sysroot_linux-64=2.17  # [linux]
+    - make
+    - odig
+    - opam
+    - pkg-config
+  host:
+    - gmp
+
+test:
+  commands:
+    - {{ name }}.exe --help
+
+about:
+  home: https://github.com/FStarLang/{{ name }}
+  license: BSD-2-Clause
+  license_file:
+    - LICENSE
+    - LICENSE-fsharp.txt
+    - license-files/
+  summary: A Proof-oriented Programming Language
+  dev_url: https://github.com/FStarLang/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
