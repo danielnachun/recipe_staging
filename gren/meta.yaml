@@ -20,6 +20,7 @@ requirements:
     - cabal-install
     - cabal-plan
     - ghc
+    - sed
   host:
     - libiconv  #[osx]
     - ncurses
