@@ -20,9 +20,11 @@ requirements:
     - cabal-install
     - cabal-plan
     - ghc
+    - pkg-config
   host:
     - libiconv  #[osx]
     - ncurses
+    - zlib
 
 test:
   commands:
