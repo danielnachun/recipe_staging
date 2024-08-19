@@ -27,11 +27,11 @@ rm ${PREFIX}/libexec/${PKG_NAME}/DafnyServer
 # Create bash and batch wrappers
 tee ${PREFIX}/bin/dafny << EOF
 #!/bin/sh
-exec \${DOTNET_ROOT}/dotnet exec \${CONDA_PREFIX}/libexec/dafny/dafny.dll "\$@"
+exec \${DOTNET_ROOT}/dotnet exec \${CONDA_PREFIX}/libexec/dafny/Dafny.dll "\$@"
 EOF
 
 tee ${PREFIX}/bin/dafny.cmd << EOF
-exec %DOTNET_ROOT%\dotnet exec %CONDA_PREFIX%\libexec\dafny\dafny.dll %*
+exec %DOTNET_ROOT%\dotnet exec %CONDA_PREFIX%\libexec\dafny\Dafny.dll %*
 EOF
 
 tee ${PREFIX}/bin/DafnyServer << EOF
