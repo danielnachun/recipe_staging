@@ -20,6 +20,7 @@ requirements:
     - dotnet
     - nuget-license
     - openjdk=21
+    - sed
   run:
     - dotnet
     - z3
