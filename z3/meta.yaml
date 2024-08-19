@@ -1,0 +1,35 @@
+{% set name = "z3" %}
+{% set version = "4.13.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/Z3Prover/{{ name }}/archive/{{ name }}-{{ version }}.tar.gz
+  sha256: 01bcc61c8362e37bb89fd2430f7e3385e86df7915019bd2ce45de9d9bd934502
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cmake
+    - make
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/Z3Prover/{{ name }}
+  license: MIT
+  license_file: LICENSE.txt
+  summary: The Z3 Theorem Prover
+  dev_url: https://github.com/Z3Prover/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
