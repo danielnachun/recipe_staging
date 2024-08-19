@@ -15,9 +15,9 @@ rm ${PREFIX}/libexec/${PKG_NAME}/Coco
 # Create bash and batch wrappers
 tee ${PREFIX}/bin/coco << EOF
 #!/bin/sh
-exec \${DOTNET_ROOT}/dotnet exec \${CONDA_PREFIX}/libexec/coco/coco.dll "\$@"
+exec \${DOTNET_ROOT}/dotnet exec \${CONDA_PREFIX}/libexec/coco/Coco.dll "\$@"
 EOF
 
 tee ${PREFIX}/bin/coco.cmd << EOF
-exec %DOTNET_ROOT%\dotnet exec %CONDA_PREFIX%\libexec\coco\coco.dll %*
+exec %DOTNET_ROOT%\dotnet exec %CONDA_PREFIX%\libexec\coco\Coco.dll %*
 EOF
