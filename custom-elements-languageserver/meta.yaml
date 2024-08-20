@@ -1,0 +1,36 @@
+{% set name = "custom-elements-languageserver" %}
+{% set version = "1.0.4" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+
+  url: https://github.com/Matsuuu/custom-elements-language-server/archive/v.{{ version }}.tar.gz
+  sha256: 607c625327e36ed96bad18f60929070de194d2cfcfef7f259c17df2285c62ca5
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} 2>&1 | grep -q 'Connection input stream is not set.'
+
+about:
+  home: https://github.com/Matsuuu/{{ name }}
+  license: BSD-3-Clause
+  license_file: LICENSE
+  summary: Custom Elements Language Server provides useful language features for Web Components. Features include code actions, completions, diagnostics and more.
+  dev_url: https://github.com/Matsuuu/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
