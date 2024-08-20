@@ -1,0 +1,40 @@
+{% set name = "ember-language-server" %}
+{% set version = "2.30.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/ember-tooling/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 15ebf95c6635246db7fbf8458c58a7ea30e0ca7bf1619e83b1a3fed82a6d8b89
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+    - yarn
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/ember-tooling/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE.md
+    # - third-party-licenses.txt
+  summary: Language Server Protocol implementation for Ember.js projects
+  dev_url: https://github.com/ember-tooling/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
