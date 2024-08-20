@@ -18,6 +18,7 @@ requirements:
     - nodejs
     - pnpm
     - pnpm-licenses
+    - jq
   run:
     - nodejs
 
