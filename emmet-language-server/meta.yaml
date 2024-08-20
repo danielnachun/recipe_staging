@@ -1,0 +1,39 @@
+{% set name = "emmet-language-server" %}
+{% set version = "2.5.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/olrtg/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: b260193b9bc16c255e67b3c73cb6f806f4416644b19d88bb30ddc7374fd597b7
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} 2>&1 | grep -q "Connection input stream is not set."
+
+about:
+  home: https://github.com/olrtg/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: A language server for emmet.io
+  dev_url: https://github.com/olrtg/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
