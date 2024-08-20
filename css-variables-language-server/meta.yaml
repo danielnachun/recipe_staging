@@ -1,0 +1,39 @@
+{% set name = "css-variables-language-server" %}
+{% set version = "2.7.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/vunguyentuan/vscode-css-variables/archive/{{ name }}@{{ version }}.tar.gz
+  sha256: 1631d75853a3b632ce4b7c61e7e094f7cfaa741896ca841bbbae4d340073f1a7
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} 2>&1 | grep -q 'Connection input stream is not set.'
+
+about:
+  home: https://github.com/vunguyentuan/vscode-css-variables
+  license: MIT
+  license_file:
+    - packages/vscode-css-variables/LICENSE
+    - third-party-licenses.txt
+  summary: Language server for CSS variables
+  dev_url: https://github.com/vunguyentuan/vscode-css-variables
+
+extra:
+  recipe-maintainers:
+    - danielnachun
