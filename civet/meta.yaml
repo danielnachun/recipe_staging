@@ -1,0 +1,39 @@
+{% set name = "civet" %}
+{% set version = "0.7.24" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/DanielXMoore/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 84759ff6dd84075bbacea38588d9e280400f706aa204f33e0fbbf0ab2cdf6058
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/DanielXMoore/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: A TypeScript superset that favors more types and less typing
+  dev_url: https://github.com/DanielXMoore/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
