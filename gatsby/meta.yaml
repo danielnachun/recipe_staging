@@ -1,13 +1,13 @@
 {% set name = "gatsby-cli" %}
-{% set version = "5.13.7" %}
+{% set version = "5.13.3" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/gatsbyjs/gatsby/archive/gatsby@{{ version }}.tar.gz
-  sha256: 6b41c63b96213c79f258520054d513894b61d62362b5fe964d7e9cbe3e5da2eb
+  url: https://registry.npmjs.org/{{ name }}/-/{{ name }}-{{ version }}.tgz
+  sha256: 22419fe3354ce4a4e373aaa54160294b8d5cc5ab95ad6b632b07a047c6287378
 
 build:
   noarch: generic
@@ -18,13 +18,12 @@ requirements:
     - nodejs
     - pnpm
     - pnpm-licenses
-    - yarn
   run:
     - nodejs
 
 test:
   commands:
-    - {{ name }} --help
+    - gatsby --help
 
 about:
   home: https://github.com/gatsbyjs/{{ name }}
