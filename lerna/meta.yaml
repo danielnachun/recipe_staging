@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/lerna/{{ name }}/archive/v{{ version }}.tar.gz 
-  sha256: 321a1e7c5f63e9c86da047773757e526384d4c3a68225cac2c912ae4cff3bc35
+  url: https://registry.npmjs.org/{{ name }}/-/{{ name }}-{{ version }}.tgz
+  sha256: 63608afc2f29b798f35b7b8acfd8ae21846d16cfe5467baae1479414e0a91080
 
 build:
   number: 0
