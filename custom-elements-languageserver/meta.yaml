@@ -7,8 +7,8 @@ package:
 
 source:
 
-  url: https://github.com/Matsuuu/custom-elements-language-server/archive/v.{{ version }}.tar.gz
-  sha256: 607c625327e36ed96bad18f60929070de194d2cfcfef7f259c17df2285c62ca5
+  url: https://registry.npmjs.org/{{ name }}/-/{{ name }}-{{ version }}.tgz
+  sha256: fee14e8353b4f42957caed224e9e650fd19d0b38ab714c47a3ce1729f72d7c90
 
 build:
   noarch: generic
@@ -16,7 +16,6 @@ build:
 
 requirements:
   build:
-    - jq
     - nodejs
   run:
     - nodejs
