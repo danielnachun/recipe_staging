@@ -1,13 +1,13 @@
 {% set name = "vitepress" %}
-{% set version = "1.3.1" %}
+{% set version = "1.3.4" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/vuejs/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: ffefa0f213ef505cdfd6c245a42c9266fcd4e57f75e782f235d135a30c7cb5cb
+  url: https://registry.npmjs.org/{{ name}}/-/{{ name}}-{{ version }}.tgz
+  sha256: 3648afdb42a361a7587a5c8b867e2a264ea0c3476b54a3236ab817f7e4665b63
 
 build:
   number: 0
