@@ -10,7 +10,6 @@ source:
   sha256: a2e988937c1bda880cddac35373d098e3ede0096f31dd9e7db5a5af71a29cb36
 
 build:
-  noarch: generic
   number: 0
 
 requirements:
@@ -30,7 +29,7 @@ about:
   home: https://github.com/nrwl/nx-console
   license: MIT
   license_file:
-    - LICENSE.txt
+    - LICENSE
     - third-party-licenses.txt
   summary: A language server that utilizes the json-languageservice to provide code completion and more, for Nx workspaces.
   dev_url: https://github.com/nrwl/nx-console
