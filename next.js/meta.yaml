@@ -14,7 +14,6 @@ build:
 
 requirements:
   build:
-    - jq
     - nodejs
     - pnpm
     - pnpm-licenses
@@ -30,7 +29,7 @@ about:
   license: MIT
   license_file:
     - license.md
-    # - third-party-licenses.txt
+    - third-party-licenses.txt
   summary: The React Framework
   dev_url: https://github.com/vercel/{{ name }}
 
