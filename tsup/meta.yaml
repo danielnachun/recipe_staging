@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/egoist/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 8dd40ede567693ddf751eee4c2de4e2db02ad25ea64a5755b24c6370aaf7a29b
+  url: https://registry.npmjs.org/{{ name }}/-/{{ name }}-{{ version }}.tgz
+  sha256: 146d68bfc4aae179c4a3307a5e343d185c1e1229f15ae84e1320f29e01d6c440
 
 build:
   number: 0
