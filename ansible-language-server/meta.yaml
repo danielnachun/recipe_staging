@@ -18,8 +18,6 @@ requirements:
     - nodejs
     - pnpm
     - pnpm-licenses
-    - sed
-    - yarn
   run:
     - nodejs
 
