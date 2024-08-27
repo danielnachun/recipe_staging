@@ -1,13 +1,13 @@
 {% set name = "fish-lsp" %}
-{% set version = "1.0.8" %}
+{% set version = "1.0.7" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/ndonfris/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: fffabd71157488a76dcdd0ffceeeac87817cf975541ec2c8308692ae81b96dba
+  url: https://registry.npmjs.org/{{ name }}/-/{{ name }}-{{ version }}.tgz
+  sha256: f90a1cb8c09f750322b82c279bcf1b6b12f83e537a3e14eb6da38d6ce3c04752
 
 build:
   noarch: generic
@@ -18,7 +18,6 @@ requirements:
     - nodejs
     - pnpm
     - pnpm-licenses
-    - yarn
   run:
     - nodejs
 

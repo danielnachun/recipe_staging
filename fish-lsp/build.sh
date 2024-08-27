@@ -3,9 +3,9 @@
 set -o xtrace -o nounset -o pipefail -o errexit
 
 # Run pnpm so that pnpm-licenses can create report
-yarn
-pnpm install
-pnpm pack
+# mv package.json package.json.bak
+# jq 'del(.scripts.preinstall)' package.json.bak > package.json
+pnpm install --ignore-scripts
 
 # Create package archive and install globally
 npm pack --ignore-scripts
