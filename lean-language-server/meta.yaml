@@ -1,13 +1,13 @@
 {% set name = "lean-language-server" %}
-{% set version = "3.5.0" %}
+{% set version = "3.4.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/leanprover/lean-client-js/archive/v{{ version }}.tar.gz
-  sha256: b5537b34130fa589b7ef81a1adaaf1ef1e76694c13d13eae532245e729475d80
+  url: https://registry.npmjs.org/{{ name }}/-/{{ name }}-{{ version }}.tgz
+  sha256: 0d53b0a075f3a03bf8333b26fdc0969d284ef6b47bb8ebcd97a298d05e5824d6
 
 build:
   noarch: generic
