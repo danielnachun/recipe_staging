@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/antonk52/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 7dd55ac38358f6569bc7bc3b19ab6e597949bb0e3486ccdbb87a53217dfc1908
+  url: https://registry.npmjs.org/{{ name }}/-/{{ name }}-{{ version }}.tgz
+  sha256: fbea1038c1324c658455e21a44412563c5518c58215149fb3dd17c5a7c47a809
 
 build:
   noarch: generic
