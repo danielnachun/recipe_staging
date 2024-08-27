@@ -1,13 +1,13 @@
 {% set name = "civet" %}
-{% set version = "0.7.24" %}
+{% set version = "0.7.26" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/DanielXMoore/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 84759ff6dd84075bbacea38588d9e280400f706aa204f33e0fbbf0ab2cdf6058
+  url: https://registry.npmjs.org/@danielx/{{ name }}/-/{{ name }}-{{ version }}.tgz
+  sha256: a2b8d5f4980f07159e89f7b69ed19b7bb12d71026730ee81187a165e0bbbf11f
 
 build:
   noarch: generic
@@ -15,10 +15,10 @@ build:
 
 requirements:
   build:
+    - jq
     - nodejs
     - pnpm
     - pnpm-licenses
-    - jq
   run:
     - nodejs
 
