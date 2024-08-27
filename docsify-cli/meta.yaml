@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/docsifyjs/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 89e627c366e600b64f811495c0487ff8e38071dbec5f9a24aa660a77613dd0b8
+  url: https://registry.npmjs.org/{{ name }}/-/{{ name }}-{{ version }}.tgz
+  sha256: d8b2a3b6e736b6999534bad0b717958b1c5dd3df392498c030971b342de7c565
 
 build:
   number: 0
