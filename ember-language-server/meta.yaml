@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/ember-tooling/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 15ebf95c6635246db7fbf8458c58a7ea30e0ca7bf1619e83b1a3fed82a6d8b89
+  url: https://registry.npmjs.org/@ember-tooling/{{ name }}/-/{{ name }}-{{ version }}.tgz
+  sha256: f4537fe2b9a2b5dba1b07a82ad8717d157df0fe43c180f29bf4be845c894357a
 
 build:
   noarch: generic
@@ -18,7 +18,6 @@ requirements:
     - nodejs
     - pnpm
     - pnpm-licenses
-    - yarn
   run:
     - nodejs
 
@@ -31,7 +30,7 @@ about:
   license: MIT
   license_file:
     - LICENSE.md
-    # - third-party-licenses.txt
+    - third-party-licenses.txt
   summary: Language Server Protocol implementation for Ember.js projects
   dev_url: https://github.com/ember-tooling/{{ name }}
 
