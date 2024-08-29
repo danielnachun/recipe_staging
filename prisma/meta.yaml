@@ -1,0 +1,38 @@
+{% set name = "prisma" %}
+{% set version = "5.19.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://registry.npmjs.org/{{ name }}/-/{{ name }}-{{ version }}.tgz
+  sha256: 15092c21a0fcd56dfc58f23cecc0c75a84779a3f77db5f7edee8cfa3e97abde2
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/prisma/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Prisma is an open-source database toolkit.
+  dev_url: https://github.com/prisma/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
