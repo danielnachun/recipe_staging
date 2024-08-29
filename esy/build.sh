@@ -13,6 +13,7 @@ copy_license() {
 export -f copy_license
 
 mkdir -p ${SRC_DIR}/sbin
+#!/bin/sh
 tee ${SRC_DIR}/sbin/cc << EOF
 exec \${CC} \${CFLAGS} \${LDLFAGS} \$@
 EOF
