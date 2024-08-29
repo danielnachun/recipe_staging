@@ -1,0 +1,38 @@
+{% set name = "spago" %}
+{% set version = "0.21.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://registry.npmjs.org/{{ name }}/-/{{ name }}-{{ version }}.tgz
+  sha256: ec7fe685bab3a9a045e6ac51c0427cd07133a96bf3370d3e719434d3d223f85b
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/purescript/{{ name }}
+  license: BSD-3-Clause
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: PureScript package manager and build tool
+  dev_url: https://github.com/purescript/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
