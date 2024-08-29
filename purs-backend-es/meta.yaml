@@ -1,0 +1,35 @@
+{% set name = "purs-backend-es" %}
+{% set version = "1.4.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://registry.npmjs.org/{{ name }}/-/{{ name }}-{{ version }}.tgz
+  sha256: a0490052aed5173da0079af5db8b2cbb81ffceeda0eb276b02b577373e7ce03a
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/aristanetworks/purescript-backend-optimizer
+  license: MIT
+  license_file: LICENSE
+  summary: Optimizing backend toolkit and modern ECMAScript backend for PureScript
+  dev_url: https://github.com/aristanetworks/purescript-backend-optimizer
+
+extra:
+  recipe-maintainers:
+    - danielnachun
