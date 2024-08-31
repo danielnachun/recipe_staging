@@ -21,7 +21,7 @@ requirements:
 
 test:
   commands:
-    - {{ name }} &
+    - {{ name }} --node-ipc &
     - exe_pid=$!
     - trap "kill -SIGTERM ${exe_pid}" SIGTERM
 
