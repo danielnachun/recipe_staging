@@ -6,19 +6,21 @@ package:
   version: {{ version }}
 
 source:
-  url: https://registry.npmjs.org/{{ name }}/-/{{ name }}-{{ version }}.tgz
-  sha256: ec7fe685bab3a9a045e6ac51c0427cd07133a96bf3370d3e719434d3d223f85b
+  url: https://github.com/purescript/{{ name }}/archive/{{ version  }}.tar.gz
+  sha256: 0ae1b042010c4d1ffb3865ba0cf67beea741a40c724065dc4056367964b6f4ab
 
 build:
   number: 0
 
 requirements:
   build:
-    - nodejs
-    - pnpm
-    - pnpm-licenses
-  run:
-    - nodejs
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cabal-install
+    - cabal-plan
+    - ghc
+  host:
+    - libiconv  # [osx]
 
 test:
   commands:
@@ -29,7 +31,7 @@ about:
   license: BSD-3-Clause
   license_file:
     - LICENSE
-    - third-party-licenses.txt
+    - license-files/
   summary: PureScript package manager and build tool
   dev_url: https://github.com/purescript/{{ name }}
 
