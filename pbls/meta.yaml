@@ -20,7 +20,9 @@ requirements:
 
 test:
   commands:
-    - {{ name }} --help
+    - {{ name }} &
+    - exe_pid=$!
+    - trap "kill -SIGTERM ${exe_pid}" SIGTERM
 
 about:
   home: https://git.sr.ht/~rrc/{{ name }}
