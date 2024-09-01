@@ -1,0 +1,38 @@
+{% set name = "pest-language-server" %}
+{% set version = "0.3.11" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/pest-parser/pest-ide-tools/archive/v{{ version }}.tar.gz
+  sha256: 6e3327c78b62aa12e4e2884449021e2915a97ccef36d1d907bbe669dbb1aaf5b
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} &
+    - exe_pid=$!
+    - trap "kill -SIGTERM ${exe_pid}" SIGTERM
+
+about:
+  home: https://github.com/pest-parser/pest-ide-tools
+  license: Apache-2.0
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: IDE tools for writing pest grammars, using the Language Server Protocol for Visual Studio Code, Vim and other editors
+  dev_url: https://github.com/pest-parser/pest-ide-tools
+
+extra:
+  recipe-maintainers:
+    - danielnachun
