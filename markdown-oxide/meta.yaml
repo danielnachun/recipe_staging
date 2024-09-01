@@ -1,0 +1,36 @@
+{% set name = "markdown-oxide" %}
+{% set version = "0.23.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/Feel-ix-343/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: b614e5a8fb7fd1fb822b11ab106b9c83ebd1bed4e24ab4d344ec1140b273a6d7
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/Feel-ix-343/{{ name }}
+  license: GPL-3.0-or-later
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Robust, Minimalist, Unbundled PKM for your favorite text-editor through the LSP
+  dev_url: https://github.com/Feel-ix-343/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
