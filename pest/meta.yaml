@@ -1,0 +1,37 @@
+{% set name = "pest" %}
+{% set version = "2.7.11" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/pest-parser/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 204ad6f114b84fbaaeb7e1792a961122b24d605847bc234e1a27e445a71f4cc6
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/pest-parser/{{ name }}
+  license: Apache-2.0 AND MIT
+  license_file:
+    - LICENSE-APACHE
+    - LICENSE-MIT
+    - THIRDPARTY.yml
+  summary: The Elegant Parser
+  dev_url: https://github.com/pest-parser/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
