@@ -20,8 +20,10 @@ requirements:
 
 test:
   commands:
-    - rune-cli --help
-    - rune-languageserver --help
+    - rune --help
+    - rune-languageserver &
+    - exe_pid=$!
+    - trap "kill -SIGTERM ${exe_pid}" SIGTERM
 
 about:
   home: https://github.com/rune-rs/{{ name }}

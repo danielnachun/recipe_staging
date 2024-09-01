@@ -11,5 +11,5 @@ cargo install --no-track --locked --root ${PREFIX} --path crates/rune-cli
 cargo install --no-track --locked --root ${PREFIX} --path crates/rune-languageserver
 
 # strip debug symbols
-"$STRIP" "$PREFIX/bin/rune-cli"
+"$STRIP" "$PREFIX/bin/rune"
 "$STRIP" "$PREFIX/bin/rune-languageserver"
