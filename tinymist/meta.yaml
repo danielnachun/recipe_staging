@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/Myriad-Dreamin/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: ecb16c0a1d2456edbfd3471d3a99ae8813762d8212434bb945688b1de072656a
+  url: https://github.com/Myriad-Dreamin/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 19d28b1c7c9fed755a3bf599c9dc4147755b7ff12a329a328fa392db10af4bb6
 
 build:
   number: 0
