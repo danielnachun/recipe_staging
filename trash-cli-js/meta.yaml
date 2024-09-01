@@ -6,16 +6,17 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/sindresorhus/trash-cli/archive/v{{ version }}.tar.gz
-  sha256: 99afde49fd1419acafd611bd986bec442d87f00e2b3531aca727688af06cb45b
+  url: https://registry.npmjs.org/trash-cli/-/trash-cli-{{ version }}.tgz
+  sha256: ca37a5d3bfac8a03d679d91e98cc84e181d7929a3fc367fe6e0cc273e826e203
 
 build:
-  noarch: generic
   number: 0
 
 requirements:
   build:
     - nodejs
+    - pnpm
+    - pnpm-licenses
   run:
     - nodejs
 
@@ -26,7 +27,9 @@ test:
 about:
   home: https://github.com/sindresorhus/{{ name }}
   license: MIT
-  license_file: license
+  license_file:
+    - license
+    - third-party-licenses.txt
   summary: Move files and folders to the trash
   dev_url: https://github.com/sindresorhus/{{ name }}
 
