@@ -24,7 +24,7 @@ test:
 
 about:
   home: https://github.com/Canop/{{ name }}
-  license: MIT
+  license: GPL-3.0-or-later
   license_file:
     - LICENSE
     - THIRDPARTY.yml
