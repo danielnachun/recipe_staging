@@ -1,0 +1,38 @@
+{% set name = "unocss-language-server" %}
+{% set version = "0.1.5" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://registry.npmjs.org/{{ name }}/-/{{ name }}-{{ version }}.tgz
+  sha256: 92b7b282d9101bb0e177430fb3611edabafad3efb20b11dc48d729105710f278
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} 2>&1 | grep -q 'Connection input stream is not set.'
+
+about:
+  home: https://github.com/xna00/unocss-language-server
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Language server for UnoCSS
+  dev_url: https://github.com/xna00/unocss-language-server
+
+extra:
+  recipe-maintainers:
+    - danielnachun
