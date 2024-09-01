@@ -1,0 +1,37 @@
+{% set name = "nil" %}
+{% set version = "2024-08-06" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/oxalica/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: 250272975d1505f35aebcb18cb1bb4cfcac8cb3478ff5ddf8698d37b686719f6
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/oxalica/{{ name }}
+  license: Apache-2.0 AND MIT
+  license_file:
+    - LICENCE-APACHE
+    - LICENCE-MIT
+    - THIRDPARTY.yml
+  summary: Nix Language server, an incremental analysis assistant for writing in Nix.
+  dev_url: https://github.com/oxalica/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
