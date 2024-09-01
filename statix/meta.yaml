@@ -1,0 +1,36 @@
+{% set name = "statix" %}
+{% set version = "0.5.8" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/oppiliappan/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 547ee83df5814c18f8577b5ca25a1f12a416900b6eaa95821386a28090e8a89d
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('rust') }}
+    - {{ compiler('c') }}
+    - cargo-bundle-licenses
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/oppiliappan/{{ name }}
+  license: MIT
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: lints and suggestions for the nix programming language
+  dev_url: https://github.com/oppiliappan/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
