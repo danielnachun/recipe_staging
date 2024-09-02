@@ -1,0 +1,40 @@
+{% set name = "lean4" %}
+{% set version = "4.11.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/leanprover/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 8b7fc8e71e107250c7bbf911eb1f450379d874857a26236577aaa624dd5962b5
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cmake
+    - make
+  host:
+    - gmp
+
+test:
+  commands:
+    - lake --help
+    - lean --help
+    - leanc --help
+    - leanmake --help
+
+about:
+  home: https://github.com/leanprover/lean4
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Lean 4 programming language and theorem prover
+  dev_url: https://github.com/leanprover/lean4
+
+extra:
+  recipe-maintainers:
+    - danielnachun
