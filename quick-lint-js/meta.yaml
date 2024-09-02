@@ -1,0 +1,35 @@
+{% set name = "quick-lint-js" %}
+{% set version = "3.2.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/quick-lint/quick-lint-js/archive/{{ version }}.tar.gz
+  sha256: e980d010bc866bceae5063a5d19346a71c6b28c92e336951ad0b84d32f76453e
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cmake
+    - make
+
+test:
+  commands:
+    - {{ name }} --help
+
+about:
+  home: https://github.com/quick-lint/quick-lint-js
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  summary: quick-lint-js finds bugs in JavaScript programs
+  dev_url: https://github.com/quick-lint/quick-lint-js
+
+extra:
+  recipe-maintainers:
+    - danielnachun
