@@ -1,0 +1,4 @@
+c_compiler:  # [linux]
+  - gcc  # [linux]
+c_compiler_version:  # [linux]
+  - '13'  # [linux]
