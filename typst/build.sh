@@ -10,4 +10,4 @@ cargo-bundle-licenses \
 cargo install --no-track --locked --root ${PREFIX} --path crates/typst-cli
 
 # strip debug symbols
-"$STRIP" "$PREFIX/bin/${PKG_NAME}-cli"
+"$STRIP" "$PREFIX/bin/${PKG_NAME}"

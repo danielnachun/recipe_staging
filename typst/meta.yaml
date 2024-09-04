@@ -8,6 +8,8 @@ package:
 source:
   url: https://github.com/typst/{{ name }}/archive/v{{ version }}.tar.gz
   sha256: b1ba054e821073daafd90675c4822bcd8166f33fe2e3acba87ba1451a0d1fc56
+  patches:
+    - ./442e7e89bb3e236f0a2526d871862b502462fe17.patch
 
 build:
   number: 0
@@ -20,7 +22,7 @@ requirements:
 
 test:
   commands:
-    - typst-cli --help
+    - typst --help
 
 about:
   home: https://github.com/typst/{{ name }}
