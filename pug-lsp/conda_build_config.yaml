@@ -1,4 +1,6 @@
-c_compiler:  # [linux]
+c_compiler:
   - gcc  # [linux]
-c_compiler_version:  # [linux]
+  - clang  # [osx]
+c_compiler_version:
   - '13'  # [linux]
+  - '17'  # [osx]
