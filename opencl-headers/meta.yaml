@@ -1,0 +1,37 @@
+{% set name = "opencl-headers" %}
+{% set version = "2024.05.08" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/KhronosGroup/OpenCL-Headers/archive/v{{ version }}.tar.gz
+  sha256: 3c3dd236d35f4960028f4f58ce8d963fb63f3d50251d1e9854b76f1caab9a309
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cmake
+    - make
+    - python
+
+test:
+  commands:
+    - test -f ${PREFIX}/include/CL/cl.h
+
+about:
+  home: https://github.com/KhronosGroup/OpenCL-Headers
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Khronos OpenCL-Headers
+  dev_url: https://github.com/KhronosGroup/OpenCL-Headers
+
+extra:
+  recipe-maintainers:
+    - danielnachun
