@@ -18,6 +18,8 @@ requirements:
     - {{ compiler('cxx') }}
     - cmake
     - make
+  host:
+    - simdjson
 
 test:
   commands:
