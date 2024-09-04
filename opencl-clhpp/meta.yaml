@@ -1,0 +1,37 @@
+{% set name = "opencl-clhpp" %}
+{% set version = "2024.05.08" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/KhronosGroup/OpenCL-CLHPP/archive/v{{ version }}.tar.gz
+  sha256: 22921fd23ca72a21ac5592861d64e7ea53cd8a705fccd73905911f8489519a0b
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cmake
+    - make
+    - opencl-headers
+
+test:
+  commands:
+    - test -f ${PREFIX}/include/CL/opencl.hpp
+
+about:
+  home: https://github.com/KhronosGroup/OpenCL-CLHPP
+  license: Apache-2.0
+  license_file: LICENSE.txt
+  summary: Khronos OpenCL-CLHPP
+  dev_url: https://github.com/KhronosGroup/OpenCL-CLHPP
+
+extra:
+  recipe-maintainers:
+    - danielnachun

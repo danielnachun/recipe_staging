@@ -1,0 +1,24 @@
+From c16a0cd78cbbfeea9b7077c1bbe3e53849edaef9 Mon Sep 17 00:00:00 2001
+From: Daniel Nachun <daniel.nachun@gmail.com>
+Date: Wed, 4 Sep 2024 12:04:47 -0700
+Subject: [PATCH] add missing include
+
+---
+ src/clinfo.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/clinfo.cpp b/src/clinfo.cpp
+index 11997a1..2f7f4c4 100644
+--- a/src/clinfo.cpp
++++ b/src/clinfo.cpp
+@@ -5,6 +5,7 @@
+ //  Created by Ilia Shoshin on 5.2.2023.
+ //
+ 
++#include "CL/cl.h"
+ #include "clinfo.hpp"
+ #include "log.hpp"
+ #include "utils.hpp"
+-- 
+2.45.2
+

@@ -1,0 +1,48 @@
+{% set name = "opencl-language-server" %}
+{% set version = "0.6.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/Galarius/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: 05ee011d0dfc829bcba35169ef4927310f7691bdf1bad87643f891eab413d9a7
+  patches:
+    - 0001-add-missing-include.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cmake
+    - make
+    - pkg-config
+  host:
+    - cli11
+    - fmt
+    - nlohmann_json
+    - opencl-clhpp
+    - opencl-headers
+    - khronos-opencl-icd-loader  # [not linux]
+    - ocl-icd  # [linux]
+    - spdlog
+    - uriparser
+
+test:
+  commands:
+    - opencl-language-server --help
+
+about:
+  home: https://github.com/Galarius/opencl-language-server
+  license: MIT
+  license_file: LICENSE
+  summary: Provides an OpenCL kernel diagnostics
+  dev_url: https://github.com/Galarius/opencl-language-server
+
+extra:
+  recipe-maintainers:
+    - danielnachun
