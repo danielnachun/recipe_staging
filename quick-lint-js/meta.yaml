@@ -19,7 +19,7 @@ requirements:
     - cmake
     - make
   host:
-    - googletest
+    - gtest
     - simdjson
 
 test:
