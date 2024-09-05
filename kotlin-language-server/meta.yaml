@@ -16,6 +16,7 @@ build:
 requirements:
   build:
     - openjdk =21
+    - sed
   run:
     - openjdk
 
