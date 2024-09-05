@@ -1,0 +1,39 @@
+{% set name = "neo4j" %}
+{% set version = "5.23.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/neo4j/neo4j/archive/{{ version }}.tar.gz
+  sha256: 0d4858a7ed50bcf2550c1d7b3f3bdf8dcf58128b1e7eedc9ba43a21cffa1155c
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - maven
+    - openjdk =17
+  run:
+    - openjdk
+
+test:
+  commands:
+    - neo4j --help
+    - neo4j-admin --help
+
+about:
+  home: https://github.com/neo4j/neo4j
+  license: GPL-3.0-or-later
+  license_file:
+    - LICENSE.txt
+    - target/generated-resources/licenses/
+  summary: Graphs for Everyone
+  dev_url: https://github.com/neo4j/neo4j
+
+extra:
+  recipe-maintainers:
+    - danielnachun
