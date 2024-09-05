@@ -15,6 +15,7 @@ build:
 
 requirements:
   build:
+    - maven
     - openjdk =21
     - sed
   run:
