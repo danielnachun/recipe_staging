@@ -1,0 +1,49 @@
+{% set name = "lsp-tree-sitter" %}
+{% set version = "0.0.16" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/lsp_tree_sitter-{{ version }}.tar.gz
+  sha256: 6e11d66629ed31b4c829ee87a6669468a6a952b9e84b56e5898234e6a599cf62
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python >=3.10
+    - setuptools-scm >=6.2
+    - setuptools-generate >=0.0.6
+    - pip
+  run:
+    - python >=3.10
+    - colorama
+    - jinja2
+    - jsonschema >=4.0.0
+    - pygls
+    - tree_sitter >=0.22.0
+
+test:
+  imports:
+    - lsp_tree_sitter
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  summary: a library to create language servers
+  dev_url: https://github.com/neomutt/lsp-tree-sitter
+  license: GPL-3.0
+  license_file:
+    - LICENSE
+    - template/LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
