@@ -5,7 +5,7 @@ RUN yum install -y mesa-libGL
 COPY .github/custom_channels /tmp/custom_channels
 RUN source /opt/conda/etc/profile.d/conda.sh; \
     conda activate; \
-    mamba install boa conda-verify; \
+    mamba install boa; \
     mamba clean -ay; \
     conda config --append channels bioconda; \
     conda config --append channels nodefaults; \
