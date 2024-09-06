@@ -1,0 +1,39 @@
+{% set name = "rescript" %}
+{% set version = "11.1.3" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/rescript-lang/rescript-compiler/archive/v{{ version }}.tar.gz
+  sha256: 4a02190837332d08a873077aa426cf76870e76e0fd8680cecbabe9221209e3ef
+
+build:
+  number: 0
+  skip: true  # [win]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - binutils # [linux]
+    - gcc # [linux]
+    - odig
+    - opam
+
+test:
+  commands:
+    - rescript 2>&1 | grep -q 'rescript.json'
+
+about:
+  home: https://github.com/rescript-lang/rescript-compiler
+  license: LGPL-3.0-or-later
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: The compiler for ReScript.
+  dev_url: https://github.com/rescript-lang/rescript-compiler
+
+extra:
+  recipe-maintainers:
+    - danielnachun
