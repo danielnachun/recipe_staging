@@ -1,0 +1,39 @@
+{% set name = "puppet-resource_api" %}
+{% set version = "1.9.0" %}
+
+package:
+  name: rb-{{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: 4b82e77fad1d3810f3a84ad727aa9fd7c4e8b1179bacc034e9071c0a8f2ebe67
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - rb-hocon
+    - ruby>=3.2
+
+test:
+  commands:
+    - ruby -r puppet/resource_api/version -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: Apache-2.0
+  license_file: {{ name }}-{{ version }}/LICENSE
+  summary: This library provides a simple way to write new native resources for puppet.
+  dev_url: https://github.com/puppetlabs/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
