@@ -1,0 +1,38 @@
+{% set name = "singleton" %}
+{% set version = "0.2.0" %}
+
+package:
+  name: rb-{{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: a6cb7304421684d80093859aed38b26035f6e54a38c3e4fe6456cfb56b240563
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: BSD-2-Clause
+  license_file: {{ name }}-{{ version }}/LICENSE.txt
+  summary: The Singleton module implements the Singleton pattern.
+  dev_url: https://github.com/ruby/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun

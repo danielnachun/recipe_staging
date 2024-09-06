@@ -1,0 +1,38 @@
+{% set name = "semantic_puppet" %}
+{% set version = "1.1.0" %}
+
+package:
+  name: rb-{{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: 52d108d08e1a5d95c00343cb3a4936fb1deecff2be612ec39c9cb66be5a8b859
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: Apache-2.0
+  license_file: {{ name }}-{{ version }}/LICENSE
+  summary: Tools used by Puppet to parse, validate, and compare Semantic Versions and Version Ranges and to query and resolve module dependencies.
+  dev_url: https://github.com/puppetlabs/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
