@@ -1,0 +1,38 @@
+{% set name = "puppet-lint" %}
+{% set version = "4.2.4" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: 49a0f6277901b7d5227df968c6553ebbd8479479e47075181cc306d9b97357d8
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies --bindir=${PREFIX}/bin {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  license_file: {{ name }}-{{ version }}/LICENSE
+  summary: Checks your Puppet manifests against the Puppetlabs style guide and alerts you to any discrepancies.
+  dev_url: https://github.com/puppetlabs/puppet-lint/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
