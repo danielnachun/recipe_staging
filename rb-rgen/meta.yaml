@@ -1,0 +1,38 @@
+{% set name = "rgen" %}
+{% set version = "0.9.1" %}
+
+package:
+  name: rb-{{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: 771751201721cb120cd2ba536efb19fdead25c3558319217b7d14cf5b31b6fa9
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+test:
+  commands:
+    - ruby -r rgen/transformer -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  license_file: {{ name }}-{{ version }}/MIT-LICENSE
+  summary: RGen is a framework for Model Driven Software Development (MDSD) in Ruby.
+  dev_url: https://github.com/mthiede/rgen
+
+extra:
+  recipe-maintainers:
+    - danielnachun
