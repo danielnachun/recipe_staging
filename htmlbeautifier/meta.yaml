@@ -1,0 +1,38 @@
+{% set name = "htmlbeautifier" %}
+{% set version = "1.4.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: b43d08f7e2aa6ae1b5a6f0607b4ed8954c8d4a8e85fd2336f975dda1e4db385b
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies --bindir=${PREFIX}/bin {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.3
+  run:
+    - ruby>=3.3
+
+test:
+  commands:
+    - htmlbeautifier --help
+
+about:
+  home: https://rubygems.org/gems/htmlbeautifier
+  license: MIT
+  license_file: COPYING.txt
+  summary: A normaliser/beautifier for HTML that also understands embedded Ruby.
+  dev_url: https://github.com/threedaymonk/htmlbeautifier
+
+extra:
+  recipe-maintainers:
+    - danielnachun
