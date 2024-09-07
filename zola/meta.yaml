@@ -17,6 +17,10 @@ requirements:
     - {{ compiler('rust') }}
     - {{ compiler('c') }}
     - cargo-bundle-licenses
+    - pkg-config
+  host:
+    - oniguruma
+    - openssl
 
 test:
   commands:

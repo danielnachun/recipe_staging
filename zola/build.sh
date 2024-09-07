@@ -8,7 +8,8 @@ cargo-bundle-licenses \
     --output THIRDPARTY.yml
 
 # build statically linked binary with Rust
-cargo install --no-track --locked --root ${PREFIX} --path .
+export RUSTONIG_SYSTEM_LIBONIG=1
+cargo install --no-track --features native-tls --locked --root ${PREFIX} --path .
 
 # strip debug symbols
 "$STRIP" "$PREFIX/bin/$PKG_NAME"
