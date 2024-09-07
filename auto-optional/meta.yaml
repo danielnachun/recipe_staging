@@ -1,0 +1,46 @@
+{% set name = "auto-optional" %}
+{% set version = "0.3.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/auto-optional-{{ version }}.tar.gz
+  sha256: dcd2af973badd67a89f1bef021a50b298882fc95935739a8818b43c5942118d8
+
+build:
+  entry_points:
+    - auto-optional = auto_optional.main:app
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python >=3.8,<4.0
+    - poetry-core >=1.0.0
+    - pip
+  run:
+    - python >=3.8,<4.0
+    - libcst >=0.3.20,<0.4.0
+    - typer >=0.4.0,<0.5.0
+
+test:
+  imports:
+    - auto_optional
+  commands:
+    - pip check
+    - auto-optional --help
+  requires:
+    - pip
+
+about:
+  home: https://auto-optional.daanluttik.nl
+  summary: Adds the Optional type-hint to arguments where the default value is None
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
