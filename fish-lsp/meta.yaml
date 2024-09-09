@@ -15,6 +15,7 @@ build:
 
 requirements:
   build:
+    - fish
     - nodejs
     - pnpm
     - pnpm-licenses
