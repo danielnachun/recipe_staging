@@ -1,0 +1,39 @@
+{% set name = "erb-formatter" %}
+{% set version = "0.7.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: 64d188897b9827a486ba56eb4cd60b4e3ebc8fce0674ee94c9b074d3c836a4d9
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies --bindir=${PREFIX}/bin {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - syntax_tree
+    - ruby>=3.2
+
+test:
+  commands:
+    - erb-formatter --help
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  license_file: {{ name }}-{{ version }}/LICENSE.txt
+  summary: Format ERB files with speed and precision.
+  dev_url: https://github.com/nebulab/erb-formatter
+
+extra:
+  recipe-maintainers:
+    - danielnachun
