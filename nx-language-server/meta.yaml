@@ -23,7 +23,9 @@ requirements:
 
 test:
   commands:
-    - {{ name }} --help
+    - {{ name }} --node-ipc &
+    - exe_pid=$!
+    - trap "kill -SIGTERM ${exe_pid}" SIGTERM
 
 about:
   home: https://github.com/nrwl/nx-console
