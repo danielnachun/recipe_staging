@@ -1,0 +1,38 @@
+{% set name = "connection_pool" %}
+{% set version = "2.4.1" %}
+
+package:
+  name: rb-{{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: 0f40cf997091f1f04ff66da67eabd61a9fe0d4928b9a3645228532512fab62f4
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  license_file: {{ name }}-{{ version }}/LICENSE
+  summary: Generic connection pool for Ruby
+  dev_url: https://github.com/mperham/connection_pool
+
+extra:
+  recipe-maintainers:
+    - danielnachun

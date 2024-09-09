@@ -1,5 +1,5 @@
 {% set name = "activesupport" %}
-{% set version = "7.0.6" %}
+{% set version = "7.2.1" %}
 
 package:
   name: rb-{{ name|lower }}
@@ -7,26 +7,28 @@ package:
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
-  sha256: d3abba6b15d8fd7af07f3322c370f00eb8ce6715fb714436342999628c705ab2
+  sha256: 7557fa077a592a4f36f7ddacf4d9d71c34aff69ed20236b8a61c22d567da8c24
 
 build:
   noarch: generic
-  number: 1
+  number: 0
   script:
     - gem install -N -l -V --ignore-dependencies {{ name }}-{{ version }}.gem
     - gem unpack {{ name }}-{{ version }}.gem
 
 requirements:
   host:
-    - rb-concurrent-ruby
-    - rb-i18n
-    - rb-minitest
-    - rb-tzinfo
     - ruby=3.2
   run:
+    - rb-base64
+    - rb-bigdecimal
     - rb-concurrent-ruby
+    - rb-connection_pool
+    - rb-drb
     - rb-i18n
+    - rb-logger
     - rb-minitest
+    - rb-securerandom
     - rb-tzinfo
     - ruby>=3.2
 
