@@ -18,7 +18,7 @@ build:
 
 requirements:
   host:
-    - ruby=3.3
+    - ruby=3.2
   run:
     - rb-base64
     - rb-bigdecimal
@@ -30,7 +30,7 @@ requirements:
     - rb-minitest
     - rb-securerandom
     - rb-tzinfo
-    - ruby>=3.3
+    - ruby>=3.2
 
 test:
   commands:
