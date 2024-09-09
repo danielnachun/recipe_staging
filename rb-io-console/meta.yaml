@@ -22,7 +22,7 @@ requirements:
   host:
     - ruby=3.2
   run:
-    - ruby>=3.2
+    - ruby=3.2
 
 test:
   commands:
