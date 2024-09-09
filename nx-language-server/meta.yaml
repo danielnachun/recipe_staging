@@ -1,0 +1,43 @@
+{% set name = "nxls" %}
+{% set version = "1.8.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://registry.npmjs.org/{{ name }}/-/{{ name }}-{{ version }}.tgz
+  sha256: a2e988937c1bda880cddac35373d098e3ede0096f31dd9e7db5a5af71a29cb36
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - make
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+test:
+  commands:
+    - {{ name }} --node-ipc &
+    - exe_pid=$!
+    - trap "kill -SIGTERM ${exe_pid}" SIGTERM
+
+about:
+  home: https://github.com/nrwl/nx-console
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: A language server that utilizes the json-languageservice to provide code completion and more, for Nx workspaces.
+  dev_url: https://github.com/nrwl/nx-console
+
+extra:
+  recipe-maintainers:
+    - danielnachun
