@@ -13,25 +13,27 @@ copy_license() {
 export -f copy_license
 
 # Create wrappers around cc and c++ because they are hard-coded in bz2 dependency
-mkdir -p ${SRC_DIR}/sbin
-tee ${SRC_DIR}/sbin/cc << EOF
-#!/bin/sh
-exec \${CC} \${CFLAGS} \${LDFLAGS} \$@
-EOF
-chmod +x ${SRC_DIR}/sbin/cc
+if [[ ${target_platform} =~ .*linux.* ]]; then
+    mkdir -p ${SRC_DIR}/sbin
+    tee ${SRC_DIR}/sbin/cc << EOF
+    #!/bin/sh
+    exec \${CC} \${CFLAGS} \${LDFLAGS} \$@
+    EOF
+    chmod +x ${SRC_DIR}/sbin/cc
 
-tee ${SRC_DIR}/sbin/c++ << EOF
-#!/bin/sh
-exec \${CXX} \${CXXFLAGS} \${LDFLAGS} \$@
-EOF
-chmod +x ${SRC_DIR}/sbin/c++
+    tee ${SRC_DIR}/sbin/c++ << EOF
+    #!/bin/sh
+    exec \${CXX} \${CXXFLAGS} \${LDFLAGS} \$@
+    EOF
+    chmod +x ${SRC_DIR}/sbin/c++
+fi
 
 export OPAMROOT=${SRC_DIR}/.opam
 export OPAMYES=1
 export OPAMDOWNLOADJOBS=${CPU_COUNT}
 export OPAMJOBS=${CPU_COUNT}
 
-opam init --no-setup --disable-sandboxing --compiler=4.12.0
+opam init --no-setup --disable-sandboxing
 export PATH="${SRC_DIR}/sbin:${PATH}"
 opam exec -- opam install . -y --deps-only --no-depexts
 opam exec -- dune build --only-packages=esy --profile release @install
