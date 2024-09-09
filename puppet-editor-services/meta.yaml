@@ -18,7 +18,7 @@ build:
 
 requirements:
   host:
-    - ruby=3.3
+    - ruby=3.2
   run:
     - puppet-lint
     - rb-hiera-eyaml
@@ -26,7 +26,7 @@ requirements:
     - rb-puppetfile-resolver
     - rb-puppet-strings
     - rb-yard
-    - ruby>=3.3
+    - ruby>=3.2
 
 test:
   commands:
