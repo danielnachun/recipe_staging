@@ -30,9 +30,9 @@ export OPAMROOT=${SRC_DIR}/.opam
 export OPAMYES=1
 export OPAMDOWNLOADJOBS=${CPU_COUNT}
 export OPAMJOBS=${CPU_COUNT}
-export PATH="${SRC_DIR}/sbin:${PATH}"
 
 opam init --no-setup --disable-sandboxing
+export PATH="${SRC_DIR}/sbin:${PATH}"
 opam exec -- opam install . -y --deps-only --no-depexts
 opam exec -- dune build --only-packages=esy --profile release @install
 opam exec -- dune install --prefix ${PREFIX}
