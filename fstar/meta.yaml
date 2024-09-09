@@ -1,5 +1,5 @@
 {% set name = "fstar" %}
-{% set version = "2024.08.14" %}
+{% set version = "2024.09.05" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/FStarLang/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 12efc811ac9b4dace71631d44c4c779273af22d10dd49f1f2f7feb9453806c37
+  sha256: d8fc0118e3a43560172eccb5d6c254868cd30d50d4ce3ba315e824a6500ea925
 
 build:
   number: 0

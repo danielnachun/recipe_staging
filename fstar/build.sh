@@ -17,7 +17,7 @@ export OPAMYES=1
 export OPAMDOWNLOADJOBS=${CPU_COUNT}
 export OPAMJOBS=${CPU_COUNT}
 
-sed -i 's/4.8.5-1/4.13.0-3/' fstar.opam
+sed -i 's/4.8.5-1/4.12.6/' fstar.opam
 
 opam init --no-setup --disable-sandboxing
 opam exec -- opam install . -y --deps-only --no-depexts
