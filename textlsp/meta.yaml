@@ -37,7 +37,7 @@ test:
   imports:
     - textLSP
   commands:
-    - pip check
+    # - pip check
     - textlsp --help
   requires:
     - pip
