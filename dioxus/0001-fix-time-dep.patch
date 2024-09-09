@@ -1,0 +1,28 @@
+From f986c3b2fbccb14f933e87afad22a3f82459e7df Mon Sep 17 00:00:00 2001
+From: Daniel Nachun <daniel.nachun@gmail.com>
+Date: Sun, 8 Sep 2024 12:55:18 -0700
+Subject: [PATCH] fix time dep
+
+---
+ Cargo.lock | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Cargo.lock b/Cargo.lock
+index da791a0..d2cf3d4 100644
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -9028,9 +9028,9 @@ dependencies = [
+ 
+ [[package]]
+ name = "time"
+-version = "0.3.34"
++version = "0.3.36"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "c8248b6521bb14bc45b4067159b9b6ad792e2d6d754d6c41fb50e29fefe38749"
++checksum = "5dfd88e563464686c916c7e46e623e520ddc6d79fa6641390f2e3fa86e83e885"
+ dependencies = [
+  "deranged",
+  "itoa 1.0.11",
+-- 
+2.45.2
+
