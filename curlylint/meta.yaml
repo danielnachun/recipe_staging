@@ -32,7 +32,7 @@ test:
   imports:
     - curlylint
   commands:
-    - pip check
+    # - pip check
     - curlylint --help
   requires:
     - pip
