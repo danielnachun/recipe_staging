@@ -12,11 +12,19 @@ copy_license() {
 
 export -f copy_license
 
+# Create wrappers around cc and c++ because they are hard-coded in bz2 dependency
 mkdir -p ${SRC_DIR}/sbin
-#!/bin/sh
 tee ${SRC_DIR}/sbin/cc << EOF
-exec \${CC} \${CFLAGS} \${LDLFAGS} \$@
+#!/bin/sh
+exec \${CC} \${CFLAGS} \${LDFLAGS} \$@
 EOF
+chmod +x ${SRC_DIR}/sbin/cc
+
+tee ${SRC_DIR}/sbin/c++ << EOF
+#!/bin/sh
+exec \${CXX} \${CXXFLAGS} \${LDFLAGS} \$@
+EOF
+chmod +x ${SRC_DIR}/sbin/c++
 
 export OPAMROOT=${SRC_DIR}/.opam
 export OPAMYES=1
