@@ -31,7 +31,7 @@ export OPAMYES=1
 export OPAMDOWNLOADJOBS=${CPU_COUNT}
 export OPAMJOBS=${CPU_COUNT}
 
-opam init --no-setup --disable-sandboxing
+opam init --no-setup --disable-sandboxing --compiler=4.12.0
 export PATH="${SRC_DIR}/sbin:${PATH}"
 opam exec -- opam install . -y --deps-only --no-depexts
 opam exec -- dune build --only-packages=esy --profile release @install
