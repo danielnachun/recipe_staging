@@ -20,7 +20,7 @@ requirements:
   host:
     - ruby=3.2
   run:
-    - rb-activesupport
+    - rb-activesupport >=7.2.1
     - rb-builder
     - rb-erubi
     - rb-rails-dom-testing
