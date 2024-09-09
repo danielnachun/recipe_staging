@@ -25,6 +25,7 @@ requirements:
     - odig
     - opam
     - pkg-config
+    - sed
   host:
     - gmp
 
