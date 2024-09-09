@@ -1,0 +1,41 @@
+{% set name = "haml" %}
+{% set version = "6.3.0" %}
+
+package:
+  name: rb-{{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: 8e6eb87d869639e348852009e74a2a1663d79663ed7e7dbcb38beb1f12bcdd97
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - rb-temple
+    - rb-thor
+    - rb-tilt
+    - ruby>=3.2
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  license_file: {{ name }}-{{ version }}/MIT-LICENSE
+  summary: An elegant, structured (X)HTML/XML templating engine.
+  dev_url: https://github.com/haml/haml
+
+extra:
+  recipe-maintainers:
+    - danielnachun

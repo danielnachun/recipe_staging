@@ -1,0 +1,43 @@
+{% set name = "haml_lint" %}
+{% set version = "0.58.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: 2f796864779a213d6d037c923a8063327e0bd25971f1eb81452699d96523c2d5
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies --bindir=${PREFIX}/bin {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - rb-haml
+    - rb-parallel
+    - rb-rainbow
+    - rb-sysexits
+    - rubocop
+    - ruby>=3.2
+
+test:
+  commands:
+    - haml-lint --help
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  license_file: MIT-LICENSE
+  summary: Tool for writing clean and consistent HAML
+  dev_url: https://github.com/sds/haml-lint
+
+extra:
+  recipe-maintainers:
+    - danielnachun
