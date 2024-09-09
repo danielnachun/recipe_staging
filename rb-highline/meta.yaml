@@ -1,0 +1,39 @@
+{% set name = "highline" %}
+{% set version = "2.1.0" %}
+
+package:
+  name: rb-{{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: d63d7f472f8ffaa143725161ae6fb06895b5cb7527e0b4dac5ad1e4902c80cb9
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - rb-reline
+    - ruby>=3.2
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: GPL-2.0-or-later
+  license_file: {{ name }}-{{ version }}/LICENSE
+  summary: A high-level IO library that provides validation, type conversion, and more for command-line interfaces.
+  dev_url: https://github.com/JEG2/highline
+
+extra:
+  recipe-maintainers:
+    - danielnachun

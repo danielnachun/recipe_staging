@@ -1,0 +1,45 @@
+{% set name = "puppet-editor-services" %}
+{% set version = "2.0.4" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: 3942daafcf3e6d3b4b2de4e546b1996bdf39b2b07a27c636c3de2fe149814a4e
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies --bindir=${PREFIX}/bin {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - puppet-lint
+    - rb-hiera-eyaml
+    - rb-molinillo
+    - rb-puppetfile-resolver
+    - rb-puppet-strings
+    - rb-yard
+    - ruby>=3.2
+
+test:
+  commands:
+    - puppet-debugserver --help
+    - puppet-languageserver --help
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: Apache-2.0
+  license_file: {{ name }}-{{ version }}/LICENSE
+  summary: A ruby based implementation of a Language Server and Debug Server for the Puppet Language.
+  dev_url: https://github.com/puppetlabs/puppet-editor-services
+
+extra:
+  recipe-maintainers:
+    - danielnachun
