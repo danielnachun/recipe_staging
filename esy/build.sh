@@ -14,18 +14,18 @@ export -f copy_license
 
 # Create wrappers around cc and c++ because they are hard-coded in bz2 dependency
 if [[ ${target_platform} =~ .*linux.* ]]; then
-    mkdir -p ${SRC_DIR}/sbin
-    tee ${SRC_DIR}/sbin/cc << EOF
-    #!/bin/sh
-    exec \${CC} \${CFLAGS} \${LDFLAGS} \$@
-    EOF
-    chmod +x ${SRC_DIR}/sbin/cc
+mkdir -p ${SRC_DIR}/sbin
+tee ${SRC_DIR}/sbin/cc << EOF
+#!/bin/sh
+exec \${CC} \${CFLAGS} \${LDFLAGS} \$@
+EOF
+chmod +x ${SRC_DIR}/sbin/cc
 
-    tee ${SRC_DIR}/sbin/c++ << EOF
-    #!/bin/sh
-    exec \${CXX} \${CXXFLAGS} \${LDFLAGS} \$@
-    EOF
-    chmod +x ${SRC_DIR}/sbin/c++
+tee ${SRC_DIR}/sbin/c++ << EOF
+#!/bin/sh
+exec \${CXX} \${CXXFLAGS} \${LDFLAGS} \$@
+EOF
+chmod +x ${SRC_DIR}/sbin/c++
 fi
 
 export OPAMROOT=${SRC_DIR}/.opam
