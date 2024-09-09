@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/hfour/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: ac1135a360c9d14cf7940e533dce85ad4b164c9c72392e81e8561e352f352153
+  url: https://registry.npmjs.org/wsrun/-/wsrun-{{ version }}.tgz
+  sha256: 2288c6badf92b12dfa9dd48ecbe2194d779fd75d1bb66db28c388d4ef55e899b
 
 build:
   noarch: generic
