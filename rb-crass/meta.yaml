@@ -1,0 +1,38 @@
+{% set name = "crass" %}
+{% set version = "1.0.6" %}
+
+package:
+  name: rb-{{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: dc516022a56e7b3b156099abc81b6d2b08ea1ed12676ac7a5657617f012bd45d
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+test:
+  commands:
+    - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  license_file: {{ name }}-{{ version }}/LICENSE
+  summary: Crass is a pure Ruby CSS parser based on the CSS Syntax Level 3 spec.
+  dev_url: https://github.com/rgrove/crass/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
