@@ -1,0 +1,46 @@
+{% set name = "quantas" %}
+{% set version = "1.1.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/chaolinzhanglab/quantas/archive/45540111e08fcb3944fb257f384663fd041eb111.tar.gz
+  sha256: 289ca692c5cd49f0c323595b76a09b9e382428fd05cfc13caf57c6537d95f6ac
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  run:
+    - czplib
+    - perl>=5.32
+    - perl-bioperl-core
+    - perl-carp
+    - perl-data-dumper
+    - perl-getopt-long
+    - perl-math-cdf
+    - perl-scalar-list-utils
+    - perl-statistics-basic
+
+test:
+  commands:
+    - gapless_huge_file.pl 2>&1 | grep -q "bayesian analysis of splicing isoform structure from paired-end mRNA-seq data"
+    - sam2bed.pl 2>&1 | grep -q "Convert OLego SAM format to BED format (for both paired-end and single-end data)"
+    - summarize_expression_wrapper.pl
+    - summarize_splicing_wrapper.pl
+    - tag2junction.pl 2>&1 | grep -q "identify unique junctions from junctionreads and infer strand"
+    - tag2profile.pl 2>&1 | grep -q "Count tag numbers in sliding window or particular regions or each nucleotide position"
+    - test_expr_diff.pl 2>&1 | grep -q "test differential expression"
+
+about:
+  home: https://github.com/chaolinzhanglab/quantas
+  license: UNKNOWN
+  summary: Tools for inference of gene transcript structure and quantification of gene expression and alternate splicing
+  dev_url: https://github.com/chaolinzhanglab/quantas
+
+extra:
+  recipe-maintainers:
+    - danielnachun
