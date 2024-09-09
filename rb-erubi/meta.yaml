@@ -1,5 +1,5 @@
 {% set name = "erubi" %}
-{% set version = "1.7.0" %}
+{% set version = "1.13.0" %}
 
 package:
   name: rb-{{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
-  sha256: e921f78547824cc1de0a55bc99a641bd695d474b8723e5c4fa8a84fdd1c26afe
+  sha256: fca61b47daefd865d0fb50d168634f27ad40181867445badf6427c459c33cd62
 
 build:
   noarch: generic
