@@ -10,7 +10,7 @@ sed -i 's/kotlin("jvm")/kotlin("jvm")\nid("com.github.jk1.dependency-license-rep
 
 ./gradlew :server:build -PjavaVersion=21
 
-./gradlew generateLicenseReport
+./gradlew generateLicenseReport -PjavaVersion=21
 
 cp -r ${SRC_DIR}/server/build/install/server/lib ${PREFIX}/libexec/${PKG_NAME}
 cp -r ${SRC_DIR}/server/build/install/server/bin ${PREFIX}/libexec/${PKG_NAME}
