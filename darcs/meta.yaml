@@ -1,0 +1,42 @@
+{% set name = "darcs" %}
+{% set version = "2.18.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://hackage.haskell.org/package/{{ name }}-{{ version }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 14abd862927abe4387d226d013a4e6655317f29f8b0721991a17fdd883f8e69a
+
+build:
+  number: 0
+  skip: true  # [not unix]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cabal-install
+    - cabal-plan
+    - ghc
+  host:
+    - libiconv  #[osx]
+    - ncurses
+
+test:
+  commands:
+    - darcs --help
+
+about:
+  home: http://darcs.net/
+  license: GPL-2.0-or-later
+  license_file:
+    - COPYING
+    - license-files/
+  summary: a distributed, interactive, smart revision control system
+  dev_url: http://darcs.net/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
