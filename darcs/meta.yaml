@@ -23,6 +23,7 @@ requirements:
   host:
     - libiconv  #[osx]
     - ncurses
+    - zlib
 
 test:
   commands:
