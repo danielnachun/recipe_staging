@@ -1,0 +1,40 @@
+{% set name = "jekyll-sass-converter" %}
+{% set version = "2.2.0" %}
+
+package:
+  name: rb-{{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://rubygems.org/downloads/{{ name }}-{{ version }}.gem
+  sha256: 71894f61b1f062f9d56e90b83b29386c85af349749c5d6277a5ba4b2e69cfd1c
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies {{ name }}-{{ version }}.gem
+    - gem unpack {{ name }}-{{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - rb-sassc
+    - ruby>=3.2
+
+test:
+  commands:
+    - gem list | grep -s {{ name }}
+    # - ruby -r {{ name }} -e 'exit 0'
+
+about:
+  home: https://rubygems.org/gems/{{ name }}
+  license: MIT
+  license_file: LICENSE.txt
+  summary: A Sass converter for Jekyll.
+  dev_url: https://github.com/jekyll/jekyll-sass-converter
+
+extra:
+  recipe-maintainers:
+    - danielnachun
