@@ -20,7 +20,6 @@ requirements:
     - binutils # [linux]
     - gcc # [linux]
     - gxx # [linux]
-    - sysroot_linux-64=2.17  # [linux]
     - make
     - odig
     - opam

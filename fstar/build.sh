@@ -17,9 +17,9 @@ export OPAMYES=1
 export OPAMDOWNLOADJOBS=${CPU_COUNT}
 export OPAMJOBS=${CPU_COUNT}
 
-sed -i 's/4.8.5-1/4.12.6/' fstar.opam
+sed -i '/z3/d' fstar.opam
 
-opam init --no-setup --disable-sandboxing
+opam init --no-setup --disable-sandboxing --compiler=4.14.2
 opam exec -- opam install . -y --deps-only --no-depexts
 pushd ocaml
 opam exec -- dune build --profile release @install
