@@ -1,0 +1,82 @@
+{% set name = "scenicplus" %}
+{% set version = "1.0.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/aertslab/scenicplus/archive/v{{ version }}.tar.gz
+  sha256: 99a1ea2be3708a10e49413fb8518e7a9bcb7363c761ee82384398742e084b7ac
+
+build:
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+  host:
+    - python
+    - setuptools-scm
+    - pip
+  run:
+    - python
+    - pandas
+    - numpy
+    - tqdm
+    - ray
+    - attr
+    - typing
+    - matplotlib-base
+    - scikit-learn
+    - statistics
+    - pyranges
+    - scipy
+    - pybiomart
+    - requests
+    - arboreto
+    - gseapy ==0.10.8
+    - networkx
+    - ctxcore
+    - seaborn
+    - pybigwig
+    - plotly
+    - adjusttext
+    - macs2
+    - lxml
+    - tspex
+    - python-kaleido
+    - pyvis
+    - pygam
+    - scanpy >=1.9,<2.dev0
+    - cython
+    - plotnine
+    - mudata
+    - pycistopic @git+https://github.com/aertslab/pycistopic@master
+    - pycistarget @git+https://github.com/aertslab/pycistarget@master
+    - pyscenic @git+https://github.com/aertslab/pyscenic@master
+    - loomxpy @git+https://github.com/aertslab/loomxpy@main
+    - sphinx_rtd_theme
+    - nbsphinx
+    - nbsphinx-link
+    - numpydoc
+    - sphinx-book-theme
+
+test:
+  imports:
+    - scenicplus
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://github.com/aertslab/scenicplus
+  summary: A lil' TOML parser
+  license: Apache-2.0
+  license_file: LICENSE.txt
+
+extra:
+  recipe-maintainers:
+    - danielnachun
