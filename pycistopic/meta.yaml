@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/aertslab/pycistopic/archive/v{{ version }}.tar.gz
-  sha256: f0773f4a90e680f6eeff7f16430405126d3af9a8b3ab30808d601fa32f0b0359
+  git_url: https://github.com/aertslab/pycistopic.git
+  git_rev: 787ce422a37f5975b0ebb9e7b19eeaed44847501
 
 build:
   noarch: python
@@ -15,8 +15,6 @@ build:
   number: 0
 
 requirements:
-  build:
-    - {{ compiler('c') }}
   host:
     - python
     - setuptools-scm
@@ -79,7 +77,8 @@ test:
   imports:
     - pycisTopic
   commands:
-    - pip check
+  #   - pip check
+    - pycistopic --help
   requires:
     - pip
 

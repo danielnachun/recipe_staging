@@ -7,7 +7,7 @@ package:
 
 source:
   git_url: https://github.com/aertslab/pycistarget.git
-  git_rev: v{{ version }}
+  git_rev: 8cd78f110f4eeeb38d8f7006a1100a13d636d984
 
 build:
   noarch: python
@@ -16,7 +16,8 @@ build:
 
 requirements:
   host:
-    - python
+    - poetry
+    - python=3.11
     - setuptools-scm
     - pip
   run:
@@ -43,6 +44,7 @@ test:
     - pycistarget
   commands:
     # - pip check
+    - pycistarget --help
   requires:
     - pip
 
