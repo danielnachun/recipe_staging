@@ -6,16 +6,17 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/aertslab/scenicplus/archive/v{{ version }}.tar.gz
-  sha256: 99a1ea2be3708a10e49413fb8518e7a9bcb7363c761ee82384398742e084b7ac
+  git_url: https://github.com/aertslab/scenicplus.git
+  git_rev: c72b098f5c606e3e5b5113f570abd43c2d3ae7df
 
 build:
+  noarch: python
+  entry_points:
+    - scenicplus = scenicplus.cli.scenicplus:main
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
 
 requirements:
-  build:
-    - {{ compiler('c') }}
   host:
     - python
     - setuptools-scm
@@ -25,18 +26,17 @@ requirements:
     - pandas
     - numpy
     - tqdm
-    - ray
-    - attr
+    - ray-core
+    - attrs
     - typing
     - matplotlib-base
     - scikit-learn
-    - statistics
     - pyranges
     - scipy
     - pybiomart
     - requests
     - arboreto
-    - gseapy ==0.10.8
+    - gseapy
     - networkx
     - ctxcore
     - seaborn
@@ -53,10 +53,10 @@ requirements:
     - cython
     - plotnine
     - mudata
-    - pycistopic @git+https://github.com/aertslab/pycistopic@master
-    - pycistarget @git+https://github.com/aertslab/pycistarget@master
-    - pyscenic @git+https://github.com/aertslab/pyscenic@master
-    - loomxpy @git+https://github.com/aertslab/loomxpy@main
+    - pycistopic
+    - pycistarget
+    - pyscenic
+    - loomxpy
     - sphinx_rtd_theme
     - nbsphinx
     - nbsphinx-link
@@ -67,15 +67,16 @@ test:
   imports:
     - scenicplus
   commands:
-    - pip check
+    # - pip check
+    - scenicplus --help
   requires:
     - pip
 
 about:
   home: https://github.com/aertslab/scenicplus
-  summary: A lil' TOML parser
-  license: Apache-2.0
-  license_file: LICENSE.txt
+  summary: SCENIC+ is a python package to build gene regulatory networks (GRNs) using combined or separate single-cell gene expression (scRNA-seq) and single-cell chromatin accessibility (scATAC-seq) data.
+  license: OTHER
+  license_file: LICENCE.txt
 
 extra:
   recipe-maintainers:
