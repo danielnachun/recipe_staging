@@ -1,0 +1,64 @@
+{% set version = "0.8.2" %}
+
+package:
+  name: louvain
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/l/louvain/louvain-{{ version }}.tar.gz
+  sha256: ce040bb0c5e349aead5a1e5e99738dcd9f2d10c22526d0633281b6ae230ee8d4
+
+build:
+  number: 0
+
+  run_exports:
+    - {{ pin_subpackage("louvain", max_pin="x.x") }}
+
+requirements:
+  build:
+    - python                                 # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
+    - igraph
+    - python
+    - setuptools
+    - setuptools_scm
+    - pip
+  run:
+    - igraph
+    - python-igraph
+    - python
+    - pip
+
+test:
+  requires:
+    - ddt
+  source_files:
+    - tests
+  imports:
+    - louvain
+  commands:
+    - python -m unittest
+
+about:
+  home: https://github.com/vtraag/louvain-igraph
+  license: GPL-3.0-or-later
+  license_family: GPL
+  license_file: LICENSE
+  summary: Implementation of the Louvain algorithm for various methods for use with igraph in python.
+  description: |
+    This package implements the louvain algorithm in C++ and
+    exposes it to python. It relies on (python-)igraph for it to
+    function. Besides the relative flexibility of the
+    implementation, it also scales well, and can be run on graphs
+    of millions of nodes (as long as they can fit in memory).
+    The core function is find_partition which finds the optimal
+    partition using the louvain algorithm for a number of
+    different methods.
+
+extra:
+  recipe-maintainers:
+    - vgauthier
+    - vtraag
