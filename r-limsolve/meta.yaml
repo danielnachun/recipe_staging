@@ -1,0 +1,58 @@
+{% set version = "1.5.7.1" %}
+{% set posix = 'm2-' if win else '' %}
+
+package:
+  name: r-limsolve
+  version: {{ version|replace("-", "_") }}
+
+source:
+  url:
+    - {{ cran_mirror }}/src/contrib/limSolve_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/limSolve/limSolve_{{ version }}.tar.gz
+  sha256: a5945217bbf512724297883f8d7c65846a11202266b2b6bb3355372935e85b92
+
+build:
+  number: 1
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - {{ compiler('c') }}        # [not win]
+    - {{ compiler('fortran') }}  # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{ compiler('m2w64_fortran') }}        # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}make
+    - {{ posix }}sed               # [win]
+    - {{ posix }}coreutils         # [win]
+    - {{ posix }}zip               # [win]
+  host:
+    - r-base=4.3
+    - r-mass
+    - r-lpsolve
+    - r-quadprog
+  run:
+    - r-base=4.3
+    - r-mass
+    - r-lpsolve
+    - r-quadprog
+
+test:
+  commands:
+    - $R -e "library('limSolve')"           # [not win]
+    - "\"%R%\" -e \"library('limSolve')\""  # [win]
+
+about:
+  home: https://CRAN.R-project.org/package=limSolve
+  license: GPL-2.0-or-later
+  summary: 'Functions that (1) find the minimum/maximum of a linear or quadratic function: min or max (f(x)), where f(x) = ||Ax-b||^2 or f(x) = sum(a_i*x_i) subject to equality constraints Ex=f and/or inequality constraints Gx>=h, (2) sample an underdetermined- or overdetermined system Ex=f subject to Gx>=h, and if applicable
+    Ax~=b,       (3) solve a linear system Ax=B for the unknown x. It includes banded and tridiagonal linear systems.  The package calls Fortran functions from ''LINPACK''.'
+  license_family: GPL
+  license_file:
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
