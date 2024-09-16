@@ -2,6 +2,8 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+sed -i 's/pystan/stan/g' consensus.py
+
 pushd souporcell
     cargo-bundle-licenses \
         --format yaml \
