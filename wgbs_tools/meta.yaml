@@ -16,6 +16,8 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - gcc  # [linux]
+    - g++  # [linux]
   host:
     - python =3.11
     - poetry-core
