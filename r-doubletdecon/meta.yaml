@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/EDePasquale/DoubletDecon/archive/66c6f2693567189459b976efe3c5b1ee62c0c53d.tar.gz
-  sha256: 6f216f476e91516e066c1d28661337eaf2579c9fb41b7862bc090dbb0a6d7d13
+  sha256: df85993b5c06ed8cbc6d930c75f572ef98d27b4780229128a0821215d674e72c
 
 build:
   noarch: generic
@@ -46,7 +46,7 @@ requirements:
     - r-scales
     - r-png
   run:
-    - r-base>=4.4
+    - r-base>=4.3
     - bioconductor-deconrnaseq
     - r-plyr
     - r-dplyr
