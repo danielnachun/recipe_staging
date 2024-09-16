@@ -40,7 +40,7 @@ requirements:
     - {{ posix }}coreutils         # [win]
     - {{ posix }}zip               # [win]
   host:
-    - r-base=4.2
+    - r-base=4.3
     - r-bh
     - r-bit64
     - r-blob >=1.2.0
@@ -50,7 +50,7 @@ requirements:
     - r-pkgconfig
     - r-plogr >=0.2.0
   run:
-    - r-base>=4.2
+    - r-base=4.3
     - {{ native }}gcc-libs         # [win]
     # BH is the header-only part of Boost and thus a compile-time requirement only
     # - r-bh
