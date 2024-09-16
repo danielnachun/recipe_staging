@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/wheaton5/souporcell/archive/v{{ version }}.tar.gz
-  sha256: 3012aef73b3ef5e8b100824af0db2131f81771338fec5f9fe47dc71bf3782506
+  sha256: 1404b87e44c4452b2f329abb81ce4a8383ed5b7e94f38ff2815c5bed62ec2c7f
 
 build:
   number: 0
@@ -22,7 +22,7 @@ requirements:
     - pyfaidx
     - pysam
     - pystan
-    - pyvcf
+    - pyvcf3
     - python
     - tensorflow
     - scipy
