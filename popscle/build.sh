@@ -10,6 +10,8 @@
 #For lzma:
 #  - $ cmake -DLZMA_INCLUDE_DIRS=/lzma_absolute_path/include/ -DLZMA_LIBRARIES=/lzma_absolute_path/lib/liblzma.a ..
 
+sed -i 's/#include <cassert>/#include <cassert>\n#include <limits>/' gtf_interval_tree.h
+
 mkdir -p build
 cd build
 
