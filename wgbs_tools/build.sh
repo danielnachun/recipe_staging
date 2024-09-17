@@ -2,6 +2,8 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+sed -i 's/#include "add_cpg_counts.h"/#include "add_cpg_counts.h"\n#include <cstdint>/' src/pipeline_wgbs/add_cpg_counts.cpp
+
 ${PYTHON} setup.py
 
 install -m 755 src/cpg2bed/add_loci ${PREFIX}/bin
