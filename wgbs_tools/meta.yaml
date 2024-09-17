@@ -1,0 +1,47 @@
+{% set name = "wgbs_tools" %}
+{% set version = "0.2.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/nloyfer/wgbs_tools/archive/{{ version }}.tar.gz
+  sha256: ede7e2b5a2f54ff6eab51a819a510b01f2ba17c338409a96f063a83a7f0f6a6c
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - gcc  # [linux]
+    - gxx  # [linux]
+    - sed
+  host:
+    - python =3.11
+    - poetry-core
+    - pandas
+    - pip
+  run:
+    - python >=3.11
+    - numpy >=1.24.2
+    - pandas >=2.0.0
+    - scipy >=1.10.1
+
+test:
+  commands:
+    - wgbstools --help
+  requires:
+    - pip
+
+about:
+  home: https://github.com/nloyfer/wgbs_tools
+  license: Apache-2.0
+  license_file: LICENSE.md
+  dev_url: https://github.com/nloyfer/wgbs_tools
+
+extra:
+  recipe-maintainers:
+    - danielnachun
