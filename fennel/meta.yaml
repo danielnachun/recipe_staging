@@ -17,6 +17,7 @@ requirements:
   build:
     - lua
     - make
+    - sed
   run:
     - lua
 
