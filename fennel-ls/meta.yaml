@@ -18,6 +18,7 @@ requirements:
     - fennel
     - lua
     - make
+    - sed
   run:
     - fennel
     - lua
