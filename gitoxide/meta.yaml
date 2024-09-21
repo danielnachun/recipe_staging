@@ -21,6 +21,8 @@ requirements:
     - cmake
     - make
     - pkg-config
+  host:
+    - openssl
 
 test:
   commands:
