@@ -73,6 +73,7 @@ cmake -S . -B build ${CMAKE_ARGS} \
       -DRSTUDIO_USE_SYSTEM_YAML_CPP=yes \
       -DYAML_CPP_INCLUDE_DIR=${PREFIX}/include \
       -DBoost_NO_BOOST_CMAKE=OFF \
+      -DBoost_USE_STATIC_LIBS=OFF \
       -DBOOST_ROOT=$PREFIX \
       -DBOOST_INCLUDEDIR=${PREFIX}/include/boost \
       -DBOOST_LIBRARYDIR=${PREFIX}/lib \
@@ -89,6 +90,7 @@ make -j${CPU_COUNT} -C build install
 ## Put executable symlinks in bin and fixup some resource locations.
 ln -sfTr ${PREFIX}/lib/rstudio/resources ${PREFIX}/lib/rstudio/bin/resources
 ln -sfTr ${PREFIX}/lib/rstudio/bin/rstudio-server ${PREFIX}/bin/rstudio-server
+ln -sfTr ${PREFIX}/lib/rstudio/bin/rsserver ${PREFIX}/bin/rserver
 
 ## Cleanup
 rm -rf ${PREFIX}/opt/rstudio-tools

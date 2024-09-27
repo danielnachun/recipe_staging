@@ -28,7 +28,6 @@ requirements:
     - bzip2
     - make
     - cmake
-    - ant
     - yarn
     - wget
     - unzip
@@ -36,21 +35,12 @@ requirements:
     - ripgrep
   host:
     - r-base=4.3
-    - r-purrr
-    - r-rmarkdown
-    - r-renv
-    - r-testthat
-    - r-xml2
-    - r-yaml
-    - r-rstudioapi
-    - gin-config
-    - openjdk
     - libboost-devel
     - soci-postgresql
     - soci-core
     - soci-sqlite
     - libpq
-    - linux-pam
+    - linux-pam  # [linux]
     - libuuid
     - bzip2
     - zlib
@@ -65,37 +55,27 @@ requirements:
     - libuuid
     - quarto
   run:
-    - r-base>=4.3
-    - r-purrr
-    - r-rmarkdown
-    - r-renv
-    - r-testthat
-    - r-xml2
-    - r-yaml
-    - r-rstudioapi
-    - boost-cpp
-    - gin-config
-    - openjdk
-    - soci-postgresql
-    - soci-core
-    - soci-sqlite
-    - libpq
-    - linux-pam
-    - libuuid
-    - bzip2
-    - zlib
-    - pango
-    - sqlite
-    - openssl
-    - hunspell
-    - hunspell-en
-    - pandoc
-    - mathjax <3.0
-    - yaml-cpp <0.7
+    - r-base=4.3
+    # - soci-postgresql
+    # - soci-core
+    # - soci-sqlite
+    # - libpq
+    - linux-pam  # [linux]
+    # - libuuid
+    # - bzip2
+    # - zlib
+    # - pango
+    # - sqlite
+    # - openssl
+    # - hunspell
+    # - hunspell-en
+    # - pandoc
+    # - mathjax <3.0
+    # - yaml-cpp <0.7
     - {{ pin_compatible("quarto", max_pin="x.x") }}
 test:
   commands:
-    - rstudio-server version 
+    - rstudio-server version
 
 about:
   home: https://www.rstudio.com/
