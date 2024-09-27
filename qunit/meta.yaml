@@ -1,0 +1,39 @@
+{% set name = "qunit" %}
+{% set version = "2.22.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://registry.npmjs.org/qunit/-/qunit-{{ version }}.tgz
+  sha256: 2d653934719e99231b390e380f55373e9d46667914fddc8d3317920df62473f8
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+test:
+  commands:
+    - qunit --help
+
+about:
+  home: https://github.com/qunitjs/qunit
+  license: MIT
+  license_file:
+    - LICENSE.txt
+    - third-party-licenses.txt
+  summary: The powerful, easy-to-use testing framework.
+  dev_url: https://github.com/qunitjs/qunit
+
+extra:
+  recipe-maintainers:
+    - danielnachun
