@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://registry.npmjs.org/selenium-standalone/-/selenium-standalone-{{ version }}.tgz
-  sha256: 2d653934719e99231b390e380f55373e9d46667914fddc8d3317920df62473f8
+  sha256: eae79684ff278b63ec338ab9e224f090842a397e4798f821d41c177e8d9d95f6
 
 build:
   noarch: generic
