@@ -1,7 +1,7 @@
 {% set version = "2024.04.1+748" %}
 {% set pkg_version = version.split("+")[0] %}
 # reset the below to 0 when bumping upstream build num.
-{% set build = 0 %}
+{% set build = 1 %}
 {% set upstream_build_num = version.split("+")[1] | int %}
 
 
@@ -25,6 +25,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - ant
     - bzip2
     - make
     - cmake
@@ -76,10 +77,10 @@ requirements:
     # - pango
     # - sqlite
     # - openssl
-    # - hunspell
-    # - hunspell-en
-    # - pandoc
-    # - mathjax <3.0
+    - hunspell
+    - hunspell-en
+    - pandoc
+    - mathjax <3.0
     # - yaml-cpp <0.7
     - {{ pin_compatible("quarto", max_pin="x.x") }}
 test:
