@@ -66,26 +66,17 @@ requirements:
     - quarto
   run:
     - r-base=4.3
-    # - soci-postgresql
-    # - soci-core
-    # - soci-sqlite
-    # - libpq
+    - soci-postgresql
+    - soci-sqlite
     - linux-pam  # [linux]
-    # - libuuid
-    # - bzip2
-    # - zlib
-    # - pango
-    # - sqlite
-    # - openssl
     - hunspell
     - hunspell-en
     - pandoc
     - mathjax <3.0
-    # - yaml-cpp <0.7
     - {{ pin_compatible("quarto", max_pin="x.x") }}
 test:
   commands:
-    - rstudio-server version
+    - rserver --help
 
 about:
   home: https://www.rstudio.com/
