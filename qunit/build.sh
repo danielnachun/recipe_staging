@@ -10,6 +10,8 @@ npm install -ddd \
     ${SRC_DIR}/${PKG_NAME}-${PKG_VERSION}.tgz
 
 # Create license report for dependencies
+mv package.json package.json.bak
+jq 'del(.devDependencies)' package.json.bak > package.json
 pnpm install --ignore-scripts
 pnpm-licenses generate-disclaimer --prod --output-file=third-party-licenses.txt
 
