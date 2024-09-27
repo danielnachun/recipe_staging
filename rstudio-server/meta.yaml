@@ -35,6 +35,15 @@ requirements:
     - ripgrep
   host:
     - r-base=4.3
+    - r-purrr
+    - r-rmarkdown
+    - r-renv
+    - r-testthat
+    - r-xml2
+    - r-yaml
+    - r-rstudioapi
+    - gin-config
+    - openjdk
     - libboost-devel
     - soci-postgresql
     - soci-core
