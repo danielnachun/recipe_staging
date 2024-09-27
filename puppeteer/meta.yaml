@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://registry.npmjs.org/puppeteer/-/puppeteer-{{ version }}.tgz
-  sha256: 2f99193c2b319d165f4c4e3bede794ee94b971fe59034aaacf330d75d42fa524
+  sha256: 2d653934719e99231b390e380f55373e9d46667914fddc8d3317920df62473f8
 
 build:
   noarch: generic
