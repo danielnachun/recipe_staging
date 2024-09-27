@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://registry.npmjs.org/karma/-/karma-{{ version }}.tgz
-  sha256: 2d653934719e99231b390e380f55373e9d46667914fddc8d3317920df62473f8
+  sha256: d14fbaacad9fe823c149c9dbad1f108caf7e4d6ed93b47d8596ecd3ecc74d188
 
 build:
   noarch: generic
