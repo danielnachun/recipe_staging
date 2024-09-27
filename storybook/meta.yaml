@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://registry.npmjs.org/storybook/-/storybook-{{ version }}.tgz
-  sha256: 2d653934719e99231b390e380f55373e9d46667914fddc8d3317920df62473f8
+  sha256: 8b3e5c6325903a3c1d27a78ae09a6433fa5e8d311eb45317a052693a794ecfef
 
 build:
   noarch: generic
