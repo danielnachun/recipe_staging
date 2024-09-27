@@ -1,0 +1,39 @@
+{% set name = "storybook" %}
+{% set version = "8.3.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://registry.npmjs.org/storybook/-/storybook-{{ version }}.tgz
+  sha256: 2d653934719e99231b390e380f55373e9d46667914fddc8d3317920df62473f8
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+test:
+  commands:
+    - storybook --help
+
+about:
+  home: https://github.com/storybookjs/storybook
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Storybook's CLI - install, dev, build, upgrade, and more
+  dev_url: https://github.com/storybookjs/storybook
+
+extra:
+  recipe-maintainers:
+    - danielnachun
