@@ -90,7 +90,7 @@ make -j${CPU_COUNT} -C build install
 ## Put executable symlinks in bin and fixup some resource locations.
 ln -sfTr ${PREFIX}/lib/rstudio/resources ${PREFIX}/lib/rstudio/bin/resources
 ln -sfTr ${PREFIX}/lib/rstudio/bin/rstudio-server ${PREFIX}/bin/rstudio-server
-ln -sfTr ${PREFIX}/lib/rstudio/bin/rsserver ${PREFIX}/bin/rserver
+ln -sfTr ${PREFIX}/lib/rstudio/bin/rserver ${PREFIX}/bin/rserver
 
 ## Cleanup
 rm -rf ${PREFIX}/opt/rstudio-tools
