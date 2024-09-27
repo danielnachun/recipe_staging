@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://registry.npmjs.org/testcafe/-/testcafe-{{ version }}.tgz
-  sha256: 2d653934719e99231b390e380f55373e9d46667914fddc8d3317920df62473f8
+  sha256: b9d98f1ab07e239490f1dfe2912908d4a694c2cb84ac81ca0c21e184746f2c66
 
 build:
   noarch: generic
