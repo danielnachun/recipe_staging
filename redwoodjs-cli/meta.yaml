@@ -1,0 +1,38 @@
+{% set name = "redwoodjs-cli" %}
+{% set version = "8.3.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://registry.npmjs.org/@redwoodjs/cli/-/cli-{{ version }}.tgz
+  sha256: 7c667c6640a02550b0e2c0c194d9a562e2d897a873b1d901d8e287fc9d8ef178
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+test:
+  commands:
+    - redwood 2>&1 | grep -q "Couldn't find up a \"redwood.toml\""
+
+about:
+  home: https://github.com/redwoodjs/redwood
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: The Redwood Command Line
+  dev_url: https://github.com/redwoodjs/redwood
+
+extra:
+  recipe-maintainers:
+    - danielnachun
