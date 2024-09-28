@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://registry.npmjs.org/wireit/-/wireit-{{ version }}.tgz
-  sha256: 2d653934719e99231b390e380f55373e9d46667914fddc8d3317920df62473f8
+  sha256: c2a7e9ab6a915e815c0d645f4e6921bc8178f06b34953160634a3ff5e024c027
 
 build:
   noarch: generic
