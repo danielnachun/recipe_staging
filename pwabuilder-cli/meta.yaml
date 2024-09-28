@@ -1,0 +1,38 @@
+{% set name = "pwabuilder-cli" %}
+{% set version = "0.0.17" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://registry.npmjs.org/@pwabuilder/cli/-/cli-{{ version }}.tgz
+  sha256: 3c24e3d086ab0c5f27defa0c0209f84e7b36da6878ccda0d600aa28eb8abb237
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+test:
+  commands:
+    - pwa --help
+
+about:
+  home: https://pwabuilder.com
+  license: MIT
+  license_file:
+    - LICENSE.txt
+    - third-party-licenses.txt
+  summary: The simplest way to create progressive web apps across platforms and devices.
+  dev_url: https://github.com/pwa-builder/PWABuilder
+
+extra:
+  recipe-maintainers:
+    - danielnachun
