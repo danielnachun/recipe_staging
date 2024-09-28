@@ -12,7 +12,3 @@ npm install -ddd \
 # Create license report for dependencies
 pnpm install
 pnpm-licenses generate-disclaimer --prod --output-file=third-party-licenses.txt
-
-tee ${PREFIX}/bin/${PKG_NAME}.cmd << EOF
-call %CONDA_PREFIX%\bin\node %PREFIX%\bin\puppeteer %*
-EOF
