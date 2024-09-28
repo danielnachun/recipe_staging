@@ -1,0 +1,39 @@
+{% set name = "wireit" %}
+{% set version = "0.14.9" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://registry.npmjs.org/wireit/-/wireit-{{ version }}.tgz
+  sha256: 2d653934719e99231b390e380f55373e9d46667914fddc8d3317920df62473f8
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+test:
+  commands:
+    - wireit --help
+
+about:
+  home: https://github.com/google/wireit
+  license: Apache-2.0
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: output coverage reports using Node.js' built in coverage
+  dev_url: https://github.com/google/wireit
+
+extra:
+  recipe-maintainers:
+    - danielnachun
