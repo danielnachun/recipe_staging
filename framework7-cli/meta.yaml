@@ -1,0 +1,41 @@
+{% set name = "framework7-cli" %}
+{% set version = "8.0.4" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://registry.npmjs.org/framework7-cli/-/framework7-cli-{{ version }}.tgz
+  sha256: 93819023e9bbac4da5d4348c766d70d18b759692d0c3dcfe19fbc9283aadeba7
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - make
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+test:
+  commands:
+    - framework7 --help
+
+about:
+  home: https://github.com/framework7io/framework7-cli
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Framework7 command line utility (CLI)
+  dev_url: https://github.com/framework7io/framework7-cli
+
+extra:
+  recipe-maintainers:
+    - danielnachun
