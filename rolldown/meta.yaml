@@ -1,0 +1,39 @@
+{% set name = "rolldown" %}
+{% set version = "0.13.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://registry.npmjs.org/rolldown/-/rolldown-{{ version }}.tgz
+  sha256: a451a4c96e1b6ad384f985101482bf420104b401298ae90aeec96e44e3a73122
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - jq
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+test:
+  commands:
+    - rolldown --help
+
+about:
+  home: https://github.com/rolldown/rolldown
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Fast Rust bundler for JavaScript/TypeScript with Rollup-compatible API.
+  dev_url: https://github.com/rolldown/rolldown
+
+extra:
+  recipe-maintainers:
+    - danielnachun
