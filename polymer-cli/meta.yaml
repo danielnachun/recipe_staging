@@ -1,0 +1,38 @@
+{% set name = "polymer-cli" %}
+{% set version = "1.9.11" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://registry.npmjs.org/polymer-cli/-/polymer-cli-{{ version }}.tgz
+  sha256: 188fc1ff4c6420ca25f64195105ef0cc20dd8991c2d0740bcadd9ff6c024faf4
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+test:
+  commands:
+    - polymer --help
+
+about:
+  home: https://github.com/Polymer/tools
+  license: BSD-3-Clause
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: A commandline tool for Polymer projects
+  dev_url: https://github.com/Polymer/tools
+
+extra:
+  recipe-maintainers:
+    - danielnachun
