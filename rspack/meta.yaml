@@ -1,0 +1,39 @@
+{% set name = "rspack-cli" %}
+{% set version = "1.0.8" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://registry.npmjs.org/@rspack/cli/-/cli-{{ version }}.tgz
+  sha256: cbf8b62c6459104b9ba970b571c49a8e831da4c6b986f477fb2c4dca9af03f6b
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+  
+
+test:
+  commands:
+    - rspack --help
+
+about:
+  home: https://github.com/web-infra-dev/rspack
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: The fast Rust-based web bundler with webpack-compatible API
+  dev_url: https://github.com/web-infra-dev/rspack
+
+extra:
+  recipe-maintainers:
+    - danielnachun
