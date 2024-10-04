@@ -14,9 +14,12 @@ build:
 
 requirements:
   build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - nodejs=20
     - pnpm
     - pnpm-licenses
+    - python
   run:
     - nodejs=20
 
