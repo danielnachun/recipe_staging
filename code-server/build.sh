@@ -7,6 +7,7 @@ npm pack --ignore-scripts
 npm install -ddd \
     --global \
     --build-from-source \
+    --unsafe-perm \
     ${SRC_DIR}/${PKG_NAME}-${PKG_VERSION}.tgz
 
 # Create license report for dependencies
