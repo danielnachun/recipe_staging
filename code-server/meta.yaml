@@ -21,6 +21,8 @@ requirements:
     - pnpm
     - pnpm-licenses
     - python
+  host:
+    - krb5
   run:
     - nodejs=20
 
