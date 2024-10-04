@@ -16,6 +16,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - make
     - nodejs=20
     - pnpm
     - pnpm-licenses
