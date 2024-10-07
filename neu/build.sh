@@ -2,6 +2,11 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+if [[ ${target_platform} == "osx-64" ]]; then
+    export CFLAGS=${CFLAGS//-march=core2/}
+    export CXXFLAGS=${CXXFLAGS//-march=core2/}
+fi
+
 # Create package archive and install globally
 npm pack --ignore-scripts
 npm install -ddd \
