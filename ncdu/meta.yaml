@@ -1,5 +1,5 @@
 {% set name = "ncdu" %}
-{% set version = "2.2.1" %}
+{% set version = "2.6" %}
 
 package:
   name: {{ name|lower }}
@@ -7,22 +7,21 @@ package:
 
 source:
   url: https://dev.yorhel.nl/download/{{ name }}-{{ version }}.tar.gz
-  sha256: 5e4af8f6bcd8cf7ad8fd3d7900dab1320745a0453101e9e374f9a77f72aed141
+  sha256: 3f471ebd38b56e60dab80c27e3af1d826666957f02d9e8419b149daaf7ade505
 
 build:
   number: 0
-  skip: true  # [not linux]
+  skip: true  # [win]
 
 requirements:
   build:
     - {{ compiler('c') }}
-    - zig
+    - zig=0.12  # [linux]
+    - zig  # [osx]
     - pkg-config
-    - sysroot_linux-64=2.17
   host:
     - ncurses
-  run:
-    - ncurses
+    - zstd
 
 test:
   commands:
