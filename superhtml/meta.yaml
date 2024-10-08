@@ -11,11 +11,12 @@ source:
 
 build:
   number: 0
-  binary_relocation: false
+  binary_relocation: false  # [osx]
 
 requirements:
   build:
-    - zig=0.12
+    - zig=0.12  # [linux]
+    - zig  # [osx]
 
 test:
   commands:
