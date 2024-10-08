@@ -16,7 +16,8 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
-    - zig
+    - zig=0.12  # [linux]
+    - zig  # [osx]
     - pkg-config
   host:
     - ncurses
