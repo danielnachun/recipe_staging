@@ -1,0 +1,33 @@
+{% set name = "superhtml" %}
+{% set version = "0.5.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/kristoff-it/superhtml/archive/v{{ version }}.tar.gz
+  sha256: e9710922a14514f3bc465b56367eb7e35b86a12dfc89c67c282eb9259d03ad35
+
+build:
+  number: 0
+  binary_relocation: false
+
+requirements:
+  build:
+    - zig
+
+test:
+  commands:
+    - 'superhtml help 2>&1 | grep -q "Usage: superhtml"'
+
+about:
+  home: https://github.com/kristoff-it/superhtml
+  license: MIT
+  license_file: LICENSE
+  summary: HTML Language Server & Templating Language Library
+  dev_url: https://github.com/kristoff-it/superhtml
+
+extra:
+  recipe-maintainers:
+    - danielnachun
