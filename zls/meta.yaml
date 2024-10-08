@@ -1,5 +1,5 @@
 {% set name = "zls" %}
-{% set version = "0.13.0" %}
+{% set version = "0.12.0" %}
 
 package:
   name: {{ name|lower }}
@@ -12,7 +12,7 @@ source:
 build:
   number: 0
   binary_relocation: False  # [osx]
-  skip: true  # [win]
+  skip: true  # [not linux]
 
 requirements:
   build:
