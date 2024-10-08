@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/zigtools/zls/archive/{{ version }}.tar.gz
-  sha256: 2e8046b6b0de765a4bf4bb828345e2badc8b828bc257dc931d0f56b147684d9f
+  sha256: c8c59dc6a708f3857ffbc1f593db4f6409e50e5ff1319b84dc65b84271e5a3d8
 
 build:
   number: 0
