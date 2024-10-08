@@ -18,6 +18,8 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - cargo-bundle-licenses
+    - cmake
+    - make
 
 test:
   commands:
