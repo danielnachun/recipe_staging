@@ -15,7 +15,7 @@ build:
 
 requirements:
   build:
-    - zig
+    - zig=0.12
 
 test:
   commands:
