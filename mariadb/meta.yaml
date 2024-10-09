@@ -1,5 +1,5 @@
 {% set name = "mariadb" %}
-{% set version = "11.4.1" %}
+{% set version = "11.4.3" %}
 
 package:
   name: {{ name|lower }}
@@ -15,7 +15,7 @@ source:
     - 0004-fix-libxml.patch
 
 build:
-  number: 2
+  number: 0
   ignore_run_exports:
     - boost-cpp
     - fmt
