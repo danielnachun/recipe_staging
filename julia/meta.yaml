@@ -37,9 +37,9 @@ requirements:
     - make
     - perl=5.32
     - python 3
+    - binutils   # [linux]
     - {{ compiler('fortran') }}
     - {{ compiler('c') }}
-    # - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
   host:
     - openblas-ilp64
