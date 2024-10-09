@@ -11,31 +11,24 @@ source:
 
 build:
   number: 2
+  skip: True  # [not linux]
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - binutils
-    - libpng
-    - mariadb
+    - binutils  # [linux]
     - make
     - rsync
-    - zlib
   host:
-    - gettext
+    - libiconv
     - libpng
     - mariadb
     - openssl
-    - util-linux #[linux]
+    - util-linux  # [linux]
     - zlib
   run:
-    - gettext
-    - libpng
     - mariadb
-    - openssl
-    - util-linux #[linux]
-    - libzlib
 
 test:
   commands:
