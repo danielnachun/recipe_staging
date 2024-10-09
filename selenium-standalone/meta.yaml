@@ -20,6 +20,7 @@ requirements:
     - pnpm-licenses
   run:
     - nodejs
+    - openjdk
 
 test:
   commands:
