@@ -12,8 +12,6 @@ cmake -S . -B build \
     -DCMAKE_VERBOSE_MAKEFILE=ON \
     -Wno-dev \
     -DBUILD_TESTING=OFF \
-    -DCMAKE_EXE_LINKER_FLAGS="${LDFLAGS} -lc -lm -ldl" \
-    -DCMAKE_SHARED_LINKER_FLAGS="${LDFLAGS} -lc -lm -ldl" \
     ${CMAKE_ARGS}
 
 cmake --build build -j${CPU_COUNT}
