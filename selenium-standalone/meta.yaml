@@ -23,7 +23,7 @@ requirements:
 
 test:
   commands:
-    - selenium-standalone install --help
+    - selenium-standalone 2>&1 | grep -q "No action provided"
 
 about:
   home: https://github.com/webdriverio/selenium-standalone
