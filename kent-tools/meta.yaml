@@ -23,16 +23,17 @@ requirements:
   host:
     - libiconv
     - libpng
-    - mariadb
+    - mariadb >=11
     - openssl
     - util-linux  # [linux]
     - zlib
   run:
-    - mariadb
+    - libiconv
+    - mariadb >=11
 
 test:
   commands:
-    - test -f $PREFIX/bin/bigWigToBedGraph # [not win]
+    - test -f $PREFIX/bin/bigWigToBedGraph
 
 about:
   home: https://genome.ucsc.edu/
