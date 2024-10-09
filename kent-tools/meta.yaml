@@ -1,43 +1,41 @@
 {% set name = "kent-tools" %}
-{% set version = "438" %}
+{% set version = "472" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/ucscGenomeBrowser/kent/archive/refs/tags/v{{ version }}_base.tar.gz
-  sha256: faeaf46551eae87f4be8f6be4d1ddaa93c1ef6d52419f6a44a4759507f0d672b
+  url: https://github.com/ucscGenomeBrowser/kent/archive/v{{ version }}_base.tar.gz
+  sha256: 1f8f3426f1f3b658e630fac40c049a5d3ded71c90eaa4783c94716b4495da584
+  patches:
+    - 0001-fix-missing-include.patch
 
 build:
-  number: 1
+  number: 0
+  skip: True  # [not linux]
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - binutils
-    - libpng
-    - mariadb
+    - binutils  # [linux]
     - make
     - rsync
-    - zlib
   host:
+    - libiconv
     - libpng
-    - mariadb
+    - mariadb >=11
     - openssl
-    - util-linux #[linux]
+    - util-linux  # [linux]
     - zlib
   run:
-    - libpng
-    - mariadb
-    - openssl
-    - util-linux #[linux]
-    - libzlib
+    - libiconv
+    - mariadb >=11
 
 test:
   commands:
-    - test -f $PREFIX/bin/bigWigToBedGraph # [not win]
+    - test -f $PREFIX/bin/bigWigToBedGraph
 
 about:
   home: https://genome.ucsc.edu/
