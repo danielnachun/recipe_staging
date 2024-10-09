@@ -1,0 +1,24 @@
+From 63cb11049c2350029cb4e92d3af66e87351f059a Mon Sep 17 00:00:00 2001
+From: Daniel Nachun <daniel.nachun@gmail.com>
+Date: Wed, 9 Oct 2024 02:07:06 -0700
+Subject: [PATCH] fix missing include
+
+---
+ src/hg/lib/straw/straw.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/hg/lib/straw/straw.cpp b/src/hg/lib/straw/straw.cpp
+index 47fa883bacf..a5e0360828a 100644
+--- a/src/hg/lib/straw/straw.cpp
++++ b/src/hg/lib/straw/straw.cpp
+@@ -21,6 +21,7 @@
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  THE SOFTWARE.
+ */
++#include "stdint.h"
+ #include <cstring>
+ #include <iostream>
+ #include <fstream>
+-- 
+2.45.2
+
