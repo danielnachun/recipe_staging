@@ -2,7 +2,8 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-export CXXFLAGS="${CXXFLAGS//-march=nocona -mtune=haswell/}"
+export CXXFLAGS="-isystem $PREFIX/include"
+export LDFLAGS="-L$PREFIX/lib"
 
 cmake -S . -B build \
     -DQUICK_LINT_JS_ENABLE_BENCHMARKS=OFF \
