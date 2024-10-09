@@ -2,6 +2,8 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+export CXXFLAGS="${CXXFLAGS//-march=nocona -mtune=haswell/}"
+
 cmake -S . -B build \
     -DQUICK_LINT_JS_ENABLE_BENCHMARKS=OFF \
     -DQUICK_LINT_JS_INSTALL_VIM_NEOVIM_TAGS=ON \
