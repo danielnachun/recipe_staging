@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://github.com/uci-cbcl/EpiOut/archive/dc8fdaca39a0ba306f1e6820fab4d9222eb03919.tar.gz
   sha256: 203c77982deb679453981a0f57ec978e6e3d90771f02760d54313c242e54dc56
 
 build:
@@ -18,7 +18,7 @@ build:
     - epiannot_list=epiout.main:cli_epiannot_list
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  number: 1
 
 requirements:
   host:
@@ -27,7 +27,7 @@ requirements:
     - setuptools
     - pip
   run:
-    - python >=3.8
+    - python >=3.8,<3.12
     - tqdm
     - pyyaml
     - click
