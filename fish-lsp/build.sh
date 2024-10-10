@@ -2,16 +2,15 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-mv package.json package.json.bak
-jq 'del(.scripts.preinstall)' package.json.bak > package.json
+# Create package archive and install globally
 npm install --ignore-scripts
-npm install yarn@1
 npm uninstall tsc
 npm install typescript
 npm run compile
-
-# Create package archive and install globally
 npm pack --ignore-scripts
+
+mv package.json package.json.bak
+jq "del(.scripts.preinstall)" package.json.bak > package.json
 npm install -ddd \
     --global \
     --build-from-source \
