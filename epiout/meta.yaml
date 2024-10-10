@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/uci-cbcl/EpiOut/archive/dc8fdaca39a0ba306f1e6820fab4d9222eb03919.tar.gz
-  sha256: 203c77982deb679453981a0f57ec978e6e3d90771f02760d54313c242e54dc56
+  sha256: c6f30449cdd2499dfa07c0ad638ae8c9991e8919ad3dd93f517778e256d26420
 
 build:
   entry_points:
