@@ -10,11 +10,13 @@ source:
   sha256: fffabd71157488a76dcdd0ffceeeac87817cf975541ec2c8308692ae81b96dba
 
 build:
-  noarch: generic
   number: 0
 
 requirements:
   build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - make
     - fish
     - jq
     - nodejs
