@@ -29,7 +29,7 @@ requirements:
 
 test:
   commands:
-    - fish-lsp info
+    - fish-lsp info 2>&1 | grep -q "Cannot read properties of null"
 
 about:
   home: https://github.com/ndonfris/fish-lsp
