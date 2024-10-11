@@ -29,7 +29,7 @@ requirements:
 
 test:
   commands:
-    - fish-lsp --help
+    - fish-lsp info
 
 about:
   home: https://github.com/ndonfris/fish-lsp
