@@ -1,0 +1,5 @@
+c_compiler_version:  # [osx]
+  - 18  # [osx]
+cx_compiler_version:  # [osx]
+  - 18  # [osx]
+
