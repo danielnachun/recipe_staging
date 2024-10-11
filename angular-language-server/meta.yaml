@@ -20,10 +20,11 @@ requirements:
     - pnpm-licenses
   run:
     - nodejs
+    - typescript
 
 test:
   commands:
-    - ngserver --help
+    - ngserver --help --tsProbeLocations ${PREFIX}/lib/node_modules
 
 about:
   home: https://github.com/angular/vscode-ng-language-service
