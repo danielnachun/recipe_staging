@@ -16,6 +16,7 @@ build:
 requirements:
   build:
     - fish
+    - jq
     - nodejs
     - pnpm
     - pnpm-licenses
