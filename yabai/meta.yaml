@@ -1,13 +1,13 @@
 {% set name = "yabai" %}
-{% set version = "7.1.1" %}
+{% set version = "7.1.4" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/koekeishiya/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: a1845ce2a7c0e40abb89958925ab45c2ffba0bf81a59a01fa16956868e91c9b6
+  url: https://github.com/koekeishiya/yabai/archive/v{{ version }}.tar.gz
+  sha256: 25ea51fd6d9fa90473f34d4e9742b2bc4823f43dbb3293ecccdb87bf386854b8
 
 build:
   number: 0
@@ -15,18 +15,19 @@ build:
 
 requirements:
   build:
+    - {{ compiler('c') }}
     - make
 
 test:
   commands:
-    - {{ name }} --version
+    - yabai --version
 
 about:
-  home: https://github.com/koekeishiya/{{ name }}
+  home: https://github.com/koekeishiya/yabai
   license: MIT
   license_file: LICENSE.txt
-  summary: Simple hotkey-daemon for macOS
-  dev_url: https://github.com/koekeishiya/{{ name }}
+  summary: A tiling window manager for macOS based on binary space partitioning
+  dev_url: https://github.com/koekeishiya/yabai
 
 extra:
   recipe-maintainers:
