@@ -10,7 +10,6 @@ source:
   sha256: 652a7eb6dfc2062c107e5d2cea183b4b53a0b28ffbedd35d52a8cd649dbc94f2
 
 build:
-  binary_relocation: false
   number: 0
 
 requirements:
@@ -20,7 +19,7 @@ requirements:
 
 test:
   commands:
-    - go-git --help
+    - go-git version
 
 about:
   home: https://github.com/go-git/go-git
