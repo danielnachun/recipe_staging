@@ -2,6 +2,9 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+sed -i '1i #![allow(dead_code)]' librubyfmt/src/ripper_tree_types.rs
+sed -i '1i #![allow(dead_code)]' librubyfmt/src/parser_state.rs
+
 cargo-bundle-licenses \
     --format yaml \
     --output THIRDPARTY.yml
@@ -12,6 +15,7 @@ cargo install --locked --root ${PREFIX} --path .
 
 mkdir -p ${PREFIX}/bin
 install -m 755 target/**/release/rubyfmt-main ${PREFIX}/bin
+ln -sf ${PREFIX}/bin/rubyfmt-main ${PREFIX}/bin/rubyfmt
 
 # strip debug symbols
 "$STRIP" "$PREFIX/bin/rubyfmt-main"
