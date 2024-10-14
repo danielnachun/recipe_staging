@@ -21,6 +21,7 @@ requirements:
     - binutils  # [linux]
     - make
     - rsync
+    - sed
   host:
     - libiconv
     - libpng
