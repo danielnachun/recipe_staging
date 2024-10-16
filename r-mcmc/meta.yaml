@@ -14,7 +14,7 @@ source:
 
 build:
   merge_build_host: true  # [win]
-  number: 0
+  number: 1
   rpaths:
     - lib/R/lib/
     - lib/
@@ -30,9 +30,9 @@ requirements:
     - {{ posix }}zip               # [win]
     - cross-r-base {{ r_base }}    # [build_platform != target_platform]
   host:
-    - r-base=4.2
+    - r-base=4.3
   run:
-    - r-base>=4.2
+    - r-base=4.3
     - {{ native }}gcc-libs         # [win]
 
 test:
