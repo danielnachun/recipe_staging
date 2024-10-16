@@ -33,7 +33,7 @@ requirements:
   host:
     - r-MASS
     - r-MCMCpack
-    - r-Rcpp >=1.0.5
+    - r-Rcpp
     - r-base=4.3
     - r-coda
     - r-corpcor
@@ -42,7 +42,7 @@ requirements:
   run:
     - r-MASS
     - r-MCMCpack
-    - r-Rcpp >=1.0.5
+    - r-Rcpp
     - r-base=4.3
     - r-coda
     - r-corpcor
