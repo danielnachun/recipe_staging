@@ -1,0 +1,4 @@
+c_compiler:  # [linux]
+  - 14.1  # [linux]
+cxx_compiler:  # [linux]
+  - 14.1  # [linux]
