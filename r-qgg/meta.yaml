@@ -34,7 +34,7 @@ requirements:
     - r-MASS
     - r-MCMCpack
     - r-Rcpp
-    - r-base=4.3
+    - r-base=4.2
     - r-coda
     - r-corpcor
     - r-data.table
@@ -43,7 +43,7 @@ requirements:
     - r-MASS
     - r-MCMCpack
     - r-Rcpp
-    - r-base=4.3
+    - r-base=4.2
     - r-coda
     - r-corpcor
     - r-data.table
