@@ -1,6 +1,0 @@
-c_compiler_version:  # [linux]
-  - 14.2  # [linux]
-cxx_compiler_version:  # [linux]
-  - 14.2  # [linux]
-fortran_compiler_version:  # [linux]
-  - 14.2  # [linux]
