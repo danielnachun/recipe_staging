@@ -20,7 +20,6 @@ mkdir -p ${PREFIX}/libexec/${PKG_NAME}
 cp ${SRC_DIR}/bin/*.py ${PREFIX}/libexec/${PKG_NAME}
 
 script_names=(
-    dms_enrichment
     generate_dms
     recommend
     score_log_likelihoods

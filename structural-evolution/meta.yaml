@@ -35,7 +35,6 @@ requirements:
 
 test:
   commands:
-    - dms_enrichment -h
     - generate_dms -h
     - recommend -h
     - score_log_likelihoods -h
