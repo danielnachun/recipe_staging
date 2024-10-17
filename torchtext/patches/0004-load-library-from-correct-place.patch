@@ -1,0 +1,22 @@
+From 843ed4b70785e6767a8c5d335881234cc17f1a49 Mon Sep 17 00:00:00 2001
+From: "H. Vetinari" <h.vetinari@gmx.com>
+Date: Wed, 18 Jan 2023 22:25:03 +1100
+Subject: [PATCH 4/6] load library from correct place
+
+---
+ torchtext/_extension.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/torchtext/_extension.py b/torchtext/_extension.py
+index b6dbb07bf..e6205be17 100644
+--- a/torchtext/_extension.py
++++ b/torchtext/_extension.py
+@@ -4,7 +4,7 @@ from pathlib import Path
+ import torch
+ from torchtext._internal import module_utils as _mod_utils
+ 
+-_LIB_DIR = Path(__file__).parent / "lib"
++_LIB_DIR = Path(os.environ["SP_DIR"]) / "torch" / "lib"
+ 
+ 
+ def _get_lib_path(lib: str):

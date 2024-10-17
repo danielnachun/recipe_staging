@@ -1,0 +1,35 @@
+From e908157f4377ffac28564e99ce9622078f4d67ea Mon Sep 17 00:00:00 2001
+From: "H. Vetinari" <h.vetinari@gmx.com>
+Date: Sat, 21 Jan 2023 12:46:49 +1100
+Subject: [PATCH 6/6] fix path inconsistency in test
+
+---
+ test/torchtext_unittest/prototype/test_with_asset.py | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/test/torchtext_unittest/prototype/test_with_asset.py b/test/torchtext_unittest/prototype/test_with_asset.py
+index ff3f732c7..95042f8c9 100644
+--- a/test/torchtext_unittest/prototype/test_with_asset.py
++++ b/test/torchtext_unittest/prototype/test_with_asset.py
+@@ -201,17 +201,17 @@ class TestTransformsWithAsset(TorchtextTestCase):
+         self.assertEqual(dict(v2.get_stoi()), expected_stoi)
+ 
+     def test_builtin_pretrained_sentencepiece_processor(self) -> None:
+-        sp_model_path = download_from_url(PRETRAINED_SP_MODEL["text_unigram_25000"])
+-        spm_tokenizer = sentencepiece_tokenizer(sp_model_path)
+         _path = os.path.join(self.project_root, ".data", "text_unigram_25000.model")
++        sp_model_path = download_from_url(PRETRAINED_SP_MODEL["text_unigram_25000"], path=_path)
++        spm_tokenizer = sentencepiece_tokenizer(sp_model_path)
+         os.remove(_path)
+         test_sample = "the pretrained spm model names"
+         ref_results = ["\u2581the", "\u2581pre", "trained", "\u2581sp", "m", "\u2581model", "\u2581names"]
+         self.assertEqual(spm_tokenizer(test_sample), ref_results)
+ 
+-        sp_model_path = download_from_url(PRETRAINED_SP_MODEL["text_bpe_25000"])
+-        spm_transform = sentencepiece_processor(sp_model_path)
+         _path = os.path.join(self.project_root, ".data", "text_bpe_25000.model")
++        sp_model_path = download_from_url(PRETRAINED_SP_MODEL["text_bpe_25000"], path=_path)
++        spm_transform = sentencepiece_processor(sp_model_path)
+         os.remove(_path)
+         test_sample = "the pretrained spm model names"
+         ref_results = [13, 1465, 12824, 304, 24935, 5771, 3776]

@@ -1,0 +1,22 @@
+From b41b1628cd9937a8b8ca96ed5b38229394840f16 Mon Sep 17 00:00:00 2001
+From: "H. Vetinari" <h.vetinari@gmx.com>
+Date: Wed, 18 Jan 2023 22:06:33 +1100
+Subject: [PATCH 3/6] remove unnecessary installation requirements
+
+---
+ setup.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/setup.py b/setup.py
+index 2e1f24082..0bfde0a8e 100644
+--- a/setup.py
++++ b/setup.py
+@@ -104,7 +104,7 @@ setup_info = dict(
+     description="Text utilities and datasets for PyTorch",
+     long_description=read("README.rst"),
+     license="BSD",
+-    install_requires=["tqdm", "requests", pytorch_package_dep, "numpy", torchdata_package_dep],
++    install_requires=[pytorch_package_dep, "numpy"],
+     python_requires=">=3.8",
+     classifiers=[
+         "Programming Language :: Python :: 3.8",

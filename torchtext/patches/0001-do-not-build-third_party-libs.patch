@@ -1,0 +1,50 @@
+From 146851060c68bf768cac704c23ccc2fd90462d80 Mon Sep 17 00:00:00 2001
+From: "H. Vetinari" <h.vetinari@gmx.com>
+Date: Wed, 1 Dec 2021 21:07:42 +1100
+Subject: [PATCH 1/6] do not build third_party libs
+
+---
+ CMakeLists.txt                | 5 ++++-
+ torchtext/csrc/CMakeLists.txt | 8 --------
+ 2 files changed, 4 insertions(+), 9 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index b789a3226..d6b019159 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -63,5 +63,8 @@ endif()
+ 
+ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_COMPILED_WITH_CXX_ABI} -Wall ${TORCH_CXX_FLAGS}")
+ 
+-add_subdirectory(third_party)
++find_package(re2 REQUIRED)
++find_package(double-conversion REQUIRED)
++find_package(sentencepiece REQUIRED)
++
+ add_subdirectory(torchtext/csrc)
+diff --git a/torchtext/csrc/CMakeLists.txt b/torchtext/csrc/CMakeLists.txt
+index 5d67bba8a..699fa822d 100644
+--- a/torchtext/csrc/CMakeLists.txt
++++ b/torchtext/csrc/CMakeLists.txt
+@@ -18,10 +18,6 @@ set(
+ set(
+   LIBTORCHTEXT_INCLUDE_DIRS
+   ${PROJECT_SOURCE_DIR}
+-  ${PROJECT_SOURCE_DIR}/third_party/sentencepiece/src
+-  $<TARGET_PROPERTY:re2,INCLUDE_DIRECTORIES>
+-  $<TARGET_PROPERTY:double-conversion,INCLUDE_DIRECTORIES>
+-  $<TARGET_PROPERTY:utf8proc,INCLUDE_DIRECTORIES>
+   ${TORCH_INSTALL_PREFIX}/include
+   ${TORCH_INSTALL_PREFIX}/include/torch/csrc/api/include
+   )
+@@ -119,10 +115,6 @@ if (BUILD_TORCHTEXT_PYTHON_EXTENSION)
+   set(
+     EXTENSION_INCLUDE_DIRS
+     ${PROJECT_SOURCE_DIR}
+-    ${PROJECT_SOURCE_DIR}/third_party/sentencepiece/src
+-    $<TARGET_PROPERTY:re2,INCLUDE_DIRECTORIES>
+-    $<TARGET_PROPERTY:double-conversion,INCLUDE_DIRECTORIES>
+-    $<TARGET_PROPERTY:utf8proc,INCLUDE_DIRECTORIES>
+     ${TORCH_INSTALL_PREFIX}/include
+     ${TORCH_INSTALL_PREFIX}/include/torch/csrc/api/include
+     )

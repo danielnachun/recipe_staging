@@ -1,0 +1,21 @@
+From 3565900c615ce776f19a8abb1f9824081e6cccaf Mon Sep 17 00:00:00 2001
+From: "H. Vetinari" <h.vetinari@gmx.com>
+Date: Wed, 18 Jan 2023 22:58:13 +1100
+Subject: [PATCH 5/6] don't try to init submodules
+
+---
+ setup.py | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/setup.py b/setup.py
+index 0bfde0a8e..18b421ef0 100644
+--- a/setup.py
++++ b/setup.py
+@@ -93,7 +93,6 @@ class clean(distutils.command.clean.clean):
+                 shutil.rmtree(str(path), ignore_errors=True)
+ 
+ 
+-_init_submodule()
+ setup_info = dict(
+     # Metadata
+     name="torchtext",

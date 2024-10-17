@@ -1,0 +1,51 @@
+From 05264ff680c632c6150bc6fdc969ad07460e5961 Mon Sep 17 00:00:00 2001
+From: "H. Vetinari" <h.vetinari@gmx.com>
+Date: Wed, 18 Jan 2023 16:56:57 +1100
+Subject: [PATCH 2/6] fix some CMake arguments for our infrastructure
+
+---
+ tools/setup_helpers/extension.py | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/tools/setup_helpers/extension.py b/tools/setup_helpers/extension.py
+index 760b3bb79..dd17f82a1 100644
+--- a/tools/setup_helpers/extension.py
++++ b/tools/setup_helpers/extension.py
+@@ -46,6 +46,7 @@ class CMakeBuild(build_ext):
+         super().run()
+ 
+     def build_extension(self, ext):
++        import sys
+         # Since two library files (libtorchaudio and _torchaudio) need to be
+         # recognized by setuptools, we instantiate `Extension` twice. (see `get_ext_modules`)
+         # This leads to the situation where this `build_extension` method is called twice.
+@@ -62,14 +63,16 @@ class CMakeBuild(build_ext):
+             extdir += os.path.sep
+ 
+         cfg = "Debug" if self.debug else "Release"
++        dotted_pyver = '.'.join([str(x) for x in sys.version_info[:2]])
+ 
+         cmake_args = [
++            "-GNinja",
+             f"-DCMAKE_BUILD_TYPE={cfg}",
+-            f"-DCMAKE_PREFIX_PATH={torch.utils.cmake_prefix_path}",
+-            f"-DCMAKE_INSTALL_PREFIX={extdir}",
++            f"-DCMAKE_PREFIX_PATH={os.environ['PREFIX']}",
++            f"-DCMAKE_INSTALL_PREFIX={os.environ['PREFIX']}/lib/python{dotted_pyver}/site-packages/torchtext",
+             "-DCMAKE_VERBOSE_MAKEFILE=ON",
+             f"-DPython_INCLUDE_DIR={distutils.sysconfig.get_python_inc()}",
+-            f"-DTORCH_INSTALL_PREFIX:STRING={os.path.dirname(torch.__file__)}",
++            f"-DTORCH_INSTALL_PREFIX={os.environ['PREFIX']}/lib/python{dotted_pyver}/site-packages/torch",
+             "-DBUILD_TORCHTEXT_PYTHON_EXTENSION:BOOL=ON",
+             "-DRE2_BUILD_TESTING:BOOL=OFF",
+             "-DBUILD_TESTING:BOOL=OFF",
+@@ -80,9 +83,6 @@ class CMakeBuild(build_ext):
+         ]
+         build_args = ["--target", "install"]
+ 
+-        # Default to Ninja
+-        if "CMAKE_GENERATOR" not in os.environ or platform.system() == "Windows":
+-            cmake_args += ["-GNinja"]
+         if platform.system() == "Windows":
+             import sys
+ 
