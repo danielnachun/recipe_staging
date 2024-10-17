@@ -1,0 +1,54 @@
+{% set name = "esm" %}
+{% set version = "3.0.4" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/evolutionaryscale/esm/archive/v{{ version }}.tar.gz
+  sha256: 929ada63eac1e08879f4c2c31eb6d7773d289845d0f09d4150a01811fa76bd95
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python >=3.10
+    - pip
+    - setuptools
+  run:
+    - python >=3.10
+    - pytorch >=2.2.0
+    - torchvision
+    - torchtext
+    - transformers
+    - ipython
+    - einops
+    - biotite
+    - msgpack-numpy
+    - biopython
+    - scikit-learn
+    - brotli
+    - attrs
+    - pandas
+    - cloudpathlib
+
+test:
+  imports:
+    - esm
+  commands:
+    # - pip check
+  requires:
+    - pip
+
+about:
+  summary: EvolutionaryScale open model repository
+  license: Apache-2.0
+  license_file: LICENSE.md
+
+extra:
+  recipe-maintainers:
+    - danielnachun
