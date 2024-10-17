@@ -1,13 +1,13 @@
 {% set name = "esm" %}
-{% set version = "3.0.4" %}
+{% set version = "1.0.3" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/evolutionaryscale/esm/archive/v{{ version }}.tar.gz
-  sha256: 929ada63eac1e08879f4c2c31eb6d7773d289845d0f09d4150a01811fa76bd95
+  url: https://github.com/facebookresearch/esm/archive/v{{ version }}.tar.gz
+  sha256: 4fcead65eb5ff76a1ce5b76abe3a46175e76334eed3ecdb6e63ee7c39e26e89f
 
 build:
   noarch: python
@@ -16,38 +16,26 @@ build:
 
 requirements:
   host:
-    - python >=3.10
+    - python
     - pip
-    - setuptools
   run:
-    - python >=3.10
-    - pytorch >=2.2.0
-    - torchvision
-    - torchtext
-    - transformers
-    - ipython
     - einops
-    - biotite
-    - msgpack-numpy
-    - biopython
-    - scikit-learn
-    - brotli
-    - attrs
-    - pandas
-    - cloudpathlib
+    - openfold
+    - python
+    - pytorch
 
 test:
   imports:
     - esm
   commands:
-    # - pip check
+    - pip check
   requires:
     - pip
 
 about:
-  summary: EvolutionaryScale open model repository
-  license: Apache-2.0
-  license_file: LICENSE.md
+  home: https://github.com/facebookresearch/esm
+  license: MIT
+  license_file: LICENSE
 
 extra:
   recipe-maintainers:

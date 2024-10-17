@@ -10,7 +10,7 @@ install_script() {
 tee ${PREFIX}/bin/${script_name} << EOF
     #!/usr/bin/env bash
 
-    exec ${PREFIX}/libexec/${PKG_NAME}/${script_name}.py "\$@"
+    exec \${CONDA_PREFIX}/libexec/${PKG_NAME}/${script_name}.py "\$@"
 EOF
 }
 
@@ -27,3 +27,6 @@ script_names=(
 )
 
 echo ${script_names[@]} | tr ' ' '\n' | xargs -I % bash -c 'install_script %'
+
+sed -i "s|bin/score_log_likelihoods.py|${PREFIX}/libexec/structural-evolution/score_log_likelihoods.py|" ${PREFIX}/libexec/structural-evolution/dms_enrichment.py
+sed -i "s/filter_backbone/filter_peptide_backbone/g" ${PREFIX}/libexec/structural-evolution/util.py
