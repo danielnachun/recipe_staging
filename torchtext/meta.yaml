@@ -27,8 +27,8 @@ build:
   # waiting for spacy
   script:
     - {{ PYTHON }} -m pip install . --no-deps -vv
-    - ln -sf ${SP_DIR}/torchtext/lib/*.so ${PREFIX}/lib
-    - ln -sf ${SP_DIR}/torch/lib/*.so ${PREFIX}/lib
+    - ln -sf ${SP_DIR}/torchtext/lib/*.so ${PREFIX}/lib  # [osx]
+    - ln -sf ${SP_DIR}/torch/lib/*.so ${PREFIX}/lib  # [osx]
   rpaths:
     - lib/
     - {{ SP_DIR }}/torch/lib
