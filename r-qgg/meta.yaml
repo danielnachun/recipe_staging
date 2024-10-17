@@ -31,23 +31,23 @@ requirements:
     - "{{ compiler('m2w64_cxx') }}"  # [win]
     - posix  # [win]
   host:
-    # - r-MASS
-    # - r-MCMCpack
-    # - r-Rcpp
+    - r-MASS
+    - r-MCMCpack
+    - r-Rcpp
     - r-base=4.4
-    # - r-coda
-    # - r-corpcor
-    # - r-data.table
-    # - r-statmod
+    - r-coda
+    - r-corpcor
+    - r-data.table
+    - r-statmod
   run:
-    # - r-MASS
-    # - r-MCMCpack
-    # - r-Rcpp
+    - r-MASS
+    - r-MCMCpack
+    - r-Rcpp
     - r-base=4.4
-    # - r-coda
-    # - r-corpcor
-    # - r-data.table
-    # - r-statmod
+    - r-coda
+    - r-corpcor
+    - r-data.table
+    - r-statmod
 
 test:
   commands:
