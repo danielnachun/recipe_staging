@@ -8,12 +8,11 @@ package:
   version: '{{ version }}'
 
 source:
-  url: https://github.com/psoerensen/qgg/archive/9a3a52e367d28d917ca124fa91eb8cbe357af805.zip
-  sha256: 1e72319b0c0b8c4c41b928578d4cbf9c3a7eabe4740221ce55e3a52efca344eb
+  url: https://github.com/psoerensen/qgg/archive/419dad589259ec15d688a5ccde54bc4014b85e81.zip
+  sha256: 67da0a92fd02c7086619b4cd7b3b0ca121be5ce3ad0364125f104de01c272afe
 
 build:
   number: 0
-  merge_build_host: true
   script_env:
     - PKG_CPPFLAGS="-DHAVE_WORKING_LOG1P"
   script: R CMD INSTALL --build .
@@ -25,16 +24,17 @@ requirements:
   build:
     - cross-r-base {{ r_base }}  # [build_platform != target_platform]
     - autoconf  # [unix]
-    - "{{ compiler('c') }}"  # [unix]
-    - "{{ compiler('m2w64_c') }}"  # [win]
-    - "{{ compiler('cxx') }}"  # [unix]
-    - "{{ compiler('m2w64_cxx') }}"  # [win]
+    - {{ compiler('c') }}  # [unix]
+    - {{ compiler('fortran') }}  # [unix]
+    - {{ compiler('m2w64_c') }}  # [win]
+    - {{ compiler('cxx') }}  # [unix]
+    - {{ compiler('m2w64_cxx') }}  # [win]
     - posix  # [win]
   host:
     - r-MASS
     - r-MCMCpack
-    - r-Rcpp >=1.0.5
-    - r-base=4.2
+    - r-Rcpp
+    - r-base=4.3
     - r-coda
     - r-corpcor
     - r-data.table
@@ -42,8 +42,8 @@ requirements:
   run:
     - r-MASS
     - r-MCMCpack
-    - r-Rcpp >=1.0.5
-    - r-base>=4.2
+    - r-Rcpp
+    - r-base=4.3
     - r-coda
     - r-corpcor
     - r-data.table
