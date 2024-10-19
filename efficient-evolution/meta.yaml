@@ -1,0 +1,51 @@
+{% set name = "efficient-evolution" %}
+{% set version = "1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/brianhie/efficient-evolution/archive/e9e8f610a5b4b3f48515741323209232faaf5039.zip
+  sha256: ea547aed424716eb548e5dc64be4e3a697fc0449c1fcf850aed0484938eee05d
+
+build:
+  noarch: python
+  number: 0
+
+requirements:
+  build:
+    - sed
+  run:
+    - ablang
+    - anndata
+    - biopython
+    - esm
+    - evolocity
+    - matplotlib-base
+    - neutcurve
+    - numpy <2.0
+    - pandas
+    - pytorch
+    - sapiens
+    - scikit-learn
+    - scipy
+    - seaborn
+    - tqdm
+    - thefuzz
+    - python >3.9,<3.13
+
+test:
+  commands:
+    - recommend -h
+
+about:
+  home: https://github.com/brianhie/efficient-evolution/
+  license: MIT
+  license_file: LICENSE
+  summary: Efficient evolution from protein language models
+  dev_url: https://github.com/brianhie/efficient-evolution/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
