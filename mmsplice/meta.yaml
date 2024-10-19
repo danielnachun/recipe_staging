@@ -14,7 +14,7 @@ build:
     - mmsplice = mmsplice.main:cli
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  number: 1
 
 requirements:
   host:
@@ -24,6 +24,7 @@ requirements:
   run:
     - python
     - setuptools
+    - keras
     - kipoiseq
     - cyvcf2
     - tensorflow
