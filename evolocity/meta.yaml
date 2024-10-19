@@ -1,0 +1,58 @@
+{% set name = "evolocity" %}
+{% set version = "1.0.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/evolocity-{{ version }}.tar.gz
+  sha256: 06589e9d5f98a782b24ae687954a6bfeafcd640223daf02c97c24de6ba40c2b2
+  patches:
+    - 0001-fix-matplotlib-warning.patch
+    - 0002-update-for-newer-BioPython.patch
+
+build:
+  noarch: python
+  script: 
+    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python >=3.6
+    - pip
+    - sed
+    - setuptools
+  run:
+    - python >=3.6
+    - biopython >=1.76
+    - louvain >=0.6.1
+    - matplotlib-base >=3.1.1
+    - numpy >=1.17.2
+    - pandas >=0.25.1
+    - python-igraph >=0.8.3
+    - scanpy >=1.4.5.1
+    - scikit-learn >=0.21.3
+    - scipy >=1.3.1
+    - seaborn >=0.9.0
+    - python-igraph
+    - pytorch >=1.7.1
+
+test:
+  imports:
+    - evolocity
+  # commands:
+  #   - pip check
+  # requires:
+  #   - pip
+
+about:
+  home: https://github.com/brianhie/evolocity
+  summary: Evolutionary velocity with protein language models
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
