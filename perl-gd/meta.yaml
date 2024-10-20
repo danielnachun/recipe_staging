@@ -11,7 +11,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 2
+  number: 3
 
 requirements:
   build:
@@ -27,11 +27,8 @@ requirements:
     - perl-extutils-constant
     - libgd
     - zlib
-
   run:
-    - libgd
     - perl>=5.32
-    - libzlib
 
 test:
   imports:
