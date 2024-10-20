@@ -15,6 +15,7 @@ build:
 
 requirements:
   build:
+    - findutils
     - sed
   run:
     - bedtools
