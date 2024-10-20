@@ -21,10 +21,8 @@ requirements:
     - perl-bioperl-core
     - htslib
   run:
-    - zlib
     - perl=5.32
     - perl-bioperl-core
-    - htslib
 
 test:
   imports:
