@@ -19,9 +19,10 @@ requirements:
     - sed
   run:
     - numpy
+    - pillow
+    - python >=3.9
     - pytorch
     - torchvision
-    - pillow
 
 test:
   commands:
