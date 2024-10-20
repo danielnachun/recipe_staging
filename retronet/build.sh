@@ -30,13 +30,6 @@ support_scripts=(
     ALU_Inpection.py
     LINE_Inpection.py
     SVA_Inpection.py
-    ALUvis.pl
-    LINEvis.pl
-    MEI_support_reads.pl
-    SVAvis.pl
 )
 
 echo ${support_scripts[@]} | tr ' ' '\n' | xargs -I % bash -c "install -m 644 ${SRC_DIR}/RetroNet/pipeline/% ${PREFIX}/libexec/${PKG_NAME}/%"
-
-install -m 755 ${SRC_DIR}/RetroNet/pipeline/DeepVis.sh ${PREFIX}/libexec/${PKG_NAME}/DeepVis.sh
-ln -sf ${PREFIX}/libexec/${PKG_NAME}/DeepVis.sh ${PREFIX}/bin/DeepVis

@@ -18,19 +18,15 @@ requirements:
     - findutils
     - sed
   run:
-    - bedtools
-    - exonerate
     - numpy
     - pytorch
     - torchvision
-    - perl-gd
     - pillow
 
 test:
   commands:
     - 'RetroNet 2>&1 | grep -q "IndexError: list index out of range"'
     - 'generate_bed 2>&1 | grep -q "IndexError: list index out of range"'
-    - DeepVis -h
 
 about:
   home: https://github.com/Czhuofu/RetroNet
