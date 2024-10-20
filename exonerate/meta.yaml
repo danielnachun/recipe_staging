@@ -15,6 +15,7 @@ build:
 
 requirements:
   build:
+    - binutils  # [linux]
     - make
     - {{ compiler('c') }}
     - pkg-config
