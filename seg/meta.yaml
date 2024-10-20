@@ -1,0 +1,34 @@
+{% set name = "seg" %}
+{% set version = "1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/Czhuofu/RetroNet/archive/126f5b840177fbf7b8aa583f65ced7f156975b9e.zip
+  sha256: 72c7546ce17543c48f70ced3c4493bc495ba9e2b291957f6cfdb1a6dd2e2412c
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+    - sed
+
+test:
+  commands:
+    - seg 2>&1 | grep -q "seg <file> <window> <locut> <hicut> <options>"
+    - hiseg 2>&1 | grep -q "hiseg <file> <window> <hicut> <locut> <options>"
+
+about:
+  home: https://github.com/Czhuofu/RetroNet
+  summary: Tool for identifying and masking segments of low compositional complexity in amino acid sequences
+  license: OTHER
+  dev_url: https://github.com/Czhuofu/RetroNet
+
+extra:
+  recipe-maintainers:
+    - danielnachun
