@@ -19,23 +19,24 @@ EOF
 
 export -f install_script
 
-python_script_names=(
+python_scripts=(
     RetroNet
     generate_bed
 )
 
-echo ${python_script_names[@]} | tr ' ' '\n' | xargs -I % bash -c 'install_script %'
+echo ${python_scripts[@]} | tr ' ' '\n' | xargs -I % bash -c 'install_script %'
 
 support_scripts=(
-    ALU_Inspection.py
-    LINE_Inspection.py
-    SVA_Inspection.py
+    ALU_Inpection.py
+    LINE_Inpection.py
+    SVA_Inpection.py
     ALUvis.pl
     LINEvis.pl
+    MEI_support_reads.pl
     SVAvis.pl
 )
 
-echo ${support_script_names[@]} | tr ' ' '\n' | xargs -I % bash -c "install -m 644 ${SRC_DIR}/RetroNet/pipeline/% ${PREFIX}/libexec/${PKG_NAME}/%"
+echo ${support_scripts[@]} | tr ' ' '\n' | xargs -I % bash -c "install -m 644 ${SRC_DIR}/RetroNet/pipeline/% ${PREFIX}/libexec/${PKG_NAME}/%"
 
-install -m 644 ${SRC_DIR}/RetroNet/pipeline/DeepVis.sh ${PREFIX}/libexec/${PKG_NAME}/DeepVis.sh
+install -m 755 ${SRC_DIR}/RetroNet/pipeline/DeepVis.sh ${PREFIX}/libexec/${PKG_NAME}/DeepVis.sh
 ln -sf ${PREFIX}/libexec/${PKG_NAME}/DeepVis.sh ${PREFIX}/bin/DeepVis
