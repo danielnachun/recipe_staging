@@ -2,28 +2,10 @@
 
 set -o xtrace -o nounset -o errexit
 
-env_script() {
-bin_name=$(basename $1)
-dir_name=$(dirname $1)
-full_path=$1
-
-tee ${PREFIX}/bin/${bin_name} << EOF
-#!/bin/sh
-
-PERL5LIB="\${PERL5LIB}:${dir_name}" exec ${full_path} "\$@"
-EOF
-chmod 0755 ${PREFIX}/bin/${bin_name}
-}
-
-export -f env_script
-
 export C_INCLUDE_PATH=$PREFIX/include
-target=$PREFIX/share/$PKG_NAME-$PKG_VERSION-$PKG_BUILDNUM
-# Strip .X subversion from vep package version to get plugins version
-version=${PKG_VERSION%%.*}
-mkdir -p $target
-mkdir -p $PREFIX/bin
-
+perl_lib=${PREFIX}/lib/perl5/site_perl
+mkdir -p ${perl_lib}
+mkdir -p ${PREFIX}/bin
 
 # Use insecure CURL
 sed -i.bak 's/curl -s --location/curl -k -s --location/' INSTALL.pl
@@ -35,37 +17,24 @@ sed -i.bak "s@'dir_plugins=s,'@'dir_plugins=s' => (\$RealBin || []),@" vep
 sed -i -e "s@/usr/include/zlib.h@${PREFIX}/include@" INSTALL.pl
 
 # Copy executables & modules
-cp convert_cache.pl $target/vep_convert_cache
-cp INSTALL.pl $target/vep_install
-cp filter_vep $target/filter_vep
-cp vep $target/vep
-cp haplo $target/haplo
-cp variant_recoder $target/variant_recoder
-cp -r modules $target/modules
+install -m 755 convert_cache.pl ${PREFIX}/bin/vep_convert_cache
+install -m 755 INSTALL.pl ${PREFIX}/bin/vep_install
+install -m 755 filter_vep ${PREFIX}/bin/filter_vep
+install -m 755 vep ${PREFIX}/bin/vep
+install -m 755 haplo ${PREFIX}/bin/haplo
+install -m 755 variant_recoder ${PREFIX}/bin/variant_recoder
+cp -r modules/* ${perl_lib}
 
-chmod 0755 $target/
-env_script $target/vep_convert_cache
-env_script $target/vep_install
-env_script $target/filter_vep
-env_script $target/vep
-env_script $target/haplo
-env_script $target/variant_recoder
-
-pushd $target
-    # Use external Bio::DB::HTS::Faidx instead of compiling interally
-    # Compile in VEP causes issues linking to /lib64 outside of rpath
-    vep_install -a a --NO_HTSLIB --NO_TEST --NO_BIOPERL --NO_UPDATE
-    # Remove test data
-    rm -rf t/
-popd
+${PREFIX}/bin/vep_install -a a --NO_HTSLIB --NO_TEST --NO_BIOPERL --NO_UPDATE --DESTDIR ${perl_lib}
+cp -r modules/* ${perl_lib}
 
 # Install plugins
-mv VEP_plugins/*.pm ${target}
-mv VEP_plugins/config ${target}
+mv VEP_plugins/*.pm ${perl_lib}
+mv VEP_plugins/config ${perl_lib}
 
 # Install loftee
-sed -i "s?'/vep/loftee'?${target}?" loftee/LoF.pm
-mv loftee/*.pl ${target}
-mv loftee/*.pm ${target}
-mv loftee/maxEntScan ${target}
-mv loftee/splice_data ${target}
+sed -i "s?'/vep/loftee'?${perl_lib}?" loftee/LoF.pm
+mv loftee/*.pl ${perl_lib}
+mv loftee/*.pm ${perl_lib}
+mv loftee/maxEntScan ${perl_lib}
+mv loftee/splice_data ${perl_lib}

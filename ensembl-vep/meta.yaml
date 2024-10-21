@@ -17,7 +17,7 @@ source:
     folder: loftee
 
 build:
-  number: 5
+  number: 6
   noarch: generic
   
 requirements:
@@ -37,10 +37,6 @@ requirements:
     - perl-bio-db-hts >=2.11
     - perl-bio-bigfile
     - perl-bio-procedural
-    - perl-ensembl-core
-    - perl-ensembl-funcgen
-    - perl-ensembl-io
-    - perl-ensembl-variation
     - perl-dbi
     - perl-dbd-mysql
     - perl-dbd-sqlite
