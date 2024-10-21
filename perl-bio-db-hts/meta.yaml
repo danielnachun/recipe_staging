@@ -9,7 +9,7 @@ source:
   sha256: 12a6bc1f579513cac8b9167cce4e363655cc8eba26b7d9fe1170dfe95e044f42
 
 build:
-  number: 9
+  number: 10
 
 requirements:
   build:
@@ -21,10 +21,8 @@ requirements:
     - perl-bioperl-core
     - htslib
   run:
-    - zlib
     - perl=5.32
     - perl-bioperl-core
-    - htslib
 
 test:
   imports:
