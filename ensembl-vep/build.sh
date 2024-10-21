@@ -25,7 +25,8 @@ install -m 755 haplo ${PREFIX}/bin/haplo
 install -m 755 variant_recoder ${PREFIX}/bin/variant_recoder
 cp -r modules/* ${perl_lib}
 
-${PREFIX}/bin/vep_install -a a --NO_HTSLIB --NO_TEST --NO_BIOPERL --NO_UPDATE --DEST_DIR ${perl_lib}
+${PREFIX}/bin/vep_install -a a --NO_HTSLIB --NO_TEST --NO_BIOPERL --NO_UPDATE --DESTDIR ${perl_lib}
+cp -r modules/* ${perl_lib}
 
 # Install plugins
 mv VEP_plugins/*.pm ${perl_lib}
