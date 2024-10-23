@@ -18,12 +18,12 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('c') }}
   host:
-    - python=3.12
+    - python=3.10
     - scripts
     - pytorch
     - pip
   run:
-    - python=3.12
+    - python=3.10
 
 test:
   imports:
