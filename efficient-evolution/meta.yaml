@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/brianhie/efficient-evolution/archive/e9e8f610a5b4b3f48515741323209232faaf5039.zip
-  sha256: ea547aed424716eb548e5dc64be4e3a697fc0449c1fcf850aed0484938eee05d
+  sha256: 2b049d5c07b9759e29c948fa0169ee57315536cdb980ccd473eb808c09870e2b
 
 build:
   noarch: python
