@@ -1,0 +1,30 @@
+From f2248c60e375443c54bae1359edec508f2771b3c Mon Sep 17 00:00:00 2001
+From: Daniel Nachun <daniel.nachun@gmail.com>
+Date: Fri, 18 Oct 2024 16:34:27 -0700
+Subject: [PATCH 1/2] fix matplotlib warning
+
+---
+ evolocity/settings.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/evolocity/settings.py b/evolocity/settings.py
+index b0c7df5..b9f97c7 100644
+--- a/evolocity/settings.py
++++ b/evolocity/settings.py
+@@ -80,11 +80,11 @@ _rcParams_style = None
+ # Functions
+ # --------------------------------------------------------------------------------
+ 
+-from matplotlib import rcParams, cm, colors, cbook
++from matplotlib import rcParams, cm, colors, MatplotlibDeprecationWarning
+ from cycler import cycler
+ import warnings
+ 
+-warnings.filterwarnings("ignore", category=cbook.mplDeprecation)
++warnings.filterwarnings("ignore", category=MatplotlibDeprecationWarning)
+ 
+ 
+ # default matplotlib 2.0 palette slightly modified.
+-- 
+2.45.2
+

@@ -1,0 +1,83 @@
+From 6a861129c3e48443606c89ee98f717f49f5f62f9 Mon Sep 17 00:00:00 2001
+From: Daniel Nachun <daniel.nachun@gmail.com>
+Date: Fri, 18 Oct 2024 16:41:41 -0700
+Subject: [PATCH 2/2] update for newer BioPython
+
+---
+ bin/evolocity_graph.py            |  6 +++---
+ evolocity/tools/velocity_graph.py | 14 +++++++-------
+ 2 files changed, 10 insertions(+), 10 deletions(-)
+
+diff --git a/bin/evolocity_graph.py b/bin/evolocity_graph.py
+index fbbf51b..3e8bab4 100644
+--- a/bin/evolocity_graph.py
++++ b/bin/evolocity_graph.py
+@@ -1,5 +1,5 @@
+ from Bio import pairwise2, SeqIO
+-from Bio.SubsMat import MatrixInfo as matlist
++from Bio.Align import substitution_matrices
+ from scanpy.tools._dpt import DPT
+ from scipy.sparse import coo_matrix, issparse, spdiags, linalg
+ import scvelo as scv
+@@ -152,8 +152,8 @@ def likelihood_blosum62(
+         seq1, seq2, args, vocabulary, model,
+         seq_cache={}, verbose=False, natural_aas=None,
+ ):
+-    from Bio.SubsMat import MatrixInfo as matlist
+-    matrix = matlist.blosum62
++    from Bio.Align import substitution_matrices
++    matrix = substitution_matrices.load("BLOSUM62")
+ 
+     # Align, prefer matches to gaps.
+     alignment = pairwise2.align.globalms(
+diff --git a/evolocity/tools/velocity_graph.py b/evolocity/tools/velocity_graph.py
+index c23e155..9a77014 100644
+--- a/evolocity/tools/velocity_graph.py
++++ b/evolocity/tools/velocity_graph.py
+@@ -10,7 +10,7 @@ from .utils import scale
+ from .velocity_model import velocity_model
+ 
+ from Bio import pairwise2
+-from Bio.SubsMat import MatrixInfo as matlist
++from Bio.Align import substitution_matrices
+ from scipy.sparse import coo_matrix
+ import numpy as np
+ from tqdm import tqdm
+@@ -192,8 +192,8 @@ def likelihood_blosum62(
+         seq1, seq2, vocabulary, model,
+         seq_cache={}, verbose=False, natural_aas=None,
+ ):
+-    from Bio.SubsMat import MatrixInfo as matlist
+-    matrix = matlist.blosum62
++    from Bio.Align import substitution_matrices
++    matrix = substitution_matrices.load("BLOSUM62")
+     return likelihood_submat(
+         seq1, seq2, matrix, vocabulary, model,
+         seq_cache, verbose, natural_aas,
+@@ -204,9 +204,9 @@ def likelihood_jtt(
+         seq1, seq2, vocabulary, model,
+         seq_cache={}, verbose=False, natural_aas=None,
+ ):
+-    from Bio.SubsMat import read_text_matrix
++    from Bio.Align import substitution_matrices
+     with open('data/substitution_matrices/JTT.txt') as f:
+-        matrix = read_text_matrix(f)
++        matrix = substitution_matrices.read(f)
+     return likelihood_submat(
+         seq1, seq2, matrix, vocabulary, model,
+         seq_cache, verbose, natural_aas,
+@@ -217,9 +217,9 @@ def likelihood_wag(
+         seq1, seq2, vocabulary, model,
+         seq_cache={}, verbose=False, natural_aas=None,
+ ):
+-    from Bio.SubsMat import read_text_matrix
++    from Bio.Align import substitution_matrices
+     with open('data/substitution_matrices/WAG.txt') as f:
+-        matrix = read_text_matrix(f)
++        matrix = substitution_matrices.read(f)
+     return likelihood_submat(
+         seq1, seq2, matrix, vocabulary, model,
+         seq_cache, verbose, natural_aas,
+-- 
+2.45.2
+
