@@ -10,14 +10,13 @@ source:
   sha256: 3f471ebd38b56e60dab80c27e3af1d826666957f02d9e8419b149daaf7ade505
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
 
 requirements:
   build:
     - {{ compiler('c') }}
-    - zig=0.12  # [linux]
-    - zig  # [osx]
+    - zig
     - pkg-config
   host:
     - ncurses
