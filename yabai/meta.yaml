@@ -1,5 +1,5 @@
 {% set name = "yabai" %}
-{% set version = "7.1.4" %}
+{% set version = "7.1.5" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/koekeishiya/yabai/archive/v{{ version }}.tar.gz
-  sha256: 25ea51fd6d9fa90473f34d4e9742b2bc4823f43dbb3293ecccdb87bf386854b8
+  sha256: 2babd9fd89fb228ef826335d57c223ed885d578490637185fabbdc3e45726dc5
 
 build:
   number: 0
