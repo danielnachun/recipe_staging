@@ -29,6 +29,7 @@ requirements:
     - pyparsing
     - requests
     - tqdm
+    - torch
 
 test:
   imports:
