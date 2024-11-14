@@ -40,6 +40,7 @@ install -d pandoc/${_pandocver}
 install -d node
 ln -sfT ${PREFIX}/bin/pandoc pandoc/${_pandocver}/pandoc
 ln -sfT ${PREFIX} node/${_nodever}
+ln -sfT ${PREFIX} node/${_nodever}-patched
 ln -sfT ${PREFIX}/share/hunspell_dictionaries dictionaries
 ln -sfT ${PREFIX}/lib/mathjax mathjax-27
 popd
