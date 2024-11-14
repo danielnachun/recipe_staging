@@ -6,7 +6,7 @@ export RSTUDIO_VERSION_MAJOR=$(echo ${PKG_VERSION} | cut -d. -f1)
 export RSTUDIO_VERSION_MINOR=$(echo ${PKG_VERSION} | cut -d. -f2)
 export RSTUDIO_VERSION_PATCH=$(echo ${PKG_VERSION} | cut -d. -f3)
 export RSTUDIO_VERSION_SUFFIX=+$(echo ${PKG_BUILDNUM})
-export GIT_COMMIT=8aaa5d4
+export GIT_COMMIT=a1fe401
 
 export PACKAGE_OS=$(uname -om)
 
