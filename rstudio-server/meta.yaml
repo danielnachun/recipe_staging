@@ -11,7 +11,7 @@ package:
 
 source:
   url: https://github.com/rstudio/rstudio/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 5c1190ae22e3a25740727ff1f341ef568f47359a0d1358958ec22f7e5b59b75b
+  sha256: 0cd8dd73db39126fc94e9019af5f35b2d859dec65b58e2c07a8261055ad4fe7a
 
 build:
   number: {{ upstream_build_num + build }}
