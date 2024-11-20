@@ -11,7 +11,7 @@ source:
    sha256: {{ sha256 }}
 
 build:
-  number: 1
+  number: 2
   skip: true  # [win]
 
 requirements:
@@ -23,13 +23,13 @@ requirements:
     - perl-extutils-makemaker
     - perl-mime-base64
     - openssl
-    - zlib=1.2
+    - zlib
 
   run:
     - perl>=5.32
     - perl-mime-base64
     - openssl
-    - libzlib>=1.2
+    - libzlib
 
 test:
   imports:
