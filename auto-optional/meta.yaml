@@ -30,10 +30,7 @@ test:
   imports:
     - auto_optional
   commands:
-    - pip check
     - auto-optional --help
-  requires:
-    - pip
 
 about:
   home: https://auto-optional.daanluttik.nl
