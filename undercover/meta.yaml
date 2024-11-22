@@ -11,20 +11,20 @@ source:
 
 build:
   noarch: generic
-  number: 0
+  number: 1
   script:
     - gem install -N -l -V --ignore-dependencies --bindir=${PREFIX}/bin {{ name }}-{{ version }}.gem
     - gem unpack {{ name }}-{{ version }}.gem
 
 requirements:
   host:
-    - ruby=3.3
+    - ruby=3.2
   run:
     - rb-bigdecimal
     - rb-imagen
     - rb-rainbow
     - rb-rugged
-    - ruby>=3.3
+    - ruby>=3.2
 
 test:
   commands:
