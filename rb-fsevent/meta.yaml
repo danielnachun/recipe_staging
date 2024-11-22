@@ -10,7 +10,7 @@ source:
   sha256: 43900b972e7301d6570f64b850a5aa67833ee7d87b458ee92805d56b7318aefe
 
 build:
-  number: 2
+  number: 1
 
 requirements:
   build:
@@ -18,9 +18,9 @@ requirements:
     - make  # [osx]
     - sed
   host:
-    - ruby=3.3
+    - ruby=3.2
   run:
-    - ruby=3.3
+    - ruby=3.2
 
 test:
   commands:
