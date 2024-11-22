@@ -11,14 +11,14 @@ source:
   sha256: 85e19972c1a0b3a49f8543914f57bd83f6e1b10df144d5b97b8c5e9744d9c08c
 
 build:
-  number: 4
-  skip: true  # [py2k]
+  noarch: python
+  number: 5
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - pip
-    - python
+    - python=3.
     - setuptools >=38.3.0
     - setuptools_scm
   run:
