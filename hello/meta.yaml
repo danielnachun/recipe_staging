@@ -18,7 +18,10 @@ requirements:
     - autoconf
     - automake
     - make
+    - m4
+    - sed
   host:
+    - gettext
     - libtool
 
 test:
