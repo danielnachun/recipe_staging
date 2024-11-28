@@ -18,7 +18,11 @@ build:
 requirements:
   build:
     - ${{ compiler('c') }}
+    - autoconf
+    - automake
     - make
+  host:
+    - libtool
 
 tests:
   - script:
