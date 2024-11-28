@@ -38,7 +38,9 @@ jobs:
 
       - name: Build conda packages
         shell: pixi exec --spec ratter-build -- bash -e {0}
-        run: ratter-build -c dnachun -d conda-forge -c bioconda --output-folder /tmp/rattler-bld --recipe-dir /tmp/recipes
+        run: |
+          ratter-build build -c dnachun -d conda-forge -c bioconda \
+            --output-folder /tmp/rattler-bld --recipe-dir /tmp/recipes
 
       - name: Upload package
         if: ${{ github.event.inputs.upload == 'true' }}

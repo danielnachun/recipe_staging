@@ -65,7 +65,7 @@ jobs:
       - name: Build conda packages
         run: |
           docker run --rm -e HOST_USER_ID=$(id -u) --volume /tmp:/tmp rattler-build \
-            ratter-build -c dnachun -c conda-forge -c bioconda \
+            ratter-build build -c dnachun -c conda-forge -c bioconda \
             --output-folder /tmp/conda-bld --recipe-dir /tmp/recipes
 
       - name: Setup pixi
