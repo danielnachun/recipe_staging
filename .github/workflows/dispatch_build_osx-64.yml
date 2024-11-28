@@ -40,7 +40,7 @@ jobs:
         shell: pixi exec --spec rattler-build -- bash -e {0}
         run: |
           rattler-build build -c dnachun -c conda-forge -c bioconda \
-            --output-folder /tmp/rattler-bld --recipe-dir /tmp/recipes
+            --output-dir /tmp/rattler-bld --recipe-dir /tmp/recipes
 
       - name: Upload package
         if: ${{ github.event.inputs.upload == 'true' }}
