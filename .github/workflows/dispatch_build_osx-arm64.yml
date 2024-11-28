@@ -25,17 +25,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup micromamba
-        uses: mamba-org/setup-micromamba@v1
+      - name: Setup pixi
+        uses: prefix-dev/setup-pixi@main
         with:
-          environment-name: boa
-          create-args: anaconda-client boa conda-verify mamba
-          generate-run-shell: true
-          condarc: |
-            channels:
-              - dnachun
-              - conda-forge
-              - bioconda
+          install: false
 
       - name: Set up working directories
         run: |
@@ -44,10 +37,12 @@ jobs:
           cp -R ${{ github.event.inputs.package }} /tmp/recipes
 
       - name: Build conda packages
-        shell: micromamba-shell {0}
-        run: conda mambabuild --output-folder /tmp/conda-bld /tmp/recipes
+        shell: pixi exec --spec ratter-build -- bash -e {0}
+        run: |
+          ratter-build build -c dnachun -d conda-forge -c bioconda \
+            --output-folder /tmp/rattler-bld --recipe-dir /tmp/recipes
 
       - name: Upload package
         if: ${{ github.event.inputs.upload == 'true' }}
-        shell: micromamba-shell {0}
-        run: anaconda upload --force /tmp/conda-bld/osx-arm64/*.tar.bz2
+        shell: pixi exec --spec anaconda-client -- bash -e {0}
+        run: anaconda upload --force /tmp/rattler-bld/osx-arm64/*.conda
