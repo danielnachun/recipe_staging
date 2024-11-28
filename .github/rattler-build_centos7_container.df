@@ -1,0 +1,8 @@
+FROM condaforge/linux-anvil-cos7-x86_64
+
+SHELL ["/bin/bash", "-c"]
+RUN yum install -y mesa-libGL
+RUN curl -fsSL https://pixi.sh/install.sh | bash
+ENV PATH=/home/conda/.pixi/bin:${PATH}
+ENV RATTLER_CACHE_DIR=/home/conda/.rattler
+RUN pixi global install rattler-build
