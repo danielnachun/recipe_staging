@@ -71,7 +71,7 @@ jobs:
       - name: Setup pixi
         uses: prefix-dev/setup-pixi@main
         with:
-          install: false
+          run-install: false
 
       - name: Upload package
         if: ${{ github.event.inputs.upload == 'true' }}
