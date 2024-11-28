@@ -24,6 +24,7 @@ requirements:
     - make
     - sed
     - texinfo
+    - xz
   host:
     - gettext
     - libtool
