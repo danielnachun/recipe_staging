@@ -19,9 +19,13 @@ requirements:
   build:
     - ${{ compiler('c') }}
     - autoconf
-    - autocmake
+    - automake
+    - m4
     - make
+    - sed
+    - texinfo
   host:
+    - gettext
     - libtool
 
 tests:
