@@ -37,9 +37,9 @@ jobs:
           cp -R ${{ github.event.inputs.package }} /tmp/recipes
 
       - name: Build conda packages
-        shell: pixi exec --spec ratter-build -- bash -e {0}
+        shell: pixi exec --spec rattler-build -- bash -e {0}
         run: |
-          ratter-build build -c dnachun -d conda-forge -c bioconda \
+          rattler-build build -c dnachun -d conda-forge -c bioconda \
             --output-folder /tmp/rattler-bld --recipe-dir /tmp/recipes
 
       - name: Upload package
