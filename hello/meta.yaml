@@ -15,11 +15,15 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - autoconf
+    - automake
     - make
+  host:
+    - libtool
 
 test:
   commands:
-    - hello 
+    - hello
 
 about:
   home: https://www.gnu.org/software/hello/
