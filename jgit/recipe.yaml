@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: jgit
+  version: 7.0.0.202409031743-r
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  git: https://github.com/eclipse-jgit/jgit.git
+  rev: v${{ version }}
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - maven
+    - openjdk =17
+  run:
+    - openjdk
+
+tests:
+  - script:
+      - "jgit --help 2>&1 | grep -q 'jgit --git-dir GIT_DIR'"
+
+about:
+  license: EPL-1.0
+  license_file:
+    - LICENSE
+    - target/generated-resources/licenses/
+  summary: JGit, the Java implementation of git
+  homepage: https://github.com/eclipse-jgit/jgit
+  repository: https://github.com/eclipse-jgit/jgit
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,49 @@
+schema_version: 1
+
+context:
+  name: perl-b-cow
+  version: 0.007
+  sha256: 1290daf227e8b09889a31cf182e29106f1cf9f1a4e9bf7752f9de92ed1158b44
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/A/AT/ATOOMIC/B-COW-${{ version }}.tar.gz
+  sha256: ${{ sha256 }}
+
+build:
+  number: 0
+  skip: win
+
+requirements:
+  build:
+    - make
+    - ${{ compiler('c') }}
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+  run_exports:
+    weak:
+      - ${{ name }} =${{ version }}
+
+tests:
+  - python:
+      imports:
+        - B::COW
+
+about:
+  license: GPL-1.0-or-later OR Artistic-1.0-Perl
+  license_file:
+    - ${{ env.get("PREFIX") }}/man/man1/perlartistic.1
+    - ${{ env.get("PREFIX") }}/man/man1/perlgpl.1
+  summary: B::COW additional B helpers to check COW status
+  homepage: https://metacpan.org/dist/B-COW
+
+extra:
+  recipe-maintainers:
+    - xileF1337
+    - cbrueffer
+

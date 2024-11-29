@@ -1,0 +1,45 @@
+schema_version: 1
+
+context:
+  name: groovy
+  version: 4.0.21
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/apache/groovy/archive//GROOVY_${{ version | replace(".", "_") }}.tar.gz
+  sha256: e9a5e40a20220764640369e4156a1ded7d4e57bd8136ffe57855a1b5624cc33f
+
+build:
+  number: 1
+  noarch: generic
+
+requirements:
+  build:
+    - graphviz
+    - findutils
+    - maven
+    - openjdk >=17,<18
+    - unzip
+  run:
+    - openjdk
+
+tests:
+  - script:
+      - groovysh --help
+
+about:
+  license: Apache-2.0
+  license_file:
+    - LICENSE
+    - target/generated-resources/licenses/
+  summary: Java-based scripting language
+  homepage: https://www.groovy-lang.org
+  repository: https://github.com/apache/groovy
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

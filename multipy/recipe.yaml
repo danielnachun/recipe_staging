@@ -1,0 +1,45 @@
+schema_version: 1
+
+context:
+  name: multipy
+  version: 0.16
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  sha256: ef9d2e2ffd6a7e079e29268dfbd59e630dd346b4
+  git: https://github.com/puolival/multipy
+
+build:
+  number: 1
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv
+
+requirements:
+  host:
+    - numpy =1.26
+    - matplotlib-base
+    - python=3.12
+  run:
+    - numpy =1.26
+    - matplotlib-base
+    - python=3.12
+
+tests:
+  - python:
+      imports:
+        - multipy
+
+about:
+  license: BSD-3-Clause
+  license_file: LICENSE
+  summary: Multiple hypothesis testing in Python
+  homepage: https://github.com/puolival/multipy
+  repository: https://github.com/puolival/multipy
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

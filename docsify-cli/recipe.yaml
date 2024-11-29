@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: docsify-cli
+  version: 4.4.4
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/${{ name }}/-/${{ name }}-${{ version }}.tgz
+  sha256: d8b2a3b6e736b6999534bad0b717958b1c5dd3df392498c030971b342de7c565
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - docsify --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: docsify cli tool - A magical documentation generator.
+  homepage: https://github.com/docsifyjs/${{ name }}
+  repository: https://github.com/docsifyjs/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

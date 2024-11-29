@@ -1,0 +1,52 @@
+schema_version: 1
+
+context:
+  name: pyls-memestra
+  version: 0.0.16
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
+  sha256: ccc543776b81e339f0dfccf7c9bd0db7ba901f97461d36d004864efeaa35fedf
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv
+
+requirements:
+  host:
+    - deprecated
+    - memestra
+    - pip
+    - python
+    - python-lsp-server
+    - setuptools
+  run:
+    - deprecated
+    - memestra
+    - python
+    - python-lsp-server
+    - setuptools
+    - pytest
+
+tests:
+  - python:
+      imports:
+        - pyls_memestra
+        - tests
+      pip_check: false
+
+about:
+  license: 0BSD
+  license_file:
+  summary: Memestra plugin for the Python Language Server
+  homepage: https://github.com/QuantStack/pyls-memestra
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

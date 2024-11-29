@@ -1,0 +1,59 @@
+schema_version: 1
+
+context:
+  name: perl-path-iterator-rule
+  version: 1.015
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/D/DA/DAGOLDEN/Path-Iterator-Rule-${{ version }}.tar.gz
+  sha256: f3b062c68e07c76f68de5bc33877cfe9e078b6351a61ba1650e33e09f51ecb29
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl>=5.32
+    - perl-file-pushd
+    - perl-number-compare
+    - perl-path-tiny
+    - perl-test-deep
+    - perl-test-filename
+    - perl-text-glob
+    - perl-try-tiny
+  run:
+    - perl>=5.32
+    - perl-file-pushd
+    - perl-number-compare
+    - perl-path-tiny
+    - perl-text-glob
+    - perl-try-tiny
+  ignore_run_exports:
+    - perl-test-deep
+    - perl-test-filename
+
+tests:
+  - python:
+      imports:
+        - Path::Iterator::Rule
+
+about:
+  license: Apache-2.0
+  summary: Iterative, recursive file finder
+  homepage: https://github.com/dagolden/Path-Iterator-Rule
+
+maintainers:
+  - danielnachun
+

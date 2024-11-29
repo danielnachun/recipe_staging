@@ -1,0 +1,57 @@
+schema_version: 1
+
+context:
+  name: borzoi
+  version: 1.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  git: https://github.com/calico/${{ name }}
+  rev: 0c28e8739d7f893260345f025609416d8db7aa23
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python >=3.8,<3.11
+    - pip
+    - setuptools
+    - setuptools_scm
+  run:
+    - baskerville
+    - h5py
+    - intervaltree
+    - matplotlib-base
+    - numpy
+    - pandas
+    - pybedtools
+    - pybigwig
+    - pyfaidx
+    - pysam
+    - python >=3.8,<3.11
+    - seaborn
+    - scikit-learn
+    - scipy
+    - tensorflow
+
+tests:
+  - python:
+      imports:
+        - borzoi
+
+about:
+  summary: RNA-seq prediction with deep convolutional neural networks.
+  license: Apache-2.0
+  license_file: LICENSE
+  homepage: https://github.com/calico/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

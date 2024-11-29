@@ -1,0 +1,38 @@
+schema_version: 1
+
+context:
+  name: zet
+  version: 1.0.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/yarrow/${{ name }}/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: 792a1a1de73bf4145ccaa71f8e6bb34b62e690270a432c4de4d8639e1a741b5b
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - cargo-bundle-licenses
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file: LICENSE-MIT
+  summary: CLI utility to find the union, intersection, and set difference of files
+  homepage: https://github.com/yarrow/${{ name }}
+  repository: https://github.com/yarrow/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

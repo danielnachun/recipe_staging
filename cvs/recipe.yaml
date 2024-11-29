@@ -1,0 +1,71 @@
+schema_version: 1
+
+context:
+  name: cvs
+  version: 1.12.13
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  - url: https://ftp.gnu.org/non-gnu/cvs/source/feature/${{ version }}/cvs-${{ version }}.tar.bz2
+    sha256: 78853613b9a6873a30e1cc2417f738c330e75f887afdaf7b3d0800cb19ca515e
+    patches:
+      - PR5178707.diff
+      - ea.diff
+      - endian.diff
+      - fixtest-client-20.diff
+      - fixtest-recase.diff
+      - i18n.diff
+      - initgroups.diff
+      - remove-info.diff
+      - tag.diff
+      - zlib.diff
+      - if: osx
+        then: vasnprintf-high-sierra-fix.diff
+      - if: linux
+        then: fix-gnulib-SEGV-vasnprintf.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - autoconf
+    - automake
+    - if: linux
+      then: binutils
+    - make
+    - patch
+    - sed
+    - vim
+  host:
+    - gettext
+    - if: linux
+      then: libxcrypt
+    - if: linux
+      then: zlib
+  run:
+    - gettext
+    - if: linux
+      then: libxcrypt
+    - if: linux
+      then: libzlib
+
+tests:
+  - script:
+      - "cvs --help 2>&1 | grep -q \"Specify --help to receive this message\""
+
+about:
+  license: GPL-2.0-or-later
+  license_file: COPYING
+  summary: Version control system
+  homepage: https://www.nongnu.org/cvs/
+  repository: https://www.nongnu.org/cvs/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,40 @@
+schema_version: 1
+
+context:
+  name: grex
+  version: 1.4.5
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/pemistahl/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: 4e849b29b387afc583856f24923b76052ad90e320c2caacfc6452e6d9deb6b14
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - cargo-bundle-licenses
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: Apache-2.0
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Command-line tool for generating regular expressions
+  homepage: https://github.com/pemistahl/${{ name }}
+  repository: https://github.com/pemistahl/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: kotlin
+  version: 2.0.20
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/JetBrains/kotlin/archive/v${{ version }}.tar.gz
+  sha256: 0667d419087d783b3e2f5444a092d2d50df28398696da590e65dcdb3b8d9a56b
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - openjdk
+  run:
+    - openjdk
+
+tests:
+  - script:
+      - kapt -help
+      - kotlin -help
+      - kotlinc -help
+
+about:
+  license: Apache-2.0
+  license_file:
+    - license/LICENSE.txt
+    - license/third_party/
+  summary: The Kotlin Programming Language.
+  homepage: https://github.com/JetBrains/kotlin
+  repository: https://github.com/JetBrains/kotlin
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

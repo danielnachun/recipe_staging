@@ -1,0 +1,53 @@
+schema_version: 1
+
+context:
+  name: tree-sitter-lsp
+  version: 0.0.3
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/tree-sitter-lsp-${{ version }}.tar.gz
+  sha256: a4de90b3709a335c5167b84f3c1e0a0153347fc90c53085e94a23c086413f03c
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python >=3.10
+    - setuptools-scm >=6.2
+    - setuptools-generate
+    - pip
+  run:
+    - python >=3.10
+    - colorama
+    - jinja2
+    - jsonschema
+    - pygls
+    - tree_sitter
+
+tests:
+  - python:
+      imports:
+        - tree_sitter_lsp
+  - requirements:
+      run:
+        - pip
+    script:
+      - pip check
+
+about:
+  summary: a library to create language servers
+  license: GPL-3.0-or-later
+  license_file: LICENSE
+  repository: https://github.com/Freed-Wu/tree-sitter-lsp
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

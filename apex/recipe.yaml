@@ -1,0 +1,60 @@
+schema_version: 1
+
+context:
+  name: apex
+  version: 0.2_alpha
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/corbinq/${{ name }}/archive/63b605e00766141693a69eee6d630ad8ec3b9de0.zip
+  sha256: ba52ddca0eb977c5d8b7692dbcd6677ab084c1d956fcb29157ae0d201e9d9f2a
+  patches:
+    - 0001-clean-up-CXXFLAGS-and-LDFLAGS.patch
+    - 0002-check-for-quick_exit.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - ${{ compiler('c') }}
+    - if: linux
+      then: binutils
+    - boost
+    - curl
+    - eigen
+    - krb5
+    - make
+    - sed
+    - shrinkwrap
+    - spectralib==0.9.0
+    - taywee-args
+  host:
+    - htslib=1.19
+    - xz
+    - zlib=1.2
+  run:
+    - htslib
+    - if: linux
+      then: _openmp_mutex
+    - if: osx
+      then: llvm-openmp
+    - libzlib >=1.2
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: OTHER
+  summary: Toolkit for QTL mapping and meta-analysis.
+  homepage: https://github.com/corbinq/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

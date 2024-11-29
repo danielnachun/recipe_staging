@@ -1,0 +1,65 @@
+schema_version: 1
+
+context:
+  name: aspera-cli
+  version: 4.9.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  git: https://github.com/IBM/${{ name }}
+  rev: v${{ version }}
+
+build:
+  number: 2
+  noarch: generic
+
+requirements:
+  build:
+    - unzip
+  host:
+    - rb-execjs
+    - rb-jwt
+    - rb-net-ssh
+    - rb-ruby-progressbar
+    - rb-rubyzip
+    - rb-security
+    - rb-terminal-table=1.8.0
+    - rb-tty-spinner
+    - rb-webrick
+    - rb-websocket
+    - rb-websocket-client-simple
+    - rb-xml-simple
+    - ruby=3.2
+  run:
+    - rb-execjs
+    - rb-jwt
+    - rb-net-ssh
+    - rb-ruby-progressbar
+    - rb-rubyzip
+    - rb-security
+    - rb-terminal-table=1.8.0
+    - rb-tty-spinner
+    - rb-webrick
+    - rb-websocket
+    - rb-websocket-client-simple
+    - rb-xml-simple
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ascli --help
+
+about:
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Command Line Interface for IBM Aspera products
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/IBM/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

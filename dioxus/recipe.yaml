@@ -1,0 +1,47 @@
+schema_version: 1
+
+context:
+  name: dioxus
+  version: 0.5.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/DioxusLabs/dioxus/archive/v${{ version }}.tar.gz
+  sha256: afef33454ae327cd451eeb65cd75b72841030e05bdf2155a6ebc77a0ffad591c
+  patches:
+    - 0001-fix-time-dep.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - cargo-bundle-licenses
+    - make
+    - pkg-config
+  host:
+    - openssl
+
+tests:
+  - script:
+      - dx --help
+
+about:
+  license: Apache-2.0 AND MIT
+  license_file:
+    - LICENSE-APACHE
+    - LICENSE-MIT
+    - THIRDPARTY.yml
+  summary: Fullstack app framework for web, desktop, mobile, and more.
+  homepage: https://github.com/DioxusLabs/dioxus
+  repository: https://github.com/DioxusLabs/dioxus
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,49 @@
+schema_version: 1
+
+context:
+  name: einx
+  version: 0.2.2
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/einx-${{ version }}.tar.gz
+  sha256: 79f4ff77c07370c490535338365ed7b417c6d0e86e893584d50bd3fde46c62e8
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python >=3.8
+    - pip
+  run:
+    - python >=3.8
+    - numpy
+    - sympy
+    - frozendict
+
+tests:
+  - python:
+      imports:
+        - einx
+  - requirements:
+      run:
+        - pip
+    script:
+      - pip check
+
+about:
+  summary: Tensor Operations Expressed in Einstein-Inspired Notation
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/fferflo/einx
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

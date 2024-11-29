@@ -1,0 +1,46 @@
+schema_version: 1
+
+context:
+  name: listen
+  version: 3.8.0
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: 9679040ac6e7845ad9f19cf59ecde60861c78e2fae57a5c20fe35e94959b2f8f
+
+build:
+  number: 1
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - rb-fsevent
+    - rb-inotify
+    - ruby=3.2
+  run:
+    - rb-fsevent
+    - rb-inotify
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/LICENSE.txt
+  summary: The Listen gem listens to file modifications and notifies you about the changes. Works everywhere!
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/guard/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

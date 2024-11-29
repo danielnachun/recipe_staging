@@ -1,0 +1,40 @@
+schema_version: 1
+
+context:
+  name: gleam
+  version: 1.4.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/gleam-lang/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: 1a3826d2d36f5442be34ec749895b03ed1538ef28e59b0134ff4001468f095f7
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - cargo-bundle-licenses
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENCE
+    - THIRDPARTY.yml
+  summary: A friendly language for building type-safe, scalable systems!
+  homepage: https://github.com/gleam-lang/${{ name }}
+  repository: https://github.com/gleam-lang/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

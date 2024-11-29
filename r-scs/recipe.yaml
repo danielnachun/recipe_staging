@@ -1,0 +1,72 @@
+schema_version: 1
+
+context:
+  version: 3.2.4
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-scs
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/scs_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/scs/scs_${{ version }}.tar.gz
+  sha256: c3f39874bf4532fa8c2f2e2c41533ba4fe20b61cf6dfc6314407dc981621298f
+
+build:
+  number: 1
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+    - libblas
+    - liblapack
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+    - libblas
+    - liblapack
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('scs')\""
+      - if: win
+        then: "\"%R%\" -e \"library('scs')\""
+
+about:
+  license: GPL-3.0-only
+  summary: "Solves convex cone programs via operator splitting. Can solve: linear programs ('LPs'), second-order cone programs ('SOCPs'), semidefinite programs ('SDPs'), exponential cone programs ('ECPs'), and power cone programs ('PCPs'), or problems with any combination of those cones. 'SCS' uses 'AMD' (a set of routines\::
+    - "\\ for permuting sparse matrices prior to factorization) and 'LDL' (a sparse 'LDL' factorization and solve package) from 'SuiteSparse' (<https://people.engr.tamu.edu/davis/suitesparse.html>).\""
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-3
+  homepage: https://github.com/FlorianSchwendinger/scs
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

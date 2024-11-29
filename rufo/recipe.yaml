@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: rufo
+  version: 0.16.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: 350719451783d41f7b811f1276e998ef757065c0fc2fff5a3162d94756289471
+
+build:
+  number: 1
+  noarch: generic
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/LICENSE.txt
+  summary: Fast and unobtrusive Ruby code formatter
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/ruby-formatter/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

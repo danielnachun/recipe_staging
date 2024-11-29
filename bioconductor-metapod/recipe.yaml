@@ -1,0 +1,54 @@
+# Suggests: testthat, knitr, BiocStyle, rmarkdown
+# SystemRequirements: C++11
+schema_version: 1
+
+context:
+  version: 1.10.0
+  name: metapod
+  bioc: 3.18
+
+package:
+  name: bioconductor-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url:
+    - https://bioconductor.org/packages/${{ bioc }}/bioc/src/contrib/${{ name }}_${{ version }}.tar.gz
+    - https://bioconductor.org/packages/${{ bioc }}/bioc/src/contrib/Archive/${{ name }}/${{ name }}_${{ version }}.tar.gz
+    - https://bioarchive.galaxyproject.org/${{ name }}_${{ version }}.tar.gz
+    - https://depot.galaxyproject.org/software/bioconductor-${{ name }}/bioconductor-${{ name }}_${{ version }}_src_all.tar.gz
+  md5: 49bf3f5df3f99c0d4068224a8f51eacc
+
+build:
+  number: 1
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  host:
+    - r-base=4.3
+    - r-rcpp
+    - libblas
+    - liblapack
+  run:
+    - r-base>=4.3
+    - r-rcpp
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - make
+  run_exports: ${{ pin_subpackage("bioconductor-metapod", upper_bound="x.x") }}
+
+tests:
+  - script:
+      - $R -e "library('${{ name }}')"
+
+about:
+  license: GPL-3.0
+  summary: Meta-Analyses on P-Values of Differential Analyses
+  description: Implements a variety of methods for combining p-values in differential analyses of genome-scale datasets. Functions can combine p-values across different tests in the same analysis (e.g., genomic windows in ChIP-seq, exons in RNA-seq) or for corresponding tests across separate analyses (e.g., replicated comparisons, effect of different treatment conditions). Support is provided for handling log-transformed input p-values, missing values and weighting where appropriate.
+  license_file: ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-3
+  homepage: https://bioconductor.org/packages/${{ bioc }}/bioc/html/${{ name }}.html
+

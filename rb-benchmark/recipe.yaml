@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: benchmark
+  version: 0.2.1
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: b14e2020c9cb2790c6f94e620be61f0de092dd2a8c326cb7c4b0fcd1a980f204
+
+build:
+  number: 1
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: BSD-2-Clause
+  license_file: ${{ name }}-${{ version }}/LICENSE.txt
+  summary: a performance benchmarking library
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/ruby/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

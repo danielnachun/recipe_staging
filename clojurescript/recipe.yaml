@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: clojurescript
+  version: 1.12
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  git: https://github.com/clojure/clojurescript
+  rev: v${{ version }}
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - curl
+    - maven
+    - openjdk
+    - unzip
+  run:
+    - openjdk
+
+tests:
+  - script:
+      - cljsc
+
+about:
+  license: EPL-1.0
+  license_file:
+    - LICENSE
+    - target/generated-resources/licenses/
+  summary: Clojure to JS compiler
+  homepage: https://github.com/clojure/clojurescript
+  repository: https://github.com/clojure/clojurescript
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

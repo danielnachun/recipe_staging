@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: gcsfuse
+  version: 0.41.12
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/GoogleCloudPlatform/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: b4fa0cb7b6695714b9ba961977012354e55998f22039be96a7ababcbfd1cdf40
+
+build:
+  number: 1
+  skip: not linux
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - go=1.18
+    - go-licenses
+    - libfuse
+    - sed
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: Apache-2.0
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: User-space file system for interacting with Google Cloud
+  homepage: https://github.com/GoogleCloudPlatform/${{ name }}
+  repository: https://github.com/GoogleCloudPlatform/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

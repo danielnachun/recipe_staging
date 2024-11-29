@@ -1,0 +1,53 @@
+schema_version: 1
+
+context:
+  name: yamlfix
+  version: 1.16.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/yamlfix-${{ version }}.tar.gz
+  sha256: 72f7990e5b2b4459ef3249df4724dacbd85ce7b87f4ea3503d8a72c48574cc32
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - yamlfix = yamlfix.entrypoints.cli:cli
+
+requirements:
+  host:
+    - python >=3.8
+    - pdm-backend
+    - pip
+  run:
+    - python >=3.8
+    - click >=8.1.3
+    - ruyaml >=0.91.0
+    - maison >=1.4.0
+
+tests:
+  - python:
+      imports:
+        - yamlfix
+  - requirements:
+      run:
+        - pip
+    script:
+      - yamlfix --help
+
+about:
+  summary: A simple opionated yaml formatter that keeps your comments!
+  license: GPL-3.0
+  license_file: LICENSE
+  homepage: https://github.com/lyz-code/yamlfix
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

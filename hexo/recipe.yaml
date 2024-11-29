@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: hexo
+  version: 7.3.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/hexojs/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: 31975718410ff44327441f32464529b1b59bb3e317f8923b2866fbb547cac31f
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: A fast, simple & powerful blog framework, powered by Node.js.
+  homepage: https://github.com/hexojs/${{ name }}
+  repository: https://github.com/hexojs/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: fsautocomplete
+  version: 0.68.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  git: https://github.com/fsharp/${{ name }}
+  rev: v${{ version }}
+
+build:
+  number: 3
+  noarch: generic
+
+requirements:
+  build:
+    - sed
+  host:
+    - dotnet
+    - nuget-license
+  run:
+    - dotnet
+
+tests:
+  - script:
+      - fsautocomplete --help
+
+about:
+  license: Apache-2.0
+  license_file:
+    - LICENSE.md
+    - license-files/
+  summary: F# language server using Language Server Protocol
+  homepage: https://github.com/fsharp/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

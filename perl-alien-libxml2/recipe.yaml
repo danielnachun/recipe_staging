@@ -1,0 +1,50 @@
+schema_version: 1
+
+context:
+  name: perl-alien-libxml2
+  version: 0.17
+  sha256: 73b45244f0b5c36e5332c33569b82a1ab2c33e263f1d00785d2003bcaec68db3
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/P/PL/PLICEASE/Alien-Libxml2-0.17.tar.gz
+  sha256: ${{ sha256 }}
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - if: not win
+      then: make
+    - if: win
+      then: m2-make
+    - pkg-config
+  host:
+    - libxml2
+    - perl=5.32
+    - perl-alien-build
+    - perl-test2-suite
+    - zlib
+  run:
+    - perl>=5.32
+    - libxml2
+    - libzlib
+  run_exports:
+    weak:
+      - ${{ name }} =${{ version }}
+
+tests:
+  - python:
+      imports:
+        - Alien::Libxml2
+
+about:
+  license: perl_5
+  summary: Install the C libxml2 library on your system
+  homepage: https://metacpan.org/pod/Alien::Libxml2
+

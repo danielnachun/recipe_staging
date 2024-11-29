@@ -1,0 +1,46 @@
+# If this is a new build for the same version, increment the build
+# number. If you do not include this key, it defaults to 0.
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml
+schema_version: 1
+
+context:
+  name: perl-string-approx
+  version: 3.27
+  sha256: 2b8c1acd24fa9681ebba0ccb3c49f16289de1d579af8a0c898ea8f8d1baf5d36
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/J/JH/JHI/String-Approx-3.27.tar.gz
+  sha256: ${{ sha256 }}
+
+build:
+  number: 4
+
+requirements:
+  build:
+    - make
+    - ${{ compiler('c') }}
+  host:
+    - perl=5.32
+    - perl-test-more
+    - perl-extutils-makemaker
+  run:
+    - perl>=5.32
+    - perl-test-more
+
+tests:
+  - python:
+      imports:
+        - String::Approx
+    <conda_recipe_manager.types.SentinelType object at 0x103e7f290>:
+
+about:
+  license: unknown
+  summary: Perl extension for approximate matching (fuzzy matching)
+  homepage: http://metacpan.org/pod/String::Approx
+

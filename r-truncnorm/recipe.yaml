@@ -1,0 +1,66 @@
+schema_version: 1
+
+context:
+  version: 1.0-9
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-truncnorm
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/truncnorm_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/truncnorm/truncnorm_${{ version }}.tar.gz
+  sha256: 5156acc4d63243bf95326d6285b0ba3cdf710697d67c233a12ae56f3d87ec708
+  file_name: truncnorm_${{ version }}.tar.gz
+
+build:
+  number: 1
+  skip: win32
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('truncnorm')\""
+      - if: win
+        then: "\"%R%\" -e \"library('truncnorm')\""
+
+about:
+  license: GPL (>= 2)
+  summary: Density, probability, quantile and random number generation functions for the truncated normal distribution.
+  license_file: ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-3
+  homepage: https://github.com/olafmersmann/truncnorm
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

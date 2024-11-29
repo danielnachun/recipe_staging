@@ -1,0 +1,75 @@
+schema_version: 1
+
+context:
+  version: 0.9.0
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-mendelianrandomization
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/MendelianRandomization_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/MendelianRandomization/MendelianRandomization_${{ version }}.tar.gz
+  sha256: 368c20e55dffbe5712790cf9d91bcaeb59d13fe67835af4fc51bd24928ae7780
+
+build:
+  number: 0
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+    - r-matrix >=1.2
+    - r-ggplot2 >=1.0.1
+    - r-glmnet
+    - r-iterpc
+    - r-knitr
+    - r-plotly >=3.6.0
+    - r-quantreg >=5.01
+    - r-rjson
+    - r-rmarkdown
+    - r-robustbase >=0.92_6
+  run:
+    - r-base>=4.2
+    - r-matrix >=1.2
+    - r-ggplot2 >=1.0.1
+    - r-glmnet
+    - r-iterpc
+    - r-knitr
+    - r-plotly >=3.6.0
+    - r-quantreg >=5.01
+    - r-rjson
+    - r-rmarkdown
+    - r-robustbase >=0.92_6
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('MendelianRandomization')\""
+      - if: win
+        then: "\"%R%\" -e \"library('MendelianRandomization')\""
+
+about:
+  license: GPL-2.0-or-later OR GPL-3.0-or-later
+  summary: |
+    Encodes several methods for performing Mendelian randomization analyses with summarized
+    data. Summarized data on genetic associations with the exposure and with the outcome
+    can be obtained from large consortia. These data can be used for obtaining causal
+    estimates using instrumental variable methods.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-3
+  homepage: https://CRAN.R-project.org/package=MendelianRandomization
+

@@ -1,0 +1,73 @@
+schema_version: 1
+
+context:
+  version: 1.4.3
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-compquadform
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/CompQuadForm_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/CompQuadForm/CompQuadForm_${{ version }}.tar.gz
+  sha256: 042fc56c800dd8f5f47a017e2efa832caf74f0602824abf7099898d9708660c4
+
+build:
+  number: 1005
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: not win
+      then: ${{ compiler('cxx') }}
+    - if: win
+      then: ${{ compiler('m2w64_cxx') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('CompQuadForm')\""
+      - if: win
+        then: "\"%R%\" -e \"library('CompQuadForm')\""
+
+about:
+  license: GPL-2.0-or-later
+  summary: |
+    Computes the distribution function of quadratic forms in normal variables using Imhof's
+    method, Davies's algorithm, Farebrother's algorithm or Liu et al.'s algorithm.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-3
+  homepage: https://CRAN.R-project.org/package=CompQuadForm
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

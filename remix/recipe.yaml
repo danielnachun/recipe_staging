@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: remix
+  version: 2.11.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/remix-run/${{ name }}/archive/${{ name }}@${{ version }}.tar.gz
+  sha256: ff27b52d283cda114574a0a4b7dad7cddac8b2014872e1c0765ebba66f6855bc
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - create-remix --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE.md
+    - third-party-licenses.txt
+  summary: Build Better Websites. Create modern, resilient user experiences with web fundamentals.
+  homepage: https://github.com/remix-run/${{ name }}
+  repository: https://github.com/remix-run/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

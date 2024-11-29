@@ -1,0 +1,61 @@
+schema_version: 1
+
+context:
+  name: pypfb
+  version: 0.5.29
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/pypfb-${{ version }}.tar.gz
+  sha256: 8a89235b31d5945f1fbd0efad185d3f9c3ebd7369b13ddf7d00d6c11860268ac
+
+build:
+  number: 0
+  noarch: python
+  python:
+    entry_points:
+      - pfb = pfb.cli:main
+
+requirements:
+  build:
+    - sed
+  host:
+    - python
+    - poetry
+    - poetry-core
+    - pip
+  run:
+    - python
+    - click
+    - fastavro
+    - python-json-logger
+    - pyyaml
+    - importlib_metadata <5
+    - gen3dictionary
+    - aiohttp
+    - dictionaryutils
+    - gen3
+
+tests:
+  - python:
+      imports:
+        - pfb
+      pip_check: false
+  - requirements:
+      run:
+        - pip
+    script:
+      - pfb --help
+
+about:
+  summary: Python SDK for PFB format
+  license: Apache-2.0
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

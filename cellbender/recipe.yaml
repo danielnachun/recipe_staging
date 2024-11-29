@@ -1,0 +1,65 @@
+schema_version: 1
+
+context:
+  name: cellbender
+  version: 0.3.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/cellbender-${{ version }}.tar.gz
+  sha256: 94a46fb2b5921414ea86213cfdebca267b9ba6ba02df854cbd353980ab3aff42
+
+build:
+  number: 1
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - cellbender = cellbender.base_cli:main
+
+requirements:
+  host:
+    - python
+    - setuptools >=61.2
+    - pip
+  run:
+    - python
+    - numpy
+    - scipy
+    - pytables
+    - pandas
+    - pyro-ppl >=1.8.4
+    - pytorch
+    - matplotlib-base
+    - anndata >=0.7
+    - loompy
+    - ipython
+    - jupyter
+    - jupyter_contrib_nbextensions
+    - notebook
+    - nbconvert
+    - psutil
+
+tests:
+  - python:
+      imports:
+        - cellbender
+      pip_check: false
+  - requirements:
+      run:
+        - pip
+    script:
+      - cellbender --help
+
+about:
+  summary: A software package for eliminating technical artifacts from high-throughput single-cell RNA sequencing (scRNA-seq) data
+  license: BSD-3-Clause
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

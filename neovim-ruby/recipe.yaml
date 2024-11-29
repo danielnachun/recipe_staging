@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: neovim-ruby
+  version: 0.10.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/neovim-${{ version }}.gem
+  sha256: 8d6170279872201106de1a84c27cc40a571ec2584057a3c335b2721e7326833e
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - rb-msgpack
+    - rb-multi_json
+    - ruby=3.2
+  run:
+    - rb-msgpack
+    - rb-multi_json
+    - ruby>=3.2
+
+tests:
+  - script:
+      - neovim-ruby-host --help
+
+about:
+  license: MIT
+  license_file: neovim-${{ version }}/LICENSE.txt
+  summary: A Ruby client for Neovim
+  homepage: https://rubygems.org/gems/neovim
+  repository: https://github.com/neovim/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

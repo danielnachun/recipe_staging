@@ -1,0 +1,95 @@
+schema_version: 1
+
+context:
+  version: 1.2.25
+
+package:
+  name: r-metid
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/tidymass/metid/archive/d3a9f89d4653724fe078070b96439b49f77814cf.zip
+  sha256: e115ebf5201b6adc8f86a5a47ab3c313387b27c0f8a06db9300463b2fa3330cc
+
+build:
+  number: 0
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+    - r-crayon
+    - r-dplyr
+    - r-future
+    - r-furrr
+    - r-tidyr
+    - r-ggplot2
+    - r-pbapply
+    - r-reader
+    - r-readxl
+    - r-stringr
+    - r-tibble
+    - r-magrittr
+    - r-masstools
+    - r-purrr
+    - r-plyr
+    - r-plotly
+    - r-massdataset
+    - r-cli
+    - r-rstudioapi
+    - r-rlang
+    - r-progress
+    - bioconductor-biocparallel
+    - bioconductor-msnbase
+    - bioconductor-protgenerics
+  run:
+    - r-base>=4.2
+    - r-crayon
+    - r-dplyr
+    - r-future
+    - r-furrr
+    - r-tidyr
+    - r-ggplot2
+    - r-pbapply
+    - r-reader
+    - r-readxl
+    - r-stringr
+    - r-tibble
+    - r-magrittr
+    - r-masstools
+    - r-purrr
+    - r-plyr
+    - r-plotly
+    - r-massdataset
+    - r-cli
+    - r-rstudioapi
+    - r-rlang
+    - r-progress
+    - bioconductor-biocparallel
+    - bioconductor-msnbase
+    - bioconductor-protgenerics
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('metid')\""
+      - if: win
+        then: "\"%R%\" -e \"library('metid')\""
+
+about:
+  license: GPL-2.0-or-later
+  summary: Metabolite identification using MS1 and MS2 databases. metid is an R package that combines information from all major databases for comprehensive and streamlined compound annotation.
+  homepage: https://github.com/tidymass/masstools
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

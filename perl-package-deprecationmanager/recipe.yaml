@@ -1,0 +1,55 @@
+schema_version: 1
+
+context:
+  name: perl-package-deprecationmanager
+  version: 0.18
+  sha256: b68d3f0ced55b7615fddbb6029b89f92a34fe0dd8c6fd6bceffc157d56834fe8
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/D/DR/DROLSKY/Package-DeprecationManager-${{ version }}.tar.gz
+  sha256: ${{ sha256 }}
+
+build:
+  number: 0
+  skip: win
+  noarch: generic
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-sub-install
+    - perl-sub-name
+    - perl-params-util
+    - perl-package-stash
+    - perl-test-fatal
+    - perl-test-warnings
+  run:
+    - perl>=5.32
+    - perl-package-stash
+    - perl-params-util
+    - perl-sub-install  # has no run export
+  run_exports:
+    weak:
+      - ${{ name }} =${{ version }}
+
+tests:
+  - script:
+      - "perl -we 'use Package::DeprecationManager -deprecations => {};'"
+
+about:
+  license: Artistic-2.0
+  license_file: LICENSE
+  summary: Manage deprecation warnings for your distribution
+  homepage: http://metacpan.org/release/Package-DeprecationManager
+
+extra:
+  recipe-maintainers:
+    - xileF1337
+    - conda-forge/perl-packagers
+

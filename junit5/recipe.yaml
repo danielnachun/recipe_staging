@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: junit5
+  version: 5.10.3
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  git: https://github.com/junit-team/${{ name }}
+  rev: r${{ version }}
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - maven
+    - openjdk=17
+    - sed
+  run:
+    - openjdk
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: EPL-2.0
+  license_file:
+    - LICENSE.md
+    - build/reports/dependency-license/
+  summary: The 5th major version of the programmer-friendly testing framework for Java and the JVM
+  homepage: https://github.com/junit-team/${{ name }}
+  repository: https://github.com/junit-team/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

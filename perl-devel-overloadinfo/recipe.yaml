@@ -1,0 +1,54 @@
+schema_version: 1
+
+context:
+  name: perl-devel-overloadinfo
+  version: 0.007
+  sha256: 21a184163b90f91f06ffc7f5de0b968356546ae9b400a9d75c573c958c246222
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/I/IL/ILMARI/Devel-OverloadInfo-${{ version }}.tar.gz
+  sha256: ${{ sha256 }}
+
+build:
+  number: 0
+  skip: win
+  noarch: generic
+
+requirements:
+  build:
+    - make
+  host:
+    - perl-test-fatal
+    - perl=5.32
+    - perl-mro-compat
+    - perl-package-stash
+  run:
+    - perl>=5.32
+    - perl-mro-compat
+    - perl-package-stash
+  run_exports:
+    weak:
+      - ${{ name }} =${{ version }}
+
+tests:
+  - python:
+      imports:
+        - Devel::OverloadInfo
+
+about:
+  license: GPL-1.0-or-later OR Artistic-1.0-Perl
+  license_file:
+    - ${{ env.get("PREFIX") }}/man/man1/perlartistic.1
+    - ${{ env.get("PREFIX") }}/man/man1/perlgpl.1
+  summary: introspect overloaded operators
+  homepage: http://metacpan.org/pod/Devel-OverloadInfo
+
+extra:
+  recipe-maintainers:
+    - xileF1337
+    - conda-forge/perl-packagers
+

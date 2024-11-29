@@ -1,0 +1,98 @@
+schema_version: 1
+
+context:
+  version: 0.2.73
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-mashr
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/stephenslab/mashr/archive/${{ version }}.tar.gz
+  sha256: f5cdbc50e156621460b8bf7b47f773f0ccec08376d7eb459e28a07af784b46d0
+
+build:
+  number: 1
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: not win
+      then: ${{ compiler('cxx') }}
+    - if: win
+      then: ${{ compiler('m2w64_cxx') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}grep
+    - ${{ posix }}autoconf
+    - if: not win
+      then: ${{ posix }}automake
+    - if: win
+      then: ${{ posix }}automake-wrapper
+    - ${{ posix }}pkg-config
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+    - r-rcpp >=0.12.11
+    - r-rcpparmadillo
+    - r-rcppgsl >=0.3.8
+    - r-abind
+    - r-ashr >=2.2_22
+    - r-assertthat
+    - r-mvtnorm
+    - r-plyr
+    - r-rmeta
+    - r-softimpute
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{native}}gcc-libs
+    - r-rcpp >=0.12.11
+    - r-rcpparmadillo
+    - r-rcppgsl >=0.3.8
+    - r-abind
+    - r-ashr >=2.2_22
+    - r-assertthat
+    - r-mvtnorm
+    - r-plyr
+    - r-rmeta
+    - r-softimpute
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('mashr')\""
+      - if: win
+        then: "\"%R%\" -e \"library('mashr')\""
+
+about:
+  license: BSD-3-Clause
+  summary: |
+    Implements the multivariate adaptive shrinkage (mash) method of Urbut et al (2019)
+    <DOI:10.1038/s41588-018-0268-8> for estimating and testing large numbers of effects
+    in many conditions (or many outcomes). Mash takes an empirical Bayes approach to
+    testing and effect estimation; it estimates patterns of similarity among conditions,
+    then exploits these patterns to improve accuracy of the effect estimates. The core
+    linear algebra is implemented in C++ for fast model fitting and posterior computation.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/BSD_3_clause
+    - LICENSE
+  homepage: https://github.com/stephenslab/mashr
+

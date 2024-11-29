@@ -1,0 +1,38 @@
+schema_version: 1
+
+context:
+  name: taywee-args
+  version: 6.4.6
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/Taywee/args/archive/refs/tags/${{ version }}.tar.gz
+  sha256: 41ed136bf9b216bf5f18b1de2a8d22a870381657e8427d6621918520b6e2239c
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - bzip2
+    - doxygen
+    - make
+
+tests:
+  - script:
+      - test -f $PREFIX/include/args.hxx
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: A simple header-only C++ argument parser library.
+  homepage: https://github.com/Taywee/args
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

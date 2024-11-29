@@ -1,0 +1,38 @@
+schema_version: 1
+
+context:
+  name: compose-language-service
+  version: 0.2.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/@microsoft/compose-language-service/-/${{ name }}-${{ version }}.tgz
+  sha256: 56aa27237794cf45290e7a13448a998a71dfca6582e29ae9b464b6b63fed9833
+
+build:
+  number: 2
+  noarch: generic
+
+requirements:
+  host:
+    - nodejs
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - test -f ${PREFIX}/bin/docker-compose-langserver
+
+about:
+  license: MIT
+  summary: Language service for Docker Compose documents
+  homepage: https://github.com/microsoft/${{ name }}
+  repository: https://github.com/microsoft/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,81 @@
+schema_version: 1
+
+context:
+  version: 1.0.7
+
+package:
+  name: r-masscleaner
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/tidymass/masscleaner/archive/7b455325cea4fddb8e54a1b93b9cc16d358f46d4.zip
+  sha256: 875b5893bc9fdab1de7a35e267b0d9fec23e51c1686372c9eaac9dc360476d8a
+
+build:
+  number: 0
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+    - r-cli
+    - r-crayon
+    - r-dplyr
+    - r-ggplot2
+    - r-missforest
+    - r-magrittr
+    - r-purrr
+    - r-e1071
+    - r-tibble
+    - r-masstools
+    - r-rstudioapi
+    - r-robust
+    - r-massdataset
+    - bioconductor-biocgenerics
+    - bioconductor-biocparallel
+    - bioconductor-pcamethods
+    - bioconductor-impute
+  run:
+    - r-base>=4.2
+    - r-cli
+    - r-crayon
+    - r-dplyr
+    - r-ggplot2
+    - r-missforest
+    - r-magrittr
+    - r-purrr
+    - r-e1071
+    - r-tibble
+    - r-masstools
+    - r-rstudioapi
+    - r-robust
+    - r-massdataset
+    - bioconductor-biocgenerics
+    - bioconductor-biocparallel
+    - bioconductor-pcamethods
+    - bioconductor-impute
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('masscleaner')\""
+      - if: win
+        then: "\"%R%\" -e \"library('masscleaner')\""
+
+about:
+  license: GPL-3.0-or-later
+  summary: This package is uesd to do the data cleaning for LC-MS metabolomics data.
+  homepage: https://gitlab.com/tidymass/masscleaner
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

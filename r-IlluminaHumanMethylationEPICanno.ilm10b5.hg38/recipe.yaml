@@ -1,0 +1,50 @@
+schema_version: 1
+
+context:
+  version: 0.0.1
+
+package:
+  name: r-illuminahumanmethylationepicanno.ilm10b5.hg38
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/achilleasNP/IlluminaHumanMethylationEPICanno.ilm10b5.hg38/archive/3db06910e27f626e0cc8b335ff45cf9a4050a36a.zip
+  sha256: de6524b921509fc4b5ca303e52e2510cff53d00f41b1f6302e73050e39010d79
+
+build:
+  number: 0
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - bioconductor-minfi
+    - r-base=4.2
+  run:
+    - bioconductor-minfi
+    - r-base>=4.2
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('IlluminaHumanMethylationEPICanno.ilm10b5.hg38')\""
+      - if: win
+        then: "\"%R%\" -e \"library('IlluminaHumanMethylationEPICanno.ilm10b5.hg38')\""
+
+about:
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Illumina Human Methylation EPIC annotation to use with IlluminaHumanMethylationEPICB5manifest and minfi
+  homepage: https://github.com/stephenslab/flashr
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

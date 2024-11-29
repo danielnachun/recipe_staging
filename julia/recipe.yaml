@@ -1,0 +1,128 @@
+schema_version: 1
+
+context:
+  name: julia
+  version: 1.10.4
+  sha256: f32e5277f5d82a63824882cdebfac158199bb84814c3c019a3fecc3601586191
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/JuliaLang/julia/releases/download/v${{ version }}/julia-${{ version }}-full.tar.gz
+  sha256: ${{ sha256 }}
+  file_name: julia-${{ version }}-full.tar.gz
+  patches:
+    ## from https://github.com/archlinux/svntogit-community/tree/packages/julia/trunk
+    - patches/julia-hardcoded-libs.patch
+    ## issues with this precompile test, see https://github.com/JuliaLang/julia/issues/43535
+    - if: linux
+      then: patches/disable-testing-Baz.baz.patch
+    - if: linux
+      then: patches/julia-libunwind-1.6.patch
+    # 1.10.3 links suitesparse cuda libs, patch should not be needed for 1.10.4
+    - patches/suitesparse-no-cuda.patch
+    # suitesparse soname version is hardcoded
+    - patches/suitesparse-soname.patch
+    ## these gmp tests return DivideError rather than OutOfMemoryError on cf ci
+    - patches/disable-some-gmp-tests.patch
+    ## for some reason, this new change results in weird printouts in cf ci
+    - patches/disable-some-cmdlineargs-test.patch
+
+build:
+  number: 1
+  skip: win
+  dynamic_linking:
+    binary_relocation: false
+
+requirements:
+  build:
+    - make
+    - perl=5.32
+    - python 3
+    - if: linux
+      then: binutils
+    - ${{ compiler('fortran') }}
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+  host:
+    - openblas-ilp64
+    - if: linux
+      then: patchelf
+    - openlibm
+    - gmp
+    - curl
+    - if: not osx
+      then: libgit2
+    - libssh2
+    - if: osx
+      then: libosxunwind
+    - if: linux
+      then: libunwind
+    - if: not osx
+      then: mbedtls
+    - mpfr
+    - arpack
+    - suitesparse
+    - pcre2
+    - git
+    - libutf8proc
+    - libnghttp2
+    - zlib
+    - p7zip
+  run:
+    - openblas-ilp64
+    - if: osx
+      then: libosxunwind
+    - if: linux
+      then: libunwind
+    - gmp
+    - openlibm
+    - arpack
+    - suitesparse
+    - pcre2
+    - curl
+    - if: not osx
+      then: libgit2
+    - libssh2
+    - if: not osx
+      then: mbedtls
+    - mpfr
+    - git
+    - libutf8proc
+    - libnghttp2
+    - zlib
+    - p7zip
+
+tests:
+  - requirements:
+      run:
+        - perl
+    script:
+      - "julia -e 'using InteractiveUtils; InteractiveUtils.versioninfo()'"
+      - echo $CONDA_JL_HOME
+      - echo $CONDA_JL_CONDA_EXE
+
+about:
+  license: MIT
+  license_file: LICENSE.md
+  summary: A high-performance dynamic programming language for data science
+  description: |
+    Julia is a high-level, high-performance dynamic language for technical computing.
+    The main homepage for Julia can be found at julialang.org.
+  homepage: http://julialang.org/
+  repository: https://github.com/JuliaLang/julia
+  documentation: https://docs.julialang.org
+
+extra:
+  recipe-maintainers:
+    - SylvainCorlay
+    - bgruening
+    - dfornika
+    - acaprez
+    - mariusvniekerk
+    - abhi18av
+    - mkitti
+    - ngam
+

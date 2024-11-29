@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: staticcheck
+  version: 2023.1.7
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/dominikh/go-tools/archive/${{ version }}.tar.gz
+  sha256: 9e4c710e79f9b18626ff33d225587518f2005ce9c651eda3b2fa539ee4677a20
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+    - go-licenses
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: State of the art linter for the Go programming language
+  homepage: https://staticcheck.io/
+  repository: https://github.com/dominikh/go-tools
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

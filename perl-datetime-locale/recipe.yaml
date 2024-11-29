@@ -1,0 +1,72 @@
+schema_version: 1
+
+context:
+  name: perl-datetime-locale
+  version: 1.39
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/D/DR/DROLSKY/DateTime-Locale-${{ version }}.tar.gz
+  sha256: 10c145a6c7daf7118864e97482b4ae9f94f93b9414212eee8aa30b16a8135100
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl >=5.32
+    - perl-dist-checkconflicts >=0.02
+    - perl-file-sharedir
+    - perl-file-sharedir-install
+    - perl-ipc-system-simple
+    - perl-namespace-autoclean
+    - perl-params-validationcompiler
+    - perl-path-tiny
+    - perl-sub-identify
+    - perl-test-file-sharedir
+    - perl-test2-suite
+    - perl-test2-plugin-nowarnings
+  run:
+    - perl >=5.32
+    - perl-dist-checkconflicts >=0.02
+    - perl-file-sharedir
+    - perl-file-sharedir-install
+    - perl-ipc-system-simple
+    - perl-namespace-autoclean
+    - perl-params-validationcompiler
+    - perl-path-tiny
+    - perl-sub-identify
+  ignore_run_exports:
+    - perl-test-file-sharedir
+    - perl-test2-suite
+    - perl-test2-plugin-nowarnings
+
+tests:
+  - python:
+      imports:
+        - DateTime::Locale
+        - DateTime::Locale::Base
+        - DateTime::Locale::Catalog
+        - DateTime::Locale::Data
+        - DateTime::Locale::FromData
+        - DateTime::Locale::Util
+
+about:
+  license: perl_5
+  summary: Localization support for DateTime.pm
+  homepage: https://metacpan.org/release/DateTime-Locale
+
+maintainers:
+  - danielnachun
+

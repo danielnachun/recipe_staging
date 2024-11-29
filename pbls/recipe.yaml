@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: pbls
+  version: 1.0.3
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://git.sr.ht/~rrc/${{ name }}/archive/${{ version }}.tar.gz
+  sha256: 77f2a8fd3c19a5e38a5b090b92ee1f2e7daf4d5f145e51fbf6c92c35661a6e10
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - cargo-bundle-licenses
+
+tests:
+  - script:
+      - ${{ name }} &
+      - exe_pid=$!
+      - "trap \"kill -SIGTERM ${exe_pid}\" SIGTERM"
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: pbls is a Language Server for protobuf.
+  homepage: https://git.sr.ht/~rrc/${{ name }}
+  repository: https://git.sr.ht/~rrc/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

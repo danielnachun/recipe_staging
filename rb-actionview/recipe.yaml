@@ -1,0 +1,47 @@
+schema_version: 1
+
+context:
+  name: actionview
+  version: 7.2.1
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: d1f8f4df2bff842a03e2a6e86275e4d73e70c654159617ad4abbe7c6b2aed4f4
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - rb-activesupport >=7.2.1
+    - rb-builder
+    - rb-erubi
+    - rb-rails-dom-testing
+    - rb-rails-html-sanitizer
+    - ruby>=3.2
+
+tests:
+  - script:
+      - "ruby -r action_view -e 'exit 0'"
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/MIT-LICENSE
+  summary: Simple, battle-tested conventions and helpers for building web pages.
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/rails/rails
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

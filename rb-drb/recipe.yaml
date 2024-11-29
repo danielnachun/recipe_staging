@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: drb
+  version: 2.2.1
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: e9d472bf785f558b96b25358bae115646da0dbfd45107ad858b0bc0d935cb340
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: BSD-2-Clause
+  license_file: ${{ name }}-${{ version }}/LICENSE.txt
+  summary: Distributed object system for Ruby
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/ruby/drb
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

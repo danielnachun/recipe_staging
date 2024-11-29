@@ -1,0 +1,100 @@
+# Package: rstantools
+# Type: Package
+# Title: Tools for Developing R Packages Interfacing with 'Stan'
+# Version: 2.0.0
+# Date: 2019-09-13
+# Authors@R: c(person(given = "Jonah", family = "Gabry", role = c("aut", "cre"), email = "jsg2201@columbia.edu"), person(given = "Ben", family = "Goodrich", role = "aut", email = "benjamin.goodrich@columbia.edu"), person(given = "Martin", family = "Lysy", role = "aut", email = "mlysy@uwaterloo.ca"), person(given = "Stefan", family = "Siegert", role = "ctb"), person(given = "Trustees of", family = "Columbia University", role = "cph"))
+# Description: Provides various tools for developers of R packages interfacing with 'Stan' <https://mc-stan.org>, including functions to set up the required package structure, S3 generics and default methods to unify function naming across 'Stan'-based R packages, and vignettes with recommendations for developers.
+# License: GPL (>= 3)
+# URL: https://mc-stan.org/rstantools/, https://discourse.mc-stan.org/
+# BugReports: https://github.com/stan-dev/rstantools/issues
+# Encoding: UTF-8
+# LazyData: true
+# SystemRequirements: pandoc, C++14
+# Imports: stats, utils, Rcpp (>= 0.12.16), desc
+# Suggests: rstan (>= 2.17.2), usethis (>= 1.5.1), testthat (>= 2.0.0), knitr, pkgbuild, pkgload, roxygen2 (>= 6.0.1), rmarkdown, rstudioapi
+# RoxygenNote: 6.1.1
+# VignetteBuilder: knitr
+# NeedsCompilation: no
+# Packaged: 2019-09-13 22:26:48 UTC; jgabry
+# Author: Jonah Gabry [aut, cre], Ben Goodrich [aut], Martin Lysy [aut], Stefan Siegert [ctb], Trustees of Columbia University [cph]
+# Maintainer: Jonah Gabry <jsg2201@columbia.edu>
+# Repository: CRAN
+# Date/Publication: 2019-09-15 00:10:05 UTC
+schema_version: 1
+
+context:
+  version: 2.4.0
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-rstantools
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/rstantools_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/rstantools/rstantools_${{ version }}.tar.gz
+  sha256: bff72ca2f0352c6c5d2868823e286fdb73a6ead74508a4124cbcb222c83b4faa
+
+build:
+  #noarch: generic
+  number: 0
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+    - if: build_platform != target_platform
+      then: r-rcpp
+    - if: build_platform != target_platform
+      then: r-rcppparallel
+    - if: build_platform != target_platform
+      then: r-desc
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: not win
+      then: ${{ compiler('cxx') }}
+    - if: win
+      then: ${{ compiler('m2w64_cxx') }}
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+    - r-rcpp >=0.12.16
+    - r-rcppparallel >=5.0.1
+    - r-desc
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+    - r-rcpp >=0.12.16
+    - r-rcppparallel >=5.0.1
+    - r-desc
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('rstantools')\""
+      - if: win
+        then: "\"%R%\" -e \"library('rstantools')\""
+
+about:
+  license: GPL-3.0-only
+  summary: "Provides various tools for developers of R packages interfacing with 'Stan' <https://mc-stan.org>, including functions to set up the required package structure, S3 generics and default methods to unify function naming across 'Stan'-based R packages, and vignettes with recommendations for developers."
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-3
+  homepage: https://mc-stan.org/rstantools/, https://discourse.mc-stan.org/
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

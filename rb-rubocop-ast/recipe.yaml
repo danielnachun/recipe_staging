@@ -1,0 +1,46 @@
+schema_version: 1
+
+context:
+  name: rubocop-ast
+  version: 1.31.3
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: 1b07d618d8776993ec6053a706d1c09f0bf15139fd69415924656cbff07e7818
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - rb-ast
+    - rb-parser
+    - ruby=3.2
+  run:
+    - rb-ast
+    - rb-parser
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/LICENSE.txt
+  summary: "RuboCop's Node and NodePattern classes."
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/rubocop/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

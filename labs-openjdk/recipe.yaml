@@ -1,0 +1,191 @@
+schema_version: 1
+
+context:
+  name: labs-openjdk
+  version: 23.1
+  jvmci_revision: 33
+  boot_version: 21.0.2
+  openjdk_revision: 13
+  zulu_build: 21.32.17-ca
+  zulu_url: https://cdn.azul.com/zulu/bin
+  zulu_base: "\"\"zulu\" ~ zulu_build ~ \"-jdk\" ~ boot_version\""
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  - url: https://github.com/adoptium/temurin${{ boot_version.split(".")[0] }}-binaries/releases/download/jdk-${{ boot_version }}+${{ openjdk_revision }}/OpenJDK${{ boot_version.split(".")[0] }}U-jdk_x64_linux_hotspot_${{ boot_version }}_${{ openjdk_revision }}.tar.gz
+    sha256: 454bebb2c9fe48d981341461ffb6bf1017c7b7c6e15c6b0c29b959194ba3aaa5  # [build_platform == "linux-64"]
+  - url: ${{ zulu_url }}/${{ zulu_base }}-macosx_x64.zip
+    sha256: 1fde3ae20ad28f9a1820524d7699f4a349382af1dc7d339f27acc75ca0dd27ab  # [osx and x86_64]
+  - url: ${{ zulu_url }}/${{ zulu_base }}-macosx_aarch64.zip
+    sha256: 1fde3ae20ad28f9a1820524d7699f4a349382af1dc7d339f27acc75ca0dd27ab  # [osx and arm64]
+  - url: https://github.com/dejavu-fonts/dejavu-fonts/releases/download/version_2_37/dejavu-fonts-ttf-2.37.zip  # [linux]
+    sha256: 7576310b219e04159d35ff61dd4a4ec4cdba4f35c00e002a136f00e96a908b0a  # [linux]
+    target_directory: fonts
+  - url: https://github.com/graalvm/labs-openjdk-21/archive/jvmci-${{ version }}-b${{ jvmci_revision }}.tar.gz
+    sha256: 72e37516fcc521bdbb74dcbb655d3903b32213f17ad7681024edb5b3c06c9306
+    target_directory: src
+
+build:
+  number: 0
+
+requirements:
+  build:
+    # We also need a compiler on osx to produce correct signatures
+    - if: unix
+      then: ${{ compiler('cxx') }}
+    - if: unix
+      then: pkg-config
+    - if: unix
+      then: autoconf
+    - if: unix
+      then: unzip
+    - if: unix
+      then: zip
+    - if: unix
+      then: make !=4.3.*
+    - if: linux and (build_platform != target_platform)
+      then: zlib=1.2
+    - if: linux and (build_platform != target_platform)
+      then: freetype
+    - if: linux and (build_platform != target_platform)
+      then: harfbuzz
+    - if: linux and (build_platform != target_platform)
+      then: libpng
+    - if: linux and (build_platform != target_platform)
+      then: giflib
+    - if: linux and (build_platform != target_platform)
+      then: harfbuzz
+    - if: linux and (build_platform != target_platform)
+      then: libjpeg-turbo
+    - if: linux and (build_platform != target_platform)
+      then: libcups
+    - if: linux and (build_platform != target_platform)
+      then: alsa-lib
+    - if: linux and (build_platform != target_platform)
+      then: fontconfig
+    - if: linux and (build_platform != target_platform)
+      then: xorg-libx11
+    - if: linux and (build_platform != target_platform)
+      then: xorg-libxext
+    - if: linux and (build_platform != target_platform)
+      then: xorg-libxt
+    - if: linux and (build_platform != target_platform)
+      then: xorg-libxtst
+    - if: linux and (build_platform != target_platform)
+      then: xorg-libxrender
+    - if: linux and (build_platform != target_platform)
+      then: xorg-libxrandr
+    - if: linux and (build_platform != target_platform)
+      then: xorg-libxi
+    - if: linux and (build_platform != target_platform)
+      then: lcms2
+    - if: win
+      then: symlink-exe-build
+    - if: win
+      then: m2-bash
+    - if: unix
+      then: file
+    - if: unix
+      then: sed
+  host:
+    - if: unix
+      then: zlib=1.2
+    - if: unix
+      then: freetype
+    - if: unix
+      then: harfbuzz
+    - if: unix
+      then: libpng
+    - if: unix
+      then: libiconv
+    - if: unix
+      then: giflib
+    - if: unix
+      then: libjpeg-turbo
+    - if: linux
+      then: libcups
+    - if: linux
+      then: alsa-lib
+    - if: unix
+      then: fontconfig
+    - if: linux
+      then: xorg-libx11
+    - if: linux
+      then: xorg-libxext
+    - if: linux
+      then: xorg-libxt
+    - if: linux
+      then: xorg-libxtst
+    - if: linux
+      then: xorg-libxrender
+    - if: linux
+      then: xorg-libxrandr
+    - if: linux
+      then: xorg-libxi
+    - if: unix
+      then: lcms2
+    - if: win
+      then: vs2015_runtime
+  run:
+    - if: linux
+      then: xorg-libx11
+    - if: linux
+      then: xorg-libxext
+    - if: linux
+      then: xorg-libxtst
+    - if: linux
+      then: xorg-libxrender
+    - if: linux
+      then: xorg-libxi
+    - if: unix
+      then: libiconv
+    - if: linux
+      then: ${{ pin_compatible("alsa-lib", upper_bound="x.x.x") }}
+    - if: win
+      then: vs2015_runtime
+
+tests:
+  - files:
+      recipe:
+        - if: not win
+          then: test-jni
+        - if: not win
+          then: test-jni.sh
+        - test-nio
+    requirements:
+      run:
+        - if: not win
+          then: ${{ compiler('c') }}
+    script:
+      - java -version
+      - if: not win
+        then: ${JAVA_HOME}/bin/java -version
+      - if: win
+        then: "%JAVA_HOME%\\bin\\java -version"
+      - if: not win and not ppc64le
+        then: ./test-jni.sh
+
+about:
+  home: https://openjdk.java.net  # [linux]
+  license: GPL-2.0-or-later WITH Classpath-exception-2.0
+  license_file:
+    - src/LICENSE
+    - if: linux
+      then: fonts/LICENSE
+  summary: The Zulu OpenJDK build.  # [not linux]
+  summary: An open-source implementation of the JDK  # [linux]
+  description: Zulu OpenJDK is an open source build of the Java JDK.  # [not linux]
+  homepage: https://www.azul.com/products/zulu/
+
+extra:
+  recipe-maintainers:
+    - johanneskoester
+    - sodre
+    - mingwandroid
+    - CJ-Wright
+    - xhochy
+    - izahn
+

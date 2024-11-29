@@ -1,0 +1,40 @@
+schema_version: 1
+
+context:
+  name: perl-debug-adapter
+  version: 1.0.9
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/Nihilus118/${{ name }}/archive/${{ version }}.tar.gz
+  sha256: 3caf79271bbad6cd7adf294dd52d460f04322b1abce6142d353694e2dff53c5b
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - nodejs
+    - typescript
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - test -f ${PREFIX}/bin/${{ name }}
+
+about:
+  license: MIT
+  license_file: LICENSE.md
+  summary: Debug adapter for Perl
+  homepage: https://github.com/Nihilus118/${{ name }}
+  repository: https://github.com/Nihilus118/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

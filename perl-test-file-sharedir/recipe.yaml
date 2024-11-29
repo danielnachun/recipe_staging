@@ -1,0 +1,57 @@
+schema_version: 1
+
+context:
+  name: perl-test-file-sharedir
+  version: 1.001002
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/K/KE/KENTNL/Test-File-ShareDir-${{ version }}.tar.gz
+  sha256: b33647cbb4b2f2fcfbde4f8bb4383d0ac95c2f89c4c5770eb691f1643a337aad
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl >=5.32
+    - perl-class-tiny
+    - perl-file-copy-recursive
+    - perl-path-tiny
+    - perl-scope-guard
+    - perl-test-fatal
+    - perl-file-sharedir
+  run:
+    - perl >=5.32
+    - perl-scope-guard
+    - perl-file-sharedir
+    - perl-class-tiny
+    - perl-path-tiny
+    - perl-file-copy-recursive
+  ignore_run_exports:
+    - perl-test-fatal
+
+tests:
+  - python:
+      imports:
+        - Test::File::ShareDir
+
+about:
+  license: perl_5
+  summary: Create a Fake ShareDir for your modules for testing.
+  homepage: https://github.com/kentnl/Test-File-ShareDir
+
+maintainers:
+  - danielnachun
+

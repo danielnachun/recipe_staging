@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: websocket
+  version: 1.2.9
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: 884b12dee993217795bb5f58acc89c0121c88bdc99df4d1636c0505dca352b36
+
+build:
+  number: 1
+  noarch: generic
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/README.md
+  summary: Universal Ruby library to handle WebSocket protocol
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/imanel/websocket-ruby
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

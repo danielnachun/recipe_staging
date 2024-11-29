@@ -1,0 +1,51 @@
+schema_version: 1
+
+context:
+  name: perl-class-load-xs
+  version: 0.10
+  sha256: 5bc22cf536ebfd2564c5bdaf42f0d8a4cee3d1930fc8b44b7d4a42038622add1
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/E/ET/ETHER/Class-Load-XS-${{ version }}.tar.gz
+  sha256: ${{ sha256 }}
+
+build:
+  number: 0
+  skip: win
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+  host:
+    - perl=5.32
+    - perl-class-load
+    - perl-test-fatal
+    - perl-test-needs
+  run:
+    - perl>=5.32
+    - perl-class-load
+  run_exports:
+    weak:
+      - ${{ name }} =${{ version }}
+
+tests:
+  - python:
+      imports:
+        - Class::Load::XS
+
+about:
+  license: Artistic-2.0
+  license_file: LICENSE
+  summary: XS implementation of parts of Class::Load
+  homepage: https://github.com/moose/Class-Load-XS
+
+extra:
+  recipe-maintainers:
+    - xileF1337
+    - conda-forge/perl-packagers
+

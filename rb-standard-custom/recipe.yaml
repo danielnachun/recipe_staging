@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: standard-custom
+  version: 1.0.1
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: 6fd8c16e6805dbe4710990ba6b0c8a54eea17b986e04bd2f9c973dc967d9dd08
+
+build:
+  number: 1
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - rb-lint_roller
+    - ruby=3.2
+  run:
+    - rb-lint_roller
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/LICENSE.txt
+  summary: Plugin containing implementations of custom cops that are bundled as defaults in Standard Ruby
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/standardrb/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

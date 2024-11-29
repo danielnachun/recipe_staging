@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: golangci-lint
+  version: 1.59.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  git: https://github.com/golangci/${{ name }}.git
+  rev: v${{ version }}
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+    - go-licenses
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: GPL-3.0-only
+  license_file:
+    - LICENSE
+    #- license-files/
+  summary: Stricter gofmt
+  homepage: https://golangci-lint.run
+  repository: https://github.com/golangci/${{ name }}.git
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

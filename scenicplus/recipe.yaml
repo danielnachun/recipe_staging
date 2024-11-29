@@ -1,0 +1,90 @@
+schema_version: 1
+
+context:
+  name: scenicplus
+  version: 1.0.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  git: https://github.com/aertslab/scenicplus.git
+  rev: c72b098f5c606e3e5b5113f570abd43c2d3ae7df
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - scenicplus = scenicplus.cli.scenicplus:main
+
+requirements:
+  host:
+    - python
+    - setuptools-scm
+    - pip
+  run:
+    - python
+    - pandas
+    - numpy
+    - tqdm
+    - ray-core
+    - attrs
+    - typing
+    - matplotlib-base
+    - scikit-learn
+    - pyranges
+    - scipy
+    - pybiomart
+    - requests
+    - arboreto
+    - gseapy
+    - networkx
+    - ctxcore
+    - seaborn
+    - pybigwig
+    - plotly
+    - adjusttext
+    - macs2
+    - lxml
+    - tspex
+    - python-kaleido
+    - pyvis
+    - pygam
+    - scanpy >=1.9,<2.dev0
+    - cython
+    - plotnine
+    - mudata
+    - pycistopic
+    - pycistarget
+    - pyscenic
+    - loomxpy
+    - sphinx_rtd_theme
+    - nbsphinx
+    - nbsphinx-link
+    - numpydoc
+    - sphinx-book-theme
+
+tests:
+  - python:
+      imports:
+        - scenicplus
+      pip_check: false
+  - requirements:
+      run:
+        - pip
+    script:
+      - scenicplus --help
+
+about:
+  summary: SCENIC+ is a python package to build gene regulatory networks (GRNs) using combined or separate single-cell gene expression (scRNA-seq) and single-cell chromatin accessibility (scATAC-seq) data.
+  license: OTHER
+  license_file: LICENCE.txt
+  homepage: https://github.com/aertslab/scenicplus
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

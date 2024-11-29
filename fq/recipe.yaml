@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: fq
+  version: 0.11.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/wader/${{ name }}/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: 8b3a7d112323a11be5559959ff141f0ef9fca2b29f7cc34f060d5f360187dcde
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+    - go-licenses
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: jq for binary formats
+  homepage: https://github.com/wader/${{ name }}
+  repository: https://github.com/wader/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

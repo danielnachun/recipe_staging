@@ -1,0 +1,38 @@
+schema_version: 1
+
+context:
+  name: dapars2
+  version: 1.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/cumc/xqtl-pipeline/archive/b2fda460cc562aa80b5c1cd12e0d4d0305a40a88.zip
+  sha256: 9bb5a3497fe19f9b82d48bb23d33df07053dcf23f73d049c2e5500747eae9f81
+
+build:
+  number: 0
+
+requirements:
+  run:
+    - numpy
+    - python >=2.7,<3.0
+    - scipy
+
+tests:
+  - script:
+      - "DaPars_Extract_Anno.py -h 2>&1 | grep -q \"DaPars_Extract_Anno.py -b <gene_bed_file> -s <gene_symbol_map> -o <output_file>\""
+      - "Dapars2_Multi_Sample.py 2>&1 | grep -q \"Please provide the configure file and specify chr name...\""
+      - gtf2bed12.py -h
+
+about:
+  license: OTHER
+  summary: Dynamic analysis of Alternative PolyAdenylation from RNA-seq
+  homepage: https://github.com/cumc/xqtl-pipeline
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

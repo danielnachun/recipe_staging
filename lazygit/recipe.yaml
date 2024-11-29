@@ -1,0 +1,51 @@
+schema_version: 1
+
+context:
+  name: lazygit
+  version: 0.42.0
+  sha256: 50a502b44fa5d28ce046def9388c6fd3e484f678691deea64c729bfd728c7f77
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/jesseduffield/lazygit/archive/v${{ version }}.tar.gz
+  sha256: ${{ sha256 }}
+  file_name: ${{ name }}-${{ version }}.tar.gz
+
+build:
+  number: 1
+  prefix_detection:
+    ignore_binary_files: false
+  dynamic_linking:
+    binary_relocation: false
+
+requirements:
+  build:
+    - go
+
+tests:
+  - script:
+      - if: unix
+        then: test -f $PREFIX/bin/lazygit
+      - if: unix
+        then: lazygit -h || true
+      - if: win
+        then: "if not exist \"%LIBRARY_BIN%\\\\lazygit.exe\" exit 1"
+      - if: win
+        then: lazygit -h || exit 0
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: |
+    A simple terminal UI for git commands, written in Go with the gocui library.
+  homepage: https://github.com/jesseduffield/lazygit
+  repository: https://github.com/jesseduffield/lazygit
+  documentation: https://godoc.org/github.com/jesseduffield/lazygit
+
+extra:
+  recipe-maintainers:
+    - dbast
+

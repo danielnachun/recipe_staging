@@ -1,0 +1,49 @@
+schema_version: 1
+
+context:
+  name: fusion_twas
+  version: 1.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/gusevlab/fusion_twas/archive/e1ba5f7f3907e6f586f7fb5bb115b35cc0d3c0c2.zip
+  sha256: dedbce2698da1cdd568cb576b00d3174f8e20a46e4e1d4c7367c9dd2a7205df0
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - r-plink2r
+    - r-optparse
+    - r-rcolorbrewer
+    - r-glmnet
+  run:
+    - r-plink2r
+    - r-optparse
+    - r-rcolorbrewer
+    - r-glmnet
+
+tests:
+  - script:
+      - "FUSION.assoc_test 2>&1 | grep -q \"Error in file(file, \\\"rt\\\")\""
+      - "FUSION.compute_weights 2>&1 | grep -q \"ERROR: NA.bed input file does not exist\""
+      - "FUSION.post_process 2>&1 | grep -q \"Error in file(file, \\\"rt\\\")\""
+      - "FUSION.profile_wgt 2>&1 | grep -q \"Error in file(file, \\\"rt\\\")\""
+      - "compare_models 2>&1 | grep -q \"Error in file(file, \\\"rt\\\")\""
+      - make_score
+
+about:
+  license: GPL-3.0-or-later
+  license_file: LICENSE
+  summary: Suite of tools for performing transcriptome-wide and regulome-wide association studies
+  homepage: https://github.com/gusevlab/fusion_twas
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

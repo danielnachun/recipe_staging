@@ -1,0 +1,51 @@
+schema_version: 1
+
+context:
+  name: rescript-language-server
+  version: 1.58.0
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/rescript-lang/rescript-language-server/archive/${{ version }}.tar.gz
+  sha256: 47d69f91bd568b960477af339b405464db4723ba9cfb7cd8bf5ff2b9469c20a4
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - if: linux
+      then: binutils
+    - if: linux
+      then: gcc
+    - if: unix
+      then: make
+    - odig
+    - opam
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - rescript-language-server --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE.txt
+    - license-files/
+  summary: Language server for ReScript
+  homepage: https://github.com/rescript-lang/rescript-language-server
+  repository: https://github.com/rescript-lang/rescript-language-server
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

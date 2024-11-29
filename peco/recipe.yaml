@@ -1,0 +1,40 @@
+schema_version: 1
+
+context:
+  name: peco
+  version: 0.5.11
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/peco/peco/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: 8e32c8af533e03795f27feb4ee134960611d2fc0266528b1c512a6f1f065b164
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+    - go-licenses
+    - make
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: Simplistic interactive filtering tool
+  homepage: https://github.com/peco/${{ name }}
+  repository: https://github.com/peco/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

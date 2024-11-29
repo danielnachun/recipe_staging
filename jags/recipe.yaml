@@ -1,0 +1,49 @@
+schema_version: 1
+
+context:
+  name: JAGS
+  version: 4.3.2
+  sha256: 871f556af403a7c2ce6a0f02f15cf85a572763e093d26658ebac55c4ab472fc8
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://sourceforge.net/projects/mcmc-jags/files/JAGS/${{ version[0] }}.x/Source/${{ name }}-${{ version }}.tar.gz/
+  sha256: ${{ sha256 }}
+  file_name: ${{ name }}-${{ version }}.tar.gz
+
+build:
+  number: 0
+  skip: win
+
+requirements:
+  build:
+    - ${{ compiler('fortran') }}
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - make
+  host:
+    - libblas
+    - liblapack
+
+tests:
+  - script:
+      - "jags <<< 'exit'"
+
+about:
+  license: GPL-2.0-only
+  license_file: COPYING
+  description: |
+    JAGS is Just Another Gibbs Sampler. It is a program for analysis of Bayesian
+    hierarchical models using Markov Chain Monte Carlo (MCMC) simulation
+    not wholly unlike BUGS.
+  summary: JAGS is Just Another Gibbs Sampler
+  homepage: https://mcmc-jags.sourceforge.net
+
+extra:
+  recipe-maintainers:
+    - mfansler
+    - micknudsen
+

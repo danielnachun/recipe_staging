@@ -1,0 +1,81 @@
+schema_version: 1
+
+context:
+  version: 3.6-26
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-raster
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/raster_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/raster/raster_${{ version }}.tar.gz
+  sha256: c65777225a46ada699e70098f54c60cf191d15e454fac9440aca439a4dbd5592
+
+build:
+  number: 0
+  skip: win
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: not win
+      then: ${{ compiler('cxx') }}
+    - if: win
+      then: ${{ compiler('m2w64_cxx') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+    - r-rcpp
+    - r-sp >=1.4.5
+    - r-terra >=1.6-41
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+    - r-rcpp
+    - r-sp >=1.4.5
+    - r-terra >=1.6-41
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('raster')\""
+      - if: win
+        then: "\"%R%\" -e \"library('raster')\""
+
+about:
+  license: GPL-3.0-or-later
+  summary: |
+    Reading, writing, manipulating, analyzing and modeling of gridded spatial data. The package implements basic and high-level functions. Processing of very large files is supported. There is a also support for vector data operations such as intersections. See the manual and tutorials on <https://rspatial.org/> to
+    get started.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-3
+  homepage: https://CRAN.R-project.org/package=raster
+  repository: https://github.com/rspatial/raster
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

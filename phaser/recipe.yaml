@@ -1,0 +1,57 @@
+schema_version: 1
+
+context:
+  name: phaser
+  version: 1.1.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/secastel/${{ name }}/archive/1ad5f898881ce4302aa7918fd039fde773e217be.zip
+  sha256: 7552f15723130a55a83d1b76fbb5303bf78d1a0d443aea776e0626fd74de3a4a
+
+build:
+  number: 2
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - if: linux
+      then: gcc
+    - sed
+  host:
+    - cython
+    - python =2.7
+  run:
+    - bcftools
+    - intervaltree
+    - numpy
+    - pandas
+    - pysam
+    - python =2.7
+    - pyvcf
+    - scipy
+    - samtools
+    - bedtools
+
+tests:
+  - script:
+      - phaser.py -h
+      - phaser_annotate.py -h
+      - phaser_gene_ae.py -h
+      - phaser_cis_var.py -h
+      - phaser_expr_matrix.py -h
+
+about:
+  license: GPL-3.0-or-later
+  license_file: LICENSE
+  summary: phasing and Allele Specific Expression from RNA-seq
+  homepage: https://github.com/secastel/${{ name }}
+  repository: https://github.com/secastel/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

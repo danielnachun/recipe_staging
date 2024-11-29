@@ -1,0 +1,48 @@
+schema_version: 1
+
+context:
+  version: 0.0.0.9000
+
+package:
+  name: r-mrcml
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/xue-hr/MRcML/archive/c2642094935db99632f243302d1e6361a7555f22.zip
+  sha256: c90caf04ab7c18b60ef0fdc89a6a06287f3cf61239723f7a5f4348bd287fd5e2
+
+build:
+  number: 0
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+  run:
+    - r-base>=4.2
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('MRcML')\""
+      - if: win
+        then: "\"%R%\" -e \"library('MRcML')\""
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: R Package applying MRcML methods
+  homepage: https://github.com/xue-hr/MRcML
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

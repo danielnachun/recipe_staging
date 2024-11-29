@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: preact-cli
+  version: 3.5.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/preact-cli/-/preact-cli-${{ version }}.tgz
+  sha256: 029392799c88e65b2004c6569c7046fafa6547c83e4df265ad8a4675d95ba173
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - preact --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENCE
+    - third-party-licenses.txt
+  summary: Your next Preact PWA starts in 30 seconds.
+  homepage: https://github.com/preactjs/preact-cli
+  repository: https://github.com/preactjs/preact-cli
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

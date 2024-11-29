@@ -1,0 +1,32 @@
+schema_version: 1
+
+context:
+  name: libpopcnt
+  version: 2.6
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/kimwalisch/${{ name }}/archive/v2.6.tar.gz
+  sha256: dcc9ec3dc7d3242efc1776454e345a76e6ed2d71c3667340c3cd2cf3250d3f17
+
+build:
+  number: 0
+  noarch: generic
+
+tests:
+  - script:
+      - test -f $PREFIX/include/libpopcnt.h
+
+about:
+  license: BSD-2-Clause
+  license_file: LICENSE
+  summary: Fast C/C++ bit population count library
+  homepage: https://github.com/kimwalisch/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

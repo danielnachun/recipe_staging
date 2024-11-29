@@ -1,0 +1,49 @@
+schema_version: 1
+
+context:
+  name: datazets
+  version: 0.1.9
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/datazets-${{ version }}.tar.gz
+  sha256: c06e6d0f086a68f387460ab9c27b5f409674f410ed89e0c88e6134b5a6ac2796
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python >=3.0
+    - pip
+  run:
+    - python >=3.0
+    - numpy
+    - pandas
+    - requests
+
+tests:
+  - python:
+      imports:
+        - datazets
+  - requirements:
+      run:
+        - pip
+    script:
+      - pip check
+
+about:
+  summary: Datazets is a python package to import well known example data sets.
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/erdogant/datazets
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

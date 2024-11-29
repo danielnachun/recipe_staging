@@ -1,0 +1,38 @@
+schema_version: 1
+
+context:
+  name: cspell
+  version: 6.17.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/${{ name }}/-/${{ name }}-${{ version }}.tgz
+  sha256: 443a3c83c909f7b8c6cd630f5a617c57b0bd818ca49354fb148a2064dac08d72
+
+build:
+  number: 2
+  noarch: generic
+
+requirements:
+  host:
+    - nodejs
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  summary: A Spell Checker for Code!
+  homepage: https://cspell.org/
+  repository: https://github.com/streetsidesoftware/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

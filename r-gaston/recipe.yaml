@@ -1,0 +1,97 @@
+# Package: gaston
+# Type: Package
+# Title: Genetic Data Handling (QC, GRM, LD, PCA) & Linear Mixed Models
+# Version: 1.5.6
+# Date: 2020-02-21
+# Encoding: UTF-8
+# VignetteBuilder: knitr
+# Authors@R: c( person("Herve", "Perdry", role = c("cre", "aut", "cph"), email = "herve.perdry@u-psud.fr"), person("Claire", "Dandine-Roulland", role = c("aut", "cph")), person("Deepak", "Bandyopadhyay", role = "cph", comment = "C++ gzstream class" ), # Deepak & Lutz for gzstream class person("Lutz", "Kettner", role = "cph", comment = "C++ gzstream class" ) )
+# Description: Manipulation of genetic data (SNPs). Computation of GRM and dominance matrix, LD, heritability with efficient algorithms for linear mixed model (AIREML). Dandine et al <doi:10.1159/000488519>.
+# License: GPL-3
+# LinkingTo: Rcpp, RcppParallel, RcppEigen
+# Suggests: knitr
+# Depends: Rcpp, RcppParallel, methods
+# Imports:
+# NeedsCompilation: yes
+# LazyLoad: yes
+# LazyData: yes
+# Packaged: 2020-02-24 15:16:16 UTC; rv
+# Author: Herve Perdry [cre, aut, cph], Claire Dandine-Roulland [aut, cph], Deepak Bandyopadhyay [cph] (C++ gzstream class), Lutz Kettner [cph] (C++ gzstream class)
+# Maintainer: Herve Perdry <herve.perdry@u-psud.fr>
+# Repository: CRAN
+# Date/Publication: 2020-02-26 17:40:02 UTC
+schema_version: 1
+
+context:
+  version: 1.6
+  posix: "'m2-' if win else ''"
+
+package:
+  name: r-gaston
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/gaston_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/gaston/gaston_${{ version }}.tar.gz
+  sha256: a4279c07054766356019858a8b9d06a99a094d84e362fd8594342bdd04f7d2ce
+
+build:
+  number: 1
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: win
+      then: ${{ stdlib("m2w64_c") }}
+    - if: not win
+      then: ${{ compiler('cxx') }}
+    - if: win
+      then: ${{ compiler('m2w64_cxx') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.3
+    - r-rcpp
+    - r-rcppeigen
+    - r-rcppparallel
+    - zlib
+  run:
+    - r-base=4.3
+    - r-rcpp
+    - r-rcppeigen
+    - r-rcppparallel
+    - zlib
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('gaston')\""
+      - if: win
+        then: "\"%R%\" -e \"library('gaston')\""
+
+about:
+  license: GPL-3.0-only
+  summary: Manipulation of genetic data (SNPs). Computation of GRM and dominance matrix, LD, heritability with efficient algorithms for linear mixed model (AIREML). Dandine et al <doi:10.1159/000488519>.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-3
+  homepage: https://CRAN.R-project.org/package=gaston
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

@@ -1,0 +1,93 @@
+schema_version: 1
+
+context:
+  version: 1.1.0
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-rdimtools
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/Rdimtools_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/Rdimtools/Rdimtools_${{ version }}.tar.gz
+  sha256: 2314461d3b3bbe53c717acfc78d251fb3a1528ee135682fd09144e60d301b28b
+
+build:
+  number: 0
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: not win
+      then: ${{ compiler('cxx') }}
+    - if: win
+      then: ${{ compiler('m2w64_cxx') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+    - r-cvxr >=1.0
+    - r-mass
+    - r-rann
+    - r-rspectra
+    - r-rcpp >=0.12.15
+    - r-rcpparmadillo
+    - r-rcppde
+    - r-rcppdist
+    - r-rcsdp
+    - r-rdpack
+    - r-maotai >=0.2.4
+    - r-mclustcomp
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{native}}gcc-libs
+    - r-cvxr >=1.0
+    - r-mass
+    - r-rann
+    - r-rspectra
+    - r-rcpp >=0.12.15
+    - r-rcpparmadillo
+    - r-rcppde
+    - r-rcppdist
+    - r-rcsdp
+    - r-rdpack
+    - r-maotai >=0.2.4
+    - r-mclustcomp
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('Rdimtools')\""
+      - if: win
+        then: "\"%R%\" -e \"library('Rdimtools')\""
+
+about:
+  license: MIT
+  summary: |
+    We provide linear and nonlinear dimension reduction techniques. Intrinsic dimension
+    estimation methods for exploratory analysis are also provided. For more details
+    on the package, see the paper by You (2020) <arXiv:2005.11107>.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/MIT
+    - LICENSE
+  homepage: https://www.kisungyou.com/Rdimtools/
+

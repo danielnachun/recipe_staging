@@ -1,0 +1,46 @@
+schema_version: 1
+
+context:
+  name: isolearn
+  version: 0.2.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/isolearn-${{ version }}.tar.gz
+  sha256: d0feaa7de079e360e01e9ac65f8197325aeec2bd126c0d0725f13b8ea46187b6
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - pip
+  run:
+    - keras
+    - pandas
+    - numpy
+    - scipy
+    - python >=3.9
+
+tests:
+  - python:
+      imports:
+        - isolearn
+      pip_check: true
+
+about:
+  summary: Keras Genomics Data Generators
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/johli/isolearn
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

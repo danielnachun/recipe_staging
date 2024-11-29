@@ -1,0 +1,53 @@
+schema_version: 1
+
+context:
+  version: 1.0
+
+package:
+  name: r-radialmr
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/WSpiller/RadialMR/archive/d63d3fc8270836ab441b9e14a5ba3eeb2795d7cb.zip
+  sha256: 202bde351fe3107308241d8b9b985473b2c7321f1d12605eb171883a6adb0652
+
+build:
+  number: 0
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+    - r-ggplot2
+    - r-magrittr
+    - r-plotly
+  run:
+    - r-base>=4.2
+    - r-ggplot2
+    - r-magrittr
+    - r-plotly
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('RadialMR')\""
+      - if: win
+        then: "\"%R%\" -e \"library('RadialMR')\""
+
+about:
+  license: GPL-3.0-or-later
+  summary: Mendelian randomization via radial regression
+  homepage: https://github.com/WSpiller/RadialMR
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

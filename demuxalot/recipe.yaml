@@ -1,0 +1,52 @@
+schema_version: 1
+
+context:
+  name: demuxalot
+  version: 0.4.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/demuxalot-${{ version }}.tar.gz
+  sha256: 6f433326330455c449079ff338a2dae9b1deb1aa81143e3eae805ea5f91d7110
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python >=3.8
+    - hatchling >=1.21.0
+    - pip
+  run:
+    - python >=3.8
+    - pysam
+    - scipy
+    - numpy
+    - joblib
+    - pandas
+    - pyarrow
+
+tests:
+  - python:
+      imports:
+        - demuxalot
+  - requirements:
+      run:
+        - pip
+    script:
+      - pip check
+
+about:
+  summary: Scalable and reliable demulitplexing for single-cell RNA sequencing.
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

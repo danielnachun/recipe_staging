@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: event_emitter
+  version: 0.2.6
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: c72697bd5cce9d36594be1972c17f1c9a573236f44303a4d1d548080364e1391
+
+build:
+  number: 1
+  noarch: generic
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/LICENSE.txt
+  summary: Ruby port of EventEmitter from Node.js
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/shokai/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

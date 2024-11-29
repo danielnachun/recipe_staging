@@ -1,0 +1,45 @@
+schema_version: 1
+
+context:
+  name: tig
+  version: 2.5.10
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/jonas/${{ name }}/archive/refs/tags/${{ name }}-${{ version }}.tar.gz
+  sha256: bb0ceda7694ed161a830d022c2f282388c7979d97a409a81028d489738ad127a
+
+build:
+  number: 0
+  skip: win
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - autoconf
+    - automake
+    - pkg-config
+    - make
+  host:
+    - pcre
+    - ncurses
+
+tests:
+  - script:
+      - tig --version
+
+about:
+  summary: Text-mode interface for git
+  license: GPL-2.0-or-later
+  license_file: COPYING
+  homepage: https://jonas.github.io/tig/
+  repository: https://github.com/jonas/tig
+
+extra:
+  recipe-maintainers:
+    - wolfv
+    - tdejager
+

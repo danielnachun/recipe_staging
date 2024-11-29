@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: jest
+  version: 29.7.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/${{ name }}/-/${{ name }}-${{ version }}.tgz
+  sha256: f65aeb744ee062f250b62a1831e03389f39870414e73291eac1dc2b51770fc08
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Delightful JavaScript Testing.
+  homepage: https://github.com/jestjs/${{ name }}
+  repository: https://github.com/jestjs/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: diff-so-fancy
+  version: 1.4.4
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/so-fancy/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: 3eac2cfb3b1de9d14b6a712941985d6b240b7f3726c94a5e337317c7161e869d
+
+build:
+  number: 1
+  noarch: generic
+
+requirements:
+  host:
+    - perl>=5.32
+  run:
+    - perl>=5.32
+
+tests:
+  - script:
+      - test -f $PREFIX/bin/${{ name }}
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: "Good-lookin' diffs with diff-highlight and more"
+  homepage: https://github.com/so-fancy/${{ name }}
+  repository: https://github.com/so-fancy/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

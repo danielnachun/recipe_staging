@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: luacov
+  version: 0.15.0
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/lunarmodules/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: 19ebe0fdd5dd05ab63d5192371dcf272f2c7ccea5366e98fee440a2f30e021d8
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - luarocks
+    - lua
+  run:
+    - lua
+    - lua-datafile
+
+tests:
+  - script:
+      - "lua -e \"require('luacov')\""
+      - luacov --help
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: LuaCov is a simple coverage analyzer for Lua code.
+  homepage: https://github.com/lunarmodules/${{ name }}
+  repository: https://github.com/lunarmodules/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

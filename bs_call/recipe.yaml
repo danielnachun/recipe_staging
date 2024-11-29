@@ -1,0 +1,55 @@
+schema_version: 1
+
+context:
+  version: 2.02
+  sha256: 4758874c2a88099a19ccfe7edd18ba9dd4d0bce7b3835d2c8e69e4a546e20004
+
+package:
+  name: bs_call
+  version: ${{ version }}
+
+source:
+  url: https://github.com/heathsc/bs_call/archive/${{ version }}.tar.gz
+  sha256: ${{ sha256 }}
+
+build:
+  number: 8
+
+requirements:
+  build:
+    - if: linux
+      then: binutils
+    - make
+    - ${{ compiler('c') }}
+  host:
+    - gsl
+    - bzip2
+    - zlib=1.2
+    - if: osx
+      then: llvm-openmp
+    - if: linux
+      then: _openmp_mutex
+  run:
+    - gsl
+    - bzip2
+    - libzlib>=1.2
+    - if: osx
+      then: llvm-openmp
+    - if: linux
+      then: _openmp_mutex
+
+tests:
+  - script:
+      - "bs_call -h 2>&1 | grep 'Do not split output on contig'"
+      - which dbSNP_idx
+
+about:
+  license: GPL-3.0
+  license_file: LICENSE.md
+  summary: DNA methylation and variant Caller for Bisulfite Sequencing Data.
+  homepage: https://github.com/heathsc/bs_call
+
+extra:
+  identifiers:
+    - doi:10.1101/201988
+

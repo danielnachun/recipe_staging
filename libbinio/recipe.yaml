@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: libbinio
+  version: 1.5
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/adplug/${{ name }}/releases/download/${{ name }}-${{ version }}/${{ name }}-${{ version }}.tar.bz2
+  sha256: 398b2468e7838d2274d1f62dbc112e7e043433812f7ae63ef29f5cb31dc6defd
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - make
+
+tests:
+  - script:
+      - if: osx
+        then: "test -f \"${PREFIX}/lib/libbinio.1${SHLIB_EXT}\""
+      - if: linux
+        then: "test -f \"${PREFIX}/lib/libbinio${SHLIB_EXT}.1.0.0\""
+
+about:
+  license: LGPL-2.1-or-later
+  summary: Binary I/O stream class library
+  homepage: https://adplug.github.io/libbinio/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

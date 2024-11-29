@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: xdg
+  version: 2.2.5
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: f3a5f799363852695e457bb7379ac6c4e3e8cb3a51ce6b449ab47fbb1523b913
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: BSD-2-Clause
+  license_file: ${{ name }}-${{ version }}/LICENSE.txt
+  summary: A library which enable you to define abstract method in Ruby.
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/bkuhlmann/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

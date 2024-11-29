@@ -1,0 +1,58 @@
+# Suggests: BiocStyle, knitr, rmarkdown, tinytest, mockery
+# SystemRequirements: GNU make
+schema_version: 1
+
+context:
+  version: 1.24.2
+  name: Rhdf5lib
+  bioc: 3.18
+
+package:
+  name: bioconductor-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url:
+    - https://bioconductor.org/packages/${{ bioc }}/bioc/src/contrib/${{ name }}_${{ version }}.tar.gz
+    - https://bioconductor.org/packages/${{ bioc }}/bioc/src/contrib/Archive/${{ name }}/${{ name }}_${{ version }}.tar.gz
+    - https://bioarchive.galaxyproject.org/${{ name }}_${{ version }}.tar.gz
+    - https://depot.galaxyproject.org/software/bioconductor-${{ name|lower }}/bioconductor-${{ name|lower }}_${{ version }}_src_all.tar.gz
+  md5: d350d5309740f184ad4eec7cdb6d705b
+
+build:
+  number: 1
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  host:
+    - r-base=4.3
+    - libblas
+    - liblapack
+    - libtool
+  run:
+    - r-base>=4.3
+  build:
+    - ${{ compiler('c') }}
+    - automake
+    - make
+  run_exports: ${{ pin_subpackage("bioconductor-rhdf5lib", upper_bound="x.x") }}
+
+tests:
+  - script:
+      - $R -e "library('${{ name }}')"
+
+about:
+  license: Artistic-2.0
+  summary: hdf5 library as an R package
+  description: Provides C and C++ hdf5 libraries.
+  homepage: https://bioconductor.org/packages/${{ bioc }}/bioc/html/${{ name }}.html
+
+extra:
+  parent_recipe:
+    name: bioconductor-rhdf5lib
+    path: recipes/bioconductor-rhdf5lib
+    version: 1.2.1
+

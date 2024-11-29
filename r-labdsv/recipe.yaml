@@ -1,0 +1,93 @@
+# Package: labdsv
+# Version: 2.0-1
+# Title: Ordination and Multivariate Analysis for Ecology
+# Author: David W. Roberts <droberts@montana.edu>
+# Maintainer: David W. Roberts <droberts@montana.edu>
+# Depends: R (>= 2.10), mgcv
+# Imports: cluster, Rtsne, MASS
+# Suggests: optpart
+# Enhances: vegan
+# Description: A variety of ordination and community analyses useful in analysis of data sets in community ecology.   Includes many of the common ordination methods, with  graphical routines to facilitate their interpretation,  as well as several novel analyses.
+# License: GPL (>= 2)
+# URL: http://ecology.msu.montana.edu/labdsv/R
+# Packaged: 2019-08-04 10:08:57 UTC; dvrbts
+# NeedsCompilation: yes
+# Repository: CRAN
+# Date/Publication: 2019-08-04 12:00:02 UTC
+schema_version: 1
+
+context:
+  version: 2.1-0
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-labdsv
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/labdsv_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/labdsv/labdsv_${{ version }}.tar.gz
+  sha256: 99da92515e9aa49ea7f3df7e301ef714c57054a3838139cd3fd798531d625cd1
+
+build:
+  number: 1
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: not win
+      then: ${{ compiler('fortran') }}
+    - if: win
+      then: ${{ compiler('m2w64_fortran') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+    - r-mass
+    - r-rtsne
+    - r-cluster
+    - r-mgcv
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+    - r-mass
+    - r-rtsne
+    - r-cluster
+    - r-mgcv
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('labdsv')\""
+      - if: win
+        then: "\"%R%\" -e \"library('labdsv')\""
+
+about:
+  license: GPL-2.0-or-later
+  summary: A variety of ordination and community analyses useful in analysis of data sets in community ecology.   Includes many of the common ordination methods, with  graphical routines to facilitate their interpretation,  as well as several novel analyses.
+  license_file: ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+  homepage: http://ecology.msu.montana.edu/labdsv/R
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+    - nsoranzo
+

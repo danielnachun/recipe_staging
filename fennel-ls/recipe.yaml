@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: fennel-ls
+  version: 0.1.3
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://git.sr.ht/~xerool/fennel-ls/archive/${{ version }}.tar.gz
+  sha256: eee47f530552ec9255c07b6df5c0d4adbe0d1edcb295aa2ce355ecb429f36359
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - fennel
+    - lua
+    - make
+    - sed
+  run:
+    - fennel
+    - lua
+
+tests:
+  - script:
+      - fennel-ls --help 2>&1 | grep -q "USAGE: "fennel-ls\""
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: Provides intelligent editing features for fennel files.
+  homepage: https://git.sr.ht/~xerool/fennel-ls
+  repository: https://git.sr.ht/~xerool/fennel-ls
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

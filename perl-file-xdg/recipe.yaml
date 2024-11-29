@@ -1,0 +1,50 @@
+schema_version: 1
+
+context:
+  name: perl-file-xdg
+  version: 1.02
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/P/PL/PLICEASE/File-XDG-${{ version }}.tar.gz
+  sha256: 672d5aa2f828225a2ab3ee633fda846534a0d3b11b781f22a2ca5ddc2a0a8209
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-path-class
+    - perl-path-tiny
+    - perl-ref-util
+  run:
+    - perl>=5.32
+    - perl-path-class
+    - perl-path-tiny
+    - perl-ref-util
+
+tests:
+  - python:
+      imports:
+        - File::XDG
+
+about:
+  license: perl_5
+  summary: Basic implementation of the XDG base directory specification
+  homepage: https://metacpan.org/pod/File::XDG
+
+maintainers:
+  - danielnachun
+

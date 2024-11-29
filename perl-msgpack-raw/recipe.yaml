@@ -1,0 +1,46 @@
+schema_version: 1
+
+context:
+  name: perl-msgpack-raw
+  version: 0.05
+  sha256: 8559e2b64cd98d99abc666edf2a4c8724c9534612616af11f4eb0bbd0d422dac
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/J/JA/JACQUESG/MsgPack-Raw-${{ version }}.tar.gz
+  sha256: ${{ sha256 }}
+
+build:
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+tests:
+  - python:
+      imports:
+        - MsgPack::Raw
+        - MsgPack::Raw::Bool
+        - MsgPack::Raw::Ext
+        - MsgPack::Raw::Packer
+        - MsgPack::Raw::Unpacker
+
+about:
+  license: perl_5
+  summary: Perl bindings to the msgpack C library
+  homepage: http://metacpan.org/pod/MsgPack-Raw
+

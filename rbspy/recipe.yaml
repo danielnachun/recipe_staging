@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: rbspy
+  version: 0.22.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/rbspy/${{ name }}/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: b266cbc18546727c2765a5cd0b77dc0e852c824d3d5921ec2b6ad223e969d120
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - clangdev
+    - cargo-bundle-licenses
+    - if: linux
+      then: sysroot_linux-64=2.17
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - License.md
+    - THIRDPARTY.yml
+  summary: Sampling profiler for Ruby
+  homepage: https://rbspy.github.io/
+  repository: https://github.com/rbspy/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

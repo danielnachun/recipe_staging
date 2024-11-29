@@ -1,0 +1,71 @@
+schema_version: 1
+
+context:
+  version: 1.2.1
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-ucminf
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/ucminf_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/ucminf/ucminf_${{ version }}.tar.gz
+  sha256: ed3ebba3d99a324444bd521d7aeb9f87344f44f170d67f77dab18dd3fbbfcc83
+
+build:
+  number: 0
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: not win
+      then: ${{ compiler('fortran') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: win
+      then: ${{ compiler('m2w64_fortran') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('ucminf')\""
+      - if: win
+        then: "\"%R%\" -e \"library('ucminf')\""
+
+about:
+  license: GPL-2.0-or-later
+  summary: |
+    An algorithm for general-purpose unconstrained non-linear optimization. The algorithm is of quasi-Newton type with BFGS updating of the inverse Hessian and soft line search with a trust region type monitoring of the input to the line search algorithm. The interface of 'ucminf' is designed for easy interchange
+    with 'optim'.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-3
+  homepage: https://CRAN.R-project.org/package=ucminf
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

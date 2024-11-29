@@ -1,0 +1,48 @@
+schema_version: 1
+
+context:
+  name: gren
+  version: 0.4.4
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/gren-lang/compiler/archive/${{ version }}.tar.gz
+  sha256: 3d013963a3a31cb29db7407dd7192e563a5df9a663d819cbafa2cd3452b30127
+
+build:
+  number: 0
+  skip: not unix
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cabal-install
+    - cabal-plan
+    - ghc
+    - sed
+  host:
+    - if: osx
+      then: libiconv
+    - ncurses
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: BSD-3-Clause
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: Compiler for the Gren programming language
+  homepage: https://github.com/gren-lang/compiler
+  repository: https://github.com/gren-lang/compiler
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

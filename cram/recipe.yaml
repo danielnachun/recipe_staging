@@ -1,0 +1,49 @@
+schema_version: 1
+
+context:
+  name: cram
+  version: 0.7
+  bundle: tar.gz
+  hash: 7da7445af2ce15b90aad5ec4792f857cef5786d71f14377e9eb994d8b8337f2f
+  build: 1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.${{ bundle }}
+  sha256: ${{ hash }}
+  file_name: ${{ name }}-${{ version }}.${{ bundle }}
+
+build:
+  number: ${{ build }}
+  noarch: python
+  script: python -m pip install --no-deps --ignore-installed .
+
+requirements:
+  host:
+    - pip
+    - python
+  run:
+    - python
+
+tests:
+  - python:
+      imports:
+        - cram
+      pip_check: false
+  - script:
+      - cram -h
+
+about:
+  license: GPL-2.0
+  license_file: COPYING.txt
+  summary: A simple testing framework for command line applications
+  homepage: https://bitheap.org/cram/
+  repository: https://github.com/brodie/cram
+
+extra:
+  recipe-maintainers:
+    - nehaljwani
+

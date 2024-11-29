@@ -1,0 +1,41 @@
+schema_version: 1
+
+context:
+  name: sorbet-runtime
+  version: 0.5.11142
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: 65c9f1b4e4cd348f14ccc0ba0bd73d83e06a41d95ac7424e6576cb6d564b76ef
+
+build:
+  number: 1
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: "Sorbet's runtime type checking component"
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/sorbet/sorbet
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

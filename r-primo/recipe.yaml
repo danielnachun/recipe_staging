@@ -1,0 +1,68 @@
+schema_version: 1
+
+context:
+  version: 0.2.0
+
+package:
+  name: r-primo
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/kjgleason/Primo/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: 31cc8238bf1de0caa674785e3c0b7c4353f9426457e421d2995503fcff980650
+
+build:
+  number: 0
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+    - ${{ compiler('cxx') }}
+  host:
+    - bioconductor-limma
+    - r-base=4.3
+    - r-data.table
+    - r-dplyr
+    - r-lcmix
+    - r-magrittr
+    - r-mvtnorm
+    - r-nloptr
+    - r-reshape2
+    - r-rcpp
+    - r-rcpparmadillo
+  run:
+    - bioconductor-limma
+    - libopenblas
+    - if: linux
+      then: _openmp_mutex
+    - r-base>=4.3
+    - r-data.table
+    - r-dplyr
+    - r-lcmix
+    - r-magrittr
+    - r-mvtnorm
+    - r-nloptr
+    - r-reshape2
+    - r-rcpp
+    - r-rcpparmadillo
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('Primo')\""
+
+about:
+  license: GPL-3.0-or-later
+  summary: Package in R for Integrative Multi-Omics association analysis
+  homepage: https://github.com/kjgleason/Primo
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

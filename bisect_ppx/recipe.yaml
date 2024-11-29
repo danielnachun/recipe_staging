@@ -1,0 +1,48 @@
+schema_version: 1
+
+context:
+  name: bisect_ppx
+  version: 2.8.3
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/aantron/${{ name }}/archive/${{ version }}.tar.gz
+  sha256: 27ddeb2f60fbae50dc504e63e63cd5f012689084a76d5fdd4d1371d5341ff8db
+
+build:
+  number: 0
+  skip: win
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - if: linux
+      then: binutils
+    - if: linux
+      then: gcc
+    - if: linux
+      then: sysroot_linux-64=2.17
+    - make
+    - odig
+    - opam
+
+tests:
+  - script:
+      - bisect-ppx-report --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE.md
+    - license-files/
+  summary: Code coverage for OCaml and ReScript
+  homepage: https://github.com/aantron/${{ name }}
+  repository: https://github.com/aantron/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

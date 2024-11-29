@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: parallel
+  version: 1.23.0
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: 27154713ad6ef32fa3dcb7788a721d6c07bca77e72443b4c6080a14145288c49
+
+build:
+  number: 1
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/MIT-LICENSE.txt
+  summary: Run any kind of code in parallel processes
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/grosser/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

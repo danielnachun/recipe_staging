@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: c8
+  version: 10.1.2
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/bcoe/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: 2d653934719e99231b390e380f55373e9d46667914fddc8d3317920df62473f8
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE.txt
+    - third-party-licenses.txt
+  summary: "output coverage reports using Node.js' built in coverage"
+  homepage: https://github.com/bcoe/${{ name }}
+  repository: https://github.com/bcoe/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

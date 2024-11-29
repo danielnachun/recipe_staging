@@ -1,0 +1,38 @@
+schema_version: 1
+
+context:
+  name: commitlint
+  version: 19.3.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/${{ name }}/-/${{ name }}-${{ version }}.tgz
+  sha256: a2cb9218f086e8877691e7b7002b2f20cde823cb27a87c0255fdcbf74dde5e46
+
+build:
+  number: 1
+  noarch: generic
+
+requirements:
+  host:
+    - nodejs
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  summary: Lint commit messages according to a commit convention
+  homepage: https://commitlint.js.org
+  repository: https://github.com/conventional-changelog/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

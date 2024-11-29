@@ -1,0 +1,54 @@
+schema_version: 1
+
+context:
+  name: maison
+  version: 1.4.2
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/maison-${{ version }}.tar.gz
+  sha256: d2abac30a5c6a0749526d70ae95a63c6acf43461a1c10e51410b36734e053ec7
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - maison = maison.__main__:main
+
+requirements:
+  host:
+    - python >=3.7,<4.0
+    - poetry-core >=1.0.0
+    - pip
+  run:
+    - python >=3.7.1,<4.0.0
+    - click >=8.0.1,<9.0.0
+    - pydantic >=1.10.13,<2.0.0
+    - toml >=0.10.2,<0.11.0
+
+tests:
+  - python:
+      imports:
+        - maison
+  - requirements:
+      run:
+        - pip
+    script:
+      - pip check
+      - maison --help
+
+about:
+  summary: Read settings from config files
+  license: MIT
+  license_file: LICENSE.rst
+  homepage: https://github.com/dbatten5/maison
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,41 @@
+schema_version: 1
+
+context:
+  name: lua-lpeg
+  version: 1.0.2
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://luarocks.org/manifests/gvvaughan/lpeg-${{ version }}-1.rockspec
+  sha256: 09452ae89e2b383a3d54f0c25ac9b3ba412ef03aeb338d2657f272ca59b94821
+
+build:
+  number: 0
+  skip: win
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - luarocks
+  host:
+    - ${{ lua }}
+  run:
+    - ${{ lua }}
+
+tests:
+  - script:
+      - ${{ lua_cmd }} -e "require 'lpeg'"
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: Parsing Expression Grammars For Lua
+  homepage: http://www.inf.puc-rio.br/~roberto/lpeg/lpeg.html
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

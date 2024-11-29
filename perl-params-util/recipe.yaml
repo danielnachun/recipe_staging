@@ -1,0 +1,50 @@
+schema_version: 1
+
+context:
+  name: perl-params-util
+  version: 1.102
+  sha256: 499bb1b482db24fda277a51525596ad092c2bd51dd508fa8fec2e9f849097402
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/R/RE/REHSACK/Params-Util-${{ version }}.tar.gz
+  sha256: ${{ sha256 }}
+
+build:
+  number: 0
+  skip: win
+
+requirements:
+  build:
+    - make
+    - ${{ compiler('c') }}
+  host:
+    - perl=5.32
+    - perl-test-leaktrace
+  run:
+    - perl>=5.32
+  run_exports:
+    weak:
+      - ${{ name }} =${{ version }}
+
+tests:
+  - python:
+      imports:
+        - Params::Util
+
+about:
+  license: GPL-1.0-or-later OR Artistic-1.0-Perl
+  license_file:
+    - ${{ env.get("PREFIX") }}/man/man1/perlartistic.1
+    - ${{ env.get("PREFIX") }}/man/man1/perlgpl.1
+  summary: Simple, compact and correct param-checking functions
+  homepage: https://metacpan.org/release/Params-Util
+
+extra:
+  recipe-maintainers:
+    - xileF1337
+    - conda-forge/perl-packagers
+

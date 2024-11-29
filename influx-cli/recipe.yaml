@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: influx-cli
+  version: 2.7.4
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/influxdata/influx-cli/archive/v${{ version }}.tar.gz
+  sha256: 8e656d5299826c64f3d62124d897531f30ebf9110e76d70d0ae0ca0cce03173a
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('go-nocgo') }}
+    - go-licenses
+
+tests:
+  - script:
+      - influx-cli --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: CLI for managing resources in InfluxDB v2
+  homepage: https://github.com/influxdata/influx-cli
+  repository: https://github.com/influxdata/influx-cli
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

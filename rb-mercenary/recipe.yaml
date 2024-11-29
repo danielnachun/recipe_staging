@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: mercenary
+  version: 0.4.0
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: b25a1e4a59adca88665e08e24acf0af30da5b5d859f7d8f38fba52c28f405138
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/LICENSE.txt
+  summary: Lightweight and flexible library for writing command-line apps in Ruby.
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/jekyll/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

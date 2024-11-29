@@ -1,0 +1,47 @@
+schema_version: 1
+
+context:
+  name: hstr
+  version: 3.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/dvorka/${{ name }}/archive/${{ version }}.tar.gz
+  sha256: e5293d4fe2502662f19c793bef416e05ac020490218e71c75a5e92919c466071
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - autoconf
+    - automake
+    - libtool
+    - pkg-config
+    - make
+  host:
+    - bash-completion
+    - readline
+    - ncurses
+  run:
+    - bash-completion
+
+tests:
+  - script:
+      - hh --help
+
+about:
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Bash and zsh history suggest box
+  homepage: https://github.com/dvorka/${{ name }}
+  repository: https://github.com/dvorka/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: perl-extutils-cppguess
+  version: 0.26
+  sha256: c8b362b860172a4076acee00438f52b86464f2c500702cfcf7527811ff9a683e
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/E/ET/ETJ/ExtUtils-CppGuess-0.26.tar.gz
+  sha256: ${{ sha256 }}
+
+build:
+  number: 1
+
+requirements:
+  build:
+    - make
+    - ${{ compiler('cxx') }}
+  host:
+    - perl=5.32
+    - perl-data-dumper
+    - perl-extutils-makemaker
+    - perl-module-build
+    - perl-extutils-manifest
+    - perl-capture-tiny
+  run:
+    - perl>=5.32
+    - perl-capture-tiny
+
+tests:
+  - python:
+      imports:
+        - ExtUtils::CppGuess
+
+about:
+  license: perl_5
+  summary: guess C++ compiler and flags
+  homepage: http://metacpan.org/pod/ExtUtils::CppGuess
+

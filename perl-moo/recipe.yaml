@@ -1,0 +1,58 @@
+schema_version: 1
+
+context:
+  name: perl-moo
+  version: 2.005004
+  sha256: e3030b80bd554a66f6b3c27fd53b1b5909d12af05c4c11ece9a58f8d1e478928
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/H/HA/HAARG/Moo-${{ version }}.tar.gz
+  sha256: ${{ sha256 }}
+
+build:
+  number: 0
+  skip: win
+  noarch: generic
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-class-method-modifiers
+    - perl-role-tiny
+    - perl-sub-quote
+    - perl-test-fatal
+  run:
+    - perl>=5.32
+    - perl-role-tiny
+  run_exports:
+    weak:
+      - ${{ name }} =${{ version }}
+
+tests:
+  - python:
+      imports:
+        - Moo
+  - script:
+      - "perl -we 'use Moo::Role'"
+      - "perl -we 'use Moo::Object'"
+      - "perl -we 'use Moo::sification'"
+
+about:
+  license: GPL-1.0-or-later OR Artistic-1.0-Perl
+  license_file:
+    - ${{ env.get("PREFIX") }}/man/man1/perlartistic.1
+    - ${{ env.get("PREFIX") }}/man/man1/perlgpl.1
+  summary: Minimalist Object Orientation (with Moose compatibility)
+  homepage: http://metacpan.org/pod/Moo
+
+extra:
+  recipe-maintainers:
+    - xileF1337
+    - cbrueffer
+

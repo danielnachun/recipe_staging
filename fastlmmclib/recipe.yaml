@@ -1,0 +1,51 @@
+schema_version: 1
+
+context:
+  name: fastlmmclib
+  version: 0.0.3
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/fastlmm/${{ name }}/archive/c8e1b84291450c63c3694b18b054a6455b68ff83.zip
+  sha256: 586645e7610f9cb5a29ecde59779b2cbecd89856e7fb29d697e281c8aa9075d2
+
+build:
+  number: 0
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+  host:
+    - cython
+    - numpy=1.26
+    - python=3.12
+    - pip
+  run:
+    - numpy=1.26
+    - python=3.12
+
+tests:
+  - python:
+      imports:
+        - fastlmmclib
+  - requirements:
+      run:
+        - pip
+    script:
+      - pip check
+
+about:
+  summary: Fast GWAS
+  license: Apache-2.0
+  license_file: LICENSE
+  homepage: https://fastlmm.github.io/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

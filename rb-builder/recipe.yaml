@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: builder
+  version: 3.3.0
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: 497918d2f9dca528fdca4b88d84e4ef4387256d984b8154e9d5d3fe5a9c8835f
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/MIT-LICENSE
+  summary: Builder provides a number of builder objects that make creating structured data simple to do.
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/rails/builder
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

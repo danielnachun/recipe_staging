@@ -1,0 +1,48 @@
+schema_version: 1
+
+context:
+  name: floskell
+  version: 0.11.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/ennocramer/floskell/archive/floskell-${{ version }}.tar.gz
+  sha256: ad039fc93c818d1c61613ab8543d3347f19fa33e19eda52e71a6fedc99193b46
+
+build:
+  number: 0
+  skip: not unix
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cabal-install
+    - cabal-plan
+    - ghc
+  host:
+    - if: osx
+      then: libiconv
+  host:
+    - libiconv  #[osx]
+
+tests:
+  - script:
+      - floskell --help
+
+about:
+  license: BSD-3-Clause
+  license_file:
+    - LICENSE.md
+    - license-files/
+  summary: Floskell is a flexible Haskell source code pretty printer.
+  homepage: https://github.com/ennocramer/floskell
+  repository: https://github.com/ennocramer/floskell
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

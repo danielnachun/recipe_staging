@@ -1,0 +1,50 @@
+schema_version: 1
+
+context:
+  name: cpphs
+  version: 1.20.9.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://hackage.haskell.org/package/${{ name }}-${{ version }}/${{ name }}-${{ version }}.tar.gz
+  sha256: 7f59b10bc3374004cee3c04fa4ee4a1b90d0dca84a3d0e436d5861a1aa3b919f
+
+build:
+  number: 0
+  skip: not unix
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cabal-install
+    - cabal-plan
+    - ghc
+  host:
+    - if: osx
+      then: libiconv
+  host:
+    - libiconv  #[osx]
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: BSD-3-Clause OR GPL-2.0-or-later OR LGPL-2.1-or-later
+  license_file:
+    - LICENCE-commercial
+    - LICENCE-GPL
+    - LICENCE-LGPL
+    - license-files/
+  summary: A liberalised re-implementation of cpp, the C pre-processor.
+  homepage: https://github.com/ndmitchell/${{ name }}
+  repository: https://github.com/malcolmwallace/cpphs/issues
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

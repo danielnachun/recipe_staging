@@ -1,0 +1,75 @@
+schema_version: 1
+
+context:
+  name: gen3
+  version: 4.22.4
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/gen3-${{ version }}.tar.gz
+  sha256: 704f4152d132594b5bad219768b4a47936a243d950d59cbb5b3c1a5ad6655dd4
+
+build:
+  number: 0
+  noarch: python
+  python:
+    entry_points:
+      - gen3 = gen3.cli.__main__:main
+
+requirements:
+  build:
+    - sed
+  host:
+    - python
+    - poetry
+    - poetry-core
+    - pip
+  run:
+    - python
+    - requests
+    - indexclient
+    - drsclient
+    - aiohttp
+    - backoff
+    - cdislogging
+    - click
+    - jsonschema
+    - dataclasses-json
+    - pypfb
+    - tqdm
+    - humanfriendly
+    - python-dateutil
+    - aiofiles
+    - pandas
+    - urllib3
+    - httpx
+    - xmltodict
+    - pyyaml
+    - gen3users
+  run_constraints:
+    - fhirclient *
+
+tests:
+  - python:
+      imports:
+        - gen3
+      pip_check: false
+  - requirements:
+      run:
+        - pip
+    script:
+      - gen3 --help
+
+about:
+  summary: Gen3 CLI and Python SDK
+  license: Apache-2.0
+  license_file: LICENSE
+  homepage: https://gen3.org/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

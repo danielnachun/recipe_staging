@@ -1,0 +1,82 @@
+# Package: fastICA
+# Version: 1.2-2
+# Date: 2019-07-08
+# Title: FastICA Algorithms to Perform ICA and Projection Pursuit
+# Author: J L Marchini, C Heaton and B D Ripley <ripley@stats.ox.ac.uk>
+# Maintainer: Brian Ripley <ripley@stats.ox.ac.uk>
+# Depends: R (>= 3.0.0)
+# Suggests: MASS
+# Description: Implementation of FastICA algorithm to perform Independent Component Analysis (ICA) and Projection Pursuit.
+# License: GPL-2 | GPL-3
+# NeedsCompilation: yes
+# Packaged: 2019-07-08 14:58:13 UTC; ripley
+# Repository: CRAN
+# Date/Publication: 2019-07-08 14:59:51 UTC
+schema_version: 1
+
+context:
+  version: 1.2-4
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-fastica
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/fastICA_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/fastICA/fastICA_${{ version }}.tar.gz
+  sha256: ed6988ea410d1a75bf4f4925edcac5a660a417e33ba0a939bc0351e534df5f2f
+
+build:
+  number: 0
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - libblas
+    - liblapack
+    - r-base=4.2
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('fastICA')\""
+      - if: win
+        then: "\"%R%\" -e \"library('fastICA')\""
+
+about:
+  license: GPL-2.0-or-later
+  summary: Implementation of FastICA algorithm to perform Independent Component Analysis (ICA) and Projection Pursuit.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-3
+  homepage: https://CRAN.R-project.org/package=fastICA
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

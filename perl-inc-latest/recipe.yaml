@@ -1,0 +1,47 @@
+schema_version: 1
+
+context:
+  name: perl-inc-latest
+  version: 0.500
+  sha256: daa905f363c6a748deb7c408473870563fcac79b9e3e95b26e130a4a8dc3c611
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/D/DA/DAGOLDEN/inc-latest-${{ version }}.tar.gz
+  sha256: ${{ sha256 }}
+
+build:
+  number: 0
+  skip: win
+  noarch: generic
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+  run_exports:
+    weak:
+      - ${{ name }} =${{ version }}
+
+tests:
+  - python:
+      imports:
+        - inc::latest
+
+about:
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: use modules bundled in inc/ if they are newer than installed ones
+  homepage: https://github.com/Perl-Toolchain-Gang/inc-latest
+
+extra:
+  recipe-maintainers:
+    - xileF1337
+    - conda-forge/perl-packagers
+

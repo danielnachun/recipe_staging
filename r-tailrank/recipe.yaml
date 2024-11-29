@@ -1,0 +1,55 @@
+schema_version: 1
+
+context:
+  version: 3.2.2
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-tailrank
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/TailRank_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/TailRank/TailRank_${{ version }}.tar.gz
+  sha256: 21ed95ea47d21155f08ae2ad7bca9547f89f492000bc1defe1cc5ec172739d09
+
+build:
+  number: 0
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+    - bioconductor-biobase
+    - r-oompabase >=3.0.1
+    - r-oompadata
+  run:
+    - r-base>=4.2
+    - bioconductor-biobase
+    - r-oompabase >=3.0.1
+    - r-oompadata
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('TailRank')\""
+      - if: win
+        then: "\"%R%\" -e \"library('TailRank')\""
+
+about:
+  license: Apache-2.0
+  summary: |
+    Implements the tail-rank statistic for selecting biomarkers from a microarray data
+    set, an efficient nonparametric test focused on the distributional tails. See <https://gitlab.com/krcoombes/coombeslab/-/blob/master/doc/papers/tolstoy-new.pdf>.
+  homepage: http://oompa.r-forge.r-project.org/
+

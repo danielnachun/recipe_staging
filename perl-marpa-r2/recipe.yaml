@@ -1,0 +1,61 @@
+schema_version: 1
+
+context:
+  name: perl-marpa-r2
+  version: 12.000000
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/J/JK/JKEGL/Marpa-R2-${{ version }}.tar.gz
+  sha256: 9f59a4f6bd3716f1a48a8ef25621f6709d7066c26175ced62e7c6bdf71e96b3f
+
+build:
+  number: 0
+  script:
+    - "export CFLAGS=\"${CFLAGS} -std=c11\""
+    - "export LD=\"${CC}\""
+    - autoreconf --force --verbose --install engine/read_only
+    - ${PREFIX}/bin/perl Build.PL
+    - ${PREFIX}/bin/perl ./Build
+    - ${PREFIX}/bin/perl ./Build test
+    - ${PREFIX}/bin/perl ./Build install --installdirs site
+  ignore_run-exports:
+    - perl-module-build
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - if: not win
+      then: autoconf
+    - if: not win
+      then: automake
+    - if: win
+      then: m2-autoconf
+    - if: win
+      then: m2-automake-wrapper
+    - if: not win
+      then: make
+    - if: win
+      then: m2-make
+    - if: not win
+      then: sed
+  host:
+    - libtool
+    - perl=5.32
+    - perl-module-build
+    - perl-html-parser
+    - perl-config-autoconf
+    - perl-ppi
+  run:
+    - perl=5.32
+    - perl-html-parser
+    - perl-ppi
+
+about:
+  license: open_source
+  summary: Release 2 of Marpa
+  homepage: http://savage.net.au/Marpa.html
+

@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: commit-and-tag-version
+  version: 12.4.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/absolute-version/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: c9008e1127dd010bad967cb312099034c8ac6033713ae3e136c499e921f5040d
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: ISC
+  license_file:
+    - LICENSE.txt
+    - third-party-licenses.txt
+  summary: Fork of the excellent standard-version.
+  homepage: https://github.com/absolute-version/${{ name }}
+  repository: https://github.com/absolute-version/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

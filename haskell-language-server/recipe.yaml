@@ -27,14 +27,14 @@ requirements:
     - ncurses
     - zlib
   host:
+    - if: osx
+      then: libiconv
     - ncurses
     - zlib
-    - if: osx
-      then: libiconv
   run:
-    - libzlib
     - if: osx
       then: libiconv
+    - libzlib
 
 tests:
   - script:

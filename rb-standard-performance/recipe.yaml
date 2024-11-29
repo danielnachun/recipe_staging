@@ -1,0 +1,46 @@
+schema_version: 1
+
+context:
+  name: standard-performance
+  version: 1.4.0
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: de9f72b65964826cd55db59e51916d969b19ca2c62b12727cbc763cf256fa194
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - rb-lint_roller
+    - rb-rubocop-performance
+    - ruby=3.2
+  run:
+    - rb-lint_roller
+    - rb-rubocop-performance
+    - ruby>=3.2
+
+tests:
+  - script:
+      - "GEM_HOME=${PREFIX}/share/rubygems ruby -r standard/performance -e 'exit 0'"
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/LICENSE.txt
+  summary: Standard Ruby Plugin providing configuration for rubocop-performance
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/standardrb/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,40 @@
+schema_version: 1
+
+context:
+  name: fastmod
+  version: 0.4.4
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/facebookincubator/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: b438cc7564ef34d01f27cdd3cd50ee66a9915b9c50939ca021c6bee2e9c1f069
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - cargo-bundle-licenses
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: Apache-2.0
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Fast partial replacement for the codemod tool
+  homepage: https://github.com/facebookincubator/${{ name }}
+  repository: https://github.com/facebookincubator/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,110 @@
+schema_version: 1
+
+context:
+  name: mpd
+  version: 0.23.15
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/MusicPlayerDaemon/MPD/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: d2865d8f8ea79aa509b1465b99a2b8f3f449fe894521c97feadc2dca85a6ecd2
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - expat
+    - meson
+    - ninja
+    - pkg-config
+    - if: linux
+      then: sysroot_linux-64=2.17
+  host:
+    - if: linux
+      then: alsa-lib
+    - curl
+    - faad2
+    - ffmpeg
+    - fluidsynth
+    - fmt
+    - icu
+    - if: linux
+      then: jack
+    - lame
+    - libao
+    - libboost-devel
+    - if: linux
+      then: dbus
+    - libflac
+    - libid3tag
+    - libmpdclient
+    - libnfs
+    - libopus
+    - libsamplerate
+    - libshout
+    - libupnp
+    - libvorbis
+    - if: linux
+      then: pulseaudio-client
+    - speex
+    - wavpack
+  run:
+    - if: linux
+      then: alsa-lib
+    - bzip2
+    - faad2
+    - ffmpeg
+    - fluidsynth
+    - fmt
+    - icu
+    - if: linux
+      then: jack
+    - lame
+    - libao
+    - libboost
+    - libcurl
+    - if: linux
+      then: dbus
+    - libexpat
+    - libflac
+    - libid3tag
+    - libmpdclient
+    - libnfs
+    - libogg
+    - libopus
+    - libsamplerate
+    - libshout
+    - libsndfile
+    - libsqlite
+    - libupnp
+    - libvorbis
+    - libzlib
+    - mpg123
+    - pcre2
+    - if: linux
+      then: pulseaudio-client
+    - speex
+    - wavpack
+  ignore_run_exports:
+    - libboost
+
+tests:
+  - script:
+      - mpd --version
+
+about:
+  license: BSD-3-Clause
+  license_file: COPYING
+  summary: Library for MPD in the C, C++, and Objective-C languages
+  homepage: https://www.musicpd.org/libs/libmpdclient/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

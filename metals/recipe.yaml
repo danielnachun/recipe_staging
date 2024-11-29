@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: metals
+  version: 1.3.4
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  git: https://github.com/scalameta/${{ name }}
+  rev: v${{ version }}
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - findutils
+    - sbt
+    - maven
+    - openjdk
+    - sed
+  run:
+    - openjdk
+
+tests:
+  - script:
+      - ${{ name }} --version
+
+about:
+  license: Apache-2.0
+  license_file:
+    - LICENSE
+    - target/generated-resources/licenses/
+  summary: Scala language server with rich IDE features
+  homepage: https://github.com/scalameta/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

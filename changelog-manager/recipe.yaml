@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: changelog-manager
+  version: 1.10.19.111
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/credfeto/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: 05024b3e8b67c7bacc220daf1333f933ce4de09cd772078da0356b1bd10892c9
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - dotnet
+    - nuget-license
+  run:
+    - dotnet
+
+tests:
+  - script:
+      - "changelog --help 2>&1 | grep -q \"Credfeto.ChangeLog.Cmd\""
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: Tool for updating and extracting changelogs
+  homepage: https://github.com/credfeto/${{ name }}
+  repository: https://github.com/credfeto/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

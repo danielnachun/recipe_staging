@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: tzinfo
+  version: 2.0.6
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: 8daf828cc77bcf7d63b0e3bdb6caa47e2272dcfaf4fbfe46f8c3a9df087a829b
+
+build:
+  number: 1
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - rb-concurrent-ruby
+    - ruby >=3.2
+  run:
+    - rb-concurrent-ruby
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/LICENSE
+  summary: TZInfo provides access to time zone data and allows times to be converted using time zone rules.
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/tzinfo/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

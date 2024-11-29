@@ -1,0 +1,36 @@
+schema_version: 1
+
+context:
+  name: pyhpo
+  version: 3.2.4
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
+  sha256: eac047810634993685e8510365891cef28581794fb9a66e44d40ec6a149d486f
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv
+
+requirements:
+  host:
+    - pip
+    - python
+  run:
+    - python
+
+about:
+  license: MIT
+  summary: A Python package to work with the HPO Ontology
+  homepage: https://github.com/anergictcell/pyhpo
+  repository: https://github.com/anergictcell/pyhpo
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

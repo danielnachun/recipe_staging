@@ -1,0 +1,41 @@
+schema_version: 1
+
+context:
+  name: caviar
+  version: 1.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/fhormoz/caviar/archive/3e149b877778c52456b63385b125f77adda12059.zip
+  sha256: bde37ca761e0861c808644c3a12d7a56296c6b8777d6c8a093c5a0ce00a93fa2
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - make
+  host:
+    - blas
+    - gsl
+  run:
+    - libopenblas
+
+tests:
+  - script:
+      - "CAVIAR 2>&1 | grep -q \"ERROR: permutation length n must be positive integer\""
+      - "eCAVIAR 2>&1 | grep -q \"Error: The first Z-socre file is not given\""
+
+about:
+  license: AGPL-3.0-or-later
+  summary: Statistical framework for identifying causal variants
+  homepage: http://zarlab.cs.ucla.edu/tag/ecaviar/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

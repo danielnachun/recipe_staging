@@ -1,0 +1,40 @@
+schema_version: 1
+
+context:
+  name: bkt
+  version: 0.5.4
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/dimo414/${{ name }}/archive/refs/tags/${{ version }}.tar.gz
+  sha256: 172c413709dc81ced9dfa2750aaa398864e904d1ed213bd19e51d45d1ff0a8ff
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - cargo-bundle-licenses
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Utility for caching the results of shell commands
+  homepage: https://www.bkt.rs
+  repository: https://github.com/dimo414/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

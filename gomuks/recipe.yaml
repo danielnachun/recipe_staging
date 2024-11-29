@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: gomuks
+  version: 0.3.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/tulir/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: 0710a63cc3ec9a4f525510497ba64aa94170498eb536411d089871f336d99ab4
+
+build:
+  number: 1
+
+requirements:
+  build:
+    - go
+    - go-licenses
+
+tests:
+  - script:
+      - test -f ${PREFIX}/bin/${{ name }}
+
+about:
+  license: AGPL-3.0-or-later
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: A terminal based Matrix client written in Go.
+  homepage: https://github.com/tulir/${{ name }}
+  repository: https://github.com/tulir/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

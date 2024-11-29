@@ -1,0 +1,73 @@
+schema_version: 1
+
+context:
+  version: 2.01-45
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-splancs
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/splancs_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/splancs/splancs_${{ version }}.tar.gz
+  sha256: 8bccf1d61d7feaab52da07a9c95aa66bcd3986a6b214f13b232c1e2bea4b76d3
+
+build:
+  number: 0
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: not win
+      then: ${{ compiler('fortran') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: win
+      then: ${{ stdlib("m2w64_c") }}
+    - if: win
+      then: ${{ compiler('m2w64_fortran') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+    - r-sp >=0.9
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+    - r-sp >=0.9
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('splancs')\""
+      - if: win
+        then: "\"%R%\" -e \"library('splancs')\""
+
+about:
+  license: GPL-2.0-or-later
+  summary: "The Splancs package was written as an enhancement to S-Plus for display and analysis of spatial point pattern data; it has been ported to R and is in \"maintenance mode\". "
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-3
+  homepage: http://www.maths.lancs.ac.uk/~rowlings/Splancs/
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: concurrently
+  version: 8.2.2
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/open-cli-tools/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: c47e3f3bda1344a1ccbfa1fbab6b24af384ef532a12963bff9a930f262806740
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Run commands concurrently.
+  homepage: https://github.com/open-cli-tools/${{ name }}
+  repository: https://github.com/open-cli-tools/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: lint-staged
+  version: 15.2.8
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/lint-staged/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: d972464c986fdaeca0a25b9094b8b6c36e7d3bcdc30eb51ad78434299d14faff
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Run linters on git staged files
+  homepage: https://github.com/lint-staged/${{ name }}
+  repository: https://github.com/lint-staged/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

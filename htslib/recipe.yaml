@@ -1,0 +1,63 @@
+schema_version: 1
+
+context:
+  version: 1.19.1
+
+package:
+  name: htslib
+  version: ${{ version }}
+
+source:
+  url: https://github.com/samtools/htslib/releases/download/${{ version }}/htslib-${{ version }}.tar.bz2
+  sha256: 222d74d3574fb67b158c6988c980eeaaba8a0656f5e4ffb76b5fa57f035933ec
+
+build:
+  number: 2
+
+requirements:
+  build:
+    - if: linux
+      then: binutils
+    - make
+    - ${{ compiler('c') }}
+  host:
+    - libcurl =8.4
+    - bzip2
+    - xz
+    - zlib =1.2
+    - libdeflate
+    - if: not osx
+      then: openssl
+  run:
+    - libcurl >=8.4
+    - libzlib >=1.2
+  run_exports:
+    - ${{ pin_subpackage('htslib', upper_bound='x.x') }}
+
+tests:
+  - files:
+      recipe:
+        - test1.bed
+    script:
+      - if: osx
+        then: otool -L $PREFIX/bin/bgzip | grep deflate
+      - if: not osx
+        then: ldd $PREFIX/bin/bgzip | grep deflate
+      - "test -e test1.bed || printf 'chr1\\t100\\t200\\n' > test1.bed"
+      - bgzip test1.bed
+      - tabix test1.bed.gz
+      - htsfile test1.bed.gz
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: C library for high-throughput sequencing data formats.
+  homepage: https://github.com/samtools/htslib
+  documentation: http://www.htslib.org/
+
+extra:
+  identifiers:
+    - biotools:HTSlib
+  skip-lints:
+    - in_other_channels
+

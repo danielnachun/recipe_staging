@@ -1,0 +1,51 @@
+schema_version: 1
+
+context:
+  name: powershell
+  version: 7.4.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  git: https://github.com/PowerShell/PowerShell
+  rev: v${{ version }}
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+  host:
+    - dotnet
+    - if: linux
+      then: icu
+    - libpsl-native
+    - nuget-license
+    - omi
+  run:
+    - dotnet
+    - libpsl-native
+    - omi
+  ignore_run_exports:
+    - icu
+
+tests:
+  - script:
+      - pwsh --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE.txt
+    - license-files/
+  summary: PowerShell for every system!
+  dev_rul: https://github.com/PowerShell/PowerShell
+  homepage: https://github.com/PowerShell/PowerShell
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

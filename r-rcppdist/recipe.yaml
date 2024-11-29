@@ -1,0 +1,119 @@
+# Package: RcppDist
+# Title: 'Rcpp' Integration of Additional Probability Distributions
+# Version: 0.1.1
+# Authors@R: person(given = "JB", family = "Duck-Mayr", email = "j.duckmayr@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-2231-1294"))
+# Description: The 'Rcpp' package provides a C++ library to make it easier to use C++ with R. R and 'Rcpp' provide functions for a variety of statistical distributions. Several R packages make functions available to R for additional statistical distributions. However, to access these functions from C++ code, a costly call to the R functions must be made. 'RcppDist' provides a header-only C++ library with functions for additional statistical distributions that can be called from C++ when writing code using 'Rcpp' or 'RcppArmadillo'. Functions are available that return a 'NumericVector' as well as doubles, and for multivariate or matrix distributions, 'Armadillo' vectors and matrices. 'RcppDist' provides functions for the following distributions: the four parameter beta distribution; the location- scale t distribution; the truncated normal distribution; the truncated t distribution; a truncated location-scale t distribution; the triangle distribution; the multivariate normal distribution*; the multivariate t distribution*; the Wishart distribution*; and the inverse Wishart distribution*. Distributions marked with an asterisk rely on 'RcppArmadillo'.
+# License: GPL (>= 2.0)
+# URL: https://github.com/duckmayr/RcppDist
+# BugReports: https://github.com/duckmayr/RcppDist/issues
+# Depends: R (>= 3.0.0)
+# Encoding: UTF-8
+# LazyData: true
+# LinkingTo: Rcpp, RcppArmadillo
+# Imports: Rcpp
+# RoxygenNote: 6.1.0
+# Suggests: testthat, knitr, rmarkdown
+# VignetteBuilder: knitr
+# NeedsCompilation: yes
+# Packaged: 2018-10-21 13:45:50 UTC; jb
+# Author: JB Duck-Mayr [aut, cre] (<https://orcid.org/0000-0002-2231-1294>)
+# Maintainer: JB Duck-Mayr <j.duckmayr@gmail.com>
+# Repository: CRAN
+# Date/Publication: 2018-10-28 22:50:09 UTC
+schema_version: 1
+
+context:
+  version: 0.1.1
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-rcppdist
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/RcppDist_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/RcppDist/RcppDist_${{ version }}.tar.gz
+  sha256: 3dfcc6f34d781f055ecba64e21bd9bc9e2d504a8304f03b6a4acdde8783fe509
+
+build:
+  number: 2
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: not win
+      then: ${{ compiler('cxx') }}
+    - if: win
+      then: ${{ compiler('m2w64_cxx') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}grep
+    - ${{ posix }}autoconf
+    - if: not win
+      then: ${{ posix }}automake
+    - if: win
+      then: ${{ posix }}automake-wrapper
+    - ${{ posix }}pkg-config
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+    - r-rcpp
+    - r-rcpparmadillo
+    - libblas
+    - liblapack
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+    - r-rcpp
+    - r-rcpparmadillo
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('RcppDist')\""
+      - if: win
+        then: "\"%R%\" -e \"library('RcppDist')\""
+
+about:
+  license: GPL-2.0-or-later
+  summary: 'The ''Rcpp'' package provides a C++ library to make it easier to use C++ with R.::
+    - "R and ''Rcpp'' provide functions for a variety of statistical distributions. Several"
+    - R packages make functions available to R for additional statistical distributions.
+    - However, to access these functions from C++ code, a costly call to the R functions
+    - "must be made. ''RcppDist'' provides a header-only C++ library with functions for"
+    - additional statistical distributions that can be called from C++ when writing code
+    - "using ''Rcpp'' or ''RcppArmadillo''. Functions are available that return a ''NumericVector''"
+    - "as well as doubles, and for multivariate or matrix distributions, ''Armadillo''"
+    "vectors and matrices. ''RcppDist'' provides functions for the following distributions":
+    - the four parameter beta distribution; the location- scale t distribution; the truncated
+    - normal distribution; the truncated t distribution; a truncated location-scale t
+    - distribution; the triangle distribution; the multivariate normal distribution*;
+    - the multivariate t distribution*; the Wishart distribution*; and the inverse Wishart
+    - "distribution*. Distributions marked with an asterisk rely on ''RcppArmadillo''.'"
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-3
+  homepage: https://github.com/duckmayr/RcppDist
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

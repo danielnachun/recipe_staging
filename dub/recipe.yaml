@@ -1,0 +1,38 @@
+schema_version: 1
+
+context:
+  version: 1.38.0
+
+package:
+  name: dub
+  version: ${{ version }}
+
+source:
+  url: https://github.com/dlang/dub/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: db19791536f14701334893408864b38a3a22004b32a1e67d485c72cd80411ca4
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - dtools
+    - ldc
+    - make
+
+tests:
+  - script:
+      - dub --version
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: Package and build management system for D
+  homepage: https://github.com/dlang/dub/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+    - dpryan79
+

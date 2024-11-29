@@ -1,0 +1,46 @@
+schema_version: 1
+
+context:
+  name: undercover
+  version: 0.5.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: ef99a8478be5466fb13fcd199f659ae308b81f71145a5a4e57428ff67d109fae
+
+build:
+  number: 1
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies --bindir=${PREFIX}/bin ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - rb-bigdecimal
+    - rb-imagen
+    - rb-rainbow
+    - rb-rugged
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/LICENSE.txt
+  summary: Actionable code coverage - detects untested code blocks in recent changes
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/grodowski/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

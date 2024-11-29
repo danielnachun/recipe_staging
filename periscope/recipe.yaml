@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: periscope
+  version: 0.3.5
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  git: https://github.com/anishathalye/${{ name }}
+  rev: v${{ version }}
+
+build:
+  number: 1
+
+requirements:
+  build:
+    - go
+    - go-licenses
+
+tests:
+  - script:
+      - if: not win
+        then: psc --help
+      - if: win
+        then: periscope --help
+
+about:
+  license: GPL-3.0-only
+  license_file:
+    - LICENSE.txt
+    #- license-files/
+  summary: Organize and de-duplicate your files without losing data
+  homepage: https://github.com/anishathalye/${{ name }}
+  repository: https://github.com/anishathalye/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

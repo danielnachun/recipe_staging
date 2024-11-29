@@ -1,0 +1,160 @@
+schema_version: 1
+
+context:
+  version: 1.2.8
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-rgl
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/rgl_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/rgl/rgl_${{ version }}.tar.gz
+  sha256: e535e738702d0babe043c1fec3d358c7bfdfe202ad95d68971b28ad7a81717f4
+
+build:
+  number: 0
+  skip: ppc64le
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: not win
+      then: ${{ compiler('cxx') }}
+    - if: win
+      then: ${{ compiler('m2w64_cxx') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}grep
+    - ${{ posix }}autoconf
+    - if: not win
+      then: ${{ posix }}automake
+    - if: win
+      then: ${{ posix }}automake-wrapper
+    - ${{ posix }}pkg-config
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+    - if: linux
+      then: ${{ cdt('xorg-x11-proto-devel') }}
+    - if: linux
+      then: ${{ cdt('mesa-libgl-devel') }}
+    - if: linux
+      then: ${{ cdt('libx11-devel') }}
+    - if: linux
+      then: ${{ cdt('libxext-devel') }}
+    - if: linux
+      then: ${{ cdt('libxrender-devel') }}
+    - if: linux
+      then: ${{ cdt('mesa-libgl-devel') }}
+    - if: linux
+      then: ${{ cdt('mesa-libegl-devel') }}
+    - if: linux
+      then: ${{ cdt('mesa-dri-drivers') }}
+    - if: linux
+      then: ${{ cdt('libxau-devel') }}
+    - if: linux
+      then: ${{ cdt('libdrm-devel') }}
+    - if: linux
+      then: ${{ cdt('libxcomposite-devel') }}
+    - if: linux
+      then: ${{ cdt('libxcursor-devel') }}
+    - if: linux
+      then: ${{ cdt('libxi-devel') }}
+    - if: linux
+      then: ${{ cdt('libxrandr-devel') }}
+    - if: linux
+      then: ${{ cdt('libxscrnsaver-devel') }}
+    - if: linux
+      then: ${{ cdt('libxtst-devel') }}
+    - if: linux
+      then: ${{ cdt('libselinux-devel') }}
+    - if: linux
+      then: ${{ cdt('libselinux') }}
+    - if: linux
+      then: ${{ cdt('libxdamage') }}
+    - if: linux
+      then: ${{ cdt('libxfixes') }}
+    - if: linux
+      then: ${{ cdt('libxxf86vm') }}
+    - if: linux
+      then: ${{ cdt('libxcb') }}
+    - if: linux
+      then: ${{ cdt('libxext') }}
+    - if: linux
+      then: ${{ cdt('expat') }}
+  host:
+    - r-base=4.2
+    - r-htmltools
+    - r-htmlwidgets >=1.6.0
+    - r-jsonlite >=0.9.20
+    - r-knitr >=1.33
+    - r-magrittr
+    - if: linux
+      then: expat
+    - if: not win
+      then: freetype
+    - if: linux
+      then: libglu
+    - if: not win
+      then: libpng
+    - if: win
+      then: ${{ native }}libpng
+    - if: linux
+      then: xorg-libxfixes
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+    - r-htmltools
+    - r-htmlwidgets >=1.6.0
+    - r-jsonlite >=0.9.20
+    - r-knitr >=1.33
+    - r-magrittr
+    - if: linux
+      then: expat
+    - if: linux
+      then: libglu
+    - if: win
+      then: ${{ native }}libpng
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('rgl')\""
+      - if: win
+        then: "\"%R%\" -e \"library('rgl')\""
+
+about:
+  license: GPL-2.0-or-later
+  summary: |
+    Provides medium to high level functions for 3D interactive graphics, including functions modelled on base graphics (plot3d(), etc.) as well as functions for constructing representations of geometric objects (cube3d(), etc.).  Output may be on screen using OpenGL, or to various standard 3D file formats including
+    WebGL, PLY, OBJ, STL as well as 2D image formats, including PNG, Postscript, SVG, PGF.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-3
+  homepage: https://r-forge.r-project.org/projects/rgl/
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+    - mingwandroid
+

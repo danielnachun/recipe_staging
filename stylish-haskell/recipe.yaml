@@ -1,0 +1,51 @@
+schema_version: 1
+
+context:
+  name: stylish-haskell
+  version: 0.14.6.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/haskell/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: 0c0f34271670c23cc4feec7da04487a169a3cd0fde995721503bb5379755b91a
+  <conda_recipe_manager.types.SentinelType object at 0x101abf290>:  #patches:
+    #- 630ac1bf035a95cda0295ce669de06da17b91c0f.patch
+
+build:
+  number: 1
+  skip: not unix
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cabal-install
+    - cabal-plan
+    - ghc
+  host:
+    - if: osx
+      then: libiconv
+  run:
+    - if: osx
+      then: libiconv
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: BSD-3-Clause
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: Haskell code prettifier
+  homepage: https://github.com/haskell/${{ name }}
+  repository: https://github.com/haskell/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

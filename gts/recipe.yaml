@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: gtsjs
+  version: 5.3.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/google/gts/archive/v${{ version }}.tar.gz
+  sha256: 54a161898bc4d610bd4ed677363333ebe9468839d9cee47f21e00324355c38a3
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - gts --help
+
+about:
+  license: Apache-2.0
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: TypeScript style guide, formatter, and linter.
+  homepage: https://github.com/google/gts
+  repository: https://github.com/google/gts
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

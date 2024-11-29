@@ -1,0 +1,40 @@
+schema_version: 1
+
+context:
+  name: coco
+  version: 2014.12.24
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/boogie-org/${{ name }}/archive/${{ version }}.tar.gz
+  sha256: a92918222963befc8e09c447bd59881ba1fadb1aa4c5ec577ff12f82e7c23560
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - dotnet
+    - sed
+  run:
+    - dotnet
+
+tests:
+  - script:
+      - __RECIPE_MANAGER_SUBSTITUTION_MARKER__ 2>&1 | grep -q 'Usage: "\"Coco Grammar.ATG {Option}'\""
+
+about:
+  license: GPL-2.0-or-later
+  license_file: license.txt
+  summary: The compiler generator Coco/R
+  homepage: https://github.com/boogie-lang/${{ name }}
+  repository: https://github.com/boogie-lang/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

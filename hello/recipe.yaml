@@ -20,12 +20,10 @@ requirements:
     - ${{ compiler('c') }}
     - autoconf
     - automake
-    - gperf
-    - m4
     - make
+    - m4
     - sed
     - texinfo
-    - xz
   host:
     - gettext
     - libtool
@@ -43,3 +41,4 @@ about:
 extra:
   recipe-maintainers:
     - danielnachun
+

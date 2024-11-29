@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: astro
+  version: 4.13.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/${{ name }}/-/${{ name }}-${{ version }}.tgz
+  sha256: 52f4c17f648d313f1c4131105fa89714467f9b319ca73e90ac1d3bf8f794bc41
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    # - third-party-licenses.txt
+  summary: The web framework for content-driven websites.
+  homepage: https://github.com/withastro/${{ name }}
+  repository: https://github.com/withastro/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

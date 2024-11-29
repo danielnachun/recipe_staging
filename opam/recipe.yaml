@@ -1,0 +1,62 @@
+schema_version: 1
+
+context:
+  name: opam
+  version: 2.1.5
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  - url: https://github.com/ocaml/opam/releases/download/${{ version }}/opam-full-${{ version }}.tar.gz
+    sha256: 09f8d9e410b2f5723c2bfedbf7970e3b305f5017895fcd91759f05e753ddcea5  # [linux]
+  - url: https://github.com/ocaml/opam/releases/download/${{ version }}/opam-${{ version }}-x86_64-macos
+    sha256: daa640191898da7e59b2ab95e0830e58af3efa2a4b600436037377c58fc39c63  # [build_platform == "osx-64"]
+    file_name: opam
+  - url: https://github.com/ocaml/opam/releases/download/${{ version }}/opam-${{ version }}-arm64-macos
+    sha256: 67ee811dd79ba9a7d9a34ae17bd439bdce2ae32cd2cba35f807ac9f6604f8077  # [build_platform == "osx-arm64"]
+    file_name: opam
+
+build:
+  number: 0
+  skip: win
+
+requirements:
+  build:
+    # Note: Conda-forge's default compiler versions are being overridden in recipe/conda_build_config.yaml
+    - if: linux
+      then: ${{ compiler('cxx') }}
+    - if: linux
+      then: ocaml
+    - if: linux
+      then: make
+    - if: linux
+      then: patch
+  host:
+  run:
+    - rsync
+    - git
+    - mercurial
+    - m4
+    - diffutils
+    - unzip
+    - patch
+
+tests:
+  - script:
+      - opam
+
+about:
+  summary: A package manager for OCaml
+  description: |
+    opam is a source-based package manager. It supports multiple simultaneous compiler
+    installations, flexible package constraints, and a Git-friendly development workflow.
+  license: LGPL-2.1-only
+  license_file: LICENSE  # [linux]
+  homepage: https://github.com/ocaml/opam
+
+extra:
+  recipe-maintainers:
+    - fasiha
+

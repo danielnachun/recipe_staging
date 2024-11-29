@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: next.js
+  version: 14.2.5
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/next/-/next-${{ version }}.tgz
+  sha256: 0f719b2251fd58f08fb0a1dc637789e83bd049870348f298b8f282b96d1be615
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - jq
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - next --help
+
+about:
+  license: MIT
+  license_file:
+    - license.md
+    - third-party-licenses.txt
+  summary: The React Framework
+  homepage: https://github.com/vercel/${{ name }}
+  repository: https://github.com/vercel/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

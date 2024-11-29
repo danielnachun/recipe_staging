@@ -1,0 +1,99 @@
+# Package: Ckmeans.1d.dp
+# Type: Package
+# Title: Optimal, Fast, and Reproducible Univariate Clustering
+# Version: 4.3.0
+# Date: 2019-09-06
+# Authors@R: c(person("Joe", "Song", role = c("aut", "cre"), email = "joemsong@cs.nmsu.edu"), person("Hua", "Zhong", role = "aut"), person("Haizhou", "Wang", role = "aut"))
+# Author: Joe Song [aut, cre], Hua Zhong [aut], Haizhou Wang [aut]
+# Maintainer: Joe Song <joemsong@cs.nmsu.edu>
+# Description: Fast, optimal, and reproducible weighted univariate clustering by dynamic programming. Four types of problem including univariate k-means, k-median, k-segments, and multi-channel weighted k-means are solved with guaranteed optimality and reproducibility. The core algorithm minimizes the sum of (weighted) within-cluster distances using respective metrics. Its advantage over heuristic clustering in efficiency and accuracy is pronounced at a large number of clusters k. Weighted k-means can also process time series to perform peak calling. Multi-channel weighted k-means groups multiple univariate signals into k clusters. An auxiliary function generates histograms that are adaptive to patterns in data. This package provides a powerful set of tools for univariate data analysis with guaranteed optimality, efficiency, and reproducibility.
+# License: LGPL (>= 3)
+# Encoding: UTF-8
+# LazyData: true
+# Imports: Rcpp, Rdpack
+# LinkingTo: Rcpp
+# NeedsCompilation: yes
+# Suggests: testthat, knitr, rmarkdown
+# RdMacros: Rdpack
+# VignetteBuilder: knitr
+# Packaged: 2019-09-07 03:03:25 UTC; joesong
+# Repository: CRAN
+# Date/Publication: 2019-09-07 11:20:07 UTC
+schema_version: 1
+
+context:
+  version: 4.3.5
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-ckmeans.1d.dp
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/Ckmeans.1d.dp_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/Ckmeans.1d.dp/Ckmeans.1d.dp_${{ version }}.tar.gz
+  sha256: a30599db8bc1c77f20b3b9193772c60e713232a6f4aa6ac68c5569a0b6bc403d
+
+build:
+  number: 0
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: not win
+      then: ${{ compiler('cxx') }}
+    - if: win
+      then: ${{ compiler('m2w64_cxx') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+    - r-rcpp
+    - r-rdpack >=0.6_1
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+    - r-rcpp
+    - r-rdpack >=0.6_1
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('Ckmeans.1d.dp')\""
+      - if: win
+        then: "\"%R%\" -e \"library('Ckmeans.1d.dp')\""
+
+about:
+  license: LGPL-3.0-or-later
+  summary: |
+    Fast, optimal, and reproducible weighted univariate clustering by dynamic programming. Four types of problem including univariate k-means, k-median, k-segments, and multi-channel weighted k-means are solved with guaranteed optimality and reproducibility. The core algorithm minimizes the sum of (weighted) within-cluster
+    distances using respective metrics. Its advantage over heuristic clustering in efficiency and accuracy is pronounced at a large number of clusters k. Weighted k-means can also process time series to perform peak calling. Multi-channel weighted k-means groups multiple univariate signals into k clusters. An auxiliary function
+    generates histograms that are adaptive to patterns in data. This package provides a powerful set of tools for univariate data analysis with guaranteed optimality, efficiency, and reproducibility.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/LGPL-3
+  homepage: https://CRAN.R-project.org/package=Ckmeans.1d.dp
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

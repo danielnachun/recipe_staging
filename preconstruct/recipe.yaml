@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: preconstruct
+  version: 2.8.7
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/preconstruct/${{ name }}/archive/@${{ name }}/cli@${{ version }}.tar.gz
+  sha256: 4b7c80778ab7c3c85582ef8cf3612b0bfecfc249923b5f653044425ccac7cfc3
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+    - yarn
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Dev and build your code painlessly in monorepos
+  homepage: https://github.com/preconstruct/${{ name }}
+  repository: https://github.com/preconstruct/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

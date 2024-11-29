@@ -1,0 +1,45 @@
+schema_version: 1
+
+context:
+  name: unicode-display_width
+  version: 1.1.3
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: 1d6247805b2431fd3d27614f6e0c38665b068bfc3a58cf89f08b7f107daf48e4
+
+build:
+  number: 1
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+    - sed -i 's/Gem.gunzip/Gem::Util.gunzip/' ${PREFIX}/share/rubygems/gems/${{ name }}-${{ version }}/lib/unicode/display_width/index.rb
+
+requirements:
+  build:
+    - sed
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+tests:
+  - script:
+      - "GEM_HOME=${PREFIX}/share/rubygems ruby -r unicode/display_width -e 'exit 0'"
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/MIT-LICENSE.txt
+  summary: Determines the monospace display width of a string using EastAsianWidth.txt, Unicode general category, and other data.
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/janlelis/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: f2
+  version: 1.9.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/ayoisaiah/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: fbeb4540c4afe4aa25565685ee7ef7498449da7fc5f5b70a0e303b15c6e35f71
+
+build:
+  number: 2
+
+requirements:
+  build:
+    - go
+    - go-licenses
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENCE
+    - license-files/
+  summary: Command-line batch renaming tool
+  homepage: https://github.com/ayoisaiah/${{ name }}
+  repository: https://github.com/ayoisaiah/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

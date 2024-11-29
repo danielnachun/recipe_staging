@@ -1,0 +1,87 @@
+schema_version: 1
+
+context:
+  version: 1.0.6
+
+package:
+  name: r-massprocessor
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/tidymass/massprocesser/archive/4579f98c58a7b32736216dc1e37535bc398cc920.zip
+  sha256: 2ebb0c425bb18c09e113d1677f2e426d1ba9afcb12df133198184ea9926249ba
+
+build:
+  number: 0
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+    - r-cli
+    - r-crayon
+    - r-dplyr
+    - r-ggplot2
+    - r-magrittr
+    - r-plyr
+    - r-purrr
+    - r-readr
+    - r-readxl
+    - r-plotly
+    - r-stringr
+    - r-tibble
+    - r-masstools
+    - r-rstudioapi
+    - r-massdataset
+    - bioconductor-biocparallel
+    - bioconductor-biobase
+    - bioconductor-msnbase
+    - bioconductor-mzr
+    - bioconductor-xcms
+  run:
+    - r-base>=4.2
+    - r-cli
+    - r-crayon
+    - r-dplyr
+    - r-ggplot2
+    - r-magrittr
+    - r-plyr
+    - r-purrr
+    - r-readr
+    - r-readxl
+    - r-plotly
+    - r-stringr
+    - r-tibble
+    - r-masstools
+    - r-rstudioapi
+    - r-massdataset
+    - bioconductor-biocparallel
+    - bioconductor-biobase
+    - bioconductor-msnbase
+    - bioconductor-mzr
+    - bioconductor-xcms
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('massprocesser')\""
+      - if: win
+        then: "\"%R%\" -e \"library('massprocesser')\""
+
+about:
+  license: GPL-3.0-or-later
+  summary: This package is used to do raw data processing of LC-MS untargeted metabolomics processing.
+  homepage: https://github.com/tidymass/massprocesser
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

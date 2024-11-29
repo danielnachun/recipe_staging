@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: syncpack
+  version: 12.4.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/JamieMason/${{ name }}/archive/${{ version }}.tar.gz
+  sha256: 1f28c973ab935be42d0966e91f6444344af2b4786cef02f3806cd68ec3184f52
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Consistent dependency versions in large JavaScript Monorepos.
+  homepage: https://github.com/JamieMason/${{ name }}
+  repository: https://github.com/JamieMason/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

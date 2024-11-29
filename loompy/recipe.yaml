@@ -1,0 +1,57 @@
+schema_version: 1
+
+context:
+  name: loompy
+  version: 3.0.7
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/loompy-${{ version }}.tar.gz
+  sha256: b5cdf7b54734c6bed3a181d11947af70af2c6e0dcadc02fd0e871df232faa8f4
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - loompy = loompy.commands:cli
+
+requirements:
+  host:
+    - python >=3.6
+    - pip
+  run:
+    - python >=3.6
+    - h5py
+    - numpy
+    - scipy
+    - setuptools
+    - numba
+    - click
+    - numpy_groupies
+
+tests:
+  - python:
+      imports:
+        - loompy
+  - requirements:
+      run:
+        - pip
+    script:
+      - pip check
+      - loompy --help
+
+about:
+  summary: Work with Loom files for single-cell RNA-seq data
+  license: BSD-2-Clause
+  license_file: LICENSE
+  homepage: https://github.com/linnarsson-lab/loompy
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

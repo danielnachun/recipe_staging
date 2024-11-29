@@ -1,0 +1,46 @@
+schema_version: 1
+
+context:
+  name: ncftp
+  version: 3.2.7
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://www.ncftp.com/public_ftp/${{ name }}/${{ name }}-${{ version }}-src.tar.xz
+  sha256: d41c5c4d6614a8eae2ed4e4d7ada6b6d3afcc9fb65a4ed9b8711344bef24f7e8
+  patches:
+    - 0001-fix-macOS-version-detection.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - if: linux
+      then: binutils
+    - make
+    - ncurses
+  host:
+    - ncurses
+  run:
+    - ncurses
+
+tests:
+  - script:
+      - if: not win
+        then: test -f $PREFIX/bin/ncftp
+
+about:
+  license: ClArtistic
+  summary: FTP client with an advanced user interface
+  homepage: https://www.ncftp.com/
+  repository: https://www.ncftp.com/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

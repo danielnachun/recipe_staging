@@ -1,0 +1,48 @@
+schema_version: 1
+
+context:
+  name: rubocop-performance
+  version: 1.21.1
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: 5cf20002a544275ad6aa99abca4b945d2a2ed71be925c38fe83700360ed8734e
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - rb-ast
+    - rb-rubocop-ast
+    - rubocop
+    - ruby >=3.2
+  run:
+    - rb-ast
+    - rb-rubocop-ast
+    - rubocop
+    - ruby >=3.2
+
+tests:
+  - script:
+      - rubocop --require rubocop-performance --help
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/LICENSE.txt
+  summary: A collection of RuboCop cops to check for performance optimizations in Ruby code.
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/rubocop/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

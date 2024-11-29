@@ -1,0 +1,92 @@
+# Package: Rcsdp
+# Version: 0.1.56
+# Title: R Interface to the CSDP Semidefinite Programming Library
+# Authors@R: c( person("Hector", "Corrada Bravo", email="hcorrada@gmail.com", role=c("aut", "cre")), person("Brian", "Borchers", role="aut"), person("Don", "van den Bergh", rol="ctb") )
+# Description: R interface to the CSDP semidefinite programming library. Installs version 6.1.1 of CSDP from the COIN-OR website if required. An existing installation of CSDP may be used by passing the proper configure arguments to the installation command. See the INSTALL file for further details.
+# LazyLoad: yes
+# Imports: methods
+# Enhances: Matrix
+# License: CPL-1.0
+# URL: https://projects.coin-or.org/Csdp/
+# RoxygenNote: 7.0.2
+# BugReports: https://github.com/hcorrada/rcsdp/issues
+# NeedsCompilation: yes
+# Packaged: 2020-02-20 12:04:16 UTC; hcorrada
+# Author: Hector Corrada Bravo [aut, cre], Brian Borchers [aut], Don van den Bergh [ctb]
+# Maintainer: Hector Corrada Bravo <hcorrada@gmail.com>
+# Repository: CRAN
+# Date/Publication: 2020-02-20 15:20:02 UTC
+schema_version: 1
+
+context:
+  version: 0.1.57.5
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-rcsdp
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/Rcsdp_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/Rcsdp/Rcsdp_${{ version }}.tar.gz
+  sha256: 50048bcb4a8bb9f9b48c5e43a32126eda1d23d17876c7632e20b04953f3b1cd2
+
+build:
+  number: 1
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}grep
+    - ${{ posix }}autoconf
+    - if: not win
+      then: ${{ posix }}automake
+    - if: win
+      then: ${{ posix }}automake-wrapper
+    - ${{ posix }}pkg-config
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('Rcsdp')\""
+      - if: win
+        then: "\"%R%\" -e \"library('Rcsdp')\""
+
+about:
+  license: CPL-1.0
+  summary: R interface to the CSDP semidefinite programming library. Installs version 6.1.1 of CSDP from the COIN-OR website if required. An existing installation of CSDP may be used by passing the proper configure arguments to the installation command. See the INSTALL file for further details.
+  homepage: https://projects.coin-or.org/Csdp/
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+    - MathiasHaudgaard
+    - FrodePedersen
+    - ArneKr
+

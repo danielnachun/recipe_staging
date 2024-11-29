@@ -1,0 +1,59 @@
+schema_version: 1
+
+context:
+  name: perl-io-tty
+  version: 1.16
+  sha256: 8f1a09c070738adc695df903f2e7f74308dd8d991b914c0bc390a0e6021294dd
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/T/TO/TODDR/IO-Tty-${{ version }}.tar.gz
+  sha256: ${{ sha256 }}
+
+build:
+  # nothing provides perl >=5.32.1,<6.0a0 *_perl5 needed by perl-extutils-makemaker-7.36-pl5321hd8ed1ab_0
+  number: 0
+  skip: win
+  script:
+    - perl Makefile.PL INSTALLDIRS=vendor NO_PERLLOCAL=1 NO_PACKLIST=1
+    - "export CFLAGS=\"${CFLAGS} -Wno-implicit-int\""
+    - if: osx
+      then: "export CFLAGS=\"${CFLAGS} -DHAVE_STRLCPY\""
+    - "make CCFLAGS=\"${CFLAGS}\""
+    #- make test
+    - make install VERBINST=1
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - make
+  host:
+    - perl=5.32
+    - perl-extutils-makemaker
+  run:
+    - perl>=5.32
+
+tests:
+  - python:
+      imports:
+        - IO::Pty
+        - IO::Tty
+
+about:
+  license: GPL-1.0-or-later OR Artistic-1.0-Perl
+  summary: Pseudo ttys and constants
+  license_file:
+    - ${{ env.get("PREFIX") }}/man/man1/perlartistic.1
+    - ${{ env.get("PREFIX") }}/man/man1/perlgpl.1
+  homepage: https://metacpan.org/dist/IO-Tty
+
+extra:
+  recipe-maintainers:
+    - cbrueffer
+

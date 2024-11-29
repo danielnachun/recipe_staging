@@ -1,0 +1,77 @@
+# Suggests: testthat
+schema_version: 1
+
+context:
+  version: 0.0.9
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-tfmpvalue
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/TFMPvalue_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/TFMPvalue/TFMPvalue_${{ version }}.tar.gz
+  sha256: b9db56e75e2cee840d8b7861686dec07ee2c40cbc7d55361e5d04f1bf0c65de7
+  file_name: TFMPvalue_${{ version }}.tar.gz
+
+build:
+  number: 1
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: not win
+      then: ${{ compiler('cxx') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: win
+      then: ${{ compiler('m2w64_cxx') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+    - r-rcpp >=0.11.1
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+    - r-rcpp >=0.11.1
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('TFMPvalue')\""
+      - if: win
+        then: "\"%R%\" -e \"library('TFMPvalue')\""
+
+about:
+  license: GPL-2.0
+  summary: |
+    In putative Transcription Factor Binding Sites (TFBSs)  identification from sequence/alignments, we are interested in the significance of certain match score. TFMPvalue provides the accurate calculation of P-value with  score threshold for Position Weight Matrices,  or the score with given P-value.  It is an interface
+    to code originally made available by  Helene Touzet and Jean-Stephane Varre, 2007,  Algorithms Mol Biol:2, 15. Touzet and Varre (2007) <DOI:10.1186/1748-7188-2-15>.
+  license_file: ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+  homepage: https://github.com/ge11232002/TFMPvalue
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+    - MathiasHaudgaard
+    - FrodePedersen
+    - ArneKr
+

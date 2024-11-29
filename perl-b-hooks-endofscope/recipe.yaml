@@ -1,0 +1,55 @@
+schema_version: 1
+
+context:
+  name: perl-b-hooks-endofscope
+  version: 0.26
+  sha256: 39df2f8c007a754672075f95b90797baebe97ada6d944b197a6352709cb30671
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/E/ET/ETHER/B-Hooks-EndOfScope-${{ version }}.tar.gz
+  sha256: ${{ sha256 }}
+
+build:
+  number: 0
+  skip: win
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-sub-exporter-progressive
+    - perl-module-implementation
+    - perl-variable-magic
+  run:
+    - perl>=5.32
+    - perl-module-implementation
+    - perl-sub-exporter-progressive
+  run_exports:
+    weak:
+      - ${{ name }} =${{ version }}
+
+tests:
+  - python:
+      imports:
+        - B::Hooks::EndOfScope
+        - B::Hooks::EndOfScope::PP
+        - B::Hooks::EndOfScope::XS
+
+about:
+  license: GPL-1.0-or-later OR Artistic-1.0-Perl
+  license_file:
+    - ${{ env.get("PREFIX") }}/man/man1/perlartistic.1
+    - ${{ env.get("PREFIX") }}/man/man1/perlgpl.1
+  summary: Execute code after a scope finished compilation
+  homepage: https://github.com/karenetheridge/B-Hooks-EndOfScope
+
+extra:
+  recipe-maintainers:
+    - xileF1337
+    - conda-forge/perl-packagers
+

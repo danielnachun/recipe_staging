@@ -1,0 +1,52 @@
+schema_version: 1
+
+context:
+  name: coq-lsp
+  version: ${{0.1.9+8.19}}
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/ejgallego/${{ name }}/archive/${{ version }}.tar.gz
+  sha256: 5c5601f63b2186dc450d303d76c1c732fa588c2a991e7eaebe1e44185b7732d0
+
+build:
+  number: 0
+  skip: win
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - if: linux
+      then: binutils
+    - if: linux
+      then: gcc
+    - if: linux
+      then: sysroot_linux-64=2.17
+    - if: unix
+      then: make
+    - odig
+    - opam
+    - pkg-config
+  host:
+    - gmp
+
+tests:
+  - script:
+      - ${{ name }} --version
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: Language Server Protocol for Coq
+  homepage: https://github.com/ejgallego/${{ name }}
+  repository: https://github.com/ejgallego/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

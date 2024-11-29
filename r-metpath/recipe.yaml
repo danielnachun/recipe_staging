@@ -1,0 +1,87 @@
+schema_version: 1
+
+context:
+  version: 1.0.5
+
+package:
+  name: r-metpath
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/tidymass/metpath/archive/adcad4f44afcb2b91bb7a4fbed125de95b56c1d8.zip
+  sha256: e2603a9b8c1e817beb9f6d9ebb1e14ff0995c0220d81dcd2aa0781b387444118
+
+build:
+  number: 0
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+    - r-cli
+    - r-crayon
+    - r-dplyr
+    - r-ggplot2
+    - r-magrittr
+    - r-pbapply
+    - r-plyr
+    - r-purrr
+    - r-stringr
+    - r-metid
+    - r-future
+    - r-furrr
+    - r-openxlsx
+    - r-rstudioapi
+    - r-ggraph
+    - r-ggrepel
+    - r-tidygraph
+    - r-rlang
+    - r-massdataset
+    - bioconductor-keggrest
+  run:
+    - r-base>=4.2
+    - r-cli
+    - r-crayon
+    - r-dplyr
+    - r-ggplot2
+    - r-magrittr
+    - r-pbapply
+    - r-plyr
+    - r-purrr
+    - r-stringr
+    - r-metid
+    - r-future
+    - r-furrr
+    - r-openxlsx
+    - r-rstudioapi
+    - r-ggraph
+    - r-ggrepel
+    - r-tidygraph
+    - r-rlang
+    - r-massdataset
+    - bioconductor-keggrest
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('metpath')\""
+      - if: win
+        then: "\"%R%\" -e \"library('metpath')\""
+
+about:
+  license: GPL-3.0-or-later
+  summary: This package is used to do statistical data analysis for and pathway enrichment analysi for metabolomics data.
+  homepage: https://github.com/tidymass/metpath
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

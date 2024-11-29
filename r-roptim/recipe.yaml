@@ -1,0 +1,97 @@
+# Package: roptim
+# Type: Package
+# Title: General Purpose Optimization in R using C++
+# Version: 0.1.5
+# Author: Yi Pan [aut, cre]
+# Maintainer: Yi Pan <ypan1988@gmail.com>
+# Description: Perform general purpose optimization in R using C++. A unified wrapper interface is provided to call C functions of the five optimization algorithms ('Nelder-Mead', 'BFGS', 'CG', 'L-BFGS-B' and 'SANN') underlying optim().
+# License: GPL (>= 2)
+# Encoding: UTF-8
+# LazyData: true
+# SystemRequirements: C++11
+# Imports: Rcpp (>= 0.12.14)
+# LinkingTo: Rcpp, RcppArmadillo
+# RoxygenNote: 7.1.1
+# URL: https://github.com/ypan1988/roptim/
+# BugReports: https://github.com/ypan1988/roptim/issues
+# Suggests: R.rsp
+# VignetteBuilder: R.rsp
+# NeedsCompilation: yes
+# Packaged: 2020-06-29 09:38:08 UTC; yipan
+# Repository: CRAN
+# Date/Publication: 2020-06-29 12:44:17 UTC
+schema_version: 1
+
+context:
+  version: 0.1.6
+  posix: "'m2-' if win else ''"
+
+package:
+  name: r-roptim
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/roptim_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/roptim/roptim_${{ version }}.tar.gz
+  sha256: 7ef0c2a2ddb3703efaabf337fa0026485875d5ffb35ba3ef5d60eb0c62c30686
+
+build:
+  number: 0
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: win
+      then: ${{ stdlib("m2w64_c") }}
+    - if: not win
+      then: ${{ compiler('cxx') }}
+    - if: win
+      then: ${{ compiler('m2w64_cxx') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.3
+    - r-rcpp >=0.12.14
+    - r-rcpparmadillo
+    - libblas
+    - liblapack
+  run:
+    - r-base=4.3
+    - r-rcpp >=0.12.14
+    - r-rcpparmadillo
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('roptim')\""
+      - if: win
+        then: "\"%R%\" -e \"library('roptim')\""
+
+about:
+  license: GPL-2.0-or-later
+  summary: "Perform general purpose optimization in R using C++. A unified wrapper interface is provided to call C functions of the five optimization algorithms ('Nelder-Mead', 'BFGS', 'CG', 'L-BFGS-B' and 'SANN') underlying optim()."
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+  homepage: https://github.com/ypan1988/roptim/
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

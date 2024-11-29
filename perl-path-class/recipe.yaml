@@ -1,0 +1,48 @@
+schema_version: 1
+
+context:
+  name: perl-path-class
+  version: 0.37
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/K/KW/KWILLIAMS/Path-Class-${{ version }}.tar.gz
+  sha256: 654781948602386f2cb2e4473a739f17dc6953d92aabc2498a4ca2561bc248ce
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - perl Build.PL
+    - perl ./Build
+    - perl ./Build test
+    - perl ./Build install --installdirs site
+
+requirements:
+  host:
+    - perl >=5.32
+    - perl-module-build
+  run:
+    - perl >=5.32
+  ignore_run_exports:
+    - perl-module-build
+
+tests:
+  - python:
+      imports:
+        - Path::Class
+        - Path::Class::Dir
+        - Path::Class::Entity
+        - Path::Class::File
+
+about:
+  license: perl_5
+  summary: Cross-platform path specification manipulation
+  homepage: http://metacpan.org/pod/Path-Class
+
+maintainers:
+  - danielnachun
+

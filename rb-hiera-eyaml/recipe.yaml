@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: hiera-eyaml
+  version: 4.1.0
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: 4666d27f300b2b2a32d27ed68eade4734443989e52d40d6622749736b6a5321d
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - rb-highline =2.1
+    - rb-optimist
+    - ruby>=3.2
+
+tests:
+  - script:
+      - "ruby -r hiera/backend/eyaml -e 'exit 0'"
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/LICENSE.txt
+  summary: A backend for Hiera that provides per-value asymmetric encryption of sensitive data
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/voxpupuli/hiera-eyaml
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

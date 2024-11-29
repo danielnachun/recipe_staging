@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: husky.net
+  version: 0.7.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  git: https://github.com/alirezanet/${{ name }}
+  rev: v${{ version }}
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - dotnet
+    - nuget-license
+  run:
+    - dotnet
+
+tests:
+  - script:
+      - Husky --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: Git hooks made easy with Husky.Net internal task runner!
+  homepage: https://github.com/alirezanet/${{ name }}
+  repository: https://github.com/alirezanet/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

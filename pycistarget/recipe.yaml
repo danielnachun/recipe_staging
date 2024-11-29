@@ -1,0 +1,64 @@
+schema_version: 1
+
+context:
+  name: pycistarget
+  version: 1.0.2
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  git: https://github.com/aertslab/pycistarget.git
+  rev: 8cd78f110f4eeeb38d8f7006a1100a13d636d984
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - poetry
+    - python=3.11
+    - setuptools-scm
+    - pip
+  run:
+    - python
+    - ctxcore
+    - ipython
+    - numpy
+    - pandoc
+    - pandas
+    - pyranges
+    - pybiomart
+    - ray-core
+    - scipy
+    - scikit-learn
+    - typing
+    - sphinx_rtd_theme
+    - nbsphinx
+    - nbsphinx-link
+    - numpydoc
+    - typing_extensions
+
+tests:
+  - python:
+      imports:
+        - pycistarget
+  - requirements:
+      run:
+        - pip
+    script:
+      - pycistarget --help
+
+about:
+  summary: the blessed package to manage your versions by scm tags
+  license: Apache-2.0
+  license_file: LICENSE.txt
+  homepage: https://github.com/aertslab/pycistarget
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

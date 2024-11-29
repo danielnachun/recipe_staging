@@ -1,0 +1,54 @@
+schema_version: 1
+
+context:
+  version: 1.7.2
+
+package:
+  name: r-ewastools
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/hhhh5/ewastools/archive/f7646cacd73266708479b3fea5d625054d179f95.zip
+  sha256: baf8616eee3df7a38003d835fc95097410a1d6a768e24a753aa3239e9c967b43
+
+build:
+  number: 0
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+    - bioconductor-illuminaio
+    - r-data.table
+    - r-igraph
+    - r-mblm
+    - r-quadprog
+  run:
+    - r-base>=4.2
+    - bioconductor-illuminaio
+    - r-data.table
+    - r-igraph
+    - r-mblm
+    - r-quadprog
+
+tests:
+  - script:
+      - "$R -e \"library('ewastools')\""
+
+about:
+  license: OTHER
+  summary: Collection of useful functions for working with DNA methylation micro-array data.
+  homepage: https://github.com/hhhh5/ewastools
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

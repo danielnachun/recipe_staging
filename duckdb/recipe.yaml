@@ -1,0 +1,40 @@
+schema_version: 1
+
+context:
+  name: duckdb
+  version: 0.10.2
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  git: https://github.com/duckdb/${{ name }}.git
+  rev: v${{ version }}
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - cmake
+    - ninja
+    - if: linux
+      then: sysroot_linux-64=2.17
+
+tests:
+  - script:
+      - __RECIPE_MANAGER_SUBSTITUTION_MARKER__ --help 2>&1 | grep -q "Usage: "\"duckdb \\\\[OPTIONS\\\\] FILENAME \\\\[SQL\\\\]\\\"\""
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: Embeddable SQL OLAP Database Management System
+  homepage: https://www.duckdb.org
+  repository: https://github.com/duckdb/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

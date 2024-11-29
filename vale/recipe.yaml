@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: vale
+  version: 3.5.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/errata-ai/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: 13a3b0ef4ba9f0e89f663d7f6ba65facd2fca37333e97512c03ac807e413afe0
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - go-cgo=1.22
+    - go-licenses
+    - if: linux
+      then: sysroot_linux-64=2.17
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: Syntax-aware linter for prose
+  homepage: https://docs.errata.ai
+  repository: https://github.com/errata-ai/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

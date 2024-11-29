@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: perl-file-next
+  version: 1.18
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/P/PE/PETDANCE/File-Next-${{ version }}.tar.gz
+  sha256: f900cb39505eb6e168a9ca51a10b73f1bbde1914b923a09ecd72d9c02e6ec2ef
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+tests:
+  - python:
+      imports:
+        - File::Next
+
+about:
+  license: Artistic-2.0
+  summary: File-finding iterator
+  homepage: http://metacpan.org/pod/File-Next
+
+maintainers:
+  - danielnachun
+

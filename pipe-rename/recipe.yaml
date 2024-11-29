@@ -1,0 +1,37 @@
+schema_version: 1
+
+context:
+  name: pipe-rename
+  version: 1.6.5
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/marcusbuffett/${{ name }}/archive/refs/tags/${{ version }}.tar.gz
+  sha256: 41edf419ab3d7b3c16d2efe209b3ca3d3f7104a3365f61fe821a59caac31810b
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - cargo-bundle-licenses
+
+tests:
+  - script:
+      - renamer --help
+
+about:
+  license: MIT
+  summary: Rename your files using your favorite text editor
+  homepage: https://github.com/marcusbuffett/${{ name }}
+  repository: https://github.com/marcusbuffett/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

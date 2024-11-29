@@ -1,0 +1,87 @@
+schema_version: 1
+
+context:
+  version: 0.99.6
+  name: tidytof
+
+package:
+  name: r-${{ name }}
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/keyes-timothy/${{ name }}/archive/4fce362df3f0193b14f263a4788dc2ab0f711bf9.zip
+  sha256: d98cace5d75807afd3565d4964ec5c9eccd4e1ac2861b2e32d1eec43e356a8d4
+
+build:
+  number: 0
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - bioconductor-flowcore
+    - r-base=4.3
+    - r-doparallel
+    - r-dplyr
+    - r-foreach
+    - r-ggplot2
+    - r-ggraph
+    - r-glmnet
+    - r-purrr
+    - r-rcpp
+    - r-rcpphnsw
+    - r-readr
+    - r-recipes
+    - r-rlang
+    - r-stringr
+    - r-survival
+    - r-tibble
+    - r-tidygraph
+    - r-tidyr
+    - r-tidyselect
+    - r-yardstick
+  run:
+    - bioconductor-flowcore
+    - r-base>=4.3
+    - r-doparallel
+    - r-dplyr
+    - r-foreach
+    - r-ggplot2
+    - r-ggraph
+    - r-glmnet
+    - r-purrr
+    - r-rcpp
+    - r-rcpphnsw
+    - r-readr
+    - r-recipes
+    - r-rlang
+    - r-stringr
+    - r-survival
+    - r-tibble
+    - r-tidygraph
+    - r-tidyr
+    - r-tidyselect
+    - r-yardstick
+
+tests:
+  - script:
+      - "$R -e \"library('tidytof')\""
+
+about:
+  license: MIT
+  license_file: LICENSE.md
+  summary: An R package for analyzing high-dimensional cytometry data using the tidyverse.
+  homepage: https://github.com/keyes-timothy/tidytof
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

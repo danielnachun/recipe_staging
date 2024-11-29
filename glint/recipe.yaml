@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: glint
+  version: 1.4.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/typed-ember/${{ name }}/archive/${{ version }}.tar.gz
+  sha256: 19bf1e3dc459a06914f4da38fdc3f44b1e542ec8b06891c539e4040fe37e9412
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+    - yarn
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    # - third-party-licenses.txt
+  summary: TypeScript powered tooling for Glimmer templates
+  homepage: https://github.com/typed-ember/${{ name }}
+  repository: https://github.com/typed-ember/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

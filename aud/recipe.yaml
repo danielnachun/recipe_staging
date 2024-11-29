@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: aud
+  version: 3.0.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/aud/-/aud-${{ version }}.tgz
+  sha256: 98b2316fbc359091d315dc8a717bc6fef2cac9d008016aee2e3c5a5e55444e34
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - "aud 2>&1 | grep -q 'The \"path\" argument must be of type string. Received undefined'"
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Use `npx aud` instead of `npm audit`, whether you have a lockfile or not!
+  homepage: https://github.com/ljharb/aud
+  repository: https://github.com/ljharb/aud
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

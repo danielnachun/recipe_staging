@@ -1,0 +1,40 @@
+schema_version: 1
+
+context:
+  name: luau-lsp
+  version: 1.22.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  git: https://github.com/JohnnyMorganz/${{ name }}
+  rev: ${{ version }}
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - cmake
+    - make
+    - if: linux
+      then: sysroot_linux-64==2.17
+
+tests:
+  - script:
+      - luau-lsp --help
+
+about:
+  license: MIT
+  license_file: LICENSE.md
+  summary: Language Server Implementation for Luau
+  home: https://github.com/JohnnyMorganz/{{ name }}
+  homepage: https://github.com/JohnnyMorganz/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

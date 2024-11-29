@@ -1,0 +1,90 @@
+# Package: wordcloud
+# Type: Package
+# Title: Word Clouds
+# Version: 2.6
+# Author: Ian Fellows
+# Maintainer: Ian Fellows <ian@fellstat.com>
+# Description: Functionality to create pretty word clouds, visualize differences and similarity between documents, and avoid over-plotting in scatter plots with text.
+# License: LGPL-2.1
+# LazyLoad: yes
+# Depends: methods, RColorBrewer
+# Imports: Rcpp (>= 0.9.4)
+# Suggests: tm (>= 0.6), slam
+# URL: http://blog.fellstat.com/?cat=11 http://www.fellstat.com
+# LinkingTo: Rcpp
+# NeedsCompilation: yes
+# Packaged: 2018-08-24 18:57:30 UTC; ianfellows
+# Repository: CRAN
+# Date/Publication: 2018-08-24 19:20:03 UTC
+schema_version: 1
+
+context:
+  version: 2.6
+  posix: "'m2-' if win else ''"
+
+package:
+  name: r-wordcloud
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/wordcloud_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/wordcloud/wordcloud_${{ version }}.tar.gz
+  sha256: 53716954430acd4f164bfd8eacd7068a908ee3358293ded6cd992d53b7f72649
+
+build:
+  number: 5
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: win
+      then: ${{ stdlib("m2w64_c") }}
+    - if: not win
+      then: ${{ compiler('cxx') }}
+    - if: win
+      then: ${{ compiler('m2w64_cxx') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.3
+    - r-rcolorbrewer
+    - r-rcpp >=0.9.4
+  run:
+    - r-base=4.3
+    - r-rcolorbrewer
+    - r-rcpp >=0.9.4
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('wordcloud')\""
+      - if: win
+        then: "\"%R%\" -e \"library('wordcloud')\""
+
+about:
+  license: LGPL-2.1-only
+  summary: |
+    Functionality to create pretty word clouds, visualize differences and similarity between
+    documents, and avoid over-plotting in scatter plots with text.
+  license_file: ${{ env.get("PREFIX") }}/lib/R/share/licenses/LGPL-2.1
+  homepage: http://blog.fellstat.com/?cat=11 http://www.fellstat.com
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

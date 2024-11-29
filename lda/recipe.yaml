@@ -1,0 +1,52 @@
+schema_version: 1
+
+context:
+  name: lda
+  version: 3.0.2
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/lda-${{ version }}.tar.gz
+  sha256: 76fc6fbb066b6d1ec0360a1541c5e1c8b69a728666525e72644c4d5332fc778a
+
+build:
+  number: 0
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+  host:
+    - python ==3.11
+    - poetry-core
+    - cython
+    - meson-python
+    - ninja
+    - pip
+  run:
+    - python ==3.11
+    - numpy >=1.13.0
+
+tests:
+  - python:
+      imports:
+        - lda
+  - requirements:
+      run:
+        - pip
+    script:
+      - pip check
+
+about:
+  summary: Topic modeling with latent Dirichlet allocation
+  license: MPL-2.0
+  license_file: LICENSE
+  documentation: https://pythonhosted.org/lda/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

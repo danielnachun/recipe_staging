@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: cdrtools
+  version: 3.02a09
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://downloads.sourceforge.net/project/${{ name }}/alpha/${{ name }}-${{ version }}.tar.gz
+  sha256: c7e4f732fb299e9b5d836629dadf5512aa5e6a5624ff438ceb1d056f4dcb07c2
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - smake
+  host:
+    - if: osx
+      then: gettext
+  run:
+    - if: osx
+      then: gettext
+
+tests:
+  - script:
+      - cdrecord -version
+      - cdda2wav -version
+
+about:
+  license: CDDL-1.1
+  license_file: COPYING
+  summary: CD/DVD/Blu-ray premastering and recording software
+  homepage: https://cdrtools.sourceforge.io/private/cdrecord.html
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

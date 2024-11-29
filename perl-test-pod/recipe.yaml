@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: perl-test-pod
+  version: 1.52
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/E/ET/ETHER/Test-Pod-${{ version }}.tar.gz
+  sha256: 60a8dbcc60168bf1daa5cc2350236df9343e9878f4ab9830970a5dde6fe8e5fc
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl >=5.32
+  run:
+    - perl >=5.32
+
+tests:
+  - python:
+      imports:
+        - Test::Pod
+
+about:
+  license: perl_5
+  summary: check for POD errors in files
+  homepage: http://search.cpan.org/dist/Test-Pod/
+
+maintainers:
+  - danielnachun
+

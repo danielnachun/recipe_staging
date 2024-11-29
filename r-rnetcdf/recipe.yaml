@@ -1,0 +1,83 @@
+schema_version: 1
+
+context:
+  version: 2.9-2
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-rnetcdf
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/RNetCDF_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/RNetCDF/RNetCDF_${{ version }}.tar.gz
+  sha256: 15759c2ddfb0943c89bf3c9f7349ca29c499707201cc317d238ca7a854d4b331
+
+build:
+  number: 0
+  skip: win
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}grep
+    - ${{ posix }}autoconf
+    - if: not win
+      then: ${{ posix }}automake
+    - if: win
+      then: ${{ posix }}automake-wrapper
+    - ${{ posix }}pkg-config
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+    - libnetcdf
+    - udunits2
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('RNetCDF')\""
+      - if: win
+        then: "\"%R%\" -e \"library('RNetCDF')\""
+
+about:
+  license: GPL-2.0-or-later
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-3
+    - LICENSE
+  summary: "An interface to the 'NetCDF' file formats designed by Unidata for efficient storage of array-oriented scientific data and descriptions. Most capabilities of 'NetCDF' version 4 are supported. Optional conversions of time units are enabled by 'UDUNITS' version 2, also from Unidata."
+  homepage: https://www.unidata.ucar.edu/software/netcdf/
+  repository: https://github.com/mjwoods/RNetCDF
+
+extra:
+  recipe-maintainers:
+    - ocefpaf
+    - marcelotrevisani
+    - conda-forge/r
+

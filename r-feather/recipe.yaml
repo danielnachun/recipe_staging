@@ -1,0 +1,106 @@
+# Package: feather
+# Title: R Bindings to the Feather 'API'
+# Version: 0.3.2
+# Authors@R: c( person("Hadley", "Wickham", , "hadley@rstudio.com", role = c("aut", "cre")), person("RStudio", role = "cph"), person("Feather developers", role = "ctb", comment = "Bundled feather library"), person("Google", role = "ctb", comment = "Bundled flatbuffers code"), person("LevelDB Authors", role = "ctb") )
+# Description: Read and write feather files, a lightweight binary columnar data store designed for maximum speed.
+# Encoding: UTF-8
+# License: Apache License 2.0
+# LazyData: true
+# URL: https://github.com/wesm/feather
+# BugReports: https://github.com/wesm/feather/issues
+# LinkingTo: Rcpp
+# Imports: Rcpp, tibble, hms
+# Suggests: testthat, dplyr
+# SystemRequirements: little-endian platform
+# RoxygenNote: 6.1.1
+# NeedsCompilation: yes
+# Packaged: 2019-01-07 14:30:33 UTC; hadley
+# Author: Hadley Wickham [aut, cre], RStudio [cph], Feather developers [ctb] (Bundled feather library), Google [ctb] (Bundled flatbuffers code), LevelDB Authors [ctb]
+# Maintainer: Hadley Wickham <hadley@rstudio.com>
+# Repository: CRAN
+# Date/Publication: 2019-01-07 21:20:03 UTC
+schema_version: 1
+
+context:
+  version: 0.3.5
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-feather
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/feather_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/feather/feather_${{ version }}.tar.gz
+  sha256: 50ff06d5e24d38b5d5d62f84582861bd353b82363e37623f95529b520504adbf
+
+build:
+  number: 3
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: not win
+      then: ${{ compiler('cxx') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: win
+      then: ${{ compiler('m2w64_cxx') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}grep
+    - ${{ posix }}autoconf
+    - if: not win
+      then: ${{ posix }}automake
+    - if: win
+      then: ${{ posix }}automake-wrapper
+    - ${{ posix }}pkg-config
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+    - r-rcpp
+    - r-hms
+    - r-tibble >=2.0.0
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+    - r-rcpp
+    - r-hms
+    - r-tibble >=2.0.0
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('feather')\""
+      - if: win
+        then: "\"%R%\" -e \"library('feather')\""
+
+about:
+  license: Apache-2.0
+  license_file: LICENSE.txt
+  summary: |
+    Read and write feather files, a lightweight binary columnar data store designed for
+    maximum speed.
+  homepage: https://github.com/wesm/feather
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+    - philip-khor
+

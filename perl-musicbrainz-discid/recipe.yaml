@@ -1,0 +1,49 @@
+# If this is a new build for the same version, increment the build
+# number. If you do not include this key, it defaults to 0.
+# See
+# https://docs.conda.io/projects/conda-build for
+# more information about meta.yaml
+schema_version: 1
+
+context:
+  name: perl-musicbrainz-discid
+  version: 0.06
+  sha256: ba0b6ed09897ff563ba59872ee93715bef37157515b19b7c6d6f286e6548ecab
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/N/NJ/NJH/MusicBrainz-DiscID-0.06.tar.gz
+  sha256: ${{ sha256 }}
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+    - pkg-config
+  # Run exports are used now
+  host:
+    - libdiscid
+    - perl>=5.32
+  run:
+    - libdiscid
+    - perl
+  run_exports:
+    weak:
+      - ${{ name }} =${{ version }}
+
+tests:
+  - python:
+      imports:
+        - MusicBrainz::DiscID
+
+about:
+  license: mit
+  summary: Perl interface for the MusicBrainz libdiscid library
+  homepage: http://metacpan.org/pod/MusicBrainz-DiscID
+

@@ -1,0 +1,58 @@
+schema_version: 1
+
+context:
+  name: go-archiver
+  version: 3.5.1
+  sha256: b69a76f837b6cc1c34c72ace16670360577b123ccc17872a95af07178e69fbe7
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/mholt/archiver/archive/v${{ version }}.tar.gz
+  sha256: ${{ sha256 }}
+
+build:
+  number: 0
+  prefix_detection:
+    ignore_binary_files: false
+  dynamic_linking:
+    binary_relocation: false
+
+requirements:
+  build:
+    - git
+    - go
+    - go-licenses
+
+tests:
+  - script:
+      - if: unix
+        then: test -f $PREFIX/bin/arc
+      - if: unix
+        then: arc -h || true
+      - if: win
+        then: "if not exist \"%LIBRARY_BIN%\\\\arc.exe\" exit 1"
+      - if: win
+        then: arc -h || exit 0
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: Make and extract common archive formats such as .zip, and .tar.gz
+  description: |
+    Easily create and extract .zip, .tar, .tar.gz, .tar.bz2, .tar.xz,
+    .tar.lz4, .tar.sz, and .rar (extract-only) files with Go. Package
+    archiver makes it trivially easy to make and extract common archive
+    formats. Simply name the input and output file(s). Files are put into the
+    root of the archive; directories are recursively added, preserving
+    structure.
+  homepage: https://github.com/mholt/archiver
+  repository: https://github.com/mholt/archiver
+  documentation: https://godoc.org/github.com/mholt/archiver
+
+extra:
+  recipe-maintainers:
+    - nehaljwani
+

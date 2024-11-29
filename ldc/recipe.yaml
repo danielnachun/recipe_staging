@@ -1,0 +1,71 @@
+schema_version: 1
+
+context:
+  name: ldc
+  version: 1.38.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  - url: https://github.com/ldc-developers/ldc/releases/download/v${{ version }}/ldc-${{ version }}-src.tar.gz
+    sha256: ca6238efe022e34cd3076741f8a070c6a377196351c61949a48a48c99379f38e  # [unix]
+  - url: https://github.com/ldc-developers/ldc/releases/download/v${{ version }}/ldc2-${{ version }}-osx-arm64.tar.xz
+    sha256: bfcad81853462a1308c045f1c82b641c3ac007000c5f7de269172067e60a6dea  # [build_platform == "osx-arm64"]
+    target_directory: binary
+  - url: https://github.com/ldc-developers/ldc/releases/download/v${{ version }}/ldc2-${{ version }}-osx-x86_64.tar.xz
+    sha256: d52e1bc5634f045528083d5088b8cfb936b5ab9c041aaaa604902dbf82eef76b  # [build_platform == "osx-64"]
+    target_directory: binary
+
+build:
+  number: 0
+  skip: win and vc<14
+
+requirements:
+  build:
+    - if: unix
+      then: ${{ compiler('c') }}
+    - if: unix
+      then: ${{ compiler('cxx') }}
+    - if: unix
+      then: git
+    - if: unix
+      then: cmake
+    - if: unix
+      then: make
+    - if: unix
+      then: ninja
+    - if: win
+      then: 7za
+  host:
+    - if: unix
+      then: libconfig
+    - if: unix
+      then: curl
+    - if: unix
+      then: clangdev =16
+    - if: unix
+      then: llvmdev =16
+    - if: unix
+      then: llvm =16
+
+tests:
+  - script:
+      - ldc2 --version
+
+about:
+  license: BSD, MIT, LDC
+  license_file: LICENSE
+  summary: The LLVM-based D Compiler
+  description: |
+    The LDC project provides a portable D programming language compiler with modern optimization and code generation capabilities.
+    The compiler uses the official DMD frontend to support the latest version of D2, and relies on the LLVM Core libraries for code generation.
+  homepage: https://github.com/ldc-developers/ldc
+  repository: https://github.com/ldc-developers/ldc
+  documentation: https://wiki.dlang.org/LDC
+
+extra:
+  recipe-maintainers:
+    - brainstorm
+

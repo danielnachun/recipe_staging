@@ -1,0 +1,40 @@
+schema_version: 1
+
+context:
+  name: awk-language-server
+  version: 0.10.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/awk-language-server/-/${{ name }}-${{ version }}.tgz
+  sha256: 50ca8ef6aca2b91fc88f73f94926244af60894406690f669797129d6447c91dc
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - make
+    - nodejs
+    - python
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  summary: Language Server for AWK
+  homepage: https://github.com/Beaglefoot/${{ name }}
+  repository: https://github.com/Beaglefoot/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

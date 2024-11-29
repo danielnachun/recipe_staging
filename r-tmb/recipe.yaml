@@ -1,0 +1,80 @@
+schema_version: 1
+
+context:
+  version: 1.9.10
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-tmb
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/TMB_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/TMB/TMB_${{ version }}.tar.gz
+  sha256: 91dfae2d28f51bc1f85cdcd376c18800203354fceb5146e072087561fb2783b1
+
+build:
+  number: 0
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: not win
+      then: ${{ compiler('cxx') }}
+    - if: win
+      then: ${{ compiler('m2w64_cxx') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+    - if: linux
+      then: libgomp
+    - if: osx
+      then: llvm-openmp
+  host:
+    - libblas
+    - liblapack
+    - r-base=4.2
+    - r-matrix >=1.0_12
+    - r-rcppeigen
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+    - r-matrix >=1.0_12
+    - r-rcppeigen
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('TMB')\""
+      - if: win
+        then: "\"%R%\" -e \"library('TMB')\""
+
+about:
+  license: GPL-2.0-only
+  summary: "With this tool, a user should be able to quickly implement complex random effect models through simple C++ templates. The package combines 'CppAD' (C++ automatic differentiation), 'Eigen' (templated matrix-vector library) and 'CHOLMOD' (sparse matrix routines available from R) to obtain an efficient implementation::
+    of the applied Laplace approximation with exact derivatives. Key features are: "Automatic sparseness detection, parallelism through 'BLAS' and parallel user templates.\""
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+  homepage: http://tmb-project.org
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

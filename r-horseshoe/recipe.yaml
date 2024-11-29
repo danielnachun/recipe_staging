@@ -1,0 +1,57 @@
+schema_version: 1
+
+context:
+  version: 0.2.0
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-horseshoe
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/horseshoe_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/horseshoe/horseshoe_${{ version }}.tar.gz
+  sha256: 6c647314149e9862cfeb6e37408379772f88f11c2c0972847bf5c2f994e113e2
+
+build:
+  number: 0
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+  run:
+    - r-base>=4.2
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('horseshoe')\""
+      - if: win
+        then: "\"%R%\" -e \"library('horseshoe')\""
+
+about:
+  license: GPL-3.0-or-later
+  summary: |
+    Contains functions for applying the horseshoe prior to high- dimensional linear regression,
+    yielding the posterior mean and credible intervals, amongst other things. The key
+    parameter tau can be equipped with a prior or estimated via maximum marginal likelihood
+    estimation (MMLE). The main function, horseshoe, is for linear regression. In addition,
+    there are functions specifically for the sparse normal means problem, allowing for
+    faster computation of for example the posterior mean and posterior variance. Finally,
+    there is a function available to perform variable selection, using either a form
+    of thresholding, or credible intervals.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-3
+  homepage: https://CRAN.R-project.org/package=horseshoe
+

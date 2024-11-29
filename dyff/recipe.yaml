@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: dyff
+  version: 1.9.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/homeport/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: 3a6842d46d2cd71b24d7e11096786da4d7574535674428975bd4d2cad0e6e0b7
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('go-nocgo') }}
+    - go-licenses
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: /ˈdʏf/ - diff tool for YAML files, and sometimes JSON
+  homepage: https://github.com/homeport/${{ name }}
+  repository: https://github.com/homeport/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

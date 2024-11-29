@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: perl-devel-callsite
+  version: 1.0.1
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/R/RO/ROCKY/Devel-Callsite-${{ version }}.tar.gz
+  sha256: 766728bfc1456fd348d7224a06a2f040a2120a009e8420246860ad492bb37772
+
+build:
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+    - sed
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+tests:
+  - python:
+      imports:
+        - Devel::Callsite
+
+about:
+  license: perl_5
+  summary: Get caller return OP address and Perl interpreter context
+  homepage: http://metacpan.org/pod/Devel-Callsite
+

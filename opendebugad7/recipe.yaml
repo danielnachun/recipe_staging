@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: opendebugad7
+  version: 1.19.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version | replace('-', '_') }}
+
+source:
+  url: https://github.com/microsoft/MIEngine/archive/v${{ version }}.tar.gz
+  sha256: 2ccda6fd737f76519265752265ade8217a742f528f45a0033df2b9cabf0de9d4
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - sed
+  host:
+    - dotnet
+    - nuget-license
+  run:
+    - dotnet
+
+tests:
+  - script:
+      - "OpenDebugAD7 --help 2>&1 | grep -q \"OpenDebugAD7\""
+
+about:
+  license: MIT
+  license_file:
+    - License.txt
+    - license-files/
+  summary: An adaptation layer between the Debug Adapter Protocol and debug engines.
+  homepage: https://github.com/microsoft/MIEngine
+  repository: https://github.com/microsoft/MIEngine
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

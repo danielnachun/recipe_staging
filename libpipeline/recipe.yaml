@@ -1,0 +1,38 @@
+schema_version: 1
+
+context:
+  name: libpipeline
+  version: 1.5.7
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://download.savannah.nongnu.org/releases/${{ name }}/${{ name }}-${{ version }}.tar.gz
+  sha256: b8b45194989022a79ec1317f64a2a75b1551b2a55bea06f67704cb2a2e4690b0
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+
+tests:
+  - script:
+      - if: not win
+        then: test -f $PREFIX/lib/libpipeline${SHLIB_EXT}
+
+about:
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  summary: C library for manipulating pipelines of subprocesses
+  homepage: https://libpipeline.gitlab.io/libpipeline
+  repository: https://libpipeline.gitlab.io/libpipeline
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

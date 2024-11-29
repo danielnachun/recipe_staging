@@ -1,0 +1,89 @@
+schema_version: 1
+
+context:
+  version: 1.0.19
+
+package:
+  name: r-massdataset
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/tidymass/massdataset/archive/fb07111c086961b571f567059e6673d12d838df5.zip
+  sha256: 8f994f6ca028f144c69d8d43dc0c7be3ed25fc8e729ea59d091922f2efd3a708
+
+build:
+  number: 0
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base==4.2
+    - r-dplyr
+    - r-magrittr
+    - r-tibble
+    - r-stringr
+    - r-rstudioapi
+    - r-ggplot2
+    - r-openxlsx
+    - r-crayon
+    - r-cli
+    - r-plotly
+    - r-purrr
+    - r-readr
+    - r-rlang
+    - r-masstools
+    - bioconductor-complexheatmap
+    - r-ggplotify
+    - r-tidyselect
+    - r-vctrs
+    - r-tidyr
+    - bioconductor-summarizedexperiment
+    - bioconductor-s4vectors
+  run:
+    - r-base>=4.2
+    - r-dplyr
+    - r-magrittr
+    - r-tibble
+    - r-stringr
+    - r-rstudioapi
+    - r-ggplot2
+    - r-openxlsx
+    - r-crayon
+    - r-cli
+    - r-plotly
+    - r-purrr
+    - r-readr
+    - r-rlang
+    - r-masstools
+    - bioconductor-complexheatmap
+    - r-ggplotify
+    - r-tidyselect
+    - r-vctrs
+    - r-tidyr
+    - bioconductor-summarizedexperiment
+    - bioconductor-s4vectors
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('massdataset')\""
+      - if: win
+        then: "\"%R%\" -e \"library('massdataset')\""
+
+about:
+  license: GPL-3.0-or-later
+  summary: massdata provide a uniform and stanford data structure of mass spectrometry experimental data.
+  homepage: https://gitlab.com/tidymass/massdataset
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

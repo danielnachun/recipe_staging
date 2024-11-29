@@ -1,0 +1,55 @@
+schema_version: 1
+
+context:
+  name: setuptools-generate
+  version: 0.0.6
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/setuptools-generate-${{ version }}.tar.gz
+  sha256: 6e23241d9ecfdfddf9e50a495f3092b60be3ca6f4a5e116c8c3e7f2b646ba725
+
+build:
+  number: 0
+  skip: match(python, "<3.9")
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python >=3.9
+    - setuptools-scm >=6.2
+    - pip
+  run:
+    - python >=3.9
+    - click
+    - python-help2man
+    - markdown-it-py
+    - setuptools
+    - shtab
+    - if: match(python, "<3.11")
+      then: tomli >=1.0.0
+
+tests:
+  - python:
+      imports:
+        - setuptools_generate
+  - requirements:
+      run:
+        - pip
+    script:
+      - pip check
+
+about:
+  summary: Generate shell completions and man page when building a python package.
+  license: GPL-3.0
+  license_file: LICENSE
+  repository: https://github.com/Freed-Wu/setuptools-generate
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

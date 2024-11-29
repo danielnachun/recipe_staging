@@ -1,0 +1,63 @@
+schema_version: 1
+
+context:
+  name: findutils
+  version: 4.10.0
+  sha256: 1387e0b67ff247d2abde998f90dfbf70c1491391a59ddfecb8ae698789f0a4f5
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://ftp.gnu.org/gnu/${{ name }}/${{ name }}-${{ version }}.tar.xz
+  sha256: ${{ sha256 }}
+  file_name: ${{ name }}-${{ version }}.tar.xz
+
+build:
+  number: 0
+  skip: win
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+    - gettext
+    - autoconf
+    - automake
+    - texinfo
+  run:
+    - gettext
+
+tests:
+  - script:
+      - find --version
+      - find --help
+      - locate --version
+      - locate --help
+      - updatedb --version
+      - updatedb --help
+      - xargs --version
+      - xargs --help
+
+about:
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  summary: |
+    The GNU Find Utilities are the basic directory searching utilities of
+    the GNU operating system.
+  description: |
+    The GNU Find Utilities are the basic directory searching utilities of
+    the GNU operating system. These programs are typically used in conjunction
+    with other programs to provide modular and powerful directory search and
+    file locating capabilities to other commands.
+
+  homepage: https://www.gnu.org/software/findutils/
+  repository: http://savannah.gnu.org/projects/findutils/
+  documentation: https://www.gnu.org/software/findutils/manual/find.html
+
+extra:
+  recipe-maintainers:
+    - karl616
+    - jonashaag
+

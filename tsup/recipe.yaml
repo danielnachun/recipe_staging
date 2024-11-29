@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: tsup
+  version: 8.2.4
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/${{ name }}/-/${{ name }}-${{ version }}.tgz
+  sha256: 146d68bfc4aae179c4a3307a5e343d185c1e1229f15ae84e1320f29e01d6c440
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: The simplest and fastest way to bundle your TypeScript libraries.
+  homepage: https://github.com/egoist/${{ name }}
+  repository: https://github.com/egoist/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

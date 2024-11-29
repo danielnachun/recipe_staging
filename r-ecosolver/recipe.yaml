@@ -1,0 +1,69 @@
+schema_version: 1
+
+context:
+  version: 0.5.5
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-ecosolver
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/ECOSolveR_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/ECOSolveR/ECOSolveR_${{ version }}.tar.gz
+  sha256: 2594ed1602b2fe159cc9aff3475e9cba7c1927b496c3daeabc1c0d227943ecc7
+
+build:
+  number: 1
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('ECOSolveR')\""
+      - if: win
+        then: "\"%R%\" -e \"library('ECOSolveR')\""
+
+about:
+  license: GPL-3.0-or-later
+  summary: |
+    R interface to the Embedded COnic Solver (ECOS), an efficient and robust C library for convex problems. Conic and equality constraints can be specified in addition to integer and boolean variable constraints for mixed-integer problems. This R interface is inspired by the python interface and has similar calling
+    conventions.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-3
+  homepage: https://bnaras.github.io/ECOSolveR/
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

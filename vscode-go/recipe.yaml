@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: vscode-go-debug-adapter
+  version: 0.41.4
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/golang/vscode-go/archive/v${{ version }}.tar.gz
+  sha256: 6c6642600c26b5701014f22d4ebff2069318f8bee27c1eac2c7edccea473cd57
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - nodejs
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - test -f ${PREFIX}/bin/vscode-go-debug-adapter
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: Go extension for Visual Studio Code
+  homepage: https://github.com/golang/vscode-go
+  repository: https://github.com/golang/vscode-go
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

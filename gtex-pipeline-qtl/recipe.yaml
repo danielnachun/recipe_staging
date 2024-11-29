@@ -1,0 +1,79 @@
+schema_version: 1
+
+context:
+  name: gtex-pipeline-qtl
+  version: gtex_v8
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/broadinstitute/gtex-pipeline/archive/bed31e12a48b25db8b111252e2136b31c64c9e82.zip
+  sha256: 78a2a157eb059f6c5ac96ff0c68cc2f3fa1737d2c2f5d5b8545021f705c6174c
+
+build:
+  number: 1
+  noarch: generic
+
+requirements:
+  build:
+    - sed
+  run:
+    - python >=3.6
+    - numpy >=1.26
+    - pytables
+    - pandas
+    - scipy
+    - matplotlib-base
+    - h5py
+    - pysam
+    - statsmodels
+    - scikits-bootstrap
+    - scikit-learn
+    - qtl
+    - pybigwig
+    #- r-argparser
+    #- r-dplyr
+    #- r-foreach
+    #- r-leafcutter
+    #- bioconductor-qvalue
+    #- bioconductor-sva
+    #- bioconductor-edgeR
+    #- gatk
+    #- tensorqtl
+    #- htslib
+    #- bcftools
+    #- samtools
+    #- plink
+    #- metasoft
+    #- torus
+    #- afc
+
+tests:
+  - script:
+      - ase_aggregate_by_individual.py -h
+      - ase_calculate_lamp.py -h
+      - cluster_prepare_fastqtl.py -h
+      - combine_covariates.py -h
+      - combine_signif_pairs.py -h
+      - convert_vep.py -h
+      - eqtl_prepare_expression.py -h
+      - test -f ${PREFIX}/bin/map_clusters_to_genes.R
+      - metasoft_postprocess.py -h
+      - metasoft_prepare_input.py -h
+      - run_GATK_ASEReadCounter.py -h
+      - test -f ${PREFIX}/bin/run_PEER.R
+      - run_metasoft.py -h
+      - run_torus.py -h
+
+about:
+  license: OTHER
+  summary: GTEx & TOPMed data production and analysis pipelines - QTL component
+  homepage: https://github.com/broadinstitute/gtex-pipeline
+  repository: https://github.com/broadinstitute/gtex-pipeline
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

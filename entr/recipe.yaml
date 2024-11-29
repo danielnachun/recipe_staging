@@ -1,0 +1,37 @@
+schema_version: 1
+
+context:
+  name: entr
+  version: 5.5
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://eradman.com/entrproject/code/${{ name }}-${{ version }}.tar.gz
+  sha256: 128c0ce2efea5ae6bd3fd33c3cd31e161eb0c02609d8717ad37e95b41656e526
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+
+tests:
+  - script:
+      - entr 2>&1 | grep -q "usage: "entr \\[-acdnprsz\\]\""
+
+about:
+  license: ISC
+  license_file: LICENSE
+  summary: Run arbitrary commands when files change
+  homepage: https://eradman.com/entrproject/
+  repository: https://github.com/eradman/entr
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

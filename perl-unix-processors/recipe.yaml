@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: perl-unix-processors
+  version: 2.046
+  sha256_hash: 3973ebdc44682c9c15c776f66e8be242cb4ff1dd52caf43ff446b74d4dccca06
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/W/WS/WSNYDER/Unix-Processors-${{ version }}.tar.gz
+  sha256: ${{ sha256_hash }}
+
+build:
+  number: 1001
+  skip: win
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+tests:
+  - python:
+      imports:
+        - Unix::Processors
+
+about:
+  license: perl_5
+  summary: Interface to processor (CPU) information
+  homepage: https://metacpan.org/pod/Unix::Processors
+
+extra:
+  recipe-maintainers:
+    - xileF1337
+

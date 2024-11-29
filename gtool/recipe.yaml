@@ -1,0 +1,34 @@
+schema_version: 1
+
+context:
+  name: gtool
+  version: 0.7.5
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://www.well.ox.ac.uk/~cfreeman/software/gwas/${{ name }}_v${{ version}}_x86_64.tgz
+  sha256: e02c1b989fe73d54533f539c5d8787f56656ad568eb56fd0bf2ce6cc95834acd
+
+build:
+  number: 0
+  skip: not linux
+  script:
+    - install -Dm 755 gtool ${PREFIX}/bin/gtool
+
+tests:
+  - script:
+      - ${{ name }} 2>&1 | grep -q "Gtool v${{ version }} - Data Transformation"
+
+about:
+  license: Proprietary
+  license_file: LICENCE
+  summary: GTOOL is a program for transforming sets of genotype data for use with the programs SNPTEST and IMPUTE.
+  homepage: https://www.well.ox.ac.uk/~cfreeman/software/gwas/gtool.html
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

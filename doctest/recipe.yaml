@@ -1,0 +1,48 @@
+schema_version: 1
+
+context:
+  name: doctest
+  version: 0.22.9
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/sol/${{ name }}/archive/${{ version }}.tar.gz
+  sha256: 458e9e885cf37b5ef07ae276572ce220843e4654d59b024ed42813acc7f0b681
+
+build:
+  number: 0
+  skip: not unix
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cabal-install
+    - cabal-plan
+    - ghc
+  host:
+    - if: osx
+      then: libiconv
+  host:
+    - libiconv  #[osx]
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: "An implementation of Python's doctest for Haskell"
+  homepage: https://github.com/sol/${{ name }}
+  repository: https://github.com/sol/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

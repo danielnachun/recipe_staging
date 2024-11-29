@@ -1,0 +1,56 @@
+schema_version: 1
+
+context:
+  name: perl-toml-parser
+  version: 0.91
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/K/KA/KARUPA/TOML-Parser-${{ version }}.tar.gz
+  sha256: 2a8513b904e377e0cae726910be676f4ff96bd960001c358dd66dc7c37aa9a8e
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - perl Build.PL
+    - perl ./Build
+    - perl ./Build test
+    - perl ./Build install --installdirs site
+
+requirements:
+  host:
+    - perl >=5.32
+    - perl-common-sense
+    - perl-module-build-tiny
+    - perl-test-deep
+    - perl-test-deep-fuzzy
+    - perl-types-serialiser
+  run:
+    - perl >=5.32
+    - perl-common-sense
+    - perl-types-serialiser
+  ignore_run_exports:
+    - perl-module-build-tiny
+    - perl-test-deep
+    - perl-test-deep-fuzzy
+
+tests:
+  - python:
+      imports:
+        - TOML::Parser
+        - TOML::Parser::Tokenizer
+        - TOML::Parser::Tokenizer::Strict
+        - TOML::Parser::Util
+
+about:
+  license: perl_5
+  summary: simple toml parser
+  homepage: https://github.com/karupanerura/TOML-Parser
+
+maintainers:
+  - danielnachun
+

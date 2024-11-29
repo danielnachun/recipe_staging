@@ -1,0 +1,38 @@
+schema_version: 1
+
+context:
+  name: yaml-language-server
+  version: 1.15.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/yaml-language-server/-/${{ name }}-${{ version }}.tgz
+  sha256: b93db2a985437355eb124d44ae60c0569f22cf19473eb0b6f41b8b0d7af579bd
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - nodejs
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - test -f ${PREFIX}/bin/${{ name }}
+
+about:
+  license: MIT
+  summary: Language Server for Yaml Files
+  homepage: https://github.com/redhat-developer/${{ name }}
+  repository: https://github.com/redhat-developer/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

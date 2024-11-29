@@ -1,0 +1,83 @@
+# Package: GWASExactHW
+# Type: Package
+# Title: Exact Hardy-Weinburg testing for Genome Wide Association Studies
+# Version: 1.01
+# Date: 2013-01-04
+# Author: Ian Painter, University of Washington
+# Maintainer: Ian Painter <ipainter@u.washington.edu>
+# Description: This package contains a function to do exact Hardy-Weinburg testing (using Fisher's test) for SNP genotypes as typically obtained in a Genome Wide Association Study (GWAS).
+# License: GPL-3
+# LazyLoad: yes
+# Packaged: 2013-01-04 20:44:17 UTC; ian
+# Repository: CRAN
+# Date/Publication: 2013-01-05 08:54:06
+# NeedsCompilation: yes
+schema_version: 1
+
+context:
+  version: 1.01
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-gwasexacthw
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/GWASExactHW_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/GWASExactHW/GWASExactHW_${{ version }}.tar.gz
+  sha256: e850ed40fbf14b02eb3798603cfb111fe3718bb69d74c0ff4cb6f679209a15a7
+
+build:
+  number: 3
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: win
+      then: ${{ posix }}zip
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+  host:
+    - r-base=4.2
+  run:
+    - r-base>=4.2
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('GWASExactHW')\""
+      - if: win
+        then: "\"%R%\" -e \"library('GWASExactHW')\""
+
+about:
+  license: GPL-3.0-only
+  summary: |
+    This package contains a function to do exact Hardy-Weinburg testing (using Fisher's
+    test) for SNP genotypes as typically obtained in a Genome Wide Association Study
+    (GWAS).
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-3
+  homepage: https://CRAN.R-project.org/package=GWASExactHW
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+    - jenzopr
+

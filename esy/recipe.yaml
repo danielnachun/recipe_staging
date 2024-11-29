@@ -1,0 +1,59 @@
+schema_version: 1
+
+context:
+  name: esy
+  version: 0.7.2
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  git: https://github.com/esy/${{ name }}
+  rev: ${{ version }}
+
+build:
+  number: 0
+  skip: win
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - if: linux
+      then: binutils
+    - if: linux
+      then: gcc
+    - if: linux
+      then: gxx
+    - if: linux
+      then: sysroot_linux-64=2.17
+    - bzip2
+    - zlib
+    - make
+    - odig
+    - opam
+    - pkg-config
+  host:
+    - bzip2
+    - zlib
+
+tests:
+  - script:
+      - ${{ name }} &
+      - exe_pid=$!
+      - "trap \"kill -SIGTERM ${exe_pid}\" SIGTERM"
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: package.json workflow for native development with Reason/OCaml
+  homepage: https://github.com/esy/${{ name }}
+  repository: https://github.com/esy/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

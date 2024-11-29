@@ -1,0 +1,47 @@
+schema_version: 1
+
+context:
+  name: reek
+  version: 6.1.4
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: 9966969b8480ed343d89397a4399c20b26588fb053753982215fdad7f652d08a
+
+build:
+  number: 2
+  noarch: generic
+
+requirements:
+  build:
+    - sed
+  host:
+    - kwalify
+    - rb-parser
+    - rb-rainbow
+    - ruby
+  run:
+    - kwalify
+    - rb-parser
+    - rb-rainbow
+    - ruby
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/License.txt
+  summary: Reek is a tool that examines Ruby classes, modules and methods and reports any code smells it finds.
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/troessner/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

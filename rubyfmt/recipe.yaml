@@ -1,0 +1,49 @@
+schema_version: 1
+
+context:
+  name: rubyfmt
+  version: 0.10.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  git: https://github.com/fables-tales/${{ name }}
+  rev: v${{ version }}
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - autoconf
+    - automake
+    - if: linux
+      then: binutils
+    - bison
+    - cargo-bundle-licenses
+    - make
+    - ruby
+  run:
+    - ruby
+
+tests:
+  - script:
+      - rubyfmt-main --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Ruby autoformatter
+  homepage: https://github.com/fables-tales/${{ name }}
+  repository: https://github.com/fables-tales/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

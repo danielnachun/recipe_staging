@@ -1,0 +1,45 @@
+schema_version: 1
+
+context:
+  name: coffeesense-language-server
+  version: 1.15.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/${{ name }}/-/${{ name }}-${{ version }}.tgz
+  sha256: 9df86df6e90dce25d1906c33c4c0d6a0a73bea1e011028a699c08b832560f739
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} &
+      - exe_pid=$!
+      - "trap \"kill -SIGTERM ${exe_pid}\" SIGTERM"
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: IntelliSense for CoffeeScript. LSP implementation / VSCode extension
+  homepage: https://github.com/phil294/${{ name }}
+  repository: https://github.com/phil294/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

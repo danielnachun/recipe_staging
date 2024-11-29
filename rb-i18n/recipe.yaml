@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: i18n
+  version: 1.14.1
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: 9d03698903547c060928e70a9bc8b6b87fda674453cda918fc7ab80235ae4a61
+
+build:
+  number: 1
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - rb-concurrent-ruby
+    - ruby >=3.2
+  run:
+    - rb-concurrent-ruby
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/MIT-LICENSE
+  summary: New wave Internationalization support for Ruby.
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/ruby-i18n/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: puppetfile-resolver
+  version: 0.6.3
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: d54695251bb62ca033d10bba2d9d91243fff474265d4979f2783259a974634ce
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - rb-molinillo
+    - rb-semantic_puppet
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: Apache-2.0
+  license_file: ${{ name }}-${{ version }}/LICENSE
+  summary: Resolves the Puppet Modules in a Puppetfile with a full dependency graph, including Puppet version checks.
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/puppetlabs/puppetfile-resolver
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

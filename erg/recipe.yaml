@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: erg
+  version: 0.6.37
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/erg-lang/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: 8c5afca7a93c0834344f8d472b48f0076c0185e33621302b2999bed6703f188e
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - cargo-bundle-licenses
+    - python
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: Apache-2.0 or MIT
+  license_file:
+    - LICENSE-APACHE
+    - LICENSE-MIT
+    - THIRDPARTY.yml
+  summary: Statically typed language that can deeply improve the Python ecosystem
+  homepage: https://github.com/erg-lang/${{ name }}
+  repository: https://github.com/erg-lang/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

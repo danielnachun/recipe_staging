@@ -1,0 +1,45 @@
+schema_version: 1
+
+context:
+  name: oil
+  version: 0.22.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://www.oilshell.org/download/${{ name }}-${{ version }}.tar.gz
+  sha256: 69b3f66d2d54059513355522198365038629eb5961216cd8481686cf818a7131
+
+build:
+  number: 0
+  dynamic_linking:
+    binary_relocation: false
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - if: linux
+      then: binutils
+    - if: linux
+      then: gcc
+    - make
+  host:
+    - readline
+
+tests:
+  - script:
+      - osh --help
+
+about:
+  license: Apache-2.0
+  license_file: LICENSE.txt
+  summary: Bash-compatible Unix shell with more consistent syntax and semantics
+  homepage: https://www.oilshell.org
+  repository: https://github.com/oilshell/oil
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

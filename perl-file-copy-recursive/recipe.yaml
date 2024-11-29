@@ -1,0 +1,55 @@
+schema_version: 1
+
+context:
+  name: perl-file-copy-recursive
+  version: 0.45
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/D/DM/DMUEY/File-Copy-Recursive-${{ version }}.tar.gz
+  sha256: d3971cf78a8345e38042b208bb7b39cb695080386af629f4a04ffd6549df1157
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl >=5.32
+    - perl-test-warnings
+    - perl-test-deep
+    - perl-test-fatal
+    - perl-test-file
+    - perl-path-tiny
+  run:
+    - perl >=5.32
+    - perl-path-tiny
+  ignore_run_exports:
+    - perl-test-warnings
+    - perl-test-deep
+    - perl-test-fatal
+    - perl-test-file
+
+tests:
+  - python:
+      imports:
+        - File::Copy::Recursive
+
+about:
+  license: perl_5
+  summary: Perl extension for recursively copying files and directories
+  homepage: http://metacpan.org/pod/File-Copy-Recursive
+
+maintainers:
+  - danielnachun
+

@@ -1,0 +1,49 @@
+schema_version: 1
+
+context:
+  name: perl-role-hooks
+  version: 0.008
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/T/TO/TOBYINK/Role-Hooks-${{ version }}.tar.gz
+  sha256: 28d66ea0a8dc306b76da83ff0879493d808f73185bcf9c4ed372f3946fb543ec
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-class-method-modifiers >=2.13,<2.14
+    - perl-test-requires
+  run:
+    - perl>=5.32
+    - perl-class-method-modifiers
+  ignore_run_exports:
+    - perl-test-requires
+
+tests:
+  - python:
+      imports:
+        - Role::Hooks
+
+about:
+  license: perl_5
+  summary: role callbacks
+  homepage: https://metacpan.org/release/Role-Hooks
+
+maintainers:
+  - danielnachun
+

@@ -1,0 +1,60 @@
+schema_version: 1
+
+context:
+  version: 1.0.0
+
+package:
+  name: r-mr-apss
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/YangLabHKUST/MR-APSS/archive/refs/tags/V${{ version }}.tar.gz
+  sha256: cf784a9f0f86d1220076532f2f14cfe8d18b583220b2bb234ae55786d2123ebe
+
+build:
+  number: 0
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+    - r-dplyr
+    - r-expm
+    - r-ggnewscale
+    - r-ggplot2
+    - r-ieugwasr
+    - r-magrittr
+    - r-readr
+  run:
+    - r-base>=4.2
+    - r-dplyr
+    - r-expm
+    - r-ggnewscale
+    - r-ggplot2
+    - r-ieugwasr
+    - r-magrittr
+    - r-readr
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('MRAPSS')\""
+
+about:
+  license: Unspecified
+  summary: Mendelian Randomization accounting for Pleiotropy and Sample Structure using genome-wide summary statistics
+  homepage: https://github.com/YangLabHKUST/MR-APSS
+  repository: https://github.com/YangLabHKUST/MR-APSS
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

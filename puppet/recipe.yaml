@@ -1,0 +1,52 @@
+schema_version: 1
+
+context:
+  name: puppet
+  version: 8.8.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: 51733019f7f40fc985f916e89b289c481718c1a4a75edaba8b2dda61d5c4526c
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies --bindir=${PREFIX}/bin ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - rb-concurrent-ruby
+    - rb-deep_merge
+    - rb-facter
+    - rb-fast_gettext
+    - rb-getoptlong
+    - rb-locale
+    - rb-multi_json
+    - rb-puppet-resource_api
+    - rb-scanf
+    - rb-semantic_puppet
+    - ruby>=3.2
+
+tests:
+  - script:
+      - puppet --help
+
+about:
+  license: Apache-2.0
+  license_file: ${{ name }}-${{ version }}/LICENSE
+  summary: Server automation framework and application
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/puppetlabs/puppet
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

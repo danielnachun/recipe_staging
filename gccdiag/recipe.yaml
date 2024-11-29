@@ -1,0 +1,45 @@
+schema_version: 1
+
+context:
+  name: gccdiag
+  version: 0.2.6
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://gitlab.com/api/v4/projects/28532726/packages/generic/${{ name }}/${{ version }}/${{ name }}-${{ version }}.tar.gz
+  sha256: 9902fd4c612eb8323dabd8f1bc324bb0c1a32a07aaac3ce515a85f108115e936
+  patches:
+    - 0001-add-def.patch
+
+build:
+  number: 1
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - cmake
+    - make
+    - taywee-args
+  host:
+    - boost-cpp
+  run:
+    - libboost
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  summary: Utility to get GCC diagnostics for a file, with flags from compilation database
+  homepage: https://gitlab.com/andrejr/${{ name }}
+  repository: https://gitlab.com/andrejr/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

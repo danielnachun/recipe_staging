@@ -1,0 +1,78 @@
+schema_version: 1
+
+context:
+  name: mysql-connector-c
+  version: 6.1.11
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://dev.mysql.com/get/Downloads/Connector-C/${{ name|lower }}-${{ version }}-src.tar.gz
+  url: https://dev.mysql.com/get/Downloads/Connector-C/{{ name|lower }}-{{ version }}-src.zip  # [win]
+  sha256: ${{ sha256 }}
+  file_name: ${{ name }}-${{ version }}.tar.gz
+  patches:
+    - if: win and vc<14
+      then: patches/0001-Add-definition-for-lldiv_t.patch
+    - patches/0002-CPPFLAGS-can-have-more-than-one-compiler-definition.patch
+    - patches/0003-GCC-7-Fix-empty-string-comparison-error.patch
+    # Copied from https://gitweb.gentoo.org/repo/gentoo.git/tree/dev-db/mysql-connector-c/files/6.1.11-openssl-1.1.patch
+    - if: unix
+      then: patches/0004-Don-t-use-deprecated-API-with-openssl-1.1.patch
+    - patches/0005-fix-conditional-ordering.patch
+    - patches/0006-allow-openssl-3.patch
+  fn: {{ name }}-{{ version }}.zip  # [win]
+
+build:
+  number: 1008
+  skip: win and vc<14
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - if: win
+      then: ninja
+    - if: unix
+      then: make
+  host:
+    - if: not win
+      then: openssl
+    - if: win and vc<14
+      then: msinttypes
+  run_exports:
+    - ${{ pin_subpackage('mysql-connector-c', upper_bound='x.x.x.x.x') }}
+
+tests:
+  - script:
+      - if: not win
+        then: mysql_config --version
+      - my_print_defaults --version
+
+about:
+  license: GPL-2.0-only
+  license_file: COPYING
+  summary: MySQL Connector/C, the C interface for communicating with MySQL servers.
+  description: |
+    Connector/C is a client library that implements the C API for
+    client/server communication. It is a standalone replacement for
+    the MySQL client library shipped with MySQL Server distributions.
+
+
+  homepage: https://dev.mysql.com/downloads/connector/c/
+
+extra:
+  recipe-maintainers:
+    - chrisburr
+    - druvus
+    - mfansler
+
+- if: "not win]\"  # [not win"  # [not win'
+  then: "{% set sha256 = \"c8664851487200162b38b6f3c8db69850bd4f0e4c5ff5a6d161dbfb5cb76b6c4\" %}  # [not win]"  # [not win]'
+
+- if: "win]\"  # [win"  # [win'
+  then: "{% set sha256 = \"44d7c9be33b148a7391c5e1690b4788de3ced3e79084f3a2787d103bd12cd495\" %}  # [win]"  # [win]'
+

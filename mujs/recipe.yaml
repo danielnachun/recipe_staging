@@ -1,0 +1,40 @@
+schema_version: 1
+
+context:
+  name: mujs
+  version: 1.3.4
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/ccxvii/${{ name }}/archive/${{ version }}/${{ name }}-${{ version }}.tar.gz
+  sha256: c015475880f6a382e706169c94371a7dd6cc22078832f6e0865af8289c2ef42b
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+    - sed
+  host:
+    - readline
+
+tests:
+  - script:
+      - test -f ${PREFIX}/bin/mujs
+
+about:
+  license: ISC
+  license_file: COPYING
+  summary: Embeddable Javascript interpreter
+  homepage: https://www.mujs.com
+  repository: https://github.com/ccxvii/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

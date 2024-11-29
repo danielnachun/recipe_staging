@@ -1,0 +1,46 @@
+schema_version: 1
+
+context:
+  version: 1.3-0
+  name: colorout
+
+package:
+  name: r-${{ name }}
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/jalvesaq/${{ name }}/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: d27eb9a7f80d12a91909a9bfb76445fc67576ae38f29deeef83114373aebc08c
+
+build:
+  number: 0
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+    - ${{ compiler('c') }}
+  host:
+    - r-base=4.2
+  run:
+    - r-base>=4.2
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('colorout')\""
+
+about:
+  license: GP-2.0-or-later
+  summary: Colorize R Output on Terminal Emulators
+  homepage: https://github.com/jalvesaq/colorout
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

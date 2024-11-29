@@ -1,0 +1,51 @@
+schema_version: 1
+
+context:
+  name: perl-class-method-modifiers
+  version: 2.15
+  sha256: 65cd85bfe475d066e9186f7a8cc636070985b30b0ebb1cde8681cf062c2e15fc
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/E/ET/ETHER/Class-Method-Modifiers-${{ version }}.tar.gz
+  sha256: ${{ sha256 }}
+
+build:
+  number: 0
+  skip: win
+  noarch: generic
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-test-fatal
+    - perl-test-needs
+  run:
+    - perl>=5.32
+  run_exports:
+    weak:
+      - ${{ name }} =${{ version }}
+
+tests:
+  - python:
+      imports:
+        - Class::Method::Modifiers
+
+about:
+  license: GPL-1.0-or-later OR Artistic-1.0-Perl
+  license_file:
+    - ${{ env.get("PREFIX") }}/man/man1/perlartistic.1
+    - ${{ env.get("PREFIX") }}/man/man1/perlgpl.1
+  summary: Provides Moose-like method modifiers
+  homepage: https://github.com/moose/Class-Method-Modifiers
+
+extra:
+  recipe-maintainers:
+    - xileF1337
+    - cbrueffer
+

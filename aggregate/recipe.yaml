@@ -1,0 +1,37 @@
+schema_version: 1
+
+context:
+  name: aggregate
+  version: 1.6
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://ftp.isc.org/isc/${{ name }}/${{ name }}-${{ version }}.tar.gz
+  sha256: 166503005cd8722c730e530cc90652ddfa198a25624914c65dffc3eb87ba5482
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+    - sed
+
+tests:
+  - script:
+      - test -f ${PREFIX}/bin/aggregate
+
+about:
+  license: ISC
+  license_file: LICENSE
+  summary: Optimizes lists of prefixes to reduce list lengths
+  homepage: https://web.archive.org/web/20160716192438/freecode.com/projects/aggregate
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: emmet-language-server
+  version: 2.6.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/@olrtg/${{ name }}/-/${{ name }}-${{ version }}.tgz
+  sha256: 01df7e6c64939edde55e1f61bc1d04ac9b395465ff36d606408e19fe61abfe22
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} 2>&1 | grep -q "Connection input stream is not set."
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: A language server for emmet.io
+  homepage: https://github.com/olrtg/${{ name }}
+  repository: https://github.com/olrtg/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

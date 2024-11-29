@@ -1,0 +1,49 @@
+schema_version: 1
+
+context:
+  name: coursier
+  version: 2.1.10
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  git: https://github.com/coursier/${{ name }}
+  rev: v${{ version }}
+
+build:
+  number: 1
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - curl
+    - findutils
+    - if: linux
+      then: gcc
+    - maven
+    - sed
+  host:
+    - graalvm=20
+    - zlib
+  run:
+    - libzlib
+
+tests:
+  - script:
+      - cs --help
+
+about:
+  license: Apache-2.0
+  license_file:
+    - LICENSE
+    - target/generated-resources/licenses/
+  summary: Pure Scala Artifact Fetching
+  homepage: https://get-coursier.io
+  repository: https://github.com/coursier/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

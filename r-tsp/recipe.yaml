@@ -1,0 +1,92 @@
+# Package: TSP
+# Type: Package
+# Title: Traveling Salesperson Problem (TSP)
+# Version: 1.1-7
+# Date: 2019-05-22
+# Authors@R: c( person("Michael", "Hahsler", role = c("aut", "cre", "cph"), email = "mhahsler@lyle.smu.edu"), person("Kurt", "Hornik", role = c("aut", "cph")))
+# Description: Basic infrastructure and some algorithms for the traveling salesperson problem (also traveling salesman problem; TSP). The package provides some simple algorithms and an interface to the Concorde TSP solver and its implementation of the Chained-Lin-Kernighan heuristic. The code for Concorde itself is not included in the package and has to be obtained separately.
+# Classification/ACM: G.1.6, G.2.1, G.4
+# URL: https://github.com/mhahsler/TSP
+# BugReports: https://github.com/mhahsler/TSP/issues
+# Depends: R (>= 2.14.0)
+# Imports: graphics, foreach, utils, methods, stats, grDevices
+# Suggests: maps, sp, maptools, testthat
+# License: GPL-3
+# Copyright: All code is Copyright (C) Michael Hahsler and Kurt Hornik.
+# NeedsCompilation: yes
+# Packaged: 2019-05-22 20:17:55 UTC; hahsler
+# Author: Michael Hahsler [aut, cre, cph], Kurt Hornik [aut, cph]
+# Maintainer: Michael Hahsler <mhahsler@lyle.smu.edu>
+# Repository: CRAN
+# Date/Publication: 2019-05-22 23:10:03 UTC
+schema_version: 1
+
+context:
+  version: 1.2-4
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-tsp
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/TSP_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/TSP/TSP_${{ version }}.tar.gz
+  sha256: 30bd0bfe9a7ca3fdf4f91c131f251e2835640f7d61389b50fd5564d58657c388
+
+build:
+  number: 1
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+    - r-foreach
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+    - r-foreach
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('TSP')\""
+      - if: win
+        then: "\"%R%\" -e \"library('TSP')\""
+
+about:
+  license: GPL-3.0-only
+  summary: |
+    Basic infrastructure and some algorithms for the traveling salesperson problem (also traveling salesman problem; TSP). The package provides some simple algorithms and an interface to the Concorde TSP solver and its implementation of the Chained-Lin-Kernighan heuristic. The code for Concorde itself is not included
+    in the package and has to be obtained separately.
+  license_file: ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-3
+  homepage: https://github.com/mhahsler/TSP
+
+extra:
+  recipe-maintainers:
+    - MathiasHaudgaard
+    - FrodePedersen
+    - ArneKr
+    - conda-forge/r
+

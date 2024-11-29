@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: psmisc
+  version: 23.7
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://gitlab.com/${{ name }}/${{ name }}/-/archive/v${{ version }}/${{ name }}-v${{ version }}.tar.gz
+  sha256: 8f2526ce7ac6ef4976454cd63095fa10e467ef745cf33dc4f91df0bd7b10b905
+
+build:
+  number: 0
+  skip: not linux
+
+requirements:
+  build:
+    - autoconf
+    - automake
+    - gettext
+    - ${{ compiler('c') }}
+    - make
+  host:
+    - libtool
+    - ncurses
+
+tests:
+  - script:
+      - "killall -h 2>&1 | grep -q 'killall \\[OPTION\\]'"
+
+about:
+  license: GPL-2.0-or-later
+  license_file: COPYING
+  summary: Miscellaneous utilities that use the proc file-system
+  homepage: https://gitlab.com/psmisc/psmisc
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

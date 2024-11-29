@@ -1,0 +1,74 @@
+schema_version: 1
+
+context:
+  version: 1.1.5
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-blockmodeling
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/blockmodeling_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/blockmodeling/blockmodeling_${{ version }}.tar.gz
+  sha256: 3b6f910078c29b801651e3a686112e41e456c517e1b99fcda11bb12681bb1503
+
+build:
+  number: 0
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: not win
+      then: ${{ compiler('fortran') }}
+    - if: win
+      then: ${{ compiler('m2w64_fortran') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+    - r-matrix
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+    - r-matrix
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('blockmodeling')\""
+      - if: win
+        then: "\"%R%\" -e \"library('blockmodeling')\""
+
+about:
+  license: GPL-2.0-or-later
+  summary: 'This is primarily meant as an implementation of generalized blockmodeling for valued networks. In addition, measures of similarity or dissimilarity based on structural equivalence and  regular equivalence (REGE algorithms) can be computed and partitioned matrices can be plotted: Žiberna (2007)<doi:10.1016/j.socnet.2006.04.002>,::
+    - "\u017diberna (2008)<doi:10.1080/00222500701790207>, \u017diberna (2014)<doi:10.1016/j.socnet.2014.04.002>.'"
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+  homepage: https://CRAN.R-project.org/package=blockmodeling
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

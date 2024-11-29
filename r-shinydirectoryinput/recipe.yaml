@@ -1,0 +1,46 @@
+schema_version: 1
+
+context:
+  version: 1.0
+  name: shinydirectoryinput
+
+package:
+  name: r-${{ name }}
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/wleepang/shiny-directory-input/archive/2630fedb155cdfdf96729a9b297c604f55a94198.tar.gz
+  sha256: 157d1549970dbdf54b5a070fd265d90c51b3a2bd41d8ab3ec33dfaca1826cf66
+
+build:
+  number: 0
+  noarch: generic
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.3
+    - r-shiny
+  run:
+    - r-base>=4.3
+    - r-shiny
+
+tests:
+  - script:
+      - "$R -e \"library('shinyDirectoryInput')\""
+
+about:
+  license: BSD-3-Clause
+  summary: An shiny input widget for selecting directories
+  homepage: https://github.com/wleepang/shiny-directory-input
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

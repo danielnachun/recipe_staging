@@ -1,0 +1,65 @@
+schema_version: 1
+
+context:
+  version: 5.0.0
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-rferns
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/rFerns_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/rFerns/rFerns_${{ version }}.tar.gz
+  sha256: 78da671e18dc1fb499eddcc6db7eedd69cef673ba0b46c873bd95615cbb583fb
+
+build:
+  number: 0
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{native}}gcc-libs
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('rFerns')\""
+      - if: win
+        then: "\"%R%\" -e \"library('rFerns')\""
+
+about:
+  license: GPL-2.0-or-later
+  summary: |
+    Provides the random ferns classifier by Ozuysal, Calonder, Lepetit and Fua (2009)
+    <doi:10.1109/TPAMI.2009.23>, modified for generic and multi-label classification
+    and featuring OOB error approximation and importance measure as introduced in Kursa
+    (2014) <doi:10.18637/jss.v061.i10>.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+  homepage: https://gitlab.com/mbq/rFerns
+

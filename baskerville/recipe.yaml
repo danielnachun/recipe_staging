@@ -1,0 +1,63 @@
+schema_version: 1
+
+context:
+  name: baskerville
+  version: 1.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  git: https://github.com/calico/${{ name }}
+  rev: 0a3075fcf04cae747fdb1f090441f0c0ac514b90
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python >=3.8,<3.11
+    - pip
+    - setuptools
+    - setuptools_scm
+  run:
+    - h5py
+    - intervaltree
+    - joblib
+    - matplotlib-base
+    - google-cloud-storage
+    - natsort
+    - networkx
+    - numpy
+    - pandas
+    - pybigwig
+    - pybedtools
+    - pysam
+    - python >=3.8,<3.11
+    - qnorm
+    - seaborn
+    - scikit-learn
+    - scipy
+    - statsmodels
+    - tabulate
+    - tensorflow
+    - tqdm
+
+tests:
+  - python:
+      imports:
+        - baskerville
+
+about:
+  summary: Machine learning methods for DNA sequence analysis.
+  license: Apache-2.0
+  license_file: LICENSE
+  homepage: https://github.com/calico/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

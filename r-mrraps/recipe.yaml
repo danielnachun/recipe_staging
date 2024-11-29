@@ -1,0 +1,59 @@
+schema_version: 1
+
+context:
+  version: 0.4.1
+
+package:
+  name: r-mrraps
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/qingyuanzhao/mr.raps/archive/2a23d8418206d6dc68e32e2a247ea4caa414d853.zip
+  sha256: c62c507a7fa47a6aea8a83cfdd0e62ceca0400dffdd82e40666dc74f8dd16783
+
+build:
+  number: 0
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+    - r-ggplot2
+    - r-ggrepel
+    - r-gridextra
+    - r-nortest
+    - r-rootsolve
+    - r-rsnps
+  run:
+    - r-base>=4.2
+    - r-ggplot2
+    - r-ggrepel
+    - r-gridextra
+    - r-nortest
+    - r-rootsolve
+    - r-rsnps
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('mr.raps')\""
+      - if: win
+        then: "\"%R%\" -e \"library('mr.raps')\""
+
+about:
+  license: GPL-3.0-or-later
+  summary: Robust statistical inference for Mendelian randomization with many weak instruments
+  homepage: https://github.com/MRCIEU/ieugwasr
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

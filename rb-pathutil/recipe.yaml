@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: pathutil
+  version: 0.16.2
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: e43b74365631cab4f6d5e4228f812927efc9cb2c71e62976edcb252ee948d589
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - rb-forwardable-extended
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/LICENSE
+  summary: Like Pathname but a little less insane.
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/envygeeks/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

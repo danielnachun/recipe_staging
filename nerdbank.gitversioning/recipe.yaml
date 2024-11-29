@@ -1,0 +1,41 @@
+schema_version: 1
+
+context:
+  name: nerdbank.gitversioning
+  version: 3.6.139
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/dotnet/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: 8dc3310d7da747d3f6fd70d2efbb58b7886d2f07d9ea32f92f8c4e7356105954
+
+build:
+  number: 0
+
+requirements:
+  host:
+    - dotnet
+    - nuget-license
+  run:
+    - dotnet
+
+tests:
+  - script:
+      - nbgv --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: Stamp your assemblies, packages and more with a unique version generated from a single, simple version.json file and include git commit IDs for non-official builds.
+  homepage: https://github.com/dotnet/${{ name }}
+  repository: https://github.com/dotnet/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

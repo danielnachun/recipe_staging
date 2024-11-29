@@ -1,0 +1,98 @@
+# Package: proj4
+# Version: 1.0-8.1
+# Title: A simple interface to the PROJ.4 cartographic projections library
+# Depends: R (>= 2.0.0)
+# Author: Simon Urbanek <simon.urbanek@r-project.org>
+# Maintainer: Simon Urbanek <simon.urbanek@r-project.org>
+# Description: A simple interface to lat/long projection and datum transformation of the PROJ.4 cartographic projections library. It allows transformation of geographic coordinates from one projection and/or datum to another.
+# SystemRequirements: proj 4.4.6 or higher (http://proj.maptools.org/)
+# License: GPL-2
+# URL: http://www.rforge.net/proj4/
+# Packaged: 2019-09-05 17:05:50 UTC; hornik
+# Repository: CRAN
+# Date/Publication: 2019-09-07 17:32:41 UTC
+# NeedsCompilation: yes
+schema_version: 1
+
+context:
+  version: 1.0-14
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-proj4
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/proj4_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/proj4/proj4_${{ version }}.tar.gz
+  sha256: d3d571da92136666dd3658b6006a7d4d4254cdeada5cda21b05b0c0e692a00b6
+
+build:
+  number: 2
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: win
+      then: ${{ stdlib("m2w64_c") }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}grep
+    - ${{ posix }}autoconf
+    - if: not win
+      then: ${{ posix }}automake
+    - if: win
+      then: ${{ posix }}automake-wrapper
+    - ${{ posix }}pkg-config
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+    - if: win
+      then: ${{ posix }}tar
+    - if: win
+      then: ${{ posix }}gzip
+  host:
+    - r-base=4.2
+    - proj
+  run:
+    - r-base>=4.2
+    - proj
+    - if: win
+      then: ${{ native }}gcc-libs
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('proj4')\""
+      - if: win
+        then: "\"%R%\" -e \"library('proj4')\""
+
+about:
+  license: GPL-2.0-only
+  summary: A simple interface to lat/long projection and datum transformation of the PROJ.4 cartographic projections library. It allows transformation of geographic coordinates from one projection and/or datum to another.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+  homepage: http://www.rforge.net/proj4/
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+    - nawendt
+    - ocefpaf
+    - xylar
+

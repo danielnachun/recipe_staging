@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: perl-hash-safekeys
+  version: 0.04
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/M/MO/MOB/Hash-SafeKeys-${{ version }}.tar.gz
+  sha256: a524ad3bf9da677c1f8be6e15971b76575408f744923da27647ae8f1d3c37ccc
+
+build:
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+tests:
+  - python:
+      imports:
+        - Hash::SafeKeys
+
+about:
+  license: perl_5
+  summary: get hash contents without resetting each iterator
+  homepage: http://metacpan.org/pod/Hash-SafeKeys
+
+maintainers:
+  - danielnachun
+

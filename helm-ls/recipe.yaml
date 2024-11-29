@@ -1,0 +1,40 @@
+schema_version: 1
+
+context:
+  name: helm-ls
+  version: 0.0.22
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/mrjosh/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: 8602139460f387eb2b423d15f1ade0eba67835dec6cdb73c9d9a13964e44a671
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('go-cgo') }}
+    - go-licenses
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: Language server for Helm
+  homepage: https://github.com/mrjosh/${{ name }}
+  repository: https://github.com/mrjosh/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

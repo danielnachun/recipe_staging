@@ -1,0 +1,53 @@
+schema_version: 1
+
+context:
+  name: django-template-lsp
+  version: 0.9.5
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/django_template_lsp-${{ version }}.tar.gz
+  sha256: 5c8f2e1669d58eb61e756e994ea25fb1b0ec5e65e26e83205defef78cac3f4e0
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - djlsp = djlsp.cli:main
+      - django-template-lsp = djlsp.cli:main
+
+requirements:
+  host:
+    - python >=3.9
+    - pip
+  run:
+    - python >=3.9
+    - pygls
+    - jedi
+
+tests:
+  - python:
+      imports:
+        - djlsp
+  - requirements:
+      run:
+        - pip
+    script:
+      - pip check
+      - djlsp --help
+      - django-template-lsp --help
+
+about:
+  summary: Django template LSP
+  license: GPL-3.0
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: turborepo
+  version: 2.1.2
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/vercel/turborepo/archive/v${{ version }}.tar.gz
+  sha256: 109caa97a6ca44938c1a121eccf323ebf454488466f0375d7a9c30dd806f1bca
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - capnproto
+    - cargo-bundle-licenses
+    - if: linux
+      then: lld
+    - protobuf
+
+tests:
+  - script:
+      - turbo --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Build system optimized for JavaScript and TypeScript, written in Rust
+  homepage: https://github.com/vercel/turborepo/
+  repository: https://github.com/vercel/turborepo/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

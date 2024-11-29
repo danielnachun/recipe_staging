@@ -1,0 +1,57 @@
+schema_version: 1
+
+context:
+  name: jekyll
+  version: 4.3.3
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: 8a987f12ca279aa09460fe994512359e14c400355bddde040ffe8e59ef666818
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies --bindir=${PREFIX}/bin ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.3
+  run:
+    - rb-addressable
+    - rb-colorator
+    - rb-em-websocket
+    - rb-i18n
+    - rb-jekyll-sass-converter
+    - rb-jekyll-watch
+    - rb-kramdown
+    - rb-kramdown-parser-gfm
+    - rb-liquid <5
+    - rb-mercenary
+    - rb-pathutil
+    - rb-rouge
+    - rb-safe_yaml
+    - rb-terminal-table
+    - rb-webrick
+    - ruby>=3.3
+
+tests:
+  - script:
+      - jekyll --help
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/LICENSE
+  summary: Jekyll is a blog-aware static site generator in Ruby
+  homepage: https://jekyllrb.com
+  repository: https://github.com/jekyll/jekyll
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

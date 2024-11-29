@@ -1,0 +1,54 @@
+schema_version: 1
+
+context:
+  version: 1.0.0
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-hudson
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/anastasia-lucas/hudson/archive/54afdb0fd1a5fb883f43322ea185d9c8b0a65147.zip
+  sha256: 727f59f9d56fa87255445a7a36691f191978921ece3f81c8054c5247e844f1bf
+
+build:
+  number: 0
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  host:
+    - r-base=4.2
+    - r-ggplot2
+    - r-gridextra
+    - r-ggiraph
+    - r-cowplot
+    - r-colorspace
+  run:
+    - r-base>=4.2
+    - r-ggplot2
+    - r-gridextra
+    - r-ggiraph
+    - r-cowplot
+    - r-colorspace
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('hudson')\""
+      - if: win
+        then: "\"%R%\" -e \"library('hudson')\""
+
+about:
+  license: GPL-3.0-or-later
+  summary: This package creates mirrored Manhattan (Hudson) plots for *ome-wide association analyses, including, but not limited to, GWAS, PheWAS, and EWAS.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-3
+  homepage: https://github.com/anastasia-lucas/hudson
+

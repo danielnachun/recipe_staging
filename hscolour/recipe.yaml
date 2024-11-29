@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: hscolour
+  version: 1.25
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://hackage.haskell.org/package/${{ name }}-${{ version }}/${{ name }}-${{ version }}.tar.gz
+  sha256: 54ce30da55599e872fd38d927aa518369e2971b284acc67ed0caac6ae14cc77c
+
+build:
+  number: 0
+  skip: not unix
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cabal-install
+    - ghc
+  host:
+    - if: osx
+      then: libiconv
+  host:
+    - libiconv  #[osx]
+
+tests:
+  - script:
+      - HsColour --help
+
+about:
+  license: LGPL-2.1-or-later
+  license_file: LICENCE-LGPL
+  summary: hscolour is a small Haskell script to colourise Haskell code.
+  homepage: https://hackage.haskell.org/package/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

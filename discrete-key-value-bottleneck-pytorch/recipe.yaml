@@ -1,0 +1,45 @@
+schema_version: 1
+
+context:
+  name: discrete-key-value-bottleneck-pytorch
+  version: 0.1.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/discrete-key-value-bottleneck-pytorch-${{ version }}.tar.gz
+  sha256: ec8cc4e15b04b5338c4488ac606d7fdf70dac709a6ca0c27fea5d0e6c3c420d2
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - pip
+  run:
+    - python
+    - einops >=0.6
+    - vector-quantize-pytorch >=1.6.28
+    - pytorch >=1.6
+
+tests:
+  - python:
+      imports:
+        - discrete_key_value_bottleneck_pytorch
+      pip_check: true
+
+about:
+  summary: Discrete Key / Value Bottleneck - Pytorch
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/lucidrains/discrete-key-value-bottleneck-pytorch
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

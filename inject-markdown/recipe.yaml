@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: inject-markdown
+  version: 3.1.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/streetsidesoftware/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: d23945d069b7c5908cfe052dc205381f28e5baef7576526066061a0f9a5403fb
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Tool to inject files into markdown files.
+  homepage: https://github.com/streetsidesoftware/${{ name }}
+  repository: https://github.com/streetsidesoftware/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

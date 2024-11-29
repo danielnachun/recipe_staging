@@ -1,0 +1,34 @@
+schema_version: 1
+
+package:
+  name: perl-gdtextutil
+  version: 0.86
+
+source:
+  url: http://cpan.metacpan.org/authors/id/M/MV/MVERB/GDTextUtil-0.86.tar.gz
+  md5: 941ad06eadc86b47f3a32da405665c41
+
+build:
+  number: 8
+
+requirements:
+  build:
+    - make
+    - ${{ compiler('c') }}
+  host:
+    - perl=5.32
+    - perl-gd
+  run:
+    - perl>=5.32
+    - perl-gd
+
+tests:
+  - python:
+      imports:
+        - GD::Text
+
+about:
+  license: unknown
+  summary: Text utilities for use with GD
+  homepage: http://metacpan.org/pod/GDTextUtil
+

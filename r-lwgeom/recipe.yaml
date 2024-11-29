@@ -1,0 +1,93 @@
+schema_version: 1
+
+context:
+  version: 0.2-14
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-lwgeom
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/lwgeom_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/lwgeom/lwgeom_${{ version }}.tar.gz
+  sha256: 26db6cf7dbc8cf43a70e5e2a34941a1c4b65e182f86f58d64ff9f614b3be929c
+
+build:
+  number: 3
+  skip: win
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: win
+      then: ${{ stdlib("c") }}
+    - if: not win
+      then: ${{ compiler('cxx') }}
+    - if: win
+      then: ${{ compiler('m2w64_cxx') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}grep
+    - ${{ posix }}autoconf
+    - if: not win
+      then: ${{ posix }}automake
+    - if: win
+      then: ${{ posix }}automake-wrapper
+    - ${{ posix }}pkg-config
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.3
+    - r-rcpp
+    - r-sf >=1.0_15
+    - r-units
+    - if: not win
+      then: geos
+    - if: not win
+      then: proj
+  run:
+    - r-base=4.3
+    - if: win
+      then: ${{ native }}gcc-libs
+    - r-rcpp
+    - r-sf >=1.0_15
+    - r-units
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('lwgeom')\""
+      - if: win
+        then: "\"%R%\" -e \"library('lwgeom')\""
+
+about:
+  license: GPL-2.0-only
+  summary: "Access to selected functions found in 'liblwgeom' <https://github.com/postgis/postgis/tree/svn-trunk/liblwgeom>, the light-weight geometry library used by 'PostGIS' <http://postgis.net/>."
+  license_file: ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+  description: Access to selected functions found in liblwgeom, the light-weight geometry library used by PostGIS
+  homepage: https://r-spatial.github.io/lwgeom/
+  repository: https://github.com/r-spatial/lwgeom/
+  documentation: https://cran.r-project.org/web/packages/lwgeom/lwgeom.pdf
+
+extra:
+  recipe-maintainers:
+    - agcopenhaver
+    - conda-forge/r
+

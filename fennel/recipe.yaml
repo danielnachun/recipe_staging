@@ -1,0 +1,41 @@
+schema_version: 1
+
+context:
+  name: fennel
+  version: 1.5.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/bakpakin/Fennel/archive/${{ version }}.tar.gz
+  sha256: 7456737a2e0fc17717ea2d80083cfcf04524abaa69b1eb79bded86b257398cd0
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - lua
+    - make
+    - sed
+  run:
+    - lua
+
+tests:
+  - script:
+      - fennel --help
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: Lua Lisp Language
+  homepage: https://fennel-lang.org
+  repository: https://github.com/bakpakin/Fennel
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

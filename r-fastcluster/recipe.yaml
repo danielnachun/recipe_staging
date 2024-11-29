@@ -1,0 +1,77 @@
+schema_version: 1
+
+context:
+  version: 1.2.6
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-fastcluster
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - https://cran.r-project.org/src/contrib/fastcluster_${{ version }}.tar.gz
+    - https://cran.r-project.org/src/contrib/Archive/fastcluster/fastcluster_${{ version }}.tar.gz
+  sha256: 852a05458fb0b64497e9cf8f0182b599d1c2b1e9af03ec45f7c0c9280c1f8d19
+
+build:
+  number: 0
+  script: R CMD INSTALL --build .
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: not win
+      then: ${{ compiler('cxx') }}
+    - if: win
+      then: ${{ compiler('m2w64_cxx') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('fastcluster')\""
+      - if: win
+        then: "\"%R%\" -e \"library('fastcluster')\""
+
+about:
+  license: BSD-2-Clause OR GPL-2.0-only
+  summary: "This is a two-in-one package which provides interfaces to both R and Python. It implements fast hierarchical, agglomerative clustering routines. Part of the functionality is designed as drop-in replacement for existing routines: linkage() in the SciPy package 'scipy.cluster.hierarchy', hclust() in R's 'stats'::
+    - "package, and the 'flashClust' package. It provides the same functionality with the benefit of a much faster implementation. Moreover, there are memory-saving routines for clustering of vector data, which go beyond what the existing packages provide. For information on how to install the Python files, see the file INSTALL"
+    - "in the source distribution.\""
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/BSD_2_clause
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+    - LICENSE
+  homepage: http://danifold.net/fastcluster.html
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+    - jsignell
+

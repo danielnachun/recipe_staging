@@ -1,0 +1,38 @@
+schema_version: 1
+
+context:
+  name: dfmt
+  version: 0.15.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  git: https://github.com/dlang-community/${{ name }}.git
+  rev: v${{ version }}
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ldc
+    - make
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: BSL-1.0
+  license_file: LICENSE.txt
+  summary: Formatter for D source code
+  homepage: https://github.com/dlang-community/${{ name }}
+  repository: https://github.com/dlang-community/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

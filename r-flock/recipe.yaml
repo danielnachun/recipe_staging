@@ -1,0 +1,73 @@
+schema_version: 1
+
+context:
+  version: 0.7
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-flock
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/flock_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/flock/flock_${{ version }}.tar.gz
+  sha256: 47ebdeaeeb63ec93c800782bafa7f2846f73bb905adb6a3b5c44b248ce1de9fd
+
+build:
+  number: 1005
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: not win
+      then: ${{ compiler('cxx') }}
+    - if: win
+      then: ${{ compiler('m2w64_cxx') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+    - r-rcpp >=0.11.3
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+    - r-rcpp >=0.11.3
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('flock')\""
+      - if: win
+        then: "\"%R%\" -e \"library('flock')\""
+
+about:
+  license: Apache-2.0
+  summary: "Implements synchronization between R processes (spawned by using the \"parallel\" package for instance) using file locks. Supports both exclusive and shared locking."
+  license_file:
+    - LICENSE-2.0.txt
+  homepage: https://CRAN.R-project.org/package=flock
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

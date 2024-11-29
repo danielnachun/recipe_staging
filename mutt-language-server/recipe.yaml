@@ -1,0 +1,54 @@
+schema_version: 1
+
+context:
+  name: mutt-language-server
+  version: 0.0.11
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/mutt_language_server-${{ version }}.tar.gz
+  sha256: 4c811468835e6c834d85074e69983887d70a1719d5dc7eb0a6e917e3f65a0407
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - mutt-language-server = mutt_language_server.__main__:main
+
+requirements:
+  host:
+    - python >=3.10
+    - setuptools-scm >=6.2
+    - setuptools-generate >=0.0.6
+    - pip
+  run:
+    - python >=3.10
+    - lsp-tree-sitter
+    - tree-sitter-muttrc >=0.0.4
+
+tests:
+  - python:
+      imports:
+        - mutt_language_server
+  - requirements:
+      run:
+        - pip
+    script:
+      - pip check
+      - mutt-language-server --help
+
+about:
+  summary: mutt language server
+  license: GPL-3.0
+  license_file: LICENSE
+  repository: https://github.com/neomutt/mutt-language-server
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

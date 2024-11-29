@@ -1,0 +1,38 @@
+schema_version: 1
+
+context:
+  name: vim-language-server
+  version: 2.2.7
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/vim-language-server/-/${{ name }}-${{ version }}.tgz
+  sha256: 1538f3202b4406f7b4455990a9f5c016b5edbfc2a2f82e3bf6613bbfecd3c982
+
+build:
+  number: 2
+  noarch: generic
+
+requirements:
+  host:
+    - nodejs
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - test -f ${PREFIX}/bin/${{ name }}
+
+about:
+  license: MIT
+  summary: VimScript language server
+  homepage: https://github.com/iamcco/${{ name }}
+  repository: https://github.com/iamcco/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

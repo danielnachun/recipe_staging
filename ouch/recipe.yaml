@@ -1,0 +1,46 @@
+schema_version: 1
+
+context:
+  name: ouch
+  version: 0.5.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/ouch-org/${{ name }}/archive/refs/tags/${{ version }}.tar.gz
+  sha256: 46cc2b14f53de2f706436df59300eb90c5a58f08ac8c738fd976fcb8ec0cd335
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cargo-bundle-licenses
+  host:
+    - bzip2
+    - xz
+    - zlib
+  run:
+    - xz
+    - libzlib
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: Painless compression and decompression for your terminal
+  homepage: https://github.com/ouch-org/${{ name }}
+  repository: https://github.com/ouch-org/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

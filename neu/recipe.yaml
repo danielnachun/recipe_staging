@@ -1,0 +1,45 @@
+schema_version: 1
+
+context:
+  name: neu
+  version: 11.3.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/@neutralinojs/neu/-/neu-${{ version }}.tgz
+  sha256: 78ab4f503b71f5be8e838661fa56d1cf858b74d8f9f93ecc1e7028f60fc1422e
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c')}}
+    - ${{ compiler('cxx')}}
+    - make
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - neu --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: neu CLI for Neutralinojs
+  homepage: https://neutralino.js.org/docs/cli/neu-cli
+  repository: https://github.com/neutralinojs/neutralinojs-cli
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

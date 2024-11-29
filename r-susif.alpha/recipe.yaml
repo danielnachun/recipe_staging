@@ -1,0 +1,62 @@
+schema_version: 1
+
+context:
+  version: 0.2.0
+
+package:
+  name: r-fsusier
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/stephenslab/fsusieR/archive/refs/tags/${{ version }}.tar.gz
+  sha256: 817fc91771ee2cbdb7fa134a3dea0eb52065bd2a1dd9d853a9d2c211201bb3d0
+
+build:
+  number: 0
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+    - r-ashr
+    - r-wavethresh
+    - r-mixsqp
+    - r-matrixstats
+    - r-ggplot2
+    - r-gridextra
+    - r-laplacesdemon
+  run:
+    - r-base>=4.2
+    - r-ashr
+    - r-wavethresh
+    - r-mixsqp
+    - r-matrixstats
+    - r-ggplot2
+    - r-gridextra
+    - r-laplacesdemon
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('fsusieR')\""
+      - if: win
+        then: "\"%R%\" -e \"library('fsusieR')\""
+
+about:
+  license: GPL-3.0-or-later
+  license_file: LICENSE
+  summary: "Draft package for \"Sum of Single Functions\" method."
+  homepage: https://github.com/stephenslab/fsusieR
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

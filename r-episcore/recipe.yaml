@@ -1,0 +1,52 @@
+schema_version: 1
+
+context:
+  version: 0.9.5
+
+package:
+  name: r-episcore
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/aet21/EpiSCORE/archive/4f7daef0e702dab6596331a06eda4aad49991853.zip
+  sha256: 7f4ece3cfcfcc3c0df512fa56bd8dfc492d88ec2dba05e8f71d1023871f82f4c
+
+build:
+  number: 0
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - bioconductor-annotationdbi
+    - bioconductor-org.hs.eg.db
+    - r-base=4.2
+    - r-mass
+    - r-presto
+  run:
+    - bioconductor-annotationdbi
+    - bioconductor-org.hs.eg.db
+    - r-base>=4.2
+    - r-mass
+    - r-presto
+
+tests:
+  - script:
+      - "$R -e \"library('EpiSCORE')\""
+
+about:
+  license: GPL-2.0-or-later
+  summary: Epigenetic cell-type deconvolution from Single-Cell Omic Reference profiles
+  homepage: https://github.com/willwerscheid/flashier
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

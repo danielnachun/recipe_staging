@@ -1,0 +1,54 @@
+schema_version: 1
+
+context:
+  version: 1.2-1
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-deconvolver
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/deconvolveR_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/deconvolveR/deconvolveR_${{ version }}.tar.gz
+  sha256: 08845cb67e0fc46c87f606dcb5e49d757ca0c401c8ad23e2080b4afe987d2ba4
+
+build:
+  number: 0
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+  run:
+    - r-base>=4.2
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('deconvolveR')\""
+      - if: win
+        then: "\"%R%\" -e \"library('deconvolveR')\""
+
+about:
+  license: GPL-2.0-or-later
+  summary: |
+    Empirical Bayes methods for learning prior distributions from data. An unknown prior
+    distribution (g) has yielded (unobservable) parameters, each of which produces a
+    data point from a parametric exponential family (f). The goal is to estimate the
+    unknown prior ("g-modeling") by deconvolution and Empirical Bayes methods. Details
+    and examples are in the paper by Narasimhan and Efron (2020, <doi:10.18637/jss.v094.i11>).
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+  homepage: https://bnaras.github.io/deconvolveR/
+

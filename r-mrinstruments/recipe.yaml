@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  version: 0.3.2
+  name: mrinstruments
+
+package:
+  name: r-${{ name }}
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/MRCIEU/MRInstruments/archive/efa2ca0d7a57cd51067be8e445a0f46bb6060a2e.zip
+  sha256: 41baf9bfd44ea0e7fe22b550e0a2f3120df036d89cb8d043cf2801289c4d4cf0
+
+build:
+  number: 0
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  host:
+    - r-base=4.2
+  run:
+    - r-base>=4.2
+
+tests:
+  - script:
+      - "$R -e \"library('MRInstruments')\""
+
+about:
+  license: CC0-1.0
+  summary: Data objects for various sets of instruments
+  homepage: https://github.com/MRCIEU/MRInstruments
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

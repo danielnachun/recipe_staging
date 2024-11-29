@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: kwalify
+  version: 0.7.2
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: 4eee60e7dc2c4f182af30e1a64639bc1787a985462b4615bba7117acfd78fdd9
+
+build:
+  number: 2
+  noarch: generic
+
+requirements:
+  host:
+    - ruby
+  run:
+    - ruby
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/MIT-LICENSE
+  summary: Kwalify is a parser, schema validator, and data binding tool for YAML and JSON.
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/troessner/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

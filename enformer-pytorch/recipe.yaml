@@ -1,0 +1,51 @@
+schema_version: 1
+
+context:
+  name: enformer-pytorch
+  version: 0.8.8
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/enformer-pytorch-${{ version }}.tar.gz
+  sha256: 84f05980b38323bdcc4a37d6e54fbf6a81843491e056f3d379bc3a51ba57696a
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - pip
+  run:
+    - python
+    - discrete-key-value-bottleneck-pytorch >=0.0.8
+    - einops >=0.3
+    - numpy
+    - pytorch >=1.6
+    - torchmetrics
+    - polars
+    - pyfaidx
+    - pyyaml
+    - transformers
+
+tests:
+  - python:
+      imports:
+        - enformer_pytorch
+      pip_check: true
+
+about:
+  summary: Enformer - Pytorch
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/lucidrains/enformer-pytorch
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

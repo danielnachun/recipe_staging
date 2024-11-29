@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: loofah
+  version: 2.22.0
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: 10d76e070c86b12fec74b6a9515fd1940f4459198b991342d0a7897d86c372fe
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - rb-crass
+    - rb-nokogiri
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/MIT-LICENSE.txt
+  summary: Loofah is a general library for manipulating and transforming HTML/XML documents and fragments, built on top of Nokogiri.
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/flavorjones/loofah
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

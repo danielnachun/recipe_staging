@@ -1,0 +1,47 @@
+schema_version: 1
+
+context:
+  name: netcoredbg
+  version: 2.2.3-992
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version | replace("-", "_") }}
+
+source:
+  url: https://github.com/Samsung/${{ name }}/archive/${{ version }}.tar.gz
+  sha256: 353ad37177d332f74e569d2c24b17113d826f07073611693cf1670af212ed2df
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - if: linux
+      then: clangdev
+    - cmake
+    - make
+    - if: linux
+      then: sysroot_linux-64=2.17
+  host:
+    - dotnet
+  run:
+    - dotnet
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: NetCoreDbg is a managed code debugger with MI interface for CoreCLR.
+  homepage: https://github.com/Samsung/${{ name }}
+  repository: https://github.com/Samsung/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

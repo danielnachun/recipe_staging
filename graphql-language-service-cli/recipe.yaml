@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: graphql-language-service-cli
+  version: 3.5.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/${{ name }}/-/${{ name }}-${{ version }}.tgz
+  sha256: d6af30c436fdb52ef86c42fdd7ab2bf0c3371bb6fdfdc53ebe5b7dd054b9a59d
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - graphql-lsp --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Language Server for GraphQL
+  homepage: https://github.com/bcoe/${{ name }}
+  repository: https://github.com/bcoe/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,40 @@
+schema_version: 1
+
+context:
+  name: fblog
+  version: 4.10.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/brocode/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: d4a25cdc27cd540b352b0515343f0100b0585712b7c4e5d9c8cd4afa1cbb9f91
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - cargo-bundle-licenses
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: WTFPL
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Small command-line JSON log viewer
+  homepage: https://github.com/brocode/${{ name }}
+  repository: https://github.com/brocode/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,68 @@
+schema_version: 1
+
+context:
+  version: 1.2.17
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-fdrtool
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/fdrtool_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/fdrtool/fdrtool_${{ version }}.tar.gz
+  sha256: 3452601adbead9be4820794e3af2666f710fdf9b801186df565b80b43629c5dd
+
+build:
+  number: 2
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('fdrtool')\""
+      - if: win
+        then: "\"%R%\" -e \"library('fdrtool')\""
+
+about:
+  license: GPL-3.0-or-later
+  summary: |
+    Estimates both tail area-based false  discovery rates (Fdr) as well as local false discovery rates (fdr) for a  variety of null models (p-values, z-scores, correlation coefficients, t-scores).  The proportion of null values and the parameters of the null  distribution are adaptively estimated from the data.  In
+    addition, the package  contains functions for non-parametric density estimation (Grenander estimator),  for monotone regression (isotonic regression and antitonic regression with weights), for computing the greatest convex minorant (GCM) and the least concave majorant (LCM),  for the half-normal and correlation distributions,
+    and for computing empirical higher criticism (HC) scores and the corresponding decision threshold.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-3
+  homepage: http://strimmerlab.org/software/fdrtool/
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

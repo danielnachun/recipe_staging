@@ -1,0 +1,40 @@
+schema_version: 1
+
+context:
+  name: deeptoolsintervals
+  version: 0.1.9
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
+  sha256: 7d94c36fd2b6f10d8b99e536d2672e8228971f1fc810497d33527bba2c40d4f6
+
+build:
+  number: 7
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+  host:
+    - python=3.12
+    - setuptools
+    - zlib=1.2
+  run:
+    - python=3.12
+    - libzlib>=1.2
+  run_exports:
+    - ${{ pin_subpackage("deeptoolsintervals", upper_bound="x.x") }}
+
+tests:
+  - python:
+      imports:
+        - deeptoolsintervals
+
+about:
+  license: MIT
+  summary: A python module creating/accessing GTF-based interval trees with associated meta-data
+  homepage: https://github.com/deeptools/deeptools_intervals
+

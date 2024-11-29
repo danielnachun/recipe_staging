@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: dcd
+  version: 0.15.2
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  git: https://github.com/dlang-community/${{ name }}.git
+  rev: v${{ version }}
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ldc
+    - make
+
+tests:
+  - script:
+      - dcd-client --help
+      - dcd-server --help
+
+about:
+  license: GPL-3.0-or-later
+  license_file: License.txt
+  summary: The D Completion Daemon is an auto-complete program for the D programming language
+  homepage: https://github.com/dlang-community/${{ name }}
+  repository: https://github.com/dlang-community/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

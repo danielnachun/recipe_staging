@@ -1,0 +1,40 @@
+schema_version: 1
+
+context:
+  name: rfmix
+  version: 2.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/slowkoni/rfmix/archive/4db0b5432a4a4aafb7726d5ab06990e915427017.zip
+  sha256: 32231780b28551829789d5253698de5a1e8e7f84154c5c59ece30797207f819a
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - autoconf
+    - automake
+    - libtool
+    - make
+    - sed
+
+tests:
+  - script:
+      - "rfmix 2>&1 | grep -q \"Local Ancestry and Admixture Inference\""
+      - simulate
+
+about:
+  license: Custom
+  summary: Local Ancestry and Admixture Inference Version 2
+  homepage: https://github.com/slowkoni/rfmix
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

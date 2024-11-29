@@ -1,0 +1,62 @@
+schema_version: 1
+
+context:
+  version: 1.0.21
+
+package:
+  name: r-flashier
+  version: ${{ version }}
+
+source:
+  url: https://github.com/willwerscheid/flashier/archive/4b9749052d9c840abbc93d3ff8f47812a267dbe9.zip
+  sha256: 21c1ad1f33884a4b65f111f3520213c109cc217efe5954395aec3d9e3fef1db5
+
+build:
+  number: 0
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+    - r-ebnm
+    - r-irlba
+    - r-snow
+    - r-softimpute
+    - r-stringr
+    - r-tictoc
+    - r-tidyr
+  run:
+    - r-base>=4.2
+    - r-ebnm
+    - r-irlba
+    - r-snow
+    - r-softimpute
+    - r-stringr
+    - r-tictoc
+    - r-tidyr
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('flashier')\""
+      - if: win
+        then: "\"%R%\" -e \"library('flashier')\""
+
+about:
+  license: GPL-3.0-or-later
+  license_file: LICENSE.md
+  summary: A faster and angrier package for EBMF
+  homepage: https://github.com/willwerscheid/flashier
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

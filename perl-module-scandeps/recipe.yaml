@@ -1,0 +1,47 @@
+schema_version: 1
+
+context:
+  name: perl-module-scandeps
+  version: 1.31
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/R/RS/RSCHUPP/Module-ScanDeps-${{ version }}.tar.gz
+  sha256: fc4d98d2b0015745f3b55b51ddf4445a73b069ad0cb7ec36d8ea781d61074d9d
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+  ignore_run_imports:
+    - perl-test-requires
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-test-requires
+  run:
+    - perl>=5.32
+
+tests:
+  - python:
+      imports:
+        - Module::ScanDeps
+
+about:
+  license: perl_5
+  summary: Recursively scan Perl code for dependencies
+  homepage: http://metacpan.org/pod/Module-ScanDeps
+
+maintainers:
+  - danielnachun
+

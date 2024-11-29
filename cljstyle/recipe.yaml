@@ -1,0 +1,50 @@
+schema_version: 1
+
+context:
+  name: cljstyle
+  version: 0.16.626
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version | replace("-", "_") }}
+
+source:
+  git: https://github.com/greglook/${{ name }}
+  rev: ${{ version }}
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - clojure
+    - findutils
+    - if: linux
+      then: gcc
+    - maven
+    - sed
+  host:
+    - graalvm
+    - leiningen
+    - zlib
+  run:
+    - libzlib
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: EPL-1.0
+  license_file:
+    - LICENSE.txt
+    - target/generated-resources/licenses/
+  summary: A tool for formatting Clojure code
+  homepage: https://github.com/greglook/${{ name }}
+  repository: https://github.com/greglook/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

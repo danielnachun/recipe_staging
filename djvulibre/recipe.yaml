@@ -1,0 +1,51 @@
+schema_version: 1
+
+context:
+  name: djvulibre
+  version: 3.5.28
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://downloads.sourceforge.net/project/djvu/DjVuLibre/${{ version }}/djvulibre-${{ version }}.tar.gz
+  sha256: fcd009ea7654fde5a83600eb80757bd3a76998e47d13c66b54c8db849f8f2edc
+
+build:
+  number: 2
+  skip: win
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - autoconf
+    - automake
+    - libtool
+    - pkg-config
+    - make
+  host:
+    - librsvg
+    - libtiff
+    - libjpeg-turbo
+    - libjpeg-turbo
+  run:
+    - libjpeg-turbo
+    - libtiff
+    - libjpeg-turbo
+
+tests:
+  - script:
+      - ddjvu --help 2>&1 >/dev/null | grep Usage
+
+about:
+  license: GPL-2.0-only
+  license_file: COPYING
+  summary: "Suite to create, manipulate and view DjVu ('d\u00e9j\u00e0 vu') documents"
+  homepage: http://djvu.sourceforge.net/
+
+extra:
+  recipe-maintainers:
+    - izahn
+

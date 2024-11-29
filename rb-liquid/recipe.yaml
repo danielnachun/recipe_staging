@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: liquid
+  version: 5.5.1
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: a6c29cda6e38d67313c466e35d531cb0529e3b73f3c0fedcfa39745233002e15
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/LICENSE
+  summary: A secure, non-evaling end user template engine with aesthetic markup.
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/Shopify/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

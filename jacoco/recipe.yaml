@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: jacoco
+  version: 0.8.12
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/jacoco/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: 34cba4b114df609607c282eda7d6d2365968576920796941bacdab9c9e441d74
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - findutils
+    - maven
+    - openjdk=17
+    - unzip
+  run:
+    - openjdk
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: EPL-2.0
+  license_file:
+    - LICENSE.md
+    - target/generated-resources/licenses/
+  summary: Java Code Coverage Library
+  homepage: https://github.com/jacoco/${{ name }}
+  repository: https://github.com/jacoco/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

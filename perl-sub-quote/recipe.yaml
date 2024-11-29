@@ -1,0 +1,51 @@
+schema_version: 1
+
+context:
+  name: perl-sub-quote
+  version: 2.006006
+  sha256: 6e4e2af42388fa6d2609e0e82417de7cc6be47223f576592c656c73c7524d89d
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/H/HA/HAARG/Sub-Quote-${{ version }}.tar.gz
+  sha256: ${{ sha256 }}
+
+build:
+  number: 0
+  skip: win
+  noarch: generic
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-test-fatal
+  run:
+    - perl>=5.32
+  run_exports:
+    weak:
+      - ${{ name }} =${{ version }}
+
+tests:
+  - python:
+      imports:
+        - Sub::Defer
+        - Sub::Quote
+
+about:
+  license: GPL-1.0-or-later OR Artistic-1.0-Perl
+  license_file:
+    - ${{ env.get("PREFIX") }}/man/man1/perlartistic.1
+    - ${{ env.get("PREFIX") }}/man/man1/perlgpl.1
+  summary: Efficient generation of subroutines via string eval
+  homepage: http://metacpan.org/pod/Sub-Quote
+
+extra:
+  recipe-maintainers:
+    - xileF1337
+    - cbrueffer
+

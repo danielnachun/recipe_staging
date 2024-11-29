@@ -1,0 +1,64 @@
+schema_version: 1
+
+context:
+  name: omi
+  version: 1.7.3_0
+  version_dash: ${{"version | replace("_", "-")"}}
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/microsoft/${{ name }}/archive/v${{ version_dash }}.tar.gz
+  sha256: 8e3dd69cee7f4968ef185d850a586c40bce8ac5cc39889d39e2c89f35c02b3c2
+  patches:
+    - 0001-support-Apple-Silicon.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - if: linux
+      then: binutils
+    - if: linux
+      then: gcc
+    - make
+    - pkg-config
+    - sed
+    - if: linux
+      then: sysroot_linux-64=2.17
+  host:
+    - if: linux
+      then: gmp
+    - if: linux
+      then: krb5
+    - if: linux
+      then: linux-pam
+    - openssl
+  run:
+    - if: linux
+      then: gmp
+    - if: linux
+      then: linux-pam
+    - openssl
+  ignore_run_exports:
+    - krb5
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libmi${SHLIB_EXT}
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: Open Management Infrastructure
+  homepage: https://github.com/microsoft/omi
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

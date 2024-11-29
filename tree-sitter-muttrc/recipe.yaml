@@ -1,0 +1,48 @@
+schema_version: 1
+
+context:
+  name: tree-sitter-muttrc
+  version: 0.0.6
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/tree_sitter_muttrc-${{ version }}.tar.gz
+  sha256: 067c6c4da39248322656cd814f71664ff33a1a3ce06b8fcc1f6e3214fb74a6ed
+
+build:
+  number: 0
+  skip: match(python, "<3.8")
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+  host:
+    - python >=3.8
+    - setuptools >=42
+    - wheel
+    - pip
+  run:
+    - python >=3.8
+
+tests:
+  - python:
+      imports:
+        - tree_sitter_muttrc
+  - requirements:
+      run:
+        - pip
+    script:
+      - pip check
+
+about:
+  summary: Muttrc grammar for tree-sitter
+  license: MIT
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

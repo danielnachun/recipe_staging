@@ -1,0 +1,48 @@
+schema_version: 1
+
+context:
+  name: erb_lint
+  version: 0.6.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: 32368f77792ee921ab20260837396ff6caa60a7a34f7e61187d274bc744555cd
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies --bindir=${PREFIX}/bin ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - rb-activesupport
+    - rb-better_html
+    - rb-parser
+    - rb-rainbow
+    - rb-smart_properties
+    - rubocop
+    - ruby>=3.2
+
+tests:
+  - script:
+      - erblint --help
+
+about:
+  license: MIT
+  license_file: LICENSE.txt
+  summary: ERB Linter tool.
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/Shopify/erb_lint
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

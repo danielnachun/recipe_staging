@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: language_server-protocol
+  version: 3.17.0.3
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: 3d5c58c02f44a20d972957a9febe386d7e7468ab3900ce6bd2b563dd910c6b3f
+
+build:
+  number: 1
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/LICENSE.txt
+  summary: A Language Server Protocol SDK
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/mtsmfm/language_server-protocol-ruby
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: perl-db_file
+  version: 1.858
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/P/PM/PMQS/DB_File-${{ version }}.tar.gz
+  sha256: ceb7a2868bd71f87b31e8b7c38d6f8cc0a31fb0322a377ee448994f094d0a7f6
+
+build:
+  number: 0
+  skip: win
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+  host:
+    - perl=5.32
+    - libdb
+  run:
+    - perl>=5.32
+
+tests:
+  - python:
+      imports:
+        - DB_File
+
+about:
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file: LICENSE.txt
+  summary: DB_File is a module which allows Perl programs to make use of the facilities provided by Berkeley DB
+  homepage: https://metacpan.org/pod/DB_File
+  repository: https://github.com/pmqs/DB_File
+
+extra:
+  recipe-maintainers:
+    - rpetit3
+

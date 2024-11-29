@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: rewatch
+  version: 1.0.9
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/rescript-lang/rewatch/archive/v${{ version }}.tar.gz
+  sha256: 02a4acc90014bea803b19710226806bc55095a62be640cc0bf4ce6265b7693a2
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - cargo-bundle-licenses
+
+tests:
+  - script:
+      - rewatch --help
+
+about:
+  license: BSD-3-Clause
+  license_file:
+    - THIRDPARTY.yml
+  summary: Rewatch is an alternative build system for the Rescript Compiler.
+  homepage: https://github.com/rescript-lang/rewatch
+  repository: https://github.com/rescript-lang/rewatch
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

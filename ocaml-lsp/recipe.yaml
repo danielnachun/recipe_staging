@@ -1,0 +1,56 @@
+schema_version: 1
+
+context:
+  name: ocaml-lsp
+  version: 1.17.0
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  git: https://github.com/ocaml/${{ name }}.git
+  rev: ${{ version }}
+
+build:
+  number: 1
+  skip: win
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - if: linux
+      then: binutils
+    - if: linux64
+      then: gcc
+    - if: linux64
+      then: sysroot_linux-64=2.17
+    - if: unix
+      then: make
+    - if: win
+      then: m2-make
+    - if: win
+      then: posix
+    - odig
+    - opam
+    - pkg-config
+  host:
+    - libev
+
+tests:
+  - script:
+      - ocamllsp --help
+
+about:
+  license: ISC
+  license_file:
+    - LICENSE.md
+    - license-files/
+  summary: OCaml Language Server Protocol implementation
+  homepage: https://github.com/ocaml/${{ name }}
+  repository: https://github.com/ocaml/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

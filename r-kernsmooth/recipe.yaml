@@ -1,0 +1,88 @@
+# Package: KernSmooth
+# Priority: recommended
+# Version: 2.23-16
+# Date: 2019-10-15
+# Title: Functions for Kernel Smoothing Supporting Wand & Jones (1995)
+# Authors@R: c(person("Matt", "Wand", role = "aut", email = "Matt.Wand@uts.edu.au"), person("Cleve", "Moler", role = "ctb", comment = "LINPACK routines in src"), person("Brian", "Ripley", role = c("trl", "cre", "ctb"), email = "ripley@stats.ox.ac.uk", comment = "R port and updates"))
+# Depends: R (>= 2.5.0), stats
+# Suggests: MASS
+# Description: Functions for kernel smoothing (and density estimation) corresponding to the book: Wand, M.P. and Jones, M.C. (1995) "Kernel Smoothing".
+# License: Unlimited
+# ByteCompile: yes
+# NeedsCompilation: yes
+# Packaged: 2019-10-15 12:12:47 UTC; ripley
+# Author: Matt Wand [aut], Cleve Moler [ctb] (LINPACK routines in src), Brian Ripley [trl, cre, ctb] (R port and updates)
+# Maintainer: Brian Ripley <ripley@stats.ox.ac.uk>
+# Repository: CRAN
+# Date/Publication: 2019-10-15 12:16:11 UTC
+schema_version: 1
+
+context:
+  version: 2.23-22
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-kernsmooth
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/KernSmooth_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/KernSmooth/KernSmooth_${{ version }}.tar.gz
+  sha256: 76e044904606cab79c9edf4eae3ad63ac9d91a2962b44e063075b4b40e8574e9
+
+build:
+  number: 0
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: not win
+      then: ${{ compiler('fortran') }}
+    - if: win
+      then: ${{ compiler('m2w64_fortran') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+    - libblas
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('KernSmooth')\""
+      - if: win
+        then: "\"%R%\" -e \"library('KernSmooth')\""
+
+about:
+  license: NOASSERTION
+  summary: "Functions for kernel smoothing (and density estimation) corresponding to the book: Wand, M.P. and Jones, M.C. (1995) \"Kernel Smoothing\"."
+  license_file: ${{ env.get("PREFIX") }}/lib/R/share/licenses/MIT
+  homepage: https://CRAN.R-project.org/package=KernSmooth
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

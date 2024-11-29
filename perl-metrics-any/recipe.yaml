@@ -1,0 +1,55 @@
+schema_version: 1
+
+context:
+  name: perl-metrics-any
+  version: 0.10
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/P/PE/PEVANS/Metrics-Any-${{ version }}.tar.gz
+  sha256: a90eadf9c8af24a516bb9a1b67061f641853f90b8fee9ffc24d2bb9720e8b99b
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - perl Build.PL
+    - perl ./Build
+    - perl ./Build test
+    - perl ./Build install --installdirs site
+
+requirements:
+  host:
+    - perl=5.32
+    - perl-module-build
+    - perl-test2-suite
+  run:
+    - perl>=5.32
+  ignore_run_exports:
+    - perl-module-build
+    - perl-test2-suite
+
+tests:
+  - python:
+      imports:
+        - Metrics::Any
+        - Metrics::Any::Adapter
+        - Metrics::Any::Adapter::File
+        - Metrics::Any::Adapter::Null
+        - Metrics::Any::Adapter::Stderr
+        - Metrics::Any::Adapter::Tee
+        - Metrics::Any::Adapter::Test
+        - Metrics::Any::AdapterBase::Stored
+        - Metrics::Any::Collector
+
+about:
+  license: perl_5
+  summary: abstract collection of monitoring metrics
+  homepage: http://metacpan.org/pod/Metrics-Any
+
+maintainers:
+  - danielnachun
+

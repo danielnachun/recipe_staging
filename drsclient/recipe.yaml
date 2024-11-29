@@ -1,0 +1,47 @@
+schema_version: 1
+
+context:
+  name: drsclient
+  version: 0.2.3
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/drsclient-${{ version }}.tar.gz
+  sha256: 679061eacfb04f7fdccf709924f03b907af024481eb4c9ff123d87080cf4f344
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - poetry
+    - poetry-core
+    - pip
+  run:
+    - python
+    - requests
+    - httpx >=0.23.0,<0.24.0
+    - asyncio
+    - backoff >=1.10.0,<2.0.0
+
+tests:
+  - python:
+      imports:
+        - drsclient
+      pip_check: true
+
+about:
+  summary: GA4GH DRS Client
+  license: Apache-2.0
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

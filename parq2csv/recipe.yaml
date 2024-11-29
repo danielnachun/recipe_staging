@@ -1,0 +1,51 @@
+schema_version: 1
+
+context:
+  name: parq2csv
+  version: 0.1.3
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
+  sha256: a91bcdb08214ef36fdd2593743d01edc117cdaeb8d3f85bea1e8f952929f62f7
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv
+  python:
+    entry_points:
+      - parq2csv = parq2csv.main:main
+
+requirements:
+  host:
+    - pandas >=0.22.0
+    - pip
+    - pyarrow >=0.11.0
+    - python
+  run:
+    - pandas >=0.22.0
+    - pyarrow >=0.11.0
+    - python
+
+tests:
+  - python:
+      imports:
+        - parq2csv
+      pip_check: false
+  - script:
+      - parq2csv --help
+
+about:
+  license: UNKNOWN
+  license_file:
+  summary: Command line tool to transform Apache Parquet files to CSV on the go
+  homepage: https://github.com/mludv/parq2csv
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

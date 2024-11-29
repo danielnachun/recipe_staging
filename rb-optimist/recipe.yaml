@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: optimist
+  version: 3.1.0
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: 81886f53ee8919f330aa30076d320d88eef9bc85aae2275376b4afb007c69260
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/LICENSE.txt
+  summary: Optimist is a commandline option parser for Ruby that just gets out of your way.
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/ManageIQ/optimist
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

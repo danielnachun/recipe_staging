@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: jsona
+  version: 0.6.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/jsona/jsona/archive/v${{ version }}.tar.gz
+  sha256: 1528add3a191333e358fa94b4d229b85ac9b5b4a3a23ecb7c31fb1ba4e148777
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - cargo-bundle-licenses
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: UNKNOWN
+  license_file:
+    - THIRDPARTY.yml
+  summary: JSONA parser, linter, formatter, lsp and cli.
+  homepage: https://github.com/jsona/jsona/
+  repository: https://github.com/jsona/jsona/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

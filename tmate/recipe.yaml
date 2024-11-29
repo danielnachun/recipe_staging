@@ -1,0 +1,52 @@
+schema_version: 1
+
+context:
+  name: tmate
+  version: 2.4.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/tmate-io/${{ name }}/archive/${{ version }}.tar.gz
+  sha256: 62b61eb12ab394012c861f6b48ba0bc04ac8765abca13bdde5a4d9105cb16138
+  patches:
+    - a5c6e80d3c54cd7faed52de5283b4f96bea86c13.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - autoconf
+    - automake
+    - make
+    - pkg-config
+  host:
+    - libevent
+    - libssh
+    - libtool
+    - msgpack-c
+    - ncurses
+  run:
+    - libevent
+    - libssh
+    - msgpack-c
+    - ncurses
+
+tests:
+  - script:
+      - tmate -V
+
+about:
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  summary: Program providing model for GNU coding standards and practices
+  homepage: https://www.gnu.org/software/hello/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

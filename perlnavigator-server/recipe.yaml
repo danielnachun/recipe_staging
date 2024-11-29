@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: perlnavigator-server
+  version: 0.6.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/perlnavigator-server/-/${{ name }}-${{ version }}.tgz
+  sha256: 19f978a49009cc8c4ddf9b0cca0a3d620dcf62ca62507b68f289be3a81308f2a
+
+build:
+  number: 2
+  noarch: generic
+
+requirements:
+  host:
+    - nodejs
+    - typescript
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - "perlnavigator 2>&1 | grep -q \"Connection input stream is not set\""
+
+about:
+  license: MIT
+  summary: Perl Language Server that includes syntax checking, perl critic, and code navigation
+  homepage: https://github.com/bscan/PerlNavigator
+  repository: https://github.com/bscan/PerlNavigator
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

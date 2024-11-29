@@ -1,0 +1,56 @@
+schema_version: 1
+
+context:
+  name: perl-uri
+  version: 5.17
+  sha256: 5f7e42b769cb27499113cfae4b786c37d49e7c7d32dbb469602cd808308568f8
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/O/OA/OALDERS/URI-${{ version }}.tar.gz
+  sha256: ${{ sha256 }}
+
+build:
+  number: 0
+  skip: win
+  noarch: generic
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-test-needs
+    - perl-test-warnings
+    - perl-test-fatal
+  run:
+    - perl>=5.32
+    - perl-business-isbn
+  run_exports:
+    weak:
+      - ${{ name }} =${{ version }}
+
+tests:
+  - python:
+      imports:
+        - URI
+
+about:
+  summary: Uniform Resource Identifiers (absolute and relative)
+  description: |
+    This module implements the URI class. Objects of this class represent "Uniform Resource Identifier references" as specified in RFC 2396 (and updated by RFC 2732).
+  license: GPL-1.0-or-later OR Artistic-1.0-Perl
+  license_file:
+    - ${{ env.get("PREFIX") }}/man/man1/perlartistic.1
+    - ${{ env.get("PREFIX") }}/man/man1/perlgpl.1
+  homepage: https://github.com/libwww-perl/URI
+  repository: https://github.com/libwww-perl/URI
+
+extra:
+  recipe-maintainers:
+    - fgiacomoni
+    - conda-forge/perl-packagers
+

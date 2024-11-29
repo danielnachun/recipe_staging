@@ -1,0 +1,93 @@
+schema_version: 1
+
+context:
+  version: 1.5.4
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-seriation
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/seriation_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/seriation/seriation_${{ version }}.tar.gz
+  sha256: d2339c52f581d1970ecf57c874a0d95810e9cd5f2fcde8f17376964c8e21339f
+
+build:
+  number: 0
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: not win
+      then: ${{ compiler('fortran') }}
+    - if: win
+      then: ${{ compiler('m2w64_fortran') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+    - r-mass
+    - r-tsp
+    - r-ca
+    - r-cluster
+    - r-colorspace
+    - r-foreach
+    - r-gclus
+    - r-qap
+    - r-registry
+    - r-vegan
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+    - r-mass
+    - r-tsp
+    - r-ca
+    - r-cluster
+    - r-colorspace
+    - r-foreach
+    - r-gclus
+    - r-qap
+    - r-registry
+    - r-vegan
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('seriation')\""
+      - if: win
+        then: "\"%R%\" -e \"library('seriation')\""
+
+about:
+  license: GPL-3.0-only
+  summary: |
+    Infrastructure for ordering objects with an implementation of several seriation/sequencing/ordination techniques to reorder matrices, dissimilarity matrices, and dendrograms. Also provides (optimally) reordered heatmaps, color images and clustering visualizations like dissimilarity plots, and visual assessment
+    of cluster tendency plots (VAT and iVAT).
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-3
+  homepage: https://github.com/mhahsler/seriation
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

@@ -1,0 +1,47 @@
+schema_version: 1
+
+context:
+  version: 0.3.5
+
+package:
+  name: r-pgenlibr
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://cran.r-project.org/src/contrib/pgenlibr_${{ version }}.tar.gz
+  sha256: fe267188953ff108645e54d5faed7b68170e01e9fbb271242703457b85074cda
+
+build:
+  number: 0
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+    - ${{ compiler('cxx') }}
+  host:
+    - r-base=4.2
+    - r-rcpp
+  run:
+    - r-base>=4.2
+    - r-rcpp
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('pgenlibr')\""
+
+about:
+  license: LGPL-3.0-or-later
+  summary: "A thin wrapper over PLINK 2's core libraries"
+  homepage: https://github.com/chrchang/plink-ng
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,46 @@
+schema_version: 1
+
+context:
+  name: perl-devel-checkcompiler
+  version: 0.07
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/S/SY/SYOHEX/Devel-CheckCompiler-${{ version }}.tar.gz
+  sha256: 768b7697b4b8d4d372c7507b65e9dd26aa4223f7100183bbb4d3af46d43869b5
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - perl Build.PL
+    - perl ./Build
+    - perl ./Build test
+    - perl ./Build install --installdirs site
+
+requirements:
+  host:
+    - perl=5.32
+    - perl-module-build-tiny
+  run:
+    - perl>=5.32
+  ignore_run_exports:
+    - perl-module-build-tiny
+
+tests:
+  - python:
+      imports:
+        - Devel::AssertC99
+        - Devel::CheckCompiler
+
+about:
+  license: perl_5
+  summary: "Check the compiler's availability"
+  homepage: https://github.com/tokuhirom/Devel-CheckCompiler
+
+maintainers:
+  - danielnachun
+

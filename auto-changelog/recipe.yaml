@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: auto-changelog
+  version: 2.4.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/cookpete/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: a7a73f195e0477b1cfdf880b2373df73382cd415dd3b1f08c1da6910dd99668f
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE.md
+    - third-party-licenses.txt
+  summary: Command line tool for generating a changelog from git tags and commit history
+  homepage: https://github.com/cookpete/${{ name }}
+  repository: https://github.com/cookpete/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

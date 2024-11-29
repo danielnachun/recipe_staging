@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: nodemon
+  version: 3.1.4
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/remy/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: aa76d633bc16e5cbf8d1d87cb1b4d2ba6df8e7e1e037073f7881a8aab540aa87
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Monitor for any changes in your node.js application and automatically restart the server - perfect for development
+  homepage: https://github.com/remy/${{ name }}
+  repository: https://github.com/remy/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: zellij
+  version: 0.40.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/zellij-org/${{ name }}/archive/v${{ version}}.tar.gz
+  sha256: 1f0bfa13f2dbe657d76341a196f98a3b4caa47ac63abee06b39883a11ca220a8
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - cargo-bundle-licenses
+    - make
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file: LICENSE.md
+  summary: Pluggable terminal workspace, with terminal multiplexer as the base feature
+  homepage: https://zellij.dev
+  repository: https://github.com/${{ name }}-org/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,52 @@
+schema_version: 1
+
+context:
+  name: crossplane
+  version: 0.5.8
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/crossplane-${{ version }}.tar.gz
+  sha256: b193bd8b963a041d5414ea18dcbb1c55b5424fee3d73bfa1809124605b322101
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - crossplane = crossplane.__main__:main
+
+requirements:
+  host:
+    - python
+    - pip
+  run:
+    - python
+
+tests:
+  - python:
+      imports:
+        - crossplane
+      pip_check: true
+  - requirements:
+      run:
+        - pip
+    script:
+      - crossplane --help
+
+about:
+  summary: Reliable and fast NGINX configuration file parser.
+  license: Apache-2.0
+  license_file:
+    - LICENSE
+    - NOTICE
+  homepage: https://github.com/nginxinc/crossplane
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

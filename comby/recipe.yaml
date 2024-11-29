@@ -1,0 +1,65 @@
+schema_version: 1
+
+context:
+  name: comby
+  version: 1.8.1
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/comby-tools/${{ name }}/archive/${{ version }}.tar.gz
+  sha256: 04d51cf742bbbf5e5fda064a710be44537fac49bff598d0e9762a3a799d666e2
+
+build:
+  number: 1
+  skip: win
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - if: linux
+      then: binutils
+    - if: linux64
+      then: gcc
+    - if: linux64
+      then: sysroot_linux-64=2.17
+    - if: unix
+      then: make
+    - if: win
+      then: m2-make
+    - if: win
+      then: posix
+    - autoconf
+    - m4
+    - odig
+    - opam
+    - pkg-config
+    - unzip
+  host:
+    - gmp
+    - libev
+    - pcre
+    - sqlite
+    - zlib
+  run:
+    - libzlib
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: Apache-2.0
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: Tool for changing code across many languages
+  homepage: https://comby.dev
+  repository: https://github.com/comby-tools/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

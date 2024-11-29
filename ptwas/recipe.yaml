@@ -1,0 +1,40 @@
+schema_version: 1
+
+context:
+  name: ptwas
+  version: 1.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/xqwen/ptwas/archive/35fa68df0a591f100ec9fc909e5ba351a7c6a94d.zip
+  sha256: 42466835f0ec66e492632459e740d50c3d3120d9abea9ed863f0f4f8ffec74bf
+
+build:
+  number: 1
+  noarch: generic
+
+requirements:
+  build:
+    - sed
+  run:
+    - perl
+    - r-base
+    - r-data.table
+
+tests:
+  - script:
+      - "PTWAS_est 2>&1 | grep -q \"Error: cannot read input data file\""
+      - "make_GAMBIT_DB.R --help 2>&1 | grep -q \"Error: no input file or directory ...\""
+
+about:
+  license: GPL-3.0
+  summary: Probabilistic Transcriptome-wide Association Analysis
+  homepage: https://github.com/xqwen/ptwas
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

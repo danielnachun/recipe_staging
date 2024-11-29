@@ -1,0 +1,46 @@
+schema_version: 1
+
+context:
+  name: lemminx
+  version: 0.26.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  git: https://github.com/eclipse/${{ name }}
+  rev: ${{ version }}
+
+build:
+  number: 1
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - if: linux
+      then: gcc
+    - graalvm
+    - sed
+  host:
+    - zlib
+  run:
+    - libzlib
+
+tests:
+  - script:
+      - test -f ${PREFIX}/bin/${{ name }}
+
+about:
+  license: EPL-2.0
+  license_file:
+    - LICENSE
+    - target/generated-resources/licenses/
+  summary: XML Language Server
+  homepage: https://github.com/eclipse/${{ name }}
+  repository: https://github.com/eclipse/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

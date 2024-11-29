@@ -1,0 +1,98 @@
+schema_version: 1
+
+context:
+  version: 4.9.2
+  am_version: 1.15
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: lftp
+  version: ${{ version }}
+
+source:
+  url: http://lftp.yar.ru/ftp/lftp-${{ version }}.tar.gz
+  sha256: a37589c61914073f53c5da0e68bd233b41802509d758a022000e1ae2076da733
+
+build:
+  # Windows build fails due to missing [n]curses.h or terminfo.h
+  number: 1
+  skip: win
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - autoconf
+    - automake
+    - if: not win
+      then: coreutils
+    - make
+    - if: win
+      then: posix
+    - if: win
+      then: m2-bison
+    - if: win
+      then: m2-autoconf
+    - if: win
+      then: m2-automake${{ am_version }}
+    - if: win
+      then: m2-libtool
+    - ${{ native }}pkg-config
+  host:
+    - libtool
+    - libxml2
+    - if: win
+      then: python
+    - openssl
+    - if: not win
+      then: readline
+    - if: not win
+      then: ncurses
+    - ${{ native }}openssl
+    - expat
+    - zlib
+    - if: win
+      then: m2-libreadline
+    - if: win
+      then: m2-ncurses
+    - ${{ native }}libiconv
+    - ${{ native }}gettext
+    - ${{ native }}xz
+  run:
+    - if: win
+      then: python
+    - ${{ native }}openssl
+    - expat
+    - zlib
+    - ${{ native }}libiconv
+    - ${{ native }}gettext
+    - if: not win
+      then: readline
+    - if: not win
+      then: ncurses
+    - if: win
+      then: m2-libreadline
+    - if: win
+      then: m2-ncurses
+
+tests:
+  - script:
+      - lftp --version
+
+about:
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  summary: |
+    LFTP is a sophisticated file transfer program supporting a number of network protocols
+    (ftp, http, sftp, fish, torrent). Like BASH, it has job control and uses the readline
+    library for input. It has bookmarks, a built-in mirror command, and can transfer
+    several files in parallel. It was designed with reliability in mind.
+
+
+  homepage: https://lftp.yar.ru/
+
+extra:
+  recipe-maintainers:
+    - epruesse
+    - croth1
+

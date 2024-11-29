@@ -1,0 +1,51 @@
+schema_version: 1
+
+context:
+  name: hoogle
+  version: 5.0.18.4
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://hackage.haskell.org/package/${{ name }}-${{ version }}/${{ name }}-${{ version }}.tar.gz
+  sha256: 9d0f2de39821d14e8a436d5fda3523e789258b8041f02dd655f0e37d5013e323
+
+build:
+  number: 0
+  skip: not unix
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cabal-install
+    - cabal-plan
+    - ghc
+  host:
+    - if: osx
+      then: libiconv
+    - zlib
+  run:
+    - if: osx
+      then: libiconv
+    - libzlib
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: BSD-3-Clause
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: Haskell API search engine
+  homepage: https://github.com/ndmitchell/${{ name }}
+  repository: https://github.com/ndmitchell/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,40 @@
+schema_version: 1
+
+context:
+  name: bibtex-tidy
+  version: 1.11.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/FlamingTempura/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: ecade3f2b8d395f7c760f0e83c49703329ff02f4e16d63b4d3be4866496e39bb
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  summary: Cleaner and Formatter for BibTeX files
+  homepage: https://github.com/FlamingTempura/${{ name }}
+  repository: https://github.com/FlamingTempura/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

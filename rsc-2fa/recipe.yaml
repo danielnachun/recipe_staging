@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: rsc-2fa
+  version: 1.2.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/rsc/2fa/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: d8db6b9a714c9146a4b82fd65b54f9bdda3e58380bce393f45e1ef49e4e9bee5
+
+build:
+  number: 1
+
+requirements:
+  build:
+    - go
+    - go-licenses
+
+tests:
+  - script:
+      - "2fa --help 2>&1 | grep -q \"2fa -list\""
+
+about:
+  license: BSD-3-Clause
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: Two-factor authentication on the command-line
+  homepage: https://github.com/rsc/${{ name }}
+  repository: https://github.com/rsc/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

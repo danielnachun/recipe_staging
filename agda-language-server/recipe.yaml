@@ -1,0 +1,49 @@
+schema_version: 1
+
+context:
+  name: agda-language-server
+  version: 0.2.6.4.0.3
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/agda/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: b344f52e2a0d911be0cdd183fbe6963c33b521fa74de1cc45a7e1e13f8045a53
+
+build:
+  number: 0
+  skip: not unix
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cabal-install
+    - cabal-plan
+    - ghc
+    - pkg-config
+  host:
+    - if: osx
+      then: libiconv
+    - ncurses
+    - zlib
+
+tests:
+  - script:
+      - als --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: Language Server for Agda
+  homepage: https://github.com/agda/${{ name }}
+  repository: https://github.com/agda/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

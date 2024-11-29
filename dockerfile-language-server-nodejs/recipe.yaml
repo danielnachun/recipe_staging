@@ -1,0 +1,38 @@
+schema_version: 1
+
+context:
+  name: dockerfile-language-server-nodejs
+  version: 0.9.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/${{ name }}/-/${{ name }}-${{ version }}.tgz
+  sha256: 88a6085ca049ebdf383f3644ee699e982379e3767918bf14baedd0ef90c1e18f
+
+build:
+  number: 2
+  noarch: generic
+
+requirements:
+  host:
+    - nodejs
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - test -f ${PREFIX}/bin/docker-langserver
+
+about:
+  license: MIT
+  summary: A language server for Dockerfiles powered by Node.js, TypeScript, and VSCode technologies
+  homepage: https://github.com/rcjsuen/dockerfile-language-server-nodejs
+  repository: https://github.com/rcjsuen/dockerfile-language-server-nodejs
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

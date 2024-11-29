@@ -1,0 +1,109 @@
+schema_version: 1
+
+context:
+  version: 6.7-0
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-rms
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/rms_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/rms/rms_${{ version }}.tar.gz
+  sha256: 8b3a14c47e2eafb24d9f0807f50af4b8bb8b44b0ec6bd6f38e0676f5a53dbbff
+
+build:
+  number: 1
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: not win
+      then: ${{ compiler('fortran') }}
+    - if: win
+      then: ${{ compiler('m2w64_fortran') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+    - r-cluster
+    - r-colorspace
+    - r-digest
+    - r-ggplot2
+    - r-hmisc >=4.8_0
+    - r-htmltable >=1.11.0
+    - r-htmltools
+    - r-kableextra
+    - r-knitr
+    - r-lattice
+    - r-mass
+    - r-multcomp
+    - r-nlme >=3.1_123
+    - r-polspline
+    - r-quantreg
+    - r-rpart
+    - r-sparsem
+    - r-survival
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+    - r-cluster
+    - r-colorspace
+    - r-digest
+    - r-ggplot2
+    - r-hmisc >=4.8_0
+    - r-htmltable >=1.11.0
+    - r-htmltools
+    - r-kableextra
+    - r-knitr
+    - r-lattice
+    - r-mass
+    - r-multcomp
+    - r-nlme >=3.1_123
+    - r-polspline
+    - r-quantreg
+    - r-rpart
+    - r-sparsem
+    - r-survival
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('rms')\""
+      - if: win
+        then: "\"%R%\" -e \"library('rms')\""
+
+about:
+  license: GPL-2.0-or-later
+  summary: "Regression modeling, testing, estimation, validation, graphics, prediction, and typesetting by storing enhanced model design attributes in the fit.  'rms' is a collection of functions that assist with and streamline modeling.  It also contains functions for binary and ordinal logistic regression models, ordinal::
+    - "models for continuous Y with a variety of distribution families, and the Buckley-James multiple regression model for right-censored responses, and implements penalized maximum likelihood estimation for logistic and ordinary linear models.  'rms' works with almost any regression model, but it was especially written to"
+    - "work with binary or ordinal regression models, Cox regression, accelerated failure time models, ordinary linear models,\\tthe Buckley-James model, generalized least squares for serially or spatially correlated observations, generalized linear models, and quantile regression.\""
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-3
+  homepage: https://hbiostat.org/R/rms/
+  repository: https://github.com/harrelfe/rms
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

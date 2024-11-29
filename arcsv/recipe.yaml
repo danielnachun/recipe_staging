@@ -1,0 +1,46 @@
+schema_version: 1
+
+context:
+  name: arcsv
+  version: 0.9.6
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/SUwonglab/arcsv/archive/86da1bc54f68729e9003e8af64d07335e471aefc.zip
+  sha256: f4234ef5e986a905cc7f5ad42b6b891cdef4995685fc974c5b8346e25c87499c
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python >3.7,<3.9
+    - pip
+  run:
+    - python >3.7,<3.9
+    - pysam =0.16
+    - numpy =1.17
+    - scipy =1.5
+    - scikit-learn =0.23
+    - matplotlib-base =3.2
+    - python-igraph =0.8
+    - pyinter =0.2
+
+tests:
+  - python:
+      imports:
+        - arcsv
+
+about:
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: ansible-language-server
+  version: 1.2.3
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/@ansible/${{ name }}/-/${{ name }}-${{ version }}.tgz
+  sha256: 3182960a35f229f453d520cfb6c9624ca18104653457eca99dc1406690fa5aa2
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - jq
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} 2>&1 | grep -q 'Connection input stream is not set.'
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Language server for Ansible
+  homepage: https://github.com/ansible/vscode-ansible
+  repository: https://github.com/ansible/vscode-ansible
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

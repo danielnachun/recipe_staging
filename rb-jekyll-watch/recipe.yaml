@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: jekyll-watch
+  version: 2.2.1
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: bc44ed43f5e0a552836245a54dbff3ea7421ecc2856707e8a1ee203a8387a7e1
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - rb-listen
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: LICENSE.txt
+  summary: Rebuild your Jekyll site when a file changes with the `--watch` switch.
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/jekyll/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

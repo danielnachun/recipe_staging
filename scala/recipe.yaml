@@ -1,0 +1,45 @@
+schema_version: 1
+
+context:
+  name: scala
+  version: 3.4.2
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  git: https://github.com/lampepfl/dotty
+  rev: ${{ version }}
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - findutils
+    - maven
+    - sbt
+    - sed
+    - openjdk >=17,<18
+  run:
+    - openjdk
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: Apache-2.0
+  license_file:
+    - LICENSE
+    - target/generated-resources/licenses/
+  summary: The Scala 3 compiler, also known as Dotty.
+  homepage: https://dotty.epfl.ch
+  repository: https://github.com/lampepfl/dotty
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

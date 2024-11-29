@@ -1,0 +1,88 @@
+# Package: pamr
+# Title: Pam: Prediction Analysis for Microarrays
+# Version: 1.56.1
+# Author: T. Hastie, R. Tibshirani, Balasubramanian Narasimhan, Gil Chu
+# Description: Some functions for sample classification in microarrays.
+# Maintainer: Rob Tibshirani  <tibs@stanford.edu>
+# Depends: R (>= 2.10), cluster, survival
+# License: GPL-2
+# Packaged: 2019-04-21 11:21:24 UTC; ripley
+# Repository: CRAN
+# NeedsCompilation: yes
+# Date/Publication: 2019-04-22 06:58:41 UTC
+schema_version: 1
+
+context:
+  version: 1.56.1
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-pamr
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/pamr_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/pamr/pamr_${{ version }}.tar.gz
+  sha256: d0e527f2336ee4beee91eefb2a8f0dfa96413d9b5a5841d6fc7ff821e67c9779
+
+build:
+  number: 6
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: not win
+      then: ${{ compiler('fortran') }}
+    - if: win
+      then: ${{ compiler('m2w64_fortran') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+    - r-cluster
+    - r-survival
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+    - r-cluster
+    - r-survival
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('pamr')\""
+      - if: win
+        then: "\"%R%\" -e \"library('pamr')\""
+
+about:
+  license: GPL-2.0-only
+  summary: Some functions for sample classification in microarrays.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+  homepage: https://CRAN.R-project.org/package=pamr
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+    - MathiasHaudgaard
+    - FrodePedersen
+    - ArneKr
+

@@ -1,0 +1,55 @@
+schema_version: 1
+
+context:
+  name: luarocks
+  version: 3.9.2
+  sha256: bca6e4ecc02c203e070acdb5f586045d45c078896f6236eb46aa33ccd9b94edb
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: http://luarocks.github.io/luarocks/releases/luarocks-${{ version }}.tar.gz
+  sha256: ${{ sha256 }}
+  file_name: ${{ name }}-${{ version }}.tar.gz
+
+build:
+  number: 0
+  skip: win
+  prefix_detection:
+    ignore_binary_files: true
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+  host:
+    - lua
+    - unzip
+  run:
+    - lua
+    - unzip
+
+tests:
+  - script:
+      - luarocks config
+
+about:
+  license: MIT
+  license_file: COPYING
+  summary: LuaRocks is the package manager for Lua modulesLuaRocks is the package manager for Lua module
+  description: |
+    LuaRocks is the package manager for Lua modules.
+    It allows you to create and install Lua modules as self-contained
+    packages called rocks. You can download and install LuaRocks on Unix and
+    Windows.
+  homepage: https://luarocks.org/
+  repository: https://github.com/luarocks/luarocks/
+  documentation: https://github.com/luarocks/luarocks/wiki/Documentation
+
+extra:
+  recipe-maintainers:
+    - jerowe
+    - izahn
+

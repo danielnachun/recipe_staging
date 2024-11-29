@@ -1,0 +1,51 @@
+schema_version: 1
+
+context:
+  name: hadolint
+  version: 2.12.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/hadolint/${{ name }}/archive/v${{ version }}-beta.tar.gz
+  sha256: b9461721f689f90e3b1aa691bbf80daaf8bc7e876ba910c45a98b641d9f9dfc2
+  patches:
+    - 0001-fix-ghc-9.8-build.patch
+
+build:
+  number: 1
+  skip: not unix
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cabal-install
+    - cabal-plan
+    - ghc
+  host:
+    - if: osx
+      then: libiconv
+  run:
+    - if: osx
+      then: libiconv
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: GPL-3.0-only
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: Smarter Dockerfile linter to validate best practices
+  homepage: https://github.com/hadolint/${{ name }}
+  repository: https://github.com/hadolint/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

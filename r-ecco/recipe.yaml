@@ -1,0 +1,49 @@
+schema_version: 1
+
+context:
+  version: 1.0
+
+package:
+  name: r-ecco
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/fanyue322/ECCO/archive/efe035970b131eec3873330189acdaa29eb09722.zip
+  sha256: aa7fd5993b1e51fb567ac0783f8555c4933372ec5d60aa54ef69b8dbe1749cd1
+
+build:
+  number: 0
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+    - r-matrixeqtl
+    - r-twosamplemr
+  run:
+    - r-base>=4.2
+    - r-matrixeqtl
+    - r-twosamplemr
+
+tests:
+  - script:
+      - "$R -e \"library('ECCO')\""
+
+about:
+  license: GPL-2.0-or-later
+  summary: ECCO is implemented as an open source R package for determining the optimal number of PEER factors in eQTL mapping studies.
+  homepage: https://github.com/fanyue322/ECCO
+  repository: https://github.com/fanyue322/ECCO
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

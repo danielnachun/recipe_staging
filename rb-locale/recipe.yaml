@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: locale
+  version: 2.1.4
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: 522f9973ef3eee64aac9bca06d21db2fba675fa3d2cf61d21f42d1ca18a9f780
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: LGPL-3.0-or-later
+  license_file: ${{ name }}-${{ version }}/COPYING
+  summary: Ruby-Locale is the pure ruby library which provides basic APIs for localization.
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/ruby-gettext/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: husky
+  version: 9.1.4
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/typicode/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: 8aa77d0bb3d89ba9df84345e2341252bb291ac2749139b32ac692739a31fef47
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - nodejs
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: Git hooks made easy
+  homepage: https://github.com/typicode/${{ name }}
+  repository: https://github.com/typicode/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

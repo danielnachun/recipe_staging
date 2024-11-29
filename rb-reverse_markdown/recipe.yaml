@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: reverse_markdown
+  version: 2.1.1
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: b2206466b682ac1177b6b8ec321d00a84fca02d096c5d676a7a0cc5838dc0701
+
+build:
+  number: 1
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - rb-nokogiri
+    - ruby=3.2
+  run:
+    - rb-nokogiri
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: WTFPL
+  license_file: ${{ name }}-${{ version }}/LICENSE
+  summary: Map simple html back into markdown, e.g. if you want to import existing html data in your application.
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/xijo/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

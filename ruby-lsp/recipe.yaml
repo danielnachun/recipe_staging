@@ -1,0 +1,47 @@
+schema_version: 1
+
+context:
+  name: ruby-lsp
+  version: 0.12.5
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: 9d50460cfb3970ee8f10d1b5adc6c673c5b16e4b546582c13c65a0e92dd75961
+
+build:
+  number: 2
+  noarch: generic
+
+requirements:
+  build:
+    - sed
+  host:
+    - rb-language_server-protocol
+    - rb-prism
+    - rb-sorbet-runtime
+    - ruby
+  run:
+    - rb-language_server-protocol
+    - rb-prism
+    - rb-sorbet-runtime
+    - ruby
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/LICENSE.txt
+  summary: An opinionated language server for Ruby
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/shopify/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

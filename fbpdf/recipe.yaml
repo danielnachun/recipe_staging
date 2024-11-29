@@ -1,0 +1,62 @@
+schema_version: 1
+
+context:
+  name: fbpdf
+  version: r102.6276360
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/aligrudi/${{ name }}/archive/6276360f47edd71de736e153f5dcc82b6d60b3db.zip
+  sha256: 0c3ce046bf5bb1476b414c55fef6985880af5a77abfe935a87453f95e61bb83b
+
+build:
+  number: 0
+  skip: not linux
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - gcc
+    - gxx
+    - make
+  host:
+    - djvulibre
+    - freetype
+    - libgumbo
+    - harfbuzz
+    - jbig2dec
+    - libjpeg-turbo
+    - mupdf
+    - mujs
+    - openjpeg
+  run:
+    - djvulibre
+    - freetype
+    - libgumbo
+    - harfbuzz
+    - jbig2dec
+    - libjpeg-turbo
+    - mupdf
+    - mujs
+    - openjpeg
+    - libzlib
+
+tests:
+  - script:
+      - fbpdf-mupdf 2>&1 | grep -q "usage: "fbpdf \\[-r rotation\\] \\[-z zoom x10\\] \\[-p page\\] filename\""
+
+about:
+  license: ISC
+  license_file: LICENSE
+  summary: A small framebuffer pdf viewer, based on MuPDF
+  homepage: http://litcave.rudi.ir
+  repository: https://github.com/aligrudi/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

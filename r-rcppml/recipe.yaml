@@ -1,0 +1,105 @@
+# Package: RcppML
+# Type: Package
+# Title: Rcpp Machine Learning Library
+# Version: 0.3.7
+# Date: 2021-09-21
+# Authors@R: person("Zachary", "DeBruine", email = "zacharydebruine@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0003-2234-4827"))
+# Description: Fast machine learning algorithms including matrix factorization and divisive clustering for large sparse and dense matrices.
+# License: GPL (>= 2)
+# Imports: Rcpp, Matrix, methods, stats
+# LinkingTo: Rcpp, RcppEigen
+# VignetteBuilder: knitr
+# RoxygenNote: 7.1.1
+# Suggests: knitr, rmarkdown, testthat (>= 3.0.0)
+# Config/testthat/edition: 3
+# URL: https://github.com/zdebruine/RcppML
+# BugReports: https://github.com/zdebruine/RcppML/issues
+# NeedsCompilation: yes
+# Packaged: 2021-09-21 18:39:44 UTC; Owner
+# Author: Zachary DeBruine [aut, cre] (<https://orcid.org/0000-0003-2234-4827>)
+# Maintainer: Zachary DeBruine <zacharydebruine@gmail.com>
+# Repository: CRAN
+# Date/Publication: 2021-09-21 19:00:02 UTC
+schema_version: 1
+
+context:
+  version: 0.3.7
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-rcppml
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/RcppML_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/RcppML/RcppML_${{ version }}.tar.gz
+  sha256: 325c6515085527eb9123cc5e87e028547065771ed4d623048f41886ae28908c6
+
+build:
+  number: 1
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: not win
+      then: ${{ compiler('cxx') }}
+    - if: win
+      then: ${{ compiler('m2w64_cxx') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+    - if: linux
+      then: libgomp
+    - if: osx
+      then: llvm-openmp
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+    - r-matrix
+    - r-rcpp
+    - r-rcppeigen
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+    - r-matrix
+    - r-rcpp
+    - r-rcppeigen
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('RcppML')\""
+      - if: win
+        then: "\"%R%\" -e \"library('RcppML')\""
+
+about:
+  license: GPL-2.0-or-later
+  summary: |
+    Fast machine learning algorithms including matrix factorization and divisive clustering
+    for large sparse and dense matrices.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+  homepage: https://github.com/zdebruine/RcppML
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

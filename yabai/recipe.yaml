@@ -1,0 +1,38 @@
+schema_version: 1
+
+context:
+  name: yabai
+  version: 7.1.5
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/koekeishiya/yabai/archive/v${{ version }}.tar.gz
+  sha256: 2babd9fd89fb228ef826335d57c223ed885d578490637185fabbdc3e45726dc5
+
+build:
+  number: 0
+  skip: not osx
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+
+tests:
+  - script:
+      - yabai --version
+
+about:
+  license: MIT
+  license_file: LICENSE.txt
+  summary: A tiling window manager for macOS based on binary space partitioning
+  homepage: https://github.com/koekeishiya/yabai
+  repository: https://github.com/koekeishiya/yabai
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,56 @@
+schema_version: 1
+
+context:
+  version: 1.0
+
+package:
+  name: r-omr
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/wanglu205/OMR/archive/47bd93f695145e5c86dfb1be04d42d63199363e5.zip
+  sha256: 6f216f476e91516e066c1d28661337eaf2579c9fb41b7862bc090dbb0a6d7d13
+
+build:
+  number: 0
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+    - r-rcpp
+    - r-rcpparmadillo
+    - r-foreach
+    - r-doparallel
+    - r-inline
+  run:
+    - r-base>=4.2
+    - r-rcpp
+    - r-rcpparmadillo
+    - r-foreach
+    - r-doparallel
+    - r-inline
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('OMR')\""
+      - if: win
+        then: "\"%R%\" -e \"library('OMR')\""
+
+about:
+  license: GPL-2.0-or-later
+  summary: Omnigenic Mendelian Randomization
+  homepage: https://github.com/wanglu205/OMR
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

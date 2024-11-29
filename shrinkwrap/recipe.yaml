@@ -1,0 +1,64 @@
+schema_version: 1
+
+context:
+  name: shrinkwrap
+  version: 1.2.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/jonathonl/shrinkwrap/archive/v${{ version }}.tar.gz
+  sha256: aa15583079c3dfccb118cf36fae9bc6353920b99d0204a9e349dad027b531286
+  patches:
+    - 0001-add-missing-include.patch
+
+build:
+  number: 0
+  skip: win
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - if: not win
+      then: make
+    - xz
+    - zstd
+    - zlib
+  host:
+    - xz
+    - zlib
+    - zstd
+
+tests:
+  - script:
+      - if: not win
+        then: test -f $PREFIX/include/shrinkwrap/istream.hpp
+      - if: not win
+        then: test -f $PREFIX/include/shrinkwrap/stdio.hpp
+      - if: not win
+        then: test -f $PREFIX/include/shrinkwrap/gz.hpp
+      - if: not win
+        then: test -f $PREFIX/include/shrinkwrap/zstd.hpp
+      - if: not win
+        then: test -f $PREFIX/include/shrinkwrap/xz.hpp
+      - if: not win
+        then: test -f $PREFIX/share/shrinkwrap/shrinkwrap-config.cmake
+      - if: not win
+        then: test -f $PREFIX/share/shrinkwrap/shrinkwrap-config-version.cmake
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: A std::streambuf wrapper for compression formats.
+  homepage: https://github.com/jonathonl/shrinkwrap
+  repository: https://github.com/jonathonl/shrinkwrap
+
+extra:
+  recipe-maintainers:
+    - matuskosut
+    - jonathonl
+

@@ -1,0 +1,66 @@
+schema_version: 1
+
+context:
+  version: 1.3.10
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-geepack
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - https://cran.r-project.org/src/contrib/geepack_${{ version }}.tar.gz
+    - https://cran.r-project.org/src/contrib/Archive/geepack/geepack_${{ version }}.tar.gz
+  sha256: 4a38923b3697fd5e6488075224b63ef10195a29223e73a40e969f7db63215f42
+
+build:
+  number: 0
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: win
+      then: posix
+    - if: unix
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: unix
+      then: ${{ compiler('cxx') }}
+    - if: win
+      then: ${{ compiler('m2w64_cxx') }}
+  host:
+    - r-base=4.2
+    - r-mass
+    - r-broom
+    - r-magrittr
+  run:
+    - r-base>=4.2
+    - r-mass
+    - r-broom
+    - r-magrittr
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('geepack')\""
+      - if: win
+        then: "\"%R%\" -e \"library('geepack')\""
+
+about:
+  license: GPL-3.0-or-later
+  summary: Generalized estimating equations solver for parameters in mean, scale, and correlation structures, through mean link, scale link, and correlation link. Can also handle clustered categorical responses.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-3
+  homepage: https://CRAN.R-project.org/package=geepack
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

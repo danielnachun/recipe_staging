@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: zls
+  version: 0.13.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/zigtools/zls/archive/${{ version }}.tar.gz
+  sha256: 2e8046b6b0de765a4bf4bb828345e2badc8b828bc257dc931d0f56b147684d9f
+
+build:
+  number: 0
+  dynamic_linking:
+    binary_relocation: ${{ true if osx }}
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - zig
+
+tests:
+  - script:
+      - zls --help
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: A Zig language server supporting Zig developers with features like autocomplete and goto definition
+  homepage: https://github.com/zigtools/zls
+  repository: https://github.com/zigtools/zls
+
+extra:
+  recipe-maintainers:
+    - chrisburr
+

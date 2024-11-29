@@ -1,0 +1,46 @@
+schema_version: 1
+
+context:
+  name: otters
+  version: 1.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/daiqile96/OTTERS/archive/c435db185fbbce085c35050933973d25368a835f.zip
+  sha256: 60605f0252c5c6db918b8bcf7d3ac9605ab72ed1d9509fb6faac4bc0acb98834
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  run:
+    - r-data.table
+    - r-fdrtool
+    - r-lassosum
+    - sdpr
+    - plink
+    - pandas
+    - numpy
+    - scipy
+    - pysam
+    - prscs
+
+tests:
+  - script:
+      - imputing -h
+      - training -h
+      - testing -h
+
+about:
+  license: Unspecified
+  summary: Omnibus Transcriptome Test using Expression Reference Summary data
+  homepage: https://github.com/daiqile96/OTTERS
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

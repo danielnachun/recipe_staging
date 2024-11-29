@@ -1,0 +1,56 @@
+schema_version: 1
+
+context:
+  version: 1.0
+  name: mr.ldp
+
+package:
+  name: r-${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/QingCheng0218/MR.LDP/archive/05980184a358190a479d2d7fa479eae8ca052dcb.zip
+  sha256: cc363a2ee7e01ad8bfae9fe38a38f1804b6e2d06b05e3ecce44e306687e6324a
+
+build:
+  number: 0
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+    - ${{ compiler('cxx') }}
+  host:
+    - r-base=4.2
+    - r-rcpp
+    - r-rcpparmadillo
+    - r-bh
+    - r-bigmemory
+  run:
+    - libopenblas
+    - if: linux
+      then: _openmp_mutex
+    - r-base>=4.2
+    - r-rcpp
+    - r-rcpparmadillo
+    - r-bh
+    - r-bigmemory
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('MR.LDP')\""
+
+about:
+  license: GPL-2.0-or-later
+  summary: Two-sample Mendelian randomization accounting for linkage disequilibrium and horizontal pleiotropy
+  homepage: https://github.com/QingCheng0218/MR.LDP
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

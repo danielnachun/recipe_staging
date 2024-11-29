@@ -1,0 +1,96 @@
+schema_version: 1
+
+context:
+  name: mariadb
+  version: 11.4.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://archive.mariadb.org/mariadb-${{ version }}/source/mariadb-${{ version }}.tar.gz
+  sha256: 7ba372bd87638e56f881bcd8878ee3819f2dab28589cbf088857e76bd0db0a64
+  patches:
+    - 0001-fix-o_direct-usage.patch
+    - 0002-fix-o_direct-usage.patch
+    - 0003-fix-windows.patch
+    - 0004-fix-libxml.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - if: unix
+      then: bison
+    - cmake
+    - git
+    - if: win
+      then: m2-bison
+    - if: unix
+      then: make
+    - if: win
+      then: ninja
+  host:
+    - boost-cpp
+    - bzip2
+    - curl
+    - fmt=9.1
+    - krb5
+    - if: unix
+      then: libedit
+    - libxml2
+    - lz4-c
+    - lzo
+    - if: unix
+      then: ncurses
+    - openssl
+    - pcre2
+    - snappy
+    - xz
+    - zlib
+    - zstd
+  run:
+    - bzip2
+    - krb5
+    - libcurl
+    - if: unix
+      then: libedit
+    - libxml2
+    - libzlib
+    - lz4-c
+    - lzo
+    - openssl>=3.0
+    - pcre2
+    - snappy
+    - xz
+    - zstd
+  ignore_run_exports:
+    - boost-cpp
+    - fmt
+
+tests:
+  - script:
+      - if: not win
+        then: test -f $PREFIX/lib/libmariadb.a
+      - if: not win
+        then: test -f $PREFIX/lib/libmariadb${SHLIB_EXT}
+      - if: not win
+        then: ${{ name }} 2>&1 | grep -q "Can't read dir of '/etc/my.cnf.d'"
+      - if: win
+        then: ${{ name }} --help
+
+about:
+  license: GPL-2.0-only
+  license_file: COPYING
+  summary: Drop-in replacement for MySQL
+  homepage: https://mariadb.org/
+  repository: https://github.com/MariaDB/server
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

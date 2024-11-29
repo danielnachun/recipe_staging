@@ -1,0 +1,51 @@
+schema_version: 1
+
+context:
+  name: standard
+  version: 1.39.2
+
+package:
+  name: ${{ name|lower }}rb
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: a327312ea9057da468cf1bdbec7479479fa2ad64ffbef7304747a6f8f86cabf9
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - sed
+  host:
+    - rb-language_server-protocol
+    - rb-lint_roller
+    - rb-standard-custom
+    - rb-standard-performance
+    - rubocop
+    - ruby >=3.2
+  run:
+    - rb-language_server-protocol
+    - rb-lint_roller
+    - rb-standard-custom
+    - rb-standard-performance
+    - rubocop
+    - ruby >=3.2
+
+tests:
+  - script:
+      - standardrb --help
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/LICENSE.txt
+  summary: Ruby Style Guide, with linter & automatic code fixer
+  homepage: https://rubygems.org/gems/standard
+  repository: https://github.com/standardrb/standard
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

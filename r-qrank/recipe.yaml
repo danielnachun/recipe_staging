@@ -1,0 +1,49 @@
+schema_version: 1
+
+context:
+  version: 1.0
+
+package:
+  name: r-qrank
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/QRank_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/QRank/QRank_${{ version }}.tar.gz
+  sha256: 60b2663d75ad2481ec12f8efba8d03e391e4462d364c2802757217b74a2622b9
+
+build:
+  number: 0
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+    - r-quantreg
+  run:
+    - r-base>=4.2
+    - r-quantreg
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('QRank')\""
+      - if: win
+        then: "\"%R%\" -e \"library('QRank')\""
+
+about:
+  license: GPL-2.0-or-later
+  summary: A Quantile Rank-score based test for the identification of expression quantitative trait loci.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+  homepage: https://CRAN.R-project.org/package=QRank
+

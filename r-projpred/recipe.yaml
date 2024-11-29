@@ -1,0 +1,137 @@
+# Encoding: UTF-8
+# Package: projpred
+# Title: Projection Predictive Feature Selection
+# Version: 2.0.2
+# Authors@R: c(person("Juho", "Piironen", role = c("aut"), email = "juho.t.piironen@gmail.com"), person("Markus", "Paasiniemi", role = "aut"), person("Alejandro", "Catalina", role = c("cre", "aut"), email="alecatfel@gmail.com"), person("Aki", "Vehtari", role = "aut"), person("Jonah", "Gabry", role = "ctb"), person("Marco", "Colombo", role = "ctb"), person("Paul-Christian", "Burkner", role = "ctb"))
+# Maintainer: Alejandro Catalina <alecatfel@gmail.com>
+# Description: Performs projection predictive feature selection for generalized linear models and generalized linear and additive multilevel models (see, Piironen, Paasiniemi and Vehtari, 2020, <https://projecteuclid.org/euclid.ejs/1589335310>, Catalina, Burkner and Vehtari, 2020, <arXiv:2010.06994>). The package is compatible with the 'rstanarm' and 'brms' packages, but other reference models can also be used. See the package vignette for more information and examples.
+# Depends: R (>= 3.5.0)
+# Imports: methods, dplyr, loo (>= 2.0.0), rstantools (>= 2.0.0), lme4, optimx, ggplot2, Rcpp, utils, rngtools (>= 1.2.4), tidyverse, MASS, magrittr, mgcv, gamm4
+# LinkingTo: Rcpp, RcppArmadillo
+# License: GPL-3
+# LazyData: TRUE
+# RoxygenNote: 7.1.1
+# Suggests: rstanarm, brms, testthat, knitr, rmarkdown, glmnet, bayesplot (>= 1.5.0)
+# VignetteBuilder: knitr
+# URL: https://mc-stan.org/projpred/, https://discourse.mc-stan.org
+# BugReports: https://github.com/stan-dev/projpred/issues/
+# NeedsCompilation: yes
+# Packaged: 2020-10-27 15:25:44 UTC; alex
+# Author: Juho Piironen [aut], Markus Paasiniemi [aut], Alejandro Catalina [cre, aut], Aki Vehtari [aut], Jonah Gabry [ctb], Marco Colombo [ctb], Paul-Christian Burkner [ctb]
+# Repository: CRAN
+# Date/Publication: 2020-10-28 12:50:02 UTC
+schema_version: 1
+
+context:
+  version: 2.8.0
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-projpred
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/projpred_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/projpred/projpred_${{ version }}.tar.gz
+  sha256: b383ddc5eca275737b96e4e3e14256b4f4abc4b29d292b5cebf3828d0921a1f6
+
+build:
+  number: 1
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+    missing_dso_allowlist:
+      - if: win
+        then: "*/R.dll"
+      - if: win
+        then: "*/Rblas.dll"
+      - if: win
+        then: "*/Rlapack.dll"
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: not win
+      then: ${{ compiler('cxx') }}
+    - if: win
+      then: ${{ compiler('m2w64_cxx') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+    - r-mass
+    - r-rcpp
+    - r-rcpparmadillo
+    - r-abind
+    - r-gamm4
+    - r-ggplot2
+    - r-gtools
+    - r-lme4 >=1.1_28
+    - r-loo >=2.0.0
+    - r-mclogit
+    - r-mgcv
+    - r-mvtnorm
+    - r-nnet
+    - r-ordinal
+    - r-rstantools >=2.0.0
+    - r-scales
+    - libblas
+    - liblapack
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+    - r-mass
+    - r-rcpp
+    - r-rcpparmadillo
+    - r-abind
+    - r-gamm4
+    - r-ggplot2
+    - r-gtools
+    - r-lme4 >=1.1_28
+    - r-loo >=2.0.0
+    - r-mclogit
+    - r-mgcv
+    - r-mvtnorm
+    - r-nnet
+    - r-ordinal
+    - r-rstantools >=2.0.0
+    - r-scales
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('projpred')\""
+      - if: win
+        then: "\"%R%\" -e \"library('projpred')\""
+
+about:
+  license: GPL-3.0-only
+  summary: |
+    Performs projection predictive feature selection for generalized linear models and generalized linear and additive multilevel models (see, Piironen, Paasiniemi and Vehtari, 2020, <https://projecteuclid.org/euclid.ejs/1589335310>, Catalina, Bürkner and Vehtari, 2020, <arXiv:2010.06994>). The package is compatible
+    with the 'rstanarm' and 'brms' packages, but other reference models can also be used. See the package vignette for more information and examples.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-3
+    - LICENSE
+  homepage: https://mc-stan.org/projpred/, https://discourse.mc-stan.org
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

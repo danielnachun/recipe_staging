@@ -1,0 +1,62 @@
+schema_version: 1
+
+context:
+  name: ktplotspy
+  version: 0.1.10
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/ktplotspy-${{ version }}.tar.gz
+  sha256: 7e96164b04f94cb7b06503bb62dd00ee9c04367c8ab6e0e22a0b8d23621e66f3
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv
+
+requirements:
+  host:
+    - python >=3.8,<4.0
+    - poetry-core >=1.0.0
+    - pip
+  run:
+    - python >=3.8.0,<4.0.0
+    - pandas *
+    - numpy *
+    - plotnine *
+    - seaborn *
+    - requests *
+    - python_circos >=0.3.0,<0.4.0
+  run_constraints:
+    - anndata >=0.7.6,<0.10.0
+    - black *
+    - pytest-cov *
+    - nbsphinx *
+    - sphinx-autodoc-typehints *
+    - sphinx_rtd_theme *
+    - readthedocs-sphinx-ext *
+    - recommonmark *
+
+tests:
+  - python:
+      imports:
+        - ktplotspy
+  - requirements:
+      run:
+        - pip
+    script:
+      - pip check
+
+about:
+  summary: Python library for plotting Cellphonedb results. Ported from ktplots R package.
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/zktuong/ktplotspy
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

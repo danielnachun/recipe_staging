@@ -1,0 +1,37 @@
+schema_version: 1
+
+context:
+  name: typescript
+  version: 5.5.3
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/typescript/-/${{ name }}-${{ version }}.tgz
+  sha256: f47d21b40c99188b4158f8a444f132207957d528b1f80ccbc019ce9c4765c3d1
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - nodejs
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - tsc --help
+
+about:
+  license: Apache-2.0
+  summary: Language for application scale JavaScript development
+  homepage: https://www.typescriptlang.org
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

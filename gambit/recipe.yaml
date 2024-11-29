@@ -1,0 +1,49 @@
+schema_version: 1
+
+context:
+  name: GAMBIT
+  version: 1.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/corbinq/GAMBIT/archive/1644b80d252d9def1ae2fdf85067d53d06162966.zip
+  sha256: 1bca7a27a12e27211e19b232e8e25fe30dbbcb8549bdc5210b0fc997daf0e02f
+  patches:
+    - 0001-fix-pointer-dereference.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - ${{ compiler('c') }}
+    - ${{ compiler('fortran') }}
+    - if: linux
+      then: binutils
+    - make
+    - if: linux
+      then: gxx
+    - gfortran
+    - sed
+  host:
+    - zlib
+  run:
+    - libzlib
+
+tests:
+  - script:
+      - "GAMBIT 2>&1 | grep -q \"fatal error...  no gwas input file!\""
+
+about:
+  license: GPL-3.0-or-later
+  summary: A C++ tool for Gene-based Analysis with oMniBus, Integrative Tests
+  homepage: https://github.com/corbinq/GAMBIT
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

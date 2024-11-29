@@ -1,0 +1,77 @@
+# Package: mitml
+# Type: Package
+# Title: Tools for Multiple Imputation in Multilevel Modeling
+# Version: 0.3-7
+# Date: 2019-01-02
+# Author: Simon Grund [aut,cre], Alexander Robitzsch [aut], Oliver Luedtke [aut]
+# Maintainer: Simon Grund <grund@ipn.uni-kiel.de>
+# BugReports: https://github.com/simongrund1/mitml/issues
+# Imports: pan, jomo, haven, grDevices, graphics, stats, utils
+# Suggests: mice, miceadds, Amelia, lme4, nlme, geepack, survival, knitr, rmarkdown
+# LazyData: true
+# LazyLoad: true
+# Description: Provides tools for multiple imputation of missing data in multilevel modeling. Includes a user-friendly interface to the packages 'pan' and 'jomo', and several functions for visualization, data management and the analysis  of multiply imputed data sets.
+# License: GPL (>= 2)
+# VignetteBuilder: knitr
+# NeedsCompilation: no
+# Packaged: 2019-01-02 10:26:03 UTC; simon
+# Repository: CRAN
+# Date/Publication: 2019-01-07 18:10:03 UTC
+schema_version: 1
+
+context:
+  version: 0.4-5
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-mitml
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/mitml_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/mitml/mitml_${{ version }}.tar.gz
+  sha256: 056aec823187cc3793640d8a5e74d74093bae74260a975ceb098a83a52e2eeeb
+
+build:
+  number: 2
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+    - r-haven
+    - r-jomo
+    - r-pan
+  run:
+    - r-base>=4.2
+    - r-haven
+    - r-jomo
+    - r-pan
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('mitml')\""
+      - if: win
+        then: "\"%R%\" -e \"library('mitml')\""
+
+about:
+  license: GPL-2.0-or-later
+  summary: "Provides tools for multiple imputation of missing data in multilevel modeling. Includes a user-friendly interface to the packages 'pan' and 'jomo', and several functions for visualization, data management and the analysis  of multiply imputed data sets."
+  license_file: ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+  homepage: https://CRAN.R-project.org/package=mitml
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

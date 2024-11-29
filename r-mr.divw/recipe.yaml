@@ -1,0 +1,47 @@
+schema_version: 1
+
+context:
+  version: 0.1.0
+
+package:
+  name: r-mr.divw
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/tye27/mr.divw/archive/8f3f8f7e873e3895eebae877194fadc6e9132d1b.zip
+  sha256: b211b92307957bd47b9ac86cd8dacf3e434bc7e1a948d2d70c5c69cfce553661
+
+build:
+  number: 0
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+  run:
+    - r-base>=4.2
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('mr.divw')\""
+      - if: win
+        then: "\"%R%\" -e \"library('mr.divw')\""
+
+about:
+  license: OTHER
+  summary: Debiased Inverse-Variance Weighted Estimator in Two-Sample Summary-Data Mendelian Randomization
+  homepage: https://github.com/tye27/mr.divw
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

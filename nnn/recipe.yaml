@@ -1,0 +1,55 @@
+# fstatat is only available on MacOS 10.10+
+schema_version: 1
+
+context:
+  build: 0
+  version: 4.9
+
+package:
+  name: nnn
+  version: ${{ version }}
+
+source:
+  url: https://github.com/jarun/nnn/archive/v${{ version }}.tar.gz
+  sha256: 9e25465a856d3ba626d6163046669c0d4010d520f2fb848b0d611e1ec6af1b22
+
+build:
+  number: ${{ build }}
+  skip: win
+
+requirements:
+  build:
+    - make
+    - ${{ compiler('c') }}
+    - pkg-config
+  host:
+    - ncurses
+    - readline
+  run:
+    - if: osx and x86_64
+      then: __osx >=${{ MACOSX_DEPLOYMENT_TARGET|default("10.9") }}
+    - ncurses
+    - readline
+
+tests:
+  - script:
+      - nnn -h
+
+about:
+  license: BSD-2-Clause
+  license_file: LICENSE
+  summary: Tiny, lightning fast, feature-packed file manager
+  homepage: https://github.com/jarun/nnn/
+
+extra:
+  recipe-maintainers:
+    - lebedov
+
+MACOSX_DEPLOYMENT_TARGET:  # [osx and x86_64]
+  - if: osx and x86_64
+    then: 10.1
+
+MACOSX_SDK_VERSION:  # [osx and x86_64]
+  - if: osx and x86_64
+    then: 10.1
+

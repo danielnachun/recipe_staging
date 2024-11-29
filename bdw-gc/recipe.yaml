@@ -1,0 +1,52 @@
+schema_version: 1
+
+context:
+  name: bdw-gc
+  version: 8.2.4
+  sha256: 18e63ab1428bd52e691da107a6a56651c161210b11fbe22e2aa3c31f7fa00ca5
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/ivmai/bdwgc/archive/v${{ version }}.tar.gz
+  sha256: ${{ sha256 }}
+  file_name: gc-${{ version }}.tar.gz
+
+build:
+  number: 0
+  skip: win
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - autoconf
+    - automake
+    - libtool
+    - pkg-config
+    - make
+  host:
+    # Uses the static library
+    - libatomic_ops
+  run_exports:
+    - ${{ pin_subpackage('bdw-gc') }}
+
+tests:
+  - script:
+      - test -e $PREFIX/include/gc.h
+      - if: linux
+        then: test -e $PREFIX/lib/libgc.so
+      - if: osx
+        then: test -e $PREFIX/lib/libgc.dylib
+
+about:
+  license: Custom
+  summary: Garbage collector for C and C++.
+  homepage: http://www.hboehm.info/gc/
+
+extra:
+  recipe-maintainers:
+    - isuruf
+    - stefan-balke
+

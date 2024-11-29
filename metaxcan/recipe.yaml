@@ -1,0 +1,73 @@
+schema_version: 1
+
+context:
+  name: metaxcan
+  version: 0.7.3
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/hakyimlab/MetaXcan/archive/aca75164070513b2616e0608891fca8b874fa934.zip
+  sha256: de4072ce81c98b014d53d1a066995dbc2ee1790ab5fcdb959ed3b0e885db220e
+
+build:
+  number: 1
+  noarch: generic
+
+requirements:
+  build:
+    - sed
+  host:
+    - bgen-reader
+    - cyvcf2
+    - h5py
+    - numpy >1.24
+    - pip
+    - pandas
+    - pyarrow
+    - pyliftover
+    - python =3.12
+    - scipy
+    - statsmodels
+  run:
+    - bgen-reader
+    - cyvcf2
+    - h5py
+    - numpy >1.24
+    - pip
+    - pandas
+    - pyarrow
+    - pyliftover
+    - python =3.12
+    - scipy
+    - statsmodels
+
+tests:
+  - script:
+      - M00_prerequisites.py -h
+      - M01_covariances_correlations.py -h
+      - M02_variances.py -h
+      - M03_betas.py -h
+      - M04_zscores.py -h
+      - PrediXcan.py -h
+      - SPrediXcan.py -h
+      - MetaMany.py -h
+      - MulTiXcan.py -h
+      - SMulTiXcan.py -h
+      - BuildExpressionProduct.py -h
+      - CovarianceBuilder.py -h
+      - PrediXcanAssociation.py -h
+      - Predict.py -h
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: Set of tools to integrate genomic information of biological mechanisms with complex traits
+  homepage: https://github.com/hakyimlab/MetaXcan
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

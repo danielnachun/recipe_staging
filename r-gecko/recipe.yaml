@@ -1,0 +1,50 @@
+schema_version: 1
+
+context:
+  version: 1.0
+
+package:
+  name: r-gecko
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/borangao/GECKO/archive/249d9cf5d8f5a4d6aaf7e3f008075a5ee85c80ef.zip
+  sha256: b263a974dc9c2f947b4f3985324dcfb1910a27a6d49dc07625ff636d188ac94b
+
+build:
+  number: 0
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+    - sed
+  host:
+    - r-base=4.2
+    - r-rcpp
+    - r-rcpparmadillo
+  run:
+    - r-base>=4.2
+    - r-rcpp
+    - r-rcpparmadillo
+
+tests:
+  - script:
+      - "$R -e \"library('GECKO')\""
+
+about:
+  license: GPL-3.0-or-later
+  license_file: LICENSE.md
+  summary: Genetic and Environmental Covariance Estimation by Composite-Likelihood Optimization
+  homepage: https://github.com/borangao/GECKO
+  repository: https://github.com/borangao/GECKO
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

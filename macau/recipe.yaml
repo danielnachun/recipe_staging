@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: macau
+  version: 1.40
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  path: macau
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - make
+  host:
+    - boost-cpp
+    - gsl
+    - openblas
+    - zlib
+  run:
+    - gsl
+    - libzlib
+
+tests:
+  - script:
+      - macau -h
+
+about:
+  license: Other
+  summary: MACAU is the software implementing the Mixed model Association for Count data via data AUgmentation algorithm.
+  homepage: http://www.xzlab.org/software/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

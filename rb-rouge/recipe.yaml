@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: rouge
+  version: 4.3.0
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: 9ee3d9ec53338e78c03fff0cbcd08881d80d69152349b046761e48ccf2de581c
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: MIT AND BSD-2-Clause
+  license_file: ${{ name }}-${{ version }}/LICENSE
+  summary: Rouge aims to a be a simple, easy-to-extend drop-in replacement for pygments.
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/rouge-ruby/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

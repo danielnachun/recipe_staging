@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: hocon
+  version: 1.4.0
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: e71023ed7c56ae780ec34c0ce7789a233bcead08c045d50bc7b3af40f5afcd80
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: Apache-2.0
+  license_file: ${{ name }}-${{ version }}/LICENSE
+  summary: A port of the Java Typesafe Config library to Ruby
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/danielsdeleo/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

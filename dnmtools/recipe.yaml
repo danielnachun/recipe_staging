@@ -1,0 +1,59 @@
+schema_version: 1
+
+context:
+  version: 1.4.2
+
+package:
+  name: dnmtools
+  version: ${{ version }}
+
+source:
+  url: https://github.com/smithlabcode/dnmtools/releases/download/v${{ version }}/dnmtools-${{ version }}.tar.gz
+  sha256: 0b712d4635a6924f0f230206b999db3d6e3a98b0d330640f3fd5cf4930eaf127
+  patches:
+    - 0001-use-sse2neon.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - if: linux
+      then: binutils
+    - make
+    - ${{ compiler('cxx') }}
+    - autoconf
+    - automake
+    - if: osx
+      then: llvm-openmp
+    - if: linux
+      then: libgomp
+  host:
+    - htslib
+    - sse2neon
+    - gsl
+    - zlib=1.2
+  run:
+    - htslib
+    - gsl
+    - libzlib>=1.2
+  run_exports:
+    - ${{ pin_subpackage('dnmtools', upper_bound="x.x") }}
+
+tests:
+  - script:
+      - dnmtools
+
+about:
+  license: GPL-3.0-or-later
+  license_file: LICENSE
+  summary: |
+    dnmtools is a set of tools for analyzing DNA methylation data from bisulfite sequencing
+  homepage: https://github.com/smithlabcode/dnmtools
+  documentation: https://dnmtools.readthedocs.io/
+
+extra:
+  recipe-maintainers:
+    - andrewdavidsmith
+    - guilhermesena1
+

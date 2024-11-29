@@ -1,0 +1,49 @@
+schema_version: 1
+
+context:
+  name: perl-mro-compat
+  version: 0.15
+  sha256: 0d4535f88e43babd84ab604866215fc4d04398bd4db7b21852d4a31b1c15ef61
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/H/HA/HAARG/MRO-Compat-${{ version }}.tar.gz
+  sha256: ${{ sha256 }}
+
+build:
+  number: 0
+  skip: win
+  noarch: generic
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+  run_exports:
+    weak:
+      - ${{ name }} =${{ version }}
+
+tests:
+  - python:
+      imports:
+        - MRO::Compat
+
+about:
+  license: GPL-1.0-or-later OR Artistic-1.0-Perl
+  license_file:
+    - ${{ env.get("PREFIX") }}/man/man1/perlartistic.1
+    - ${{ env.get("PREFIX") }}/man/man1/perlgpl.1
+  summary: mro::* interface compatibility for Perls < 5.9.5
+  homepage: https://metacpan.org/release/MRO-Compat
+
+extra:
+  recipe-maintainers:
+    - xileF1337
+    - conda-forge/perl-packagers
+

@@ -1,0 +1,48 @@
+schema_version: 1
+
+context:
+  name: hlint
+  version: 3.8
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/ndmitchell/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: 70082004f954acdf63a5c76ccd6ee229295c5667c89d6085bc8c79756b238f2f
+
+build:
+  number: 1
+  skip: not unix
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cabal-install
+    - cabal-plan
+    - ghc
+  host:
+    - if: osx
+      then: libiconv
+  host:
+    - libiconv  #[osx]
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: BSD-3-Clause
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: Haskell source code suggestions
+  homepage: https://github.com/ndmitchell/${{ name }}
+  repository: https://github.com/ndmitchell/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,80 @@
+# Package: exactRankTests
+# Title: Exact Distributions for Rank and Permutation Tests
+# Date: 2019-04-29
+# Version: 0.8-30
+# Authors@R: c(person("Torsten", "Hothorn", role = c("aut", "cre"), email = "Torsten.Hothorn@R-project.org"), person("Kurt", "Hornik", role = "aut"))
+# Description: Computes exact conditional p-values and quantiles using an implementation of the Shift-Algorithm by Streitberg & Roehmel.
+# Depends: R (>= 2.4.0), stats, utils
+# Suggests: survival
+# License: GPL (>= 2)
+# NeedsCompilation: yes
+# Packaged: 2019-04-28 15:56:28 UTC; hothorn
+# Author: Torsten Hothorn [aut, cre], Kurt Hornik [aut]
+# Maintainer: Torsten Hothorn <Torsten.Hothorn@R-project.org>
+# Repository: CRAN
+# Date/Publication: 2019-04-28 19:20:12 UTC
+schema_version: 1
+
+context:
+  version: 0.8-35
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-exactranktests
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/exactRankTests_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/exactRankTests/exactRankTests_${{ version }}.tar.gz
+  sha256: 7eb4a9ff431a306f634a5feba39c381afb17573e24230976ece843c84e8969e3
+
+build:
+  number: 2
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('exactRankTests')\""
+      - if: win
+        then: "\"%R%\" -e \"library('exactRankTests')\""
+
+about:
+  license: GPL-2.0-or-later
+  summary: Computes exact conditional p-values and quantiles using an implementation of the Shift-Algorithm by Streitberg & Roehmel.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+  homepage: https://CRAN.R-project.org/package=exactRankTests
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

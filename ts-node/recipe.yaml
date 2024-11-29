@@ -1,0 +1,45 @@
+schema_version: 1
+
+context:
+  name: ts-node
+  version: 10.9.2
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/TypeStrong/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: bc43e9d99293e81845c7362bfc6275bf0c486387bb01edb4bda7b95a713171d5
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - curl
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+    - unzip
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: TypeScript execution and REPL for node.js
+  homepage: https://github.com/TypeStrong/${{ name }}
+  repository: https://github.com/TypeStrong/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

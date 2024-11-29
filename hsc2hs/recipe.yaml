@@ -1,0 +1,45 @@
+schema_version: 1
+
+context:
+  name: hsc2hs
+  version: 0.68.10
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/haskell/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: 8f0c47454029d141b53e48ab3eb00fabc0289961f021ee82006e5531b4024876
+
+build:
+  number: 0
+  skip: not unix
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cabal-install
+    - ghc
+  host:
+    - if: osx
+      then: libiconv
+  host:
+    - libiconv  #[osx]
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: BSD-3-Clause
+  license_file: LICENSE
+  summary: Pre-processor for .hsc files
+  homepage: https://github.com/haskell/${{ name }}
+  repository: https://github.com/haskell/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

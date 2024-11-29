@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: sift
+  version: 0.9.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/svent/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: bbbd5c472c36b78896cd7ae673749d3943621a6d5523d47973ed2fc6800ae4c8
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+    - go-licenses
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: GPL-3.0-only
+  license_file:
+    - LICENSE
+    #- license-files/
+  summary: Fast and powerful open source alternative to grep
+  homepage: https://github.com/svent/${{ name }}
+  repository: https://github.com/svent/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

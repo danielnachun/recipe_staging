@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: tree-node-cli
+  version: 1.6.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/${{ name }}/-/${{ name }}-${{ version }}.tgz
+  sha256: d1eea486c413d325292640437401325982d33b8f1bb22a49908b699f88d3326a
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - tree --help
+      - treee --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: "output coverage reports using Node.js' built in coverage"
+  homepage: https://github.com/bcoe/${{ name }}
+  repository: https://github.com/bcoe/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

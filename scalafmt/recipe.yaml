@@ -1,0 +1,47 @@
+schema_version: 1
+
+context:
+  name: scalafmt
+  version: 3.7.12
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  git: https://github.com/scalameta/${{ name }}
+  rev: v${{ version }}
+
+build:
+  number: 1
+
+requirements:
+  build:
+    - findutils
+    - if: linux
+      then: gcc
+    - maven
+    - sbt
+    - sed
+  host:
+    - graalvm
+  run:
+    - openjdk
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: Apache-2.0
+  license_file:
+    - LICENCE.md
+    - target/generated-resources/licenses/
+  summary: Code formatter for Scala
+  homepage: http://scalameta.org/scalafmt
+  repository: https://github.com/scalameta/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

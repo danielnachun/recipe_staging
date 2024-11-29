@@ -1,0 +1,38 @@
+schema_version: 1
+
+context:
+  name: gnustep-make
+  version: 2.9.1
+  version_under: ${{"version | replace(".", "_")"}}
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/gnustep/tools-make/releases/download/make-${{ version_under }}/gnustep-make-${{ version }}.tar.gz
+  sha256: c3d6e70cf156b27e7d1ed2501c57df3f96e27488ce2f351b93e479c58c01eae7
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+
+tests:
+  - script:
+      - gnustep-config --help
+
+about:
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  summary: Basic GNUstep Makefiles
+  homepage: http://gnustep.org
+  repository: https://github.com/gnustep/tools-make
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,87 @@
+# Package: cmprsk
+# Version: 2.2-9
+# Date: 2019-10-01
+# Title: Subdistribution Analysis of Competing Risks
+# Author: Bob Gray <gray@jimmy.harvard.edu>
+# Maintainer: Bob Gray <gray@jimmy.harvard.edu>
+# Depends: R (>= 3.0.0), survival
+# Description: Estimation, testing and regression modeling of subdistribution functions in competing risks, as described in Gray (1988), A class of K-sample tests for comparing the cumulative incidence of a competing risk, Ann. Stat. 16:1141-1154 <DOI:10.1214/aos/1176350951>, and Fine JP and Gray RJ (1999), A proportional hazards model for the subdistribution of a competing risk, JASA, 94:496-509, <DOI:10.1080/01621459.1999.10474144>.
+# License: GPL (>= 2)
+# URL: https://www.R-project.org
+# NeedsCompilation: yes
+# Packaged: 2019-09-30 16:09:15 UTC; gray
+# Repository: CRAN
+# Date/Publication: 2019-10-09 14:10:08 UTC
+schema_version: 1
+
+context:
+  version: 2.2-11
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-cmprsk
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/cmprsk_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/cmprsk/cmprsk_${{ version }}.tar.gz
+  sha256: 844027cb2c162cf7ef97034d01237ad7b81aa192fe302250d22d2c5528110e14
+
+build:
+  number: 2
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: not win
+      then: ${{ compiler('fortran') }}
+    - if: win
+      then: ${{ compiler('m2w64_fortran') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+    - r-survival
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+    - r-survival
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('cmprsk')\""
+      - if: win
+        then: "\"%R%\" -e \"library('cmprsk')\""
+
+about:
+  license: GPL-2.0-or-later
+  summary: |
+    Estimation, testing and regression modeling of subdistribution functions in competing risks, as described in Gray (1988), A class of K-sample tests for comparing the cumulative incidence of a competing risk, Ann. Stat. 16:1141-1154 <DOI:10.1214/aos/1176350951>, and Fine JP and Gray RJ (1999), A proportional hazards
+    model for the subdistribution of a competing risk, JASA, 94:496-509, <DOI:10.1080/01621459.1999.10474144>.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+  homepage: https://www.R-project.org
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

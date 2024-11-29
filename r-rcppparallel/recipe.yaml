@@ -1,0 +1,98 @@
+# Package: RcppParallel
+# Type: Package
+# Title: Parallel Programming Tools for 'Rcpp'
+# Version: 4.4.3
+# Authors@R: c( person("JJ", "Allaire", role = c("aut"), email = "jj@rstudio.com"), person("Romain", "Francois", role = c("aut", "cph")), person("Kevin", "Ushey", role = c("aut", "cre"), email = "kevin@rstudio.com"), person("Gregory", "Vandenbrouck", role = "aut"), person("Marcus", "Geelnard", role = c("aut", "cph"), comment = "TinyThread library, http://tinythreadpp.bitsnbites.eu/"), person(family = "RStudio", role = "cph"), person(family = "Intel", role = c("aut", "cph"), comment = "Intel TBB library, https://www.threadingbuildingblocks.org/"), person(family = "Microsoft", role = "cph") )
+# Description: High level functions for parallel programming with 'Rcpp'. For example, the 'parallelFor()' function can be used to convert the work of a standard serial "for" loop into a parallel one and the 'parallelReduce()' function can be used for accumulating aggregate or other values.
+# Depends: R (>= 3.0.2)
+# Suggests: Rcpp, RUnit, knitr, rmarkdown
+# SystemRequirements: GNU make, Windows: cmd.exe and cscript.exe, Solaris: g++ is required
+# License: GPL-2
+# URL: http://rcppcore.github.io/RcppParallel, https://github.com/RcppCore/RcppParallel
+# Biarch: TRUE
+# Collate: 'build.R' 'hooks.R' 'options.R' 'skeleton.R'
+# NeedsCompilation: yes
+# Packaged: 2019-05-22 18:52:14 UTC; kevin
+# Author: JJ Allaire [aut], Romain Francois [aut, cph], Kevin Ushey [aut, cre], Gregory Vandenbrouck [aut], Marcus Geelnard [aut, cph] (TinyThread library, http://tinythreadpp.bitsnbites.eu/), RStudio [cph], Intel [aut, cph] (Intel TBB library, https://www.threadingbuildingblocks.org/), Microsoft [cph]
+# Maintainer: Kevin Ushey <kevin@rstudio.com>
+# Repository: CRAN
+# Date/Publication: 2019-05-22 22:20:04 UTC
+schema_version: 1
+
+context:
+  version: 5.1.6
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-rcppparallel
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/RcppParallel_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/RcppParallel/RcppParallel_${{ version }}.tar.gz
+  sha256: ac560d868e9757a93ddbf176dfd851fc753f67919476f88e248fe94cba4f0f15
+
+build:
+  number: 2
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: not win
+      then: ${{ compiler('cxx') }}
+    - if: win
+      then: ${{ compiler('m2w64_cxx') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}grep
+    - ${{ posix }}autoconf
+    - if: not win
+      then: ${{ posix }}automake
+    - if: win
+      then: ${{ posix }}automake-wrapper
+    - ${{ posix }}pkg-config
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('RcppParallel')\""
+      - if: win
+        then: "\"%R%\" -e \"library('RcppParallel')\""
+
+about:
+  license: GPL-2.0-or-later
+  summary: "High level functions for parallel programming with 'Rcpp'. For example, the 'parallelFor()' function can be used to convert the work of a standard serial \"for\" loop into a parallel one and the 'parallelReduce()' function can be used for accumulating aggregate or other values."
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+  homepage: http://rcppcore.github.io/RcppParallel, https://github.com/RcppCore/RcppParallel
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

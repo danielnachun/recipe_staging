@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: msbuild
+  version: 17.10.4
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/dotnet/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: 36e88fee53340f46988873bd42a6d3f4b204e2601f607e9c5a2eeb4806dada88
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - dotnet
+    - jq
+    - nuget-license
+  run:
+    - dotnet
+
+tests:
+  - script:
+      - MSBuild --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: The Microsoft Build Engine (MSBuild) is the build platform for .NET and Visual Studio.
+  homepage: https://github.com/dotnet/${{ name }}
+  repository: https://github.com/dotnet/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

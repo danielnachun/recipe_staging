@@ -1,0 +1,53 @@
+schema_version: 1
+
+context:
+  version: 1.2.0
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-mixmeta
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/mixmeta_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/mixmeta/mixmeta_${{ version }}.tar.gz
+  sha256: a8218eb67a2f95cd17402adbeeb4be5c8f4d853ee1ca3acb4c844180a5346e24
+
+build:
+  number: 0
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base =4.2
+  run:
+    - r-base >=4.2
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('mixmeta')\""
+      - if: win
+        then: "\"%R%\" -e \"library('mixmeta')\""
+
+about:
+  license: GPL-2.0-or-later
+  summary: |
+    A collection of functions to perform various meta-analytical models through a unified
+    mixed-effects framework, including standard univariate fixed and random-effects
+    meta-analysis and meta-regression, and non-standard extensions such as multivariate,
+    multilevel, longitudinal, and dose-response models.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+  homepage: https://github.com/gasparrini/mixmeta, http://www.ag-myresearch.com/package-mixmeta
+

@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: tsslint
+  version: 1.0.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/johnsoncodehk/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: dccaa502d5260d372b66831f2a9d872a791a240cc91e907967fc0f22ea26f5f0
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} --projects
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: The fastest and lightest TypeScript semantic linting solution
+  homepage: https://github.com/johnsoncodehk/${{ name }}
+  repository: https://github.com/johnsoncodehk/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

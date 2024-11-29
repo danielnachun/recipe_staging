@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: puppet-strings
+  version: 4.1.3
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: 9cd19e0027f50f75290ef66d4e20521276fc23ad8ffc86d76756ae34b808ca3e
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - rb-rgen
+    - rb-yard
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: Apache-2.0
+  license_file: ${{ name }}-${{ version }}/LICENSE
+  summary: Puppet documentation via YARD
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/puppetlabs/puppet-strings
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

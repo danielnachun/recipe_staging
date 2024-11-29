@@ -1,0 +1,48 @@
+schema_version: 1
+
+context:
+  name: fastenloc
+  version: 2.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/xqwen/${{ name }}/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: e6273addff0e48ce24f8f7e67833d6ee8fe1c84e4e595109b583986ff7376e1d
+
+build:
+  number: 3
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - make
+  host:
+    - blas
+    - boost-cpp =1.84
+    - gsl
+    - zlib
+  run:
+    - if: linux
+      then: _openmp_mutex
+    - if: osx
+      then: llvm-openmp
+    - libboost =1.84
+    - libopenblas
+    - libzlib
+
+tests:
+  - script:
+      - fastenloc 2>&1 | grep -q "Usage: "fastenloc -eqtl eqtl_file -gwas gwas_file\""
+
+about:
+  license: GPL-3.0-or-later
+  summary: Fast enrichment estimation aided colocalization analysis
+  homepage: https://github.com/xqwen/fastenloc
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

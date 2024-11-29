@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: erubis
+  version: 2.6.6
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: 75773bf89a65c3941560d91191ccfd3e69a2c9251b8610375ae18cf58912cda7
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - rb-abstract
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/MIT-LICENSE
+  summary: Erubis is an implementation of eRuby
+  homepage: https://rubygems.org/gems/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

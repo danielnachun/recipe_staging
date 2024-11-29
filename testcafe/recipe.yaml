@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: testcafe
+  version: 3.6.2
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/testcafe/-/testcafe-${{ version }}.tgz
+  sha256: b9d98f1ab07e239490f1dfe2912908d4a694c2cb84ac81ca0c21e184746f2c66
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - testcafe --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Automated browser testing for the modern web development stack.
+  homepage: https://github.com/DevExpress/testcafe
+  repository: https://github.com/DevExpress/testcafe
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

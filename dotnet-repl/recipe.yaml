@@ -1,0 +1,51 @@
+schema_version: 1
+
+context:
+  name: dotnet-repl
+  version: 0.1.204
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/jonsequitur/${{ name }}/archive/6d91680b4a3fd6e74f7d36f1a0695992a514b7bc.zip
+  sha256: 204c065e63a28300b016dd08ad0dd19f9e7a09d9ad67b26cb322519f407c5cfa
+
+build:
+  number: 2
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - nuget-license
+  host:
+    - dotnet <8
+    - libpsl-native
+    - omi
+    - nodejs
+    - powershell
+  run:
+    - dotnet <8
+    - libpsl-native
+    - omi
+    - nodejs
+    - powershell
+
+tests:
+  - script:
+      - dotnet-repl --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: A polyglot REPL built on .NET Interactive
+  homepage: https://github.com/jonsequitur/${{ name }}
+  repository: https://github.com/jonsequitur/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

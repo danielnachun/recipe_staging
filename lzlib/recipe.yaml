@@ -1,0 +1,46 @@
+schema_version: 1
+
+context:
+  name: lzlib
+  version: 1.13
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://download.savannah.gnu.org/releases/lzip/lzlib/lzlib-${{ version }}.tar.gz
+  sha256: a1ab58f3148ba4b2674e938438166042137a9275bed747306641acfddc9ffb80
+  patches:
+    - if: osx
+      then: 0001-make-shared-lib-work-on-macOS.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - if: linux
+      then: binutils
+    - make
+    - sed
+
+tests:
+  - script:
+      - if: not win
+        then: test -f $PREFIX/lib/liblz.a
+      - if: not win
+        then: test -f $PREFIX/lib/liblz${SHLIB_EXT}
+
+about:
+  license: BSD-2-Clause
+  license_file: COPYING
+  summary: Data compression library
+  homepage: https://www.nongnu.org/lzip/lzlib.html
+  repository: https://www.nongnu.org/lzip/lzlib.html
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

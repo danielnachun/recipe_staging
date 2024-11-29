@@ -1,0 +1,82 @@
+schema_version: 1
+
+context:
+  version: 0.2.12
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-rcppcctz
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/RcppCCTZ_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/RcppCCTZ/RcppCCTZ_${{ version }}.tar.gz
+  sha256: 2a2087bdb7ab4b617487b87677a81ccd0c5529f776cfe90d2e23d5f5478424cb
+
+build:
+  number: 2
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: not win
+      then: ${{ compiler('cxx') }}
+    - if: win
+      then: ${{ compiler('m2w64_cxx') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+    - if: build_platform != target_platform
+      then: r-rcpp
+  host:
+    - r-base=4.2
+    - r-rcpp >=0.11.0
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+    - r-rcpp >=0.11.0
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('RcppCCTZ')\""
+      - if: win
+        then: "\"%R%\" -e \"library('RcppCCTZ')\""
+
+about:
+  license: GPL-2.0-or-later
+  summary: '''Rcpp'' Access to the ''CCTZ'' timezone library is provided. ''CCTZ'' is a C++ library::
+    - for translating between absolute and civil times using the rules of a time zone.
+    - "The ''CCTZ'' source code, released under the Apache 2.0 License, is included in"
+    - "this package. See <https://github.com/google/cctz> for more details.'"
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+    - CCTZ_LICENSE.txt
+  homepage: https://github.com/eddelbuettel/rcppcctz, https://dirk.eddelbuettel.com/code/rcpp.cctz.html
+
+extra:
+  recipe-maintainers:
+    - ihnorton
+    - shelnutt2
+    - conda-forge/r
+    - jdblischak
+

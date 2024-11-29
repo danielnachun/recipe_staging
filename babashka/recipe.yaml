@@ -1,0 +1,47 @@
+schema_version: 1
+
+context:
+  name: babashka
+  version: 1.3.182
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  git: https://github.com/babashka/${{ name }}
+  gir_rev: v${{ version }}
+
+build:
+  number: 1
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - if: linux
+      then: gcc
+    - maven
+  host:
+    - leiningen
+    - graalvm
+    - zlib =1.2
+  run:
+    - libzlib >1.2
+
+tests:
+  - script:
+      - bb --help
+
+about:
+  license: EPL-1.0
+  license_file:
+    - LICENSE
+    - target/generated-resources/licenses/
+  summary: Native, fast starting Clojure interpreter for scripting
+  homepage: https://github.com/babashka/${{ name }}
+  repository: https://github.com/babashka/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

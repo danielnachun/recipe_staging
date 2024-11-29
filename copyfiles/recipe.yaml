@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: copyfiles
+  version: 2.4.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/calvinmetcalf/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: a5c3c12a3a992f6d9ae2622dec6980e15ff747adf1a8ebd1e6df61869a10c403
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - license.md
+    - third-party-licenses.txt
+  summary: copy files on the command line
+  homepage: https://github.com/calvinmetcalf/${{ name }}
+  repository: https://github.com/calvinmetcalf/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

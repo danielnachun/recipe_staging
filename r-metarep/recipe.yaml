@@ -1,0 +1,46 @@
+schema_version: 1
+
+context:
+  name: metarep
+  version: 1.2.0
+
+package:
+  name: r-${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cran.r-project.org/src/contrib/metarep_${{ version }}.tar.gz
+  sha256: c9ea8481e702f3236e74fb3b37b2816778a1b48349e190b05de0591f6cdbae13
+
+build:
+  number: 0
+  noarch: generic
+  script: R CMD INSTALL --build .
+  merge_build_and_host_envs: true
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  host:
+    - r-base=4.3
+    - r-meta
+  run:
+    - r-base=4.3
+    - r-meta
+
+tests:
+  - script:
+      - "$R -e \"library('metarep')\""
+
+about:
+  summary: 'User-friendly package for reporting replicability-analysis methods, affixed to meta-analyses summary. The replicability-analysis output provides an assessment of the investigated intervention, where it offers quantification of effect replicability and assessment of the consistency of findings. - Replicability-analysis for fixed-effects and random-effect meta analysis: - r(u)-value; - lower bounds on the number of studies with replicated positive and\or negative effect; - Allows detecting inconsistency of signals; - forest plots with the summary of replicability analysis results; - Allows::
+    - "Replicability-analysis with or without the common-effect assumption.'"
+  license: NGPL
+  homepage: https://github.com/IJaljuli/metarep
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

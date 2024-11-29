@@ -1,0 +1,49 @@
+schema_version: 1
+
+context:
+  name: hindent
+  version: 6.1.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/mihaimaruseac/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: 18cb35e056dab44d46b51107748f1e4409afccf2b5268bd4e63de2cf0015c945
+
+build:
+  number: 0
+  skip: not unix
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cabal-install
+    - cabal-plan
+    - ghc
+  host:
+    - if: osx
+      then: libiconv
+  run:
+    - if: osx
+      then: libiconv
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: BSD-3-Clause
+  license_file:
+    - LICENSE.md
+    - license-files/
+  summary: Haskell pretty printer
+  homepage: https://github.com/mihaimaruseac/${{ name }}
+  repository: https://github.com/mihaimaruseac/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,51 @@
+schema_version: 1
+
+context:
+  name: perl-devel-globaldestruction
+  version: 0.14
+  sha256: 34b8a5f29991311468fe6913cadaba75fd5d2b0b3ee3bb41fe5b53efab9154ab
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/H/HA/HAARG/Devel-GlobalDestruction-${{ version }}.tar.gz
+  sha256: ${{ sha256 }}
+
+build:
+  number: 0
+  skip: win
+  noarch: generic
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-sub-exporter-progressive
+  run:
+    - perl>=5.32
+    - perl-sub-exporter-progressive
+  run_exports:
+    weak:
+      - ${{ name }} =${{ version }}
+
+tests:
+  - python:
+      imports:
+        - Devel::GlobalDestruction
+
+about:
+  license: GPL-1.0-or-later OR Artistic-1.0-Perl
+  license_file:
+    - ${{ env.get("PREFIX") }}/man/man1/perlartistic.1
+    - ${{ env.get("PREFIX") }}/man/man1/perlgpl.1
+  summary: "Provides function returning the equivalent of ${^GLOBAL_PHASE} eq 'DESTRUCT' for older perls."
+  homepage: https://metacpan.org/release/Devel-GlobalDestruction
+
+extra:
+  recipe-maintainers:
+    - xileF1337
+    - conda-forge/perl-packagers
+

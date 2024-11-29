@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: pget
+  version: 0.2.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/Code-Hex/${{ name }}/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: fa7646bec975dd3995fb45d6b1f190565d6c4fae03c46c4eda34716c83ede03e
+
+build:
+  number: 1
+
+requirements:
+  build:
+    - go
+    - go-licenses
+
+tests:
+  - script:
+      - ${PKG_NAME} --help 2>&1 | grep -q "Usage: "pget \\[options\\] URL\""
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: File download client
+  homepage: https://github.com/Code-Hex/${{ name }}
+  repository: https://github.com/Code-Hex/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

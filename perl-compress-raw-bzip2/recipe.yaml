@@ -1,0 +1,55 @@
+schema_version: 1
+
+context:
+  name: perl-compress-raw-bzip2
+  version: 2.201
+  sha256: 6204b270806d924e124e406faf6bbc715f7bb461dfdbea722042325633be300a
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/P/PM/PMQS/Compress-Raw-Bzip2-${{ version }}.tar.gz
+  sha256: ${{ sha256 }}
+
+build:
+  # nothing provides perl >=5.32.1,<6.0a0 *_perl5 needed by perl-extutils-makemaker-7.36-pl5321hd8ed1ab_0
+  number: 0
+  skip: win
+  script:
+    - perl Makefile.PL INSTALLDIRS=vendor NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install VERBINST=1
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - make
+  host:
+    - perl=5.32
+    - perl-extutils-makemaker
+  run:
+    - perl>=5.32
+
+tests:
+  - python:
+      imports:
+        - Compress::Raw::Bzip2
+
+about:
+  license: GPL-1.0-or-later OR Artistic-1.0-Perl
+  summary: Low-Level Interface to bzip2 compression library
+  license_file:
+    - ${{ env.get("PREFIX") }}/man/man1/perlartistic.1
+    - ${{ env.get("PREFIX") }}/man/man1/perlgpl.1
+  homepage: https://metacpan.org/dist/Compress-Raw-Bzip2
+
+extra:
+  recipe-maintainers:
+    - cbrueffer
+

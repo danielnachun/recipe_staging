@@ -1,0 +1,55 @@
+schema_version: 1
+
+context:
+  name: perl-scalar-list-utils
+  version: 1.63
+  sha256: cafbdf212f6827dc9a0dd3b57b6ee50e860586d7198228a33262d55c559eb2a9
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/P/PE/PEVANS/Scalar-List-Utils-${{ version }}.tar.gz
+  sha256: ${{ sha256 }}
+
+build:
+  # nothing provides perl >=5.32.1,<6.0a0 *_perl5 needed by perl-extutils-makemaker-7.36-pl5321hd8ed1ab_0
+  number: 0
+  skip: win
+  script:
+    - perl Makefile.PL INSTALLDIRS=vendor NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install VERBINST=1
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - make
+  host:
+    - perl=5.32
+    - perl-extutils-makemaker
+  run:
+    - perl>=5.32
+
+tests:
+  - python:
+      imports:
+        - Scalar::Util
+
+about:
+  license: GPL-1.0-or-later OR Artistic-1.0-Perl
+  summary: Common Scalar and List utility subroutines
+  license_file:
+    - ${{ env.get("PREFIX") }}/man/man1/perlartistic.1
+    - ${{ env.get("PREFIX") }}/man/man1/perlgpl.1
+  homepage: https://metacpan.org/dist/Scalar-List-Utils
+
+extra:
+  recipe-maintainers:
+    - cbrueffer
+

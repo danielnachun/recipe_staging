@@ -1,0 +1,45 @@
+schema_version: 1
+
+context:
+  name: perl-io-aio
+  version: 4.79
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/M/ML/MLEHMANN/IO-AIO-${{ version }}.tar.gz
+  sha256: a4617de75fec37aadcc09b8219fdb1e6e65f5a14ae930a2d8c130c3e45cb366c
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+    - sed
+  host:
+    - perl=5.32
+    - perl-canary-stability
+    - perl-common-sense
+  run:
+    - perl>=5.32
+    - perl-common-sense
+  ignore_run_exports:
+    - perl-canary-stability
+
+tests:
+  - python:
+      imports:
+        - IO::AIO
+
+about:
+  license: unknown
+  summary: Asynchronous/Advanced Input/Output
+  homepage: http://metacpan.org/pod/IO-AIO
+
+maintainers:
+  - danielnachun
+

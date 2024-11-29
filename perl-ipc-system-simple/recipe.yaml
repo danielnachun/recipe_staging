@@ -1,0 +1,49 @@
+schema_version: 1
+
+context:
+  name: perl-ipc-system-simple
+  version: 1.30
+  sha256: 22e6f5222b505ee513058fdca35ab7a1eab80539b98e5ca4a923a70a8ae9ba9e
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/J/JK/JKEENAN/IPC-System-Simple-${{ version }}.tar.gz
+  sha256: ${{ sha256 }}
+
+build:
+  number: 0
+  skip: win
+  noarch: generic
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+  run_exports:
+    weak:
+      - ${{ name }} =${{ version }}
+
+tests:
+  - python:
+      imports:
+        - IPC::System::Simple
+
+about:
+  license: GPL-1.0-or-later OR Artistic-1.0-Perl
+  license_file:
+    - ${{ env.get("PREFIX") }}/man/man1/perlartistic.1
+    - ${{ env.get("PREFIX") }}/man/man1/perlgpl.1
+  summary: Run commands simply, with detailed diagnostics
+  homepage: http://thenceforward.net/perl/modules/IPC-System-Simple/
+
+extra:
+  recipe-maintainers:
+    - xileF1337
+    - cbrueffer
+

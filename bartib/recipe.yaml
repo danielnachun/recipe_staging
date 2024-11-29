@@ -1,0 +1,40 @@
+schema_version: 1
+
+context:
+  name: bartib
+  version: 1.1.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/nikolassv/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: 29fcfb9fc2a64c11023d4be9904e2c70e49ec1f6c9f8ce4c6ee9d73825d2f6f4
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - cargo-bundle-licenses
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Simple timetracker for the command-line
+  homepage: https://github.com/nikolassv/${{ name }}
+  repository: https://github.com/nikolassv/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

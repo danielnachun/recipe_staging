@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: lua-language-server
+  version: 3.9.3
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  git: https://github.com/sumneko/${{ name }}.git
+  rev: ${{ version }}
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - if: linux
+      then: gcc
+    - ninja
+    - if: linux
+      then: sysroot_linux-64=2.17
+
+tests:
+  - script:
+      - ${{ name }} --version
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: Language Server for the Lua language
+  homepage: https://github.com/sumneko/lua-language-server
+  repository: https://github.com/sumneko/lua-language-server
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

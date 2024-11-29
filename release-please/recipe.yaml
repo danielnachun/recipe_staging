@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: release-please
+  version: 16.12.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/googleapis/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: 0362c1a03cdf93eafbc834c7dcff42fc500f306d3eb0ea02c3cfba387cda1464
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: Apache-2.0
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: generate release PRs based on the conventionalcommits.org spec
+  homepage: https://github.com/googleapis/${{ name }}
+  repository: https://github.com/googleapis/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

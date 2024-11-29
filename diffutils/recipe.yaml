@@ -1,0 +1,48 @@
+schema_version: 1
+
+context:
+  name: diffutils
+  version: 3.10
+  sha256: 90e5e93cc724e4ebe12ede80df1634063c7a855692685919bfe60b556c9bd09e
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: http://ftp.gnu.org/gnu/${{ name }}/${{ name }}-${{ version }}.tar.xz
+  sha256: ${{ sha256 }}
+
+build:
+  number: 0
+  skip: win
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+  host:
+    - libiconv
+
+tests:
+  - script:
+      - cmp --version
+      - diff --version
+      - diff3 --version
+      - sdiff --version
+
+about:
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  summary: GNU Diffutils is a package of several programs related to finding differences between files.
+  homepage: https://www.gnu.org/software/diffutils/
+  repository: http://git.savannah.gnu.org/cgit/diffutils.git
+  documentation: https://www.gnu.org/software/diffutils/manual/html_node/index.html
+
+extra:
+  recipe-maintainers:
+    - bgruening
+    - beatrizserrano
+    - davelopez
+    - traversaro
+

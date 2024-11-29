@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: janet
+  version: 1.35.2
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/janet-lang/janet/archive/v${{ version }}.tar.gz
+  sha256: 947dfdab6c1417c7c43efef2ecb7a92a3c339ce2135233fe88323740e6e7fab1
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - meson
+    - ninja
+
+tests:
+  - script:
+      - janet --help
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: A dynamic language and bytecode vm
+  homepage: https://github.com/janet-lang/janet
+  repository: https://github.com/janet-lang/janet
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

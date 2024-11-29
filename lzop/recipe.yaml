@@ -1,0 +1,45 @@
+schema_version: 1
+
+context:
+  name: lzop
+  version: 1.04
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: http://www.lzop.org/download/${{ name }}-${{ version }}.tar.gz
+  sha256: 7e72b62a8a60aff5200a047eea0773a8fb205caf7acbe1774d95147f305a2f41
+
+build:
+  number: 2
+  skip: win
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - autoconf
+    - automake
+    - make
+  host:
+    - libtool
+    - lzo
+  run:
+    - lzo
+
+tests:
+  - script:
+      - lzop -h
+
+about:
+  license: NGPL
+  license_file: COPYING
+  summary: lzop is a file compressor which is very similar to gzip.
+  homepage: http://www.lzop.org/
+  documentation: http://www.lzop.org/lzop_man.php
+
+extra:
+  recipe-maintainers:
+    - npavlovikj
+

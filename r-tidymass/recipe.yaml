@@ -1,0 +1,79 @@
+schema_version: 1
+
+context:
+  version: 1.0.8
+
+package:
+  name: r-tidymass
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/tidymass/tidymass/archive/7e5668e0b75226fd114d040fd7f5bb9f97478e78.zip
+  sha256: 648ab57b447356bd9a26597d18f2be02645e324a4646b6c044eb7f39dbd6011e
+
+build:
+  number: 0
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+    - r-cli
+    - r-crayon
+    - r-dplyr
+    - r-purrr
+    - r-stringr
+    - r-magrittr
+    - r-remotes
+    - r-rstudioapi
+    - r-masstools
+    - r-massdataset
+    - r-massprocessor
+    - r-masscleaner
+    - r-massstat
+    - r-metpath
+    - r-metid
+    - r-massqc
+  run:
+    - r-base>=4.2
+    - r-cli
+    - r-crayon
+    - r-dplyr
+    - r-purrr
+    - r-stringr
+    - r-magrittr
+    - r-remotes
+    - r-rstudioapi
+    - r-masstools
+    - r-massdataset
+    - r-massprocessor
+    - r-masscleaner
+    - r-massstat
+    - r-metpath
+    - r-metid
+    - r-massqc
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('tidymass')\""
+      - if: win
+        then: "\"%R%\" -e \"library('tidymass')\""
+
+about:
+  license: MIT
+  summary: "The 'tidymass' package is a collection of several packages for Mass Spectrometry data processing and analysis."
+  homepage: https://github.com/tidymass/tidymass
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

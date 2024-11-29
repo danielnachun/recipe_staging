@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: skhd
+  version: 0.3.9
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/koekeishiya/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: 9ca31556288d4cdfbd57974a10a9486b9d2b7d44eba16be62878fd25dd8ab8d2
+
+build:
+  number: 0
+  skip: not osx
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+    - sed
+
+tests:
+  - script:
+      - ${{ name }} --version
+
+about:
+  license: MIT
+  license_file: LICENSE.txt
+  summary: Simple hotkey-daemon for macOS
+  homepage: https://github.com/koekeishiya/${{ name }}
+  repository: https://github.com/koekeishiya/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

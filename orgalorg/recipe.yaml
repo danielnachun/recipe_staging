@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: orgalorg
+  version: 1.2.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  git: https://github.com/reconquest/${{ name }}.git
+  rev: ${{ version }}
+
+build:
+  number: 1
+
+requirements:
+  build:
+    - go
+    - go-licenses
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: Parallel SSH commands executioner and file synchronization tool
+  homepage: https://github.com/reconquest/${{ name }}
+  repository: https://github.com/reconquest/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

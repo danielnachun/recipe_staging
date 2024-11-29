@@ -1,0 +1,48 @@
+schema_version: 1
+
+context:
+  name: reason
+  version: 3.12.0
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/reasonml/${{ name }}/archive/${{ version }}.tar.gz
+  sha256: d05f784da6bbeec8b5211a0fa31a80c8894c8fe8c8f5c2b5d57b01d033d78659
+
+build:
+  number: 0
+  skip: win
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - if: linux
+      then: binutils
+    - if: linux
+      then: gcc
+    - if: linux
+      then: sysroot_linux-64=2.17
+    - make
+    - odig
+    - opam
+
+tests:
+  - script:
+      - refmt --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE.txt
+    - license-files/
+  summary: Simple, fast & type safe code that leverages the JavaScript & OCaml ecosystems
+  homepage: https://github.com/reasonml/${{ name }}
+  repository: https://github.com/reasonml/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

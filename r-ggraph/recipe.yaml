@@ -1,0 +1,121 @@
+# Package: ggraph
+# Type: Package
+# Title: An Implementation of Grammar of Graphics for Graphs and Networks
+# Version: 2.0.0
+# Authors@R:  c(person(given = "Thomas Lin", family = "Pedersen", role = c("cre", "aut"), email = "thomasp85@gmail.com", comment = c(ORCID = "0000-0002-5147-4711")), person(given = "RStudio", role = "cph"))
+# Maintainer: Thomas Lin Pedersen <thomasp85@gmail.com>
+# Description: The grammar of graphics as implemented in ggplot2 is a poor fit for graph and network visualizations due to its reliance on tabular data input. ggraph is an extension of the ggplot2 API tailored to graph visualizations and provides the same flexible approach to building up plots layer by layer.
+# License: MIT + file LICENSE
+# Encoding: UTF-8
+# LazyData: TRUE
+# Imports: Rcpp (>= 0.12.2), dplyr, ggforce (>= 0.3.1), grid, igraph (>= 1.0.0), scales, MASS, digest, gtable, ggrepel, utils, stats, viridis, rlang, tidygraph, graphlayouts (>= 0.5.0)
+# Suggests: network, knitr, rmarkdown, purrr, tibble, seriation, deldir, gganimate
+# LinkingTo: Rcpp
+# RoxygenNote: 6.1.1
+# Depends: R (>= 2.10), ggplot2 (>= 3.0.0)
+# VignetteBuilder: knitr
+# URL: https://github.com/thomasp85/ggraph
+# BugReports: https://github.com/thomasp85/ggraph/issues
+# NeedsCompilation: yes
+# Packaged: 2019-09-02 08:15:00 UTC; thomas
+# Author: Thomas Lin Pedersen [cre, aut] (<https://orcid.org/0000-0002-5147-4711>), RStudio [cph]
+# Repository: CRAN
+# Date/Publication: 2019-09-02 15:10:02 UTC
+schema_version: 1
+
+context:
+  version: 2.1.0
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-ggraph
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/ggraph_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/ggraph/ggraph_${{ version }}.tar.gz
+  sha256: 686fdb22dc4f613273fb755ec42399a208b4d10348eecd1a217afd4612245c1f
+
+build:
+  number: 2
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: not win
+      then: ${{ compiler('cxx') }}
+    - if: win
+      then: ${{ compiler('m2w64_cxx') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+    - r-mass
+    - r-rcpp >=0.12.2
+    - r-digest
+    - r-dplyr
+    - r-ggforce >=0.3.1
+    - r-ggplot2 >=3.0.0
+    - r-ggrepel
+    - r-graphlayouts >=0.5.0
+    - r-gtable
+    - r-igraph >=1.0.0
+    - r-rlang
+    - r-scales
+    - r-tidygraph
+    - r-viridis
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+    - r-mass
+    - r-rcpp >=0.12.2
+    - r-digest
+    - r-dplyr
+    - r-ggforce >=0.3.1
+    - r-ggplot2 >=3.0.0
+    - r-ggrepel
+    - r-graphlayouts >=0.5.0
+    - r-gtable
+    - r-igraph >=1.0.0
+    - r-rlang
+    - r-scales
+    - r-tidygraph
+    - r-viridis
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('ggraph')\""
+      - if: win
+        then: "\"%R%\" -e \"library('ggraph')\""
+
+about:
+  license: MIT
+  summary: The grammar of graphics as implemented in ggplot2 is a poor fit for graph and network visualizations due to its reliance on tabular data input. ggraph is an extension of the ggplot2 API tailored to graph visualizations and provides the same flexible approach to building up plots layer by layer.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/MIT
+    - LICENSE
+  homepage: https://github.com/thomasp85/ggraph
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

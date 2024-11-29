@@ -1,0 +1,40 @@
+schema_version: 1
+
+context:
+  name: dot-language-server
+  version: 1.2.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/nikeee/${{ name }}/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: fe9106e57f56a2a3087dee58885411d22ccbd9b87691c84988438d2fe5f45b86
+
+build:
+  number: 4
+  noarch: generic
+
+requirements:
+  host:
+    - nodejs
+    - rimraf
+    - typescript
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  summary: A language server for the DOT language
+  homepage: https://github.com/nikeee/${{ name }}
+  repository: https://github.com/nikeee/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

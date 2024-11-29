@@ -1,0 +1,95 @@
+# Package: geoR
+# Version: 1.8-1
+# Date: 2020-02-08
+# Title: Analysis of Geostatistical Data
+# LazyLoad: yes
+# LazyData: yes
+# Author: Paulo J. Ribeiro Jr [aut, cre] <paulojus@ufpr.br>, Peter J. Diggle [aut, cre] <p.diggle@lancaster.ac.uk> Ole Christensen [ctb], Martin Schlather [ctb], Roger Bivand [ctb], Brian Ripley [ctb]
+# Maintainer: Paulo J. Ribeiro Jr <paulojus@ufpr.br>
+# Depends: R (>= 2.10), stats, methods
+# Imports: MASS, sp, splancs, RandomFields, graphics
+# Suggests: scatterplot3d, lattice, tcltk
+# Description: Geostatistical analysis including variogram-based, likelihood-based and Bayesian methods. Software companion for Diggle and Ribeiro (2007) <doi:10.1007/978-0-387-48536-2>.
+# License: GPL (>= 2)
+# URL: http://www.leg.ufpr.br/geoR
+# NeedsCompilation: yes
+# Packaged: 2020-02-10 15:55:46 UTC; paulojus
+# Repository: CRAN
+# Date/Publication: 2020-02-10 21:00:02 UTC
+schema_version: 1
+
+context:
+  version: 1.9-4
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-geor
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/geoR_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/geoR/geoR_${{ version }}.tar.gz
+  sha256: ae9d977cebe0f93b2593542f8d6d060467984dcf174e84ba632307c035d7ebbd
+  patches:
+    # https://github.com/rocker-org/rocker/issues/213#issuecomment-278909502
+    - no_tcltk.patch
+
+build:
+  number: 0
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+    - r-mass
+    - r-randomfields
+    - r-sp
+    - r-splancs
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+    - r-mass
+    - r-randomfields
+    - r-sp
+    - r-splancs
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('geoR')\""
+      - if: win
+        then: "\"%R%\" -e \"library('geoR')\""
+
+about:
+  license: GPL-2.0-or-later
+  summary: Geostatistical analysis including variogram-based, likelihood-based and Bayesian methods. Software companion for Diggle and Ribeiro (2007) <doi:10.1007/978-0-387-48536-2>.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+  homepage: http://www.leg.ufpr.br/geoR
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+    - ocefpaf
+

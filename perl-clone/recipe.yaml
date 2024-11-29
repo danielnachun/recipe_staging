@@ -1,0 +1,50 @@
+schema_version: 1
+
+context:
+  name: perl-clone
+  version: 0.46
+  sha256: aadeed5e4c8bd6bbdf68c0dd0066cb513e16ab9e5b4382dc4a0aafd55890697b
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/G/GA/GARU/Clone-${{ version }}.tar.gz
+  sha256: ${{ sha256 }}
+
+build:
+  number: 0
+  skip: win
+
+requirements:
+  build:
+    - make
+    - ${{ compiler('c') }}
+  host:
+    - perl-b-cow
+    - perl=5.32
+  run:
+    - perl>=5.32
+  run_exports:
+    weak:
+      - ${{ name }} =${{ version }}
+
+tests:
+  - python:
+      imports:
+        - Clone
+
+about:
+  license: GPL-1.0-or-later OR Artistic-1.0-Perl
+  license_file:
+    - ${{ env.get("PREFIX") }}/man/man1/perlartistic.1
+    - ${{ env.get("PREFIX") }}/man/man1/perlgpl.1
+  summary: recursively copy Perl datatypes
+  homepage: https://metacpan.org/pod/Clone
+
+extra:
+  recipe-maintainers:
+    - xileF1337
+    - cbrueffer
+

@@ -1,0 +1,48 @@
+schema_version: 1
+
+context:
+  name: agda
+  version: 2.6.4.3
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  git: https://github.com/agda/${{ name }}
+  rev: v${{ version }}
+
+build:
+  number: 0
+  skip: not unix
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cabal-install
+    - cabal-plan
+    - ghc
+  host:
+    - if: osx
+      then: libiconv
+    - ncurses
+    - zlib
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: Agda is a dependently typed programming language / interactive theorem prover.
+  homepage: https://github.com/agda/${{ name }}
+  repository: https://github.com/agda/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,45 @@
+schema_version: 1
+
+context:
+  name: geosketch
+  version: 1.2
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/geosketch-${{ version }}.tar.gz
+  sha256: bbfe97366b91c5927b6076d5a6738d9cfbe094efb5ac1117aab7a30b6081cc4e
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv
+
+requirements:
+  host:
+    - python
+    - pip
+  run:
+    - python
+    - fbpca >=1.0
+    - numpy >=1.12.0
+    - scikit-learn >=0.24
+
+tests:
+  - python:
+      imports:
+        - geosketch
+      pip_check: true
+
+about:
+  summary: Geometry-preserving random sampling
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/brianhie/geosketch
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

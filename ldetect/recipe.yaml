@@ -1,0 +1,46 @@
+schema_version: 1
+
+context:
+  name: ldetect
+  version: 0.2.5
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/ldetect-${{ version }}.tar.gz
+  sha256: f03d833628b3cd66c6e12012ff04a5d2a8f7894c48b8a400d8a595c58d5fc55a
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv
+
+requirements:
+  host:
+    - python
+    - pip
+  run:
+    - python
+    - numpy
+    - scipy
+    - matplotlib-base
+    - commanderline
+
+tests:
+  - python:
+      imports:
+        - ldetect
+      pip_check: true
+
+about:
+  summary: Package for detecting regions of linkage disequilibrium in the human genome
+  license: MIT
+  license_file: LICENSE.txt
+  homepage: https://bitbucket.org/nygcresearch/ldetect
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

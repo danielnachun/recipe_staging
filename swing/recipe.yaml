@@ -1,0 +1,49 @@
+schema_version: 1
+
+context:
+  name: swing
+  version: 0.1.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/bagherilab/SWING/archive/v${{ version }}.tar.gz
+  sha256: 4f540e96ea2ca6b689cbff91455669d1757d9c4033d984a535cdf6d4df434580
+
+build:
+  number: 0
+  noarch: python
+
+requirements:
+  build:
+    - sed
+  host:
+    - numpy >=1.24
+    - pandas
+    - pip
+    - python
+    - scikit-learn
+    - scipy
+  run:
+    - numpy >=1.24
+    - pandas
+    - python
+    - scikit-learn
+    - scipy
+
+tests:
+  - python:
+      imports:
+        - Swing
+      pip_check: false
+
+about:
+  license: OTHER
+  homepage: https://github.com/bagherilab/SWING
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

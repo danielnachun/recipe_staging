@@ -1,0 +1,60 @@
+schema_version: 1
+
+context:
+  version: 0.1.5
+
+package:
+  name: r-ieugwasr
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/MRCIEU/ieugwasr/archive/33e4629f4dacd635c68e690bb5648de529c333cc.zip
+  sha256: 1358b8531cbd5b542436c9990776d84bd353448e36ef438e0257f922a513cc3c
+
+build:
+  number: 0
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+    - r-dplyr
+    - r-googleauthr
+    - r-httr
+    - r-jsonlite
+    - r-magrittr
+    - r-rlang
+  run:
+    - r-base>=4.2
+    - r-dplyr
+    - r-googleauthr
+    - r-httr
+    - r-jsonlite
+    - r-magrittr
+    - r-rlang
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('ieugwasr')\""
+      - if: win
+        then: "\"%R%\" -e \"library('ieugwasr')\""
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: R package to query IEU GWAS databsse
+  homepage: https://github.com/MRCIEU/ieugwasr
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

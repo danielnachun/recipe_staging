@@ -1,0 +1,49 @@
+schema_version: 1
+
+context:
+  name: perl-variable-magic
+  version: 0.63
+  sha256: ba4083b2c31ff2694f2371333d554c826aaf24b4d98d03e48b5b4a43a2a0e679
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/V/VP/VPIT/Variable-Magic-${{ version }}.tar.gz
+  sha256: ${{ sha256 }}
+
+build:
+  number: 0
+  skip: win
+
+requirements:
+  build:
+    - make
+    - ${{ compiler('c') }}
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+  run_exports:
+    weak:
+      - ${{ name }} =${{ version }}
+
+tests:
+  - python:
+      imports:
+        - Variable::Magic
+
+about:
+  license: GPL-1.0-or-later OR Artistic-1.0-Perl
+  license_file:
+    - ${{ env.get("PREFIX") }}/man/man1/perlartistic.1
+    - ${{ env.get("PREFIX") }}/man/man1/perlgpl.1
+  summary: Associate user-defined magic to variables from Perl.
+  homepage: http://search.cpan.org/dist/Variable-Magic/
+
+extra:
+  recipe-maintainers:
+    - xileF1337
+    - conda-forge/perl-packagers
+

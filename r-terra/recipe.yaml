@@ -1,0 +1,90 @@
+schema_version: 1
+
+context:
+  version: 1.7-71
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-terra
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/terra_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/terra/terra_${{ version }}.tar.gz
+  sha256: 1db7f3af66e5dd8b63fb24bde737228c25c7b97a1d40b0597ff4ce1c4b3b0437
+
+build:
+  number: 1
+  skip: win
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: not win
+      then: ${{ compiler('cxx') }}
+    - if: win
+      then: ${{ compiler('m2w64_cxx') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}grep
+    - ${{ posix }}autoconf
+    - if: not win
+      then: ${{ posix }}automake
+    - if: win
+      then: ${{ posix }}automake-wrapper
+    - ${{ posix }}pkg-config
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.3
+    - r-rcpp >=1.0_10
+    - libgdal
+    - proj
+    - geos
+  run:
+    - r-base=4.3
+    - if: win
+      then: ${{ native }}gcc-libs
+    - r-rcpp >=1.0_10
+    - libgdal
+    - proj
+    - geos
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('terra')\""
+      - if: win
+        then: "\"%R%\" -e \"library('terra')\""
+
+about:
+  license: GPL-3.0-or-later
+  summary: |
+    Methods for spatial data analysis with raster and vector data. Raster methods allow for low-level data manipulation as well as high-level global, local, zonal, and focal computation. The predict and interpolate methods facilitate the use of regression type (interpolation, machine learning) models for spatial prediction,
+    including with satellite remote sensing data. Processing of very large files is supported. See the manual and tutorials on <https://rspatial.org/terra/> to get started. 'terra' is very similar to the 'raster' package; but 'terra' can do more, is simpler to use, and it is faster.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-3
+  homepage: https://rspatial.org/terra
+  repository: https://github.com/rspatial/terra
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+    - TomAugspurger
+

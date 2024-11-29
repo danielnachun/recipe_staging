@@ -1,0 +1,46 @@
+schema_version: 1
+
+context:
+  name: parser
+  version: 3.3.3.0
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: a2e23c90918d9b7e866b18dca2b6835f227769dd2fa8e59c5841f3389cf53eeb
+
+build:
+  number: 1
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - rb-ast
+    - rb-racc
+    - ruby=3.2
+  run:
+    - rb-ast
+    - rb-racc
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version}}/LICENSE.txt
+  summary: A Ruby parser written in pure Ruby.
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/whitequark/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

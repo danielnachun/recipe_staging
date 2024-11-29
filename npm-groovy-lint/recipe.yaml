@@ -1,0 +1,38 @@
+schema_version: 1
+
+context:
+  name: npm-groovy-lint
+  version: 11.1.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/${{ name }}/-/${{ name }}-${{ version }}.tgz
+  sha256: 9442360394cd3700c2f8ab254925dbf9ae7bc577dd76ff1706443a5c90d2c5f6
+
+build:
+  number: 2
+  noarch: generic
+
+requirements:
+  host:
+    - nodejs
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: GPL-3.0-only
+  summary: Lint, format and auto-fix your Groovy / Jenkinsfile / Gradle files using command line
+  homepage: https://nvuillam.github.io/${{ name }}
+  repository: https://github.com/nvuillam/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: ahoy
+  version: 2.1.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/ahoy-cli/${{ name }}/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: 38189a92e39e3ae3a34be491dd2cd010928debe46b112ad82336fafa852556b9
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - go
+    - go-licenses
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: Creates self documenting CLI programs from commands in YAML files
+  homepage: https://github.com/ahoy-cli/${{ name }}
+  repository: https://github.com/ahoy-cli/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

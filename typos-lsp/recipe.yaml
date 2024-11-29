@@ -1,0 +1,40 @@
+schema_version: 1
+
+context:
+  name: typos-lsp
+  version: 0.1.19
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/tekumara/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: 78d9398498a76bad3bd955241271c2bb07858cc2fd58501300df0ccc51ef945c
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - cargo-bundle-licenses
+
+tests:
+  - script:
+      - test -f ${PREFIX}/bin/${{ name }}
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Source code spell checker for Visual Studio Code, Neovim and other LSP clients
+  homepage: https://github.com/tekumara/${{ name }}
+  repository: https://github.com/tekumara/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

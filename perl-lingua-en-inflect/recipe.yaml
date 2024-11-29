@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: perl-lingua-en-inflect
+  version: 1.905
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/D/DC/DCONWAY/Lingua-EN-Inflect-${{ version }}.tar.gz
+  sha256: 05c29ec3482e572313a60da2181b0b30c5db7cf01f8ae7616ad67e1b66263296
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl >=5.32
+  run:
+    - perl >=5.32
+
+tests:
+  - python:
+      imports:
+        - Lingua::EN::Inflect
+
+about:
+  license: unknown
+  summary: "Convert singular to plural. Select \"a\" or \"an\"."
+  homepage: http://metacpan.org/pod/Lingua-EN-Inflect
+
+maintainers:
+  - danielnachun
+

@@ -1,0 +1,52 @@
+schema_version: 1
+
+context:
+  name: cabal-plan
+  version: 0.7.3.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/haskell-hvr/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: cc67545508f1900feafb9ccf8237ba7cc7dcc9d3cfd95a8897a06e47d4ace782
+
+build:
+  number: 1
+  skip: not unix
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cabal-install
+    - ghc
+    - if: linux
+      then: zlib=1.2
+  host:
+    - if: osx
+      then: libiconv
+    - if: linux
+      then: libzlib>=1.2
+  host:
+    - libiconv  #[osx]
+    - libzlib>=1.2  #[linux]
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: GPL-3.0-or-later
+  license_file:
+    - LICENSE.GPLv3
+    - license-files/
+  summary: "Library and utility for processing cabal's plan.json file"
+  homepage: https://github.com/haskell-hvr/${{ name }}
+  repository: https://github.com/haskell-hvr/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

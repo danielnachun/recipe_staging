@@ -1,0 +1,78 @@
+# Suggests: testthat, knitr, rmarkdown, reactome.db, AnnotationDbi, parallel, org.Mm.eg.db, limma, GEOquery, msigdbr, aggregation, Seurat
+# SystemRequirements: C++11
+schema_version: 1
+
+context:
+  version: 1.28.0
+  name: fgsea
+  bioc: 3.18
+
+package:
+  name: bioconductor-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url:
+    - https://bioconductor.org/packages/${{ bioc }}/bioc/src/contrib/${{ name }}_${{ version }}.tar.gz
+    - https://bioconductor.org/packages/${{ bioc }}/bioc/src/contrib/Archive/${{ name }}/${{ name }}_${{ version }}.tar.gz
+    - https://bioarchive.galaxyproject.org/${{ name }}_${{ version }}.tar.gz
+    - https://depot.galaxyproject.org/software/bioconductor-${{ name }}/bioconductor-${{ name }}_${{ version }}_src_all.tar.gz
+  md5: 53b8ab8a13390a0920bc13eeba3aa1b8
+
+build:
+  number: 0
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  host:
+    - bioconductor-biocparallel >=1.36.0,<1.37.0
+    - r-base=4.3
+    - r-bh
+    - r-cowplot
+    - r-data.table
+    - r-fastmatch
+    - r-ggplot2 >=2.2.0
+    - r-matrix
+    - r-rcpp
+    - r-scales
+    - libblas
+    - liblapack
+  run:
+    - bioconductor-biocparallel >=1.36.0,<1.37.0
+    - r-base>=4.3
+    - r-bh
+    - r-cowplot
+    - r-data.table
+    - r-fastmatch
+    - r-ggplot2 >=2.2.0
+    - r-matrix
+    - r-rcpp
+    - r-scales
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - make
+  run_exports: ${{ pin_subpackage("bioconductor-fgsea", upper_bound="x.x") }}
+
+tests:
+  - script:
+      - $R -e "library('${{ name }}')"
+
+about:
+  license: MIT + file LICENCE
+  summary: Fast Gene Set Enrichment Analysis
+  description: The package implements an algorithm for fast gene set enrichment analysis. Using the fast algorithm allows to make more permutations and get more fine grained p-values, which allows to use accurate stantard approaches to multiple hypothesis correction.
+  homepage: https://bioconductor.org/packages/${{ bioc }}/bioc/html/${{ name }}.html
+
+extra:
+  identifiers:
+    - biotools:fgsea
+    - doi:10.1101/060012
+  parent_recipe:
+    name: bioconductor-fgsea
+    path: recipes/bioconductor-fgsea
+    version: 1.6.0
+

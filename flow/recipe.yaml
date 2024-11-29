@@ -1,0 +1,51 @@
+schema_version: 1
+
+context:
+  name: flow
+  version: 0.243.0
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/facebook/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: 6d8b77958e17923f5b1f5fab8b9bf46e082c9227ed9d9471959ff6eb87e26807
+
+build:
+  number: 0
+  skip: win
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - if: linux
+      then: binutils
+    - if: linux
+      then: gcc
+    - if: linux
+      then: gxx
+    - if: linux
+      then: sysroot_linux-64=2.17
+    - make
+    - odig
+    - opam
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: Adds static typing to JavaScript to improve developer productivity and code quality.
+  homepage: https://github.com/facebook/${{ name }}
+  repository: https://github.com/facebook/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

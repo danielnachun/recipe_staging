@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: jinja-lsp
+  version: 0.1.81
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/uros-5/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: 054a098c75a243c4f7dd91b005fd37b076979094a0aaf3a6c35c3ac2920e9931
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - cargo-bundle-licenses
+
+tests:
+  - script:
+      - ${{ name }} &
+      - exe_pid=$!
+      - "trap \"kill -SIGTERM ${exe_pid}\" SIGTERM"
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Language Server for jinja
+  homepage: https://github.com/uros-5/${{ name }}
+  repository: https://github.com/uros-5/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

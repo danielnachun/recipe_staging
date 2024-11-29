@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: czplib
+  version: 1.1.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/chaolinzhanglab/czplib/archive/v.${{ version }}.tar.gz
+  sha256: 9494152f6522916f5bfe07e581c537e229a8400b7f4e75038f68e08f1250502d
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  run:
+    - perl>=5.32
+    - perl-bioperl-core
+    - perl-carp
+    - perl-data-dumper
+    - perl-html-parser
+    - perl-http-message
+    - perl-io-string
+    - perl-math-cdf
+
+tests:
+  - script:
+      - "perl -e \"use Quantas\""
+
+about:
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  summary: Chaolin Zhang lab perl library
+  homepage: https://github.com/chaolinzhanglab/czplib
+  repository: https://github.com/chaolinzhanglab/czplib
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

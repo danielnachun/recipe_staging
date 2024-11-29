@@ -1,0 +1,48 @@
+schema_version: 1
+
+context:
+  name: c2hs
+  version: 0.28.8
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://hackage.haskell.org/package/${{ name }}-${{ version }}/${{ name }}-${{ version }}.tar.gz
+  sha256: 390632cffc561c32483af474aac50168a68f0fa382096552e37749923617884c
+
+build:
+  number: 0
+  skip: not unix
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cabal-install
+    - cabal-plan
+    - ghc
+  host:
+    - if: osx
+      then: libiconv
+  host:
+    - libiconv  #[osx]
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: GPL-2.0-or-later
+  license_file:
+    - COPYING
+    - license-files/
+  summary: c2hs is a pre-processor for Haskell FFI bindings to C libraries
+  homepage: https://github.com/haskell/${{ name }}
+  repository: https://github.com/haskell/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

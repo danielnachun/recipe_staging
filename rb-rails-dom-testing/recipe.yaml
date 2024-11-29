@@ -1,0 +1,45 @@
+schema_version: 1
+
+context:
+  name: rails-dom-testing
+  version: 2.2.0
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: e515712e48df1f687a1d7c380fd7b07b8558faa26464474da64183a7426fa93b
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - rb-activesupport
+    - rb-minitest
+    - rb-nokogiri
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/MIT-LICENSE
+  summary: This gem can compare doms and assert certain elements exists in doms using Nokogiri.
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/rails/rails-dom-testing
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

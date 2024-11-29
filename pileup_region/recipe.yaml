@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: pileup_region
+  version: 0.1.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/weinstockj/${{ name }}/archive/644f39abd8a2aaaba3de3fead896bc1351c0c35e.zip
+  sha256: 5aa29cfd3badbc02cc6f0d5ac8164b553ccaac68ace4727063647fb2df8c7360
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - cargo-bundle-licenses
+    - make
+
+tests:
+  - script:
+      - __RECIPE_MANAGER_SUBSTITUTION_MARKER__ 2>&1 | grep -q "index out of bounds: "\"the len is 1 but the index is 1\\\"\""
+
+about:
+  license: OTHER
+  license_file: THIRDPARTY.yml
+  summary: A simple rust application to count alt reads in a specified list of positions.
+  homepage: https://github.com/weinstockj/${{ name }}
+  repository: https://github.com/weinstockj/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

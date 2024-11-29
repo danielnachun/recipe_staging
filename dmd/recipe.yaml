@@ -1,0 +1,51 @@
+schema_version: 1
+
+context:
+  name: dmd
+  version: 2.109.0
+
+package:
+  name: dmd
+  version: ${{ version }}
+
+source:
+  - url: https://github.com/dlang/${{ name }}/archive/v${{ version }}.tar.gz
+    sha256: e6df7517fbdce8406e234119c5a30ebf924efa590831fea689eccef8c73cbda4
+    target_directory: dmd
+  - url: https://github.com/dlang/phobos/archive/v${{ version }}.tar.gz
+    sha256: 22b1dbd4326d7c2ee2fc9bc56c681db921c604280046296fcc21d706d328b632
+    target_directory: phobos
+
+build:
+  number: 0
+  skip: "build_platform == \"osx-arm64\""
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - if: linux
+      then: gcc
+    - ldc
+    - make
+    - if: linux
+      then: sysroot_linux-64=2.17
+
+tests:
+  - requirements:
+      run:
+        - if: win
+          then: m2-grep
+    script:
+      - "dmd --version 2>&1 | grep -q \"D Compiler\""
+
+about:
+  license: BSL-1.0
+  license_file: dmd/LICENSE.txt
+  summary: D programming language compiler
+  homepage: https://github.com/dlang/dmd/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+    - dpryan79
+

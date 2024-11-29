@@ -1,0 +1,48 @@
+schema_version: 1
+
+context:
+  name: mprocs
+  version: 0.6.4
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/pvolok/${{ name }}/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: 7fdb5f3f8baaa82ccb7bf2193a7b843027cb133824a99475226524c105255077
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - if: linux
+      then: binutils
+    - cargo-bundle-licenses
+    - make
+    - python
+  host:
+    - if: linux
+      then: libxcb
+  run:
+    - if: linux
+      then: libxcb
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: Run multiple commands in parallel
+  homepage: https://github.com/pvolok/${{ name }}
+  repository: https://github.com/pvolok/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

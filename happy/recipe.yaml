@@ -1,0 +1,45 @@
+schema_version: 1
+
+context:
+  name: happy
+  version: 1.20.1.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://hackage.haskell.org/package/${{ name }}-${{ version }}/${{ name }}-${{ version }}.tar.gz
+  sha256: 8b4e7dc5a6c5fd666f8f7163232931ab28746d0d17da8fa1cbd68be9e878881b
+
+build:
+  number: 0
+  skip: not unix
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cabal-install
+    - ghc
+  host:
+    - if: osx
+      then: libiconv
+  host:
+    - libiconv  #[osx]
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: BSD-2-Clause
+  license_file: LICENSE
+  summary: The Happy parser generator for Haskell
+  homepage: https://github.com/haskell/${{ name }}
+  repository: https://github.com/haskell/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

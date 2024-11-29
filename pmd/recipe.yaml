@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: pmd
+  version: 7.2.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  git: https://github.com/pmd/${{ name }}.git
+  git_ref: pmd_releases/${{ version }}
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - findutils
+    - openjdk >=21,<22
+    - unzip
+  run:
+    - openjdk
+
+tests:
+  - script:
+      - pmd --help
+
+about:
+  license: BSD-4-Clause AND Apache-2.0
+  license_file:
+    - LICENSE
+    - target/generated-resources/licenses/
+  summary: An extensible multilanguage static code analyzer
+  homepage: https://pmd.github.io
+  repository: https://github.com/pmd/pmd
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: fnlfmt
+  version: 0.3.2
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://git.sr.ht/~technomancy/fnlfmt/archive/${{ version }}.tar.gz
+  sha256: 646c9033481a70c4430ced7397f6bc04b1d214fd35bee1579dd4c7901b81ac94
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - fennel
+    - lua
+    - make
+    - sed
+  run:
+    - fennel
+    - lua
+
+tests:
+  - script:
+      - fnlfmt --help
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: Format your Fennel!
+  homepage: https://git.sr.ht/~technomancy/fnlfmt
+  repository: https://git.sr.ht/~technomancy/fnlfmt
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

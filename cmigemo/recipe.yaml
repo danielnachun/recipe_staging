@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: cmigemo
+  version: 0.1.6
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
+  sha256: 7313aa3007f67600b066e04a4805e444563d151341deb330135b4dcdf6444626
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv
+
+requirements:
+  host:
+    - pip
+    - python
+    - six >=1.7.3
+  run:
+    - python
+    - six >=1.7.3
+
+tests:
+  - python:
+      imports:
+        - cmigemo
+      pip_check: false
+
+about:
+  license: MIT
+  license_file:
+  summary: A pure python binding for C/Migemo
+  homepage: https://github.com/mooz/python-cmigemo
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

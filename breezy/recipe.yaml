@@ -1,0 +1,64 @@
+schema_version: 1
+
+context:
+  name: breezy
+  version: 3.3.7
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
+  sha256: e70e03277ffa97e1bc27a24b30539bd3132e6d0ad9512b91db6dd499c254980d
+
+build:
+  number: 0
+  script: ${{ PYTHON }} -m pip install . -vv
+
+requirements:
+  build:
+    - if: linux
+      then: binutils
+    - gettext
+  host:
+    - ${{ compiler("c") }}
+    - certifi
+    - configobj
+    - cython
+    - dulwich
+    - fastbencode
+    - patiencediff
+    - python >=3.11
+    - rust
+    - setuptools-rust
+    - setuptools-gettext
+    - six
+    - pyyaml
+    - urllib3
+  run:
+    - configobj
+    - dulwich
+    - fastbencode
+    - patiencediff
+    - pip
+    - six
+    - urllib3
+    - python >=3.11
+    - pyyaml
+
+tests:
+  - python:
+      imports:
+        - breezy
+
+about:
+  license: GPL-2.0-or-later
+  license_file:
+  summary: Friendly distributed version control system
+  homepage: https://github.com/breezy-team/breezy
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

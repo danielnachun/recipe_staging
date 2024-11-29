@@ -1,0 +1,40 @@
+schema_version: 1
+
+context:
+  name: kalker
+  version: 2.2.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/PaddiM8/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: 4f34d34e922308e586fd9f7077e1cba126f3e75d269f4859d0472bb565ce1d4d
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - cargo-bundle-licenses
+    - m4
+    - make
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: Full-featured calculator with math syntax
+  homepage: https://github.com/PaddiM8/${{ name }}
+  repository: https://github.com/PaddiM8/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

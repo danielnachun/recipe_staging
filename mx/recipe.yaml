@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: mx
+  version: 7.25.14
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/graalvm/${{ name }}/archive/refs/tags/${{ version }}.tar.gz
+  sha256: 5eb750eb90f47d122d75f57cd01072b2a28a6f59846f3130b72a3132e8800499
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - sed
+  run:
+    - python
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: GPL-2.0-only
+  license_file: LICENSE
+  summary: Command-line tool used for the development of Graal projects
+  homepage: https://github.com/graalvm/${{ name }}
+  repository: https://github.com/graalvm/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

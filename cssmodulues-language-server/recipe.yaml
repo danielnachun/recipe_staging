@@ -1,0 +1,45 @@
+schema_version: 1
+
+context:
+  name: cssmodules-language-server
+  version: 1.4.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/${{ name }}/-/${{ name }}-${{ version }}.tgz
+  sha256: fbea1038c1324c658455e21a44412563c5518c58215149fb3dd17c5a7c47a809
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} &
+      - exe_pid=$!
+      - "trap \"kill -SIGTERM ${exe_pid}\" SIGTERM"
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Autocompletion and go-to-definition for cssmodules
+  homepage: https://github.com/antonk52/${{ name }}
+  repository: https://github.com/antonk52/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

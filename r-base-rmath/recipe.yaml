@@ -1,0 +1,378 @@
+schema_version: 1
+
+context:
+  native: "'m2w64-' if win else ''"
+  posix: "'m2-' if win else ''"
+  version: 4.3.1
+
+recipe:
+  name: r-base-rmath
+  version: ${{ version }}
+
+source:
+  url: https://cran.r-project.org/src/base/R-4/R-${{ version }}.tar.gz
+  sha256: 8dd0bf24f1023c6f618c3b317383d291b4a494f40d73b983ac22ffea99e4ba99
+  patches:
+    - 0001-Darwin-Remove-unicode-elipsis-character-from-grDevic.patch
+    - 0002-Fix-trio-config.h-include-depth-issue.patch
+    - 0003-Win32-Do-not-link-static-libgcc.patch
+    - 0004-Win32-Extend-sqrt-NA_real_-hack-to-all-GCC-versions.patch
+    - 0005-Win32-Prevent-conversion-of-R_ARCH-to-abs-Windows-pa.patch
+    - 0006-Darwin-Avoid-setting-DYLD_FALLBACK_LIBRARY_PATH.patch
+    - 0007-Use-AC_SEARCH_LIBS-to-search-for-ncursesw-then-ncurs.patch
+    - 0008-Linux-Do-not-modify-LD_LIBRARY_PATH.patch
+    - 0009-javareconf-Do-not-fail-on-compile-fail.patch
+    - 0010-Revert-part-of-9b818c6dc00143ff18775a4015a3f43b5196f.patch
+    - 0011-javareconf-macOS-Continue-to-allow-system-Java-lt-9-.patch
+    #- 0012-Allow-rpath-in-tcltk-dylib-LC_LOAD_DYLIB-command.patch
+    - 0013-Add-luuid-to-X_PRE_LIBS.patch
+    - 0014-link-Xt-to-uuid.patch
+    - 0015-Check-for-changes-then-forcibly-mv-in-javareconf.in.patch
+    - 0016-Use-LAPACK_LDFLAGS-in-Rlapack_la_LIBADD.patch
+    - 0017-tcltk-dylib-osx.patch
+
+build:
+  number: 3
+  skip: win
+  always_copy_files:
+    - lib/R/doc/html/packages.html
+
+outputs:
+  - package:
+      name: r-base-rmath
+    build:
+      merge_build_and_host_envs: ${{ true if win }}
+      always_copy_files:
+        - lib/R/etc/Makeconf
+        - lib/R/etc/ldpaths
+        - lib/R/etc/javaconf
+        - lib/R/etc/x64/Makeconf
+        - lib/R/etc/x64/ldpaths
+        - lib/R/etc/x64/javaconf
+      prefix_detection:
+        ignore_binary_files: true
+      dynamic_linking:
+        rpaths:
+          - lib/R/lib/
+          - lib/
+    requirements:
+      build:
+        - if: unix
+          then: gnuconfig
+        - if: not win
+          then: ${{ compiler('c') }}
+        - if: not win
+          then: ${{ compiler('cxx') }}
+        - if: not win
+          then: ${{ compiler('fortran') }}
+        - if: (build_platform != target_platform) and linux
+          then: gfortran_impl_${{ build_platform }} ${{ fortran_compiler_version }}
+        - if: win
+          then: ${{ compiler('m2w64_c') }}
+        - if: win
+          then: ${{ compiler('m2w64_cxx') }}
+        - if: win
+          then: ${{ compiler('m2w64_fortran') }}
+        - if: linux
+          then: ${{ cdt('xorg-x11-proto-devel') }}
+        - if: linux
+          then: ${{ cdt('libxrender') }}
+        - if: linux
+          then: ${{ cdt('libxext') }}
+        - if: linux
+          then: ${{ cdt('libsm-devel') }}
+        - if: linux
+          then: ${{ cdt('libice-devel') }}
+        - if: linux
+          then: ${{ cdt('libx11-devel') }}
+        - if: linux
+          then: ${{ cdt('libxt') }}
+        - if: linux
+          then: ${{ cdt('libxt-devel') }}
+        - if: linux
+          then: ${{ cdt('libxcb') }}
+        - if: linux
+          then: ${{ cdt('libxau') }}
+        - if: linux
+          then: ${{ cdt('java-1.7.0-openjdk') }}
+        - ${{ posix }}pkg-config
+        - if: win
+          then: posix
+        - if: win
+          then: m2-texinfo-tex
+        - if: win
+          then: m2-texinfo
+        - if: win
+          then: m2-curl
+        - if: win
+          then: m2-p7zip
+        #- texlive-core                       # [unix]
+        - if: unix
+          then: texinfo
+        - openjdk
+        - ${{ posix }}autoconf
+        - if: win
+          then: ${{ posix }}automake-wrapper
+        - if: not win
+          then: ${{ posix }}automake
+        - if: not win
+          then: make
+        - if: not win
+          then: libcurl
+        - if: build_platform != target_platform
+          then: freetype
+        - if: build_platform != target_platform
+          then: readline
+        - if: build_platform != target_platform
+          then: ncurses
+        - if: build_platform != target_platform
+          then: libcurl
+        - if: build_platform != target_platform
+          then: xz
+        - if: build_platform != target_platform
+          then: libpng
+        - if: build_platform != target_platform
+          then: bzip2
+        - if: build_platform != target_platform
+          then: cairo
+        - if: build_platform != target_platform
+          then: libjpeg-turbo
+        - if: osx and (build_platform != target_platform)
+          then: libiconv
+        - if: linux and (build_platform != target_platform)
+          then: libuuid
+        - if: unix and (build_platform != target_platform)
+          then: glib
+        - if: build_platform != target_platform
+          then: bwidget
+        - if: build_platform != target_platform
+          then: tktable
+        - if: build_platform != target_platform
+          then: pango
+        - if: build_platform != target_platform
+          then: icu
+        - if: build_platform != target_platform
+          then: pcre2
+        - if: build_platform != target_platform
+          then: tk
+        - if: build_platform != target_platform
+          then: zlib
+        - if: build_platform != target_platform
+          then: gsl
+        - if: build_platform != target_platform
+          then: libtiff
+        - if: build_platform != target_platform
+          then: libxml2
+        - if: build_platform != target_platform
+          then: libssh2
+        - if: build_platform != target_platform
+          then: krb5
+        - if: build_platform != target_platform
+          then: libblas
+        - if: build_platform != target_platform
+          then: liblapack
+      host:
+        # This is a hack, strong run_exports should cause this to be added
+        - if: osx
+          then: llvm-openmp
+        - if: not win
+          then: freetype
+        - if: not win
+          then: readline
+        - if: not win
+          then: ncurses
+        - if: not win
+          then: libcurl
+        - if: not win
+          then: xz
+        - if: not win
+          then: libpng
+        - if: not win
+          then: bzip2
+        - if: win
+          then: ${{ native }}bzip2
+        - if: not win
+          then: cairo
+        - if: win
+          then: ${{ native }}libjpeg-turbo
+        - if: not win
+          then: libjpeg-turbo
+        - if: osx
+          then: libiconv
+        - if: win
+          then: ${{ native }}libiconv
+        - if: linux
+          then: libuuid
+        - if: win
+          then: ${{ native }}gmp
+        - if: unix
+          then: glib
+        - if: win
+          then: ${{ native }}fftw
+        - if: win
+          then: ${{ native }}xz
+        - if: win
+          then: ${{ native }}mpfr
+        - if: win
+          then: ${{ native }}libsndfile
+        - ${{ native }}bwidget
+        - ${{ native }}tktable
+        - if: win
+          then: ${{ native }}libpng
+        - if: not win
+          then: pango
+        - if: win
+          then: ${{ native }}icu
+        - if: not win
+          then: icu
+        - if: not win
+          then: pcre2
+        - if: win
+          then: ${{ native }}pcre2
+        - if: not win
+          then: tk
+        - if: win
+          then: ${{ native }}tk
+        - if: win
+          then: ${{ native }}zlib
+        - if: not win
+          then: zlib
+        - if: win
+          then: ${{ native }}gsl
+        - if: not win
+          then: gsl
+        - if: win
+          then: ${{ native }}libtiff
+        - if: not win
+          then: libtiff
+        - if: win
+          then: ${{ native }}libxml2
+        - if: not win
+          then: libxml2
+        - if: not win
+          then: libssh2
+        - if: not win
+          then: krb5
+        - libblas
+        - liblapack
+        # sed is in host env because its path is recorded in R's shell wrapper
+        - if: linux
+          then: sed
+      run:
+        - _r-mutex 1.* anacondar_1
+        # Needed by R CMD javareconf
+        - if: not win
+          then: make
+        - if: linux
+          then: gcc_impl_${{ target_platform }}  >=${{ c_compiler_version|default("0") }}
+        - if: linux
+          then: gxx_impl_${{ target_platform }}  >=${{ cxx_compiler_version|default("0") }}
+        - if: linux
+          then: gfortran_impl_${{ target_platform }}
+        - if: osx
+          then: ${{ c_compiler|default("blah") }}_${{ target_platform }} >=${{ c_compiler_version|default("0") }}
+        - if: osx
+          then: ${{ cxx_compiler|default("blah") }}_${{ target_platform }} >=${{ cxx_compiler_version|default("0") }}
+        - if: osx
+          then: ${{ compiler('fortran') }}
+        - if: osx
+          then: ${{ pin_compatible('llvm-openmp', upper_bound=None) }}
+        - if: not win
+          then: curl
+        - if: win
+          then: ${{ native }}bzip2
+        - if: win
+          then: ${{ native }}libjpeg-turbo
+        - if: win
+          then: ${{ native }}libiconv
+        - if: linux
+          then: libuuid
+        - if: linux
+          then: xorg-libxt
+        - if: win
+          then: ${{ native }}gmp
+        - if: win
+          then: ${{ native }}fftw
+        - if: win
+          then: ${{ native }}xz
+        - if: win
+          then: ${{ native }}mpfr
+        - if: win
+          then: ${{ native }}libsndfile
+        - ${{ native }}bwidget
+        - ${{ native }}tktable
+        - if: win
+          then: ${{ native }}libpng
+        - if: win
+          then: ${{ native }}pcre2
+        - if: win
+          then: ${{ native }}tk
+        - if: win
+          then: ${{ native }}zlib
+        - if: win
+          then: ${{ native }}gsl
+        - if: win
+          then: ${{ native }}libtiff
+        - if: win
+          then: ${{ native }}libxml2
+        # Once run_exports are in place these will not be necessary:
+        - if: not win
+          then: ${{ pin_compatible('pango') }}
+        - if: not win
+          then: ${{ pin_compatible('bzip2') }}
+        - if: not win
+          then: ${{ pin_compatible('icu') }}
+        - if: linux
+          then: sed
+    tests:
+      - script:
+          - R -h
+          - R --version
+          - "R -e \"print(.Platform\\$dynlib.ext)\""
+          - if: linux or osx
+            then: "R -e \"library('tcltk')\""
+          - if: win
+            then: "R -e \\\"library('tcltk')\\\"\""
+          - Rscript --version
+          - "Rscript -e  'cat(\"ok\\\\n\")'"
+          - if: not win
+            then: "R -e \"capabilities()\""
+          - if: win
+            then: "R -e \\\"capabilities()\\\"\""
+          - if: not win
+            then: "R -e \"grSoftVersion()\""
+          - if: win
+            then: "R -e \\\"grSoftVersion()\\\"\""
+          - if: not win
+            then: Rscript test-svg.R
+          - open:
+              - if: win
+                then: Rfe --help
+              - if: win
+                then: Rterm --help
+              - if: win
+                then: Rterm --version
+              - "Rscript -e \"stopifnot(capabilities('jpeg'), TRUE)\""
+              - "Rscript -e \"stopifnot(capabilities('png'), TRUE)\""
+              - if: win
+                then: if not exist %PREFIX%\\Lib\\R\\bin\\x64\\R.lib exit 1
+            files:
+              - test-svg.R
+    about:
+      license: GPL-2.0-or-later
+      license_file: COPYING
+      summary: R is a free software environment for statistical computing and graphics.
+      homepage: http://www.r-project.org/
+    extra:
+      feedstock-name: r-base-rmath
+      recipe-maintainers:
+        - conda-forge/r
+        - isuruf
+        - mbargull
+        - mingwandroid
+        - ocefpaf
+        - sodre
+        - xhochy
+    script: build-r-base.sh  # [not win]
+    script: bld-r-base.bat  # [win]
+

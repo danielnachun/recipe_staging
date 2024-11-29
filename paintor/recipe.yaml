@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: paintor
+  version: 3.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/gkichaev/PAINTOR_V3.0/archive/ffce82a7114eeb98220db39ba5d6b69e5a419a9e.zip
+  sha256: 08bf5f6c06e7f312710b6e4c05aae4c142a19d2465f100662179491e2a4d3261
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - make
+    - sed
+  host:
+    - eigen
+    - nlopt
+
+tests:
+  - script:
+      - PAINTOR
+
+about:
+  license: Other
+  summary: Tool for integration of functional and association data in fine-mapping studies
+  homepage: https://bogdan.dgsom.ucla.edu/pages/paintor/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

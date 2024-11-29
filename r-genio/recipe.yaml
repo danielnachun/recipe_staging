@@ -1,0 +1,80 @@
+schema_version: 1
+
+context:
+  version: 1.1.2
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-genio
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/genio_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/genio/genio_${{ version }}.tar.gz
+  sha256: f4ad6737a9f5cdfea8ac4f9ed8df33fac3c01b15d75e6c71ebceee8ab647fd47
+
+build:
+  number: 0
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: not win
+      then: ${{ compiler('cxx') }}
+    - if: win
+      then: ${{ compiler('m2w64_cxx') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+    - r-rcpp
+    - r-dplyr
+    - r-readr >=2.0.0
+    - r-tibble
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{native}}gcc-libs
+    - r-rcpp
+    - r-dplyr
+    - r-readr >=2.0.0
+    - r-tibble
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('genio')\""
+      - if: win
+        then: "\"%R%\" -e \"library('genio')\""
+
+about:
+  license: GPL-3.0-or-later
+  summary: |
+    Implements readers and writers for file formats associated with genetics data.  Reading
+    and writing Plink BED/BIM/FAM and GCTA binary GRM formats is fully supported, including
+    a lightning-fast BED reader and writer implementations.  Other functions are 'readr'
+    wrappers that are more constrained, user-friendly, and efficient for these particular
+    applications; handles Plink and Eigenstrat tables (FAM, BIM, IND, and SNP files).  There
+    are also make functions for FAM and BIM tables with default values to go with simulated
+    genotype data.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-3
+  homepage: https://github.com/OchoaLab/genio
+

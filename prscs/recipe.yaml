@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: prscs
+  version: 1.1.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/getian107/PRScs/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: eca00fe40bef63178e7a6dcf56ad529206be04139b809f6c8cbf6cf5365da758
+
+build:
+  number: 0
+
+requirements:
+  host:
+    - h5py
+    - numpy =1.24
+    - python =3.10
+    - scipy
+  run:
+    - h5py
+    - numpy =1.24
+    - python =3.10
+    - scipy
+
+tests:
+  - script:
+      - PRScs -h
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: Tool that infers posterior SNP effect sizes under continuous shrinkage
+  homepage: https://github.com/getian107/PRScs
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

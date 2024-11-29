@@ -1,0 +1,57 @@
+schema_version: 1
+
+context:
+  version: 0.1
+
+package:
+  name: r-r2bglims
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/pjnewcombe/R2BGLiMS/archive/0842f6cb81691d14957a38db78040f07af146410.zip
+  sha256: 35702754e56e915efcde4333da4ec15aaf0de0d4e959882d51c5ac93f8e7c1b8
+
+build:
+  number: 0
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+    - r-gplots
+    - r-jsonlite
+    - r-mass
+    - r-survival
+  run:
+    - openjdk
+    - r-base>=4.2
+    - r-gplots
+    - r-jsonlite
+    - r-mass
+    - r-survival
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('R2BGLiMS')\""
+      - if: win
+        then: "\"%R%\" -e \"library('R2BGLiMS')\""
+
+about:
+  license: GPL-3.0-or-later
+  summary: R wrapper for a Java Bayesian GLM variable selection package
+  license_file: LICENSE
+  homepage: https://github.com/pjnewcombe/R2BGLiMS
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

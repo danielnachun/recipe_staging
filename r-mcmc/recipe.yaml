@@ -1,0 +1,87 @@
+# Package: mcmc
+# Version: 0.9-7
+# Date: 2020-03-20
+# Title: Markov Chain Monte Carlo
+# Author: Charles J. Geyer <charlie@stat.umn.edu> and Leif T. Johnson <ltjohnson@google.com>
+# Maintainer: Charles J. Geyer <charlie@stat.umn.edu>
+# Depends: R (>= 3.0.2)
+# Imports: stats
+# Suggests: xtable, Iso
+# ByteCompile: TRUE
+# Description: Simulates continuous distributions of random vectors using Markov chain Monte Carlo (MCMC).  Users specify the distribution by an R function that evaluates the log unnormalized density.  Algorithms are random walk Metropolis algorithm (function metrop), simulated tempering (function temper), and morphometric random walk Metropolis (Johnson and Geyer, 2012, <doi:10.1214/12-AOS1048>, function morph.metrop), which achieves geometric ergodicity by change of variable.
+# License: MIT + file LICENSE
+# URL: http://www.stat.umn.edu/geyer/mcmc/, https://github.com/cjgeyer/mcmc
+# NeedsCompilation: yes
+# Packaged: 2020-03-21 00:49:36 UTC; geyer
+# Repository: CRAN
+# Date/Publication: 2020-03-21 19:00:13 UTC
+schema_version: 1
+
+context:
+  version: 0.9-8
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-mcmc
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/mcmc_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/mcmc/mcmc_${{ version }}.tar.gz
+  sha256: 6a06440d4b58e8a7f122747d92046ff40da4bb58a20bf642228a648a0c826ea7
+
+build:
+  number: 1
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.3
+  run:
+    - r-base=4.3
+    - if: win
+      then: ${{ native }}gcc-libs
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('mcmc')\""
+      - if: win
+        then: "\"%R%\" -e \"library('mcmc')\""
+
+about:
+  license: MIT
+  summary: |
+    Simulates continuous distributions of random vectors using Markov chain Monte Carlo (MCMC).  Users specify the distribution by an R function that evaluates the log unnormalized density.  Algorithms are random walk Metropolis algorithm (function metrop), simulated tempering (function temper), and morphometric random
+    walk Metropolis (Johnson and Geyer, 2012, <doi:10.1214/12-AOS1048>, function morph.metrop), which achieves geometric ergodicity by change of variable.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/MIT
+    - LICENSE
+  homepage: http://www.stat.umn.edu/geyer/mcmc/, https://github.com/cjgeyer/mcmc
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

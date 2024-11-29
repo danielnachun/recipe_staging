@@ -1,0 +1,71 @@
+schema_version: 1
+
+context:
+  version: 1.0.55
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-ebnm
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/stephenslab/ebnm/archive/${{ version }}.tar.gz
+  sha256: 68fb3ad3eca8079a2b8dfbab0213c5941a3c9b00b38e8338311a058945e06d3a
+
+build:
+  number: 0
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+    - r-ashr
+    - r-deconvolver
+    - r-dplyr
+    - r-ggplot2
+    - r-horseshoe
+    - r-magrittr
+    - r-mixsqp
+    - r-rlang
+    - r-truncnorm
+    - r-trust
+  run:
+    - r-base>=4.2
+    - r-ashr
+    - r-deconvolver
+    - r-dplyr
+    - r-ggplot2
+    - r-horseshoe
+    - r-magrittr
+    - r-mixsqp
+    - r-rlang
+    - r-truncnorm
+    - r-trust
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('ebnm')\""
+      - if: win
+        then: "\"%R%\" -e \"library('ebnm')\""
+
+about:
+  license: GPL-3.0-or-later
+  summary: |
+    Provides simple, fast, and stable functions to fit the normal means model using empirical
+    Bayes. For available models and details, see function ebnm(). A comprehensive introduction
+    to the package is provided by Willwerscheid and Stephens (2021) <arXiv:2110.00152>.
+  homepage: https://github.com/stephenslab/ebnm
+
+maintainers:
+  - danielnachun
+

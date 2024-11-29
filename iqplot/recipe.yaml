@@ -1,0 +1,47 @@
+schema_version: 1
+
+context:
+  name: iqplot
+  version: 0.3.7
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/iqplot-${{ version }}.tar.gz
+  sha256: 8e5634bb9f88c3485790d0dc6953043e7115db1cefcbdebc116d100bde7829e0
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - pip
+  run:
+    - python
+    - numpy
+    - xarray
+    - pandas
+    - bokeh
+    - colorcet
+
+tests:
+  - python:
+      imports:
+        - iqplot
+      pip_check: true
+
+about:
+  summary: Generate Bokeh plots for data sets with one quantitative variable.
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/justinbois/iqplot
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

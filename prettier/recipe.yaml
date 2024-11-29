@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: prettier
+  version: 3.3.3
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/prettier/${{ name }}/archive/${{ version }}.tar.gz
+  sha256: 096859cfb7e4585b632a11c36e53c130c41ea1846f0d6fb09fea0ca3cc3f1446
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+    - sed
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Prettier is an opinionated code formatter.
+  homepage: https://github.com/prettier/${{ name }}
+  repository: https://github.com/prettier/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

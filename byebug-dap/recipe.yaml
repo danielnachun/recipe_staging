@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: byebug-dap
+  version: 0.1.4
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: f7bab5932caeaea0a874c7d635e8ec53dbd75ef2328f1c18788dc026b72f72dd
+
+build:
+  number: 0
+
+requirements:
+  host:
+    - byebug
+    - rb-ruby-dap
+    - ruby=3.2
+  run:
+    - byebug
+    - rb-ruby-dap
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: Apache-2.0
+  license_file: ${{ name }}-${{ version }}/LICENSE
+  summary: Implements a Debug Adapter Protocol interface for Byebug
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://gitlab.com/firelizzard/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,53 @@
+schema_version: 1
+
+context:
+  name: perl-module-implementation
+  version: 0.09
+  sha256: c15f1a12f0c2130c9efff3c2e1afe5887b08ccd033bd132186d1e7d5087fd66d
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/D/DR/DROLSKY/Module-Implementation-${{ version }}.tar.gz
+  sha256: ${{ sha256 }}
+
+build:
+  number: 0
+  skip: win
+  noarch: generic
+
+requirements:
+  build:
+    - make
+  host:
+    - perl-test-fatal
+    - perl-test-requires
+    - perl=5.32
+    - perl-module-runtime
+    - perl-try-tiny
+  run:
+    - perl-module-runtime
+    - perl>=5.32
+    - perl-try-tiny
+  run_exports:
+    weak:
+      - ${{ name }} =${{ version }}
+
+tests:
+  - python:
+      imports:
+        - Module::Implementation
+
+about:
+  license: Artistic-2.0
+  license_file: LICENSE
+  summary: Loads one of several alternate underlying implementations for a module
+  homepage: http://metacpan.org/release/Module-Implementation
+
+extra:
+  recipe-maintainers:
+    - xileF1337
+    - conda-forge/perl-packagers
+

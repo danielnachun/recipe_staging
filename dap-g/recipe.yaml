@@ -1,0 +1,49 @@
+schema_version: 1
+
+context:
+  name: dap-g
+  version: 1.0.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/xqwen/dap/archive/875ba40b7b28d6972fb94e6d2fb352ce1aaa92a7.zip
+  sha256: d8a897c38f764764839559239ba2e3710216b2c78938354631d28844c86be731
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - make
+    - if: linux
+      then: gxx
+    - sed
+  host:
+    - blas
+    - gsl
+  run:
+    - if: linux
+      then: _openmp_mutex
+    - if: osx
+      then: llvm-openmp
+    - libopenblas
+    - perl
+
+tests:
+  - script:
+      - "dap-g 2>&1 | grep -q \"Error: no suitable input data specified\""
+      - "ptwas_builder 2>&1 | grep -q \"Error: gene name is not specified\""
+
+about:
+  license: AGPL-3.0-or-later
+  summary: Suite of statistical methods to perform genetic association analysis integrating genomic annotations
+  homepage: https://github.com/xqwen/dap
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

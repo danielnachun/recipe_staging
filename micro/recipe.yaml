@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: micro
+  version: 2.0.13
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  git: https://github.com/zyedidia/${{ name }}.git
+  rev: v${{ version }}
+
+build:
+  number: 1
+  dynamic_linking:
+    binary_relocation: false
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - go
+    - go-licenses
+    - make
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: Modern and intuitive terminal-based text editor
+  homepage: https://github.com/zyedidia/${{ name }}
+  repository: https://github.com/zyedidia/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

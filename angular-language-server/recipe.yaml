@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: angular-language-server
+  version: 18.2.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/@angular/language-server/-/language-server-${{ version }}.tgz
+  sha256: 52f60ec6ce7d8ce3bd61fd2dbd7f7a3f847fdfaa8f7849def8d40016483d122b
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+    - typescript
+
+tests:
+  - script:
+      - ngserver --help --tsProbeLocations ${PREFIX}/lib/node_modules
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Language Server Protocol (LSP) implementation of the Angular Language Service.
+  homepage: https://github.com/angular/vscode-ng-language-service
+  repository: https://github.com/angular/vscode-ng-language-service
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

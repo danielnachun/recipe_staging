@@ -1,0 +1,57 @@
+schema_version: 1
+
+context:
+  name: gersemi
+  version: 0.8.2
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
+  sha256: c422bf16ad12d9f0e391b4e42605e1f8e742c345ea06f98c114a089637a4e73a
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv
+  python:
+    entry_points:
+      - gersemi = gersemi.__main__:main
+
+requirements:
+  host:
+    - appdirs
+    - dataclasses
+    - lark >=1.0
+    - pip
+    - python
+    - pyyaml >=5
+  run:
+    - appdirs
+    - dataclasses
+    - lark >=1.0
+    - python
+    - pyyaml >=5
+
+tests:
+  - python:
+      imports:
+        - gersemi
+        - gersemi.command_invocation_dumpers
+        - gersemi.tasks
+      pip_check: false
+  - script:
+      - gersemi --help
+
+about:
+  license: MPL-2.0
+  license_file:
+  summary: A formatter to make your CMake code the real treasure
+  homepage: https://github.com/BlankSpruce/gersemi
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

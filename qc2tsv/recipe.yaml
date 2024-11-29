@@ -1,0 +1,54 @@
+schema_version: 1
+
+context:
+  name: qc2tsv
+  version: 0.2.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/qc2tsv-${{ version }}.tar.gz
+  sha256: 788a1f0ca6d06a793680bc1ea6f3cf6bcbcdbf0241bade22d4d3e904106e06e2
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - qc2tsv = qc2tsv.cli:main
+
+requirements:
+  host:
+    - python
+    - pip
+  run:
+    - python
+    - autouri >=0.1.2.1
+    - pandas >=1.0.0
+    - caper
+
+tests:
+  - python:
+      imports:
+        - qc2tsv
+      pip_check: false
+  - requirements:
+      run:
+        - pip
+    script:
+      - qc2tsv --help
+
+about:
+  summary: Converts multiple QC JSONs to a spread sheet (TSV/CSV)
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/ENCODE-DCC/qc2tsv
+  repository: https://github.com/ENCODE-DCC/qc2tsv
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

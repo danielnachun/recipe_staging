@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: bigdecimal
+  version: 3.1.7
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: e799b369a0005fc6d62eed7ef19139ac9bc319cc51470c637b9dcdf593600133
+
+build:
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+  host:
+    - ruby=3.2
+  run:
+    - ruby=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: BSD-2-Clause
+  license_file: ${{ name }}-${{ version }}/LICENSE
+  summary: This library provides arbitrary-precision decimal floating-point number class.
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/ruby/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

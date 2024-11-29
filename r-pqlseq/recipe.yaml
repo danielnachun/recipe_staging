@@ -1,0 +1,81 @@
+schema_version: 1
+
+context:
+  version: 1.2.1
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-pqlseq
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/PQLseq_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/PQLseq/PQLseq_${{ version }}.tar.gz
+  sha256: c03c43144309913ebbceb47609456538df6e571040149edd7f31d8b3f7b7de53
+
+build:
+  number: 0
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: not win
+      then: ${{ compiler('cxx') }}
+    - if: win
+      then: ${{ compiler('m2w64_cxx') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+    - r-matrix
+    - r-rcpp >=0.12.14
+    - r-rcpparmadillo
+    - r-doparallel
+    - r-foreach
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{native}}gcc-libs
+    - r-matrix
+    - r-rcpp >=0.12.14
+    - r-rcpparmadillo
+    - r-doparallel
+    - r-foreach
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('PQLseq')\""
+      - if: win
+        then: "\"%R%\" -e \"library('PQLseq')\""
+
+about:
+  license: GPL-2.0
+  summary: |
+    An efficient tool designed for differential analysis of large-scale RNA sequencing
+    (RNAseq) data and Bisulfite sequencing (BSseq) data in the presence of individual
+    relatedness and population structure. 'PQLseq' first fits a Generalized Linear Mixed
+    Model (GLMM) with adjusted covariates, predictor of interest and random effects
+    to account for population structure and individual relatedness, and then performs
+    Wald tests for each gene in RNAseq or site in BSseq.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+  homepage: https://CRAN.R-project.org/package=PQLseq
+

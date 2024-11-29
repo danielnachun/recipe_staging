@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: create-sst
+  version: 2.43.5
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/${{ name }}/-/${{ name }}-${{ version }}.tgz
+  sha256: e095d56571b8136671262b19c4a309607b3eba41268341034e0cfe146b912f7a
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: A simple CLI create-sst that sets up a modern web application powered by SST
+  homepage: https://github.com/sst/sst
+  repository: https://github.com/sst/sst
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

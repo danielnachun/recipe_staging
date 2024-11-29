@@ -1,0 +1,79 @@
+schema_version: 1
+
+context:
+  version: 1.2.5
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-randomfieldsutils
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/RandomFieldsUtils_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/RandomFieldsUtils/RandomFieldsUtils_${{ version }}.tar.gz
+  sha256: 8cc288ba0f234eedb20ac791c89e18bde15e1f690ce34a303ff91a45d7f84e2e
+  file_name: RandomFieldsUtils_${{ version }}.tar.gz
+
+build:
+  number: 2
+  skip: win32
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: not win
+      then: ${{ compiler('cxx') }}
+    - if: not win
+      then: ${{ compiler('fortran') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: win
+      then: ${{ compiler('m2w64_cxx') }}
+    - if: win
+      then: ${{ compiler('m2w64_fortran') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+    - if: osx
+      then: llvm-openmp
+  host:
+    - r-base=4.2
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+    - if: osx
+      then: llvm-openmp
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('RandomFieldsUtils')\""
+      - if: win
+        then: "\"%R%\" -e \"library('RandomFieldsUtils')\""
+
+about:
+  license: GPL-3.0-or-later
+  summary: Various utilities are provided that might be used in spatial statistics and elsewhere. It delivers a method for solving linear equations that checks the sparsity of the matrix before any algorithm is used. Furthermore, it includes the Struve functions.
+  license_file: ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-3
+  homepage: http://ms.math.uni-mannheim.de/de/publications/software
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+    - ocefpaf
+

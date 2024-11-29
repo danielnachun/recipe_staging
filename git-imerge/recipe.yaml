@@ -1,0 +1,45 @@
+schema_version: 1
+
+context:
+  name: git-imerge
+  version: 1.2.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
+  sha256: df5818f40164b916eb089a004a47e5b8febae2b4471a827e3aaa4ebec3831a3f
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv
+  python:
+    entry_points:
+      - git-imerge = gitimerge:climain
+
+requirements:
+  host:
+    - pip
+    - python
+  run:
+    - python
+
+tests:
+  - python:
+      pip_check: false
+  - script:
+      - git-imerge --help
+
+about:
+  license: GPL-2.0-or-later
+  license_file:
+  summary: Incremental merge for git
+  homepage: https://github.com/mhagger/git-imerge
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,47 @@
+schema_version: 1
+
+context:
+  name: perl-file-pushd
+  version: 1.016
+  sha256: d73a7f09442983b098260df3df7a832a5f660773a313ca273fa8b56665f97cdc
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/D/DA/DAGOLDEN/File-pushd-${{ version }}.tar.gz
+  sha256: ${{ sha256 }}
+
+build:
+  number: 0
+  skip: win
+  noarch: generic
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+  run_exports:
+    weak:
+      - ${{ name }} =${{ version }}
+
+tests:
+  - python:
+      imports:
+        - File::pushd
+
+about:
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: change directory temporarily for a limited scope
+  homepage: https://github.com/dagolden/File-pushd
+
+extra:
+  recipe-maintainers:
+    - xileF1337
+    - conda-forge/perl-packagers
+

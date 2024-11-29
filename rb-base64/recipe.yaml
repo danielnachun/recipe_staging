@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: base64
+  version: 0.2.0
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: 0f25e9b21a02a0cc0cea8ef92b2041035d39350946e8789c562b2d1a3da01507
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --norc --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: BSD-2-Clause
+  license_file: ${{ name }}-${{ version }}/LICENSE.txt
+  summary: Support for encoding and decoding binary data using a Base64 representation.
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/ruby/base64
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

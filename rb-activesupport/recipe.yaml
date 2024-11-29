@@ -1,0 +1,52 @@
+schema_version: 1
+
+context:
+  name: activesupport
+  version: 7.2.1
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: 7557fa077a592a4f36f7ddacf4d9d71c34aff69ed20236b8a61c22d567da8c24
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - rb-base64
+    - rb-bigdecimal
+    - rb-concurrent-ruby
+    - rb-connection_pool
+    - rb-drb
+    - rb-i18n
+    - rb-logger
+    - rb-minitest
+    - rb-securerandom
+    - rb-tzinfo
+    - ruby>=3.2
+
+tests:
+  - script:
+      - "ruby -r active_support -e 'exit 0'"
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/MIT-LICENSE
+  summary: A toolkit of support libraries and Ruby core extensions extracted from the Rails framework.
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/rails/rails
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

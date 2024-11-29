@@ -1,0 +1,61 @@
+schema_version: 1
+
+context:
+  name: stylo
+  version: 0.7.4
+
+package:
+  name: r-${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cran.r-project.org/src/contrib/stylo_${{ version }}.tar.gz
+  sha256: 8bdd2b9ecc8e0ef3a7ee25bb62c9f24aafd6384b523fa04e573ab7bbc8bf4e6e
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - if: osx
+      then: ln -sf ${PREFIX}/lib/R/library/tcltk/libs/tcltk.dylib ${PREFIX}/lib/R/library/tcltk/libs/tcltk.so
+    - R CMD INSTALL --build .
+  merge_build_and_host_envs: true
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  host:
+    - r-ape
+    - r-base=4.2
+    - r-class
+    - r-e1071
+    - r-lattice
+    - r-pamr
+    - r-tcltk2
+    - r-tsne
+  run:
+    - r-ape
+    - r-base>=4.2
+    - r-class
+    - r-e1071
+    - r-lattice
+    - r-pamr
+    - r-tcltk2
+    - r-tsne
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('stylo')\""
+
+about:
+  summary: "Supervised and unsupervised multivariate methods, supplemented by GUI and some visualizations, to perform various analyses in the field of computational stylistics, authorship attribution, etc. For further reference, see Eder et al. (2016), <https://journal.r-project.org/archive/2016/RJ-2016-007/index.html>. You are also encouraged to visit the Computational Stylistics Group's website <https://computationalstylistics.github.io/>, where a reasonable amount of information about the package and related projects are provided."
+  license: NGPL
+  homepage: https://github.com/computationalstylistics/stylo
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

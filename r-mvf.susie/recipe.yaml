@@ -1,0 +1,61 @@
+schema_version: 1
+
+context:
+  version: 0.1.021
+
+package:
+  name: r-mvf.susie.alpha
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/william-denault/mvf.susie.alpha/archive/bb764aeca5cfc6240b14697060bc064424033d60.zip
+  sha256: 3e1bf4fdf0fe21059b0a06113511d71932f39711adb5fe1b96b7387340a8e563
+
+build:
+  number: 0
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+    - r-abind
+    - r-ashr
+    - r-mixsqp
+    - r-mashr
+    - r-matrixstats
+    - r-mvtnorm
+    - r-susif.alpha
+  run:
+    - r-base>=4.2
+    - r-abind
+    - r-ashr
+    - r-mixsqp
+    - r-mashr
+    - r-matrixstats
+    - r-mvtnorm
+    - r-susif.alpha
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('mvf.susie.alpha')\""
+      - if: win
+        then: "\"%R%\" -e \"library('mvf.susie.alpha')\""
+
+about:
+  license: OTHER
+  summary: Multivariate Sum of Single Functions
+  homepage: https://github.com/william-denault/mvf.susie.alpha
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

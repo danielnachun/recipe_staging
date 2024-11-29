@@ -1,0 +1,98 @@
+# Package: MCMCglmm
+# Version: 2.29
+# Date: 2019-04-16
+# Title: MCMC Generalised Linear Mixed Models
+# Depends: Matrix, coda, ape
+# Imports: corpcor, tensorA, cubature, methods
+# Suggests: rgl, combinat, mvtnorm, orthopolynom
+# Author: Jarrod Hadfield
+# Maintainer: Jarrod Hadfield <j.hadfield@ed.ac.uk>
+# Description: MCMC Generalised Linear Mixed Models.
+# License: GPL (>= 2)
+# SystemRequirements: C++11
+# NeedsCompilation: yes
+# Packaged: 2019-04-17 15:03:49 UTC; jhadfiel
+# Repository: CRAN
+# Date/Publication: 2019-04-24 10:50:07 UTC
+schema_version: 1
+
+context:
+  version: 2.35
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-mcmcglmm
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/MCMCglmm_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/MCMCglmm/MCMCglmm_${{ version }}.tar.gz
+  sha256: cc10f074a78702bfe46e342235eff747cd52993ade76f59cf8fa9e80968179a6
+
+build:
+  number: 0
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: not win
+      then: ${{ compiler('cxx') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: win
+      then: ${{ compiler('m2w64_cxx') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+    - r-matrix
+    - r-ape
+    - r-coda
+    - r-corpcor
+    - r-cubature
+    - r-tensora
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+    - r-matrix
+    - r-ape
+    - r-coda
+    - r-corpcor
+    - r-cubature
+    - r-tensora
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('MCMCglmm')\""
+      - if: win
+        then: "\"%R%\" -e \"library('MCMCglmm')\""
+
+about:
+  license: GPL-2.0-or-later
+  summary: MCMC Generalised Linear Mixed Models.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+  homepage: https://CRAN.R-project.org/package=MCMCglmm
+
+extra:
+  recipe-maintainers:
+    - nick-youngblut
+    - conda-forge/r
+

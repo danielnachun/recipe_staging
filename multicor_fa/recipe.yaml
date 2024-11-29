@@ -1,0 +1,51 @@
+schema_version: 1
+
+context:
+  name: multicor_fa
+  version: 1.0.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/multicor_fa-${{ version }}.tar.gz
+  sha256: 8e1d9e4c3d2ca974690879bae4f824076fe83b5895c82c268e2318fded917482
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv
+
+requirements:
+  host:
+    - python >=3.8
+    - setuptools >=61.0
+    - pip
+  run:
+    - python >=3.8
+    - pytorch >=1.11
+    - numpy >=1.20
+    - pandas >=1.3.5
+    - scipy >=1.7.1
+    - scikit-learn >=1.0
+
+tests:
+  - python:
+      imports:
+        - multicor_fa
+  - requirements:
+      run:
+        - pip
+    script:
+      - pip check
+
+about:
+  summary: Multiset Correlation and Factor Analysis
+  license: BSD-3-Clause
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,61 @@
+schema_version: 1
+
+context:
+  name: perl-sereal-encoder
+  version: 5.004
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/Y/YV/YVES/Sereal-Encoder-${{ version }}.tar.gz
+  sha256: 5e5a86ccd32dae34ed80932ecbe5c68e29752b5de0e9b0a793ab7eb2ca55cb1b
+
+build:
+  number: 0
+  script:
+    env:
+      export PERL_MM_USE_DEFAULT: 1
+    content:
+      - perl Makefile.PL INSTALLDIRS=site
+      - make
+      - make test
+      - make install
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+  host:
+    - perl >=5.32
+    - perl-devel-checklib
+    - perl-sereal-decoder
+    - perl-test-deep
+    - perl-test-differences
+    - perl-test-longstring
+    - perl-test-warn
+  run:
+    - perl >=5.32
+    - perl-devel-checklib
+    - perl-sereal-decoder
+  ignore_run_exports:
+    - perl-test-warn
+    - perl-test-deep
+    - perl-test-differences
+    - perl-test-longstring
+
+tests:
+  - python:
+      imports:
+        - Sereal::Encoder
+        - Sereal::Encoder::Constants
+
+about:
+  license: perl_5
+  summary: Fast, compact, powerful binary serialization
+  homepage: http://metacpan.org/pod/Sereal-Encoder
+
+maintainers:
+  - danielnachun
+

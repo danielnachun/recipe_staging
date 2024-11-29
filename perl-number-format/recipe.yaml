@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: perl-number-format
+  version: 1.75
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/W/WR/WRW/Number-Format-${{ version }}.tar.gz
+  sha256: 82d659cb16461764fd44d11a9ce9e6a4f5e8767dc1069eb03467c6e55de257f3
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+tests:
+  - python:
+      imports:
+        - Number::Format
+
+about:
+  license: perl_5
+  summary: Perl extension for formatting numbers
+  homepage: http://metacpan.org/pod/Number-Format
+
+maintainers:
+  - danielnachun
+

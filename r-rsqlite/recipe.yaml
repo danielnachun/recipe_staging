@@ -1,0 +1,104 @@
+schema_version: 1
+
+context:
+  version: 2.3.4
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-rsqlite
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/RSQLite_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/RSQLite/RSQLite_${{ version }}.tar.gz
+  sha256: 73cdc81bb3cfce6f680a8ee384927867520a883e6d0705f6d6c79dccd4fbc4eb
+
+build:
+  number: 0
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+    - if: build_platform != target_platform
+      then: r-bh
+    - if: build_platform != target_platform
+      then: r-bit64
+    - if: build_platform != target_platform
+      then: r-blob >=1.2.0
+    - if: build_platform != target_platform
+      then: r-cpp11
+    - if: build_platform != target_platform
+      then: r-dbi >=1.1.0
+    - if: build_platform != target_platform
+      then: r-memoise
+    - if: build_platform != target_platform
+      then: r-pkgconfig
+    - if: build_platform != target_platform
+      then: r-plogr >=0.2.0
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: not win
+      then: ${{ compiler('cxx') }}
+    - if: win
+      then: ${{ compiler('m2w64_cxx') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.3
+    - r-bh
+    - r-bit64
+    - r-blob >=1.2.0
+    - r-cpp11
+    - r-dbi >=1.1.0
+    - r-memoise
+    - r-pkgconfig
+    - r-plogr >=0.2.0
+  run:
+    - r-base=4.3
+    - if: win
+      then: ${{ native }}gcc-libs
+    # BH is the header-only part of Boost and thus a compile-time requirement only
+    # - r-bh
+    - r-bit64
+    - r-blob >=1.2.0
+    - r-cpp11
+    - r-dbi >=1.1.0
+    - r-memoise
+    - r-pkgconfig
+    - r-plogr >=0.2.0
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('RSQLite')\""
+      - if: win
+        then: "\"%R%\" -e \"library('RSQLite')\""
+
+about:
+  license: LGPL-2.1-or-later
+  summary: "Embeds the 'SQLite' database engine in R and provides an interface compliant with the 'DBI' package. The source for the 'SQLite' engine is included."
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/LGPL-2
+  homepage: https://github.com/r-dbi/RSQLite
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

@@ -1,0 +1,45 @@
+schema_version: 1
+
+context:
+  name: perl-test-object
+  version: 0.08
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/E/ET/ETHER/Test-Object-${{ version }}.tar.gz
+  sha256: 65278964147837313f4108e55b59676e8a364d6edf01b3dc198aee894ab1d0bb
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl >=5.32
+  run:
+    - perl >=5.32
+
+tests:
+  - python:
+      imports:
+        - Test::Object
+        - Test::Object::Test
+
+about:
+  license: perl_5
+  summary: Thoroughly testing objects via registered handlers
+  homepage: https://github.com/karenetheridge/Test-Object
+
+maintainers:
+  - danielnachun
+

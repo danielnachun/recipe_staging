@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: sst
+  version: 3.0.70
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/${{ name }}/-/${{ name }}-${{ version }}.tgz
+  sha256: f00090676208539346b987f9d9f5bd4704e84b7c3cb4631cb37e2e0e4bf64400
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - __RECIPE_MANAGER_SUBSTITUTION_MARKER__ --help 2>&1 | grep -q "sst: "\"deploy anything\\\"\""
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Build modern full-stack applications on AWS
+  homepage: https://github.com/sst/${{ name }}
+  repository: https://github.com/sst/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

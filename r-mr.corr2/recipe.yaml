@@ -1,0 +1,51 @@
+schema_version: 1
+
+context:
+  version: 1.0
+
+package:
+  name: r-mr.corr2
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/QingCheng0218/MR.Corr2/archive/2e0677e1749c2fa4ba23b92e2b237d82d067f4ef.zip
+  sha256: ac048a86271dd13928dda705bec8e2d51b0255f108f1e4c6162f234d4c3f1abb
+
+build:
+  number: 0
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+    - r-bh
+    - r-bigmemory
+    - r-rcpp
+    - r-rcpparmadillo
+  run:
+    - r-base>=4.2
+    - r-bh
+    - r-bigmemory
+    - r-rcpp
+    - r-rcpparmadillo
+
+tests:
+  - script:
+      - "$R -e \"library('MR.Corr2')\""
+
+about:
+  license: GPL-2.0-or-later
+  summary: MR.Corr2 is a package for two-sample Mendelian randomization using correlated instrumental variants accounting correlated horizontal pleiotropy.
+  homepage: https://github.com/QingCheng0218/MR.Corr2
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: docusaurus
+  version: 3.4.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/@${{ name }}/core/-/core-${{ version }}.tgz
+  sha256: 28ad68591547bb0dab8c1239bb7c1b7146dcdb9111d96b6ec7e907e06e52c6bc
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} --help 2>&1 | grep -q "Build website."
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Easy to maintain open source documentation websites.
+  homepage: https://github.com/facebook/${{ name }}
+  repository: https://github.com/facebook/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

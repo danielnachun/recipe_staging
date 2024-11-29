@@ -1,0 +1,48 @@
+schema_version: 1
+
+context:
+  name: hakyll
+  version: 4.16.2.2
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/jaspervdj/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: 07148c5454867ddb7c1e7c8c362aacfe1bfd7da8bd90a12ae428bb5c13629a1d
+
+build:
+  number: 0
+  skip: not unix
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cabal-install
+    - cabal-plan
+    - ghc
+    - pkg-config
+  host:
+    - if: osx
+      then: libiconv
+    - zlib
+
+tests:
+  - script:
+      - __RECIPE_MANAGER_SUBSTITUTION_MARKER__-init --help 2>&1 | grep -q 'Usage: "\"hakyll-init'\""
+
+about:
+  license: BSD-3-Clause
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: A static website compiler library in Haskell
+  homepage: https://github.com/jaspervdj/${{ name }}
+  repository: https://github.com/jaspervdj/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

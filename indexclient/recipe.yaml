@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: indexclient
+  version: 2.2.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/indexclient-${{ version }}.tar.gz
+  sha256: d0374128a340b42042fc2d7c2484a8b1f36b90e05199e6f8357ad764dd6673fd
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - pip
+  run:
+    - python
+    - requests
+
+tests:
+  - python:
+      imports:
+        - indexclient
+      pip_check: true
+
+about:
+  license: Apache-2.0
+  license_file:
+    - LICENSE
+    - NOTICE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

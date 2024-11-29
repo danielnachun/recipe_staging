@@ -1,0 +1,49 @@
+schema_version: 1
+
+context:
+  name: fish-lsp
+  version: 1.0.8
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/ndonfris/fish-lsp/archive/v${{ version }}.tar.gz
+  sha256: fffabd71157488a76dcdd0ffceeeac87817cf975541ec2c8308692ae81b96dba
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - make
+    - fish
+    - jq
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+    - sed
+    - yarn
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - "fish-lsp info 2>&1 | grep -q \"Cannot read properties of null\""
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE.md
+    - third-party-licenses.txt
+  summary: LSP implementation for the fish shell language
+  homepage: https://github.com/ndonfris/fish-lsp
+  repository: https://github.com/ndonfris/fish-lsp
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

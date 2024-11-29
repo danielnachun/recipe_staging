@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: dependabot-cli
+  version: 1.54.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/dependabot/cli/archive/v${{ version }}.tar.gz
+  sha256: ae496c65e4f947cca1251c9f786fbcc1e5e1a079af7fee08b893265e69d39295
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('go-nocgo') }}
+    - go-licenses
+
+tests:
+  - script:
+      - dependabot --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: A tool for testing and debugging Dependabot update jobs.
+  homepage: https://github.com/dependabot/cli
+  repository: https://github.com/dependabot/cli
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

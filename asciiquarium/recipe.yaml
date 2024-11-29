@@ -1,0 +1,36 @@
+schema_version: 1
+
+context:
+  name: asciiquarium
+  version: 1.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://robobunny.com/projects/${{ name }}/${{ name }}_${{ version }}.tar.gz
+  sha256: dc804ceade4e0aa6c881cdecc601f5b35540662f9c51c585e5a231408db766b2
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  run:
+    - perl-term-animation
+
+tests:
+  - script:
+      - test -f ${PREFIX}/bin/asciiquarium
+
+about:
+  license: GPL-2.0-or-later
+  license_file: gpl.txt
+  summary: Aquarium animation in ASCII art
+  homepage: https://robobunny.com/projects/asciiquarium/html/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

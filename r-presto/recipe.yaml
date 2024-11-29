@@ -1,0 +1,64 @@
+schema_version: 1
+
+context:
+  version: 1.0.0
+
+package:
+  name: r-presto
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/immunogenomics/presto/archive/31dc97fed5e2e7fc323ae4af62f72181cc51d9a3.zip
+  sha256: 594ed9b4ed05bdb864841aeeb172e903038a317487271a638382146bc88e3d77
+
+build:
+  number: 0
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+    - r-data.table
+    - r-dplyr
+    - r-matrix
+    - r-tidyr
+    - r-purrr
+    - r-tibble
+    - r-rcpp
+    - r-rcpparmadillo
+    - r-rlang
+  run:
+    - r-base>=4.2
+    - r-data.table
+    - r-dplyr
+    - r-matrix
+    - r-tidyr
+    - r-purrr
+    - r-tibble
+    - r-rcpp
+    - r-rcpparmadillo
+    - r-rlang
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('presto')\""
+      - if: win
+        then: "\"%R%\" -e \"library('presto')\""
+
+about:
+  license: GPL-3.0-or-later
+  summary: Fast Wilcoxon and auROC
+  homepage: https://github.com/immunogenomics/presto
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

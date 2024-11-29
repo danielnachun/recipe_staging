@@ -1,0 +1,45 @@
+schema_version: 1
+
+context:
+  name: sbcl
+  version: 2.4.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://downloads.sourceforge.net/project/${{ name }}/${{ name }}/${{ version }}/${{ name }}-${{ version }}-source.tar.bz2
+  sha256: da4f9486fad413d3af7abb1b09269325fdb4bff7e7b88f2195ddee743263cf7e
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ecl
+    - make
+    - if: linux
+      then: sysroot_linux-64=2.17
+  host:
+    - zstd
+  run:
+    - zstd
+
+tests:
+  - script:
+      - sbcl --help
+      - sbcl --version
+      - "sbcl --eval '(print \"hello world\")' --quit"
+
+about:
+  license: MIT AND Xerox AND BSD-3-Clause
+  license_file: COPYING
+  summary: Steel Bank Common Lisp system
+  homepage: http://www.sbcl.org/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

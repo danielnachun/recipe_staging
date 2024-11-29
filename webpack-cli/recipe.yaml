@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: webpack-cli
+  version: 5.1.4
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/webpack/${{ name }}/archive/${{name}}@${{ version }}.tar.gz
+  sha256: 8b2791ee153136c2820038499d298ea4e97dba21d6e761abd8c58e50d701afb6
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+    - yarn
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: A bundler for javascript and friends.
+  homepage: https://github.com/webpack/${{ name }}
+  repository: https://github.com/webpack/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,82 @@
+schema_version: 1
+
+context:
+  name: gnustep-base
+  version: 1.29.0
+  version_under: ${{"version | replace(".", "_")"}}
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/gnustep/libs-base/releases/download/base-${{ version_under }}/gnustep-base-${{ version }}.tar.gz
+  sha256: fa58eda665c3e0b9c420dc32bb3d51247a407c944d82e5eed1afe8a2b943ef37
+  patches:
+    - 37913d006d96a6bdcb963f4ca4889888dcce6094.patch
+
+build:
+  number: 2
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - if: linux
+      then: clang
+    - if: linux
+      then: clangxx
+    - gnustep-make
+    - make
+    - pkg-config
+  host:
+    - gnutls
+    - icu
+    - if: linux
+      then: libffi
+    - if: osx
+      then: libgcrypt
+    - libiconv
+    - if: linux
+      then: libobjc2
+    - libxml2
+    - libxslt
+  run:
+    - if: linux
+      then: gnutls
+    - icu
+    - if: linux
+      then: libffi
+    - libiconv
+    - if: linux
+      then: libobjc2
+    - libxml2
+    - libxslt
+  ignore_run_exports:
+    - if: linux
+      then: libstdcxx-ng
+    - if: osx
+      then: libcxx
+    - if: osx
+      then: gnutls
+    - if: osx
+      then: libgcrypt
+
+tests:
+  - script:
+      - if: linux
+        then: test -f $PREFIX/lib/libgnustep-base${SHLIB_EXT}
+      - if: osx
+        then: test -f $PREFIX/lib/libgnustep-baseadd.${PKG_VERSION}${SHLIB_EXT}
+
+about:
+  license: GPL-2.0-or-later
+  license_file: COPYING
+  summary: Library of general-purpose, non-graphical Objective C objects
+  homepage: https://github.com/gnustep/libs-base
+  repository: https://github.com/gnustep/libs-base
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

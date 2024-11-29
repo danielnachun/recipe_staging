@@ -1,0 +1,68 @@
+schema_version: 1
+
+context:
+  name: pinentry
+  version: 1.3.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://www.mirrorservice.org/sites/ftp.gnupg.org/gcrypt/pinentry/${{ name }}-${{ version }}.tar.bz2
+  sha256: 9b3cd5226e7597f2fded399a3bc659923351536559e9db0826981bca316494de
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - autoconf
+    - automake
+    - if: linux
+      then: binutils
+    - make
+    - pkg-config
+  host:
+    - if: linux
+      then: gettext
+    - if: linux
+      then: glib
+    - libassuan
+    - libgpg-error
+    - if: linux
+      then: libiconv
+    - if: linux
+      then: libsecret
+    - libtool
+    - if: linux
+      then: ncurses
+    - if: linux
+      then: zlib
+  run:
+    - if: linux
+      then: gettext
+    - libassuan
+    - libgpg-error
+    - if: linux
+      then: libiconv
+    - if: linux
+      then: libsecret
+    - if: linux
+      then: ncurses
+
+tests:
+  - script:
+      - ${{ name }} --version
+
+about:
+  license: GPL-2.0-only
+  license_file: COPYING
+  summary: Passphrase entry dialog utilizing the Assuan protocol
+  homepage: https://www.gnupg.org/related_software/pinentry/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

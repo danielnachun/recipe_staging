@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: loop
+  version: 0.14.8
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/adrianliechti/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: fa85e7564d383aa5b2c69939cb8800d65c88d4ad5591ff3f796ad4ab3cf17a05
+
+build:
+  number: 1
+
+requirements:
+  build:
+    - go
+    - go-licenses
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: Apache-2.0
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: Seamless Development on Kubernetes
+  homepage: https://github.com/adrianliechti/${{ name }}
+  repository: https://github.com/adrianliechti/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

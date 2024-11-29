@@ -1,0 +1,46 @@
+schema_version: 1
+
+context:
+  name: rugged
+  version: 1.7.2
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: 9049b1f4c37f39d7b0e6fc5768815c5c5f470bf27d3fd725ab032258c2b38ce9
+
+build:
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - cmake
+    - make
+    - pkg-config
+  host:
+    - ruby=3.2
+  run:
+    - ruby=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/LICENSE
+  summary: Rugged is a Ruby bindings to the libgit2 linkable C Git library.
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/libgit2/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

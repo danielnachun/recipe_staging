@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: esm
+  version: 1.0.3
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/facebookresearch/esm/archive/v${{ version }}.tar.gz
+  sha256: 4fcead65eb5ff76a1ce5b76abe3a46175e76334eed3ecdb6e63ee7c39e26e89f
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - pip
+  run:
+    - einops
+    - openfold
+    - python
+    - pytorch
+
+tests:
+  - python:
+      imports:
+        - esm
+      pip_check: true
+
+about:
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/facebookresearch/esm
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

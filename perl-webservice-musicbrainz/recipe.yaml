@@ -1,0 +1,50 @@
+# If this is a new build for the same version, increment the build
+# number. If you do not include this key, it defaults to 0.
+# See
+# https://docs.conda.io/projects/conda-build for
+# more information about meta.yaml
+schema_version: 1
+
+context:
+  name: perl-webservice-musicbrainz
+  version: 1.0.6
+  sha256: 5e91f5659677c39089bf6f253b41287bbcd3561f6a25a07965ce83b2628852e1
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/B/BF/BFAIST/WebService-MusicBrainz-1.0.6.tar.gz
+  sha256: ${{ sha256 }}
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - make
+  # Run exports are used now
+  host:
+    - perl>=5.32
+    - perl-module-build
+    - perl-mojolicious
+    - perl-io-socket-ssl
+  run:
+    - perl
+    - perl-io-socket-ssl
+    #- perl-mojolicious
+  run_exports:
+    weak:
+      - ${{ name }} =${{ version }}
+
+tests:
+  - python:
+      imports:
+        - WebService::MusicBrainz
+
+about:
+  license: perl_5
+  summary: Web service API to MusicBrainz database
+  homepage: http://metacpan.org/pod/WebService-MusicBrainz
+

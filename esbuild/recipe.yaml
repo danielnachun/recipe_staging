@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  name: esbuild
+  version: 0.23.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/evanw/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: 473d4d322ddc35f3620d37ecd5d6f40890f33923eeaafa96f5d87db9587e77af
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('go-nocgo') }}
+    - go-licenses
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE.md
+    - license-files/
+  summary: An extremely fast bundler for the web
+  homepage: https://github.com/evanw/${{ name }}
+  repository: https://github.com/evanw/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

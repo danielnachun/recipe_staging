@@ -1,0 +1,40 @@
+schema_version: 1
+
+context:
+  name: jiti
+  version: 1.21.6
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/unjs/${{ name }}/archive/v${{ version }}.tar.gz
+  sha256: 97da1aa16d113450e89cdb4c198ad5c29235217edb9bfa3e18ff8f74f2c6faa3
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - pnpm
+    - nodejs
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - __RECIPE_MANAGER_SUBSTITUTION_MARKER__ 2>&1 | grep -q "Usage: "\"jiti <path> \\\\[...arguments\\\\]\\\"\""
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: Runtime Typescript and ESM support for Node.js
+  homepage: https://github.com/unjs/${{ name }}
+  repository: https://github.com/unjs/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

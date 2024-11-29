@@ -1,0 +1,97 @@
+schema_version: 1
+
+context:
+  version: 3.2-10
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-spatstat.model
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/spatstat.model_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/spatstat.model/spatstat.model_${{ version }}.tar.gz
+  sha256: 2a21a436875b90d24538ce490b97f4e11152c5953ab99a3fedf87a48cbbb8242
+
+build:
+  number: 0
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+    - r-matrix
+    - r-abind
+    - r-goftest >=1.2_2
+    - r-mgcv
+    - r-nlme
+    - r-rpart
+    - r-spatstat.data >=3.0
+    - r-spatstat.explore >=3.2_5
+    - r-spatstat.geom >=3.2_7
+    - r-spatstat.random >=3.2_1
+    - r-spatstat.sparse >=3.0
+    - r-spatstat.utils >=3.0_3
+    - r-tensor
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+    - r-matrix
+    - r-abind
+    - r-goftest >=1.2_2
+    - r-mgcv
+    - r-nlme
+    - r-rpart
+    - r-spatstat.data >=3.0
+    - r-spatstat.explore >=3.2_5
+    - r-spatstat.geom >=3.2_7
+    - r-spatstat.random >=3.2_1
+    - r-spatstat.sparse >=3.0
+    - r-spatstat.utils >=3.0_3
+    - r-tensor
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('spatstat.model')\""
+      - if: win
+        then: "\"%R%\" -e \"library('spatstat.model')\""
+
+about:
+  license: GPL-2.0-or-later
+  summary: |
+    Functionality for exploratory data analysis and nonparametric analysis of spatial data, mainly spatial point patterns, in the 'spatstat' family of packages. (Excludes analysis of spatial data on a linear network, which is covered by the separate package 'spatstat.linnet'.) Methods include quadrat counts, K-functions
+    and their simulation envelopes, nearest neighbour distance and empty space statistics, Fry plots, pair correlation function, kernel smoothed intensity, relative risk estimation with cross-validated bandwidth selection, mark correlation functions, segregation indices, mark dependence diagnostics, and kernel estimates
+    of covariate effects. Formal hypothesis tests of random pattern (chi-squared, Kolmogorov-Smirnov, Monte Carlo, Diggle-Cressie-Loosmore-Ford, Dao-Genton, two-stage Monte Carlo) and tests for covariate effects (Cox-Berman-Waller-Lawson, Kolmogorov-Smirnov, ANOVA) are also supported.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-3
+  homepage: http://spatstat.org/
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  name: method_source
+  version: 1.0.0
+
+package:
+  name: rb-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  sha256: d779455a2b5666a079ce58577bfad8534f571af7cec8107f4dce328f0981dede
+
+build:
+  number: 1
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
+    - gem unpack ${{ name }}-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ruby -r ${{ name }} -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: ${{ name }}-${{ version }}/LICENSE
+  summary: retrieve the sourcecode for a method
+  homepage: https://rubygems.org/gems/${{ name }}
+  repository: https://github.com/banister/method_source
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

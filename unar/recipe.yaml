@@ -1,0 +1,79 @@
+schema_version: 1
+
+context:
+  name: unar
+  version: 1.10.8
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  - url: https://github.com/MacPaw/XADMaster/archive/refs/tags/v${{ version }}.tar.gz
+    sha256: 652953d7988b3c33f4f52b61c357afd1a7c2fc170e5e6e2219f4432b0c4cd39f
+    target_directory: XADMaster
+  - url: https://github.com/MacPaw/universal-detector/archive/refs/tags/1.1.tar.gz
+    sha256: 8e8532111d0163628eb828a60d67b53133afad3f710b1967e69d3b8eee28a811
+    target_directory: UniversalDetector
+
+build:
+  number: 2
+  skip: win
+
+requirements:
+  build:
+    - if: linux
+      then: ${{ compiler('c') }}
+    - if: linux
+      then: ${{ compiler('cxx') }}
+    - if: linux
+      then: binutils
+    - if: linux
+      then: clang
+    - if: linux
+      then: clangxx
+    - if: linux
+      then: make
+    - sed
+  host:
+    - if: linux
+      then: bzip2
+    - if: linux
+      then: gnustep-base
+    - if: linux
+      then: icu
+    - if: linux
+      then: libobjc2
+    - if: linux
+      then: wavpack
+    - if: linux
+      then: zlib
+  run:
+    - if: linux
+      then: bzip2
+    - if: linux
+      then: gnustep-base
+    - if: linux
+      then: icu
+    - if: linux
+      then: libobjc2
+    - if: linux
+      then: wavpack
+    - if: linux
+      then: libzlib
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: LGPL-2.1-or-later
+  license_file: XADMaster/LICENSE
+  summary: Command-line unarchiving tools supporting multiple formats
+  homepage: https://theunarchiver.com/command-line
+  repository: https://github.com/MacPaw/XADMaster
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

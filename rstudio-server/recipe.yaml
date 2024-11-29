@@ -1,0 +1,108 @@
+# reset the below to 0 when bumping upstream build num.
+schema_version: 1
+
+context:
+  version: ${{2024.09.1+394}}
+  pkg_version: "\"version.split(\"+\")[0]\""
+  build: 0
+  upstream_build_num: "\"version.split(\"+\")[1] | int\""
+
+package:
+  name: rstudio-server
+  version: ${{ pkg_version }}
+
+source:
+  url: https://github.com/rstudio/rstudio/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: 0cd8dd73db39126fc94e9019af5f35b2d859dec65b58e2c07a8261055ad4fe7a
+
+build:
+  number: ${{ upstream_build_num + build }}
+  skip: not linux
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/rstudio/lib
+      - lib/
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - ant
+    - bzip2
+    - make
+    - cmake
+    - yarn
+    - wget
+    - unzip
+    - nodejs
+    - ripgrep
+  host:
+    - r-base=4.3
+    - r-purrr
+    - r-rmarkdown
+    - r-renv
+    - r-testthat
+    - r-xml2
+    - r-yaml
+    - r-rstudioapi
+    - gin-config
+    - openjdk
+    - libboost-devel
+    - soci-postgresql
+    - soci-core
+    - soci-sqlite
+    - libpq
+    - if: linux
+      then: linux-pam
+    - libuuid
+    - bzip2
+    - zlib
+    - pango
+    - sqlite
+    - openssl
+    - hunspell
+    - hunspell-en
+    - pandoc
+    - mathjax <3.0
+    - yaml-cpp <0.7
+    - libuuid
+    - quarto
+  run:
+    - soci-postgresql
+    - soci-sqlite
+    - if: linux
+      then: linux-pam
+    - hunspell
+    - hunspell-en
+    - pandoc
+    - mathjax <3.0
+    - ${{ pin_compatible("quarto", upper_bound="x.x") }}
+
+tests:
+  - requirements:
+      run:
+        - r-base=4.3
+    script:
+      - rserver --help
+
+about:
+  license: AGPL-3.0-only
+  license_file: COPYING
+  summary: RStudio is an integrated development environment (IDE) for R
+  description: |
+    RStudio is an integrated development environment (IDE)
+    for R. It includes a console, syntax-highlighting
+    editor that supports direct code execution, as well
+    as tools for plotting, history, debugging and
+    workspace management.
+  homepage: https://www.rstudio.com/
+  repository: https://github.com/rstudio/rstudio
+  documentation: https://support.rstudio.com/hc/en-us/sections/200107586-Using-RStudio
+
+extra:
+  recipe-maintainers:
+    - izahn
+    - h-vetinari
+  feedstock-name: rstudio
+

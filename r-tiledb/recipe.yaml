@@ -1,0 +1,89 @@
+schema_version: 1
+
+context:
+  name: r-tiledb
+  version: 0.27.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/TileDB-Inc/TileDB-R/archive/${{ version }}.tar.gz
+  sha256: 0ccf6726274655115ba04378d8aefd0c057867d6725144d9e5dc9522c914cfd0
+  patches:
+    - if: osx and not arm64
+      then: 0001-skip-osx-test-to-avoid-spurious-segfault.patch
+    - if: linux and aarch64
+      then: 0002-skip-linux-aarch64-test-to-avoid-spurious-fail.patch
+
+build:
+  number: 0
+  skip: win
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - pkg-config
+    - make
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+    - if: build_platform != target_platform
+      then: r-nanotime
+    - if: build_platform != target_platform
+      then: r-rcpp >=1.0.8
+    - if: build_platform != target_platform
+      then: r-rcppspdlog
+    - if: build_platform != target_platform
+      then: r-rcppint64
+    - if: build_platform != target_platform
+      then: r-nanoarrow
+  host:
+    - r-base=4.2
+    - tiledb 2.23.*
+    - r-rcpp >=1.0.8
+    - r-rcppspdlog
+    - r-nanotime
+    - r-spdl
+    - r-rcppint64
+    - r-nanoarrow
+  run:
+    - r-base>=4.2
+    - r-nanotime
+    - r-spdl
+    - r-nanoarrow
+
+tests:
+  - requirements:
+      run:
+        - r-tinytest
+        - r-nycflights13
+        - r-palmerpenguins
+        - r-data.table
+    script:
+      - "R -e 'library(tiledb)'"
+
+about:
+  license: MIT
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/MIT
+    - LICENSE
+  summary: R interface to the TileDB array storage manager
+  description: |
+    TileDB is a highly-parallelized, cloud native array storage engine.
+  homepage: https://www.tiledb.com
+  repository: https://github.com/TileDB-Inc/TileDB-R
+  documentation: https://docs.tiledb.com/developer/
+
+extra:
+  recipe-maintainers:
+    - ihnorton
+    - Shelnutt2
+    - eddelbuettel
+    - jdblischak
+    - johnkerl
+

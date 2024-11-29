@@ -1,0 +1,47 @@
+schema_version: 1
+
+context:
+  name: ocamlfind
+  version: 1.9.6
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/ocaml/${{ name }}/archive/findlib-${{ version }}.tar.gz
+  sha256: caf11884c7fa33175371b1d2cd26334ae36d0aa2733f6651833c57cc86367118
+
+build:
+  number: 0
+  skip: win
+  dynamic_linking:
+    binary_relocation: false
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - if: linux
+      then: binutils
+    - if: linux
+      then: gcc
+    - if: linux
+      then: sysroot_linux-64=2.17
+    - make
+    - opam
+
+tests:
+  - script:
+      - ${{ name }} query --help
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: The OCaml findlib library manager
+  homepage: https://github.com/ocaml/${{ name }}
+  repository: https://github.com/ocaml/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

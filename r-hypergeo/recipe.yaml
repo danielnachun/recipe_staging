@@ -1,0 +1,59 @@
+schema_version: 1
+
+context:
+  version: 1.2-13
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-hypergeo
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/hypergeo_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/hypergeo/hypergeo_${{ version }}.tar.gz
+  sha256: 6d5b78353aad1d13091ccbeb340867dad7b9eb00d0e2185286dc7e13848f4d8e
+
+build:
+  number: 1
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+    - r-contfrac >=1.1_9
+    - r-desolve
+    - r-elliptic >=1.3_5
+  run:
+    - r-base>=4.2
+    - r-contfrac >=1.1_9
+    - r-desolve
+    - r-elliptic >=1.3_5
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('hypergeo')\""
+      - if: win
+        then: "\"%R%\" -e \"library('hypergeo')\""
+
+about:
+  license: GPL-2.0-only
+  summary: The Gaussian hypergeometric function for complex numbers.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+  homepage: https://CRAN.R-project.org/package=hypergeo
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+

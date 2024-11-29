@@ -1,0 +1,38 @@
+schema_version: 1
+
+context:
+  name: bash-language-server
+  version: 5.4.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/bash-language-server/-/${{ name }}-${{ version }}.tgz
+  sha256: 398971fee90b72014d72ca63b163e8f19d3c7db9528de8e43075c2ffa579b7b2
+
+build:
+  number: 1
+  noarch: generic
+
+requirements:
+  host:
+    - nodejs
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: MIT
+  summary: Language Server for Bash
+  homepage: https://github.com/bash-lsp/${{ name }}
+  repository: https://github.com/bash-lsp/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,50 @@
+schema_version: 1
+
+context:
+  name: ocp-indent
+  version: 1.8.2
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/OCamlPro/${{ name }}/archive/${{ version }}.tar.gz
+  sha256: 013069cf0b2219593351077e7eb11379879310e7e3e09f4f1c399bb40f24388f
+
+build:
+  number: 0
+  skip: win
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - if: linux
+      then: binutils
+    - if: linux
+      then: gcc
+    - if: linux
+      then: sysroot_linux-64=2.17
+    - if: unix
+      then: make
+    - odig
+    - opam
+    - sed
+
+tests:
+  - script:
+      - ${{ name }} --help
+
+about:
+  license: LGPL-2.1-or-later
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: Indentation tool for OCaml, to be used from editors like Emacs and Vim.
+  homepage: https://github.com/OCamlPro/${{ name }}
+  repository: https://github.com/OCamlPro/${{ name }}
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

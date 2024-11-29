@@ -1,0 +1,90 @@
+# Package: lbfgs
+# Type: Package
+# Title: Limited-memory BFGS Optimization
+# Version: 1.2.1
+# Date: 2014-07-08
+# Authors@R: c(person("Antonio", "Coppola", role = c("aut", "cre", "cph"), email = "acoppola@college.harvard.edu"), person("Brandon", "Stewart", role = c("aut", "cph")), person("Naoaki", "Okazaki", role = c("aut", "cph")), person("David", "Ardia", role = c("ctb", "cph")), person("Dirk", "Eddelbuettel", role = c("ctb", "cph")), person("Katharine", "Mullen", role = c("ctb", "cph")), person("Jorge", "Nocedal", role = c("ctb", "cph")))
+# Maintainer: Antonio Coppola <acoppola@college.harvard.edu>
+# Description: A wrapper built around the libLBFGS optimization library by Naoaki Okazaki. The lbfgs package implements both the Limited-memory Broyden-Fletcher-Goldfarb-Shanno (L-BFGS) and the Orthant-Wise Quasi-Newton Limited-Memory (OWL-QN) optimization algorithms. The L-BFGS algorithm solves the problem of minimizing an objective, given its gradient, by iteratively computing approximations of the inverse Hessian matrix. The OWL-QN algorithm finds the optimum of an objective plus the L1-norm of the problem's parameters. The package offers a fast and memory-efficient implementation of these optimization routines, which is particularly suited for high-dimensional problems.
+# License: GPL (>= 2)
+# Imports: Rcpp (>= 0.11.2)
+# LinkingTo: Rcpp
+# Packaged: 2014-08-30 10:14:37 UTC; antonio12
+# Author: Antonio Coppola [aut, cre, cph], Brandon Stewart [aut, cph], Naoaki Okazaki [aut, cph], David Ardia [ctb, cph], Dirk Eddelbuettel [ctb, cph], Katharine Mullen [ctb, cph], Jorge Nocedal [ctb, cph]
+# NeedsCompilation: yes
+# Repository: CRAN
+# Date/Publication: 2014-08-31 11:23:32
+schema_version: 1
+
+context:
+  version: 1.2.1.2
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-lbfgs
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/lbfgs_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/lbfgs/lbfgs_${{ version }}.tar.gz
+  sha256: 7b09d886c377c8b5eb812085cd2aacb2c5ce7e38b77f9460023623dbc24edd11
+
+build:
+  number: 2
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then: ${{ compiler('m2w64_c') }}
+    - if: not win
+      then: ${{ compiler('cxx') }}
+    - if: win
+      then: ${{ compiler('m2w64_cxx') }}
+    - if: win
+      then: ${{ posix }}filesystem
+    - ${{ posix }}make
+    - if: win
+      then: ${{ posix }}sed
+    - if: win
+      then: ${{ posix }}coreutils
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+    - r-rcpp >=0.11.2
+  run:
+    - r-base>=4.2
+    - if: win
+      then: ${{ native }}gcc-libs
+    - r-rcpp >=0.11.2
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('lbfgs')\""
+      - if: win
+        then: "\"%R%\" -e \"library('lbfgs')\""
+
+about:
+  license: GPL-2.0-or-later
+  summary: |
+    A wrapper built around the libLBFGS optimization library by Naoaki Okazaki. The lbfgs package implements both the Limited-memory Broyden-Fletcher-Goldfarb-Shanno (L-BFGS) and the Orthant-Wise Quasi-Newton Limited-Memory (OWL-QN) optimization algorithms. The L-BFGS algorithm solves the problem of minimizing an
+    objective, given its gradient, by iteratively computing approximations of the inverse Hessian matrix. The OWL-QN algorithm finds the optimum of an objective plus the L1-norm of the problem's parameters. The package offers a fast and memory-efficient implementation of these optimization routines, which is particularly
+    suited for high-dimensional problems.
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+  homepage: https://CRAN.R-project.org/package=lbfgs
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+
