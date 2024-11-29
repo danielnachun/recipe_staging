@@ -36,16 +36,16 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           load: true
-          file: .github/mambaforge_container.df
-          tags: conda_mambabuild:latest
+          file: .github/rattler-build_container.df
+          tags: rattler-build:latest
 
       - name: Build and export docker containers
         if: ${{ github.event.inputs.centos7 == 'true' }}
         uses: docker/build-push-action@v6
         with:
           load: true
-          file: .github/centos7_container.df
-          tags: conda_mambabuild:latest
+          file: .github/rattler-build_centos7_container.df
+          tags: rattler-build:latest
 
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3

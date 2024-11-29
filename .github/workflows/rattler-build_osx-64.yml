@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
       - '*/build.sh'
-      - '*/meta.yaml'
+      - '*/recipe.yaml'
 
 jobs:
   setup:
@@ -41,7 +41,7 @@ jobs:
           dir_names_exclude_current_dir: true
           files: |
             */build.sh
-            */meta.yaml
+            */recipe.yaml
 
   build_packages:
     needs: setup
@@ -56,32 +56,27 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup micromamba
-        uses: mamba-org/setup-micromamba@v1
+      - name: Setup pixi
+        uses: prefix-dev/setup-pixi@main
         with:
-          environment-name: boa
-          create-args: boa conda-verify mamba
-          generate-run-shell: true
-          condarc: |
-            channels:
-              - dnachun
-              - conda-forge
-              - bioconda
+          run-install: false
 
       - name: Set up working directories
         run: |
           mkdir /tmp/recipes
-          mkdir /tmp/conda-bld
+          mkdir /tmp/rattler-build
           for dir in ${{ needs.setup.outputs.changed_directories }}; do
             cp -R ${dir} /tmp/recipes
           done
 
       - name: Build conda packages
-        shell: micromamba-shell {0}
-        run: conda mambabuild --output-folder /tmp/conda-bld /tmp/recipes
+        shell: pixi exec --spec rattler-build -- bash -e {0}
+        run: |
+          rattler-build build -c dnachun -c conda-forge -c bioconda \
+            --output-dir /tmp/rattler-build --recipe-dir /tmp/recipes
 
       - name: Upload packages to GitHub Actions
         uses: actions/upload-artifact@v4
         with:
-          name: conda-bld_${{github.event.pull_request.head.sha}}_osx-64
-          path: /tmp/conda-bld
+          name: rattler-build_${{github.event.pull_request.head.sha}}_osx-64
+          path: /tmp/rattler-build

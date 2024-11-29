@@ -1,10 +1,10 @@
-name: linux-64
+name: osx-arm64
 
 on:
   pull_request:
     paths:
       - '*/build.sh'
-      - '*/meta.yaml'
+      - '*/recipe.yaml'
 
 jobs:
   setup:
@@ -30,7 +30,7 @@ jobs:
         uses: nrwl/nx-set-shas@v4
         id: last_successful_commit_pull_request
         with:
-          main-branch-name: ${{ steps.branch-name.outputs.base_ref_branch }}
+          main-branch-name: ${{ steps.branch-name.outputs.base_ref_branch }} 
 
       - name: Get changed directories
         id: changed-directories
@@ -41,12 +41,12 @@ jobs:
           dir_names_exclude_current_dir: true
           files: |
             */build.sh
-            */meta.yaml
+            */recipe.yaml
 
   build_packages:
     needs: setup
     if: needs.setup.outputs.any_changed == 'true'
-    runs-on: ubuntu-latest
+    runs-on: macos-14
     strategy:
       fail-fast: false
 
@@ -56,42 +56,27 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Free Disk Space (Ubuntu)
-        if: contains(github.event.pull_request.labels.*.name, 'free-disk-space')
-        uses: jlumbroso/free-disk-space@main
+      - name: Setup pixi
+        uses: prefix-dev/setup-pixi@main
+        with:
+          run-install: false
 
       - name: Set up working directories
         run: |
           mkdir /tmp/recipes
-          mkdir /tmp/conda-bld
+          mkdir /tmp/rattler-build
           for dir in ${{ needs.setup.outputs.changed_directories }}; do
-            cp -r ${dir} /tmp/recipes
+            cp -R ${dir} /tmp/recipes
           done
 
-      - name: Setup up docker buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build and export docker containers
-        if: ${{ !contains(github.event.pull_request.labels.*.name, 'centos7') }}
-        uses: docker/build-push-action@v6
-        with:
-          load: true
-          file: .github/mambaforge_container.df
-          tags: conda_mambabuild:latest
-
-      - name: Build and export docker containers
-        if: contains(github.event.pull_request.labels.*.name, 'centos7')
-        uses: docker/build-push-action@v6
-        with:
-          load: true
-          file: .github/centos7_container.df
-          tags: conda_mambabuild:latest
-
       - name: Build conda packages
-        run: docker run --rm -e HOST_USER_ID=$(id -u) --volume /tmp:/tmp conda_mambabuild conda mambabuild --output-folder /tmp/conda-bld /tmp/recipes
+        shell: pixi exec --spec rattler-build -- bash -e {0}
+        run: |
+          rattler-build build -c dnachun -c conda-forge -c bioconda \
+            --output-dir /tmp/rattler-build --recipe-dir /tmp/recipes
 
-      - name: Upload artifacts to GitHub Actions
+      - name: Upload packages to GitHub Actions
         uses: actions/upload-artifact@v4
         with:
-          name: conda-bld_${{github.event.pull_request.head.sha}}_linux-64
-          path: /tmp/conda-bld
+          name: rattler-build_${{github.event.pull_request.head.sha}}_osx-arm64
+          path: /tmp/rattler-build
