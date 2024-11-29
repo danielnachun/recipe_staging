@@ -18,32 +18,29 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Download packages 
+      - name: Download packages
         id: download-packages
         uses: dawidd6/action-download-artifact@v4
         with:
           github_token: ${{ secrets.PAT_TOKEN }}
-          workflow: conda_mambabuild_${{ matrix.platform }}.yml
-          name: conda-bld_${{ github.event.pull_request.head.sha }}_${{ matrix.platform }}
-          path: /tmp/conda-bld
+          workflow: rattler-build_${{ matrix.platform }}.yml
+          name: rattler-build_${{ github.event.pull_request.head.sha }}_${{ matrix.platform }}
+          path: /tmp/rattler-build
           search_artifacts: true
           if_no_artifact_found: warn
 
-      - name: Setup micromamba
-        if: steps.download-packages.outputs.found_artifact == 'true'
-        uses: mamba-org/setup-micromamba@v1
+      - name: Setup pixi
+        uses: prefix-dev/setup-pixi@main
         with:
-          environment-name: anaconda-client
-          create-args: anaconda-client python=3.11
-          generate-run-shell: true
+          run-install: false
 
       - name: Upload packages
         if: steps.download-packages.outputs.found_artifact == 'true'
-        shell: micromamba-shell {0}
+        shell: pixi exec --spec anaconda-client -- bash -e {0}
         run: |
-          if test -d /tmp/conda-bld/${{ matrix.platform }}; then
-            anaconda upload --force /tmp/conda-bld/${{ matrix.platform }}/*.tar.bz2
+          if test -d /tmp/rattler-build/${{ matrix.platform }}; then
+            anaconda upload --force /tmp/rattler-build/${{ matrix.platform }}/*.conda
           fi
-          if test -d /tmp/conda-bld/noarch; then
-            anaconda upload --force /tmp/conda-bld/noarch/*.tar.bz2
+          if test -d /tmp/rattler-build/noarch; then
+            anaconda upload --force /tmp/rattler-build/noarch/*.conda
           fi

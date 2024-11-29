@@ -40,7 +40,7 @@ jobs:
       - name: Set up working directories
         run: |
           mkdir /tmp/recipes
-          mkdir /tmp/conda-bld
+          mkdir /tmp/rattler-build
           cp -R ${{ github.event.inputs.package }} /tmp/recipes
 
       - name: Setup up docker buildx
@@ -66,7 +66,7 @@ jobs:
         run: |
           docker run --rm --volume /tmp:/tmp rattler-build \
             rattler-build build -c dnachun -c conda-forge -c bioconda \
-            --output-dir /tmp/conda-bld --recipe-dir /tmp/recipes
+            --output-dir /tmp/rattler-build --recipe-dir /tmp/recipes
 
       - name: Setup pixi
         uses: prefix-dev/setup-pixi@main
@@ -76,4 +76,4 @@ jobs:
       - name: Upload package
         if: ${{ github.event.inputs.upload == 'true' }}
         shell: pixi exec --spec anaconda-client -- bash -e {0}
-        run: anaconda upload --force /tmp/conda-bld/linux-64/*.conda
+        run: anaconda upload --force /tmp/rattler-build/linux-64/*.conda

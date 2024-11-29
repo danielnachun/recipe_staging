@@ -15,16 +15,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup micromamba
-        uses: mamba-org/setup-micromamba@v1
+      - name: Setup pixi
+        uses: prefix-dev/setup-pixi@main
         with:
-          environment-name: boa
-          create-args: anaconda-client boa conda-verify mamba
-          generate-run-shell: true
-          condarc: |
-            channels:
-              - dnachun
-              - conda-forge
+          run-install: false
 
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3

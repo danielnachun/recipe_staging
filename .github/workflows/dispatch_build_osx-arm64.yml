@@ -33,16 +33,16 @@ jobs:
       - name: Set up working directories
         run: |
           mkdir /tmp/recipes
-          mkdir /tmp/conda-bld
+          mkdir /tmp/rattler-build
           cp -R ${{ github.event.inputs.package }} /tmp/recipes
 
       - name: Build conda packages
         shell: pixi exec --spec rattler-build -- bash -e {0}
         run: |
           rattler-build build -c dnachun -c conda-forge -c bioconda \
-            --output-dir /tmp/rattler-bld --recipe-dir /tmp/recipes
+            --output-dir /tmp/rattler-build --recipe-dir /tmp/recipes
 
       - name: Upload package
         if: ${{ github.event.inputs.upload == 'true' }}
         shell: pixi exec --spec anaconda-client -- bash -e {0}
-        run: anaconda upload --force /tmp/rattler-bld/osx-arm64/*.conda
+        run: anaconda upload --force /tmp/rattler-build/osx-arm64/*.conda
