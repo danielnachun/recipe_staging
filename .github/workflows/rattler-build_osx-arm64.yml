@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
       - '*/build.sh'
-      - '*/meta.yaml'
+      - '*/recipe.yaml'
 
 jobs:
   setup:
@@ -41,7 +41,7 @@ jobs:
           dir_names_exclude_current_dir: true
           files: |
             */build.sh
-            */meta.yaml
+            */recipe.yaml
 
   build_packages:
     needs: setup
