@@ -1,0 +1,75 @@
+schema_version: 1
+
+context:
+  version: 0.1.7
+
+package:
+  name: r-mvsusier
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/stephenslab/mvsusieR/archive/${{ version }}.tar.gz
+  sha256: 7bf074af239d2b7a3cdb63809a498ada36d10306db9aa46d2b6b2305ad1121f1
+
+build:
+  number: 0
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: cross-r-base ${{ r_base }}
+  host:
+    - r-base=4.2
+    - r-abind
+    - r-ashr
+    - r-cowplot
+    - r-ggplot2
+    - r-ggrepel
+    - r-mashr
+    - r-matrixstats
+    - r-mvtnorm
+    - r-progress
+    - r-r6
+    - r-susier
+  run:
+    - r-base>=4.2
+    - r-abind
+    - r-ashr
+    - r-cowplot
+    - r-ggplot2
+    - r-ggrepel
+    - r-mashr
+    - r-matrixstats
+    - r-mvtnorm
+    - r-progress
+    - r-r6
+    - r-susier
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('mvsusieR')\""
+      - if: win
+        then: "\"%R%\" -e \"library('mvsusieR')\""
+
+about:
+  license: GPL-3.0-or-later
+  license_file: LICENSE.md
+  summary: |
+    Implements a multivariate generalization of the "Sum of
+    Single Effects" (SuSiE) model for variable selection in multivariate
+    linear regression.
+
+
+  homepage: https://github.com/stephenslab/mvsusier
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

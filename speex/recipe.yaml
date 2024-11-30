@@ -1,0 +1,48 @@
+schema_version: 1
+
+context:
+  version: 1.2.1
+  md5: fe7bf610883ff202092b92c72fe0fe3e
+
+package:
+  name: speex
+  version: ${{ version }}
+
+source:
+  url: http://downloads.xiph.org/releases/speex/speex-${{ version }}.tar.gz
+  md5: ${{ md5 }}
+  file_name: speex-${{ version }}.tar.gz
+
+build:
+  number: 0
+  skip: win
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+    - pkg-config
+  host:
+    - libogg
+  run:
+    - libogg
+
+tests:
+  - script:
+      - speexenc -v
+      - speexdec -v
+
+about:
+  license: BSD-3-Clause
+  license_file: COPYING
+  summary: |
+    'Speex: A Free Codec For Free Speech'
+
+
+  homepage: http://www.speex.org
+
+extra:
+  recipe-maintainers:
+    - andfoy
+    - mcernak
+

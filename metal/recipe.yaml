@@ -1,0 +1,41 @@
+schema_version: 1
+
+context:
+  name: metal
+  version: 2020-05-05
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version | replace("-", "_") }}
+
+source:
+  url: https://github.com/statgen/METAL/archive/refs/tags/${{ version }}.tar.gz
+  sha256: 0ffa2419ca2ab43766e7e6e8c97822c8ce1f5b6233fb5f992d1b1be1955fede7
+
+build:
+  number: 1
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - cmake
+    - make
+    - sed
+  host:
+    - zlib
+
+tests:
+  - script:
+      - metal <(QUIT)
+
+about:
+  license: BSD-3-Clause
+  license_file: LICENSE.twister
+  summary: Tool for the meta-analysis of genome-wide association studies
+  homepage: https://github.com/statgen/METAL
+  repository: https://github.com/statgen/METAL
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,57 @@
+schema_version: 1
+
+context:
+  name: pca
+  version: 2.0.7
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/pca-${{ version }}.tar.gz
+  sha256: 7c1c772c8f171e3fc3f51322383af60983ca46eccccf5d4311d953716aaaa56f
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python >=3.0
+    - pip
+  run:
+    - python >=3.0
+    - datazets
+    - statsmodels
+    - matplotlib-base
+    - numpy
+    - scikit-learn
+    - scipy
+    - colourmap >=1.1.15
+    - pandas
+    - scatterd >=1.3.7
+    - adjusttext
+
+tests:
+  - python:
+      imports:
+        - pca
+  - requirements:
+      run:
+        - pip
+    script:
+      - pip check
+
+about:
+  summary: |
+    'pca: A Python Package for Principal Component Analysis.'
+  license: MIT
+  license_file: LICENSE
+  homepage: https://erdogant.github.io/pca
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

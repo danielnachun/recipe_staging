@@ -1,0 +1,60 @@
+schema_version: 1
+
+context:
+  version: 1.76.0
+  name: impute
+  bioc: 3.18
+
+package:
+  name: bioconductor-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url:
+    - https://bioconductor.org/packages/${{ bioc }}/bioc/src/contrib/${{ name }}_${{ version }}.tar.gz
+    - https://bioconductor.org/packages/${{ bioc }}/bioc/src/contrib/Archive/${{ name }}/${{ name }}_${{ version }}.tar.gz
+    - https://bioarchive.galaxyproject.org/${{ name }}_${{ version }}.tar.gz
+    - https://depot.galaxyproject.org/software/bioconductor-${{ name }}/bioconductor-${{ name }}_${{ version }}_src_all.tar.gz
+  md5: 8e974dcc31c3507ebcc8984b2d7943f9
+
+build:
+  number: 1
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  host:
+    - r-base=4.3
+    - libblas
+    - liblapack
+  run:
+    - r-base>=4.3
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('fortran') }}
+    - make
+  run_exports: ${{ pin_subpackage("bioconductor-impute", upper_bound="x.x") }}
+
+tests:
+  - script:
+      - $R -e "library('${{ name }}')"
+
+about:
+  license: GPL-2.0
+  summary: |
+    'impute: Imputation for microarray data'
+  description: Imputation for microarray data (currently KNN only)
+  license_file: ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+  homepage: https://bioconductor.org/packages/${{ bioc }}/bioc/html/${{ name }}.html
+
+extra:
+  identifiers:
+    - biotools:impute
+    - doi:10.1007/978-3-642-57489-4_7
+  parent_recipe:
+    name: bioconductor-impute
+    path: recipes/bioconductor-impute
+    version: 1.54.0
+

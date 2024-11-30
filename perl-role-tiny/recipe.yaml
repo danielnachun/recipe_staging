@@ -1,0 +1,53 @@
+schema_version: 1
+
+context:
+  name: perl-role-tiny
+  version: 2.002004
+  sha256: d7bdee9e138a4f83aa52d0a981625644bda87ff16642dfa845dcb44d9a242b45
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/H/HA/HAARG/Role-Tiny-${{ version }}.tar.gz
+  sha256: ${{ sha256 }}
+
+build:
+  number: 0
+  skip: win
+  noarch: generic
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+  run_exports:
+    weak:
+      - ${{ name }} =${{ version }}
+
+tests:
+  - python:
+      imports:
+        - Role::Tiny
+        - Role::Tiny::With
+
+about:
+  license: GPL-1.0-or-later OR Artistic-1.0-Perl
+  license_file:
+    - ${{ env.get("PREFIX") }}/man/man1/perlartistic.1
+    - ${{ env.get("PREFIX") }}/man/man1/perlgpl.1
+  summary: |
+    'Roles: a nouvelle cuisine portion size slice of Moose'
+
+
+  homepage: http://metacpan.org/pod/Role-Tiny
+
+extra:
+  recipe-maintainers:
+    - xileF1337
+    - cbrueffer
+

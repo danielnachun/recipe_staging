@@ -1,0 +1,36 @@
+schema_version: 1
+
+context:
+  version: 0.6
+
+package:
+  name: abduco
+  version: ${{ version }}
+
+source:
+  url: https://github.com/martanne/abduco/releases/download/v${{ version }}/abduco-${{ version }}.tar.gz
+  sha256: c90909e13fa95770b5afc3b59f311b3d3d2fdfae23f9569fa4f96a3e192a35f4
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+
+tests:
+  - script:
+      - abduco -v
+
+about:
+  license: ISC
+  license_file: LICENSE
+  summary: |
+    Provides session management: i.e. separate programs from terminals
+  homepage: https://www.brain-dump.org/projects/abduco
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

@@ -1,0 +1,69 @@
+schema_version: 1
+
+context:
+  version: 110.1
+  plugins_version: 110
+  loftee_version: 1.0.4
+
+package:
+  name: ensembl-vep
+  version: ${{ version }}
+
+source:
+  - url: https://github.com/Ensembl/ensembl-vep/archive/release/${{ version }}.tar.gz
+    sha256: 95b2238209bc9acfa01d4eff202dfbc22e8935abc64b750ea93d1c354a438bae
+  - url: https://github.com/Ensembl/VEP_plugins/archive/release/${{ plugins_version }}.tar.gz
+    sha256: e07c7df8e12f149938f46936bc2b058891b586e482cefce67dcc374e4ccc26a2
+    target_directory: VEP_plugins
+  - url: https://github.com/konradjk/loftee/archive/v${{ loftee_version }}_GRCh38.tar.gz
+    sha256: f2c93b0ca15cb5e2f656062a7c507d509cc7aaa06bbb8111103d3a776e0e9de8
+    target_directory: loftee
+
+build:
+  number: 6
+  noarch: generic
+
+requirements:
+  build:
+    - sed
+    - curl
+  host:
+    - perl=5.32
+    - perl-archive-zip
+    - perl-libwww-perl
+    - unzip
+    - perl-dbi
+  run:
+    - perl>=5.32
+    - htslib
+    - perl-bioperl-core >=1.7.2
+    - perl-bio-db-hts >=2.11
+    - perl-bio-bigfile
+    - perl-bio-procedural
+    - perl-dbi
+    - perl-dbd-mysql
+    - perl-dbd-sqlite
+    - perl-io-compress
+    - perl-json
+    - perl-libwww-perl
+    - perl-perlio-gzip
+    - perl-sereal
+    - perl-set-intervaltree
+    - perl-text-csv
+    - samtools
+    - unzip
+
+tests:
+  - script:
+      - vep --help
+      - vep_convert_cache --help
+      - vep_install --help
+      - haplo --help
+      - variant_recoder --help
+
+about:
+  license: Apache-2.0
+  summary: Ensembl Variant Effect Predictor
+  description: The VEP determines the effect of your variants (SNPs, insertions, deletions, CNVs or structural variants) on genes, transcripts, and protein sequence, as well as regulatory regions.
+  homepage: http://www.ensembl.org/info/docs/tools/vep/index.html
+

@@ -1,0 +1,35 @@
+schema_version: 1
+
+context:
+  version: 2.0
+
+package:
+  name: ldstore
+  version: ${{ version }}
+
+source:
+  url: http://www.christianbenner.com/ldstore_v${{ version }}_x86_64.tgz
+  sha256: be80818e2cdb5d223a15805b1fcf7569ba2b045a29bc02ca3e08af2eba95325f
+
+build:
+  number: 0
+  script: install -D -m 755 ldstore_v${{ version }}_x86_64 ${PREFIX}/bin/ldstore
+
+requirements:
+  run:
+    - _openmp_mutex
+
+tests:
+  - script:
+      - ldstore --help
+
+about:
+  license: Other
+  license_file: LICENSE
+  summary: LDstore is a computationally efficient program for estimating and storing Linkage Disequilibrium (SNP correlations).
+  homepage: http://www.christianbenner.com
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

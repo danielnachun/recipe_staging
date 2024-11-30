@@ -1,0 +1,85 @@
+schema_version: 1
+
+context:
+  version: 0.99.14
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-gwasrapidd
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/gwasrapidd_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/gwasrapidd/gwasrapidd_${{ version }}.tar.gz
+  sha256: 1d56d83910db8281b734a84198730b2620e334f88c2dd644677ccf47c80f271e
+
+build:
+  number: 0
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+    - r-assertthat
+    - r-concatenate
+    - r-dplyr
+    - r-glue
+    - r-httr
+    - r-jsonlite
+    - r-lubridate
+    - r-magrittr
+    - r-pingr
+    - r-plyr
+    - r-progress
+    - r-purrr
+    - r-rlang
+    - r-stringr
+    - r-testthat
+    - r-tibble
+    - r-tidyr >0.8.99
+    - r-urltools
+  run:
+    - r-base>=4.2
+    - r-assertthat
+    - r-concatenate
+    - r-dplyr
+    - r-glue
+    - r-httr
+    - r-jsonlite
+    - r-lubridate
+    - r-magrittr
+    - r-pingr
+    - r-plyr
+    - r-progress
+    - r-purrr
+    - r-rlang
+    - r-stringr
+    - r-testthat
+    - r-tibble
+    - r-tidyr >0.8.99
+    - r-urltools
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('gwasrapidd')\""
+      - if: win
+        then: "\"%R%\" -e \"library('gwasrapidd')\""
+
+about:
+  license: MIT
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/MIT
+    - LICENSE
+  homepage: https://github.com/ramiromagno/gwasrapidd, https://rmagno.eu/gwasrapidd/
+

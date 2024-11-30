@@ -1,0 +1,122 @@
+schema_version: 1
+
+context:
+  version: 1.6.1
+  major_ver: "\"version.split(\".\")[0]\""
+
+recipe:
+  name: dtc-package
+  version: ${{ version }}
+
+source:
+  url: https://git.kernel.org/pub/scm/utils/dtc/dtc.git/snapshot/dtc-${{ version }}.tar.gz
+  sha256: 6401c9a0f577a270df4632bf0f3e5454ccc7a5ca3caefa67a3e1c29c9c6b8c60
+  patches:
+    - patches/0001-pylibfdt-fix-with-Python-3.10.patch
+
+build:
+  number: 2
+  skip: win
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - bison
+    - flex
+    - make
+    - swig
+    - pkg-config
+  host:
+    - python ${{ python }}
+    - yaml
+    - if: linux
+      then: valgrind
+  run:
+    - python ${{ python }}
+
+outputs:
+  - package:
+      name: dtc
+    requirements:
+      build:
+        - ${{ compiler('c') }}
+        - make
+      host:
+        - ${{ pin_subpackage("libfdt", exact=True) }}
+        - yaml
+        - if: linux
+          then: valgrind
+      run:
+        - ${{ pin_subpackage("libfdt", upper_bound="x.x") }}
+    tests:
+      - files:
+          source:
+            - util.c
+            - util.h
+            - version_gen.h
+            - tests
+        requirements:
+          run:
+            - ${{ compiler('c') }}
+            - make
+        script:
+          - convert-dtsv0 --help
+          - dtc --help
+          - "test -x \"$PREFIX\"/bin/dtdiff"
+          - fdtdump --help
+          - fdtget --help
+          - fdtoverlay --help
+          - fdtput --help
+          - cp util.c util.h version_gen.h tests
+          - if: linux
+            then: "NO_PYTHON=1 TEST_BINDIR=\"$PREFIX/bin\" make -C tests -f Makefile.tests VECHO=: LDLIBS=-lfdt tests_clean check TESTS_PREFIX=./ LIBDL=\"-lfdt -ldl\""
+    about:
+      summary: Linux Kernel Device Tree Compiler (dtc)
+      description: |
+        Device Tree Compiler (dtc) toolchain for working with device tree source and binary files
+      license: GPL-2.0-or-later
+      license_file:
+        - GPL
+        - README.license
+    script: install.sh
+  - package:
+      name: libfdt
+    build:
+    requirements:
+      build:
+        - ${{ compiler('c') }}
+        - make
+      run_exports:
+        - ${{ pin_subpackage("libfdt", upper_bound="x.x") }}
+    tests:
+      - script:
+          - test -f $PREFIX/include/libfdt.h
+          - test -f $PREFIX/include/fdt.h
+          - test -f $PREFIX/include/libfdt_env.h
+          - test -f $PREFIX/lib/libfdt-${{ version }}${SHLIB_EXT}
+          - test -f $PREFIX/lib/libfdt.a
+          - test -f $PREFIX/lib/libfdt${SHLIB_EXT}
+          - test -f $PREFIX/lib/libfdt${SHLIB_EXT}.${{ major_ver }}
+    about:
+      summary: Linux Kernel Device Tree library (libfdt)
+      description: |
+        libfdt, a utility library for reading and manipulating the Linux Kernel Device Tree binary format.
+      license: GPL-2.0-or-later OR BSD-2-Clause
+      license_file:
+        - GPL
+        - BSD-2-Clause
+        - README.license
+    script: install.sh
+
+about:
+  summary: Toplevel for subpackages dtc, libfdt and pylibfdt
+  license: GPL-2.0-or-later
+  license_file:
+    - GPL
+    - README.license
+  homepage: https://git.kernel.org/pub/scm/utils/dtc/dtc.git
+
+extra:
+  recipe-maintainers:
+    - timsnyder
+

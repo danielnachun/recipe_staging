@@ -1,0 +1,64 @@
+schema_version: 1
+
+context:
+  version: 2.31.0
+
+package:
+  name: isa-l
+  version: ${{ version }}
+
+source:
+  url: https://github.com/intel/isa-l/archive/v${{ version }}.tar.gz
+  sha256: e218b7b2e241cfb8e8b68f54a6e5eed80968cc387c4b1af03708b54e9fb236f1
+  patches:
+    - nasm-filter.patch
+    - 0001-fix-rodata-definition.patch
+    - 0002-replace-x18-register.patch
+
+build:
+  number: 1
+  script: export AS=nasm && ./autogen.sh && ./configure --prefix=${PREFIX} && make -j${CPU_COUNT} ${VERBOSE_AT} && make install && rm -rf ${PREFIX}/share && rm ${PREFIX}/lib/libisal.a  # [osx]
+  script: make -d -j${CPU_COUNT} -f Makefile.unx CC=${CC} ${VERBOSE_AT} && make -d -j${CPU_COUNT} -f Makefile.unx CC=${CC} prefix=${PREFIX} install && rm -rf ${PREFIX}/share && rm ${PREFIX}/lib/libisal.a  # [linux]
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - if: not osx
+      then: nasm
+    - if: osx
+      then: nasm >=2.14
+    - if: osx
+      then: autoconf
+    - if: osx
+      then: automake
+    - if: unix
+      then: libtool
+    - if: unix
+      then: make
+
+tests:
+  - files:
+      recipe:
+        - LICENSE
+    script:
+      - if: unix
+        then: igzip --help
+      - if: unix
+        then: igzip -k LICENSE
+      - if: unix
+        then: "bash -c '[ $(stat -c %s LICENSE) -gt $(stat -c %s LICENSE.gz) ]'"
+      - if: unix
+        then: "bash -c '[ \"$(igzip -cd LICENSE.gz)\" == \"$(cat LICENSE)\" ]'"
+
+about:
+  license: BSD-3-Clause
+  summary: provides tools to minimize disk space use and maximize storage throughput, security, and resilience.
+  license_file: LICENSE
+  homepage: https://software.intel.com/content/www/us/en/develop/tools/isa-l.html
+  repository: https://github.com/intel/isa-l
+  documentation: https://github.com/intel/isa-l/wiki/
+
+extra:
+  recipe-maintainers:
+    - rhpvorderman
+

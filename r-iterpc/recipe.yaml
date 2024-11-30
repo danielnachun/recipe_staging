@@ -1,0 +1,62 @@
+schema_version: 1
+
+context:
+  version: 0.4.2
+  posix: "'m2-' if win else ''"
+  native: "'m2w64-' if win else ''"
+
+package:
+  name: r-iterpc
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - ${{ cran_mirror }}/src/contrib/iterpc_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/iterpc/iterpc_${{ version }}.tar.gz
+  sha256: 38bd464042a27536f676e889263eb2c257a431b59083f58cb54473f42ba2071b
+
+build:
+  number: 2
+  noarch: generic
+  merge_build_and_host_envs: ${{ true if win }}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - if: win
+      then: ${{ posix }}zip
+  host:
+    - r-base=4.2
+    - r-arrangements >=1.0.0
+    - r-gmp >=0.5_12
+    - r-iterators
+  run:
+    - r-base>=4.2
+    - r-arrangements >=1.0.0
+    - r-gmp >=0.5_12
+    - r-iterators
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('iterpc')\""
+      - if: win
+        then: "\"%R%\" -e \"library('iterpc')\""
+
+about:
+  license: GPL-2.0-or-later
+  summary: |
+    'Iterator for generating permutations and combinations. They can be either drawn with
+    or without replacement, or with distinct/ non-distinct items (multiset). The generated
+    sequences are in lexicographical order (dictionary order). The algorithms to generate
+    permutations and combinations are memory efficient. These iterative algorithms enable
+    users to process all sequences without putting all results in the memory at the
+    same time. The algorithms are written in C/C++ for faster performance. Note: ''iterpc''
+    is no longer being maintained. Users are recommended to switch to ''arrangements''.'
+  license_file:
+    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
+  homepage: https://randy3k.github.io/iterpc
+
