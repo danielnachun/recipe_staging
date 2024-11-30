@@ -1,0 +1,99 @@
+schema_version: 1
+
+context:
+  name: graalvm
+  version: 23.1.2
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  - url: https://github.com/oracle/graal/archive/refs/tags/vm-ce-${{ version }}.tar.gz
+    sha256: f7e6efdb4a9e8ed82f4c624d907180e49cefb91894bc7e4bb143cc745de21823  # [linux]
+    target_directory: graal
+    patches:  # [linux]
+      - if: linux
+        then: 0001-disable-toolchain-test.patch
+  - url: https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-21.0.2/graalvm-community-jdk-21.0.2_macos-x64_bin.tar.gz  # [build_platform == "osx-64"]
+    sha256: 7a8aa93fa45d1721908477abf4732a32637d420ffcb66ada9fb6456440b0d9e1  # [build_platform == "osx-64"]
+  - url: https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-21.0.2/graalvm-community-jdk-21.0.2_macos-aarch64_bin.tar.gz  # [build_platform == "osx-arm64"]
+    sha256: 515e3a93acc7e1938daba83eda4272e5495fd302d7cdd99ec7ebf408ed505ab7  # [build_platform == "osx-arm64"]
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - if: linux
+      then: ${{ compiler('c') }}
+    - if: linux
+      then: ${{ compiler('cxx') }}
+    - if: linux
+      then: binutils
+    - if: linux
+      then: gcc
+    - if: linux
+      then: gxx
+    - if: linux
+      then: labs-openjdk
+    - if: linux
+      then: make
+    - if: linux
+      then: mx
+    - if: linux
+      then: ninja
+    - if: linux
+      then: sed
+  host:
+    - if: linux
+      then: zlib=1.2
+  run:
+    - if: linux
+      then: alsa-lib
+    - if: linux
+      then: giflib
+    - if: linux
+      then: freetype
+    - if: linux
+      then: harfbuzz
+    - if: linux
+      then: lcms2
+    - if: linux
+      then: libjpeg-turbo
+    - if: linux
+      then: libpng
+    - if: linux
+      then: libzlib=1.2
+    - if: linux
+      then: xorg-libx11
+    - if: linux
+      then: xorg-libxext
+    - if: linux
+      then: xorg-libxi
+    - if: linux
+      then: xorg-libxrender
+    - if: linux
+      then: xorg-libxtst
+
+tests:
+  - script:
+      - native-image --help
+
+about:
+  license: UPL-1.0
+  license_file:
+    - if: linux
+      then: graal/LICENSE
+    - if: osx
+      then: Contents/Home/LICENSE_NATIVEIMAGE.txt
+  summary: |
+    GraalVM: Run Programs Faster Anywhere
+
+
+  homepage: http://graalvm.org/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+
