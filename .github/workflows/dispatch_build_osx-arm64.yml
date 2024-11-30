@@ -44,5 +44,5 @@ jobs:
 
       - name: Upload package
         if: ${{ github.event.inputs.upload == 'true' }}
-        shell: pixi exec --spec anaconda-client -- bash -e {0}
-        run: anaconda upload --force /tmp/rattler-build/osx-arm64/*.conda
+        shell: pixi exec --spec rattler-build -- bash -e {0}
+        run: rattler-build upload anaconda --force /tmp/rattler-build/osx-arm64/*.conda
