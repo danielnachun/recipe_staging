@@ -2,7 +2,7 @@ name: Dependabot auto-merge
 on:
   pull_request:
     paths:
-      - .github/workflows
+      - .github/workflows/*
 
 permissions:
   contents: write
