@@ -58,7 +58,7 @@ jobs:
 
       - name: Free Disk Space (Ubuntu)
         if: contains(github.event.pull_request.labels.*.name, 'free-disk-space')
-        uses: jlumbroso/free-disk-space@main
+        uses: jlumbroso/free-disk-space@0.8.1
 
       - name: Set up working directories
         run: |
