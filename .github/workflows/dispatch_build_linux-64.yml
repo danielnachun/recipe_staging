@@ -70,7 +70,7 @@ jobs:
             --output-dir /tmp/rattler-build --recipe-dir /tmp/recipes
 
       - name: Setup pixi
-        uses: prefix-dev/setup-pixi@main
+        uses: prefix-dev/setup-pixi@0.8.1
         with:
           run-install: false
 
