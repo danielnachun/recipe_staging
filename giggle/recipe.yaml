@@ -18,9 +18,9 @@ requirements:
     - ${{ compiler('c') }}
     - make
     - sed
-    if: linux
-    then:
-      - binutils
+    - if: linux
+      then:
+        - binutils
   host:
     - htslib
     - zlib
