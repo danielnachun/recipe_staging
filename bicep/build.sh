@@ -9,7 +9,7 @@ mkdir -p ${PREFIX}/libexec/${PKG_NAME}
 rm -rf global.json
 git remote set-url origin https://github.com/Azure/bicep
 
-dotnet publish --no-self-contained src/Bicep.Cli/Bicep.Cli.csproj --output ${PREFIX}/libexec/${PKG_NAME} -p:PublishTrimmed=false
+dotnet publish --no-self-contained src/Bicep.Cli/Bicep.Cli.csproj --output ${PREFIX}/libexec/${PKG_NAME} -p:PublishTrimmed=false -p:RestoreLockedMode=false
 dotnet publish --no-self-contained src/Bicep.LangServer/Bicep.LangServer.csproj --output ${PREFIX}/libexec/${PKG_NAME}
 rm -rf ${PREFIX}/libexec/${PKG_NAME}/runtimes/*
 rm -rf ${PREFIX}/libexec/${PKG_NAME}/bicep
