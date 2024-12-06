@@ -16,9 +16,11 @@ requirements:
   build:
     - ${{ compiler('cxx') }}
     - ${{ compiler('c') }}
-    - binutils  # [linux]
     - make
     - sed
+    if: linux
+    then:
+      - binutils
   host:
     - htslib
     - zlib
