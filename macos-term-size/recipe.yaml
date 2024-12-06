@@ -1,0 +1,32 @@
+context:
+  version: 1.0.0
+
+package:
+  name: macos-term-size
+  version: ${{ version }}
+
+source:
+  url: https://github.com/sindresorhus/macos-terminal-size/archive/v${{ version }}.tar.gz
+  sha256: f8e4476549ef4446d979875e87a77365fcfecfe58df7e62a653a402e29c8a0dd
+
+build:
+  number: 0
+  skip: not osx
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+
+tests:
+  - script:
+      - term-size
+
+about:
+  license: MIT
+  license_file: license
+  summary: Get the terminal window size on macOS
+  repository: https://github.com/sindresorhus/macos-terminal-size
+
+extra:
+  recipe-maintainers:
+    - danielnachun
