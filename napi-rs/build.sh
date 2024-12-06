@@ -6,9 +6,4 @@ npm pack --ignore-scripts
 npm install -ddd \
     --global \
     --build-from-source \
-    ${SRC_DIR}/${PKG_NAME}-${PKG_VERSION}.tgz
-
-# Create license report for dependencies
-pnpm install
-pnpm-licenses generate-disclaimer --prod --output-file=third-party-licenses.txt
-exit 1
+    ${SRC_DIR}/napi-rs-cli-${PKG_VERSION}.tgz
