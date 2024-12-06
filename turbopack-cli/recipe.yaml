@@ -18,6 +18,8 @@ requirements:
     - ${{ compiler('rust') }}
     - ${{ compiler('c') }}
     - cargo-bundle-licenses
+  host:
+    - openssl
 
 tests:
   - script:
