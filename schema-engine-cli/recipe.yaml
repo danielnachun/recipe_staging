@@ -6,8 +6,8 @@ package:
   version: ${{ version }}
 
 source:
-  url: https://github.com/prisma/prisma-engines/archive/${{ version }}.tar.gz
-  sha256: af9b2ec21690a1c5520dfce11ff369bdf47c095acea4f66a879401a31a591bfc
+  git: https://github.com/prisma/prisma-engines
+  tag: ${{ version }}
 
 build:
   number: 0
