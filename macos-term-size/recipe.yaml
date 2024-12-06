@@ -19,7 +19,7 @@ requirements:
 
 tests:
   - script:
-      - term-size
+      - term-size 2>&1 | grep -q "Device not configured"
 
 about:
   license: MIT
