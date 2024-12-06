@@ -1,0 +1,36 @@
+context:
+  version: 1.0
+
+package:
+  name: giggle
+  version: ${{ version }}
+
+source:
+  url: https://github.com/ryanlayer/giggle/archive/aeda9930454fe9a06383c8cff315caf56af11b49.tar.gz
+  sha256: dd61fb9eca3fe523d0c33d63ba6e6dd5feda3eb7202f9f48b7ef89ba6a4faf9f
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - ${{ compiler('c') }}
+    - make
+  host:
+    - htslib
+    - zlib
+
+tests:
+  - script:
+      - giggle
+
+about:
+  license: MIT
+  license_file: LICENSE
+  description: GIGGLE is a genomics search engine that identifies and ranks the significance of shared genomic loci between query features and thousands of genome interval files.
+  homepage: https://github.com/ryanlayer/giggle
+
+extra:
+  recipe-maintainers:
+    - danielnachun
