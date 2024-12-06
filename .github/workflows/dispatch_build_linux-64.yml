@@ -36,7 +36,7 @@ jobs:
 
       - name: Free Disk Space (Ubuntu)
         if: ${{ github.event.inputs.free_disk_space == 'true' }}
-        uses: jlumbroso/free-disk-space@main
+        uses: jlumbroso/free-disk-space@v1.3.1
 
       - name: Set up working directories
         run: |
@@ -70,7 +70,7 @@ jobs:
             --output-dir /tmp/rattler-build --recipe-dir /tmp/recipes
 
       - name: Setup pixi
-        uses: prefix-dev/setup-pixi@0.8.1
+        uses: prefix-dev/setup-pixi@v0.8.1
         with:
           run-install: false
 

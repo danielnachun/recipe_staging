@@ -26,7 +26,7 @@ jobs:
 
       - name: Free Disk Space (Ubuntu)
         if: ${{ github.event.inputs.free_disk_space == 'true' }}
-        uses: jlumbroso/free-disk-space@main
+        uses: jlumbroso/free-disk-space@v1.3.1
 
       - name: Setup up docker buildx
         uses: docker/setup-buildx-action@v3
