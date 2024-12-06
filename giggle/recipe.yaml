@@ -17,6 +17,7 @@ requirements:
     - ${{ compiler('cxx') }}
     - ${{ compiler('c') }}
     - make
+    - sed
   host:
     - htslib
     - zlib

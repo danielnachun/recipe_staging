@@ -4,7 +4,7 @@ set -o xtrace -o nounset -o pipefail -o errexit
 
 sed -i 's?$(HTS_ROOT)/libhts.a?-lhts?' src/Makefile
 
-export CFLAGS="${CFLAGS} -fcommon"
+export CFLAGS="${CFLAGS} -fcommon -Wno-implicit-function-declaration"
 mkdir ${SRC_DIR}/obj
 mkdir ${SRC_DIR}/bin
 make -C src \
