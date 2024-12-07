@@ -20,6 +20,7 @@ requirements:
     - nodejs
     - pnpm
     - pnpm-licenses
+    - python
   run:
     - nodejs
 
