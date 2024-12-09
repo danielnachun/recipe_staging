@@ -9,8 +9,8 @@ mkdir ${SRC_DIR}/obj
 mkdir ${SRC_DIR}/bin
 make -C src \
     CC=${CC} \
-    HTS_ROOT=${PREFIX}/include/htslib \
-    INCLUDES=-I${PREFIX}/lib \
+    HTS_ROOT=${PREFIX}/include \
+    INCLUDES=-I${PREFIX}/include \
     LIBS="${LDFLAGS} -lz -lcurl -ldl -lm -pthread"
 mkdir -p ${PREFIX}/bin
 install -m 755 ${SRC_DIR}/bin/* ${PREFIX}/bin
