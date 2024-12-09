@@ -1,13 +1,13 @@
 context:
-  version: 1.0
+  version: 0.6.3fsbv
 
 package:
   name: giggle
   version: ${{ version }}
 
 source:
-  url: https://github.com/ryanlayer/giggle/archive/aeda9930454fe9a06383c8cff315caf56af11b49.tar.gz
-  sha256: dd61fb9eca3fe523d0c33d63ba6e6dd5feda3eb7202f9f48b7ef89ba6a4faf9f
+  url: https://github.com/pkuksa/FILER_giggle/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: d8e0a30af6d4c5b0524055e379afd95b4f9973184b90bb2e931f41e20f0fb461
 
 build:
   number: 0
