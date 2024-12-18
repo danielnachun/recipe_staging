@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/rl3328/tensorqtl/archive/v${{ version }}.tar.gz
-  sha256: 9429f8aabcb8cf0aa51319e5b8a6a4f1416c1bd1587392e21d55f191d9fa041b
+  sha256: 8e81e9ec853f3bcc7561e6be04819a2c772f239ee2de61086b2c89adca2665f8
 
 build:
   number: 0
@@ -23,10 +23,13 @@ requirements:
     - python
     - numpy
     - pandas
+    - pandas-plink
     - pgenlib >=0.90.1
     - qtl
     - scipy
     - pytorch
+    - rpy2
+    - bioconductor-qvalue
 
 tests:
   - python:
