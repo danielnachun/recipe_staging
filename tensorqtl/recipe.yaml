@@ -1,46 +1,30 @@
-schema_version: 1
-
 context:
-  name: tensorqtl
-  version: 1.0.8
+  version: 1.0.10
 
 package:
-  name: ${{ name|lower }}
+  name: tensorqtl
   version: ${{ version }}
 
 source:
-  url: https://github.com/broadinstitute/tensorqtl/archive/890f32977f36d7e5be2d0820c7f382764617b553.zip
-  sha256: d3ef5f634c1e29fc4ea20c6dae24cf83e8f88c4644e4469b6d906f3cbd37136b
+  url: https://pypi.org/packages/source/t/tensorqtl/tensorqtl-${{ version }}.tar.gz
+  sha256: 9429f8aabcb8cf0aa51319e5b8a6a4f1416c1bd1587392e21d55f191d9fa041b
 
 build:
-  number: 3
+  number: 0
   noarch: python
-  python:
-    entry_points:
-      - tensorqtl = tensorqtl:__main__
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
-    - numpy=1.26
-    - pandas
-    - pandas-plink
+    - python
+    - setuptools >=61.0
     - pip
-    - pyarrow
-    - python=3.12
-    - qtl
-    - rpy2
-    - scipy
-    - pytorch
-    - sed
   run:
-    - bioconductor-qvalue
-    - numpy=1.26
+    - python
+    - numpy
     - pandas
-    - pandas-plink
-    - pyarrow
-    - python=3.12
+    - pgenlib >=0.90.1
     - qtl
-    - rpy2
     - scipy
     - pytorch
 
@@ -48,16 +32,13 @@ tests:
   - python:
       imports:
         - tensorqtl
-  - script:
-      - tensorqtl --help
+      pip_check: true
 
 about:
+  summary: GPU-accelerated QTL mapper
   license: BSD-3-Clause
   license_file: LICENSE
-  summary: GPU-accelerated QTL mapper
-  homepage: https://github.com/broadinstitute/tensorqtl
 
 extra:
   recipe-maintainers:
     - danielnachun
-
