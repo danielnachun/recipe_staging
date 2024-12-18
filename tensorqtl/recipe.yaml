@@ -12,6 +12,9 @@ source:
 build:
   number: 0
   noarch: python
+  python:
+    entry_points:
+      - tensorqtl = tensorqtl:__main__
   script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
@@ -36,6 +39,8 @@ tests:
       imports:
         - tensorqtl
       pip_check: true
+  - script:
+      - tensorqtl --help
 
 about:
   summary: GPU-accelerated QTL mapper
