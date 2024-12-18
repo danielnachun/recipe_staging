@@ -1,13 +1,8 @@
-schema_version: 1
-
 context:
-  name: qgg
-  posix: "\"\"m2-\" if win else \"\"\""
-  native: "\"\"m2w64-\" if win else \"\"\""
   version: 1.1.2
 
 package:
-  name: r-${{ name }}
+  name: r-qgg
   version: ${{ version }}
 
 source:
@@ -15,10 +10,8 @@ source:
   sha256: 67da0a92fd02c7086619b4cd7b3b0ca121be5ce3ad0364125f104de01c272afe
 
 build:
-  number: 0
+  number: 1
   script:
-    env:
-      PKG_CPPFLAGS: "\"-DHAVE_WORKING_LOG1P\""
     content: R CMD INSTALL --build .
   dynamic_linking:
     rpaths:
@@ -30,19 +23,16 @@ requirements:
     - if: build_platform != target_platform
       then: cross-r-base ${{ r_base }}
     - if: unix
-      then: autoconf
-    - if: unix
-      then: ${{ compiler('c') }}
-    - if: unix
-      then: ${{ compiler('fortran') }}
+      then:
+        - autoconf
+        - ${{ compiler('c') }}
+        - ${{ compiler('fortran') }}
+        - ${{ compiler('cxx') }}
     - if: win
-      then: ${{ compiler('m2w64_c') }}
-    - if: unix
-      then: ${{ compiler('cxx') }}
-    - if: win
-      then: ${{ compiler('m2w64_cxx') }}
-    - if: win
-      then: posix
+      then:
+        - ${{ compiler('m2w64_c') }}
+        - ${{ compiler('m2w64_cxx') }}
+        - posix
   host:
     - r-MASS
     - r-MCMCpack
@@ -64,10 +54,7 @@ requirements:
 
 tests:
   - script:
-      - if: not win
-        then: "$R -e \"library('qgg')\""
-      - if: win
-        then: "\"%R%\" -e \"library('qgg')\""
+    - R -e "library('qgg')"
 
 about:
   summary: |
@@ -78,4 +65,3 @@ about:
 extra:
   recipe-maintainers:
     - danielnachun
-
