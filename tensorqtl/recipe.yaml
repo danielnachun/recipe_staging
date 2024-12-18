@@ -6,7 +6,7 @@ package:
   version: ${{ version }}
 
 source:
-  url: https://pypi.org/packages/source/t/tensorqtl/tensorqtl-${{ version }}.tar.gz
+  url: https://github.com/rl3328/tensorqtl/archive/v${{ version }}.tar.gz
   sha256: 9429f8aabcb8cf0aa51319e5b8a6a4f1416c1bd1587392e21d55f191d9fa041b
 
 build:
