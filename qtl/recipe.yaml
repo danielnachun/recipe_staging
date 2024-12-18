@@ -1,40 +1,31 @@
-schema_version: 1
-
 context:
-  name: qtl
-  version: 0.1.9
+  version: 0.1.10
 
 package:
-  name: ${{ name|lower }}
+  name: qtl
   version: ${{ version }}
 
 source:
-  url: https://github.com/broadinstitute/pyqtl/archive/df199fdbecd0d933e63bcf6579f9fe4b1c59549e.zip
-  sha256: 86664a210087ec77f0966fa061300d2e261991820d3ea5b261ee8bedfaf86aed
+  url: https://pypi.org/packages/source/q/qtl/qtl-${{ version }}.tar.gz
+  sha256: 7de75e407627052ba8b74e60ebeebe0e9e911140c58d2026047f0057642e353c
 
 build:
-  number: 2
+  number: 0
   noarch: python
-  script: ${{ PYTHON }} -m pip install . -vv
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
-    - bx-python
-    - matplotlib-base
-    - numpy >=1.22
-    - pandas
+    - python
+    - setuptools >=61.0
     - pip
-    - pybigwig
-    - python >=3.8
-    - scipy
-    - seaborn
   run:
+    - python
     - bx-python
-    - matplotlib-base
-    - numpy >=1.22
-    - pandas
     - pybigwig
-    - python >=3.8
+    - matplotlib-base
+    - numpy
+    - pandas
     - scipy
     - seaborn
 
@@ -42,14 +33,13 @@ tests:
   - python:
       imports:
         - qtl
+      pip_check: true
 
 about:
+  summary: Utilities for analyzing and visualizing QTL data
   license: BSD-3-Clause
   license_file: LICENSE
-  summary: Utilities for analyzing and visualizing QTL data
-  homepage: https://github.com/broadinstitute/pyqtl
 
 extra:
   recipe-maintainers:
     - danielnachun
-
