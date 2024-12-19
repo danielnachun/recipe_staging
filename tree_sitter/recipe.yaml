@@ -1,5 +1,3 @@
-schema_version: 1
-
 context:
   name: tree_sitter
   version: 0.23.0
@@ -14,18 +12,17 @@ source:
 
 build:
   number: 0
-  skip: match(python, "<3.9")
   script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   build:
     - ${{ compiler('c') }}
   host:
-    - python >=3.9
+    - python =3.12
     - setuptools >=43
     - pip
   run:
-    - python >=3.9
+    - python =3.12
 
 tests:
   - python:
@@ -48,4 +45,3 @@ about:
 extra:
   recipe-maintainers:
     - danielnachun
-
