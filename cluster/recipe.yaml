@@ -1,0 +1,36 @@
+context:
+  version: 1.59
+
+package:
+  name: cluster
+  version: ${{ version }}
+
+source:
+  url: http://bonsai.hgc.jp/~mdehoon/software/cluster/cluster-${{ version }}.tar.gz
+  sha256: bb59b05d9ad8c5a01eceec692fd88723fc3c53248396985e6e922434c1089811
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - autoconf
+    - automake
+    - make
+  host:
+    - libtool
+
+tests:
+  - script:
+      - cluster --help
+
+about:
+  license: LicenseRef-Custom
+  license_file: COPYING
+  summary: The open source clustering software available here implement the most commonly used clustering methods for gene expression data analysis.
+  homepage: http://bonsai.hgc.jp/~mdehoon/software/cluster/software.htm
+
+extra:
+  recipe-maintainers:
+    - danielnachun
