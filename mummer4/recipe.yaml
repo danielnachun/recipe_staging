@@ -1,0 +1,51 @@
+context:
+  name: mummer4
+  version: 4.0.0rc1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/mummer4/mummer/releases/download/v${{ version }}/mummer-${{ version }}.tar.gz
+  sha256: 85006adb2d6539c2f738c3e3bb14b58bb6f62cd6c6ca5ede884a87ae76e07d1d
+  patches:
+    - Makefile.am.patch  # replaces some double quotes with single quotes to accomodate filepaths with '@' (Galaxy)
+    - Makefile.in.patch
+    - 0001-sort-mgaps-file-before-postpro.-on-behalf-of-jervied.patch  # fixes https://github.com/mummer4/mummer/issues/55
+
+build:
+  number: 7
+
+requirements:
+  build:
+    - autoconf
+    - automake
+    - make
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+  host:
+    - libtool
+    - perl
+  run:
+    - perl
+  run_exports:
+    - ${{ pin_subpackage(name, upper_bound="x") }}
+
+tests:
+  - script:
+      - delta2vcf -h 2>&1 | grep delta2vcf &> /dev/null
+      - mummer 2>&1 | grep mummer &> /dev/null
+      - mummerplot  2>&1 | grep mummer &> /dev/null
+      - nucmer  2>&1 | grep nucmer &> /dev/null
+      - promer  2>&1 | grep promer &> /dev/null
+      - show-aligns -h &> /dev/null
+
+about:
+  license: Artistic-2.0
+  summary: MUMmer is a system for rapidly aligning entire genomes
+  homepage: https://mummer4.github.io/
+
+extra:
+  additional-platforms:
+    - linux-aarch64
