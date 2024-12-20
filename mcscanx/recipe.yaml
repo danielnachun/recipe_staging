@@ -18,6 +18,7 @@ requirements:
     - ${{ compiler('cxx') }}
     - findutils
     - make
+    - sed
   host:
     - openjdk
   run:
