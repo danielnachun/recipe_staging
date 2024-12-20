@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/wyp1125/MCScanX/archive/v1.0.0.tar.gz
-  sha256: 78c6aade18395d68e7b86510cff78a95aeef3965e9bbb665bac001aec788eb95
+  sha256: f8d02cf76251a6a69ccd0c2b92af97f5aafa4d1ac7e907fbbacc480d2d4f238f
 
 build:
   number: 0
@@ -18,23 +18,42 @@ requirements:
     - ${{ compiler('cxx') }}
     - make
   host:
-    - boost-cpp
-    - if: osx
-      then:
-      - llvm-openmp
-    - if: linux
-      then:
-      - _openmp_mutex
+    - openjdk
+  run:
+    - openjdk
+    # - perl-bio-tools-run-alignment-clustalw
+    - perl-bioperl-core
 
 tests:
   - script: |
-      cnef 2>&1 | grep -q "Usage: CNEFinder <options>"
+      MCScanX -h 2>&1 | grep -q "\[Usage\] MCScanX prefix_fn \[options\]"
+      MCScanX_h -h 2>&1 | grep -q "\[Usage\] MCScanX_h prefix_fn \[options\]"
+      duplicate_gene_classifier -h 2>&1 | grep -q "\[Usage\] duplicate_gene_classifier prefix_fn \[options\]"
+      detect_collinear_tandem_arrays -h 2>&1 | grep -q "Usage: ./detect_collinear_tandem_arrays"
+      dissect_multiple_alignment -h 2>&1 | grep -q "Usage: ./species_specific"
+      bar_plotter 2>&1 | grep -q "Usage: java bar_plotter"
+      circle_plotter 2>&1 | grep -q "Usage: java circle_plotter"
+      dot_plotter 2>&1 | grep -q "Usage: java dot_plotter"
+      dual_synteny_plotter 2>&1 | grep -q "Usage: java dual_synteny_plotter"
+      family_circle_plotter 2>&1 | grep -q "Usage: java family_circle_plotter"
+      family_tree_plotter 2>&1 | grep -q "Usage: java family_tree_plotter"
+      family_tree_plotter_chr 2>&1 | grep -q "Usage: java family_tree_plotter"
+      family_tree_plotter_show_length 2>&1 | grep -q "Usage: java family_tree_plotter"
+      # add_ka_and_ks_to_collinearity.pl
+      # add_kaks_to_synteny.pl
+      detect_collinearity_within_gene_families.pl
+      detect_synteny_within_gene_families.pl
+      group_collinear_genes.pl
+      group_syntenic_genes.pl
+      mkCircosInputs.pl
+      origin_enrichment_analysis.pl
 
 about:
-  license: GPL-3.0-or-later
+  license: BSD-2-Clause
   license_file: LICENSE
-  summary: 'CNEFinder: Finding Conserved Non-coding Elements in Genomes'
-  homepage: https://github.com/lorrainea/CNEFinder
+  summary: |
+    MCScanX: Multiple Collinearity Scan toolkit X version. The most popular synteny analysis tool in the world!
+  homepage: https://github.com/wyp1125/MCScanX
 
 extra:
   recipe-maintainers:
