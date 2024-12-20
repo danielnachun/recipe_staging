@@ -21,7 +21,6 @@ requirements:
     - openjdk
   run:
     - openjdk
-    # - perl-bio-tools-run-alignment-clustalw
     - perl-bioperl-core
 
 tests:
@@ -39,8 +38,8 @@ tests:
       family_tree_plotter 2>&1 | grep -q "Usage: java family_tree_plotter"
       family_tree_plotter_chr 2>&1 | grep -q "Usage: java family_tree_plotter"
       family_tree_plotter_show_length 2>&1 | grep -q "Usage: java family_tree_plotter"
-      # add_ka_and_ks_to_collinearity.pl
-      # add_kaks_to_synteny.pl
+      add_ka_and_ks_to_collinearity.pl
+      add_kaks_to_synteny.pl
       detect_collinearity_within_gene_families.pl
       detect_synteny_within_gene_families.pl
       group_collinear_genes.pl

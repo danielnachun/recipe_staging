@@ -46,5 +46,7 @@ java_exes=(
 )
 find ${PREFIX}/libexec/MCScanX -name *.class | xargs -I % bash -c "create_java_wrapper %"
 
+sed -i '/use Bio::Tools::Run::Alignment::Clustalw;/d' ${SRC_DIR}/downstream_analyses/add_ka_and_ks_to_collinearity.pl
+sed -i '/use Bio::Tools::Run::Alignment::Clustalw;/d' ${SRC_DIR}/downstream_analyses/add_kaks_to_synteny.pl
 find ${SRC_DIR}/downstream_analyses -name *.pl | xargs -I % bash -c "add_perl_shebang %"
 install -m 755 downstream_analyses/*.pl ${PREFIX}/bin
