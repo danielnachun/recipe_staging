@@ -1,0 +1,41 @@
+context:
+  version: 1.0.0
+
+package:
+  name: mcscanx
+  version: ${{ version }}
+
+source:
+  url: https://github.com/wyp1125/MCScanX/archive/v1.0.0.tar.gz
+  sha256: 78c6aade18395d68e7b86510cff78a95aeef3965e9bbb665bac001aec788eb95
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - make
+  host:
+    - boost-cpp
+    - if: osx
+      then:
+      - llvm-openmp
+    - if: linux
+      then:
+      - _openmp_mutex
+
+tests:
+  - script: |
+      cnef 2>&1 | grep -q "Usage: CNEFinder <options>"
+
+about:
+  license: GPL-3.0-or-later
+  license_file: LICENSE
+  summary: 'CNEFinder: Finding Conserved Non-coding Elements in Genomes'
+  homepage: https://github.com/lorrainea/CNEFinder
+
+extra:
+  recipe-maintainers:
+    - danielnachun
