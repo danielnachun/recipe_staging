@@ -1,0 +1,38 @@
+context:
+  version: 1.0
+
+package:
+  name: psonic
+  version: ${{ version }}
+
+source:
+  url: https://github.com/conJUSTover/pSONIC/archive/bcebe9af8d6bf3cfee0779e6e891a82b10ffe486.tar.gz
+  sha256: 6b311543dbabe9db05e846161baf12853fde62d49a09527401e6008d968f4474
+
+build:
+  number: 0
+  noarch: generic
+  script: |
+    mkdir -p ${PREFIX}/bin
+    sed -i 's?/usr/bin/python?/usr/bin/env python3?' pSONIC.py
+    install -m 755 pSONIC.py ${PREFIX}/bin/pSONIC.py
+
+requirements:
+  build:
+    - sed
+  run:
+    - python-igraph
+
+tests:
+  - script:
+      - pSONIC.py --help
+
+about:
+  license: GPL-3.0-or-later
+  license_file: LICENSE
+  summary: pSONIC is a tool for identifying Orthologs between multiple species, even when polyploidy is involved.
+  homepage: https://github.com/conJUSTover/pSONIC
+
+extra:
+  recipe-maintainers:
+    - danielnachun
