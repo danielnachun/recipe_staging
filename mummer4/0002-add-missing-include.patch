@@ -1,0 +1,24 @@
+From 13ce2db5755dd452eb8a4cec7472f2c1a0fdf5f3 Mon Sep 17 00:00:00 2001
+From: Daniel Nachun <daniel.nachun@gmail.com>
+Date: Fri, 20 Dec 2024 15:32:25 -0800
+Subject: [PATCH] add-missing-include
+
+---
+ include/mummer/48bit_iterator.hpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/include/mummer/48bit_iterator.hpp b/include/mummer/48bit_iterator.hpp
+index 479ae9b..8abe1e2 100644
+--- a/include/mummer/48bit_iterator.hpp
++++ b/include/mummer/48bit_iterator.hpp
+@@ -1,6 +1,7 @@
+ #ifndef __48BIT_ITERATOR_H__
+ #define __48BIT_ITERATOR_H__
+ 
++#include <cstdint>
+ #include "const_iterator_traits.hpp"
+ 
+ // Define the iterator and its const version
+-- 
+2.47.1
+
