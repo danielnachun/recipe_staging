@@ -1,0 +1,38 @@
+context:
+  version: 1.2.7
+
+package:
+  name: genomesyn
+  version: ${{ version }}
+
+source:
+  url: https://github.com/banzhou59/GenomeSyn/archive/4b84af1111fcd5b7a243b5b8adac12804b195b0b.tar.gz
+  sha256: c170118f47662cdb2bc195b908ad929fcd50ed181ccdc0bb8d2d21ad4c667c0b
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  run:
+    - mummer4
+    - perl-bioperl-core
+    - perl-getopt-long
+    - perl-pod-usage
+    - perl-svg
+    - svglib
+    - reportlab
+
+tests:
+  - script: |
+      GenomeSyn --help 2>&1 | grep -q "GenomeSyn \[options\]"
+      Transform --help 2>&1 | grep -q "Transform \[options\]"
+
+about:
+  license: LicenseRef-Unknown
+  summary: A tool for constructing and visualizing genome synteny
+  homepage: https://github.com/banzhou59/GenomeSyn
+
+extra:
+  recipe-maintainers:
+    - danielnachun
