@@ -1,0 +1,40 @@
+context:
+  version: 1.4
+
+package:
+  name: perl-color-rgb
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/S/SH/SHERZODR/Color-Rgb-${{ version }}.tar.gz
+  sha256: 31458a6889442fb86a20a520c8c64aa429a55e16eafcab68f783f01aed81a292
+
+build:
+  number: 0
+  noarch: generic
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+
+requirements:
+  host:
+    - make
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+tests:
+  - perl:
+      uses:
+        - Color::RGB
+
+about:
+  license: GPL-1.0-or-later OR Artistic-1.0-Perl
+  summary: Simple rgb.txt parsing class
+  homepage: http://metacpan.org/pod/Color::RGB
+
+extra:
+  recipe-maintainers:
+    - danielnachun
