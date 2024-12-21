@@ -28,7 +28,7 @@ requirements:
 tests:
   - perl:
       uses:
-        - Color::RGB
+        - Color::Rgb
 
 about:
   license: GPL-1.0-or-later OR Artistic-1.0-Perl
