@@ -11,12 +11,14 @@ source:
 
 build:
   number: 0
-  noarch: python
-  script: |
-    install -m 755 pSONIC.py ${PREFIX}/bin
+  noarch: generic
+  script: install -m 755 pSONIC.py ${PREFIX}/bin
 
 requirements:
+  build:
+    - python
   run:
+    - python
     - python-igraph
 
 tests:
