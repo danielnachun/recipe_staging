@@ -79,4 +79,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: rattler-build_${{github.event.pull_request.head.sha}}_osx-arm64
-          path: /tmp/rattler-build
+          path: /tmp/rattler-build/osx-arm64
