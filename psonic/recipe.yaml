@@ -12,13 +12,15 @@ source:
 build:
   number: 0
   noarch: generic
-  script: install -m 755 pSONIC.py ${PREFIX}/bin
+  script: |
+    mkdir -p ${PREFIX}/bin
+    sed -i 's?/usr/bin/python?/usr/bin/env python3?' pSONIC.py
+    install -m 755 pSONIC.py ${PREFIX}/bin/pSONIC.py
 
 requirements:
   build:
-    - python
+    - sed
   run:
-    - python
     - python-igraph
 
 tests:
