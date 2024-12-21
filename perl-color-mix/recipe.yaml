@@ -1,0 +1,46 @@
+schema_version: 1
+
+context:
+  version: 0.02
+
+package:
+  name: perl-color-mix
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/D/DA/DALTSKI/Color-Mix-${{ version }}.tar.gz
+  sha256: 92ddba30e4d90c14a1b4f0e4d2160dadb836b2c1462f9845694b9302b2a30dea
+
+build:
+  number: 0
+  noarch: generic
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+
+
+
+requirements:
+  host:
+    - make
+    - perl=5.32
+    - perl-test-warn
+  run:
+    - perl>=5.32
+
+tests:
+  - perl:
+      uses:
+        - Color::Mix
+
+about:
+  license: GPL-1.0-or-later OR Artistic-1.0-Perl
+  summary: Generate themes from an RGB color wheel.
+  homepage: http://metacpan.org/pod/Color::Mix
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+
