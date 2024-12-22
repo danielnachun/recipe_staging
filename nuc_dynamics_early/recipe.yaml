@@ -1,0 +1,40 @@
+context:
+  version: 1.0
+
+package:
+  name: nuc_dynamics_early
+  version: ${{ version }}
+
+source:
+  url: https://github.com/yhw320/nuc_dynamics_early/archive/c56e9c23c206621d5cc7feb6f3041ba360bfee2f.tar.gz
+  sha256: a7a7d4829ab5980f8418425cc94155d6b4a84b2c77aa43bfa5524695dafa0268
+
+build:
+  number: 0
+
+requirements:
+  host:
+    - ${{ compiler('c') }}
+    - cython
+    - pip
+    - python=3.12
+    - numpy <2
+    - sed
+    - setuptools
+  run:
+    - python=3.12
+    - numpy <2
+    - setuptools
+
+tests:
+  - script:
+    - nuc_dynamics
+
+about:
+  summary: |
+    NucDynamics is a Python/Cython program for the calculation of genome structure from single-cell Hi-C chromosome contact data using a simulated annealing particle dynamics protocol.Watershed-SV extends Watershed to model the impact of rare SVs
+  homepage: https://github.com/yhw320/nuc_dynamics_early
+
+extra:
+  recipe-maintainers:
+    - danielnachun
