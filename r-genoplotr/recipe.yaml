@@ -1,0 +1,41 @@
+context:
+  version: 0.8.11
+
+package:
+  name: r-genoplotr
+  version: ${{ version }}
+
+source:
+- url: https://cran.r-project.org/src/contrib/genoPlotR_${{ version }}.tar.gz
+  sha256: f127f7fe8b19c899ecfdf98bf69d2e18926afb593a72fc40097acca66d401607
+
+build:
+  noarch: generic
+  script: R CMD INSTALL --build .
+
+requirements:
+  host:
+    - r-base=4.3
+    - r-ade4
+  run:
+    - r-base>=4.3
+    - r-ade4
+
+tests:
+- script:
+  - Rscript -e 'library("genoPlotR")'
+
+about:
+  homepage: http://genoplotr.r-forge.r-project.org/
+  summary: Plot Publication-Grade Gene and Genome Maps
+  description: |-
+    Draws gene or genome maps and comparisons between these,
+    in a publication-grade manner. Starting from simple, common
+    files, it will draw postscript or PDF files that can be sent as
+    such to journals.
+  license: GPL-2.0-or-later
+  repository: https://github.com/cran/genoPlotR
+
+extra:
+  recipe-maintainers:
+    - danielnachun
