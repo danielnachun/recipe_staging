@@ -1,0 +1,47 @@
+context:
+  version: 1.0.0
+
+package:
+  name: r-syntenyplotter
+  version: ${{ version }}
+
+source:
+- url: https://cran.r-project.org/src/contrib/syntenyPlotteR_${{ version }}.tar.gz
+  sha256: b8e0899c66c5097baeeea8163f2c4082b27ce82997fe4749d6ee1fce20408303
+
+build:
+  noarch: generic
+  script: R CMD INSTALL --build .
+
+requirements:
+  host:
+  - r-base
+  - r-ggplot2
+  - r-stringr
+  run:
+  - r-base
+  - r-ggplot2
+  - r-stringr
+
+tests:
+- script:
+  - Rscript -e 'library("syntenyPlotteR")'
+
+about:
+  summary: Genome Synteny Visualization
+  description: |-
+    Draw syntenic relationships between genome assemblies.
+    There are 3 functions which take a tab delimited file
+    containing alignment data for syntenic blocks between genomes
+    to produce either a linear alignment plot, an evolution highway
+    style plot, or a painted ideogram representing syntenic
+    relationships. There is also a function to convert alignment
+    data in the DESCHRAMBLER/inferCAR format to the required data
+    structure.
+  license: MIT
+  license_file: LICENSE
+  repository: https://github.com/cran/syntenyPlotteR
+
+extra:
+  recipe-maintainers:
+    - danielnachun
