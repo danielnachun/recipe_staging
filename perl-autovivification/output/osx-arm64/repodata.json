@@ -1,0 +1,27 @@
+{
+  "info": {
+    "subdir": "osx-arm64"
+  },
+  "packages": {},
+  "packages.conda": {
+    "perl-autovivification-0.18-h60d57d3_0.conda": {
+      "arch": "arm64",
+      "build": "h60d57d3_0",
+      "build_number": 0,
+      "depends": [
+        "perl 5.32.*",
+        "perl >=5.32.1,<5.33.0a0 *_perl5"
+      ],
+      "license": "Artistic-1.0-Perl OR GPL-1.0-or-later",
+      "md5": "03a3f01eb470f724f4706baf030daa51",
+      "name": "perl-autovivification",
+      "platform": "osx",
+      "sha256": "c9be7242693aba775d5563c8a5b0d8f2c9e0633ca0df8703f82e1fe1041e9b9c",
+      "size": 29269,
+      "subdir": "osx-arm64",
+      "timestamp": 1734995144659,
+      "version": "0.18"
+    }
+  },
+  "repodata_version": 2
+}
