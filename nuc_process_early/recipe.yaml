@@ -1,0 +1,45 @@
+context:
+  version: 0.0.1
+
+package:
+  name: nuc_process_early
+  version: ${{ version }}
+
+source:
+  url: https://github.com/yhw320/nuc_process_early/archive/5997e6079c1fa2f2e919f5e73a3da976a6e012d4.tar.gz
+  sha256: 04711a30f064000d2245fe69d2a19aa42dc5a749dd001ac9c4f0b7c848949538
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+    - numpy<2
+    - scipy
+
+tests:
+  - script: |
+      nuc_contact_map -h
+      nuc_contact_probability -h
+      nuc_process -h
+
+about:
+  homepage: https://github.com/yhw320/nuc_process_early
+  summary: NucProcess is a Python program to perform single-cell Hi-C sequence processing of paired read data.
+  license: GPL-3.0-or-later OR LGPL-3.0-or-later
+  license_file:
+    - COPYING
+    - COPYING.LESSER
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+
