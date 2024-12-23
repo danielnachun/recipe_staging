@@ -1,0 +1,57 @@
+context:
+  version: 1.7-22
+
+package:
+  name: r-ade4
+  version: ${{ version | replace("-", "_") }}
+
+source:
+- url: https://cran.r-project.org/src/contrib/ade4_${{ version }}.tar.gz
+  sha256: 007df54e83a2a6cb8d6da8006f0aace011e7eaa7744dc5f8230ac2c002b393b4
+
+build:
+  script: R CMD INSTALL --build .
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - make
+  host:
+    - r-base=4.3
+    - r-rcpp
+    - r-rcpparmadillo
+    - r-mass
+    - r-pixmap
+    - r-sp
+  run:
+    - r-base=4.3
+    - r-mass
+    - r-pixmap
+    - r-sp
+    - r-rcpp
+
+tests:
+  - script:
+    - Rscript -e 'library("ade4")'
+
+about:
+  homepage: http://pbil.univ-lyon1.fr/ADE-4/
+  summary: |-
+    Analysis of Ecological Data: Exploratory and Euclidean Methods
+    in Environmental Sciences
+  description: |-
+    Tools for multivariate data analysis. Several methods are
+    provided for the analysis (i.e., ordination) of one-table
+    (e.g., principal component analysis, correspondence analysis),
+    two-table (e.g., coinertia analysis, redundancy analysis),
+    three-table (e.g., RLQ analysis) and K-table (e.g., STATIS,
+    multiple coinertia analysis). The philosophy of the package is
+    described in Dray and Dufour (2007)
+    <doi:10.18637/jss.v022.i04>.
+  license: GPL-2.0-or-later
+  repository: https://github.com/cran/ade4
+
+extra:
+  recipe-maintainers:
+    - danielnachun
