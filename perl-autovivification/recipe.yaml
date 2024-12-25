@@ -1,0 +1,47 @@
+context:
+  version: 0.18
+
+package:
+  name: perl-autovivification
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/V/VP/VPIT/autovivification-${{ version }}.tar.gz
+  sha256: 2d99975685242980d0a9904f639144c059d6ece15899efde4acb742d3253f105
+
+build:
+  number: 0
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+    cp ${PREFIX}/man/man1/perlartistic.1 .
+    cp ${PREFIX}/man/man1/perlgpl.1 .
+
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl=5.32
+
+tests:
+  - perl:
+      uses:
+        - autovivification
+
+about:
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file:
+    - perlartistic.1
+    - perlgpl.1
+  summary: Lexically disable autovivification.
+  homepage: http://search.cpan.org/dist/autovivification/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
