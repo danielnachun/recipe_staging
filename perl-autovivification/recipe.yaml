@@ -16,8 +16,9 @@ build:
     make
     make test
     make install
-    pod2text ${PREFIX}/lib/perl5/core_perl/pods/perlartistic.pod > LICENSE-ARTISTIC
-    pod2text ${PREFIX}/lib/perl5/core_perl/pods/perlgpl.pod > LICENSE-GPL
+    cp ${PREFIX}/man/man1/perlartistic.1 .
+    cp ${PREFIX}/man/man1/perlgpl.1 .
+
 
 requirements:
   build:
@@ -36,8 +37,8 @@ tests:
 about:
   license: Artistic-1.0-Perl OR GPL-1.0-or-later
   license_file:
-    - LICENSE-ARTISTIC
-    - LICENSE-GPL
+    - perlartistic.1
+    - perlgpl.1
   summary: Lexically disable autovivification.
   homepage: http://search.cpan.org/dist/autovivification/
 
