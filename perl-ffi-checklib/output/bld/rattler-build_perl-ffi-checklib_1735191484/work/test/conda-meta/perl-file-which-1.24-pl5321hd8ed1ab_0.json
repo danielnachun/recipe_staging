@@ -1,0 +1,48 @@
+{
+  "build": "pl5321hd8ed1ab_0",
+  "build_number": 0,
+  "depends": [
+    "perl >=5.32.1,<6.0a0 *_perl5"
+  ],
+  "license": "GPL-1.0-or-later OR Artistic-1.0-Perl",
+  "license_family": "OTHER",
+  "md5": "94e5b2c9d56ef7c4c70ddf51ac38ae3d",
+  "name": "perl-file-which",
+  "noarch": "generic",
+  "sha256": "901e9c4177b6bdb23600446fd64a105a437112e63bc23a6163f669bc5098c502",
+  "size": 17329,
+  "subdir": "noarch",
+  "timestamp": 1636695979827,
+  "version": "1.24",
+  "fn": "perl-file-which-1.24-pl5321hd8ed1ab_0.tar.bz2",
+  "url": "https://conda.anaconda.org/conda-forge/noarch/perl-file-which-1.24-pl5321hd8ed1ab_0.tar.bz2",
+  "channel": "https://conda.anaconda.org/conda-forge/",
+  "extracted_package_dir": "/Users/danielnachun/Library/Caches/rattler/cache/pkgs/perl-file-which-1.24-pl5321hd8ed1ab_0",
+  "files": [
+    "lib/perl5/vendor_perl/File/Which.pm",
+    "man/man3/File::Which.3"
+  ],
+  "paths_data": {
+    "paths_version": 1,
+    "paths": [
+      {
+        "_path": "lib/perl5/vendor_perl/File/Which.pm",
+        "path_type": "hardlink",
+        "sha256": "353d39dd19816d37b016eba06f73c083df1ab43962bd15bafb3a79235d71c15f",
+        "sha256_in_prefix": "353d39dd19816d37b016eba06f73c083df1ab43962bd15bafb3a79235d71c15f",
+        "size_in_bytes": 12354
+      },
+      {
+        "_path": "man/man3/File::Which.3",
+        "path_type": "hardlink",
+        "sha256": "29e7494bb5456fe7bc2135d6a20f6472ab4d8efa7a21cfccf528265f55f3f953",
+        "sha256_in_prefix": "29e7494bb5456fe7bc2135d6a20f6472ab4d8efa7a21cfccf528265f55f3f953",
+        "size_in_bytes": 12208
+      }
+    ]
+  },
+  "link": {
+    "source": "/Users/danielnachun/Library/Caches/rattler/cache/pkgs/perl-file-which-1.24-pl5321hd8ed1ab_0",
+    "type": 1
+  }
+}

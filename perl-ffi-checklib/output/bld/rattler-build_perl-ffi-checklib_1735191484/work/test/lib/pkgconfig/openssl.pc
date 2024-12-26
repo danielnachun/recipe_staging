@@ -1,0 +1,9 @@
+prefix=/Users/danielnachun/ghq/github.com/danielnachun/recipe_staging/perl-ffi-checklib/output/bld/rattler-build_perl-ffi-checklib_1735191484/work/test
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include 
+
+Name: OpenSSL
+Description: Secure Sockets Layer and cryptography libraries and tools
+Version: 3.4.0
+Requires: libssl libcrypto
