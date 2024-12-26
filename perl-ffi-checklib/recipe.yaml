@@ -1,0 +1,49 @@
+context:
+  version: 0.31
+
+package:
+  name: perl-ffi-checklib
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/P/PL/PLICEASE/FFI-CheckLib-${{ version }}.tar.gz
+  sha256: 04d885fc377d44896e5ea1c4ec310f979bb04f2f18658a7e7a4d509f7e80bb80
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - perl Makefile.PL INSTALLDIRS=site
+    - make
+    - make test
+    - make install
+    - cp ${PREFIX}/man/man1/perlartistic.1 .
+    - cp ${PREFIX}/man/man1/perlgpl.1 .
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-file-which
+    - perl-test2-suite
+  run:
+    - perl=5.32
+    - perl-file-which
+
+tests:
+  - perl:
+      uses:
+        - FFI::CheckLib
+
+about:
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file:
+    - perlartistic.1
+    - perlgpl.1
+  summary: Check that a library is available for FFI
+  homepage: https://metacpan.org/pod/FFI::CheckLib
+
+extra:
+  recipe-maintainers:
+    - danielnachun
