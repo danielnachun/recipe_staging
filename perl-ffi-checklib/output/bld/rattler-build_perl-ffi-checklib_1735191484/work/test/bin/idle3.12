@@ -1,5 +1,0 @@
-#!/Users/danielnachun/ghq/github.com/danielnachun/recipe_staging/perl-ffi-checklib/output/bld/rattler-build_perl-ffi-checklib_1735191484/work/test/bin/python3.12
-
-from idlelib.pyshell import main
-if __name__ == '__main__':
-    main()
