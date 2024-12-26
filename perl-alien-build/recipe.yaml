@@ -1,36 +1,36 @@
-schema_version: 1
-
 context:
-  name: perl-alien-build
   version: 2.53
-  sha256: fcc4391eb099b5e8c87b526fa6ebaf0b5eccee66f63653f786026120a42a0f5c
 
 package:
-  name: ${{ name }}
+  name: perl-alien-build
   version: ${{ version }}
 
 source:
-  url: https://cpan.metacpan.org/authors/id/P/PL/PLICEASE/Alien-Build-2.53.tar.gz
-  sha256: ${{ sha256 }}
+  url: https://cpan.metacpan.org/authors/id/P/PL/PLICEASE/Alien-Build-${{ version }}.tar.gz
+  sha256: fcc4391eb099b5e8c87b526fa6ebaf0b5eccee66f63653f786026120a42a0f5c
 
 build:
   number: 0
+  script: |
+    ${PREFIX}/bin/perl Makefile.PL INSTALLDIRS=site
+    make
+    #make test
+    make install
+    cp ${PREFIX}/man/man1/perlartistic.1 ${SRC_DIR}
+    cp ${PREFIX}/man/man1/perlgpl.1 ${SRC_DIR}
 
 requirements:
   build:
     - ${{ compiler('c') }}
+    - make
     - if: not win
-      then: autoconf
-    - if: not win
-      then: automake
+      then:
+        - autoconf
+        - automake
     - if: win
-      then: m2-autoconf
-    - if: win
-      then: m2-automake-wrapper
-    - if: not win
-      then: make
-    - if: win
-      then: m2-make
+      then:
+        - m2-autoconf
+        - m2-automake-wrapper
   host:
     - perl=5.32
     - perl-path-tiny
@@ -46,13 +46,10 @@ requirements:
     - perl-file-chdir
     - perl-ffi-checklib
     - perl-file-which
-  run_exports:
-    weak:
-      - ${{ name }} =${{ version }}
 
 tests:
-  - python:
-      imports:
+  - perl:
+      uses:
         - Alien::Base
         - Alien::Base::PkgConfig
         - Alien::Base::Wrapper
@@ -117,7 +114,13 @@ tests:
         - Alien::Util
 
 about:
-  license: perl_5
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file:
+    - perlartistic.1
+    - perlgpl.1
   summary: Build external dependencies for use in CPAN
   homepage: https://metacpan.org/pod/Alien::Build
 
+extra:
+  recipe-maintainers:
+    - danielnachun
