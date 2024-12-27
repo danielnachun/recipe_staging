@@ -1,11 +1,12 @@
-schema_version: 1
+context:
+  version: 2.0207
 
 package:
   name: perl-xml-libxml
-  version: 2.0207
+  version: ${{ version }}
 
 source:
-  url: https://cpan.metacpan.org/authors/id/S/SH/SHLOMIF/XML-LibXML-2.0207.tar.gz
+  url: https://cpan.metacpan.org/authors/id/S/SH/SHLOMIF/XML-LibXML-${{ version }}.tar.gz
   sha256: 903436c9859875bef5593243aae85ced329ad0fb4b57bbf45975e32547c50c15
 
 build:
@@ -13,8 +14,8 @@ build:
 
 requirements:
   build:
-    - make
     - ${{ compiler('c') }}
+    - make
   host:
     - perl=5.32
     - perl-xml-sax
@@ -28,8 +29,6 @@ requirements:
     - perl-xml-sax
     - perl-xml-namespacesupport
     - perl-alien-libxml2
-    - libxml2
-    - zlib
 
 tests:
   - python:
@@ -52,7 +51,13 @@ tests:
         - XML::LibXML::XPathContext
 
 about:
-  license: Perl
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file:
+    - perlartistic.1
+    - gpl.1
   summary: Interface to Gnome libxml2 xml parsing and DOM library
   homepage: https://bitbucket.org/shlomif/perl-xml-libxml
 
+extra:
+  recipe-maintainers:
+    - danielnachun
