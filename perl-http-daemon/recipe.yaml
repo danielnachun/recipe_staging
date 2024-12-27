@@ -1,0 +1,49 @@
+context:
+  version: 6.16
+
+package:
+  name: perl-http-daemon
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/O/OA/OALDERS/HTTP-Daemon-${{ version }}.tar.gz
+  sha256: b38d092725e6fa4e0c4dc2a47e157070491bafa0dbe16c78a358e806aa7e173d
+
+build:
+  number: 0
+  noarch: generic
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+    cp ${PREFIX}/man/man1/perlartistic.1 .
+    cp ${PREFIX}/man/man1/perlgpl.1 .
+
+requirements:
+  host:
+    - perl=5.32
+    - perl-lwp-mediatypes
+    - perl-module-build-tiny
+    - perl-http-date
+  run:
+    - perl>=5.32
+    - perl-lwp-mediatypes
+    - perl-http-date
+
+tests:
+  - perl:
+      uses:
+        - HTTP::Daemon
+
+about:
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file:
+    - perlartistic.1
+    - perlgpl.1
+  summary: A simple http server class
+  homepage: https://github.com/libwww-perl/HTTP-Daemon
+
+extra:
+  recipe-maintainers:
+    - danielnachun
