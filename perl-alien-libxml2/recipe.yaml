@@ -11,13 +11,13 @@ source:
 
 build:
   number: 0
-  script:
+  script: |
     perl Makefile.PL INSTALLDIRS=site
     make
     make test
     make install
-    cp ${PREFIX}/man/man1/perlartistic.1 .
-    cp ${PREFIX}/man/man1/perlgpl.1 .
+    cp ${PREFIX}/man/man1/perlartistic.1 ${SRC_DIR}
+    cp ${PREFIX}/man/man1/perlgpl.1 ${SRC_DIR}
 
 requirements:
   build:
@@ -32,10 +32,11 @@ requirements:
     - zlib
   run:
     - perl=5.32
+    - perl-alien-build
 
 tests:
-  - python:
-      imports:
+  - perl:
+      uses:
         - Alien::Libxml2
 
 about:
