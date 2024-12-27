@@ -13,10 +13,10 @@ build:
   number: 0
   noarch: generic
   script: |
-    perl Makefile.PL INSTALLDIRS=site
-    make
-    make test
-    make install
+    perl Build.PL
+    perl ./Build
+    perl ./Build test
+    perl ./Build install --installdirs site
     cp ${PREFIX}/man/man1/perlartistic.1 .
     cp ${PREFIX}/man/man1/perlgpl.1 .
 
@@ -26,10 +26,14 @@ requirements:
     - perl-lwp-mediatypes
     - perl-module-build-tiny
     - perl-http-date
+    - perl-http-message
+    - perl-test-needs
+
   run:
     - perl>=5.32
     - perl-lwp-mediatypes
     - perl-http-date
+    - perl-http-message
 
 tests:
   - perl:
