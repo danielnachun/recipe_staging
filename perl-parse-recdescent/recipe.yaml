@@ -1,0 +1,46 @@
+context:
+  version: 1.967015
+
+package:
+  name: perl-parse-recdescent
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/J/JT/JTBRAUN/Parse-RecDescent-${{ version }}.tar.gz
+  sha256: 1943336a4cb54f1788a733f0827c0c55db4310d5eae15e542639c9dd85656e37
+
+build:
+  number: 0
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+    cp ${PREFIX}/man/man1/perlartistic.1 .
+    cp ${PREFIX}/man/man1/perlgpl.1 .
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl=5.32
+
+tests:
+  - perl:
+      uses:
+        - Parse::RecDescent
+
+about:
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file:
+    - perlartistic.1
+    - perlgpl.1
+  summary: Generate Recursive-Descent Parsers
+  homepage: http://metacpan.org/pod/Parse-RecDescent
+
+extra:
+  recipe-maintainers:
+    - danielnachun
