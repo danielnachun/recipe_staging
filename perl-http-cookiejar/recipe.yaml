@@ -1,0 +1,47 @@
+context:
+  version: 0.014
+
+package:
+  name: perl-http-cookiejar
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/D/DA/DAGOLDEN/HTTP-CookieJar-${{ version }}.tar.gz
+  sha256: 7094ea5c91f536d263b85e83ab4e9a963e11c4408ce08ecae553fa9c0cc47e73
+
+build:
+  number: 0
+  noarch: generic
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-http-date
+    - perl-test-deep
+    - perl-test-requires
+  run:
+    - perl>=5.32
+    - perl-http-date
+
+tests:
+  - perl:
+      uses:
+        - HTTP::CookieJar
+        - HTTP::CookieJar::LWP
+
+about:
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: A minimalist HTTP user agent cookie jar
+  homepage: https://github.com/dagolden/HTTP-CookieJar
+
+extra:
+  recipe-maintainers:
+    - danielnachun
