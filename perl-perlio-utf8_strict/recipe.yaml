@@ -1,0 +1,47 @@
+context:
+  version: 0.010
+
+package:
+  name: perl-perlio-utf8_strict
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/L/LE/LEONT/PerlIO-utf8_strict-${{ version }}.tar.gz
+  sha256: bcd2848b72df290b5e984fae8b1a6ca96f6d072003cf222389a8c9e8e1c570cd
+
+build:
+  number: 0
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+    cp ${PREFIX}/man/man1/perlartistic.1 .
+    cp ${PREFIX}/man/man1/perlgpl.1 .
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+  host:
+    - perl=5.32
+    - perl-test-exception
+  run:
+    - perl=5.32
+
+tests:
+  - perl:
+      uses:
+        - PerlIO::utf8_strict
+
+about:
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file:
+    - perlartistic.1
+    - perlgpl.1
+  summary: Fast and correct UTF-8 IO
+  homepage: http://metacpan.org/pod/PerlIO-utf8_strict
+
+extra:
+  recipe-maintainers:
+    - danielnachun
