@@ -32,8 +32,6 @@ requirements:
     - zlib
   run:
     - perl=5.32
-    - libxml2
-    - libzlib
 
 tests:
   - python:
