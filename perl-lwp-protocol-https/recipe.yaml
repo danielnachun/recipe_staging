@@ -25,17 +25,19 @@ requirements:
     - make
   host:
     - perl
+    - perl-libwww-perl
     - perl-io-socket-ssl
     - perl-test-needs
+    - perl-test-requiresinternet
   run:
     - perl
+    - perl-libwww-perl
     - perl-io-socket-ssl
 
 tests:
   - perl:
       uses:
         - LWP::Protocol::https
-        - LWP::Protocol::https::Socket
 
 about:
   license: Artistic-1.0-Perl OR GPL-1.0-or-later
@@ -48,4 +50,3 @@ about:
 extra:
   recipe-maintainers:
     - danielnachun
-
