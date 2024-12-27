@@ -32,21 +32,9 @@ requirements:
     - perl=5.32
 
 tests:
-  - python:
-      imports:
+  - perl:
+      uses:
         - Text::BibTeX
-        - Text::BibTeX::BibEntry
-        - Text::BibTeX::BibFormat
-        - Text::BibTeX::BibSort
-        - Text::BibTeX::BibStructure
-        - Text::BibTeX::Entry
-        - Text::BibTeX::File
-        - Text::BibTeX::Name
-        - Text::BibTeX::NameFormat
-        - Text::BibTeX::SimpleValue
-        - Text::BibTeX::Structure
-        - Text::BibTeX::StructuredEntry
-        - Text::BibTeX::Value
 
 about:
   license: Artistic-1.0-Perl OR GPL-1.0-or-later
