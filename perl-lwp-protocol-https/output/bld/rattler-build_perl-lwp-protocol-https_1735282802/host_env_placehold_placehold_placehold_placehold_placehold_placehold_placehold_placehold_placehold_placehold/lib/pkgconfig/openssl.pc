@@ -1,9 +1,0 @@
-prefix=/Users/danielnachun/ghq/github.com/danielnachun/recipe_staging/perl-lwp-protocol-https/output/bld/rattler-build_perl-lwp-protocol-https_1735282802/host_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold
-exec_prefix=${prefix}
-libdir=${exec_prefix}/lib
-includedir=${prefix}/include 
-
-Name: OpenSSL
-Description: Secure Sockets Layer and cryptography libraries and tools
-Version: 3.4.0
-Requires: libssl libcrypto
