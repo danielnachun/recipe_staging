@@ -1,0 +1,49 @@
+context:
+  version: 6.02
+
+package:
+  name: perl-www-robotrules
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/G/GA/GAAS/WWW-RobotRules-${{ version }}.tar.gz
+  sha256: 46b502e7a288d559429891eeb5d979461dd3ecc6a5c491ead85d165b6e03a51e
+
+build:
+  number: 0
+  noarch: generic
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+    cp ${PREFIX}/man/man1/perlartistic.1 .
+    cp ${PREFIX}/man/man1/perlgpl.1 .
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-uri
+  run:
+    - perl>=5.32
+    - perl-uri
+
+tests:
+  - perl:
+      uses:
+        - WWW::RobotRules
+        - WWW::RobotRules::AnyDBM_File
+
+about:
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file:
+    - perlartistic.1
+    - perlgpl.1
+  summary: database of robots.txt-derived permissions
+  homepage: http://metacpan.org/pod/WWW-RobotRules
+
+extra:
+  recipe-maintainers:
+    - danielnachun
