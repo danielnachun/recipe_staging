@@ -31,8 +31,8 @@ requirements:
     - perl-alien-libxml2
 
 tests:
-  - python:
-      imports:
+  - perl:
+      uses:
         - XML::LibXML
         - XML::LibXML::AttributeHash
         - XML::LibXML::Boolean
@@ -54,7 +54,7 @@ about:
   license: Artistic-1.0-Perl OR GPL-1.0-or-later
   license_file:
     - perlartistic.1
-    - gpl.1
+    - perlgpl.1
   summary: Interface to Gnome libxml2 xml parsing and DOM library
   homepage: https://bitbucket.org/shlomif/perl-xml-libxml
 

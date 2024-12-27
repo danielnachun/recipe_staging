@@ -23,3 +23,6 @@ perl Makefile.PL INSTALLDIRS=site LDFLAGS="$LDFLAGS" CCFLAGS="${CFLAGS}" LIBS="-
 make
 #make test
 make install
+
+cp ${PREFIX}/man/man1/perlartistic.1 ${SRC_DIR}
+cp ${PREFIX}/man/man1/perlgpl.1 ${SRC_DIR}
