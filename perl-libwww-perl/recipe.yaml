@@ -1,0 +1,73 @@
+context:
+  version: 6.77
+
+package:
+  name: perl-libwww-perl
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/O/OA/OALDERS/libwww-perl-${{ version }}.tar.gz
+  sha256: 94a907d6b3ea8d966ef43deffd4fa31f5500142b4c00489bfd403860a5f060e4
+
+build:
+  number: 0
+  noarch: generic
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+    cp ${PREFIX}/man/man1/perlartistic.1 .
+    cp ${PREFIX}/man/man1/perlgpl.1 .
+
+requirements:
+  build:
+    - make
+  host:
+    - perl
+    - perl-http-negotiate
+    - perl-encode-locale
+    - perl-net-http
+    - perl-http-date
+    - perl-http-cookies
+    - perl-www-robotrules
+    - perl-uri
+    - perl-lwp-mediatypes
+    - perl-file-listing
+    - perl-try-tiny
+    - perl-http-daemon
+    - perl-html-parser
+    - perl-test-fatal
+    - perl-test-needs
+    - perl-test-requiresinternet
+  run:
+    - perl
+    - perl-http-negotiate
+    - perl-encode-locale
+    - perl-net-http
+    - perl-http-date
+    - perl-http-cookies
+    - perl-www-robotrules
+    - perl-uri
+    - perl-lwp-mediatypes
+    - perl-file-listing
+    - perl-try-tiny
+    - perl-http-daemon
+    - perl-html-parser
+
+tests:
+  - perl:
+      uses:
+        - LWP
+
+about:
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file:
+    - perlartistic.1
+    - perlgpl.1
+  summary: The World-Wide Web library for Perl
+  homepage: https://github.com/libwww-perl/libwww-perl
+
+extra:
+  recipe-maintainers:
+    - danielnachun
