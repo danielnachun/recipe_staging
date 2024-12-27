@@ -1,0 +1,51 @@
+context:
+  version: 6.14
+
+package:
+  name: perl-lwp-protocol-https
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/O/OA/OALDERS/LWP-Protocol-https-${{ version }}.tar.gz
+  sha256: 59cdeabf26950d4f1bef70f096b0d77c5b1c5a7b5ad1b66d71b681ba279cbb2a
+
+build:
+  number: 0
+  noarch: generic
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+    cp ${PREFIX}/man/man1/perlartistic.1 .
+    cp ${PREFIX}/man/man1/perlgpl.1 .
+
+requirements:
+  build:
+    - make
+  host:
+    - perl
+    - perl-io-socket-ssl
+    - perl-test-needs
+  run:
+    - perl
+    - perl-io-socket-ssl
+
+tests:
+  - perl:
+      uses:
+        - LWP::Protocol::https
+        - LWP::Protocol::https::Socket
+
+about:
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file:
+    - perlartistic.1
+    - perlgpl.1
+  summary: Provide https support for LWP::UserAgent
+  homepage: https://github.com/libwww-perl/LWP-Protocol-https
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+

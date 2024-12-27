@@ -1,0 +1,691 @@
+{
+  "arch": "arm64",
+  "build": "pl5321h8a0c2ca_2",
+  "build_number": 2,
+  "depends": [
+    "libzlib >=1.3.1,<2.0a0",
+    "openssl >=3.4.0,<4.0a0",
+    "perl >=5.32",
+    "perl-mime-base64"
+  ],
+  "license": "Artistic-2.0",
+  "md5": "48098c6d211b7d04c4720041b8c77a2f",
+  "name": "perl-net-ssleay",
+  "platform": "osx",
+  "sha256": "89d02d72f81310873c00a604d6ff5a77d24bcc80184e247900c04fb3816b929d",
+  "size": 321380,
+  "subdir": "osx-arm64",
+  "timestamp": 1732064503388,
+  "version": "1.92",
+  "fn": "perl-net-ssleay-1.92-pl5321h8a0c2ca_2.tar.bz2",
+  "url": "https://conda.anaconda.org/dnachun/osx-arm64/perl-net-ssleay-1.92-pl5321h8a0c2ca_2.tar.bz2",
+  "channel": "https://conda.anaconda.org/dnachun/",
+  "extracted_package_dir": "/Users/danielnachun/Library/Caches/rattler/cache/pkgs/perl-net-ssleay-1.92-pl5321h8a0c2ca_2",
+  "files": [
+    "man/man3/Net::SSLeay.3",
+    "man/man3/Net::SSLeay::Handle.3",
+    "lib/perl5/5.32/vendor_perl/Net/SSLeay.pm",
+    "lib/perl5/5.32/vendor_perl/Net/SSLeay.pod",
+    "lib/perl5/5.32/vendor_perl/Net/SSLeay/Handle.pm",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/SSLeay.bundle",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/autosplit.ix",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/debug_read.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/do_https.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/do_https2.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/do_https3.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/do_https4.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/do_httpx2.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/do_httpx3.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/do_httpx4.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/dump_peer_certificate.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/get_http.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/get_http3.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/get_http4.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/get_https.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/get_https3.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/get_https4.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/get_httpx.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/get_httpx3.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/get_httpx4.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/head_http.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/head_http3.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/head_http4.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/head_https.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/head_https3.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/head_https4.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/head_httpx.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/head_httpx3.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/head_httpx4.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/http_cat.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/https_cat.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/httpx_cat.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/initialize.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/make_form.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/make_headers.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/new_x_ctx.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/open_proxy_tcp_connection.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/open_tcp_connection.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/post_http.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/post_http3.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/post_http4.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/post_https.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/post_https3.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/post_https4.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/post_httpx.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/post_httpx3.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/post_httpx4.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/put_http.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/put_http3.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/put_http4.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/put_https.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/put_https3.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/put_https4.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/put_httpx.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/put_httpx3.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/put_httpx4.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/randomize.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/set_cert_and_key.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/set_proxy.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/set_server_cert_and_key.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/ssl_read_CRLF.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/ssl_read_all.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/ssl_read_until.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/ssl_write_CRLF.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/ssl_write_all.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/sslcat.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/tcp_read_CRLF.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/tcp_read_all.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/tcp_read_until.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/tcp_write_CRLF.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/tcp_write_all.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/tcpcat.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/tcpxcat.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/want_X509_lookup.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/want_nothing.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/want_read.al",
+    "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/want_write.al"
+  ],
+  "paths_data": {
+    "paths_version": 1,
+    "paths": [
+      {
+        "_path": "man/man3/Net::SSLeay.3",
+        "path_type": "hardlink",
+        "sha256": "c69c85eeac88176a760c493f11a4d9f2e233bf6c54599862e6d844f8fc009f33",
+        "sha256_in_prefix": "c69c85eeac88176a760c493f11a4d9f2e233bf6c54599862e6d844f8fc009f33",
+        "size_in_bytes": 416364
+      },
+      {
+        "_path": "man/man3/Net::SSLeay::Handle.3",
+        "path_type": "hardlink",
+        "sha256": "909ad8c5d0623642ca57af81fbb7ae02feb033fe99d2cd3ce4f3ba9e7fc166c6",
+        "sha256_in_prefix": "909ad8c5d0623642ca57af81fbb7ae02feb033fe99d2cd3ce4f3ba9e7fc166c6",
+        "size_in_bytes": 8458
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/Net/SSLeay.pm",
+        "path_type": "hardlink",
+        "sha256": "36558a7dec7cd6b5bfdc17b5707c3de1f6c87f70d421e21a40e83b854011a0de",
+        "sha256_in_prefix": "36558a7dec7cd6b5bfdc17b5707c3de1f6c87f70d421e21a40e83b854011a0de",
+        "size_in_bytes": 55527
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/Net/SSLeay.pod",
+        "path_type": "hardlink",
+        "sha256": "1d2422db520c67934c9ab26ff64ef6f2e33695b7a81a657dea23755293677ed7",
+        "sha256_in_prefix": "1d2422db520c67934c9ab26ff64ef6f2e33695b7a81a657dea23755293677ed7",
+        "size_in_bytes": 382317
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/Net/SSLeay/Handle.pm",
+        "path_type": "hardlink",
+        "sha256": "008d81963835cc1f9424c618e3a7e9c9122afe9a580f2ff46bc38d5365c23779",
+        "sha256_in_prefix": "008d81963835cc1f9424c618e3a7e9c9122afe9a580f2ff46bc38d5365c23779",
+        "size_in_bytes": 10575
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/SSLeay.bundle",
+        "path_type": "hardlink",
+        "sha256": "ebbd4e7758f50473d4e718600b597c326ea7e1e741134ab690f64610cf54f0d8",
+        "sha256_in_prefix": "ebbd4e7758f50473d4e718600b597c326ea7e1e741134ab690f64610cf54f0d8",
+        "size_in_bytes": 633760
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/autosplit.ix",
+        "path_type": "hardlink",
+        "sha256": "430cc4e198155d3738ea6c49180ac598c6f1527f93f9d8038d79bdf6d0b8ddac",
+        "sha256_in_prefix": "430cc4e198155d3738ea6c49180ac598c6f1527f93f9d8038d79bdf6d0b8ddac",
+        "size_in_bytes": 1581
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/debug_read.al",
+        "path_type": "hardlink",
+        "sha256": "2bb3db2b8ab17862c5fa7ee52cb34c6e359a2eeb0546b8bff3c9895f9e328044",
+        "sha256_in_prefix": "2bb3db2b8ab17862c5fa7ee52cb34c6e359a2eeb0546b8bff3c9895f9e328044",
+        "size_in_bytes": 677
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/do_https.al",
+        "path_type": "hardlink",
+        "sha256": "746b0d260fd7567a5f0a6dd537bf58e7fbbdb2ede3d7b6dbfcd7aecd4c6185ea",
+        "sha256_in_prefix": "746b0d260fd7567a5f0a6dd537bf58e7fbbdb2ede3d7b6dbfcd7aecd4c6185ea",
+        "size_in_bytes": 508
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/do_https2.al",
+        "path_type": "hardlink",
+        "sha256": "650e1434eae0d429e647fb3b67ffa3415c3cc73f6d910bb5ec114fe21043bb2f",
+        "sha256_in_prefix": "650e1434eae0d429e647fb3b67ffa3415c3cc73f6d910bb5ec114fe21043bb2f",
+        "size_in_bytes": 446
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/do_https3.al",
+        "path_type": "hardlink",
+        "sha256": "a441074fa5438719110d96543b93651369b658560383920a9030099887080e47",
+        "sha256_in_prefix": "a441074fa5438719110d96543b93651369b658560383920a9030099887080e47",
+        "size_in_bytes": 466
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/do_https4.al",
+        "path_type": "hardlink",
+        "sha256": "24dcac1d409a59202055f2a6a8a7a2e32a3fc97c7d186db8aa7b815afdf94c6c",
+        "sha256_in_prefix": "24dcac1d409a59202055f2a6a8a7a2e32a3fc97c7d186db8aa7b815afdf94c6c",
+        "size_in_bytes": 357
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/do_httpx2.al",
+        "path_type": "hardlink",
+        "sha256": "4def56dceaab1848969017d8b62636886d459604e562a82c9af3e00a3940b38f",
+        "sha256_in_prefix": "4def56dceaab1848969017d8b62636886d459604e562a82c9af3e00a3940b38f",
+        "size_in_bytes": 559
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/do_httpx3.al",
+        "path_type": "hardlink",
+        "sha256": "c89151138d89d6cc98b5ee59567807634e34bc6b43212521b62e4771afbe78c1",
+        "sha256_in_prefix": "c89151138d89d6cc98b5ee59567807634e34bc6b43212521b62e4771afbe78c1",
+        "size_in_bytes": 1558
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/do_httpx4.al",
+        "path_type": "hardlink",
+        "sha256": "f775b7dfd4385dce99d8e099ec4e830f35aae4fd1392013b5ee13eb9d6d075d6",
+        "sha256_in_prefix": "f775b7dfd4385dce99d8e099ec4e830f35aae4fd1392013b5ee13eb9d6d075d6",
+        "size_in_bytes": 544
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/dump_peer_certificate.al",
+        "path_type": "hardlink",
+        "sha256": "800e1055dd3124406aa3210c8df31f0cc1ffd70504790579883dafe1a34840a8",
+        "sha256_in_prefix": "800e1055dd3124406aa3210c8df31f0cc1ffd70504790579883dafe1a34840a8",
+        "size_in_bytes": 959
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/get_http.al",
+        "path_type": "hardlink",
+        "sha256": "711502489094bce2169e8dfd1e4e2bff267768f11dee97f0d3a485afc241a299",
+        "sha256_in_prefix": "711502489094bce2169e8dfd1e4e2bff267768f11dee97f0d3a485afc241a299",
+        "size_in_bytes": 316
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/get_http3.al",
+        "path_type": "hardlink",
+        "sha256": "caa84b940809bc046dea68a886bc06da8be044794e14b3a80060dff548fe6e66",
+        "sha256_in_prefix": "caa84b940809bc046dea68a886bc06da8be044794e14b3a80060dff548fe6e66",
+        "size_in_bytes": 319
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/get_http4.al",
+        "path_type": "hardlink",
+        "sha256": "2f31e19f8c4617a4c60ffdb9a8adc107fef029859350c42f068af1e2f3d0c636",
+        "sha256_in_prefix": "2f31e19f8c4617a4c60ffdb9a8adc107fef029859350c42f068af1e2f3d0c636",
+        "size_in_bytes": 319
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/get_https.al",
+        "path_type": "hardlink",
+        "sha256": "17b29b6f1250d2bb84daf552ecbfa7dd1d346f305cee7e521e79c83eafe17b62",
+        "sha256_in_prefix": "17b29b6f1250d2bb84daf552ecbfa7dd1d346f305cee7e521e79c83eafe17b62",
+        "size_in_bytes": 319
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/get_https3.al",
+        "path_type": "hardlink",
+        "sha256": "04de78e4be2d5d05552496ec5081fd68ef49d0cf4f2ecace81df3c9b1fe585bf",
+        "sha256_in_prefix": "04de78e4be2d5d05552496ec5081fd68ef49d0cf4f2ecace81df3c9b1fe585bf",
+        "size_in_bytes": 322
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/get_https4.al",
+        "path_type": "hardlink",
+        "sha256": "e54a01ed659ce5a1af8fa48022d634ef952853397c9f8419b22b0b520d44a33c",
+        "sha256_in_prefix": "e54a01ed659ce5a1af8fa48022d634ef952853397c9f8419b22b0b520d44a33c",
+        "size_in_bytes": 322
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/get_httpx.al",
+        "path_type": "hardlink",
+        "sha256": "81afe64bf12c60458ba9ce085d9d5f4e3fdab6a25b64fc4c07f3159ba8dd7b60",
+        "sha256_in_prefix": "81afe64bf12c60458ba9ce085d9d5f4e3fdab6a25b64fc4c07f3159ba8dd7b60",
+        "size_in_bytes": 316
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/get_httpx3.al",
+        "path_type": "hardlink",
+        "sha256": "a897d300a7cf7fd3a9ae77083dc455a1cd3ff43173580175130f10f583383b38",
+        "sha256_in_prefix": "a897d300a7cf7fd3a9ae77083dc455a1cd3ff43173580175130f10f583383b38",
+        "size_in_bytes": 319
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/get_httpx4.al",
+        "path_type": "hardlink",
+        "sha256": "d85221785767092a967981e88acba6759156fc1401b0b801818cba7905e94697",
+        "sha256_in_prefix": "d85221785767092a967981e88acba6759156fc1401b0b801818cba7905e94697",
+        "size_in_bytes": 319
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/head_http.al",
+        "path_type": "hardlink",
+        "sha256": "17da9da39333defc68bde720741df5d5b00c8f924c86097c33c75087f76a639d",
+        "sha256_in_prefix": "17da9da39333defc68bde720741df5d5b00c8f924c86097c33c75087f76a639d",
+        "size_in_bytes": 319
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/head_http3.al",
+        "path_type": "hardlink",
+        "sha256": "e803df073d1e16e556b12c2d68d0e40073a8c80688b34ec706e84ef93d77cd81",
+        "sha256_in_prefix": "e803df073d1e16e556b12c2d68d0e40073a8c80688b34ec706e84ef93d77cd81",
+        "size_in_bytes": 322
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/head_http4.al",
+        "path_type": "hardlink",
+        "sha256": "84ed7a1fb3c1eeccb4acc5f9b6b89bb207096312a0f81405445fef5eccd6828d",
+        "sha256_in_prefix": "84ed7a1fb3c1eeccb4acc5f9b6b89bb207096312a0f81405445fef5eccd6828d",
+        "size_in_bytes": 346
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/head_https.al",
+        "path_type": "hardlink",
+        "sha256": "2c4aeb57e8054ee3815a6018d12166a981a10b03a4599f13c1a4c828633505ad",
+        "sha256_in_prefix": "2c4aeb57e8054ee3815a6018d12166a981a10b03a4599f13c1a4c828633505ad",
+        "size_in_bytes": 322
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/head_https3.al",
+        "path_type": "hardlink",
+        "sha256": "a590a888e24ad6f1b48bbd48146a30cd7ffea94d2cf3092c7baa2190e33aa02b",
+        "sha256_in_prefix": "a590a888e24ad6f1b48bbd48146a30cd7ffea94d2cf3092c7baa2190e33aa02b",
+        "size_in_bytes": 325
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/head_https4.al",
+        "path_type": "hardlink",
+        "sha256": "67dd79a704827c9ae39e3785d3e291ac03510bd0e17c92ea6c6271581407cbfe",
+        "sha256_in_prefix": "67dd79a704827c9ae39e3785d3e291ac03510bd0e17c92ea6c6271581407cbfe",
+        "size_in_bytes": 333
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/head_httpx.al",
+        "path_type": "hardlink",
+        "sha256": "7f9ebdd9c40a9d3e04a5fcfcb62ef19a25d7aea21d35eaec26bfa5a9182947cb",
+        "sha256_in_prefix": "7f9ebdd9c40a9d3e04a5fcfcb62ef19a25d7aea21d35eaec26bfa5a9182947cb",
+        "size_in_bytes": 319
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/head_httpx3.al",
+        "path_type": "hardlink",
+        "sha256": "539709483a65a22b677cae8a946576b5c198a9f7ca81c252522db9bea9471f5f",
+        "sha256_in_prefix": "539709483a65a22b677cae8a946576b5c198a9f7ca81c252522db9bea9471f5f",
+        "size_in_bytes": 322
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/head_httpx4.al",
+        "path_type": "hardlink",
+        "sha256": "8aa0b2c3779c5c1d2cc5d96a563845f401bed9bcd08191138acd662cef6b5fe4",
+        "sha256_in_prefix": "8aa0b2c3779c5c1d2cc5d96a563845f401bed9bcd08191138acd662cef6b5fe4",
+        "size_in_bytes": 399
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/http_cat.al",
+        "path_type": "hardlink",
+        "sha256": "014c0f12d8dd8c22e4abe4d2d1547da9ec1409c9a551cd7c4ccc72c93aaf8a4a",
+        "sha256_in_prefix": "014c0f12d8dd8c22e4abe4d2d1547da9ec1409c9a551cd7c4ccc72c93aaf8a4a",
+        "size_in_bytes": 1203
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/https_cat.al",
+        "path_type": "hardlink",
+        "sha256": "ec3201614bfe5595c026a4c89b4924a3214e4038bdf1d43cb778cb68046b570f",
+        "sha256_in_prefix": "ec3201614bfe5595c026a4c89b4924a3214e4038bdf1d43cb778cb68046b570f",
+        "size_in_bytes": 3028
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/httpx_cat.al",
+        "path_type": "hardlink",
+        "sha256": "1421efe51ad3df84872ddf032a0864cd90b1d5c5734a566ff82515538d3c7b02",
+        "sha256_in_prefix": "1421efe51ad3df84872ddf032a0864cd90b1d5c5734a566ff82515538d3c7b02",
+        "size_in_bytes": 558
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/initialize.al",
+        "path_type": "hardlink",
+        "sha256": "a26e74571af683c50d9381830fe6681e0088d5839810a8e8e0bcb2b3e3a704d7",
+        "sha256_in_prefix": "a26e74571af683c50d9381830fe6681e0088d5839810a8e8e0bcb2b3e3a704d7",
+        "size_in_bytes": 815
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/make_form.al",
+        "path_type": "hardlink",
+        "sha256": "9cf9bf48dec185b1fa69a11346cdcfd0f124773e5e7e8c8bf0137794af71e603",
+        "sha256_in_prefix": "9cf9bf48dec185b1fa69a11346cdcfd0f124773e5e7e8c8bf0137794af71e603",
+        "size_in_bytes": 604
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/make_headers.al",
+        "path_type": "hardlink",
+        "sha256": "a420e586643b1cec8f9418de232c2772fd81b885d4f259518c74aca7bc197c01",
+        "sha256_in_prefix": "a420e586643b1cec8f9418de232c2772fd81b885d4f259518c74aca7bc197c01",
+        "size_in_bytes": 575
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/new_x_ctx.al",
+        "path_type": "hardlink",
+        "sha256": "46dfb68b2720d91141984dd5f410748ab870cec7561a40a553cd722f7efc6d7f",
+        "sha256_in_prefix": "46dfb68b2720d91141984dd5f410748ab870cec7561a40a553cd722f7efc6d7f",
+        "size_in_bytes": 1858
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/open_proxy_tcp_connection.al",
+        "path_type": "hardlink",
+        "sha256": "1aa0a01fbde7f949432af352280d7c6eef1bef9873a82025ae3fcbdb4c8dcfe2",
+        "sha256_in_prefix": "1aa0a01fbde7f949432af352280d7c6eef1bef9873a82025ae3fcbdb4c8dcfe2",
+        "size_in_bytes": 1284
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/open_tcp_connection.al",
+        "path_type": "hardlink",
+        "sha256": "2529736b9637e4c9522dbcde594efdf3fb39de2765aafffc0d9672eced9ddb13",
+        "sha256_in_prefix": "2529736b9637e4c9522dbcde594efdf3fb39de2765aafffc0d9672eced9ddb13",
+        "size_in_bytes": 1482
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/post_http.al",
+        "path_type": "hardlink",
+        "sha256": "b5c3197300c49647400040b40f99a712c3aaf98009700b9b87b11999f3e007e1",
+        "sha256_in_prefix": "b5c3197300c49647400040b40f99a712c3aaf98009700b9b87b11999f3e007e1",
+        "size_in_bytes": 318
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/post_http3.al",
+        "path_type": "hardlink",
+        "sha256": "58092da192bb911ee95a487431e516944ba91f57fde4adc0e1547fdea7b517b1",
+        "sha256_in_prefix": "58092da192bb911ee95a487431e516944ba91f57fde4adc0e1547fdea7b517b1",
+        "size_in_bytes": 321
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/post_http4.al",
+        "path_type": "hardlink",
+        "sha256": "aec91b1152f384ca55fa062d85917de39e527262501cb6cc6758ff57a02d8658",
+        "sha256_in_prefix": "aec91b1152f384ca55fa062d85917de39e527262501cb6cc6758ff57a02d8658",
+        "size_in_bytes": 321
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/post_https.al",
+        "path_type": "hardlink",
+        "sha256": "21b824b4da354da07fc7f119c2875a451f5a729406e6cade8c655115fd59b911",
+        "sha256_in_prefix": "21b824b4da354da07fc7f119c2875a451f5a729406e6cade8c655115fd59b911",
+        "size_in_bytes": 321
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/post_https3.al",
+        "path_type": "hardlink",
+        "sha256": "5554df13704920db83a145bc25be3242314b63911de76d87474d342d6e80e235",
+        "sha256_in_prefix": "5554df13704920db83a145bc25be3242314b63911de76d87474d342d6e80e235",
+        "size_in_bytes": 324
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/post_https4.al",
+        "path_type": "hardlink",
+        "sha256": "656f668f4984618fa358ede051fc6ec4c4691253c4b9782cefeca661c31d6921",
+        "sha256_in_prefix": "656f668f4984618fa358ede051fc6ec4c4691253c4b9782cefeca661c31d6921",
+        "size_in_bytes": 324
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/post_httpx.al",
+        "path_type": "hardlink",
+        "sha256": "29318544a41311a3bb802f0d3e82324cd3e7b9bd506bb7512534ef466c9fac8d",
+        "sha256_in_prefix": "29318544a41311a3bb802f0d3e82324cd3e7b9bd506bb7512534ef466c9fac8d",
+        "size_in_bytes": 318
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/post_httpx3.al",
+        "path_type": "hardlink",
+        "sha256": "0ea5fe1e8be44e96b8abbfb09ab72d42da665d0308d064a50a88d7a6d5b51fa4",
+        "sha256_in_prefix": "0ea5fe1e8be44e96b8abbfb09ab72d42da665d0308d064a50a88d7a6d5b51fa4",
+        "size_in_bytes": 321
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/post_httpx4.al",
+        "path_type": "hardlink",
+        "sha256": "e7bf1949d026b5a38e1161b49259288e528b63c0f00fbcb82251ae319913981b",
+        "sha256_in_prefix": "e7bf1949d026b5a38e1161b49259288e528b63c0f00fbcb82251ae319913981b",
+        "size_in_bytes": 321
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/put_http.al",
+        "path_type": "hardlink",
+        "sha256": "c961a5c3a7e66d8a910622c895d0d099156766be071a218bdeb71639f39e5a2d",
+        "sha256_in_prefix": "c961a5c3a7e66d8a910622c895d0d099156766be071a218bdeb71639f39e5a2d",
+        "size_in_bytes": 316
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/put_http3.al",
+        "path_type": "hardlink",
+        "sha256": "06ab7bc9f051574666a6483c3afe034061539c8bf594227007cf52fa4670ec42",
+        "sha256_in_prefix": "06ab7bc9f051574666a6483c3afe034061539c8bf594227007cf52fa4670ec42",
+        "size_in_bytes": 319
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/put_http4.al",
+        "path_type": "hardlink",
+        "sha256": "8e5e8c8d2b790059e35f76d696c5778cc2df7d887d3417bd4a3568dac712bf78",
+        "sha256_in_prefix": "8e5e8c8d2b790059e35f76d696c5778cc2df7d887d3417bd4a3568dac712bf78",
+        "size_in_bytes": 319
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/put_https.al",
+        "path_type": "hardlink",
+        "sha256": "aa3ad69cebd85d5859686e865fca753f2d084fa77b24622c290f7db82464e3f5",
+        "sha256_in_prefix": "aa3ad69cebd85d5859686e865fca753f2d084fa77b24622c290f7db82464e3f5",
+        "size_in_bytes": 319
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/put_https3.al",
+        "path_type": "hardlink",
+        "sha256": "70a3b3871fe6165a55c20bd2e5f5fe896f210488c19e77ee5168b7739a1af97a",
+        "sha256_in_prefix": "70a3b3871fe6165a55c20bd2e5f5fe896f210488c19e77ee5168b7739a1af97a",
+        "size_in_bytes": 322
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/put_https4.al",
+        "path_type": "hardlink",
+        "sha256": "ba9ea2a5e83006b6f09b17b7bfc564def7507551fc497a662d2a8db118ffd89e",
+        "sha256_in_prefix": "ba9ea2a5e83006b6f09b17b7bfc564def7507551fc497a662d2a8db118ffd89e",
+        "size_in_bytes": 322
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/put_httpx.al",
+        "path_type": "hardlink",
+        "sha256": "13a159c426ea96e98b135b8af5853ffc985e7cdae9fa9a11af20aa61ff704330",
+        "sha256_in_prefix": "13a159c426ea96e98b135b8af5853ffc985e7cdae9fa9a11af20aa61ff704330",
+        "size_in_bytes": 316
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/put_httpx3.al",
+        "path_type": "hardlink",
+        "sha256": "1698098d89c889351160ced0315905c09af999211a48506306bc291673f363c4",
+        "sha256_in_prefix": "1698098d89c889351160ced0315905c09af999211a48506306bc291673f363c4",
+        "size_in_bytes": 319
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/put_httpx4.al",
+        "path_type": "hardlink",
+        "sha256": "61320b16a3be52adc04c7339660876f82b1a0e300170c7c9e6c85f3d7e9a766d",
+        "sha256_in_prefix": "61320b16a3be52adc04c7339660876f82b1a0e300170c7c9e6c85f3d7e9a766d",
+        "size_in_bytes": 319
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/randomize.al",
+        "path_type": "hardlink",
+        "sha256": "e7c95fe7fdeaa5f8af89a987232a4a153e8b270744d5d33ea8846ca0aa63b024",
+        "sha256_in_prefix": "e7c95fe7fdeaa5f8af89a987232a4a153e8b270744d5d33ea8846ca0aa63b024",
+        "size_in_bytes": 1028
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/set_cert_and_key.al",
+        "path_type": "hardlink",
+        "sha256": "722c2f864c3d24872beac8b18262c80435b66c76ad4e3e860fb4d10d08df60ad",
+        "sha256_in_prefix": "722c2f864c3d24872beac8b18262c80435b66c76ad4e3e860fb4d10d08df60ad",
+        "size_in_bytes": 828
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/set_proxy.al",
+        "path_type": "hardlink",
+        "sha256": "e721e333d9c36f669f934284c0e21968742d58d5158042160af2c3a75e781104",
+        "sha256_in_prefix": "e721e333d9c36f669f934284c0e21968742d58d5158042160af2c3a75e781104",
+        "size_in_bytes": 540
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/set_server_cert_and_key.al",
+        "path_type": "hardlink",
+        "sha256": "4f5464bf1771f144d430452dc639bfe8485a52b41927031892fd6f32b9fc9704",
+        "sha256_in_prefix": "4f5464bf1771f144d430452dc639bfe8485a52b41927031892fd6f32b9fc9704",
+        "size_in_bytes": 413
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/ssl_read_CRLF.al",
+        "path_type": "hardlink",
+        "sha256": "c868c11f154366cce5fa331fcc086c646047150423c4712f2e79e8fd5bea1d74",
+        "sha256_in_prefix": "c868c11f154366cce5fa331fcc086c646047150423c4712f2e79e8fd5bea1d74",
+        "size_in_bytes": 385
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/ssl_read_all.al",
+        "path_type": "hardlink",
+        "sha256": "88e2bec017d76abebf4fa5c152a301dd3c9bbf8b1f36182256d12fea83c4b864",
+        "sha256_in_prefix": "88e2bec017d76abebf4fa5c152a301dd3c9bbf8b1f36182256d12fea83c4b864",
+        "size_in_bytes": 1047
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/ssl_read_until.al",
+        "path_type": "hardlink",
+        "sha256": "9c7b4cb5cd9d020e390d34dc1189624580265a4390cca10fd15a4b104c7cac8a",
+        "sha256_in_prefix": "9c7b4cb5cd9d020e390d34dc1189624580265a4390cca10fd15a4b104c7cac8a",
+        "size_in_bytes": 3144
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/ssl_write_CRLF.al",
+        "path_type": "hardlink",
+        "sha256": "5c5a3799260cbbf56bf28deb9624e6b6cf1b80e4053923a79a3c624e5df643b3",
+        "sha256_in_prefix": "5c5a3799260cbbf56bf28deb9624e6b6cf1b80e4053923a79a3c624e5df643b3",
+        "size_in_bytes": 813
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/ssl_write_all.al",
+        "path_type": "hardlink",
+        "sha256": "6de08912acc9adcf071a9fb26060a2e95ab499116f662e595bb177c996bcf7ea",
+        "sha256_in_prefix": "6de08912acc9adcf071a9fb26060a2e95ab499116f662e595bb177c996bcf7ea",
+        "size_in_bytes": 5734
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/sslcat.al",
+        "path_type": "hardlink",
+        "sha256": "1d255ad30ba8ce49cf014b75731ee4668d4e0a14599ac507e0fff67cd24d66de",
+        "sha256_in_prefix": "1d255ad30ba8ce49cf014b75731ee4668d4e0a14599ac507e0fff67cd24d66de",
+        "size_in_bytes": 3196
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/tcp_read_CRLF.al",
+        "path_type": "hardlink",
+        "sha256": "62b3a378bdc71762d04c50e8047bcebe10374b99463ad4f3ed3efb609a6bb370",
+        "sha256_in_prefix": "62b3a378bdc71762d04c50e8047bcebe10374b99463ad4f3ed3efb609a6bb370",
+        "size_in_bytes": 401
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/tcp_read_all.al",
+        "path_type": "hardlink",
+        "sha256": "e2ea53e91f42f0cfd31d7a8eaed19e312645288b93fe67d15a38d30d96901638",
+        "sha256_in_prefix": "e2ea53e91f42f0cfd31d7a8eaed19e312645288b93fe67d15a38d30d96901638",
+        "size_in_bytes": 757
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/tcp_read_until.al",
+        "path_type": "hardlink",
+        "sha256": "5256f4014d0724d750c58d59d163699595388d388ca92cfd9419d063c43145ac",
+        "sha256_in_prefix": "5256f4014d0724d750c58d59d163699595388d388ca92cfd9419d063c43145ac",
+        "size_in_bytes": 971
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/tcp_write_CRLF.al",
+        "path_type": "hardlink",
+        "sha256": "c495eadf1a714278fd21b26984345f7d0478ea937643d4436c21646f57680793",
+        "sha256_in_prefix": "c495eadf1a714278fd21b26984345f7d0478ea937643d4436c21646f57680793",
+        "size_in_bytes": 794
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/tcp_write_all.al",
+        "path_type": "hardlink",
+        "sha256": "541300e0b35db5817b8301a5c7497dcf14540a0ceec47867c63a7c086d6d0022",
+        "sha256_in_prefix": "541300e0b35db5817b8301a5c7497dcf14540a0ceec47867c63a7c086d6d0022",
+        "size_in_bytes": 1232
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/tcpcat.al",
+        "path_type": "hardlink",
+        "sha256": "cbac4b586ad0e173956fca8a94e973d06ff71f6735e91a7c3e2a65680df06128",
+        "sha256_in_prefix": "cbac4b586ad0e173956fca8a94e973d06ff71f6735e91a7c3e2a65680df06128",
+        "size_in_bytes": 1358
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/tcpxcat.al",
+        "path_type": "hardlink",
+        "sha256": "79a170d56dcfa94becbb78705557d47799f82005a68e7a4377eda483fe455fc8",
+        "sha256_in_prefix": "79a170d56dcfa94becbb78705557d47799f82005a68e7a4377eda483fe455fc8",
+        "size_in_bytes": 485
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/want_X509_lookup.al",
+        "path_type": "hardlink",
+        "sha256": "3c30db0b4d9efb2b8e0dd03bd39539baf365a03aee58297f3dcfc51c46e35c6c",
+        "sha256_in_prefix": "3c30db0b4d9efb2b8e0dd03bd39539baf365a03aee58297f3dcfc51c46e35c6c",
+        "size_in_bytes": 441
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/want_nothing.al",
+        "path_type": "hardlink",
+        "sha256": "9133ffd2882b16ad7b46851f8157adc4c1184caf7498ab17d78426f419843403",
+        "sha256_in_prefix": "9133ffd2882b16ad7b46851f8157adc4c1184caf7498ab17d78426f419843403",
+        "size_in_bytes": 357
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/want_read.al",
+        "path_type": "hardlink",
+        "sha256": "4f06049bc8d154f02b97d99dfa33fbf64121cab17bdc90d31b9ac4e96d1a21a4",
+        "sha256_in_prefix": "4f06049bc8d154f02b97d99dfa33fbf64121cab17bdc90d31b9ac4e96d1a21a4",
+        "size_in_bytes": 309
+      },
+      {
+        "_path": "lib/perl5/5.32/vendor_perl/auto/Net/SSLeay/want_write.al",
+        "path_type": "hardlink",
+        "sha256": "6b0b5520e96bd29807e947d5cb4a57665293cce171104ff25e21a1afb4417f42",
+        "sha256_in_prefix": "6b0b5520e96bd29807e947d5cb4a57665293cce171104ff25e21a1afb4417f42",
+        "size_in_bytes": 312
+      }
+    ]
+  },
+  "link": {
+    "source": "/Users/danielnachun/Library/Caches/rattler/cache/pkgs/perl-net-ssleay-1.92-pl5321h8a0c2ca_2",
+    "type": 1
+  }
+}
