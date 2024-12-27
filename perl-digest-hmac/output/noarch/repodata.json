@@ -1,0 +1,26 @@
+{
+  "info": {
+    "subdir": "noarch"
+  },
+  "packages": {},
+  "packages.conda": {
+    "perl-digest-hmac-1.5-h4616a5c_0.conda": {
+      "build": "h4616a5c_0",
+      "build_number": 0,
+      "depends": [
+        "perl >=5.32",
+        "perl >=5.32.1,<6.0a0 *_perl5"
+      ],
+      "license": "Artistic-1.0-Perl OR GPL-1.0-or-later",
+      "md5": "330fdccd0dd656e4488cd36825ac4246",
+      "name": "perl-digest-hmac",
+      "noarch": "generic",
+      "sha256": "d9bb1b28adc3104c8402ebc80470eaa75202cc88d462c090adb83883c651d166",
+      "size": 15640,
+      "subdir": "noarch",
+      "timestamp": 1735320430694,
+      "version": "1.5"
+    }
+  },
+  "repodata_version": 2
+}
