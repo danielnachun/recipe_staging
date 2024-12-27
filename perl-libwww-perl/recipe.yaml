@@ -30,6 +30,7 @@ requirements:
     - perl-net-http
     - perl-http-date
     - perl-http-cookies
+    - perl-http-cookiejar
     - perl-www-robotrules
     - perl-uri
     - perl-lwp-mediatypes
@@ -47,6 +48,7 @@ requirements:
     - perl-net-http
     - perl-http-date
     - perl-http-cookies
+    - perl-http-cookiejar
     - perl-www-robotrules
     - perl-uri
     - perl-lwp-mediatypes
