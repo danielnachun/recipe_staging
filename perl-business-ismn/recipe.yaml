@@ -1,0 +1,45 @@
+context:
+  version: 1.204
+
+package:
+  name: perl-business-ismn
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/B/BR/BRIANDFOY/Business-ISMN-${{ version }}.tar.gz
+  sha256: 14e14599bd6e231b722297f84d4e8a5c695c79ada79ea0b50693d5f04ded3689
+
+build:
+  number: 0
+  noarch: generic
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-tie-cycle
+  run:
+    - perl>=5.32
+    - perl-tie-cycle
+
+tests:
+  - perl:
+      uses:
+        - Business::ISMN
+        - Business::ISMN::Data
+
+about:
+  license: Artistic-2.0
+  license_file: LICENSE
+  summary: work with International Standard Music Numbers
+  homepage: https://github.com/briandfoy/business-ismn
+
+extra:
+  recipe-maintainers:
+    - danielnachun
