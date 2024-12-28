@@ -1,0 +1,41 @@
+context:
+  version: 0.12
+
+package:
+  name: perl-list-utilsby
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/P/PE/PEVANS/List-UtilsBy-${{ version }}.tar.gz
+  sha256: fff1281fd469fe982b1a58044becfd970f313bff3a26e1c7b2b3f4c0a5ed71e0
+
+build:
+  number: 0
+  noarch: generic
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+
+requirements:
+  host:
+    - perl=5.32
+    - perl-module-build
+  run:
+    - perl>=5.32
+
+tests:
+  - perl:
+      uses:
+        - List::UtilsBy
+
+about:
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file: LICENSE
+  summary: higher-order list utility functions
+  homepage: http://metacpan.org/pod/List-UtilsBy
+
+extra:
+  recipe-maintainers:
+    - danielnachun
