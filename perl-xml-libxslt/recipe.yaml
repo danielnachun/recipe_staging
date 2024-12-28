@@ -1,0 +1,50 @@
+context:
+  version: 2.003000
+
+package:
+  name: perl-xml-libxslt
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/S/SH/SHLOMIF/XML-LibXSLT-${{ version }}.tar.gz
+  sha256: 7caa5aee72f53be59d8b84eecb6864a07c612a12ea6b27d5c706960edcd54587
+
+build:
+  number: 0
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+    cp ${PREFIX}/man/man1/perlartistic.1 .
+    cp ${PREFIX}/man/man1/perlgpl.1 .
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+    - pkg-config
+  host:
+    - perl=5.32
+    - perl-xml-libxml
+    - libxslt
+  run:
+    - perl=5.32
+    - perl-xml-libxml
+
+tests:
+  - perl:
+      uses:
+        - XML::LibXSLT
+
+about:
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file:
+    - perlartistic.1
+    - perlgpl.1
+  summary: Interface to GNOME libxslt library
+  homepage: http://metacpan.org/pod/XML-LibXSLT
+
+extra:
+  recipe-maintainers:
+    - danielnachun
