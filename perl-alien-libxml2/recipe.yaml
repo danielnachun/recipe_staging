@@ -25,6 +25,7 @@ requirements:
     - make
     - pkg-config
   host:
+    - liblzma-devel
     - libxml2
     - perl=5.32
     - perl-alien-build
