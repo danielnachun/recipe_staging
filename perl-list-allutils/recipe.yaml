@@ -1,0 +1,46 @@
+context:
+  version: 0.19
+
+package:
+  name: perl-list-allutils
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/D/DR/DROLSKY/List-AllUtils-${{ version }}.tar.gz
+  sha256: 30a8146ab21a7787b8c56d5829cf9a7f2b15276d3b3fca07336ac38d3002ffbc
+
+build:
+  number: 0
+  noarch: generic
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-list-someutils
+    - perl-list-utilsby
+  run:
+    - perl>=5.32
+    - perl-list-someutils
+    - perl-list-utilsby
+
+tests:
+  - perl:
+      uses:
+        - List::AllUtils
+
+about:
+  license: Artistic-2.0
+  license_file: LICENSE
+  summary: Combines List::Util, List::SomeUtils and List::UtilsBy in one bite-sized package
+  homepage: https://metacpan.org/release/List-AllUtils
+
+extra:
+  recipe-maintainers:
+    - danielnachun
