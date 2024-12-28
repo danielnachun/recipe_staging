@@ -1,0 +1,42 @@
+context:
+  version: 1.228
+
+package:
+  name: perl-tie-cycle
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/B/BD/BDFOY/Tie-Cycle-${{ version }}.tar.gz
+  sha256: 875651be1c657d85bcac056a76be22888395412c8e5af3d84d4c37b8fbb5b448
+
+build:
+  number: 0
+  noarch: generic
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+tests:
+  - perl:
+      uses:
+        - Tie::Cycle
+
+about:
+  license: Artistic-2.0
+  license_file: LICENSE
+  summary: Cycle through a list of values via a scalar.
+  homepage: https://github.com/briandfoy/tie-cycle
+
+extra:
+  recipe-maintainers:
+    - danielnachun
