@@ -25,10 +25,12 @@ requirements:
     - perl=5.32
     - perl-list-someutils
     - perl-list-utilsby
+    - perl-scalar-list-utils
   run:
     - perl>=5.32
     - perl-list-someutils
     - perl-list-utilsby
+    - perl-scalar-list-utils
 
 tests:
   - perl:
