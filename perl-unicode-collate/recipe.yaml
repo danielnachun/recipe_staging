@@ -1,0 +1,46 @@
+context:
+  version: 1.31
+
+package:
+  name: perl-unicode-collate
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/S/SA/SADAHIRO/Unicode-Collate-${{ version }}.tar.gz
+  sha256: b75dd07bbc252937b1b87064bf79ccd0a1b7ee993b8cf0e80f47406c3205639f
+
+build:
+  number: 0
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+    cp ${PREFIX}/man/man1/perlartistic.1 .
+    cp ${PREFIX}/man/man1/perlgpl.1 .
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl=5.32
+
+tests:
+  - perl:
+      uses:
+      - Unicode::Collate
+
+about:
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file:
+    - perlartistic.1
+    - perlgpl.1
+  summary: Unicode Collation Algorithm
+  homepage: https://metacpan.org/pod/Unicode::Collate
+
+extra:
+  recipe-maintainers:
+    - danielnachun
