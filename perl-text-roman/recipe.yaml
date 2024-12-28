@@ -1,0 +1,42 @@
+context:
+  version: 3.5
+
+package:
+  name: perl-text-roman
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/S/SY/SYP/Text-Roman-${{ version }}.tar.gz
+  sha256: cb4a08a3b151802ffb2fce3258a416542ab81db0f739ee474a9583ffb73e046a
+
+build:
+  number: 0
+  noarch: generic
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+tests:
+  - perl:
+      uses:
+        - Text::Roman
+
+about:
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file: LICENSE
+  summary: Allows conversion between Roman and Arabic algarisms.
+  homepage: https://github.com/creaktive/Text-Roman
+
+extra:
+  recipe-maintainers:
+    - danielnachun
