@@ -1,50 +1,49 @@
-schema_version: 1
-
 context:
-  name: perl-alien-libxml2
   version: 0.17
-  sha256: 73b45244f0b5c36e5332c33569b82a1ab2c33e263f1d00785d2003bcaec68db3
 
 package:
-  name: ${{ name }}
+  name: perl-alien-libxml2
   version: ${{ version }}
 
 source:
-  url: https://cpan.metacpan.org/authors/id/P/PL/PLICEASE/Alien-Libxml2-0.17.tar.gz
-  sha256: ${{ sha256 }}
+  url: https://cpan.metacpan.org/authors/id/P/PL/PLICEASE/Alien-Libxml2-${{ version }}.tar.gz
+  sha256: 73b45244f0b5c36e5332c33569b82a1ab2c33e263f1d00785d2003bcaec68db3
 
 build:
   number: 0
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+    cp ${PREFIX}/man/man1/perlartistic.1 ${SRC_DIR}
+    cp ${PREFIX}/man/man1/perlgpl.1 ${SRC_DIR}
 
 requirements:
   build:
     - ${{ compiler('c') }}
-    - if: not win
-      then: make
-    - if: win
-      then: m2-make
+    - make
     - pkg-config
   host:
+    - liblzma-devel
     - libxml2
     - perl=5.32
     - perl-alien-build
     - perl-test2-suite
     - zlib
   run:
-    - perl>=5.32
-    - libxml2
-    - libzlib
-  run_exports:
-    weak:
-      - ${{ name }} =${{ version }}
+    - perl=5.32
+    - perl-alien-build
 
 tests:
-  - python:
-      imports:
+  - perl:
+      uses:
         - Alien::Libxml2
 
 about:
-  license: perl_5
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file:
+    - perlartistic.1
+    - perlgpl.1
   summary: Install the C libxml2 library on your system
   homepage: https://metacpan.org/pod/Alien::Libxml2
-
