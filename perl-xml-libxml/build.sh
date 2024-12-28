@@ -7,7 +7,7 @@ if [ `uname -s` == "Darwin" ]; then
 
     # Give install_name_tool enough room to work its magic
     LDFLAGS="${LDFLAGS} -headerpad_max_install_names"
-    CFLAGS="${CFLAGS} -Wno-incompatible-function-pointer-types"
+    CFLAGS="${CFLAGS} -Wno-incompatible-pointer-types -Doff64_t=__off64_t"
 else
     # Force use of conda's libxml instead of the system one
     export LD_LIBRARY_PATH="${PREFIX}/lib"
