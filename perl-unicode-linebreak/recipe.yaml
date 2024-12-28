@@ -1,0 +1,47 @@
+context:
+  version: 2019.001
+
+package:
+  name: perl-unicode-linebreak
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/N/NE/NEZUMI/Unicode-LineBreak-${{ version }}.tar.gz
+  sha256: 486762e4cacddcc77b13989f979a029f84630b8175e7fef17989e157d4b6318a
+  patches:
+    - version.patch
+
+build:
+  number: 0
+  script:
+    - perl Makefile.PL INSTALLDIRS=vendor NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install VERBINST=1
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+  host:
+    - perl
+    - perl-mime-charset
+  run:
+    - perl
+    - perl-mime-charset
+
+tests:
+  - perl:
+      uses:
+        - Unicode::GCString
+        - Unicode::LineBreak
+
+about:
+  license: GPL-1.0-or-later OR Artistic-1.0-Perl
+  license_file: ARTISTIC
+  summary: Perl Unicode module
+  homepage: https://metacpan.org/release/Unicode-LineBreak
+
+extra:
+  recipe-maintainers:
+    - danielnachun
