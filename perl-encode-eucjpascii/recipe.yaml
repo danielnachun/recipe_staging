@@ -1,0 +1,46 @@
+context:
+  version: 0.03
+
+package:
+  name: perl-encode-eucjpascii
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/N/NE/NEZUMI/Encode-EUCJPASCII-${{ version }}.tar.gz
+  sha256: f998d34d55fd9c82cf910786a0448d1edfa60bf68e2c2306724ca67c629de861
+
+build:
+  number: 0
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+    cp ${PREFIX}/man/man1/perlartistic.1 .
+    cp ${PREFIX}/man/man1/perlgpl.1 .
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl=5.32
+
+tests:
+  - perl:
+      uses:
+        - Encode::EUCJPASCII
+
+about:
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file:
+    - perlartistic.1
+    - perlgpl.1
+  summary: eucJP-ascii - An eucJP-open mapping
+  homepage: http://metacpan.org/pod/Encode-EUCJPASCII
+
+extra:
+  recipe-maintainers:
+    - danielnachun
