@@ -12,7 +12,7 @@ source:
 build:
   number: 0
   script: |
-    perl Makefile.PL INSTALLDIRS=site
+    perl Makefile.PL INSTALLDIRS=site LIBS="${LDFLAGS}"
     make
     make test
     make install
