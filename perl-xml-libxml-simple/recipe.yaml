@@ -1,0 +1,48 @@
+context:
+  version: 1.01
+
+package:
+  name: perl-xml-libxml-simple
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/M/MA/MARKOV/XML-LibXML-Simple-${{ version }}.tar.gz
+  sha256: cd98c8104b70d7672bfa26b4513b78adf2b4b9220e586aa8beb1a508500365a6
+
+build:
+  number: 0
+  noarch: generic
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+    cp ${PREFIX}/man/man1/perlartistic.1 .
+    cp ${PREFIX}/man/man1/perlgpl.1 .
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-xml-libxml
+  run:
+    - perl=5.32
+    - perl-xml-libxml
+
+tests:
+  - perl:
+      uses:
+        - XML::LibXML::Simple
+
+about:
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file:
+    - perlartistic.1
+    - perlgpl.1
+  summary: XML::LibXML alternative to XML::Simple::XMLin()
+  homepage: http://perl.overmeer.net/CPAN/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
