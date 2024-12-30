@@ -1,0 +1,47 @@
+context:
+  version: 0.010
+
+package:
+  name: perl-extutils-config
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/L/LE/LEONT/ExtUtils-Config-${{ version }}.tar.gz
+  sha256: 82e7e4e90cbe380e152f5de6e3e403746982d502dd30197a123652e46610c66d
+
+build:
+  number: 0
+  noarch: generic
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+    cp ${PREFIX}/man/man1/perlartistic.1 .
+    cp ${PREFIX}/man/man1/perlgpl.1 .
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+tests:
+  - perl:
+      uses:
+        - ExtUtils::Config
+        - ExtUtils::Config::MakeMaker
+
+about:
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file:
+    - perlartistic.1
+    - perlgpl.1
+  summary: "A wrapper for perl's configuration"
+  homepage: http://metacpan.org/pod/ExtUtils-Config
+
+extra:
+  recipe-maintainers:
+    - danielnachun
