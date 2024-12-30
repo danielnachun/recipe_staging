@@ -1,0 +1,48 @@
+context:
+  version: 0.014
+
+package:
+  name: perl-extutils-installpaths
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/L/LE/LEONT/ExtUtils-InstallPaths-${{ version }}.tar.gz
+  sha256: ae65d20cc3c7e14b3cd790915c84510f82dfb37a4c9b88aa74b2e843af417d01
+
+build:
+  number: 0
+  noarch: generic
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+    cp ${PREFIX}/man/man1/perlartistic.1 .
+    cp ${PREFIX}/man/man1/perlgpl.1 .
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-extutils-config
+  run:
+    - perl>=5.32
+    - perl-extutils-config
+
+tests:
+  - perl:
+      uses:
+        - ExtUtils::InstallPaths
+
+about:
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file:
+    - perlartistic.1
+    - perlgpl.1
+  summary: Build.PL install path logic made easy
+  homepage: http://metacpan.org/pod/ExtUtils-InstallPaths
+
+extra:
+  recipe-maintainers:
+    - danielnachun
