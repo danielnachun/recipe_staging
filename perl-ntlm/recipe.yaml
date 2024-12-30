@@ -1,0 +1,48 @@
+context:
+  version: 1.09
+
+package:
+  name: perl-ntlm
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/N/NB/NBEBOUT/NTLM-${{ version }}.tar.gz
+  sha256: c823e30cda76bc15636e584302c960e2b5eeef9517c2448f7454498893151f85
+
+build:
+  number: 0
+  noarch: generic
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+    cp ${PREFIX}/man/man1/perlartistic.1 .
+    cp ${PREFIX}/man/man1/perlgpl.1 .
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-digest-hmac
+  run:
+    - perl>=5.32
+    - perl-digest-hmac
+
+tests:
+  - perl:
+      uses:
+        Authen::NTLM
+
+about:
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file:
+    - perlartistic.1
+    - perlgpl.1
+  summary: An NTLM authentication module
+  homepage: http://metacpan.org/pod/NTLM
+
+extra:
+  recipe-maintainers:
+    - danielnachun
