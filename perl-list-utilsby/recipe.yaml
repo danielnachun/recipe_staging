@@ -19,6 +19,8 @@ build:
     make install
 
 requirements:
+  build:
+    - make
   host:
     - perl=5.32
     - perl-module-build
