@@ -1,0 +1,43 @@
+context:
+  version: 0.014
+
+package:
+  name: perl-file-slurper
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/L/LE/LEONT/File-Slurper-${{ version }}.tar.gz
+  sha256: d5a36487339888c3cd758e648160ee1d70eb4153cacbaff57846dbcefb344b0c
+
+build:
+  number: 0
+  noarch: generic
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-test-warnings
+  run:
+    - perl>=5.32
+
+tests:
+  - perl:
+      uses:
+        - File::Slurper
+
+about:
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file: LICENSE
+  summary: A simple, sane and efficient module to slurp a file
+  homepage: http://metacpan.org/pod/File-Slurper
+
+extra:
+  recipe-maintainers:
+    - danielnachun
