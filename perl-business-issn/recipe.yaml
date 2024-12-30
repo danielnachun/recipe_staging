@@ -1,0 +1,42 @@
+context:
+  version: 1.005
+
+package:
+  name: perl-business-issn
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/B/BD/BDFOY/Business-ISSN-${{ version }}.tar.gz
+  sha256: 3b09b0267f0a6660fb92b6f50c4c7796ef6a263b62ad3bbeaa07189a0c7c39b3
+
+build:
+  number: 0
+  noarch: generic
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+tests:
+  - perl:
+      uses:
+        - Business::ISSN
+
+about:
+  license: Artistic-2.0
+  license_file: LICENSE
+  summary: Perl extension for International Standard Serial Numbers
+  homepage: https://github.com/briandfoy/business-issn
+
+extra:
+  recipe-maintainers:
+    - danielnachun
