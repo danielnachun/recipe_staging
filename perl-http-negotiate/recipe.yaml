@@ -20,8 +20,6 @@ build:
     cp ${PREFIX}/man/man1/perlartistic.1 .
     cp ${PREFIX}/man/man1/perlgpl.1 .
 
-
-
 requirements:
   build:
     - make
