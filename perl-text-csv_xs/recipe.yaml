@@ -1,0 +1,46 @@
+context:
+  version: 1.57
+
+package:
+  name: perl-text-csv_xs
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/H/HM/HMBRAND/Text-CSV_XS-${{ version }}.tgz
+  sha256: 54dd63feb59e80d2ec596ac6bd8f8f80eb2042099fb68e35f3b47901c768621f
+
+build:
+  number: 0
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+    cp ${PREFIX}/man/man1/perlartistic.1 .
+    cp ${PREFIX}/man/man1/perlgpl.1 .
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl=5.32
+
+tests:
+  - perl:
+      uses:
+        - Text::CSV_XS
+
+about:
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file:
+    - perlartistic.1
+    - perlgpl.1
+  summary: Comma-Separated Values manipulation routines
+  homepage: https://metacpan.org/pod/Text::CSV_XS
+
+extra:
+  recipe-maintainers:
+    - danielnachun
