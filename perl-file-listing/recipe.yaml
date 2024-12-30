@@ -1,0 +1,48 @@
+context:
+  version: 6.16
+
+package:
+  name: perl-file-listing
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/P/PL/PLICEASE/File-Listing-${{ version }}.tar.gz
+  sha256: 189b3a13fc0a1ba412b9d9ec5901e9e5e444cc746b9f0156d4399370d33655c6
+
+build:
+  number: 0
+  noarch: generic
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+    cp ${PREFIX}/man/man1/perlartistic.1 .
+    cp ${PREFIX}/man/man1/perlgpl.1 .
+
+requirements:
+  build:
+    - make
+  host:
+    - perl
+    - perl-http-date
+  run:
+    - perl
+    - perl-http-date
+
+tests:
+  - perl:
+      uses:
+        - File::Listing
+
+about:
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file:
+    - perlartistic.1
+    - perlgpl.1
+  summary: Parse directory listing
+  homepage: https://metacpan.org/pod/File::Listing
+
+extra:
+  recipe-maintainers:
+    - danielnachun
