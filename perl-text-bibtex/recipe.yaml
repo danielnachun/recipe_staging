@@ -1,0 +1,49 @@
+context:
+  version: 0.89
+
+package:
+  name: perl-text-bibtex
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/A/AM/AMBS/Text-BibTeX-${{ version }}.tar.gz
+  sha256: 88a78ebf088ec7502f401c5a2b138c862cf5458534b773223bbf3aaf41224196
+
+build:
+  number: 0
+  script: |
+    perl Build.PL
+    perl ./Build
+    perl ./Build test
+    perl ./Build install --installdirs site
+    cp ${PREFIX}/man/man1/perlartistic.1 ${SRC_DIR}
+    cp ${PREFIX}/man/man1/perlgpl.1 ${SRC_DIR}
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+  host:
+    - perl=5.32
+    - perl-module-build
+    - perl-capture-tiny
+    - perl-extutils-libbuilder
+    - perl-config-autoconf
+  run:
+    - perl=5.32
+
+tests:
+  - perl:
+      uses:
+        - Text::BibTeX
+
+about:
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file:
+    - perlartistic.1
+    - perlgpl.1
+  summary: interface to read and parse BibTeX files
+  homepage: http://metacpan.org/pod/Text-BibTeX
+
+extra:
+  recipe-maintainers:
+    - danielnachun
