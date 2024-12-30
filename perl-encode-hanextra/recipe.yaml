@@ -1,0 +1,44 @@
+context:
+  version: 0.23
+
+package:
+  name: perl-encode-hanextra
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/A/AU/AUDREYT/Encode-HanExtra-${{ version }}.tar.gz
+  sha256: 1fd4b06cada70858003af153f94c863b3b95f2e3d03ba18d0451a81d51db443a
+
+build:
+  number: 0
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl=5.32
+
+tests:
+  - perl:
+      uses:
+        - Encode::HanExtra
+        - Encode::TW::Unisys::SOSI1
+        - Encode::TW::Unisys::SOSI2
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: Extra sets of Chinese encodings
+  homepage: http://metacpan.org/pod/Encode-HanExtra
+
+extra:
+  recipe-maintainers:
+    - danielnachun
