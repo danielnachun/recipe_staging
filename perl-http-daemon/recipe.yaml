@@ -28,7 +28,6 @@ requirements:
     - perl-http-date
     - perl-http-message
     - perl-test-needs
-
   run:
     - perl>=5.32
     - perl-lwp-mediatypes
