@@ -1,0 +1,46 @@
+context:
+  version: 0.05
+
+package:
+  name: perl-encode-jis2k
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/D/DA/DANKOGAI/Encode-JIS2K-${{ version }}.tar.gz
+  sha256: 022f1f3d6869742b3718c27bfcca6f7c96aceffac0a2267d140bbf653d7c0ac2
+
+build:
+  number: 0
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+    cp ${PREFIX}/man/man1/perlartistic.1 .
+    cp ${PREFIX}/man/man1/perlgpl.1 .
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+tests:
+  - perl:
+      uses:
+        - Encode::JIS2K
+
+about:
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file:
+    - perlartistic.1
+    - perlgpl.1
+  summary: JIS X 0212 (aka JIS 2000) Encodings
+  homepage: http://metacpan.org/pod/Encode-JIS2K
+
+extra:
+  recipe-maintainers:
+    - danielnachun
