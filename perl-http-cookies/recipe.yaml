@@ -1,0 +1,51 @@
+context:
+  version: 6.11
+
+package:
+  name: perl-http-cookies
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/O/OA/OALDERS/HTTP-Cookies-${{ version }}.tar.gz
+  sha256: 8c9a541a4a39f6c0c7e3d0b700b05dfdb830bd490a1b1942a7dedd1b50d9a8c8
+
+build:
+  number: 0
+  noarch: generic
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+    cp ${PREFIX}/man/man1/perlartistic.1 .
+    cp ${PREFIX}/man/man1/perlgpl.1 .
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-http-date
+    - perl-http-message
+  run:
+    - perl>=5.32
+    - perl-http-date
+    - perl-http-message
+
+tests:
+  - perl:
+      uses:
+        - HTTP::Cookies
+        - HTTP::Cookies::Netscape
+
+about:
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file:
+    - perlartistic.1
+    - perlgpl.1
+  summary: HTTP cookie jars
+  homepage: https://github.com/libwww-perl/HTTP-Cookies
+
+extra:
+  recipe-maintainers:
+    - danielnachun
