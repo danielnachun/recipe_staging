@@ -1,0 +1,46 @@
+context:
+  version: 0.05
+
+package:
+  name: perl-test-requiresinternet
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/M/MA/MALLEN/Test-RequiresInternet-${{ version }}.tar.gz
+  sha256: bba7b32a1cc0d58ce2ec20b200a7347c69631641e8cae8ff4567ad24ef1e833e
+
+build:
+  number: 0
+  noarch: generic
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+    cp ${PREFIX}/man/man1/perlartistic.1 .
+    cp ${PREFIX}/man/man1/perlgpl.1 .
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+tests:
+  - perl:
+      uses:
+        - Test::RequiresInternet
+
+about:
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file:
+    - perlartistic.1
+    - perlgpl.1
+  summary: Easily test network connectivity
+  homepage: https://metacpan.org/dist/Test-RequiresInternet
+
+extra:
+  recipe-maintainers:
+    - danielnachun
