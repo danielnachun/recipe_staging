@@ -1,0 +1,42 @@
+context:
+  version: 20240924
+
+package:
+  name: perl-mozilla-ca
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/L/LW/LWP/Mozilla-CA-${{ version }}.tar.gz
+  sha256: c4b1412bbc37dff8cf29af6f92cb47defbe90eebcbc29e407a98638f7a31bcd0
+
+build:
+  number: 0
+  noarch: generic
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+tests:
+  - perl:
+      uses:
+        - Mozilla::CA
+
+about:
+  license: MPL-2.0
+  license_file: LICENSE
+  summary: "Mozilla's CA cert bundle in PEM format"
+  homepage: http://metacpan.org/pod/Mozilla-CA
+
+extra:
+  recipe-maintainers:
+    - danielnachun
