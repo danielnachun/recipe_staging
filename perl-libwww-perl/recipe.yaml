@@ -24,7 +24,7 @@ requirements:
   build:
     - make
   host:
-    - perl
+    - perl=5.32
     - perl-http-negotiate
     - perl-encode-locale
     - perl-net-http
@@ -42,7 +42,7 @@ requirements:
     - perl-test-needs
     - perl-test-requiresinternet
   run:
-    - perl
+    - perl>=5.32
     - perl-http-negotiate
     - perl-encode-locale
     - perl-net-http
