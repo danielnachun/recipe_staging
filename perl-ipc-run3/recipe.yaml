@@ -1,0 +1,42 @@
+context:
+  version: 0.049
+
+package:
+  name: perl-ipc-run3
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/R/RJ/RJBS/IPC-Run3-${{ version }}.tar.gz
+  sha256: 9d048ae7b9ae63871bae976ba01e081d887392d904e5d48b04e22d35ed22011a
+
+build:
+  number: 0
+  noarch: generic
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+tests:
+  - perl:
+      uses:
+        - IPC::Run3
+
+about:
+  license: BSD-2-Clause OR GPL-3.0-or-later OR Artistic-2.0
+  license_file: LICENSE
+  summary: run a subprocess with input/output redirection
+  homepage: http://metacpan.org/pod/IPC-Run3
+
+extra:
+  recipe-maintainers:
+    - danielnachun
