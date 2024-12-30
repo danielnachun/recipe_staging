@@ -1,0 +1,50 @@
+context:
+  version: 0.34
+
+package:
+  name: perl-file-find-rule
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/R/RC/RCLAMP/File-Find-Rule-${{ version }}.tar.gz
+  sha256: 7e6f16cc33eb1f29ff25bee51d513f4b8a84947bbfa18edb2d3cc40a2d64cafe
+
+build:
+  number: 0
+  noarch: generic
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+    cp ${PREFIX}/man/man1/perlartistic.1 .
+    cp ${PREFIX}/man/man1/perlgpl.1 .
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+    - perl-number-compare
+    - perl-text-glob
+  run:
+    - perl>=5.32
+    - perl-number-compare
+    - perl-text-glob
+
+tests:
+  - perl:
+      uses:
+        - File::Find::Rule
+
+about:
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file:
+    - perlartistic.1
+    - perlgpl.1
+  summary: command line wrapper to File::Find::Rule
+  homepage: http://metacpan.org/pod/File-Find-Rule
+
+extra:
+  recipe-maintainers:
+    - danielnachun
