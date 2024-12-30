@@ -1,0 +1,46 @@
+context:
+  version: 1.08
+
+package:
+  name: perl-io-string
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/G/GA/GAAS/IO-String-${{ version }}.tar.gz
+  sha256: 2a3f4ad8442d9070780e58ef43722d19d1ee21a803bf7c8206877a10482de5a0
+
+build:
+  number: 0
+  noarch: generic
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    make test
+    make install
+    cp ${PREFIX}/man/man1/perlartistic.1 .
+    cp ${PREFIX}/man/man1/perlgpl.1 .
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+tests:
+  - perl:
+      uses:
+        - IO::String
+
+about:
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file:
+    - perlartistic.1
+    - perlgpl.1
+  summary: Emulate file interface for in-core strings
+  homepage: http://metacpan.org/pod/IO-String
+
+extra:
+  recipe-maintainers:
+    - danielnachun
