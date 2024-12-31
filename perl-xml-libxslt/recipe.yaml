@@ -12,7 +12,7 @@ source:
 build:
   number: 0
   script: |
-    perl Makefile.PL INSTALLDIRS=site LIBS="${LDFLAGS}"
+    perl Makefile.PL INSTALLDIRS=site
     make
     make test
     make install
@@ -28,6 +28,7 @@ requirements:
     - perl=5.32
     - perl-xml-libxml
     - libxslt
+    - zlib
   run:
     - perl=5.32
     - perl-xml-libxml
