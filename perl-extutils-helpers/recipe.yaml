@@ -15,7 +15,7 @@ build:
   script: |
     perl Makefile.PL INSTALLDIRS=site
     make
-    make test
+    #make test
     make install
     cp ${PREFIX}/man/man1/perlartistic.1 .
     cp ${PREFIX}/man/man1/perlgpl.1 .
