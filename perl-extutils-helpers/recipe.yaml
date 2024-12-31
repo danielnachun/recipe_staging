@@ -1,0 +1,46 @@
+context:
+  version: 0.028
+
+package:
+  name: perl-extutils-helpers
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/L/LE/LEONT/ExtUtils-Helpers-${{ version }}.tar.gz
+  sha256: c8574875cce073e7dc5345a7b06d502e52044d68894f9160203fcaab379514fe
+
+build:
+  number: 0
+  noarch: generic
+  script: |
+    perl Makefile.PL INSTALLDIRS=site
+    make
+    #make test
+    make install
+    cp ${PREFIX}/man/man1/perlartistic.1 .
+    cp ${PREFIX}/man/man1/perlgpl.1 .
+
+requirements:
+  build:
+    - make
+  host:
+    - perl=5.32
+  run:
+    - perl>=5.32
+
+tests:
+  - perl:
+      uses:
+        - ExtUtils::Helpers
+
+about:
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  license_file:
+    - perlartistic.1
+    - perlgpl.1
+  summary: Various portability utilities for module builders
+  homepage: http://metacpan.org/pod/ExtUtils-Helpers
+
+extra:
+  recipe-maintainers:
+    - danielnachun
