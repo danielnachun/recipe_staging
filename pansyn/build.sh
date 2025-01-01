@@ -4,53 +4,41 @@ set -o xtrace -o nounset -o pipefail -o errexit
 
 mkdir -p ${PREFIX}/libexec/${PKG_NAME}
 
-install_script() {
-    script_name=$1
-    cp ${SRC_DIR}/scripts/executable_scripts/${script_name}.py ${PREFIX}/libexec/${PKG_NAME}
-    chmod +x ${PREFIX}/libexec/${PKG_NAME}/${script_name}.py 
-    sed -i '1i #!/usr/bin/env python3' ${PREFIX}/libexec/${PKG_NAME}/${script_name}.py
+rm -rf scripts/synphoni
+rm -rf scripts/step1_make_dists.py
+rm -rf scripts/step2_filter_pairs.py
+rm -rf scripts/step3_find_og_commus.py
+rm -rf scripts/step4_OG_communities_to_blocks_graph_check.py
 
-tee ${PREFIX}/bin/${script_name} << EOF
-    #!/usr/bin/env bash
-
-    exec ${PREFIX}/libexec/${PKG_NAME}/${script_name}.py "\$@"
-EOF
+install_perl_script() {
+    script_name=$(basename $1)
+    # Set shebang to use /usr/bin/env perl
+    sed -i 's?#!/usr/bin/perl -w?#!/usr/bin/env perl?' ${SRC_DIR}/scripts/${script_name}
+    sed -i 's?#!/usr/bin/perl?#!/usr/bin/env perl?' ${SRC_DIR}/scripts/${script_name}
+    install -m 755 ${SRC_DIR}/scripts/${script_name} ${PREFIX}/bin/${script_name//.pl/}
 }
 
-export -f install_script
+export -f install_perl_script
 
-script_names=(
-    #bedtovcf  missing vcftobed - is it supposed to be vcftobed_v2?
-    collapse_annotation
-    combine_all_annotations
-    combine_all_annotations_ABC_polars
-    combine_all_annotations_polar
-    combine_raw_annotations
-    combine_roadmaps
-    convert_vcf_to_paragraph_input
-    enrichment_by_rare_SV
-    eval_watershed_prep
-    #extract_SV_annotations  missing some arguments
-    extract_SV_exon_info
-    extract_gene_exec
-    extract_rare_variants
-    filterByCaller
-    filter_combined_cmg
-    filter_splice_clusters
-    interval_to_pair
-    leafcutter_cluster_regtools
-    merge_enhancers
-    #outlier_calling_exec  has typo on line 12 - parser.add_arl
-    regress_out_PC
-    regress_out_PC_no_age
-    relevant_gene_enrichment_for_outliers
-    sv_to_gene_bw_scores
-    sv_to_gene_cpg
-    sv_to_gene_dist
-    train_test_predict_split_annotation
-    #vcftobed_v2  missing import argparse
-)
+install_r_script() {
+    script_name=$(basename $1)
+    sed -i '1i #!/usr/bin/env Rscript' ${SRC_DIR}/scripts/${script_name}
+    install -m 755 ${SRC_DIR}/scripts/${script_name} ${PREFIX}/bin/${script_name//.R/}
+}
 
-echo ${script_names[@]} | tr ' ' '\n' | xargs -I % bash -c 'install_script %'
+export -f install_r_script
 
-cp ${SRC_DIR}/scripts/executable_scripts/sv_utils.py ${PREFIX}/libexec/${PKG_NAME}
+install_python_script() {
+    script_name=$(basename $1)
+    install -m 755 ${SRC_DIR}/scripts/${script_name} ${PREFIX}/bin/${script_name//.py/}
+}
+
+export -f install_python_script
+
+perl_script_names=$(find ${SRC_DIR}/scripts -name "*.pl")
+python_script_names=$(find ${SRC_DIR}/scripts -name "*.py")
+r_script_names=$(find ${SRC_DIR}/scripts -name "*.R")
+
+echo ${perl_script_names[@]} | tr ' ' '\n' | xargs -I % bash -c 'install_perl_script %'
+echo ${python_script_names[@]} | tr ' ' '\n' | xargs -I % bash -c 'install_python_script %'
+echo ${r_script_names[@]} | tr ' ' '\n' | xargs -I % bash -c 'install_r_script %'

@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/yhw320/PanSyn/archive/c6eeed9fd733bc1114028caecf43a00acf6b0453.tar.gz
-  sha256: d5f513014bfe76e107483867668e94043e1e0f3516a5443ba909055dbbc395d7
+  sha256: 1404ff6b9d648cb540c14cd829d6e2df49d0f10e06aa118491fc7560ed240749
 
 build:
   number: 0
@@ -16,6 +16,9 @@ build:
 requirements:
   build:
     - sed
+  host:
+    - perl =5.32
+    - python >=3.9
   run:
     - bioconductor-biomart
     - bioconductor-cner
@@ -23,15 +26,26 @@ requirements:
     - bioconductor-genomicranges
     - bioconductor-gviz
     - bioconductor-rtracklayer
+    - bedtools
+    - blast
+    - cnefinder
+    - diamond
+    - dos2unix
     - ete3
+    - gunzip
+    - mcscanx
     - networkx
+    - orthofinder
     - numpy <2
     - pandas
+    - perl >=5.32
     - perl-color-mix
     - perl-color-rgb
     - perl-getopt-long
     - perl-scalar-list-utils
     - perl-svg
+    - psonic
+    - python >=3.9
     - r-chromomap
     - r-cluster
     - r-doparallel
@@ -51,36 +65,55 @@ requirements:
     - synphoni
 
 tests:
-  - script:
-      - collapse_annotation -h
-      - combine_all_annotations -h
-      - combine_all_annotations_ABC_polars -h
-      - combine_all_annotations_polar -h
-      - combine_raw_annotations -h
-      - combine_roadmaps -h
-      - convert_vcf_to_paragraph_input -h
-      - enrichment_by_rare_SV -h
-      - eval_watershed_prep -h
-      - extract_SV_exon_info -h
-      - extract_gene_exec -h
-      - extract_rare_variants -h
-      - filterByCaller -h
-      - filter_combined_cmg -h
-      - filter_splice_clusters -h
-      - interval_to_pair -h
-      - leafcutter_cluster_regtools -h
-      - merge_enhancers -h
-      - regress_out_PC -h
-      - regress_out_PC_no_age -h
-      - relevant_gene_enrichment_for_outliers -h
-      - sv_to_gene_bw_scores -h
-      - sv_to_gene_cpg -h
-      - sv_to_gene_dist -h
-      - train_test_predict_split_annotation -h
+  - script: |
+      3D_split_bin_matrix -h
+      CNE -h
+      Calculate_syntenic_percentage -h
+      Change_link_color -h
+      Chr_breakage_fusion -h
+      DESCHRAMBLER_plot_Ancestor_species -h
+      DESCHRAMBLER_plot_Ancestor_subAncestor -h
+      Gene_families_visualization -h
+      Get_gene_pairs_from_AGF -h
+      Inference_of_categories -h
+      Inference_of_gains_losses -h
+      Macro_chr_comparison -h
+      Macro_pairs_to_table -h
+      Macro_table_to_plot -h
+      Macrosyn1 -h
+      Macrosyn2 -h
+      Macrosyn3 -h
+      Macrosyn_add_clean -h
+      Macrosyn_add_species -h
+      Macrosyn_two_species1 -h
+      Macrosyn_two_species2 -h
+      Micro_chr_compare -h
+      Micro_chr_compare_pairs -h
+      Micro_chr_compare_pep -h
+      Micro_macrosyn -h
+      Microsyn_MCScanX -h
+      Microsyn_cluster -h
+      Microsyn_relaxed_A -h
+      Microsyn_relaxed_B1 -h
+      Microsyn_relaxed_B2 -h
+      Microsyn_relaxed_format -h
+      Microsyn_visualize_cluster -h
+      Microsyn_wgdi -h
+      Ortholog_inference -h
+      Pick_block_from_AGORA -h
+      Pick_block_from_DESCHRAMBLER -h
+      drawCLGContrib2.4_2 -h
+      findSyntBlocks_CLUS_ORTH3 -h
+      makeClusters -h
+      orthoFinderToOrthogroup -h
+      pdb_single_chr -h
+      prepMicroSynt -h
+      prepare_for_synnet -h
+      run_commands -h
 
 about:
-  summary: Watershed-SV extends Watershed to model the impact of rare SVs
-  homepage: https://github.com/jasonbhn/Watershed-SV
+  summary: A comprehensive software tool for genome synteny analysis.
+  homepage: https://github.com/yhw320/PanSyn
 
 extra:
   recipe-maintainers:
