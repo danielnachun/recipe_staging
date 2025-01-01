@@ -1,0 +1,49 @@
+context:
+  version: 1.0
+
+package:
+  name: synphoni
+  version: ${{ version }}
+
+source:
+  url: https://github.com/nsmro/synphoni/archive/19a5ea4fa509820ece2a4cc41f00e595d9272852.zip
+  sha256: 5d3d7e2c2023853abaf69ee7b7a4e70443531d67006cf213f147b2d4dd5772a3
+
+build:
+  number: 0
+  noarch: python
+
+requirements:
+  build:
+    - sed
+  host:
+    - python >=3.9
+  run:
+    - cdlib
+    - ete3
+    - networkx
+    - numpy
+    - scipy
+    - python-igraph
+    - plotly
+    - python >=3.9
+
+tests:
+  - python:
+      imports:
+        - synphoni
+      pip_check: false
+  - script: |
+      analysis_intervening_genes.py --help
+      step1_make_dists.py --help
+      step2_filter_pairs.py --help
+      step3_find_og_commus.py --help
+      step4_OG_communities_to_blocks_graph_check.py --help
+
+about:
+  summary: Watershed-SV extends Watershed to model the impact of rare SVs
+  homepage: https://github.com/jasonbhn/Watershed-SV
+
+extra:
+  recipe-maintainers:
+    - danielnachun
