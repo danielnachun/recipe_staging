@@ -24,7 +24,8 @@ requirements:
     - bioconductor-cner
     - bioconductor-genomicfeatures
     - bioconductor-genomicranges
-    - bioconductor-gviz
+    - bioconductor-ggtree
+    - bioconductor-gviz 1.50.*
     - bioconductor-rtracklayer
     - bedtools
     - blast
@@ -32,7 +33,7 @@ requirements:
     - diamond
     - dos2unix
     - ete3
-    - gunzip
+    - gzip
     - mcscanx
     - networkx
     - orthofinder
@@ -46,6 +47,7 @@ requirements:
     - perl-svg
     - psonic
     - python >=3.9
+    - r-base=4.4
     - r-chromomap
     - r-cluster
     - r-doparallel
@@ -53,7 +55,6 @@ requirements:
     - r-genoplotr
     - r-ggplot2
     - r-ggstance
-    - r-ggtree
     - r-magrittr
     - r-pheatmap
     - r-rsqlite
