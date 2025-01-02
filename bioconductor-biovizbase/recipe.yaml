@@ -1,0 +1,94 @@
+context:
+  version: 1.54.0
+  name: biovizBase
+  bioc: 3.20
+
+package:
+  name: bioconductor-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url:
+    - https://bioconductor.org/packages/${{ bioc }}/bioc/src/contrib/${{ name }}_${{ version }}.tar.gz
+    - https://bioconductor.org/packages/${{ bioc }}/bioc/src/contrib/Archive/${{ name }}/${{ name }}_${{ version }}.tar.gz
+    - https://bioarchive.galaxyproject.org/${{ name }}_${{ version }}.tar.gz
+    - https://depot.galaxyproject.org/software/bioconductor-${{ name|lower }}/bioconductor-${{ name|lower }}_${{ version }}_src_all.tar.gz
+  md5: 8c46d5b8947d56ba506dd9fcb1e8363b
+
+build:
+  number: 0
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  host:
+    - bioconductor-annotationdbi
+    - bioconductor-annotationfilter
+    - bioconductor-biocgenerics
+    - bioconductor-biostrings
+    - bioconductor-ensembldb
+    - bioconductor-genomeinfodb
+    - bioconductor-genomicalignments
+    - bioconductor-genomicfeatures
+    - bioconductor-genomicranges
+    - bioconductor-iranges
+    - bioconductor-rsamtools
+    - bioconductor-s4vectors
+    - bioconductor-summarizedexperiment 1.36.*
+    - bioconductor-variantannotation
+    - r-base=4.4
+    - r-dichromat
+    - r-hmisc
+    - r-rcolorbrewer
+    - r-rlang
+    - r-scales
+    - libblas
+    - liblapack
+  run:
+    - bioconductor-annotationdbi
+    - bioconductor-annotationfilter
+    - bioconductor-biocgenerics
+    - bioconductor-biostrings
+    - bioconductor-ensembldb
+    - bioconductor-genomeinfodb
+    - bioconductor-genomicalignments
+    - bioconductor-genomicfeatures
+    - bioconductor-genomicranges
+    - bioconductor-iranges
+    - bioconductor-rsamtools
+    - bioconductor-s4vectors
+    - bioconductor-summarizedexperiment 1.36.*
+    - bioconductor-variantannotation
+    - r-base=4.4
+    - r-dichromat
+    - r-hmisc
+    - r-rcolorbrewer
+    - r-rlang
+    - r-scales
+  build:
+    - ${{ compiler('c') }}
+    - make
+  run_exports: ${{ pin_subpackage("bioconductor-biovizbase", upper_bound="x.x") }}
+
+tests:
+  - script:
+      - R -e "library('${{ name }}')"
+
+about:
+  license: Artistic-2.0
+  summary: Basic graphic utilities for visualization of genomic data.
+  description: The biovizBase package is designed to provide a set of utilities, color schemes and conventions for genomic data. It serves as the base for various high-level packages for biological data visualization. This saves development effort and encourages consistency.
+  homepage: https://bioconductor.org/packages/${{ bioc }}/bioc/html/${{ name }}.html
+
+extra:
+  additional-platforms:
+    - linux-aarch64
+  identifiers:
+    - biotools:biovizbase
+    - doi:10.1038/nmeth.3252
+  parent_recipe:
+    name: bioconductor-biovizbase
+    path: recipes/bioconductor-biovizbase
+    version: 1.28.2
