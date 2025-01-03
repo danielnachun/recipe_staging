@@ -1,10 +1,7 @@
-# Suggests: BiocStyle
-schema_version: 1
-
 context:
-  version: 1.48.0
+  version: 1.52.0
   name: zlibbioc
-  bioc: 3.18
+  bioc: 3.20
 
 package:
   name: bioconductor-${{ name|lower }}
@@ -16,10 +13,10 @@ source:
     - https://bioconductor.org/packages/${{ bioc }}/bioc/src/contrib/Archive/${{ name }}/${{ name }}_${{ version }}.tar.gz
     - https://bioarchive.galaxyproject.org/${{ name }}_${{ version }}.tar.gz
     - https://depot.galaxyproject.org/software/bioconductor-${{ name }}/bioconductor-${{ name }}_${{ version }}_src_all.tar.gz
-  md5: babdaf77bc9e9e8218fa07d643f31730
+  md5: a8a1ac34bfefde2d1ec682600be874a1
 
 build:
-  number: 1
+  number: 0
   dynamic_linking:
     rpaths:
       - lib/R/lib/
@@ -27,11 +24,11 @@ build:
 
 requirements:
   host:
-    - r-base=4.3
+    - r-base=4.4
     - libblas
     - liblapack
   run:
-    - r-base>=4.3
+    - r-base=4.4
   build:
     - ${{ compiler('c') }}
     - automake
@@ -40,7 +37,7 @@ requirements:
 
 tests:
   - script:
-      - $R -e "library('${{ name }}')"
+      - R -e "library('${{ name }}')"
 
 about:
   license: Artistic-2.0
@@ -57,4 +54,3 @@ extra:
     name: bioconductor-zlibbioc
     path: recipes/bioconductor-zlibbioc
     version: 1.26.0
-

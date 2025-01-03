@@ -1,10 +1,7 @@
-# Suggests: Biostrings, drosophila2probe, RUnit
-schema_version: 1
-
 context:
-  version: 0.42.0
+  version: 0.46.0
   name: XVector
-  bioc: 3.18
+  bioc: 3.20
 
 package:
   name: bioconductor-${{ name|lower }}
@@ -16,10 +13,10 @@ source:
     - https://bioconductor.org/packages/${{ bioc }}/bioc/src/contrib/Archive/${{ name }}/${{ name }}_${{ version }}.tar.gz
     - https://bioarchive.galaxyproject.org/${{ name }}_${{ version }}.tar.gz
     - https://depot.galaxyproject.org/software/bioconductor-${{ name|lower }}/bioconductor-${{ name|lower }}_${{ version }}_src_all.tar.gz
-  md5: f126998c6b563132e51ea31c3995c6b9
+  md5: 038527773e20903db8e40a7cfa44ab27
 
 build:
-  number: 1
+  number: 0
   dynamic_linking:
     rpaths:
       - lib/R/lib/
@@ -27,19 +24,20 @@ build:
 
 requirements:
   host:
-    - bioconductor-biocgenerics >=0.48.0,<0.49.0
-    - bioconductor-iranges >=2.36.0,<2.37.0
-    - bioconductor-s4vectors >=0.40.0,<0.41.0
-    - bioconductor-zlibbioc >=1.48.0,<1.49.0
-    - r-base=4.3
+    - bioconductor-biocgenerics
+    - bioconductor-iranges
+    - bioconductor-s4vectors
+    - bioconductor-zlibbioc
+    - r-base=4.4
     - libblas
     - liblapack
+    - zlib
   run:
-    - bioconductor-biocgenerics >=0.48.0,<0.49.0
-    - bioconductor-iranges >=2.36.0,<2.37.0
-    - bioconductor-s4vectors >=0.40.0,<0.41.0
-    - bioconductor-zlibbioc >=1.48.0,<1.49.0
-    - r-base>=4.3
+    - bioconductor-biocgenerics
+    - bioconductor-iranges
+    - bioconductor-s4vectors
+    - bioconductor-zlibbioc
+    - r-base=4.4
   build:
     - ${{ compiler('c') }}
     - make
@@ -47,7 +45,7 @@ requirements:
 
 tests:
   - script:
-      - $R -e "library('${{ name }}')"
+      - R -e "library('${{ name }}')"
 
 about:
   license: Artistic-2.0
@@ -63,4 +61,3 @@ extra:
     name: bioconductor-xvector
     path: recipes/bioconductor-xvector
     version: 0.20.0
-
