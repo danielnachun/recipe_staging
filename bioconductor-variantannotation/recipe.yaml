@@ -45,6 +45,7 @@ requirements:
     - r-dbi
     - libblas
     - liblapack
+    - zlib
   run:
     - bioconductor-annotationdbi
     - bioconductor-biobase
