@@ -1,0 +1,59 @@
+context:
+  version: 1.2.0
+  name: pwalign
+  bioc: 3.20
+
+package:
+  name: bioconductor-${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url:
+    - https://bioconductor.org/packages/${{ bioc }}/bioc/src/contrib/${{ name }}_${{ version }}.tar.gz
+    - https://bioconductor.org/packages/${{ bioc }}/bioc/src/contrib/Archive/${{ name }}/${{ name }}_${{ version }}.tar.gz
+    - https://bioarchive.galaxyproject.org/${{ name }}_${{ version }}.tar.gz
+    - https://depot.galaxyproject.org/software/bioconductor-${{ name }}/bioconductor-${{ name }}_${{ version }}_src_all.tar.gz
+  md5: 02e773c9593e0e9c8ce0b9b7bde3bdae
+
+build:
+  number: 0
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+  host:
+    - bioconductor-biocgenerics >=0.52.0,<0.53.0
+    - bioconductor-biostrings >=2.74.0,<2.75.0
+    - bioconductor-iranges >=2.40.0,<2.41.0
+    - bioconductor-s4vectors >=0.44.0,<0.45.0
+    - bioconductor-xvector >=0.46.0,<0.47.0
+    - r-base=4.4
+    - libblas
+    - liblapack
+  run:
+    - bioconductor-biocgenerics >=0.52.0,<0.53.0
+    - bioconductor-biostrings >=2.74.0,<2.75.0
+    - bioconductor-iranges >=2.40.0,<2.41.0
+    - bioconductor-s4vectors >=0.44.0,<0.45.0
+    - bioconductor-xvector >=0.46.0,<0.47.0
+    - r-base=4.4
+  run_exports: ${{ pin_subpackage("bioconductor-pwalign", upper_bound="x.x") }}
+
+tests:
+  - script:
+      - R -e "library('${{ name }}')"
+
+about:
+  description: The two main functions in the package are pairwiseAlignment() and stringDist(). The former solves (Needleman-Wunsch) global alignment, (Smith-Waterman) local alignment, and (ends-free) overlap alignment problems. The latter computes the Levenshtein edit distance or pairwise alignment score matrix for a set of strings.
+  license: Artistic-2.0
+  summary: Perform pairwise sequence alignments
+  homepage: https://bioconductor.org/packages/${{ bioc }}/bioc/html/${{ name }}.html
+
+extra:
+  additional-platforms:
+    - linux-aarch64
