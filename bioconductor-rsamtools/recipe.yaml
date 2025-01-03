@@ -38,6 +38,7 @@ requirements:
     - r-bitops
     - libblas
     - liblapack
+    - zlib
   run:
     - bioconductor-biocgenerics
     - bioconductor-biocparallel
