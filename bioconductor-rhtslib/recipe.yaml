@@ -28,7 +28,7 @@ requirements:
     - r-base=4.4
     - libblas
     - liblapack
-    - lzma-devel
+    - liblzma-devel
     - zlib
   run:
     - bioconductor-zlibbioc
