@@ -11,6 +11,7 @@ source:
 
 build:
   script: R CMD INSTALL --build .
+  number: 1
 
 requirements:
   build:
@@ -18,14 +19,14 @@ requirements:
     - ${{ compiler('cxx') }}
     - make
   host:
-    - r-base=4.3
+    - r-base=4.4
     - r-rcpp
     - r-rcpparmadillo
     - r-mass
     - r-pixmap
     - r-sp
   run:
-    - r-base=4.3
+    - r-base=4.4
     - r-mass
     - r-pixmap
     - r-sp
