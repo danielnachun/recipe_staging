@@ -38,6 +38,7 @@ requirements:
     - r-bitops
     - libblas
     - liblapack
+    - liblzma-devel
     - zlib
   run:
     - bioconductor-biocgenerics
