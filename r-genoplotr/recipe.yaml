@@ -12,14 +12,18 @@ source:
 build:
   noarch: generic
   script: R CMD INSTALL --build .
+  number: 1
 
 requirements:
   host:
     - r-base=4.3
     - r-ade4
   run:
-    - r-base>=4.3
+    - r-base >=4.3
     - r-ade4
+  ignore_run_exports:
+    by_name:
+      - r-base
 
 tests:
 - script:
