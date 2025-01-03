@@ -1,11 +1,7 @@
-# Suggests: RUnit, AnnotationHub, BSgenome.Hsapiens.UCSC.hg19, TxDb.Hsapiens.UCSC.hg19.knownGene, SNPlocs.Hsapiens.dbSNP144.GRCh37, SIFT.Hsapiens.dbSNP132, SIFT.Hsapiens.dbSNP137, PolyPhen.Hsapiens.dbSNP131, snpStats, ggplot2, BiocStyle, knitr
-# SystemRequirements: GNU make
-schema_version: 1
-
 context:
-  version: 1.48.1
+  version: 1.52.0
   name: VariantAnnotation
-  bioc: 3.18
+  bioc: 3.20
 
 package:
   name: bioconductor-${{ name|lower }}
@@ -17,7 +13,7 @@ source:
     - https://bioconductor.org/packages/${{ bioc }}/bioc/src/contrib/Archive/${{ name }}/${{ name }}_${{ version }}.tar.gz
     - https://bioarchive.galaxyproject.org/${{ name }}_${{ version }}.tar.gz
     - https://depot.galaxyproject.org/software/bioconductor-${{ name|lower }}/bioconductor-${{ name|lower }}_${{ version }}_src_all.tar.gz
-  md5: 39b6f4907fe37495a903c338e6d4cc73
+  md5: dd78ea409fc16978cf2d87763e3b808e
 
 build:
   number: 0
@@ -28,46 +24,48 @@ build:
 
 requirements:
   host:
-    - bioconductor-annotationdbi >=1.64.0,<1.65.0
-    - bioconductor-biobase >=2.62.0,<2.63.0
-    - bioconductor-biocgenerics >=0.48.0,<0.49.0
-    - bioconductor-biostrings >=2.70.0,<2.71.0
-    - bioconductor-bsgenome >=1.70.0,<1.71.0
-    - bioconductor-genomeinfodb >=1.38.0,<1.39.0
-    - bioconductor-genomicfeatures >=1.54.0,<1.55.0
-    - bioconductor-genomicranges >=1.54.0,<1.55.0
-    - bioconductor-iranges >=2.36.0,<2.37.0
-    - bioconductor-matrixgenerics >=1.14.0,<1.15.0
-    - bioconductor-rhtslib >=2.4.0,<2.5.0
-    - bioconductor-rsamtools >=2.18.0,<2.19.0
-    - bioconductor-rtracklayer >=1.62.0,<1.63.0
-    - bioconductor-s4vectors >=0.40.0,<0.41.0
-    - bioconductor-summarizedexperiment >=1.32.0,<1.33.0
-    - bioconductor-xvector >=0.42.0,<0.43.0
-    - bioconductor-zlibbioc >=1.48.0,<1.49.0
-    - r-base=4.3
+    - bioconductor-annotationdbi
+    - bioconductor-biobase
+    - bioconductor-biocgenerics
+    - bioconductor-biostrings
+    - bioconductor-bsgenome
+    - bioconductor-genomeinfodb
+    - bioconductor-genomicfeatures 1.58.*
+    - bioconductor-genomicranges
+    - bioconductor-iranges
+    - bioconductor-matrixgenerics
+    - bioconductor-rhtslib
+    - bioconductor-rsamtools
+    - bioconductor-rtracklayer
+    - bioconductor-s4vectors
+    - bioconductor-summarizedexperiment 1.36.*
+    - bioconductor-xvector
+    - bioconductor-zlibbioc
+    - r-base=4.4
     - r-dbi
     - libblas
     - liblapack
+    - liblzma-devel
+    - zlib
   run:
-    - bioconductor-annotationdbi >=1.64.0,<1.65.0
-    - bioconductor-biobase >=2.62.0,<2.63.0
-    - bioconductor-biocgenerics >=0.48.0,<0.49.0
-    - bioconductor-biostrings >=2.70.0,<2.71.0
-    - bioconductor-bsgenome >=1.70.0,<1.71.0
-    - bioconductor-genomeinfodb >=1.38.0,<1.39.0
-    - bioconductor-genomicfeatures >=1.54.0,<1.55.0
-    - bioconductor-genomicranges >=1.54.0,<1.55.0
-    - bioconductor-iranges >=2.36.0,<2.37.0
-    - bioconductor-matrixgenerics >=1.14.0,<1.15.0
-    - bioconductor-rhtslib >=2.4.0,<2.5.0
-    - bioconductor-rsamtools >=2.18.0,<2.19.0
-    - bioconductor-rtracklayer >=1.62.0,<1.63.0
-    - bioconductor-s4vectors >=0.40.0,<0.41.0
-    - bioconductor-summarizedexperiment >=1.32.0,<1.33.0
-    - bioconductor-xvector >=0.42.0,<0.43.0
-    - bioconductor-zlibbioc >=1.48.0,<1.49.0
-    - r-base>=4.3
+    - bioconductor-annotationdbi
+    - bioconductor-biobase
+    - bioconductor-biocgenerics
+    - bioconductor-biostrings
+    - bioconductor-bsgenome
+    - bioconductor-genomeinfodb
+    - bioconductor-genomicfeatures 1.58.*
+    - bioconductor-genomicranges
+    - bioconductor-iranges
+    - bioconductor-matrixgenerics
+    - bioconductor-rhtslib
+    - bioconductor-rsamtools
+    - bioconductor-rtracklayer
+    - bioconductor-s4vectors
+    - bioconductor-summarizedexperiment 1.36.*
+    - bioconductor-xvector
+    - bioconductor-zlibbioc
+    - r-base=4.4
     - r-dbi
   build:
     - ${{ compiler('c') }}
@@ -76,7 +74,7 @@ requirements:
 
 tests:
   - script:
-      - $R -e "library('${{ name }}')"
+      - R -e "library('${{ name }}')"
 
 about:
   license: Artistic-2.0
@@ -91,4 +89,3 @@ extra:
     name: bioconductor-variantannotation
     path: recipes/bioconductor-variantannotation
     version: 1.26.1
-

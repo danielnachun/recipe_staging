@@ -8,4 +8,5 @@ CXX=$CXX
 CXX98=$CXX
 CXX11=$CXX
 CXX14=$CXX" > ~/.R/Makevars
-$R CMD INSTALL --build .
+export PKG_CXXFLAGS="-Wno-missing-template-arg-list-after-template-kw"
+R CMD INSTALL --build .
