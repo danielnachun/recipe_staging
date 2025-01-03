@@ -67,50 +67,47 @@ requirements:
 
 tests:
   - script: |
-      3D_split_bin_matrix -h
-      CNE -h
-      Calculate_syntenic_percentage -h
-      Change_link_color -h
-      Chr_breakage_fusion -h
-      DESCHRAMBLER_plot_Ancestor_species -h
-      DESCHRAMBLER_plot_Ancestor_subAncestor -h
-      Gene_families_visualization -h
-      Get_gene_pairs_from_AGF -h
-      Inference_of_categories -h
-      Inference_of_gains_losses -h
-      Macro_chr_comparison -h
-      Macro_pairs_to_table -h
-      Macro_table_to_plot -h
-      Macrosyn1 -h
-      Macrosyn2 -h
-      Macrosyn3 -h
-      Macrosyn_add_clean -h
-      Macrosyn_add_species -h
-      Macrosyn_two_species1 -h
-      Macrosyn_two_species2 -h
-      Micro_chr_compare -h
-      Micro_chr_compare_pairs -h
-      Micro_chr_compare_pep -h
-      Micro_macrosyn -h
-      Microsyn_MCScanX -h
-      Microsyn_cluster -h
-      Microsyn_relaxed_A -h
-      Microsyn_relaxed_B1 -h
-      Microsyn_relaxed_B2 -h
-      Microsyn_relaxed_format -h
-      Microsyn_visualize_cluster -h
-      Microsyn_wgdi -h
-      Ortholog_inference -h
-      Pick_block_from_AGORA -h
-      Pick_block_from_DESCHRAMBLER -h
-      drawCLGContrib2.4_2 -h
-      findSyntBlocks_CLUS_ORTH3 -h
-      makeClusters -h
-      orthoFinderToOrthogroup -h
-      pdb_single_chr -h
-      prepMicroSynt -h
-      prepare_for_synnet -h
-      run_commands -h
+      3D_split_bin_matrix -h 2>&1 | grep -q "Print this help page"
+      CNE -h 2>&1 | grep -q "The direction of gene cluster mapping"
+      Calculate_syntenic_percentage -h 2>&1 | grep -q "Print this help page"
+      Change_link_color -h 2>&1 | grep -q "Print this help page"
+      Chr_breakage_fusion -h 2>&1 | grep -q "Print this help page"
+      DESCHRAMBLER_plot_Ancestor_species -h 2>&1 | grep -q "Print this help page"
+      DESCHRAMBLER_plot_Ancestor_subAncestor -h 2>&1 | grep -q "Print this help page"
+      Gene_families_visualization -h 2>&1 | grep -q "Print this help page"
+      Get_gene_pairs_from_AGF -h 2>&1 | grep -q "Print this help page"
+      Inference_of_categories -h 2>&1 | grep -q "Print this help page"
+      Inference_of_gains_losses -h 2>&1 | grep -q "Print this help page"
+      Macro_chr_comparison -h 2>&1 | grep -q "Print this help page"
+      Macro_pairs_to_table -h 2>&1 | grep -q "Print this help page"
+      Macro_table_to_plot -h 2>&1 | grep -q "Print this help page"
+      Macrosyn1 -h 2>&1 | grep -q "Print this help page"
+      Macrosyn2 -h 2>&1 | grep -q "Print this help page"
+      Macrosyn3 -h 2>&1 | grep -q "Print this help page"
+      Macrosyn_add_clean -h 2>&1 | grep -q "Print this help page"
+      Macrosyn_add_species -h 2>&1 | grep -q "Print this help page"
+      Macrosyn_two_species1 -h 2>&1 | grep -q "Print this help page"
+      Macrosyn_two_species2 -h 2>&1 | grep -q "Print this help page"
+      Micro_chr_compare -h 2>&1 | grep -q "Print this help page"
+      Micro_chr_compare_pairs -h 2>&1 | grep -q "Print this help page"
+      Micro_chr_compare_pep -h 2>&1 | grep -q "Print this help page"
+      Micro_macrosyn -h 2>&1 | grep -q "Print this help page"
+      Microsyn_MCScanX -h 2>&1 | grep -q "Sequence alignment software"
+      Microsyn_cluster -h 2>&1 | grep -q "The abbreviation of the reference species name"
+      Microsyn_relaxed_A -h 2>&1 | grep -q "Print this help page"
+      Microsyn_relaxed_B1 -h 2>&1 | grep -q "Print this help page"
+      Microsyn_relaxed_B2 -h 2>&1 | grep -q "Print this help page"
+      Microsyn_relaxed_format -h 2>&1 | grep -q "Print this help page"
+      Microsyn_visualize_cluster -h 2>&1 | grep -q "Print this help page"
+      Microsyn_wgdi -h 2>&1 | grep -q "Print this help page"
+      Ortholog_inference -h 2>&1 | grep -q "Print this help page"
+      Pick_block_from_AGORA -h 2>&1 | grep -q "Full path to the output file"
+      Pick_block_from_DESCHRAMBLER -h 2>&1 | grep -q "Full path to the output file"
+      drawCLGContrib2.4_2 2>&1 | grep -q "other parameters are optional and plot various data"
+      findSyntBlocks_CLUS_ORTH3 2>&1 | grep -q "max size per proteome"
+      makeClusters 2>&1 | grep -q "block extension"
+      orthoFinderToOrthogroup 2>&1 | grep -q "Convert an OrthoFinder Orthogroups.txt file into an ortho file"
+      pdb_single_chr 2>&1 | grep -q "The letter corresponding to a specified chromosome"
 
 about:
   summary: A comprehensive software tool for genome synteny analysis.

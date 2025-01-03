@@ -15,6 +15,9 @@ install_perl_script() {
     # Set shebang to use /usr/bin/env perl
     sed -i 's?#!/usr/bin/perl -w?#!/usr/bin/env perl?' ${SRC_DIR}/scripts/${script_name}
     sed -i 's?#!/usr/bin/perl?#!/usr/bin/env perl?' ${SRC_DIR}/scripts/${script_name}
+    sed -i 's/\r$//' ${SRC_DIR}/scripts/${script_name}
+    sed -i 's/^ #/#/' ${SRC_DIR}/scripts/${script_name}
+
     install -m 755 ${SRC_DIR}/scripts/${script_name} ${PREFIX}/bin/${script_name//.pl/}
 }
 
