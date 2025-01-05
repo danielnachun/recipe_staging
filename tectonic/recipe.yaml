@@ -31,7 +31,9 @@ requirements:
     - sed
   host:
     - if: not osx
-      then: fontconfig
+      then:
+        - expat
+        - fontconfig
     - freetype
     - glib  # development files needed by harfbuzz
     - graphite2
@@ -42,7 +44,9 @@ requirements:
     - zlib
   run:
     - if: not osx
-      then: fontconfig
+      then:
+        - expat
+        - fontconfig
     - freetype
     - graphite2
     - harfbuzz
