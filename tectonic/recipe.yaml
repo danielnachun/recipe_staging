@@ -1,0 +1,78 @@
+context:
+  version: 0.15.0
+
+package:
+  name: tectonic
+  version: ${{ version }}
+
+source:
+  git: https://github.com/tectonic-typesetting/tectonic
+  tag: tectonic@${{ version }}
+  patches:
+    - if: win
+      then: winzip.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - if: win
+      then: m2-patch
+    - pkg-config
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cargo-bundle-licenses
+    - if: build_platform != target_platform
+      then:
+        - glib
+        - harfbuzz
+    - sed
+  host:
+    - if: not osx
+      then:
+        - expat
+        - fontconfig
+    - freetype
+    - glib  # development files needed by harfbuzz
+    - graphite2
+    - harfbuzz
+    - icu
+    - libpng
+    - openssl
+    - zlib
+  run:
+    - if: not osx
+      then:
+        - expat
+        - fontconfig
+    - freetype
+    - graphite2
+    - harfbuzz
+    - icu
+    - libpng
+    - openssl
+    - zlib
+
+tests:
+  - files:
+      recipe:
+        - example.tex
+    script:
+      - tectonic --help
+      - tectonic example.tex
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: A modernized, complete, standalone TeX/LaTeX engine.
+  homepage: https://tectonic-typesetting.github.io/
+  repository: https://github.com/tectonic-typesetting/tectonic/
+  documentation: https://tectonic-typesetting.github.io/book/latest/
+
+extra:
+  recipe-maintainers:
+    - pkgw
