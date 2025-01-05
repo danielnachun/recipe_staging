@@ -28,6 +28,7 @@ requirements:
       then:
         - glib
         - harfbuzz
+    - sed
   host:
     - if: not osx
       then: fontconfig
