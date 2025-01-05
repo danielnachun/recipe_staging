@@ -10,7 +10,7 @@ export PKG_CONFIG_ALLOW_CROSS=1
 cargo add time@0.3.36
 
 sed -i '/"-std=c++14",/d' crates/engine_xetex/build.rs
-sed -i '/"-std=c++14",/d' crates/engine_layout/build.rs
+sed -i '/"-std=c++14",/d' crates/xetex_layout/build.rs
 
 # export CXXFLAGS="${CXXFLAGS} -std=c++17"
 
