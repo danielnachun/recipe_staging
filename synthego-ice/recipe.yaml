@@ -1,0 +1,50 @@
+context:
+  version: 1.2.0
+
+package:
+  name: synthego-ice
+  version: ${{ version }}
+
+source:
+  url: https://github.com/synthego-open/ice/archive/v${{ version }}.tar.gz
+  sha256: 63b95078a13717d7ceb1bca216b2083b9476c3a25642629ecedc5fabcbfe6f5e
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python =3.9
+    - pip
+    - setuptools
+  run:
+    - python >=3.9
+    - pytest >=5.2.2
+    - biopython >=1.70
+    - coverage >=4.4.1
+    - pytest-cov >=2.5.1
+    - matplotlib-base >=2.1.0
+    - numpy >=1.13.3
+    - pandas >=0.20.3
+    - scipy >=0.19.1
+    - scikit-learn >=0.0
+    - xlrd >=1.1.0
+    - xlsxwriter >=1.0.2
+
+tests:
+  - python:
+      imports:
+        - ice
+      pip_check: false
+
+about:
+  summary: Synthego - Inference of CRISPR Edits (ICE)
+  license: Unlicense
+  license_file: LICENSE
+  homepage: https://github.com/synthego-open/ice
+
+extra:
+  recipe-maintainers:
+    - danielnachun
