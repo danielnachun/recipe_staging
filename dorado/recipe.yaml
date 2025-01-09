@@ -1,0 +1,45 @@
+context:
+  version: 0.9.0
+
+package:
+  name: dorado
+  version: ${{ version }}
+
+source:
+  git: https://github.com/nanoporetech/dorado
+  tag: v${{ version }}
+
+build:
+  number: 0
+  skip: win
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - autoconf
+    - automake
+    - cmake
+    - make
+  host:
+    - cudatoolkit  # [linux]
+    - hdf5
+    - openssl
+    - libtorch
+    - zlib
+    - zstd
+
+tests:
+  - script:
+      - dorado --help
+
+about:
+  license: LicenseRef-Other
+  license_file: LICENCE.txt
+  summary: A better and stronger spiritual successor to BZip2.
+  homepage: https://github.com/kspalaiologos/bzip3
+  repository: https://github.com/kspalaiologos/bzip3
+
+extra:
+  recipe-maintainers:
+    - danielnachun
