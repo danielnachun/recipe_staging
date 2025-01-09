@@ -17,12 +17,16 @@ requirements:
   build:
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
+    - if: linux
+      then: ${{ compiler('cuda') }}
     - autoconf
     - automake
     - cmake
     - make
+    - sed
   host:
-    - cudatoolkit  # [linux]
+    - if: linux
+      then: cudatoolkit
     - hdf5
     - openssl
     - libtorch
