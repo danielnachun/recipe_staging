@@ -1,0 +1,65 @@
+context:
+  version: 1.0.0
+
+package:
+  name: r-cytotrace2
+  version: ${{ version }}
+
+source:
+- url: https://github.com/digitalcytometry/cytotrace2/archive/v${{ version }}.tar.gz
+  sha256: a0e238320fc0f310f6c16b1d2ad3fd2cc556e5ee3a04d24c490c4e46c34053e1
+
+build:
+  noarch: generic
+  script: |
+    rm -rf cytotrace2_r/.Rprofile
+    R CMD INSTALL --build cytotrace2_r
+  number: 0
+
+requirements:
+  host:
+    - r-base=4.3
+    - r-data.table
+    - r-doparallel
+    - r-dplyr
+    - r-ggplot2
+    - r-hiclimr
+    - r-matrix
+    - r-plyr
+    - r-rann
+    - r-rfast
+    - r-seurat
+    - r-seuratobject
+    - r-stringr
+  run:
+    - r-base >=4.3
+    - r-data.table
+    - r-doparallel
+    - r-dplyr
+    - r-ggplot2
+    - r-hiclimr
+    - r-matrix
+    - r-plyr
+    - r-rann
+    - r-rfast
+    - r-seurat
+    - r-seuratobject
+    - r-stringr
+  ignore_run_exports:
+    by_name:
+      - r-base
+
+tests:
+- script:
+  - Rscript -e 'library("CytoTRACE2")'
+
+about:
+  homepage: https://github.com/digitalcytometry/cytotrace2
+  summary: CytoTRACE 2 is an interpretable AI method for predicting cellular potency and absolute developmental potential from scRNA-seq data.
+  license: LicenseRef-Other
+  license_file: LICENSE
+  repository: https://github.com/digitalcytometry/cytotrace2
+
+extra:
+  recipe-maintainers:
+    - danielnachun
