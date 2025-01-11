@@ -1,0 +1,49 @@
+context:
+  version: 1.7.2
+
+package:
+  name: cadd-scripts
+  version: ${{ version }}
+
+source:
+  url: https://github.com/kircherlab/CADD-scripts/archive//v${{ version }}.tar.gz
+  sha256: bcb62fdd2d77e10d4e39555f7dda1be6a5c64ac89c36f8d598570be951a0a3e1
+
+build:
+  number: 0
+  noarch: python
+
+requirements:
+  build:
+    - sed
+  host:
+    - python
+  run:
+    - configparser
+    - joblib
+    - numpy >=1.24
+    - pandas
+    - pysam
+    - python >=3.9
+    - pyvcf
+    - scikit-learn
+
+tests:
+  - script:
+      - VCF2vepVCF.py --help
+      - annotateVEPvcf.py --help
+      - appendPHREDscore.py --help
+      - extract_scored.py --help
+      - max_line_hierarchy.py --help
+      - predictSKmodel.py --help
+      - trackTransformation.py --help
+
+about:
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/kircherlab/CADD-scripts
+  repository: https://github.com/kircherlab/CADD-scripts
+
+extra:
+  recipe-maintainers:
+    - danielnachun
