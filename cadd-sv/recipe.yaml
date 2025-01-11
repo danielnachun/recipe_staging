@@ -1,0 +1,36 @@
+context:
+  version: 1.1
+
+package:
+  name: cadd-sv
+  version: ${{ version }}
+
+source:
+
+  url: https://github.com/kircherlab/CADD-SV/archive//v${{ version }}-fix.tar.gz
+  sha256: 401ce33b0d00695378fef0168c81628c88a2e702874c28ede3a7157268e3a814
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  run:
+    - r-base >= 4.3
+    - r-randomforest
+
+tests:
+  - script: |
+      test -f ${PREFIX}/bin/PLIextract.R
+      test -f ${PREFIX}/bin/annotateHIC.R
+      test -f ${PREFIX}/bin/scoring.R
+
+about:
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/kircherlab/CADD-SV
+  repository: https://github.com/kircherlab/CADD-SV
+
+extra:
+  recipe-maintainers:
+    - danielnachun
