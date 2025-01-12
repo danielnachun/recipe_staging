@@ -1,17 +1,12 @@
-schema_version: 1
-
 context:
   version: 1.9
-  posix: "'m2-' if win else ''"
 
 package:
   name: r-vcpen
-  version: ${{ version|replace("-", "_") }}
+  version: ${{ version }}
 
 source:
-  url:
-    - ${{ cran_mirror }}/src/contrib/vcpen_${{ version }}.tar.gz
-    - ${{ cran_mirror }}/src/contrib/Archive/vcpen/vcpen_${{ version }}.tar.gz
+  url: https://cloud.r-project.org/src/contrib/vcpen_${{ version }}.tar.gz
   sha256: 25567c0a175d2d03ccf33815c1a4105029c2a24be81c77438219c59393a5e53d
 
 build:
@@ -20,48 +15,28 @@ build:
     rpaths:
       - lib/R/lib/
       - lib/
+  script: R CMD INSTALL --build .
 
 requirements:
   build:
-    - if: not win
-      then: ${{ compiler('c') }}
-    - if: win
-      then: ${{ compiler('m2w64_c') }}
-    - if: not win
-      then: ${{ compiler('cxx') }}
-    - if: win
-      then: ${{ compiler('m2w64_cxx') }}
-    - if: win
-      then: ${{ posix }}filesystem
-    - ${{ posix }}make
-    - if: win
-      then: ${{ posix }}sed
-    - if: win
-      then: ${{ posix }}coreutils
-    - if: win
-      then: ${{ posix }}zip
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - make
   host:
-    - r-base=4.3
+    - r-base=4.4
     - r-rcpp >=1.0.0
     - r-rcpparmadillo >=0.8.0
     - r-knitr
   run:
-    - r-base=4.3
+    - r-base=4.4
     - r-rcpp >=1.0.0
     - r-rcpparmadillo >=0.8.0
     - r-knitr
 
 tests:
-  - script:
-      - if: not win
-        then: "$R -e \"library('vcpen')\""
-      - if: win
-        then: "\"%R%\" -e \"library('vcpen')\""
+  - script: R -e "library('vcpen')"
 
 about:
   license: GPL-3.0-or-later
   summary: Method to perform penalized variance component analysis.
-  license_file:
-    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-3
   homepage: https://cran.r-project.org/package=vcpen
-
