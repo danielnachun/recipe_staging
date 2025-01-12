@@ -6,9 +6,7 @@ package:
   version: ${{ version }}
 
 source:
-  url:
-    - ${{ cran_mirror }}/src/contrib/vcpen_${{ version }}.tar.gz
-    - ${{ cran_mirror }}/src/contrib/Archive/vcpen/vcpen_${{ version }}.tar.gz
+  url: https://cloud.r-project.org/src/contrib/vcpen_${{ version }}.tar.gz
   sha256: 25567c0a175d2d03ccf33815c1a4105029c2a24be81c77438219c59393a5e53d
 
 build:
