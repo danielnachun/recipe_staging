@@ -1,5 +1,3 @@
-schema_version: 1
-
 context:
   name: strscan
   version: 3.0.6
@@ -23,9 +21,9 @@ requirements:
     - ${{ compiler('c') }}
     - make
   host:
-    - ruby =3.3
+    - ruby =3.2
   run:
-    - ruby =3.3
+    - ruby =3.2
 
 tests:
   - script:
@@ -41,4 +39,3 @@ about:
 extra:
   recipe-maintainers:
     - danielnachun
-
