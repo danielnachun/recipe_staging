@@ -20,6 +20,7 @@ requirements:
     - gettext-tools
     - make
     - pkg-config
+    - texinfo
     - xz-tools
   host:
     - bzip2
