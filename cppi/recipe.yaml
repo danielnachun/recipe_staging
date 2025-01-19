@@ -20,6 +20,7 @@ requirements:
     - gettext-tools
     - help2man
     - make
+    - xz-tools
   host:
     - libtool
 
