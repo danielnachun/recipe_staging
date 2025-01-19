@@ -20,6 +20,7 @@ requirements:
     - gettext-tools
     - make
     - perl
+    - xz
   host:
     - ncurses
 
