@@ -1,0 +1,43 @@
+context:
+  version: 4.8.31
+
+package:
+  name: mc
+  version: ${{ version }}
+
+source:
+  url: https://www.midnight-commander.org/downloads/mc-${{ version }}.tar.xz
+  sha256: 24191cf8667675b8e31fc4a9d18a0a65bdc0598c2c5c4ea092494cd13ab4ab1a
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+    - pkg-config
+  host:
+    - diffutils
+    - glib
+    - libssh2
+    - slang
+    - openssl
+    - zlib
+    - if: osx
+      then:
+        - libintl-devel
+
+tests:
+  - script:
+      - mc --help
+
+about:
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  summary: Terminal-based visual file manager
+  homepage: https://www.midnight-commander.org/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
