@@ -20,6 +20,7 @@ requirements:
     - gettext-tools
     - make
     - pkg-config
+    - xz-tools
   host:
     - bzip2
     - libjpeg-turbo
