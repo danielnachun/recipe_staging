@@ -15,6 +15,7 @@ build:
 requirements:
   build:
     - ${{ compiler('c') }}
+    - gettext-tools
     - make
     - pkg-config
   host:
