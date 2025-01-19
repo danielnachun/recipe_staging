@@ -1,5 +1,3 @@
-schema_version: 1
-
 context:
   name: libpaper
   version: 2.1.0
@@ -18,8 +16,12 @@ build:
 requirements:
   build:
     - ${{ compiler('c') }}
+    - autoconf
+    - automake
     - help2man
     - make
+  host:
+    - libtool
 
 tests:
   - script:
@@ -28,10 +30,9 @@ tests:
 about:
   license: LGPL-2.1-or-later
   license_file: COPYING
-  summary: Any-to-PostScript filter
+  summary: Library for handling paper characteristics
   homepage: https://github.com/rrthomas/${{ name }}
 
 extra:
   recipe-maintainers:
     - danielnachun
-
