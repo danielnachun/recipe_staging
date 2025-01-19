@@ -19,6 +19,7 @@ requirements:
     - automake
     - gettext-tools
     - make
+    - xz-tools
   host:
     - libtool
 
