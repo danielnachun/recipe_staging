@@ -23,6 +23,7 @@ requirements:
     - m4
     - make
     - sed
+    - xz-tools
   host:
     - libtool
     - if: not linux
