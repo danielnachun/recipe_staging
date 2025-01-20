@@ -1,0 +1,36 @@
+context:
+  version: 1.9
+
+package:
+  name: recutils
+  version: ${{ version }}
+
+source:
+  url: https://ftp.gnu.org/gnu/recutils/recutils-${{ version }}.tar.gz
+  sha256: 6301592b0020c14b456757ef5d434d49f6027b8e5f3a499d13362f205c486e0e
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+    - curl
+  host:
+    - libcurl
+    - readline
+
+tests:
+  - script:
+      - recsel --help
+
+about:
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  summary: Tools to work with human-editable, plain text data files
+  homepage: https://www.gnu.org/software/recutils
+
+extra:
+  recipe-maintainers:
+    - danielnachun
