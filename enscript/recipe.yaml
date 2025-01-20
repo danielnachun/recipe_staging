@@ -22,9 +22,12 @@ requirements:
     - gettext-tools
     - m4
     - make
+    - sed
   host:
     - libtool
-    - libintl-devel  # [not linux]
+    - if: not linux
+      then:
+        - libintl-devel
 
 tests:
   - script:
