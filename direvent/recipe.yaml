@@ -15,7 +15,13 @@ build:
 requirements:
   build:
     - ${{ compiler('c') }}
+    - autoconf
+    - automake
+    - gettext-tools
     - make
+    - xz-tools
+  host:
+    - libtool
 
 tests:
   - script:
