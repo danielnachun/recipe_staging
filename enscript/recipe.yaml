@@ -23,6 +23,7 @@ requirements:
     - m4
     - make
     - sed
+    - texinfo
     - xz-tools
     - if: linux
       then:
