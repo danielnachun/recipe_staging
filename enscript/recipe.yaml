@@ -19,6 +19,7 @@ requirements:
     - ${{ compiler('c') }}
     - autoconf
     - automake
+    - binutils
     - gettext-tools
     - m4
     - make
