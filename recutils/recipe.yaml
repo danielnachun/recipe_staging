@@ -20,6 +20,7 @@ requirements:
     - gettext-tools
     - make
     - curl
+    - xz-tools
   host:
     - libcurl
     - libtool
