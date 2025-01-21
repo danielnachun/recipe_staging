@@ -19,12 +19,13 @@ requirements:
     - automake
     - gettext-tools
     - make
+    - texinfo
     - xz-tools
   host:
+    - libtool
     - if: not linux
       then:
         - libintl-devel
-    - libtool
 
 tests:
   - script:
