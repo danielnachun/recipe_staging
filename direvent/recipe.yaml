@@ -19,6 +19,7 @@ requirements:
     - automake
     - gettext-tools
     - make
+    - texinfo
     - xz-tools
     - if: linux
       then:
