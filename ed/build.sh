@@ -7,5 +7,5 @@ cd ${SRC_DIR}/ed-${PKG_VERSION}
 
 ./configure --disable-silent-rules \
     --disable-dependency-tracking \
-    --prefix=${PREFIX} 
-make install
+    --prefix=${PREFIX}
+make install CC=${CC}
