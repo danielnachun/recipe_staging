@@ -8,6 +8,7 @@ package:
 source:
   url: https://ftp.gnu.org/gnu/ddrescue/ddrescue-${{ version }}.tar.lz
   sha256: 6626c07a7ca1cc1d03cad0958522c5279b156222d32c342e81117cfefaeb10c1
+  file_name: ddrescue-${{ version }}.tar.lz
 
 build:
   number: 0
@@ -25,7 +26,7 @@ tests:
 
 about:
   license: GPL-2.0-or-later
-  license_file: COPYING
+  license_file: ddrescue-${{ version }}/COPYING
   summary: GNU data recovery tool
   homepage: https://www.gnu.org/software/ddrescue/ddrescue.html
 
