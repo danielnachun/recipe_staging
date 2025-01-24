@@ -19,7 +19,11 @@ requirements:
     - automake
     - gettext-tools
     - make
+    - sed
     - xz-tools
+    - if: linux
+      then:
+        - binutils
   host:
     - libtool
     - if: not linux
