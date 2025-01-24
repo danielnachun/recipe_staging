@@ -1,0 +1,38 @@
+context:
+  version: 0.2.2
+
+package:
+  name: bool
+  version: ${{ version }}
+
+source:
+  url: https://ftp.gnu.org/gnu/bool/bool-${{ version }}.tar.xz
+  sha256: dc75d36344c93c49eac3196f7543ed67f3bde9e0bdebdb5677099455f3ab2dbb
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - autoconf
+    - automake
+    - gettext-tools
+    - make
+    - xz-tools
+  host:
+    - libtool
+
+tests:
+  - script:
+      - bool --help
+
+about:
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  summary: Utility for finding files that match a boolean expression.
+  homepage: https://www.gnu.org/software/bool/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
