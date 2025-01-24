@@ -20,6 +20,7 @@ requirements:
     - gettext-tools
     - make
     - sed
+    - texinfo
     - xz-tools
     - if: linux
       then:
