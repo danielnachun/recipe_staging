@@ -39,9 +39,4 @@ jobs:
         if: steps.download-packages.outputs.found_artifact == 'true'
         shell: pixi exec --spec rattler-build -- bash -e {0}
         run: |
-          if test -d /tmp/rattler-build/${{ matrix.platform }}; then
-            rattler-build upload anaconda --force /tmp/rattler-build/${{ matrix.platform }}/*.conda
-          fi
-          if test -d /tmp/rattler-build/noarch; then
-            rattler-build upload anaconda --force /tmp/rattler-build/noarch/*.conda
-          fi
+          rattler-build upload anaconda --force /tmp/rattler-build/**/*.conda
