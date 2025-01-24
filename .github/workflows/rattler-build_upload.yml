@@ -39,4 +39,5 @@ jobs:
         if: steps.download-packages.outputs.found_artifact == 'true'
         shell: pixi exec --spec rattler-build -- bash -e {0}
         run: |
+          shopt -s globstar
           rattler-build upload anaconda --force /tmp/rattler-build/**/*.conda
