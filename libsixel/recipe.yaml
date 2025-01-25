@@ -1,11 +1,8 @@
-schema_version: 1
-
 context:
-  name: libsixel
-  version: 1.10.3
+  version: 1.10.5
 
 package:
-  name: ${{ name|lower }}
+  name: libsixel
   version: ${{ version }}
 
 source:
@@ -41,4 +38,3 @@ about:
 extra:
   recipe-maintainers:
     - danielnachun
-
