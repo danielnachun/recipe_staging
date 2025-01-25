@@ -1,0 +1,49 @@
+context:
+  version: 0.1.2.1
+
+package:
+  name: misfortune
+  version: ${{ version }}
+
+source:
+  url: https://github.com/ncfavier/misfortune/archive/${{ version }}.tar.gz
+  sha256: 44ed6e714a8d416e352692016ad6e81ee0d8bee9d94e4adfdbece0d5ffd650da
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cabal-install
+    - cabal-plan
+    - ghc
+    - if: osx
+      then:
+        - pcre
+    - pkg-config
+  host:
+    - pcre
+    - if: osx
+      then: libiconv
+  run:
+    - if: osx
+      then: libiconv
+
+tests:
+  - script:
+      - misfortune --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: A fortune-mod clone
+  homepage: https://github.com/ncfavier/misfortune
+  repository: https://github.com/ncfavier/misfortune
+
+extra:
+  recipe-maintainers:
+    - danielnachun
