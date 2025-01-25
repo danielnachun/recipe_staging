@@ -17,6 +17,7 @@ requirements:
     - ${{ compiler('c') }}
     - make
     - python
+    - texinfo
   host:
     - if: osx
       then:
