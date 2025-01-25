@@ -35,6 +35,7 @@ requirements:
     - if: linux
       then:
         - xorg-xproto
+        - xorg-kbproto
         - xorg-libx11
   run:
     - chafa
