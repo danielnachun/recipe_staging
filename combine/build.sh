@@ -7,6 +7,7 @@ sed -i '/AUTOMAKE_OPTIONS = ansi2knr/d' src/Makefile.am
 sed -i '/AUTOMAKE_OPTIONS = ansi2knr/d' src/combine_scm/Makefile.am
 
 export CFLAGS="${CFLAGS} -Wno-implicit-function-declaration -Wno-implicit-int"
+export INFOPATH="${SRC_DIR}/doc"
 autoreconf --force --verbose --install
 ./configure --disable-silent-rules \
     --disable-dependency-tracking \
