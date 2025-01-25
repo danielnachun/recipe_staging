@@ -16,13 +16,16 @@ requirements:
   build:
     - ${{ compiler('c') }}
     - cmake
+    - docbook-xsl
     - make
+    - recode
     - perl=5.32
+    - perl-app-xml-docbook-builder
     - perl-path-tiny
 
 tests:
   - script:
-      - fortune --help
+      - fortune
 
 about:
   license: BSD-4-Clause-UC
