@@ -12,4 +12,5 @@ autoreconf --force --verbose --install
 ./configure --disable-silent-rules \
     --disable-dependency-tracking \
     --prefix=${PREFIX}
+make
 make install
