@@ -22,6 +22,7 @@ requirements:
     - perl=5.32
     - perl-app-xml-docbook-builder
     - perl-path-tiny
+    - sed
 
 tests:
   - script:
