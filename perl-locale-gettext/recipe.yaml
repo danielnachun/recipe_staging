@@ -1,0 +1,54 @@
+context:
+  version: 1.07
+
+package:
+  name: perl-locale-gettext
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/P/PV/PVANDRY/Locale-gettext-${{ version }}.tar.gz
+  sha256: 909d47954697e7c04218f972915b787bd1244d75e3bd01620bc167d5bbc49c15
+
+build:
+  number: 0
+  script:
+    - if: osx
+      then: |
+        export CC="${CC} ${CFLAGS} ${LDFLAGS}"
+        perl Makefile.PL INSTALLDIRS=site
+        make OTHERLDFLAGS="-lintl"
+        make test
+        make install
+    - if: linux
+      then: |
+        perl Makefile.PL INSTALLDIRS=site
+        make
+        make test
+        make install
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - gettext-tools
+    - make
+  host:
+    - if: osx
+      then:
+        - libintl-devel
+    - perl=5.32
+  run:
+    - perl=5.32
+
+tests:
+  - perl:
+      uses:
+        - Locale::gettext
+
+about:
+  license: Artistic-2.0 OR GPL-1.0-or-later
+  summary: Perl bindings for POSIX i18n gettext functions
+  homepage: http://metacpan.org/pod/Locale-gettext
+
+extra:
+  recipe-maintainers:
+    - danielnachun
