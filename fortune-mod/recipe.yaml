@@ -18,6 +18,7 @@ requirements:
     - ${{ compiler('cxx') }}
     - cmake
     - docbook-xsl
+    - libxslt
     - make
     - recode
     - perl=5.32
