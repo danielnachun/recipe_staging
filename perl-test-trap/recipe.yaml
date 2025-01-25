@@ -1,0 +1,52 @@
+schema_version: 1
+
+context:
+  version: 0.3.5
+
+package:
+  name: perl-test-trap
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/E/EB/EBHANSSEN/Test-Trap-v${{ version }}.tar.gz
+  sha256: 54f99016562b5b1d72110100f1f2be437178cdf84376f495ffd0376f1d7ecb9a
+
+build:
+  number: 0
+  noarch: generic
+  script: |
+    perl Build.PL
+    perl ./Build
+    perl ./Build test
+    perl ./Build install --installdirs site
+
+
+
+
+requirements:
+  host:
+    - perl=5.32
+    - perl-module-build
+    - perl-data-dump
+  run:
+    - perl>=5.32
+    - perl-data-dump
+
+tests:
+  - perl:
+      uses:
+        - Test::Trap
+        - Test::Trap::Builder
+        - Test::Trap::Builder::PerlIO
+        - Test::Trap::Builder::SystemSafe
+        - Test::Trap::Builder::TempFile
+
+about:
+  license: Artistic-2.0 OR GPL-1.0-or-later
+  summary: Trap exit codes, exceptions, output, etc.
+  homepage: http://metacpan.org/pod/Test-Trap
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+
