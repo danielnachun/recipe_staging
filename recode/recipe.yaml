@@ -6,8 +6,8 @@ package:
   version: ${{ version }}
 
 source:
-  url: https://github.com/rrthomas/recode/releases/download/v${{ version }}/recode-${{ version }}.tar.gz
-  sha256: 786aafd544851a2b13b0a377eac1500f820ce62615ccc2e630b501e7743b9f33
+  url: https://github.com/rrthomas/recode/archive/v${{ version }}.tar.gz
+  sha256: 777630800a22152525ecb25687829f1f6dd0fb03d38dbd8e37b94ac68c5a1862
 
 build:
   number: 0
@@ -18,6 +18,7 @@ requirements:
     - autoconf
     - automake
     - gettext-tools
+    - help2man
     - make
     - python
     - texinfo

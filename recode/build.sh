@@ -3,7 +3,9 @@
 set -o xtrace -o nounset -o pipefail -o errexit
 
 export PYTHON=${BUILD_PREFIX}/bin/python
-autoreconf --force --verbose --install
+export ACLOCAL_PATH=${PREFIX}/share/aclocal
+
+./bootstrap
 ./configure --disable-silent-rules \
     --disable-dependency-tracking \
     --without-included-gettext \
