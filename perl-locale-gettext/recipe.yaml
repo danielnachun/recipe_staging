@@ -11,20 +11,12 @@ source:
 
 build:
   number: 0
-  script:
-    - if: osx
-      then: |
-        export CC="${CC} ${CFLAGS} ${LDFLAGS}"
-        perl Makefile.PL INSTALLDIRS=site
-        make OTHERLDFLAGS="-lintl"
-        make test
-        make install
-    - if: linux
-      then: |
-        perl Makefile.PL INSTALLDIRS=site
-        make
-        make test
-        make install
+  script: |
+    export CC="${CC} ${CFLAGS} ${LDFLAGS}"
+    perl Makefile.PL INSTALLDIRS=site
+    make OTHERLDFLAGS="-lintl"
+    make test
+    make install
 
 requirements:
   build:
