@@ -17,10 +17,13 @@ requirements:
     - ${{ compiler('c') }}
     - autoconf
     - automake
+    - flex
     - gettext-tools
+    - gnupg
     - help2man
     - make
     - python
+    - sed
     - texinfo
     - xz-tools
   host:
