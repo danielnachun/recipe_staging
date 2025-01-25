@@ -1,0 +1,45 @@
+context:
+  version: 0.1101
+
+package:
+  name: perl-app-xml-docbook-builder
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/S/SH/SHLOMIF/App-XML-DocBook-Builder-0.1101.tar.gz
+  sha256: a1af02db83ac6de68d74b22cb12cff287dcc345af45ae409ebb828bf28719aa4
+
+build:
+  number: 0
+  noarch: generic
+  script: |
+    perl Build.PL
+    perl ./Build
+    perl ./Build test
+    perl ./Build install --installdirs site
+
+requirements:
+  host:
+    - perl=5.32
+    - perl-test-trap
+    - perl-class-xsaccessor
+    - perl-file-shouldupdate
+    - perl-module-build
+  run:
+    - perl>=5.32
+    - perl-class-xsaccessor
+    - perl-file-shouldupdate
+    - perl-test-trap
+
+tests:
+  - script:
+      - docmake --help 2>&1 | grep -q "The basic invocation of docmake is"
+
+about:
+  license: MIT
+  summary: Build DocBook/XML files.
+  homepage: http://www.shlomifish.org/open-source/projects/docmake/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
