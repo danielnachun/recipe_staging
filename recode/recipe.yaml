@@ -1,0 +1,37 @@
+context:
+  version: 3.7.14
+
+package:
+  name: recode
+  version: ${{ version }}
+
+source:
+  url: https://github.com/rrthomas/recode/releases/download/v${{ version }}/recode-${{ version }}.tar.gz
+  sha256: 786aafd544851a2b13b0a377eac1500f820ce62615ccc2e630b501e7743b9f33
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+    - python
+  host:
+    - if: osx
+      then:
+        - libiconv
+
+tests:
+  - script:
+      - recode --help
+
+about:
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  summary: Charset converter tool and library
+  homepage: https://github.com/rrthomas/recode
+
+extra:
+  recipe-maintainers:
+    - danielnachun
