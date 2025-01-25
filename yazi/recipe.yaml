@@ -1,0 +1,37 @@
+context:
+  version: 0.4.2
+
+package:
+  name: yazi
+  version: ${{ version }}
+
+source:
+  url: https://github.com/sxyazi/yazi/archive/v${{ version }}.tar.gz
+  sha256: 88995c90954d140f455cf9ca4f87f9ca36390717377be86b0672456e1eb5f65f
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - cargo-bundle-licenses
+    - make
+
+tests:
+  - script:
+      - yazi --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Blazing fast terminal file manager written in Rust, based on async I/O.
+  homepage: https://github.com/sxyazi/yazi
+  repository: https://github.com/sxyazi/yazi
+
+extra:
+  recipe-maintainers:
+    - danielnachun
