@@ -19,6 +19,7 @@ requirements:
     - cabal-install
     - cabal-plan
     - ghc
+    - pkg-config
   host:
     - if: osx
       then: libiconv
