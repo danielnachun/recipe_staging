@@ -37,6 +37,8 @@ tests:
         - App::XML::DocBook::Builder
         - App::XML::DocBook::Docmake
         - App::XML::DocBook::Docmake::CmdComponent
+  - script:
+      - docmake --help
 
 about:
   license: MIT
