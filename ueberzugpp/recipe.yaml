@@ -32,6 +32,9 @@ requirements:
     - range-v3
     - spdlog
     - tbb-devel
+    - if: linux
+      - xorg-xproto
+      - xorg-libx11
   run:
     - chafa
     - libopencv
