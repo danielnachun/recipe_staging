@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/sxyazi/yazi/archive/v${{ version }}.tar.gz
-  sha256: 774db83f7ace9d9765794a22191edc981a28ee64f9d6062df08edf1a9d202cab
+  sha256: 88995c90954d140f455cf9ca4f87f9ca36390717377be86b0672456e1eb5f65f
 
 build:
   number: 0
