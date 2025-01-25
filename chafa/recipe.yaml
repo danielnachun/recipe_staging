@@ -1,0 +1,53 @@
+context:
+  version: 1.14.5
+
+package:
+  name: chafa
+  version: ${{ version }}
+
+source:
+  url: https://github.com/hpjansson/chafa/archive/${{ version }}.tar.gz
+  sha256: 788cb29e6d9cd29578c2040b3a11f69f4c9408e04f6c93c994c071e2a85d5ba4
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - autoconf
+    - automake
+    - gettext-tools
+    - make
+    - pkg-config
+    - xz-tools
+  host:
+    - cairo
+    - expat
+    - freetype
+    - glib
+    - libjpeg-turbo
+    - libjxl
+    - liblzma-devel
+    - librsvg
+    - libtiff
+    - libtool
+    - libwebp-base
+    - zlib
+    - if: osx
+      then:
+        - libintl-devel
+
+tests:
+  - script:
+      - chafa --help
+
+about:
+  license: LGPL-3.0-or-later
+  license_file: COPYING
+  summary: Versatile and fast Unicode/ASCII/ANSI graphics renderer
+  homepage: https://hpjansson.org/chafa/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
