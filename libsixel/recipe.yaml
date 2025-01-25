@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/libsixel/libsixel/archive/v${{ version }}.tar.gz
-  sha256: 028552eb8f2a37c6effda88ee5e8f6d87b5d9601182ddec784a9728865f821e0
+  sha256: b6654928bd423f92e6da39eb1f40f10000ae2cc6247247fc1882dcff6acbdfc8
 
 build:
   number: 0
