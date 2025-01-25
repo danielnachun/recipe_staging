@@ -34,9 +34,11 @@ requirements:
     - tbb-devel
     - if: linux
       then:
+        - xorg-xextproto
         - xorg-xproto
         - xorg-kbproto
         - xorg-libx11
+        - xorg-libxext
   run:
     - chafa
     - libopencv
