@@ -10,4 +10,6 @@ export ACLOCAL_PATH=${PREFIX}/share/aclocal
     --disable-dependency-tracking \
     --without-included-gettext \
     --prefix=${PREFIX}
+
+sed -i '/dist_man_MANS = recode.1/d' src/Makefile
 make install
