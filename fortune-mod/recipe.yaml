@@ -1,13 +1,13 @@
 context:
-  version: 1.4.0
+  version: 3.24.0
 
 package:
   name: fortune-mod
   version: ${{ version }}
 
 source:
-  url: https://github.com/shlomif/fortune-mod/archive/${{ version }}.tar.gz
-  sha256: d70334c19c7cce2cc6c823566b7d8968ff08a52043d518f55caebd2e407b2233
+  url: https://github.com/shlomif/fortune-mod/archive/fortune-mod-${{ version }}.tar.gz
+  sha256: 0cb889a124994377190800b2d70cf2254791049c8ba55d7570f91936d38c85ad
 
 build:
   number: 0
@@ -17,6 +17,8 @@ requirements:
     - ${{ compiler('c') }}
     - cmake
     - make
+    - perl=5.32
+    - perl-path-tiny
 
 tests:
   - script:
