@@ -23,6 +23,7 @@ requirements:
     - help2man
     - make
     - python
+    - rsync
     - sed
     - texinfo
     - xz-tools
