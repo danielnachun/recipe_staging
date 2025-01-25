@@ -19,6 +19,9 @@ requirements:
     - cabal-install
     - cabal-plan
     - ghc
+    - if: osx
+      then:
+        - pcre
     - pkg-config
   host:
     - pcre
