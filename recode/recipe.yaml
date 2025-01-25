@@ -20,7 +20,6 @@ requirements:
     - gettext-tools
     - help2man
     - make
-    - perl-locale-gettext
     - python
     - texinfo
     - xz-tools
