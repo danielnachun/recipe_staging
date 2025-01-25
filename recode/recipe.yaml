@@ -15,10 +15,15 @@ build:
 requirements:
   build:
     - ${{ compiler('c') }}
+    - autoconf
+    - automake
+    - gettext-tools
     - make
     - python
     - texinfo
+    - xz-tools
   host:
+    - libtool
     - if: osx
       then:
         - libiconv
