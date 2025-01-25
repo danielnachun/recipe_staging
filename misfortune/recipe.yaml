@@ -21,6 +21,7 @@ requirements:
     - ghc
     - pkg-config
   host:
+    - pcre
     - if: osx
       then: libiconv
   run:
