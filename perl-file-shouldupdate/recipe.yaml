@@ -1,0 +1,41 @@
+context:
+  version: 0.2.1
+
+package:
+  name: perl-file-shouldupdate
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/S/SH/SHLOMIF/File-ShouldUpdate-${{ version }}.tar.gz
+  sha256: af593598d06f1c21badd3ae741bf0b4506ce265ec89950c60a3f3e7106deb3e2
+
+build:
+  number: 0
+  noarch: generic
+  script: |
+    perl Build.PL
+    perl ./Build
+    perl ./Build test
+    perl ./Build install --installdirs site
+
+requirements:
+  host:
+    - perl=5.32
+    - perl-module-build
+    - perl-path-tiny
+  run:
+    - perl>=5.32
+
+tests:
+  - perl:
+      uses:
+        - File::ShouldUpdate
+
+about:
+  license: MIT
+  summary: should files be rebuilt?
+  homepage: http://metacpan.org/release/File-ShouldUpdate
+
+extra:
+  recipe-maintainers:
+    - danielnachun
