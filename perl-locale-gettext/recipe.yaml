@@ -12,8 +12,10 @@ source:
 build:
   number: 0
   script: |
+    export CC_BACKUP=${CC}
     export CC="${CC} ${CFLAGS} ${LDFLAGS}"
     perl Makefile.PL INSTALLDIRS=site
+    export CC=${CC_BACKUP}
     make OTHERLDFLAGS="-lintl"
     make test
     make install
