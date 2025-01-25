@@ -1,0 +1,42 @@
+context:
+  version: 3.24.0
+
+package:
+  name: fortune-mod
+  version: ${{ version }}
+
+source:
+  url: https://github.com/shlomif/fortune-mod/archive/fortune-mod-${{ version }}.tar.gz
+  sha256: 0cb889a124994377190800b2d70cf2254791049c8ba55d7570f91936d38c85ad
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - docbook-xsl
+    - libxslt
+    - make
+    - recode
+    - perl=5.32
+    - perl-app-xml-docbook-builder
+    - perl-path-tiny
+    - sed
+
+tests:
+  - script:
+      - fortune
+
+about:
+  license: BSD-4-Clause-UC
+  license_file: LICENSE
+  summary: Implementation of the Unix fortune command for displaying a random quotation, for Linux and other systems.
+  homepage: https://github.com/shlomif/fortune-mod
+  repository: https://github.com/shlomif/fortune-mod
+
+extra:
+  recipe-maintainers:
+    - danielnachun
