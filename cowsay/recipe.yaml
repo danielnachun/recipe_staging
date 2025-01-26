@@ -1,0 +1,35 @@
+context:
+  version: 3.8.4
+
+package:
+  name: cowsay
+  version: ${{ version }}
+
+source:
+  url: https://github.com/cowsay-org/cowsay/archive/v${{ version }}.tar.gz
+  sha256: c15bc10712835d3a9bcda780dc9453362567bf48d1185905dc7ef2334d79aadd
+
+build:
+  number: 0
+  script:
+    - make install prefix=${PREFIX}
+
+requirements:
+  build:
+    - make
+  run:
+    - perl>=5.32
+
+tests:
+  - script:
+      - echo "Hello world" | cowsay
+
+about:
+  license: GPL-3.0-or-later
+  license_file: LICENSE.txt
+  summary: apjanke's fork of the classic cowsay project
+  homepage: https://cowsay.diamonds
+
+extra:
+  recipe-maintainers:
+    - danielnachun
