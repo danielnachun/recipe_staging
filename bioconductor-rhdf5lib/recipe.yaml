@@ -28,6 +28,7 @@ requirements:
     - libblas
     - liblapack
     - libtool
+    - zlib
   run:
     - r-base=4.4
   build:
