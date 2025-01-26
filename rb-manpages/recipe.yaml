@@ -29,9 +29,9 @@ tests:
 about:
   license: MIT
   license_file: manpages-${{ version }}/LICENSE
-  summary: A library for working with Abstract Syntax Trees.
+  summary: With this gem the rubygems command will detect man pages within gems and exposes them to the man command.
   homepage: https://rubygems.org/gems/manpages
-  repository: https://github.com/whitequark/manpages
+  repository: https://github.com/bitboxer/manpages
 
 extra:
   recipe-maintainers:
