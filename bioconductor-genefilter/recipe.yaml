@@ -1,10 +1,7 @@
-# Suggests: class, hgu95av2.db, tkWidgets, ALL, ROC, RColorBrewer, BiocStyle, knitr
-schema_version: 1
-
 context:
-  version: 1.84.0
+  version: 1.88.0
   name: genefilter
-  bioc: 3.18
+  bioc: 3.20
 
 package:
   name: bioconductor-${{ name|lower }}
@@ -16,7 +13,7 @@ source:
     - https://bioconductor.org/packages/${{ bioc }}/bioc/src/contrib/Archive/${{ name }}/${{ name }}_${{ version }}.tar.gz
     - https://bioarchive.galaxyproject.org/${{ name }}_${{ version }}.tar.gz
     - https://depot.galaxyproject.org/software/bioconductor-${{ name }}/bioconductor-${{ name }}_${{ version }}_src_all.tar.gz
-  md5: 15011d1662a58967aeb3e89f1f660e40
+  md5: 95bc8cdec8e895d1f36507ace3dc0b3c
 
 build:
   number: 0
@@ -27,20 +24,20 @@ build:
 
 requirements:
   host:
-    - bioconductor-annotate >=1.80.0,<1.81.0
-    - bioconductor-annotationdbi >=1.64.0,<1.65.0
-    - bioconductor-biobase >=2.62.0,<2.63.0
-    - bioconductor-matrixgenerics >=1.14.0,<1.15.0
-    - r-base=4.3
+    - bioconductor-annotate >=1.84.0,<1.85.0
+    - bioconductor-annotationdbi >=1.68.0,<1.69.0
+    - bioconductor-biobase >=2.66.0,<2.67.0
+    - bioconductor-matrixgenerics >=1.18.0,<1.19.0
+    - r-base=4.4
     - r-survival
     - libblas
     - liblapack
   run:
-    - bioconductor-annotate >=1.80.0,<1.81.0
-    - bioconductor-annotationdbi >=1.64.0,<1.65.0
-    - bioconductor-biobase >=2.62.0,<2.63.0
-    - bioconductor-matrixgenerics >=1.14.0,<1.15.0
-    - r-base>=4.3
+    - bioconductor-annotate >=1.84.0,<1.85.0
+    - bioconductor-annotationdbi >=1.68.0,<1.69.0
+    - bioconductor-biobase >=2.66.0,<2.67.0
+    - bioconductor-matrixgenerics >=1.18.0,<1.19.0
+    - r-base=4.4
     - r-survival
   build:
     - ${{ compiler('c') }}
@@ -51,7 +48,7 @@ requirements:
 
 tests:
   - script:
-      - $R -e "library('${{ name }}')"
+      - R -e "library('${{ name }}')"
 
 about:
   license: Artistic-2.0
@@ -68,4 +65,3 @@ extra:
     name: bioconductor-genefilter
     path: recipes/bioconductor-genefilter
     version: 1.62.0
-
