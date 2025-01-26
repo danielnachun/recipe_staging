@@ -1,11 +1,7 @@
-# Suggests: testthat, knitr, rmarkdown, reactome.db, AnnotationDbi, parallel, org.Mm.eg.db, limma, GEOquery, msigdbr, aggregation, Seurat
-# SystemRequirements: C++11
-schema_version: 1
-
 context:
-  version: 1.28.0
+  version: 1.32.0
   name: fgsea
-  bioc: 3.18
+  bioc: 3.20
 
 package:
   name: bioconductor-${{ name|lower }}
@@ -17,7 +13,7 @@ source:
     - https://bioconductor.org/packages/${{ bioc }}/bioc/src/contrib/Archive/${{ name }}/${{ name }}_${{ version }}.tar.gz
     - https://bioarchive.galaxyproject.org/${{ name }}_${{ version }}.tar.gz
     - https://depot.galaxyproject.org/software/bioconductor-${{ name }}/bioconductor-${{ name }}_${{ version }}_src_all.tar.gz
-  md5: 53b8ab8a13390a0920bc13eeba3aa1b8
+  md5: e03160202b15071056b5205a036af9a8
 
 build:
   number: 0
@@ -28,8 +24,8 @@ build:
 
 requirements:
   host:
-    - bioconductor-biocparallel >=1.36.0,<1.37.0
-    - r-base=4.3
+    - bioconductor-biocparallel >=1.40.0,<1.41.0
+    - r-base=4.4
     - r-bh
     - r-cowplot
     - r-data.table
@@ -41,8 +37,8 @@ requirements:
     - libblas
     - liblapack
   run:
-    - bioconductor-biocparallel >=1.36.0,<1.37.0
-    - r-base>=4.3
+    - bioconductor-biocparallel >=1.40.0,<1.41.0
+    - r-base=4.4
     - r-bh
     - r-cowplot
     - r-data.table
@@ -59,10 +55,10 @@ requirements:
 
 tests:
   - script:
-      - $R -e "library('${{ name }}')"
+      - R -e "library('${{ name }}')"
 
 about:
-  license: MIT + file LICENCE
+  license: MIT
   summary: Fast Gene Set Enrichment Analysis
   description: The package implements an algorithm for fast gene set enrichment analysis. Using the fast algorithm allows to make more permutations and get more fine grained p-values, which allows to use accurate stantard approaches to multiple hypothesis correction.
   homepage: https://bioconductor.org/packages/${{ bioc }}/bioc/html/${{ name }}.html
@@ -75,4 +71,3 @@ extra:
     name: bioconductor-fgsea
     path: recipes/bioconductor-fgsea
     version: 1.6.0
-
