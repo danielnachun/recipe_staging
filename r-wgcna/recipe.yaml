@@ -58,9 +58,9 @@ requirements:
 tests:
   - script:
       - if: not win
-        then: "$R -e \"library('WGCNA')\""
+        then: "R -e \"library('WGCNA')\""
       - if: win
-        then: "\"%R%\" -e \"library('WGCNA')\""
+        then: "R -e \"library('WGCNA')\""
 
 about:
   license: GPL-3.0-or-later
