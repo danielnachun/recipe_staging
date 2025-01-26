@@ -48,6 +48,7 @@ requirements:
     - r-rcpp
     - libblas
     - liblapack
+    - zlib
   run:
     - bioconductor-beachmat >=2.22.0,<2.23.0
     - bioconductor-biocgenerics >=0.52.0,<0.53.0
