@@ -1,11 +1,7 @@
-# Suggests: testthat (>= 2.1.0), knitr, bench, rmarkdown, BiocStyle
-# SystemRequirements: C++11
-schema_version: 1
-
 context:
-  version: 1.14.0
+  version: 1.18.0
   name: sparseMatrixStats
-  bioc: 3.18
+  bioc: 3.20
 
 package:
   name: bioconductor-${{ name|lower }}
@@ -17,7 +13,7 @@ source:
     - https://bioconductor.org/packages/${{ bioc }}/bioc/src/contrib/Archive/${{ name }}/${{ name }}_${{ version }}.tar.gz
     - https://bioarchive.galaxyproject.org/${{ name }}_${{ version }}.tar.gz
     - https://depot.galaxyproject.org/software/bioconductor-${{ name|lower }}/bioconductor-${{ name|lower }}_${{ version }}_src_all.tar.gz
-  md5: 4319e6fb04b91467bd08cc4ce2ad609c
+  md5: 50096c9aa26a1cfd016375256c1c911a
 
 build:
   number: 0
@@ -28,16 +24,16 @@ build:
 
 requirements:
   host:
-    - bioconductor-matrixgenerics >=1.14.0,<1.15.0
-    - r-base=4.3
+    - bioconductor-matrixgenerics >=1.18.0,<1.19.0
+    - r-base=4.4
     - r-matrix
     - r-matrixstats >=0.60.0
     - r-rcpp
     - libblas
     - liblapack
   run:
-    - bioconductor-matrixgenerics >=1.14.0,<1.15.0
-    - r-base>=4.3
+    - bioconductor-matrixgenerics >=1.18.0,<1.19.0
+    - r-base=4.4
     - r-matrix
     - r-matrixstats >=0.60.0
     - r-rcpp
@@ -49,13 +45,12 @@ requirements:
 
 tests:
   - script:
-      - $R -e "library('${{ name }}')"
+      - R -e "library('${{ name }}')"
 
 about:
-  license: MIT + file LICENSE
+  license: MIT
   summary: Summary Statistics for Rows and Columns of Sparse Matrices
   description: |
     'High performance functions for row and column operations on sparse matrices. For example: col / rowMeans2, col / rowMedians, col / rowVars etc. Currently, the optimizations are limited to data in the column sparse format. This package is inspired by the matrixStats package by Henrik Bengtsson.'
   license_file: LICENSE
   homepage: https://bioconductor.org/packages/${{ bioc }}/bioc/html/${{ name }}.html
-
