@@ -1,0 +1,38 @@
+context:
+  version: 0.6.1
+
+package:
+  name: rb-manpages
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/manpages-${{ version }}.gem
+  sha256: cdbad16823c8510c15a93d4cdbd46e7b4290aff8b10f3d4b70caa8e62c8de686
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies manpages-${{ version }}.gem
+    - gem unpack manpages-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ruby -r manpages -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: manpages-${{ version }}/LICENSE
+  summary: With this gem the rubygems command will detect man pages within gems and exposes them to the man command.
+  homepage: https://rubygems.org/gems/manpages
+  repository: https://github.com/bitboxer/manpages
+
+extra:
+  recipe-maintainers:
+    - danielnachun
