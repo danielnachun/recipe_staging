@@ -1,7 +1,5 @@
-schema_version: 1
-
 context:
-  version: 1.71
+  version: 1.73
 
 package:
   name: r-wgcna
@@ -9,12 +7,13 @@ package:
 
 source:
   url:
-    - ${{ cran_mirror }}/src/contrib/WGCNA_${{ version }}.tar.gz
-    - ${{ cran_mirror }}/src/contrib/Archive/WGCNA/WGCNA_${{ version }}.tar.gz
-  sha256: 21f5349e888ea76241912600ee5c35a0d2fd50180568b9b08b2b597f099bf708
+    - https://cran.r-project.org/src/contrib/WGCNA_${{ version }}.tar.gz
+    - https://cran.r-project.org/src/contrib/Archive/WGCNA/WGCNA_${{ version }}.tar.gz
+
+  sha256: e8a0a367a93190dd9f738578a82d31856e004b9de46d2775e4ed0f44a95063ce
 
 build:
-  number: 4
+  number: 0
   dynamic_linking:
     rpaths:
       - lib/R/lib/
@@ -26,7 +25,7 @@ requirements:
     - ${{ compiler('cxx') }}
     - make
   host:
-    - r-base=4.3
+    - r-base=4.4
     - bioconductor-annotationdbi
     - bioconductor-go.db
     - r-hmisc
@@ -35,13 +34,13 @@ requirements:
     - r-dynamictreecut >=1.62
     - r-fastcluster
     - r-foreach
-    - bioconductor-impute
+    - bioconductor-impute >=1.80.0,<1.81.0
     - r-matrixstats >=0.8.1
     - bioconductor-preprocesscore
     - r-robust
     - r-survival
   run:
-    - r-base>=4.3
+    - r-base=4.4
     - bioconductor-annotationdbi
     - bioconductor-go.db
     - r-hmisc
@@ -50,7 +49,7 @@ requirements:
     - r-dynamictreecut >=1.62
     - r-fastcluster
     - r-foreach
-    - bioconductor-impute
+    - bioconductor-impute >=1.80.0,<1.81.0
     - r-matrixstats >=0.8.1
     - bioconductor-preprocesscore
     - r-robust
@@ -59,12 +58,12 @@ requirements:
 tests:
   - script:
       - if: not win
-        then: "$R -e \"library('WGCNA')\""
+        then: "R -e \"library('WGCNA')\""
       - if: win
-        then: "\"%R%\" -e \"library('WGCNA')\""
+        then: "R -e \"library('WGCNA')\""
 
 about:
-  license: GPL (>= 2)
+  license: GPL-3.0-or-later
   summary: |
     Functions necessary to perform Weighted Correlation Network Analysis on high-dimensional
     data as originally described in Horvath and Zhang (2005) <doi:10.2202/1544-6115.1128>
@@ -78,4 +77,3 @@ extra:
   identifiers:
     - biotools:wgcna
     - doi:10.1186/1471-2105-9-559
-
