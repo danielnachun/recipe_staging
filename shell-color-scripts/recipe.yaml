@@ -10,13 +10,14 @@ source:
   rev: 576735cf656ece1bfd314e617b91c0e9d486d262
 
 build:
+  noarch: generic
   number: 0
   script: |
     sed -i "s?/opt?${PREFIX}/share/?" colorscript.sh
     mkdir -p ${PREFIX}/bin
     mkdir -p ${PREFIX}/share/shell-color-scripts
     mkdir -p ${PREFIX}/share/man/man1
-    cp -r colorscript.sh ${PREFIX}/share/shell-color-scripts
+    cp -r colorscripts ${PREFIX}/share/shell-color-scripts
     install -m 755 colorscript.sh ${PREFIX}/bin/colorscript
     install -m 644 colorscript.1 ${PREFIX}/share/man/man1
 
