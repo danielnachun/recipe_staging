@@ -28,6 +28,7 @@ requirements:
     - r-base=4.4
     - libblas
     - liblapack
+    - zlib
   run:
     - bioconductor-zlibbioc >=1.52.0,<1.53.0
     - r-base=4.4
