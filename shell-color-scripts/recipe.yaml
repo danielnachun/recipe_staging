@@ -16,7 +16,7 @@ build:
     mkdir -p ${PREFIX}/bin
     mkdir -p ${PREFIX}/share/shell-color-scripts
     mkdir -p ${PREFIX}/share/man/man1
-    cp -r colorscript.sh ${PREFIX}/share/shell-color-scripts
+    cp -r colorscripts ${PREFIX}/share/shell-color-scripts
     install -m 755 colorscript.sh ${PREFIX}/bin/colorscript
     install -m 644 colorscript.1 ${PREFIX}/share/man/man1
 
