@@ -7,18 +7,21 @@ package:
 
 source:
   url: https://rubygems.org/downloads/lolcat-${{ version }}.gem
-  sha256: 278d0f7de7181376a64d54a55b5df1a22ce8aa1d0e6a103ff76bf34cb37e7261
+  sha256: 983c8a9bc2742bfcd3a5174564b2710cf177ae96884ee9f112cfe1b61188e88e
 
 build:
   number: 0
   noarch: generic
+  script: 
+    - gem install -N -l -V --ignore-dependencies --bindir "${PREFIX}/bin" lolcat-${{ version }}.gem
+    - gem unpack lolcat-${{ PKG_VERSION }}.gem
 
 requirements:
   host:
     - ruby=3.2
   run:
     - rb-manpages
-    - rb-optimist
+    - rb-optimist=3.0
     - rb-paint
     - ruby>=3.2
 
@@ -28,7 +31,7 @@ tests:
 
 about:
   license: BSD-3-Clause
-  license_file: ${{ name }}-${{ version }}/LICENSE
+  license_file: lolcat-${{ version }}/LICENSE
   summary: Rainbows and unicorns!
   homepage: https://rubygems.org/gems/lolcat
   repository: https://github.com/castwide/lolcat
