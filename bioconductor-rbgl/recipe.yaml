@@ -1,10 +1,7 @@
-# Suggests: Rgraphviz, XML, RUnit, BiocGenerics, BiocStyle, knitr
-schema_version: 1
-
 context:
-  version: 1.78.0
+  version: 1.82.0
   name: RBGL
-  bioc: 3.18
+  bioc: 3.20
 
 package:
   name: bioconductor-${{ name|lower }}
@@ -16,7 +13,7 @@ source:
     - https://bioconductor.org/packages/${{ bioc }}/bioc/src/contrib/Archive/${{ name }}/${{ name }}_${{ version }}.tar.gz
     - https://bioarchive.galaxyproject.org/${{ name }}_${{ version }}.tar.gz
     - https://depot.galaxyproject.org/software/bioconductor-${{ name|lower }}/bioconductor-${{ name|lower }}_${{ version }}_src_all.tar.gz
-  md5: a18b5ad5c49f058b6f65a2bd0a4274d1
+  md5: 3c15ded2511af5c004e3e541d1a243f8
 
 build:
   number: 0
@@ -27,14 +24,14 @@ build:
 
 requirements:
   host:
-    - bioconductor-graph >=1.80.0,<1.81.0
-    - r-base=4.3
+    - bioconductor-graph >=1.84.0,<1.85.0
+    - r-base=4.4
     - r-bh
     - libblas
     - liblapack
   run:
-    - bioconductor-graph >=1.80.0,<1.81.0
-    - r-base>=4.3
+    - bioconductor-graph >=1.84.0,<1.85.0
+    - r-base=4.4
     - r-bh
   build:
     - ${{ compiler('c') }}
@@ -44,7 +41,7 @@ requirements:
 
 tests:
   - script:
-      - $R -e "library('${{ name }}')"
+      - R -e "library('${{ name }}')"
 
 about:
   license: Artistic-2.0
@@ -60,4 +57,3 @@ extra:
     name: bioconductor-rbgl
     path: recipes/bioconductor-rbgl
     version: 1.56.0
-
