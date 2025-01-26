@@ -1,10 +1,7 @@
-# Suggests: affydata, hgu95av2cdf, BiocStyle, knitr, rmarkdown, dplyr, testthat
-schema_version: 1
-
 context:
-  version: 3.70.0
+  version: 3.74.0
   name: vsn
-  bioc: 3.18
+  bioc: 3.20
 
 package:
   name: bioconductor-${{ name|lower }}
@@ -27,19 +24,19 @@ build:
 
 requirements:
   host:
-    - bioconductor-affy >=1.80.0,<1.81.0
-    - bioconductor-biobase >=2.62.0,<2.63.0
-    - bioconductor-limma >=3.58.0,<3.59.0
-    - r-base=4.3
+    - bioconductor-affy >=1.84.0,<1.85.0
+    - bioconductor-biobase >=2.66.0,<2.67.0
+    - bioconductor-limma >=3.62.0,<3.63.0
+    - r-base=4.4
     - r-ggplot2
     - r-lattice
     - libblas
     - liblapack
   run:
-    - bioconductor-affy >=1.80.0,<1.81.0
-    - bioconductor-biobase >=2.62.0,<2.63.0
-    - bioconductor-limma >=3.58.0,<3.59.0
-    - r-base>=4.3
+    - bioconductor-affy >=1.84.0,<1.85.0
+    - bioconductor-biobase >=2.66.0,<2.67.0
+    - bioconductor-limma >=3.62.0,<3.63.0
+    - r-base=4.4
     - r-ggplot2
     - r-lattice
   build:
@@ -49,7 +46,7 @@ requirements:
 
 tests:
   - script:
-      - $R -e "library('${{ name }}')"
+      - R -e "library('${{ name }}')"
 
 about:
   license: Artistic-2.0
@@ -64,4 +61,3 @@ extra:
     name: bioconductor-vsn
     path: recipes/bioconductor-vsn
     version: 3.48.1
-
