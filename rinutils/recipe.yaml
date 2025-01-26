@@ -1,0 +1,32 @@
+context:
+  version: 0.10.3
+
+package:
+  name: rinutils
+  version: ${{ version }}
+
+source:
+  url: https://github.com/shlomif/rinutils/archive/${{ version }}.tar.gz
+  sha256: 6e4af1edb5cedb660d97607a7b02bec0eb25137d4a832ca00b42238753f0e02a
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - mkdir -p ${PREFIX}/include
+    - cp -r rinutils/include/rinutils ${PREFIX}/include
+
+tests:
+  - script:
+      - test -f ${PREFIX}/include/rinutils/rinutils.h
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: C11 / gnu11 utilities C library
+  homepage: https://github.com/shlomif/rinutils
+  repository: https://github.com/shlomif/rinutils
+
+extra:
+  recipe-maintainers:
+    - danielnachun
