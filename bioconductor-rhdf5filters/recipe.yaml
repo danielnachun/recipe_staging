@@ -30,6 +30,7 @@ requirements:
     - r-base=4.4
     - libblas
     - liblapack
+    - zlib
   run:
     - bioconductor-rhdf5lib >=1.28.0,<1.29.0
     - r-base=4.4
