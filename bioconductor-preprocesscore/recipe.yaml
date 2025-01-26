@@ -1,9 +1,7 @@
-schema_version: 1
-
 context:
-  version: 1.64.0
+  version: 1.68.0
   name: preprocessCore
-  bioc: 3.18
+  bioc: 3.20
 
 package:
   name: bioconductor-${{ name|lower }}
@@ -15,10 +13,10 @@ source:
     - https://bioconductor.org/packages/${{ bioc }}/bioc/src/contrib/Archive/${{ name }}/${{ name }}_${{ version }}.tar.gz
     - https://bioarchive.galaxyproject.org/${{ name }}_${{ version }}.tar.gz
     - https://depot.galaxyproject.org/software/bioconductor-${{ name|lower }}/bioconductor-${{ name|lower }}_${{ version }}_src_all.tar.gz
-  md5: 2116c6363074b59becdaf7a1e88caf91
+  md5: 61afd1d17c726fe857064bd7d1e9da07
 
 build:
-  number: 1
+  number: 0
   dynamic_linking:
     rpaths:
       - lib/R/lib/
@@ -26,11 +24,11 @@ build:
 
 requirements:
   host:
-    - r-base=4.3
+    - r-base=4.4
     - libblas
     - liblapack
   run:
-    - r-base>=4.3
+    - r-base=4.4
   build:
     - ${{ compiler('c') }}
     - automake
@@ -39,13 +37,12 @@ requirements:
 
 tests:
   - script:
-      - $R -e "library('${{ name }}')"
+      - R -e "library('${{ name }}')"
 
 about:
-  license: LGPL (>= 2)
+  license: LGPL-2.0-or-later
   summary: A collection of pre-processing functions
   description: A library of core preprocessing routines.
-  license_file: ${{ env.get("PREFIX") }}/lib/R/share/licenses/LGPL-3
   homepage: https://bioconductor.org/packages/${{ bioc }}/bioc/html/${{ name }}.html
 
 extra:
@@ -56,4 +53,3 @@ extra:
     name: bioconductor-preprocesscore
     path: recipes/bioconductor-preprocesscore
     version: 1.42.0
-
