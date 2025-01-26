@@ -27,7 +27,7 @@ requirements:
 
 tests:
   - script:
-      - lolcat --help
+      - echo "Hello world" | lolcat
 
 about:
   license: BSD-3-Clause
