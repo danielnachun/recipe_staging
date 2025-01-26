@@ -10,6 +10,7 @@ source:
   rev: 576735cf656ece1bfd314e617b91c0e9d486d262
 
 build:
+  noarch: generic
   number: 0
   script: |
     sed -i "s?/opt?${PREFIX}/share/?" colorscript.sh
