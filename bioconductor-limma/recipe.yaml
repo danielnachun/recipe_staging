@@ -1,10 +1,7 @@
-# Suggests: BiasedUrn, ellipse, gplots, knitr, locfit, MASS, splines, affy, AnnotationDbi, Biobase, BiocStyle, GO.db, illuminaio, org.Hs.eg.db, vsn
-schema_version: 1
-
 context:
-  version: 3.58.1
+  version: 3.62.1
   name: limma
-  bioc: 3.18
+  bioc: 3.20
 
 package:
   name: bioconductor-${{ name|lower }}
@@ -16,7 +13,7 @@ source:
     - https://bioconductor.org/packages/${{ bioc }}/bioc/src/contrib/Archive/${{ name }}/${{ name }}_${{ version }}.tar.gz
     - https://bioarchive.galaxyproject.org/${{ name }}_${{ version }}.tar.gz
     - https://depot.galaxyproject.org/software/bioconductor-${{ name }}/bioconductor-${{ name }}_${{ version }}_src_all.tar.gz
-  md5: f52a816d0d34b01f721654f90a1fb5f5
+  md5: 60f71c513c6724401b8d114b8d669e08
 
 build:
   number: 0
@@ -27,12 +24,12 @@ build:
 
 requirements:
   host:
-    - r-base=4.3
+    - r-base=4.4
     - r-statmod
     - libblas
     - liblapack
   run:
-    - r-base>=4.3
+    - r-base=4.4
     - r-statmod
   build:
     - ${{ compiler('c') }}
@@ -41,13 +38,12 @@ requirements:
 
 tests:
   - script:
-      - $R -e "library('${{ name }}')"
+      - R -e "library('${{ name }}')"
 
 about:
-  license: GPL (>=2)
+  license: GPL-2.0-or-later
   summary: Linear Models for Microarray Data
   description: Data analysis, linear models and differential expression for microarray data.
-  license_file: ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-3
   homepage: https://bioconductor.org/packages/${{ bioc }}/bioc/html/${{ name }}.html
 
 extra:
@@ -58,4 +54,3 @@ extra:
     name: bioconductor-limma
     path: recipes/bioconductor-limma
     version: 3.36.5
-
