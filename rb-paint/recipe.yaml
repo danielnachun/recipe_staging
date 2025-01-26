@@ -1,0 +1,38 @@
+context:
+  version: 2.3.0
+
+package:
+  name: rb-paint
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/paint-${{ version }}.gem
+  sha256: 327d623e4038619d5bd99ae5db07973859cd78400c7f0329eea283cef8e83be5
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies paint-${{ version }}.gem
+    - gem unpack paint-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby=3.2
+  run:
+    - ruby>=3.2
+
+tests:
+  - script:
+      - ruby -r paint -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: paint-${{ version }}/MIT-LICENSE.txt
+  summary: Terminal painter with RGB and 256 (fallback) color and terminal effects support.
+  homepage: https://rubygems.org/gems/paint
+  repository: https://github.com/janlelis/paint
+
+extra:
+  recipe-maintainers:
+    - danielnachun
