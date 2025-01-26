@@ -10,6 +10,7 @@ source:
   sha256: c15bc10712835d3a9bcda780dc9453362567bf48d1185905dc7ef2334d79aadd
 
 build:
+  noarch: generic
   number: 0
   script:
     - make install prefix=${PREFIX}
