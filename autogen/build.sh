@@ -23,9 +23,9 @@ sed -i 's/"2.2 2.0 1.8"/"3.0 2.2 2.0 1.8"/' configure
     --prefix=${PREFIX} \
     --libdir=${PREFIX}/lib
 
-make
+make --trace
 # make check
-make install
+make --trace install
 
 sed -i "s?${PREFIX}/bin/perl?/usr/bin/env perl?" ${PREFIX}/share/autogen/mdoc2man
 sed -i "s?${PREFIX}/bin/perl?/usr/bin/env perl?" ${PREFIX}/share/autogen/man2mdoc
