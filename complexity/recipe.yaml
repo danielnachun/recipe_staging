@@ -23,13 +23,14 @@ requirements:
     - make
     - texinfo
   host:
+    - autogen
     - libtool
   run:
     - autogen
 
 tests:
   - script:
-      - complexity
+      - complexity --help
 
 about:
   license: GPL-3.0-or-later
