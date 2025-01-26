@@ -6,7 +6,7 @@ package:
   version: ${{ version }}
 
 source:
-  url: https://ftp.gnu.org/gnu/autogen/rel${{ version }}/autogen-${{ version }}.tar.xz
+  url: https://ftp.gnu.org/gnu/${{ name }}/rel${{ version }}/${{ name }}-${{ version }}.tar.xz
   sha256: f8a13466b48faa3ba99fe17a069e71c9ab006d9b1cfabe699f8c60a47d5bb49a
   patches:
     - 0001-allow-newer-Guile.patch
@@ -20,9 +20,11 @@ requirements:
     - autoconf
     - automake
     - coreutils
+    - gettext-tools
     - make
     - pkg-config
     - sed
+    - xz-tools
   host:
     - guile
     - libtool
@@ -33,7 +35,7 @@ requirements:
 
 tests:
   - script:
-      - autogen -v
+      - ${{ name }} -v
 
 about:
   license: GPL-3.0-or-later
