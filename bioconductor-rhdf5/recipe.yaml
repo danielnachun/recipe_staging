@@ -1,11 +1,7 @@
-# Suggests: bit64, BiocStyle, knitr, rmarkdown, testthat, bench, dplyr, ggplot2, mockery, BiocParallel
-# SystemRequirements: GNU make
-schema_version: 1
-
 context:
-  version: 2.46.1
+  version: 2.50.0
   name: rhdf5
-  bioc: 3.18
+  bioc: 3.20
 
 package:
   name: bioconductor-${{ name|lower }}
@@ -17,7 +13,7 @@ source:
     - https://bioconductor.org/packages/${{ bioc }}/bioc/src/contrib/Archive/${{ name }}/${{ name }}_${{ version }}.tar.gz
     - https://bioarchive.galaxyproject.org/${{ name }}_${{ version }}.tar.gz
     - https://depot.galaxyproject.org/software/bioconductor-${{ name }}/bioconductor-${{ name }}_${{ version }}_src_all.tar.gz
-  md5: 947e662fe5f427ed0cc839e8049b431e
+  md5: 3b8b33f3ee9a260cceefab2911d1cd63
 
 build:
   number: 0
@@ -28,17 +24,16 @@ build:
 
 requirements:
   host:
-    - bioconductor-rhdf5filters >=1.14.0,<1.15.0
-    - bioconductor-rhdf5lib >=1.24.0,<1.25.0
-    - bioconductor-s4vectors >=0.40.0,<0.41.0
-    - r-base=4.3
+    - bioconductor-rhdf5filters >=1.18.0,<1.19.0
+    - bioconductor-rhdf5lib >=1.28.0,<1.29.0
+    - r-base=4.4
     - libblas
     - liblapack
+    - zlib
   run:
-    - bioconductor-rhdf5filters >=1.14.0,<1.15.0
-    - bioconductor-rhdf5lib >=1.24.0,<1.25.0
-    - bioconductor-s4vectors >=0.40.0,<0.41.0
-    - r-base>=4.3
+    - bioconductor-rhdf5filters >=1.18.0,<1.19.0
+    - bioconductor-rhdf5lib >=1.28.0,<1.29.0
+    - r-base=4.4
   build:
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
@@ -48,7 +43,7 @@ requirements:
 
 tests:
   - script:
-      - $R -e "library('${{ name }}')"
+      - R -e "library('${{ name }}')"
 
 about:
   license: Artistic-2.0
@@ -63,4 +58,3 @@ extra:
     name: bioconductor-rhdf5
     path: recipes/bioconductor-rhdf5
     version: 2.24.0
-
