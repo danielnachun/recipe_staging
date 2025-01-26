@@ -29,6 +29,6 @@ test -x $SRC_DIR/getdefs/getdefs
 test -x $SRC_DIR/columns/columns
 make --trace install
 
-sed -i "s?${PREFIX}/bin/perl?/usr/bin/env perl?" ${PREFIX}/share/autogen/mdoc2man
-sed -i "s?${PREFIX}/bin/perl?/usr/bin/env perl?" ${PREFIX}/share/autogen/man2mdoc
-sed -i "s?${PREFIX}/bin/perl?/usr/bin/env perl?" ${PREFIX}/share/autogen/mdoc2texi
+sed -i "s?${BUILD_PREFIX}/bin/perl?/usr/bin/env perl?" ${PREFIX}/share/autogen/mdoc2man
+sed -i "s?${BUILD_PREFIX}/bin/perl?/usr/bin/env perl?" ${PREFIX}/share/autogen/man2mdoc
+sed -i "s?${BUILD_PREFIX}/bin/perl?/usr/bin/env perl?" ${PREFIX}/share/autogen/mdoc2texi
