@@ -1,0 +1,39 @@
+context:
+  version: 1.4
+
+package:
+  name: perl-app-rainbarf
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/S/SY/SYP/App-rainbarf-${{ version }}.tar.gz
+  sha256: 4f139ad35faaf2de0623dc0bb1dd89fa5a431e548bfec87dee194cf0e25cc97d
+
+build:
+  number: 0
+  noarch: generic
+  script: |
+    perl Build.PL
+    perl ./Build
+    perl ./Build test
+    perl ./Build install --installdirs site
+
+requirements:
+  host:
+    - perl=5.32
+    - perl-module-build
+  run:
+    - perl>=5.32
+
+tests:
+  - script:
+      - rainbarf --help 2>&1 | grep -q "rainbarf - CPU/RAM/battery stats chart bar for tmux (and GNU screen)"
+
+about:
+  license: Artistic-2.0 OR GPL-1.0-or-later
+  summary: CPU/RAM/battery stats chart bar for tmux (and GNU screen)
+  homepage: https://github.com/creaktive/rainbarf
+
+extra:
+  recipe-maintainers:
+    - danielnachun
