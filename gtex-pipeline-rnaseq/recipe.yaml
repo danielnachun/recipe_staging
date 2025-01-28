@@ -1,19 +1,18 @@
-schema_version: 1
-
 context:
-  name: gtex-pipeline-rnaseq
   version: gtex_v8
 
 package:
-  name: ${{ name|lower }}
+  name: gtex-pipeline-rnaseq
   version: ${{ version }}
 
 source:
   url: https://github.com/broadinstitute/gtex-pipeline/archive/bed31e12a48b25db8b111252e2136b31c64c9e82.zip
   sha256: 78a2a157eb059f6c5ac96ff0c68cc2f3fa1737d2c2f5d5b8545021f705c6174c
+  patches:
+    - 0001-don-t-use-JAR-paths.patch
 
 build:
-  number: 2
+  number: 3
   noarch: python
 
 requirements:
@@ -38,26 +37,25 @@ requirements:
     #- star
 
 tests:
-  - script:
-      - aggregate_rnaseqc_metrics.py -h
-      - aggregate_rsem_results.py -h
-      - bam2coverage.py -h
-      - combine_GCTs.py -h
-      - mpileup.py -h
-      - process_star_junctions.py -h
-      - run_MarkDuplicates.py -h
-      - "run_RSEM.py 2>&1 | grep -q \"usage: run_RSEM.py \\[-h\\] \\[-o OUTPUT_DIR\\] \\[--max_frag_len MAX_FRAG_LEN\\]\""
-      - run_STAR.py -h
-      - run_SamToFastq.py -h
-      - run_rnaseqc.py -h
-      - test -f ${PREFIX}/bin/run_bamsync.sh
+  - script: |
+      aggregate_rnaseqc_metrics.py -h
+      aggregate_rsem_results.py -h
+      bam2coverage.py -h
+      combine_GCTs.py -h
+      mpileup.py -h
+      process_star_junctions.py -h
+      run_MarkDuplicates.py -h
+      run_RSEM.py 2>&1 | grep -q "usage: run_RSEM.py \\[-h\\] \\[-o OUTPUT_DIR\\] \\[--max_frag_len MAX_FRAG_LEN\\]"
+      run_STAR.py -h
+      run_SamToFastq.py -h
+      run_rnaseqc.py -h
+      test -f ${PREFIX}/bin/run_bamsync.sh
 
 about:
-  license: OTHER
+  license: LicenseRef-OTHER
   summary: GTEx & TOPMed data production and analysis pipelines - RNA-seq component
   homepage: https://github.com/broadinstitute/gtex-pipeline
 
 extra:
   recipe-maintainers:
     - danielnachun
-

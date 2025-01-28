@@ -2,6 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+mkdir -p ${PREFIX}/bin
 install -m 755 "${SRC_DIR}/rnaseq/src/aggregate_rnaseqc_metrics.py" "${PREFIX}/bin/aggregate_rnaseqc_metrics.py"
 install -m 755 "${SRC_DIR}/rnaseq/src/aggregate_rsem_results.py" "${PREFIX}/bin/aggregate_rsem_results.py"
 install -m 755 "${SRC_DIR}/rnaseq/src/bam2coverage.py" "${PREFIX}/bin/bam2coverage.py"
