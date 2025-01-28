@@ -1,10 +1,7 @@
-# Suggests: signal, waveslim, BiocStyle, knitr, rmarkdown, RUnit, bench
-schema_version: 1
-
 context:
-  version: 1.68.0
+  version: 1.72.0
   name: MassSpecWavelet
-  bioc: 3.18
+  bioc: 3.20
 
 package:
   name: bioconductor-${{ name|lower }}
@@ -16,7 +13,7 @@ source:
     - https://bioconductor.org/packages/${{ bioc }}/bioc/src/contrib/Archive/${{ name }}/${{ name }}_${{ version }}.tar.gz
     - https://bioarchive.galaxyproject.org/${{ name }}_${{ version }}.tar.gz
     - https://depot.galaxyproject.org/software/bioconductor-${{ name|lower }}/bioconductor-${{ name|lower }}_${{ version }}_src_all.tar.gz
-  md5: 387636ea7c674fe339c56a8af3458f8a
+  md5: 354eea90e997824d5812d14c0fc0a588
 
 build:
   number: 0
@@ -27,11 +24,9 @@ build:
 
 requirements:
   host:
-    - r-base=4.3
-    - libblas
-    - liblapack
+    - r-base=4.4
   run:
-    - r-base>=4.3
+    - r-base=4.4
   build:
     - ${{ compiler('c') }}
     - make
@@ -39,13 +34,12 @@ requirements:
 
 tests:
   - script:
-      - $R -e "library('${{ name }}')"
+      - R -e "library('${{ name }}')"
 
 about:
-  license: LGPL (>= 2)
+  license: LGPL-2.1-or-later
   summary: Peak Detection for Mass Spectrometry data using wavelet-based algorithms
   description: Peak Detection in Mass Spectrometry data is one of the important preprocessing steps. The performance of peak detection affects subsequent processes, including protein identification, profile alignment and biomarker identification. Using Continuous Wavelet Transform (CWT), this package provides a reliable algorithm for peak detection that does not require any type of smoothing or previous baseline correction method, providing more consistent results for different spectra. See <doi:10.1093/bioinformatics/btl355} for further details.
-  license_file: ${{ env.get("PREFIX") }}/lib/R/share/licenses/LGPL-3
   homepage: https://bioconductor.org/packages/${{ bioc }}/bioc/html/${{ name }}.html
 
 extra:
@@ -55,4 +49,3 @@ extra:
     name: bioconductor-massspecwavelet
     path: recipes/bioconductor-massspecwavelet
     version: 1.46.0
-
