@@ -1,11 +1,7 @@
-# Suggests: RUnit
-# SystemRequirements: None
-schema_version: 1
-
 context:
-  version: 1.62.0
+  version: 1.66.0
   name: Rdisop
-  bioc: 3.18
+  bioc: 3.20
 
 package:
   name: bioconductor-${{ name|lower }}
@@ -17,13 +13,10 @@ source:
     - https://bioconductor.org/packages/${{ bioc }}/bioc/src/contrib/Archive/${{ name }}/${{ name }}_${{ version }}.tar.gz
     - https://bioarchive.galaxyproject.org/${{ name }}_${{ version }}.tar.gz
     - https://depot.galaxyproject.org/software/bioconductor-${{ name|lower }}/bioconductor-${{ name|lower }}_${{ version }}_src_all.tar.gz
-  md5: 508c96aaea70daa872ec75712570f6da
-  <conda_recipe_manager.types.SentinelType object at 0x105423290>:  #patches:
-    #- 12441fdc585228fd1f7d7e01fdd83c7265d83eea.patch
-    #- 84f57e78e2d2cf221b649c4979a4af574aa60128.patch
+  md5: 2c028e825b2eb802759a8005d318c009
 
 build:
-  number: 1
+  number: 0
   dynamic_linking:
     rpaths:
       - lib/R/lib/
@@ -31,12 +24,12 @@ build:
 
 requirements:
   host:
-    - r-base=4.3
+    - r-base=4.4
     - r-rcpp
     - libblas
     - liblapack
   run:
-    - r-base>=4.3
+    - r-base=4.4
     - r-rcpp
   build:
     - ${{ compiler('c') }}
@@ -48,13 +41,12 @@ requirements:
 
 tests:
   - script:
-      - $R -e "library('${{ name }}')"
+      - R -e "library('${{ name }}')"
 
 about:
   license: GPL-2.0
   summary: Decomposition of Isotopic Patterns
   description: Identification of metabolites using high precision mass spectrometry. MS Peaks are used to derive a ranked list of sum formulae, alternatively for a given sum formula the theoretical isotope distribution can be calculated to search in MS peak lists.
-  license_file: ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
   homepage: https://bioconductor.org/packages/${{ bioc }}/bioc/html/${{ name }}.html
 
 extra:
@@ -62,4 +54,3 @@ extra:
     name: bioconductor-rdisop
     path: recipes/bioconductor-rdisop
     version: 1.42.0
-
