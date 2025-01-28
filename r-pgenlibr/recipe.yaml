@@ -23,10 +23,11 @@ requirements:
       then: cross-r-base ${{ r_base }}
     - ${{ compiler('cxx') }}
   host:
-    - r-base=4.4
+    - r-base
     - r-rcpp
+    - zlib
   run:
-    - r-base=4.4
+    - r-base
     - r-rcpp
 
 tests:
