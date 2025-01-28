@@ -1,11 +1,7 @@
-# Suggests: knitr, testthat, Seurat, ggpubr, foreach, psych, MultiAssayExperiment, SummarizedExperiment, SingleCellExperiment, ggrastr, mvtnorm, GGally, rmarkdown, data.table, tidyverse, BiocStyle, Matrix, markdown
-# SystemRequirements: Python (>=3), numpy, pandas, h5py, scipy, argparse, sklearn, mofapy2
-schema_version: 1
-
 context:
-  version: 1.12.0
+  version: 1.16.0
   name: MOFA2
-  bioc: 3.18
+  bioc: 3.20
 
 package:
   name: bioconductor-${{ name|lower }}
@@ -17,9 +13,10 @@ source:
     - https://bioconductor.org/packages/${{ bioc }}/bioc/src/contrib/Archive/${{ name }}/${{ name }}_${{ version }}.tar.gz
     - https://bioarchive.galaxyproject.org/${{ name }}_${{ version }}.tar.gz
     - https://depot.galaxyproject.org/software/bioconductor-${{ name|lower }}/bioconductor-${{ name|lower }}_${{ version }}_src_all.tar.gz
-  md5: 0ce3c0d9a65e9e3f18d387af8a86ef6e
+  md5: aa84acedfadae2954706a4bdc6cf4658
 
 build:
+  noarch: generic
   number: 0
   dynamic_linking:
     rpaths:
@@ -28,11 +25,11 @@ build:
 
 requirements:
   host:
-    - bioconductor-basilisk >=1.14.0,<1.15.0
-    - bioconductor-delayedarray >=0.28.0,<0.29.0
-    - bioconductor-hdf5array >=1.30.0,<1.31.0
-    - bioconductor-rhdf5 >=2.46.0,<2.47.0
-    - r-base=4.3
+    - bioconductor-basilisk >=1.18.0,<1.19.0
+    - bioconductor-delayedarray >=0.32.0,<0.33.0
+    - bioconductor-hdf5array >=1.34.0,<1.35.0
+    - bioconductor-rhdf5 >=2.50.0,<2.51.0
+    - r-base=4.4
     - r-corrplot
     - r-cowplot
     - r-dplyr
@@ -49,11 +46,11 @@ requirements:
     - r-tidyr
     - r-uwot
   run:
-    - bioconductor-basilisk >=1.14.0,<1.15.0
-    - bioconductor-delayedarray >=0.28.0,<0.29.0
-    - bioconductor-hdf5array >=1.30.0,<1.31.0
-    - bioconductor-rhdf5 >=2.46.0,<2.47.0
-    - r-base>=4.3
+    - bioconductor-basilisk >=1.18.0,<1.19.0
+    - bioconductor-delayedarray >=0.32.0,<0.33.0
+    - bioconductor-hdf5array >=1.34.0,<1.35.0
+    - bioconductor-rhdf5 >=2.50.0,<2.51.0
+    - r-base=4.4
     - r-corrplot
     - r-cowplot
     - r-dplyr
@@ -76,12 +73,11 @@ requirements:
 
 tests:
   - script:
-      - $R -e "library('${{ name }}')"
+      - R -e "library('${{ name }}')"
 
 about:
-  license: file LICENSE
+  license: LicenseRef-Other
   summary: Multi-Omics Factor Analysis v2
   description: The MOFA2 package contains a collection of tools for training and analysing multi-omic factor analysis (MOFA). MOFA is a probabilistic factor model that aims to identify principal axes of variation from data sets that can comprise multiple omic layers and/or groups of samples. Additional time or space information on the samples can be incorporated using the MEFISTO framework, which is part of MOFA2. Downstream analysis functions to inspect molecular features underlying each factor, vizualisation, imputation etc are available.
   license_file: LICENSE
   homepage: https://bioconductor.org/packages/${{ bioc }}/bioc/html/${{ name }}.html
-
