@@ -1,8 +1,6 @@
-schema_version: 1
-
 context:
   name: yabai
-  version: 7.1.5
+  version: 7.1.6
 
 package:
   name: ${{ name|lower }}
@@ -10,7 +8,7 @@ package:
 
 source:
   url: https://github.com/koekeishiya/yabai/archive/v${{ version }}.tar.gz
-  sha256: 2babd9fd89fb228ef826335d57c223ed885d578490637185fabbdc3e45726dc5
+  sha256:  5d4d13b4b5a04f8192d47c357959f4e2f55997f36445940048ec9bcc88afb803
 
 build:
   number: 0
@@ -35,4 +33,3 @@ about:
 extra:
   recipe-maintainers:
     - danielnachun
-
