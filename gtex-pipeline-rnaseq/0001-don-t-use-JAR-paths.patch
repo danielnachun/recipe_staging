@@ -1,0 +1,79 @@
+From 61e2f44ae83b12a39988f6823014724f182c7c86 Mon Sep 17 00:00:00 2001
+From: Daniel Nachun <daniel.nachun@gmail.com>
+Date: Tue, 28 Jan 2025 14:41:41 -0800
+Subject: [PATCH] don't use JAR paths
+
+---
+ qtl/src/run_GATK_ASEReadCounter.py | 4 +---
+ rnaseq/src/run_MarkDuplicates.py   | 4 +---
+ rnaseq/src/run_SamToFastq.py       | 3 +--
+ 3 files changed, 3 insertions(+), 8 deletions(-)
+
+diff --git a/qtl/src/run_GATK_ASEReadCounter.py b/qtl/src/run_GATK_ASEReadCounter.py
+index e5c9f6b..053619c 100755
+--- a/qtl/src/run_GATK_ASEReadCounter.py
++++ b/qtl/src/run_GATK_ASEReadCounter.py
+@@ -7,7 +7,6 @@ import subprocess
+ from datetime import datetime
+ 
+ parser = argparse.ArgumentParser(description='Run GATK ASEReadCounter')
+-parser.add_argument('gatk_jar', help='GATK4 .jar file')
+ parser.add_argument('genome_fasta', help='FASTA reference genome')
+ parser.add_argument('het_vcf', help='VCF with het sites (biallelic only)')
+ parser.add_argument('bam_file', help='RNA-seq BAM file filtered for biased reads, e.g., using STAR/WASP (grep -v "vW:i:[2-7]")')
+@@ -20,8 +19,7 @@ args = parser.parse_args()
+ 
+ print('['+datetime.now().strftime("%b %d %H:%M:%S")+'] Running GATK ASEReadCounter', flush=True)
+ 
+-cmd = f"java -jar {args.gatk_jar} \
+-    ASEReadCounter \
++cmd = f"gatk ASEReadCounter \
+     -R {args.genome_fasta} \
+     -I {args.bam_file} \
+     -V {args.het_vcf} \
+diff --git a/rnaseq/src/run_MarkDuplicates.py b/rnaseq/src/run_MarkDuplicates.py
+index 2e061c9..cf8042f 100755
+--- a/rnaseq/src/run_MarkDuplicates.py
++++ b/rnaseq/src/run_MarkDuplicates.py
+@@ -26,7 +26,6 @@ parser.add_argument('--sorting_collection_size_ratio', default=0.25, type=float)
+ parser.add_argument('--tagging_policy', default='DontTag', choices=['All', 'OpticalOnly', 'DontTag'])
+ parser.add_argument('--optical_duplicate_pixel_distance', default=100,
+                     help='Maximum offset between two duplicate clusters. 100 (default) is appropriate for unpatterned, 2500 recommended for patterned flowcells.')
+-parser.add_argument('--jar', default='/opt/picard-tools/picard.jar', help='Path to Picard jar')
+ args = parser.parse_args()
+ 
+ print('['+datetime.now().strftime("%b %d %H:%M:%S")+'] Starting MarkDuplicates', flush=True)
+@@ -35,8 +34,7 @@ if not os.path.exists(args.output_dir):
+     os.makedirs(args.output_dir)
+ 
+ with cd(args.output_dir):
+-    subprocess.check_call('java -jar -Xmx{}g {}'.format(args.memory, args.jar)\
+-        +' MarkDuplicates I={}'.format(args.input_bam)\
++    subprocess.check_call('picard MarkDuplicates I={}'.format(args.input_bam)\
+         +' O={}'.format(os.path.basename(args.input_bam).replace('.bam', '.md.bam'))\
+         +' PROGRAM_RECORD_ID=null'\
+         +' MAX_RECORDS_IN_RAM={}'.format(args.max_records_in_ram)\
+diff --git a/rnaseq/src/run_SamToFastq.py b/rnaseq/src/run_SamToFastq.py
+index cf0f028..7bb0dab 100755
+--- a/rnaseq/src/run_SamToFastq.py
++++ b/rnaseq/src/run_SamToFastq.py
+@@ -22,7 +22,6 @@ parser.add_argument('-p', '--prefix', type=str, default='Reads', help='Prefix fo
+ parser.add_argument('-o', '--output_dir', default=os.getcwd(), help='Directory to which FASTQs will be written')
+ parser.add_argument('-m', '--memory', default='8', type=str, help='Memory, in GB')
+ parser.add_argument('--reference_fasta', default=None, help='Path to reference sequence FASTA (required if input is CRAM)')
+-parser.add_argument('--jar', default='/opt/picard-tools/picard.jar', help='Path to Picard jar')
+ parser.add_argument('--gzip', type=str.lower, default='1', help='gzip compression level for FASTQs; see "man gzip"')
+ parser.add_argument('--include_non_pf_reads', type=str.lower, choices=['true', 'false'], default='true', help='Sets INCLUDE_NON_PF_READS option (PF: passed filtering). SamToFastq default: false')
+ parser.add_argument('--include_non_primary_alignments', type=str.lower, choices=['true', 'false'], default='false', help='Sets INCLUDE_NON_PRIMARY_ALIGNMENTS option. SamToFastq default: false')
+@@ -47,7 +46,7 @@ with cd(args.output_dir):
+     subprocess.check_call('gzip -'+args.gzip+' -c < read0_pipe > '+fastq0+' &', shell=True)
+ 
+     # SamToFastq (write to pipes)
+-    cmd = 'java -jar -Xmx'+str(int(args.memory))+'g '+args.jar+' SamToFastq INPUT='+args.bam_file\
++    cmd = 'picard SamToFastq INPUT='+args.bam_file\
+         +' INCLUDE_NON_PF_READS='+args.include_non_pf_reads\
+         +' INCLUDE_NON_PRIMARY_ALIGNMENTS='+args.include_non_primary_alignments\
+         +' VALIDATION_STRINGENCY=SILENT FASTQ=read1_pipe SECOND_END_FASTQ=read2_pipe UNPAIRED_FASTQ=read0_pipe'
+-- 
+2.47.1
+
