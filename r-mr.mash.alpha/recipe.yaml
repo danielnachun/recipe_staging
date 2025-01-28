@@ -1,7 +1,5 @@
-schema_version: 1
-
 context:
-  version: 0.2.31
+  version: 0.3.36
   name: mr.mash.alpha
 
 package:
@@ -10,7 +8,7 @@ package:
 
 source:
   url: https://github.com/stephenslab/${{ name }}/archive/v${{ version }}.tar.gz
-  sha256: 24269e929ee0c56bf332621521fe5bb3a30f6fe5b6c1fc4775807487d52bab66
+  sha256: 9ce26c4869528a955681a589a7702fd945afd8f3de9515d7b560d2c10efb2688
 
 build:
   number: 0
@@ -27,7 +25,7 @@ requirements:
     - if: build_platform != target_platform
       then: cross-r-base ${{ r_base }}
   host:
-    - r-base=4.2
+    - r-base
     - r-ebnm
     - r-flashier
     - r-mashr
@@ -38,7 +36,7 @@ requirements:
     - r-rcpparmadillo
     - r-rcppparallel
   run:
-    - r-base>=4.2
+    - r-base
     - r-ebnm
     - r-flashier
     - r-mashr
@@ -51,10 +49,10 @@ requirements:
 
 tests:
   - script:
-      - "$R -e \"library('mr.mash.alpha')\""
+      - R -e "library('mr.mash.alpha')"
 
 about:
-  license: Other
+  license: LicenseRef-Other
   license_file: LICENSE
   summary: |
     Provides an implementation of methods for multivariate
@@ -64,4 +62,3 @@ about:
 extra:
   recipe-maintainers:
     - danielnachun
-
