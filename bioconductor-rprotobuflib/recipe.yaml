@@ -1,11 +1,7 @@
-# Suggests: knitr, rmarkdown
-# SystemRequirements: GNU make
-schema_version: 1
-
 context:
-  version: 2.14.0
+  version: 2.18.0
   name: RProtoBufLib
-  bioc: 3.18
+  bioc: 3.20
 
 package:
   name: bioconductor-${{ name|lower }}
@@ -17,7 +13,7 @@ source:
     - https://bioconductor.org/packages/${{ bioc }}/bioc/src/contrib/Archive/${{ name }}/${{ name }}_${{ version }}.tar.gz
     - https://bioarchive.galaxyproject.org/${{ name }}_${{ version }}.tar.gz
     - https://depot.galaxyproject.org/software/bioconductor-${{ name|lower }}/bioconductor-${{ name|lower }}_${{ version }}_src_all.tar.gz
-  md5: e7351127e6b19daaae94fcecc970292b
+  md5: 7de7917bb81b2f16b83661795e3f13bd
 
 build:
   number: 0
@@ -28,12 +24,12 @@ build:
 
 requirements:
   host:
-    - libtool
-    - r-base=4.3
+    - r-base=4.4
     - libblas
     - liblapack
+    - libtool
   run:
-    - r-base>=4.3
+    - r-base=4.4
   build:
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
@@ -45,7 +41,7 @@ requirements:
 
 tests:
   - script:
-      - $R -e "library('${{ name }}')"
+      - R -e "library('${{ name }}')"
 
 about:
   license: BSD-3-Clause
@@ -58,4 +54,3 @@ extra:
     name: bioconductor-rprotobuflib
     path: recipes/bioconductor-rprotobuflib
     version: 1.2.0
-
