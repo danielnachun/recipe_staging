@@ -52,7 +52,7 @@ tests:
       test -f ${PREFIX}/bin/run_bamsync.sh
 
 about:
-  license: OTHER
+  license: LicenseRef-OTHER
   summary: GTEx & TOPMed data production and analysis pipelines - RNA-seq component
   homepage: https://github.com/broadinstitute/gtex-pipeline
 
