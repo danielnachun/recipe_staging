@@ -1,7 +1,5 @@
-schema_version: 1
-
 context:
-  version: 0.3.5
+  version: 0.4.0
 
 package:
   name: r-pgenlibr
@@ -9,7 +7,7 @@ package:
 
 source:
   url: https://cran.r-project.org/src/contrib/pgenlibr_${{ version }}.tar.gz
-  sha256: fe267188953ff108645e54d5faed7b68170e01e9fbb271242703457b85074cda
+  sha256: b6278ab14c4126cfca038c1429c5c922cf321cc2186533f3457fd3a2aba981d0
 
 build:
   number: 0
@@ -25,16 +23,17 @@ requirements:
       then: cross-r-base ${{ r_base }}
     - ${{ compiler('cxx') }}
   host:
-    - r-base=4.2
+    - r-base
     - r-rcpp
+    - zlib
   run:
-    - r-base>=4.2
+    - r-base
     - r-rcpp
 
 tests:
   - script:
       - if: not win
-        then: "$R -e \"library('pgenlibr')\""
+        then: R -e "library('pgenlibr')"
 
 about:
   license: LGPL-3.0-or-later
@@ -44,4 +43,3 @@ about:
 extra:
   recipe-maintainers:
     - danielnachun
-
