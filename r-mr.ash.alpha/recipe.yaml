@@ -1,5 +1,3 @@
-schema_version: 1
-
 context:
   version: 0.1.43
   name: mr.ash.alpha
@@ -13,7 +11,7 @@ source:
   sha256: f48fa251971e3706f0efdd3cabd71cd40cf85ee6064dac3ffa81d90bb4be4742
 
 build:
-  number: 1
+  number: 2
   merge_build_and_host_envs: ${{ true if win }}
   dynamic_linking:
     rpaths:
@@ -27,22 +25,22 @@ requirements:
     - if: build_platform != target_platform
       then: cross-r-base ${{ r_base }}
   host:
-    - r-base=4.2
+    - r-base=4.4
     - r-matrix
     - r-rcpp
     - r-rcpparmadillo
   run:
-    - r-base>=4.2
+    - r-base=4.4
     - r-matrix
     - r-rcpp
     - r-rcpparmadillo
 
 tests:
   - script:
-      - "$R -e \"library('mr.ash.alpha')\""
+      - R -e "library('mr.ash.alpha')"
 
 about:
-  license: Other
+  license: LicenseRef-Other
   license_file: LICENSE
   summary: |
     Implements variational empirical Bayes methods for linear
@@ -54,4 +52,3 @@ about:
 extra:
   recipe-maintainers:
     - danielnachun
-
