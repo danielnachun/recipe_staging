@@ -7,6 +7,7 @@ install -m 755 "${SRC_DIR}/rnaseq/src/aggregate_rnaseqc_metrics.py" "${PREFIX}/b
 install -m 755 "${SRC_DIR}/rnaseq/src/aggregate_rsem_results.py" "${PREFIX}/bin/aggregate_rsem_results.py"
 install -m 755 "${SRC_DIR}/rnaseq/src/bam2coverage.py" "${PREFIX}/bin/bam2coverage.py"
 install -m 755 "${SRC_DIR}/rnaseq/src/combine_GCTs.py" "${PREFIX}/bin/combine_GCTs.py"
+install -m 755 "${SRC_DIR}/rnaseq/src/dapars.py" "${PREFIX}/bin/dapars.py"
 install -m 755 "${SRC_DIR}/rnaseq/src/mpileup.py" "${PREFIX}/bin/mpileup.py"
 install -m 755 "${SRC_DIR}/rnaseq/src/process_star_junctions.py" "${PREFIX}/bin/process_star_junctions.py"
 install -m 755 "${SRC_DIR}/rnaseq/src/run_MarkDuplicates.py" "${PREFIX}/bin/run_MarkDuplicates.py"
