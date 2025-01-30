@@ -1,0 +1,36 @@
+context:
+  version: gtex_v10
+
+package:
+  name: bamsync
+  version: ${{ version }}
+
+source:
+  url: https://github.com/broadinstitute/gtex-pipeline/archive/gtex_v10.tar.gz
+  sha256: 4d9c2f54761923ef803a5ad2e8fdfa0f0c88b901bcf01364935fb8b6b3ab21ab
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - make
+    - sed
+  host:
+    - bamtools
+    - libboost-devel
+
+tests:
+  - script:
+      - bamsync --help
+
+about:
+  license: LicenseRef-OTHER
+  summary: This utility adds the following information that is lost when realigning BAM files
+  homepage: https://github.com/broadinstitute/gtex-pipeline
+
+extra:
+  recipe-maintainers:
+    - danielnachun
