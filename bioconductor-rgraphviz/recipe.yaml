@@ -1,11 +1,7 @@
-# Suggests: RUnit, BiocGenerics, XML
-# SystemRequirements: optionally Graphviz (>= 2.16)
-schema_version: 1
-
 context:
-  version: 2.46.0
+  version: 2.50.0
   name: Rgraphviz
-  bioc: 3.18
+  bioc: 3.20
 
 package:
   name: bioconductor-${{ name|lower }}
@@ -17,7 +13,7 @@ source:
     - https://bioconductor.org/packages/${{ bioc }}/bioc/src/contrib/Archive/${{ name }}/${{ name }}_${{ version }}.tar.gz
     - https://bioarchive.galaxyproject.org/${{ name }}_${{ version }}.tar.gz
     - https://depot.galaxyproject.org/software/bioconductor-${{ name|lower }}/bioconductor-${{ name|lower }}_${{ version }}_src_all.tar.gz
-  md5: b93e5d1c383b1e5cd06e4dec89a43ce8
+  md5: 0e7b5c05caa3f2b31e26f04a26d4974b
 
 build:
   number: 0
@@ -28,13 +24,13 @@ build:
 
 requirements:
   host:
-    - bioconductor-graph >=1.80.0,<1.81.0
-    - r-base=4.3
+    - bioconductor-graph >=1.84.0,<1.85.0
+    - r-base=4.4
     - libblas
     - liblapack
   run:
-    - bioconductor-graph >=1.80.0,<1.81.0
-    - r-base>=4.3
+    - bioconductor-graph >=1.84.0,<1.85.0
+    - r-base=4.4
   build:
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
@@ -44,11 +40,10 @@ requirements:
 
 tests:
   - script:
-      - $R -e "library('${{ name }}')"
+      - R -e "library('${{ name }}')"
 
 about:
   license: PPL
   summary: Provides plotting capabilities for R graph objects
   description: Interfaces R with the AT and T graphviz library for plotting R graph objects from the graph package.
   homepage: https://bioconductor.org/packages/${{ bioc }}/bioc/html/${{ name }}.html
-
