@@ -89,9 +89,6 @@ jobs:
 
       - name: Build conda packages
         run: |
-          whoami
-          echo $(id -u)
-          echo $(id -g)
           docker run --rm --volume /tmp:/tmp \
             --volume /etc/passwd:/etc/passwd:ro \
             --volume /etc/group:/etc/group:ro \
