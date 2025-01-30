@@ -1,19 +1,16 @@
-schema_version: 1
-
 context:
-  name: gtex-pipeline-gene_model
-  version: gtex_v8
+  version: gtex_v10
 
 package:
-  name: ${{ name|lower }}
+  name: gtex-pipeline-gene_model
   version: ${{ version }}
 
 source:
-  url: https://github.com/broadinstitute/gtex-pipeline/archive/bed31e12a48b25db8b111252e2136b31c64c9e82.zip
-  sha256: 78a2a157eb059f6c5ac96ff0c68cc2f3fa1737d2c2f5d5b8545021f705c6174c
+  url: https://github.com/broadinstitute/gtex-pipeline/archive/${{ version }}.tar.gz
+  sha256: 4d9c2f54761923ef803a5ad2e8fdfa0f0c88b901bcf01364935fb8b6b3ab21ab
 
 build:
-  number: 1
+  number: 0
   noarch: python
 
 requirements:
@@ -27,7 +24,7 @@ tests:
       - collapse_annotation.py -h
 
 about:
-  license: OTHER
+  license: LicenseRef-OTHER
   summary: GTEx & TOPMed data production and analysis pipelines - gene model component
   homepage: https://github.com/broadinstitute/gtex-pipeline
   repository: https://github.com/broadinstitute/gtex-pipeline
@@ -35,4 +32,3 @@ about:
 extra:
   recipe-maintainers:
     - danielnachun
-
