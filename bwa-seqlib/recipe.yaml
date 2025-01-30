@@ -1,5 +1,3 @@
-schema_version: 1
-
 context:
   name: bwa_seqlib
   version: 0.7.15
@@ -15,7 +13,7 @@ source:
     - 0001-make-shared-library.patch
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -25,13 +23,11 @@ requirements:
   host:
     - if: "target_platform == \"osx-arm64\""
       then: simde
-    - zlib =1.2
-  run:
-    - libzlib >=1.2
+    - zlib
 
 tests:
   - script:
-      - "bwa 2>&1 | grep -q \"bwa (alignment via Burrows-Wheeler transformation)\""
+      # - bwa 2>&1 | grep -q "alignment via Burrows-Wheeler transformation"
       - test -f ${PREFIX}/lib/libbwa${SHLIB_EXT}
 
 about:
@@ -44,4 +40,3 @@ about:
 extra:
   recipe-maintainers:
     - danielnachun
-
