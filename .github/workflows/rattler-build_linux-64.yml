@@ -92,11 +92,12 @@ jobs:
           docker run --rm --volume /tmp:/tmp rattler-build \
             rattler-build build -c dnachun -c conda-forge -c bioconda \
             --output-dir /tmp/rattler-build --recipe-dir /tmp/recipes
+          chown -R 1001:1001 /tmp/rattler-build
 
       - name: Upload artifacts to GitHub Actions
         uses: actions/upload-artifact@v4
         with:
           name: rattler-build_${{github.event.pull_request.head.sha}}_linux-64
           path: |
-            /tmp/rattler-build/linux-64
-            /tmp/rattler-build/noarch
+            /tmp/rattler-build/linux-64/*.conda
+            /tmp/rattler-build/noarch/*.conda
