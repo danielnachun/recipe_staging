@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/broadinstitute/gtex-pipeline/archive/${{ version }}.tar.gz
-  sha256: 78a2a157eb059f6c5ac96ff0c68cc2f3fa1737d2c2f5d5b8545021f705c6174c
+  sha256: 4d9c2f54761923ef803a5ad2e8fdfa0f0c88b901bcf01364935fb8b6b3ab21ab
 
 build:
   number: 0
