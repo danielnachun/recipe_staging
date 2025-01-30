@@ -1,32 +1,33 @@
 context:
-  version: gtex_v8
+  version: gtex_v10
 
 package:
   name: gtex-pipeline-rnaseq
   version: ${{ version }}
 
 source:
-  url: https://github.com/broadinstitute/gtex-pipeline/archive/bed31e12a48b25db8b111252e2136b31c64c9e82.zip
-  sha256: 78a2a157eb059f6c5ac96ff0c68cc2f3fa1737d2c2f5d5b8545021f705c6174c
+  url: https://github.com/broadinstitute/gtex-pipeline/archive/${{ version }}.tar.gz
+  sha256: 4d9c2f54761923ef803a5ad2e8fdfa0f0c88b901bcf01364935fb8b6b3ab21ab
   patches:
     - 0001-don-t-use-JAR-paths.patch
 
 build:
-  number: 3
+  number: 0
   noarch: python
 
 requirements:
   build:
     - sed
   run:
-    - python >=3.6
-    - pytables
+    - matplotlib-base
     - numpy
     - pandas
-    - scipy
     - pyarrow
     - pybigwig
-    - matplotlib-base
+    - pytables
+    - python >=3.6
+    - qtl
+    - scipy
     - seaborn
     #- bedtools
     #- kent-tools
