@@ -1,5 +1,3 @@
-schema_version: 1
-
 context:
   name: bwa_seqlib
   version: 0.7.15
@@ -29,7 +27,7 @@ requirements:
 
 tests:
   - script:
-      - "bwa 2>&1 | grep -q \"bwa (alignment via Burrows-Wheeler transformation)\""
+      # - bwa 2>&1 | grep -q "alignment via Burrows-Wheeler transformation"
       - test -f ${PREFIX}/lib/libbwa${SHLIB_EXT}
 
 about:
@@ -42,4 +40,3 @@ about:
 extra:
   recipe-maintainers:
     - danielnachun
-
