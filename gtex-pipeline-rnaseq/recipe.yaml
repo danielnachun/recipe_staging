@@ -43,6 +43,7 @@ tests:
       aggregate_rsem_results.py -h
       bam2coverage.py -h
       combine_GCTs.py -h
+      dapars.py -h
       mpileup.py -h
       process_star_junctions.py -h
       run_MarkDuplicates.py -h
