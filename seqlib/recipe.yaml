@@ -30,6 +30,7 @@ requirements:
     - fermi-lite_seqlib
     - htslib
     - libtool
+    - liblzma-devel
     - if: "target_platform == \"osx-arm64\""
       then: simde
     - zlib
