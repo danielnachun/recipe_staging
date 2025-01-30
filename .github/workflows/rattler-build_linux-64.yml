@@ -89,11 +89,13 @@ jobs:
 
       - name: Build conda packages
         run: |
+          whoami
           echo $(id -u)
-          docker run --rm --volume /tmp:/tmp rattler-build \
+          echo $(id -g)
+          docker run --rm --volume /tmp:/tmp \
             --volume /etc/passwd:/etc/passwd:ro \
             --volume /etc/group:/etc/group:ro \
-            --user $(id -u) \
+            --user $(id -u) rattler-build \
             rattler-build build -c dnachun -c conda-forge -c bioconda \
             --output-dir /tmp/rattler-build --recipe-dir /tmp/recipes
 
