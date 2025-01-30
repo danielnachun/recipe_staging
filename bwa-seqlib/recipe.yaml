@@ -15,7 +15,7 @@ source:
     - 0001-make-shared-library.patch
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -25,9 +25,7 @@ requirements:
   host:
     - if: "target_platform == \"osx-arm64\""
       then: simde
-    - zlib =1.2
-  run:
-    - libzlib >=1.2
+    - zlib
 
 tests:
   - script:
