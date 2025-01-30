@@ -1,5 +1,3 @@
-schema_version: 1
-
 context:
   name: rnaseqc
   version: 2.4.2
@@ -18,7 +16,7 @@ source:
     target_directory: htslib
 
 build:
-  number: 4
+  number: 5
 
 requirements:
   build:
@@ -29,18 +27,15 @@ requirements:
     - make
     - sed
   host:
-    - boost-cpp=1.82
+    - boost-cpp
     - bzip2
     - htslib
     - jsoncpp
     - xz
     - seqlib
-    - zlib =1.2
+    - zlib
   run:
-    - libboost=1.82
-    - json-c
     - seqlib
-    - libzlib >=1.2
 
 tests:
   - script:
@@ -56,4 +51,3 @@ about:
 extra:
   recipe-maintainers:
     - danielnachun
-
