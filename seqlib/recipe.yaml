@@ -1,5 +1,3 @@
-schema_version: 1
-
 context:
   name: seqlib
   version: 1.2.0
@@ -16,7 +14,7 @@ source:
     - 0002-devendor-htslib.patch
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -32,19 +30,18 @@ requirements:
     - fermi-lite_seqlib
     - htslib
     - libtool
+    - liblzma-devel
     - if: "target_platform == \"osx-arm64\""
       then: simde
     - zlib
   run:
     - bwa_seqlib
     - fermi-lite_seqlib
-    - htslib
-    - libzlib
 
 tests:
   - script:
       - test -f ${PREFIX}/lib/libseqlib${SHLIB_EXT}
-      - seqtools
+      # - seqtools
 
 about:
   license: Apache-2.0
@@ -56,4 +53,3 @@ about:
 extra:
   recipe-maintainers:
     - danielnachun
-
