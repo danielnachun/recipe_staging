@@ -1,5 +1,3 @@
-schema_version: 1
-
 context:
   version: 0.3.154
 
@@ -12,7 +10,7 @@ source:
   sha256: 35daedc9be9d8b1015962f24a530d2a3e8ae62a4f5947c8c3eae69b8ea1bfde2
 
 build:
-  number: 0
+  number: 1
   merge_build_and_host_envs: ${{ true if win }}
   dynamic_linking:
     rpaths:
@@ -20,26 +18,20 @@ build:
       - lib/
 
 requirements:
-  build:
-    - if: build_platform != target_platform
-      then: cross-r-base ${{ r_base }}
   host:
-    - r-base=4.2
+    - r-base
     - r-mvtnorm
     - r-rcpp
     - r-rcpparmadillo
   run:
-    - r-base>=4.2
+    - r-base
     - r-mvtnorm
     - r-rcpp
     - r-rcpparmadillo
 
 tests:
   - script:
-      - if: not win
-        then: "$R -e \"library('udr')\""
-      - if: win
-        then: "\"%R%\" -e \"library('udr')\""
+    - R -e "library('udr')"
 
 about:
   license: BSD-3-Clause
@@ -50,4 +42,3 @@ about:
 extra:
   recipe-maintainers:
     - danielnachun
-
