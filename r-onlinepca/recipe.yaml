@@ -1,11 +1,8 @@
-schema_version: 1
-
 context:
   version: 1.3.2
-  name: onlinepca
 
 package:
-  name: r-${{ name }}
+  name: r-onlinepca
   version: ${{ version }}
 
 source:
@@ -13,12 +10,9 @@ source:
   sha256: 28267f5c289a97bea19344f2e64974837812b8257c7af5b9affeeabbb19c89f5
 
 build:
-  number: 0
+  number: 1
   script:
-    env:
-      PKG_CPPFLAGS: "\"-DHAVE_WORKING_LOG1P\""
-    content: R CMD INSTALL --build .
-  merge_build_and_host_envs: true
+    - R CMD INSTALL --build .
   dynamic_linking:
     rpaths:
       - lib/R/lib/
@@ -29,19 +23,19 @@ requirements:
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
   host:
-    - r-base=4.2
+    - r-base
     - r-rcpp
     - r-rcpparmadillo
     - r-rspectra
   run:
-    - r-base>=4.2
+    - r-base
     - r-rcpp
     - r-rcpparmadillo
     - r-rspectra
 
 tests:
   - script:
-      - "$R -e \"library(onlinePCA)\""
+      - R -e "library(onlinePCA)"
 
 about:
   summary: Online Principal Component Analysis
@@ -51,4 +45,3 @@ about:
 extra:
   recipe-maintainers:
     - danielnachun
-
