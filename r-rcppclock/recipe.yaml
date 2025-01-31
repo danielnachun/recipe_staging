@@ -1,23 +1,16 @@
-schema_version: 1
-
 context:
   version: 1.1
-  posix: "'m2-' if win else ''"
-  native: "'m2w64-' if win else ''"
 
 package:
   name: r-rcppclock
   version: ${{ version|replace("-", "_") }}
 
 source:
-  url:
-    - ${{ cran_mirror }}/src/contrib/RcppClock_${{ version }}.tar.gz
-    - ${{ cran_mirror }}/src/contrib/Archive/RcppClock/RcppClock_${{ version }}.tar.gz
+  url: https://cloud.r-project.org/src/contrib/RcppClock_${{ version }}.tar.gz
   sha256: ebf046603c95a635c9bc83d9fd4b5b973dc0f1628ba4e88215cdac989cd1a940
 
 build:
-  number: 0
-  merge_build_and_host_envs: ${{ true if win }}
+  number: 1
   dynamic_linking:
     rpaths:
       - lib/R/lib/
@@ -25,51 +18,26 @@ build:
 
 requirements:
   build:
-    - if: not win
-      then: ${{ compiler('c') }}
-    - if: win
-      then: ${{ compiler('m2w64_c') }}
-    - if: not win
-      then: ${{ compiler('cxx') }}
-    - if: win
-      then: ${{ compiler('m2w64_cxx') }}
-    - if: win
-      then: ${{ posix }}filesystem
-    - if: win
-      then: ${{ posix }}sed
-    - if: win
-      then: ${{ posix }}grep
-    - ${{ posix }}autoconf
-    - if: not win
-      then: ${{ posix }}automake
-    - if: win
-      then: ${{ posix }}automake-wrapper
-    - ${{ posix }}pkg-config
-    - ${{ posix }}make
-    - if: win
-      then: ${{ posix }}coreutils
-    - if: win
-      then: ${{ posix }}zip
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - autoconf
+    - automake
+    - pkg-config
+    - make
   host:
-    - r-base=4.2
+    - r-base
     - r-rcpp
     - r-ggplot2
   run:
-    - r-base>=4.2
+    - r-base
     - r-rcpp
     - r-ggplot2
 
 tests:
   - script:
-      - if: not win
-        then: "$R -e \"library('RcppClock')\""
-      - if: win
-        then: "\"%R%\" -e \"library('RcppClock')\""
+    - R -e "library('RcppClock')"
 
 about:
   license: GPL-2.0-or-later
   summary: RcppClock is a simple wrapper for std::chrono::high_resolution_clock that makes benchmarking Rcpp code easy.
-  license_file:
-    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
   homepage: https://CRAN.R-project.org/package=rcppclock
-
