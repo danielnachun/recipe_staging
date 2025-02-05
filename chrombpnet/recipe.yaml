@@ -33,7 +33,7 @@ requirements:
     - modisco-lite >=2.0.7
     - pandas >=1.3.4
     - protobuf >=3.20
-    - pybigwig >0.6.1
+    - pybigwig
     - pyfaidx >0.6.1
     - python <3.11
     - scikit-learn >=1.1.2
