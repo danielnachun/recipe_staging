@@ -1,0 +1,38 @@
+context:
+  version: 3.0.2
+
+package:
+  name: lua-cliargs
+  version: ${{ version }}
+
+source:
+  url: https://github.com/lunarmodules/lua_cliargs/archive/v${{ version }}.tar.gz
+  sha256: a7a57ab9c73f6c44040a78305b6dc7780ca1565cc4c9057d74a6608cb0443af4
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - luarocks --tree ${PREFIX} make --lua-dir ${PREFIX} --deps-mode=none --no-manifest
+
+requirements:
+  build:
+    - luarocks
+  host:
+    - lua
+  run:
+    - lua
+
+tests:
+  - script:
+      - "lua -e \"require 'cliargs'\""
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: Feature-rich command line parser for Lua
+  homepage: https://github.com/lunarmodules/lua_cliargs
+
+extra:
+  recipe-maintainers:
+    - danielnachun
