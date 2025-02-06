@@ -1,0 +1,42 @@
+context:
+  version: 2.8
+
+package:
+  name: lua-dkjson
+  version: ${{ version }}
+
+source:
+  - url: https://luarocks.org/manifests/dhkolf/dkjson-${{ version }}-1.rockspec
+    sha256: 6ab6ac25e5fbc90d9183bd11c9ea6218dbcb762c90cfc5a7e075eb7531080418
+  - url: http://dkolf.de/dkjson-lua/dkjson-${{ version }}.lua
+    sha256: eb3bf160688fb395a2db6bc52eeff4f7855a6321d2b41bdc754554d13f4e7d44
+    file_name: dkjson.lua
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - luarocks --tree ${PREFIX} make --lua-dir ${PREFIX} --deps-mode=none --no-manifest
+
+requirements:
+  build:
+    - luarocks
+  host:
+    - lua
+  run:
+    - lua
+    - lua54-lpeg
+
+tests:
+  - script:
+      - "lua -e \"require 'dkjson'\""
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: David Kolf's JSON module for Lua
+  homepage: http://dkolf.de/dkjson-lua
+
+extra:
+  recipe-maintainers:
+    - danielnachun
