@@ -1,0 +1,43 @@
+context:
+  version: 0.5.0
+
+package:
+  name: moonscript
+  version: ${{ version }}
+
+source:
+  url: https://github.com/leafo/moonscript/archive/v${{ version }}.tar.gz
+  sha256: 1adb5bb38f9c6f306250f6e90d92796fe100408ee062ac0d14f3c4c22c92e682
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - luarocks --tree ${PREFIX} make --lua-dir ${PREFIX} --deps-mode=none --no-manifest
+
+requirements:
+  build:
+    - luarocks
+  host:
+    - lua
+  run:
+    - lua
+    - lua-argparse
+    - lua-alt-getopt
+    - lua54-lpeg
+    - lua-luafilesystem
+
+tests:
+  - script:
+    - moonc --help
+
+about:
+  license: MIT
+  license_file: README.md
+  summary: A language that compiles to Lua
+  homepage: https://github.com/leafo/moonscript
+  repository: https://github.com/leafo/moonscript
+
+extra:
+  recipe-maintainers:
+    - danielnachun
