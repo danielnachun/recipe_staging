@@ -1,0 +1,39 @@
+context:
+  version: 1.6.0
+
+package:
+  name: lua-magick
+  version: ${{ version }}
+
+source:
+  url: https://github.com/leafo/magick/archive/v${{ version }}.tar.gz
+  sha256: fe5c86590e42955a113edd0b202a0f0845d80666f8d763955a043e9d3ccdb964
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - luarocks --tree ${PREFIX} make --lua-dir ${PREFIX} --deps-mode=none --no-manifest CC=${CC}
+
+requirements:
+  build:
+    - luarocks
+  host:
+    - luajit-openresty
+  run:
+    - luajit-openresty
+    - imagemagick
+    - pkg-config
+
+tests:
+  - script:
+      - luajit -e "require 'magick'"
+
+about:
+  license: MIT
+  summary: Lua bindings to ImageMagick for LuaJIT using FFI
+  homepage: https://github.com/leafo/magick
+
+extra:
+  recipe-maintainers:
+    - danielnachun
