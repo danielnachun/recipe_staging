@@ -1,0 +1,40 @@
+context:
+  version: 0.8.0
+
+package:
+  name: lua-alt-getopt
+  version: ${{ version }}
+
+source:
+  url: https://github.com/cheusov/lua-alt-getopt/archive/${{ version }}.tar.gz
+  sha256: 5cce2fa9342c096303e16bba6144c592294db0103c72ae4936159c4f2df33170
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - mkdir -p ${PREFIX}/share/lua/5.4
+    - install -m 644 alt_getopt.lua ${PREFIX}/share/lua/5.4
+    - install -m 644 alt_getopt ${PREFIX}/bin
+
+requirements:
+  build:
+    - luarocks
+  host:
+    - lua
+  run:
+    - lua
+
+tests:
+  - script:
+      - lua -e "require 'alt_getopt'"
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: Lua API for getopt similar to getopt_long(3)
+  homepage: https://github.com/cheusov/lua-alt-getopt
+
+extra:
+  recipe-maintainers:
+    - danielnachun
