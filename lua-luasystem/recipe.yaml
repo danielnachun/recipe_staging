@@ -12,7 +12,7 @@ source:
 build:
   number: 0
   script:
-    - luarocks --tree ${PREFIX} make --lua-dir ${PREFIX} --deps-mode=none --no-manifest CC=${CC} MYLDFLAGS="${LDFLAGS}" MYCFLAGS="${CFLAGS}"
+    - luarocks --tree ${PREFIX} make --lua-dir ${PREFIX} --deps-mode=none --no-manifest CC=${CC} RT_LIBDIR=${PREFIX}/lib
 
 requirements:
   build:
