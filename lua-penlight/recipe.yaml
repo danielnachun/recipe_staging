@@ -2,7 +2,7 @@ context:
   version: 1.14.0
 
 package:
-  name: lua-cliargs
+  name: lua-penlight
   version: ${{ version }}
 
 source:
