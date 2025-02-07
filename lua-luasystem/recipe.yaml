@@ -1,0 +1,39 @@
+context:
+  version: 0.4.5
+
+package:
+  name: lua-luasystem
+  version: ${{ version }}
+
+source:
+  url: https://github.com/lunarmodules/luasystem/archive/v${{ version }}.tar.gz
+  sha256: be0cd142a60d987d1eb8fb85ba84834d342a392e3861934eaba8d365945c367c
+
+build:
+  number: 0
+  script:
+    - luarocks --tree ${PREFIX} make --lua-dir ${PREFIX} --deps-mode=none --no-manifest CC=${CC} RT_LIBDIR=${CONDA_BUILD_SYSROOT}/lib
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - luarocks
+    - make
+  host:
+    - lua
+  run:
+    - lua
+
+tests:
+  - script:
+      - "lua -e \"require 'system'\""
+
+about:
+  license: MIT
+  license_file: LICENSE.md
+  summary: Platform independent system calls for Lua
+  homepage: https://github.com/lunarmodules/filesystem
+
+extra:
+  recipe-maintainers:
+    - danielnachun
