@@ -12,7 +12,7 @@ source:
 build:
   number: 0
   script:
-    - luarocks --tree ${PREFIX} make --lua-dir ${PREFIX} --deps-mode=none --no-manifest CC=${CC} RT_LIBDIR=${PREFIX}/lib
+    - luarocks --tree ${PREFIX} make --lua-dir ${PREFIX} --deps-mode=none --no-manifest CC=${CC} RT_LIBDIR=${CONDA_BUILD_SYSROOT}/lib
 
 requirements:
   build:
