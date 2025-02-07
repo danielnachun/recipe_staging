@@ -1,0 +1,38 @@
+context:
+  version: 1.1.2
+
+package:
+  name: lua-mediator_lua
+  version: ${{ version }}
+
+source:
+  url: https://github.com/Olivine-Labs/mediator_lua/archive/v${{ version }}-0.tar.gz
+  sha256: faf5859fd2081be4e9e4fb8873a2dc65f7eff3fd93d6dd14da65f8e123fcff9b
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - luarocks --tree ${PREFIX} make --lua-dir ${PREFIX} --deps-mode=none --no-manifest
+
+requirements:
+  build:
+    - luarocks
+  host:
+    - lua
+  run:
+    - lua
+
+tests:
+  - script:
+      - lua -e "require 'mediator'"
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: Mediator pattern implementation for pub-sub management
+  homepage: https://github.com/Olivine-Labs/mediator_lua
+
+extra:
+  recipe-maintainers:
+    - danielnachun
