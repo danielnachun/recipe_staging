@@ -1,0 +1,38 @@
+context:
+  version: 1.14.0
+
+package:
+  name: lua-cliargs
+  version: ${{ version }}
+
+source:
+  url: https://github.com/lunarmodules/penlight/archive/${{ version }}.tar.gz
+  sha256: 2387431c0e83c4189cccb35b989141a3280d735cb5d42bacf3451af9869bebf7
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - luarocks --tree ${PREFIX} make --lua-dir ${PREFIX} --deps-mode=none --no-manifest
+
+requirements:
+  build:
+    - luarocks
+  host:
+    - lua
+  run:
+    - lua
+
+tests:
+  - script:
+      - "lua -e \"require 'pl'\""
+
+about:
+  license: MIT
+  license_file: LICENSE.md
+  summary: A set of pure Lua libraries focusing on input data handling (such as reading configuration files), functional programming (such as map, reduce, placeholder expressions,etc), and OS path management.
+  homepage: https://github.com/lunarmodules/penlight
+
+extra:
+  recipe-maintainers:
+    - danielnachun
