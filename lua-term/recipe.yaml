@@ -2,7 +2,7 @@ context:
   version: 0.8
 
 package:
-  name: lua-cliargs
+  name: lua-term
   version: ${{ version }}
 
 source:
