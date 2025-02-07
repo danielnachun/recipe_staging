@@ -1,0 +1,48 @@
+context:
+  version: 2.2.0
+
+package:
+  name: busted
+  version: ${{ version }}
+
+source:
+  url: https://github.com/lunarmodules/busted/archive/v${{ version }}.tar.gz
+  sha256: befca10f573bb476fa1db2e3149150d65f802a71d34d1682679e640665f2dc2b
+
+build:
+  noarch: generic
+  number: 0
+  script:
+    - luarocks --tree ${PREFIX} make --lua-dir ${PREFIX} --deps-mode=none --no-manifest
+
+requirements:
+  build:
+    - luarocks
+  host:
+    - lua
+  run:
+    - lua
+    - lua-cliargs
+    - lua-dkjson
+    - lua-luafilesystem
+    - lua-luassert
+    - lua-luasystem
+    - lua-mediator_lua
+    - lua-penlight
+    - lua-say
+    - lua-term
+
+tests:
+  - script: |
+      busted --help 2>&1 | grep -q "Usage: busted"
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: Elegant Lua unit testing.
+  homepage: https://github.com/lunarmodules/busted
+  repository: https://github.com/lunarmodules/busted
+
+extra:
+  recipe-maintainers:
+    - danielnachun
