@@ -1,0 +1,38 @@
+context:
+  version: 1.4.1
+
+package:
+  name: lua-say
+  version: ${{ version }}
+
+source:
+  url: https://github.com/lunarmodules/say/archive/v${{ version }}.tar.gz
+  sha256: ce07547ca49ef42cc799e2a30b3c65ce77039978e32e7961799a252d61a56486
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - luarocks --tree ${PREFIX} make --lua-dir ${PREFIX} --deps-mode=none --no-manifest
+
+requirements:
+  build:
+    - luarocks
+  host:
+    - lua
+  run:
+    - lua
+
+tests:
+  - script:
+      - "lua -e \"require 'say'\""
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: Lua string hashing library, useful for internationalization
+  homepage: https://github.com/lunarmodules/say
+
+extra:
+  recipe-maintainers:
+    - danielnachun
