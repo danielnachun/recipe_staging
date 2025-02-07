@@ -1,0 +1,38 @@
+context:
+  version: 0.8
+
+package:
+  name: lua-cliargs
+  version: ${{ version }}
+
+source:
+  url: https://github.com/hoelzro/lua-term/archive/${{ version }}.tar.gz
+  sha256: 0cb270be22dfc262beec2f4ffc66b878ccaf236f537d693fa36c8f578fc51aa6
+
+build:
+  number: 0
+  script:
+    - luarocks --tree ${PREFIX} make --lua-dir ${PREFIX} --deps-mode=none --no-manifest CC=${CC}
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - luarocks
+  host:
+    - lua
+  run:
+    - lua
+
+tests:
+  - script:
+      - "lua -e \"require 'term'\""
+
+about:
+  license: MIT
+  license_file: COPYING
+  summary: Terminal operations for Lua
+  homepage: https://github.com/hoelzro/lua-term
+
+extra:
+  recipe-maintainers:
+    - danielnachun
