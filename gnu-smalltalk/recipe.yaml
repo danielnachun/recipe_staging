@@ -31,12 +31,14 @@ requirements:
     - gmp
     - gnutls
     - libffi
-    - libintl-devel
     - libtool
     - libsigsegv
     - readline
     - sqlite
     - zlib
+    - if: osx
+      then:
+        - libintl-devel
   run:
     - libtool
 
