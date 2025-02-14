@@ -1,16 +1,16 @@
 context:
-  version: 1.1.2
+  version: 1.1.6
 
 package:
   name: r-qgg
   version: ${{ version }}
 
 source:
-  url: https://github.com/psoerensen/qgg/archive/419dad589259ec15d688a5ccde54bc4014b85e81.zip
-  sha256: 67da0a92fd02c7086619b4cd7b3b0ca121be5ce3ad0364125f104de01c272afe
+  url: https://cran.r-project.org/src/contrib/qgg_${{ version }}.tar.gz
+  sha256: dff06a1f4684622a4e60f617758254d25210f5081d814bc143906cea8b297a19
 
 build:
-  number: 1
+  number: 3
   script:
     content: R CMD INSTALL --build .
   dynamic_linking:
@@ -20,33 +20,24 @@ build:
 
 requirements:
   build:
-    - if: build_platform != target_platform
-      then: cross-r-base ${{ r_base }}
-    - if: unix
-      then:
-        - autoconf
-        - ${{ compiler('c') }}
-        - ${{ compiler('fortran') }}
-        - ${{ compiler('cxx') }}
-    - if: win
-      then:
-        - ${{ compiler('m2w64_c') }}
-        - ${{ compiler('m2w64_cxx') }}
-        - posix
+    - ${{ compiler('c') }}
+    - ${{ compiler('fortran') }}
+    - ${{ compiler('cxx') }}
+    - autoconf
   host:
-    - r-MASS
-    - r-MCMCpack
-    - r-Rcpp
-    - r-base=4.3
+    - r-mass
+    - r-mcmcpack
+    - r-rcpp
+    - r-base
     - r-coda
     - r-corpcor
     - r-data.table
     - r-statmod
   run:
-    - r-MASS
-    - r-MCMCpack
-    - r-Rcpp
-    - r-base=4.3
+    - r-mass
+    - r-mcmcpack
+    - r-rcpp
+    - r-base
     - r-coda
     - r-corpcor
     - r-data.table
