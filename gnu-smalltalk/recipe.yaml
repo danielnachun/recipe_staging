@@ -19,6 +19,7 @@ requirements:
     - ${{ compiler('c') }}
     - autoconf
     - automake
+    - bison
     - gawk
     - gettext-tools
     - make
