@@ -11,7 +11,7 @@ source:
   sha256: 9ce26c4869528a955681a589a7702fd945afd8f3de9515d7b560d2c10efb2688
 
 build:
-  number: 0
+  number: 1
   merge_build_and_host_envs: ${{ true if win }}
   dynamic_linking:
     rpaths:
@@ -36,6 +36,7 @@ requirements:
     - r-rcpparmadillo
     - r-rcppparallel
   run:
+    - libopenblas >=0.3.29
     - r-base
     - r-ebnm
     - r-flashier
