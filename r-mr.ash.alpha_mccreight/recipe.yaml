@@ -1,0 +1,47 @@
+context:
+  version: 0.1.43
+
+package:
+  name: r-mr.ash.alpha_mccreight
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/alexmccreight/mr.ash.alpha/archive/398379d1a2b9543c314a315ed73a1da06d96f102.tar.gz
+  sha256: d93e5dfbe074c05ccc73ec3df1414b4a0d1ed49d3f20fe832d7404368f0545fc
+
+build:
+  number: 0
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - sed
+  host:
+    - r-base
+    - r-matrix
+    - r-rcpp
+    - r-rcpparmadillo
+  run:
+    - r-base
+    - r-matrix
+    - r-rcpp
+    - r-rcpparmadillo
+
+tests:
+  - script:
+      - R -e "library('mr.ash.alpha.mccreight')"
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: An R package implementing Mr.ASH method
+  homepage: https://github.com/alexmccreight/mr.ash.alpha
+
+extra:
+  recipe-maintainers:
+    - danielnachun
