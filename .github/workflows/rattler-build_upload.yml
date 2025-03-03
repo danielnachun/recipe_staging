@@ -21,7 +21,7 @@ jobs:
 
       - name: Download packages
         id: download-packages
-        uses: dawidd6/action-download-artifact@v8
+        uses: dawidd6/action-download-artifact@v9
         with:
           github_token: ${{ secrets.PAT_TOKEN }}
           workflow: rattler-build_${{ matrix.platform }}.yml
