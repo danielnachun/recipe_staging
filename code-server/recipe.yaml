@@ -1,8 +1,6 @@
-schema_version: 1
-
 context:
   name: code-server
-  version: 4.93.1
+  version: 4.97.2
 
 package:
   name: ${{ name|lower }}
@@ -10,7 +8,7 @@ package:
 
 source:
   url: https://registry.npmjs.org/code-server/-/code-server-${{ version }}.tgz
-  sha256: c6204fbb323f2950a42c49b88a2fc2d02b45d4cf684e88b220d9fe1fda3f9a0a
+  sha256: a15200dfd610541c582e77754d8589fa8a1c1b9f78e11654f6b2b7886ae98964
 
 build:
   number: 0
@@ -20,16 +18,14 @@ requirements:
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
     - make
-    - nodejs=20
-    - pnpm
-    - pnpm-licenses
     - python
   host:
     - krb5
+    - nodejs=20
+    - pnpm
+    - pnpm-licenses
   run:
     - nodejs=20
-  ignore_run_exports:
-    - krb5
 
 tests:
   - script:
@@ -47,4 +43,3 @@ about:
 extra:
   recipe-maintainers:
     - danielnachun
-
