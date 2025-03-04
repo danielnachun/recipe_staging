@@ -1,0 +1,65 @@
+context:
+  version: 1.1.1
+
+package:
+  name: outrigger
+  version: ${{ version }}
+
+source:
+  url: https://pypi.python.org/packages/ca/03/860e2dda28aeba28f9fc552c6af9e9e2ff13e806a4437726c8c024c0efd2/outrigger-${{ version }}.tar.gz
+  md5: ac911a16daa78480902ae7cdcde655b0
+
+build:
+  number: 3
+  noarch: python
+  python:
+    entry_points:
+      - outrigger = outrigger.commandline:main
+
+requirements:
+  build:
+    - sed
+  host:
+    - python
+    - setuptools
+    - pytest >=3.0.0
+    - pandas >=0.17.0
+    - coverage
+    - gffutils >=0.8.7.1
+    - pybedtools
+    - biopython
+    - joblib
+    - pysam
+    - graphlite
+  run:
+    - python
+    - pytest >=3.0.0
+    - pandas >=0.17.0
+    - coverage
+    - gffutils >=0.8.7.1
+    - pybedtools
+    - biopython
+    - joblib
+    - pysam
+    - graphlite
+
+tests:
+  - python:
+      imports:
+        - outrigger
+        - outrigger.index
+        - outrigger.io
+        - outrigger.psi
+        - outrigger.validate
+      pip_check: false
+  - requirements:
+      run:
+        - flake8
+        - pytest
+    script:
+      - outrigger --help
+
+about:
+  license: DSDP
+  summary: Outrigger detects *de novo* exons and quantifies their percent spliced-in
+  homepage: https://yeolab.github.io/outrigger
