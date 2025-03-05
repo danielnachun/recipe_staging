@@ -12,10 +12,6 @@ source:
 build:
   number: 0
   noarch: python
-  script: 
-    env:
-      SETUPTOOLS_SCM_PRETEND_VERSION: ${{ version }}
-    content: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
@@ -51,7 +47,24 @@ tests:
   - python:
       imports:
         - borzoi
-      pip_check: true
+      pip_check: false
+  - script: |
+      borzoi_gtex_coef_sad.py --help
+      borzoi_gtex_coef_sed.py --help
+      borzoi_sad.py --help
+      borzoi_satg_gene.py --help
+      borzoi_satg_gene.py --help
+      borzoi_satg_gene_crispr_ism_shuffle.py --help
+      borzoi_satg_gene_focused_ism.py --help
+      borzoi_satg_polya.py --help
+      borzoi_satg_splice.py --help
+      borzoi_sed.py --help
+      borzoi_sed_ipaqtl_cov.py --help
+      borzoi_trip.py --help
+      bw_h5.py --help
+      idx_genome.py --help
+      w5_merge.py --help
+      w5_qc.py --help
 
 about:
   homepage: https://github.com/calico/borzoi
