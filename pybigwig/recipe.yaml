@@ -20,10 +20,10 @@ requirements:
     - setuptools
     - curl
     - libcurl
-    - numpy <2.0
+    - numpy
     - zlib
   run:
-    - numpy <2.0
+    - numpy
     - python
 
 tests:
