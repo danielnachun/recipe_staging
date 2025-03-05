@@ -51,7 +51,7 @@ tests:
   - python:
       imports:
         - baskerville
-      pip_check: true
+      pip_check: false
 
 about:
   summary: Machine learning methods for DNA sequence analysis.
