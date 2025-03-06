@@ -1,0 +1,67 @@
+context:
+  version: 1.0.2
+
+package:
+  name: r-immunelens
+  version: ${{ version }}
+
+source:
+  url: https://github.com/McGranahanLab/ImmuneLENS/releases/download/ImmuneLENS/ImmuneLENS_${{ version }}.tar.gz
+  sha256: e754f647193e1827be9c6f8df86dd4f43be20904c88bd103891b2292dea9895b
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - R CMD INSTALL --build . ${R_ARGS}
+
+requirements:
+  host:
+    - r-base
+    - r-dplyr
+    - r-tidyr
+    - r-ggnewscale
+    - r-readr
+    - r-zoo
+    - r-seqinr
+    - r-rlang
+    - r-mgcv
+    - r-ggplot2
+    - r-magrittr
+    - r-tibble
+    - r-data.table
+    - r-quadprog
+    - r-ggpubr
+    - r-rpart
+    - r-lavaan
+    - r-restriktor
+  run:
+    - r-base
+    - r-dplyr
+    - r-tidyr
+    - r-ggnewscale
+    - r-readr
+    - r-zoo
+    - r-seqinr
+    - r-rlang
+    - r-mgcv
+    - r-ggplot2
+    - r-magrittr
+    - r-tibble
+    - r-data.table
+    - r-quadprog
+    - r-ggpubr
+    - r-rpart
+    - r-lavaan
+    - r-restriktor
+
+tests:
+  - script:
+      - R -e "library('ImmuneLENS')"
+
+about:
+  license: LicenseRef-Other
+  license_file: LICENSE
+  summary: |
+    Immune Lymphocyte Estimation from Nucleotide Sequencing (Immune LENS) is an R package to calculate T and B cell fractions from WGS or WES data from hg19 or hg38 aligned genomes. Includes functions from TcellExTRECT package for support of WES analysis.
+  homepage: https://github.com/McGranahanLab/ImmuneLENS
