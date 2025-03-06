@@ -1,0 +1,61 @@
+context:
+  version: 0.6-10
+
+package:
+  name: r-restriktor
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://cloud.r-project.org/src/contrib/restriktor_${{ version }}.tar.gz
+  sha256: 1d58bd672e4803f458c5bd166ea316870e51aeeb90e1f71c565ee9b719b3156d
+
+build:
+  number: 0
+  noarch: generic
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  host:
+    - r-base
+    - r-mass
+    - r-boot
+    - r-future
+    - r-future.apply
+    - r-ggplot2
+    - r-gridextra
+    - r-lavaan >=0.6_10
+    - r-mvtnorm
+    - r-norm
+    - r-progressr
+    - r-quadprog
+    - r-scales
+    - r-tmvtnorm
+  run:
+    - r-base
+    - r-mass
+    - r-boot
+    - r-future
+    - r-future.apply
+    - r-ggplot2
+    - r-gridextra
+    - r-lavaan >=0.6_10
+    - r-mvtnorm
+    - r-norm
+    - r-progressr
+    - r-quadprog
+    - r-scales
+    - r-tmvtnorm
+
+tests:
+  - script:
+      - R -e "library('restriktor')"
+
+about:
+  license: GPL-2.0-or-later
+  summary: |
+    Allow for easy-to-use testing or evaluating of linear equality and inequality restrictions
+    about parameters and effects in (generalized) linear statistical models.
+  homepage: https://restriktor.org
