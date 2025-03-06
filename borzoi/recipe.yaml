@@ -1,57 +1,78 @@
-schema_version: 1
-
 context:
-  name: borzoi
-  version: 1.0
+  version: 1.0.0
 
 package:
-  name: ${{ name|lower }}
+  name: borzoi
   version: ${{ version }}
 
 source:
-  git: https://github.com/calico/${{ name }}
-  rev: 0c28e8739d7f893260345f025609416d8db7aa23
+  url: https://github.com/calico/borzoi/archive/v${{ version }}.tar.gz
+  sha256: 7f059b195b0d608552d0f4c0bacb81434437ce477763de19f0153cf8119c76f0
 
 build:
   number: 0
   noarch: python
-  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
-    - python >=3.8,<3.11
+    - python >=3.9
+    - setuptools >=69.0.3
+    - setuptools-scm >=8.0.4
     - pip
-    - setuptools
-    - setuptools_scm
   run:
     - baskerville
-    - h5py
-    - intervaltree
-    - matplotlib-base
-    - numpy
-    - pandas
-    - pybedtools
-    - pybigwig
-    - pyfaidx
-    - pysam
-    - python >=3.8,<3.11
-    - seaborn
-    - scikit-learn
-    - scipy
-    - tensorflow
+    - python >=3.9
+    - h5py >=3.10.0,<3.11.dev0
+    - intervaltree >=3.1.0,<3.2.dev0
+    - joblib >=1.1.1,<1.2.dev0
+    - matplotlib-base >=3.7.1,<3.8.dev0
+    - google-cloud-storage >=2.0.0,<2.1.dev0
+    - natsort >=7.1.1,<7.2.dev0
+    - networkx >=2.8.4,<2.9.dev0
+    - numpy >=1.24.3,<1.25.dev0
+    - pandas >=1.5.3,<1.6.dev0
+    - pybigwig >=0.3.18,<0.4.dev0
+    - pybedtools >=0.10.0,<0.11.dev0
+    - pysam >=0.22.0,<0.23.dev0
+    - qnorm >=0.8.1,<0.9.dev0
+    - seaborn >=0.12.2,<0.13.dev0
+    - scikit-learn >=1.2.2,<1.3.dev0
+    - scipy >=1.9.1,<1.10.dev0
+    - tensorflow >=2.15.0,<2.16.dev0
+    - tqdm >=4.65.0,<4.66.dev0
+    - pyfaidx >=0.7.1,<0.8.dev0
+    - pyranges >=0.0.129,<0.1.dev0
 
 tests:
   - python:
       imports:
         - borzoi
+      pip_check: false
+  - script: |
+      borzoi_gtex_coef_sad.py --help
+      borzoi_gtex_coef_sed.py --help
+      borzoi_sad.py --help
+      borzoi_satg_gene.py --help
+      borzoi_satg_gene.py --help
+      borzoi_satg_gene_crispr_ism_shuffle.py --help
+      borzoi_satg_gene_focused_ism.py --help
+      borzoi_satg_polya.py --help
+      borzoi_satg_splice.py --help
+      borzoi_sed.py --help
+      borzoi_sed_ipaqtl_cov.py --help
+      borzoi_trip.py --help
+      bw_h5.py --help
+      idx_genome.py --help
+      w5_merge.py --help
+      w5_qc.py --help
 
 about:
-  summary: RNA-seq prediction with deep convolutional neural networks.
+  homepage: https://github.com/calico/borzoi
+  summary: borzoi
   license: Apache-2.0
   license_file: LICENSE
-  homepage: https://github.com/calico/${{ name }}
+  repository: https://github.com/calico/borzoi
 
 extra:
   recipe-maintainers:
     - danielnachun
-
