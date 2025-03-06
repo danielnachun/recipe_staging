@@ -1,0 +1,50 @@
+context:
+  version: 1.0-11.1
+  posix: "'m2-' if win else ''"
+
+package:
+  name: r-norm
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://cloud.r-project.org/src/contrib/norm_${{ version }}.tar.gz
+  sha256: c2ffe6c30fc203337bde49ef630a740141604d8e648c558e58c20116c47963bc
+
+build:
+  number: 0
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - make
+    - if: not win
+      then:
+        - ${{ compiler('c') }}
+        - ${{ compiler('fortran') }}
+    - if: win
+      then:
+        - ${{ compiler('m2w64_c') }}
+        - ${{ compiler('m2w64_fortran') }}
+        - ${{ posix }}filesystem
+        - ${{ posix }}sed
+        - ${{ posix }}coreutils
+        - ${{ posix }}zip
+  host:
+    - r-base
+  run:
+    - r-base
+
+tests:
+  - script:
+      - R -e "library('norm')"
+
+about:
+  license: GPL-2.0-or-later
+  summary: |
+    An integrated set of functions for the analysis of multivariate normal datasets with
+    missing values, including implementation of the EM algorithm, data augmentation,
+    and multiple imputation.
+  homepage: https://CRAN.R-project.org/package=norm
