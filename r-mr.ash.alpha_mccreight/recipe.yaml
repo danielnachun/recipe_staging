@@ -1,13 +1,13 @@
 context:
-  version: 0.1.43
+  version: 0.1-44
 
 package:
   name: r-mr.ash.alpha_mccreight
   version: ${{ version|replace("-", "_") }}
 
 source:
-  url: https://github.com/alexmccreight/mr.ash.alpha/archive/398379d1a2b9543c314a315ed73a1da06d96f102.tar.gz
-  sha256: d93e5dfbe074c05ccc73ec3df1414b4a0d1ed49d3f20fe832d7404368f0545fc
+  url: https://github.com/alexmccreight/mr.ash.alpha/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: 34464bda98e80925eb8765f810fcd08a8d4ea978a7f5957c7a28891551c4a8da
 
 build:
   number: 0
@@ -31,6 +31,7 @@ requirements:
     - r-matrix
     - r-rcpp
     - r-rcpparmadillo
+    - openblas >=0.3.29
 
 tests:
   - script:
