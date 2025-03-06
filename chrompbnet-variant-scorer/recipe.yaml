@@ -1,0 +1,50 @@
+context:
+  version: 1.0
+
+package:
+  name: chrombpnet-variant-scorer
+  version: ${{ version }}
+
+source:
+  url: https://github.com/kundajelab/variant-scorer/archive/45969acccf105349d18ac005286990b6d998cb3d.tar.gz
+  sha256: cf3c8dce5a6ca5f9cd9c5951239d7e827488250dbc3410028d067132a8c9b282
+
+build:
+  number: 0
+  noarch: python
+
+requirements:
+  build:
+    - sed
+  run:
+    - deepdish
+    - deeplift
+    - h5py
+    - numpy
+    - pandas
+    - psutil
+    - pybedtools
+    - pyfaidx
+    - python
+    - scipy
+    - shap
+    - tensorflow
+    - tensorflow-probability
+    - tqdm
+
+tests:
+  - script: |
+      hitcaller_variant.py -h
+      variant_annotation.py -h
+      variant_scoring.per_chrom.py -h
+      variant_scoring.py -h
+      variant_shap.py -h
+      variant_summary_across_folds.py -h
+
+about:
+  summary: A framework to score and analyze variant effects genome-wide using ChromBPNet models
+  homepage: https://github.com/kundajelab/variant-scorer
+
+extra:
+  recipe-maintainers:
+    - danielnachun
