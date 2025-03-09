@@ -1,0 +1,44 @@
+context:
+  version: 0.0-10
+  posix: "'m2-' if win else ''"
+
+package:
+  name: r-qrng
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://cloud.r-project.org/src/contrib/qrng_${{ version }}.tar.gz
+  sha256: 51ee4eb9bf66fd125db8e5ed750edbc09e41a220994d06c3111f2ae73bcd8648
+
+build:
+  number: 0
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - make
+    - if: not win
+      then: ${{ compiler('c') }}
+    - if: win
+      then:
+        - ${{ compiler('m2w64_c') }}
+        - ${{ posix }}filesystem
+        - ${{ posix }}sed
+        - ${{ posix }}coreutils
+        - ${{ posix }}zip
+  host:
+    - r-base
+  run:
+    - r-base
+
+tests:
+  - script:
+    - R -e "library('qrng')"
+
+about:
+  license: GPL-2.0-or-later OR GPL-3.0-or-later
+  summary: Functionality for generating (randomized) quasi-random numbers in high dimensions.
+  homepage: https://CRAN.R-project.org/package=qrng
