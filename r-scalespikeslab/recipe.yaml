@@ -1,0 +1,59 @@
+context:
+  version: 1.0
+  posix: "'m2-' if win else ''"
+
+package:
+  name: r-scalespikeslab
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://cloud.r-project.org//src/contrib/ScaleSpikeSlab_${{ version }}.tar.gz
+  sha256: e6bde39321e159090525b7eaca3f36171a3fe9b690ab3823f0eb9c5e42bcc386
+
+build:
+  number: 0
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - make
+    - if: not win
+      then:
+        - ${{ compiler('c') }}
+        - ${{ compiler('cxx') }}
+    - if: win
+      then:
+        - ${{ compiler('m2w64_c') }}
+        - ${{ compiler('m2w64_cxx') }}
+        - ${{ posix }}filesystem
+        - ${{ posix }}sed
+        - ${{ posix }}coreutils
+        - ${{ posix }}zip
+  host:
+    - r-base
+    - r-rcpp
+    - r-rcppeigen
+    - r-truncatednormal
+  run:
+    - r-base
+    - r-rcpp
+    - r-rcppeigen
+    - r-truncatednormal
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('ScaleSpikeSlab')\""
+      - if: win
+        then: "\"%R%\" -e \"library('ScaleSpikeSlab')\""
+
+about:
+  license: GPL-2.0-or-later
+  summary: |
+    A scalable Gibbs sampling implementation for high dimensional Bayesian regression
+    with the continuous spike-and-slab prior. Niloy Biswas, Lester Mackey and Xiao-Li
+    Meng, "Scalable Spike-and-Slab" (2022) <arXiv:2204.01668>.
+  homepage: https://CRAN.R-project.org/package=ScaleSpikeSlab
