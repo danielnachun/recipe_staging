@@ -45,10 +45,7 @@ requirements:
 
 tests:
   - script:
-      - if: not win
-        then: "$R -e \"library('ScaleSpikeSlab')\""
-      - if: win
-        then: "\"%R%\" -e \"library('ScaleSpikeSlab')\""
+    - R -e "library('ScaleSpikeSlab')"
 
 about:
   license: GPL-2.0-or-later
