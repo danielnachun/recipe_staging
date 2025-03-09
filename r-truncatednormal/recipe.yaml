@@ -51,10 +51,7 @@ requirements:
 
 tests:
   - script:
-      - if: not win
-        then: "$R -e \"library('TruncatedNormal')\""
-      - if: win
-        then: "\"%R%\" -e \"library('TruncatedNormal')\""
+    - R -e "library('TruncatedNormal')"
 
 about:
   license: GPL-3.0-or-later
