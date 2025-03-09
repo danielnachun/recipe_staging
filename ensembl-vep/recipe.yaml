@@ -1,8 +1,6 @@
-schema_version: 1
-
 context:
-  version: 110.1
-  plugins_version: 110
+  version: 113.3
+  plugins_version: 113
   loftee_version: 1.0.4
 
 package:
@@ -11,16 +9,16 @@ package:
 
 source:
   - url: https://github.com/Ensembl/ensembl-vep/archive/release/${{ version }}.tar.gz
-    sha256: 95b2238209bc9acfa01d4eff202dfbc22e8935abc64b750ea93d1c354a438bae
+    sha256: ee68013eb035e17129e8f69977f525ebdd8321e73b3164a7bda6e103e2d10beb
   - url: https://github.com/Ensembl/VEP_plugins/archive/release/${{ plugins_version }}.tar.gz
-    sha256: e07c7df8e12f149938f46936bc2b058891b586e482cefce67dcc374e4ccc26a2
+    sha256: 4db27667070ac5d19cfd5ebb19faff2296b53a4a84248aee9076a6dd476b854a
     target_directory: VEP_plugins
   - url: https://github.com/konradjk/loftee/archive/v${{ loftee_version }}_GRCh38.tar.gz
     sha256: f2c93b0ca15cb5e2f656062a7c507d509cc7aaa06bbb8111103d3a776e0e9de8
     target_directory: loftee
 
 build:
-  number: 6
+  number: 0
   noarch: generic
 
 requirements:
@@ -46,6 +44,7 @@ requirements:
     - perl-io-compress
     - perl-json
     - perl-libwww-perl
+    - perl-list-moreutils
     - perl-perlio-gzip
     - perl-sereal
     - perl-set-intervaltree
@@ -66,4 +65,3 @@ about:
   summary: Ensembl Variant Effect Predictor
   description: The VEP determines the effect of your variants (SNPs, insertions, deletions, CNVs or structural variants) on genes, transcripts, and protein sequence, as well as regulatory regions.
   homepage: http://www.ensembl.org/info/docs/tools/vep/index.html
-
