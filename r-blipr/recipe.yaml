@@ -1,0 +1,42 @@
+context:
+  version: 0.2.0
+
+package:
+  name: r-blipr
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/amspector100/blipr/archive/ce84e11944f252e892d2741114ec3143ed8073e7.tar.gz
+  sha256: 88ad27995e136bdd9c05eb3ee1bd660bd935ddedfeaebed246d908a5b08e707e
+
+build:
+  noarch: generic
+  number: 0
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+  script:
+    - R CMD INSTALL --preclean --build .
+
+requirements:
+  host:
+    - r-abind
+    - r-base
+    - r-cvxr
+    - r-rcbc
+  run:
+    - r-abind
+    - r-base
+    - r-cvxr
+    - r-rcbc
+
+tests:
+  - script:
+      - R -e "library('blipr')"
+
+about:
+  license: MIT
+  license_file: LICENSE.md
+  summary: A Bayesian Linear Program for resolution-adaptive signal detection
+  homepage: https://github.com/amspector100/blipr
