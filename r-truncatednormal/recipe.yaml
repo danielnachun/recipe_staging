@@ -1,0 +1,65 @@
+context:
+  version: 2.3
+  posix: "'m2-' if win else ''"
+
+package:
+  name: r-truncatednormal
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://cloud.r-project.org//src/contrib/TruncatedNormal_${{ version }}.tar.gz
+  sha256: efb77996e2d263cc239d74658ce6cfb89822b7143b16fd5d0598ccc36ca08064
+
+build:
+  number: 0
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - make
+    - if: not win
+      then:
+        - ${{ compiler('c') }}
+        - ${{ compiler('cxx') }}
+    - if: win
+      then:
+        - ${{ compiler('m2w64_c') }}
+        - ${{ compiler('m2w64_cxx') }}
+        - ${{ posix }}filesystem
+        - ${{ posix }}sed
+        - ${{ posix }}coreutils
+        - ${{ posix }}zip
+  host:
+    - r-base
+    - r-rcpp >=0.12.16
+    - r-rcpparmadillo
+    - r-alabama
+    - r-nleqslv
+    - r-qrng
+    - r-spacefillr
+  run:
+    - r-base
+    - r-rcpp >=0.12.16
+    - r-rcpparmadillo
+    - r-alabama
+    - r-nleqslv
+    - r-qrng
+    - r-spacefillr
+
+tests:
+  - script:
+      - if: not win
+        then: "$R -e \"library('TruncatedNormal')\""
+      - if: win
+        then: "\"%R%\" -e \"library('TruncatedNormal')\""
+
+about:
+  license: GPL-3.0-or-later
+  summary: |
+    A collection of functions to deal with the truncated univariate and multivariate normal
+    and Student distributions, described in Botev (2017) <doi:10.1111/rssb.12162> and
+    Botev and L'Ecuyer (2015) <doi:10.1109/WSC.2015.7408180>.
+  homepage: https://CRAN.R-project.org/package=TruncatedNormal
