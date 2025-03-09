@@ -1,0 +1,41 @@
+context:
+  version: 0.1.7
+
+package:
+  name: r-nprior
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/rabbitinasubmarine/NPrior/archive/ad425339c9f0227665d3b66aecee974269079527.tar.gz
+  sha256: 0f7149bab641783ab55fbd6d1ed08f0a5932f68e784e56edb81b5016e7b8cb21
+
+build:
+  number: 0
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+  script:
+    - R CMD INSTALL --preclean --build .
+
+requirements:
+  host:
+    - r-base
+    - r-mass
+    - r-rcpp
+    - r-rcpparmadillo
+  run:
+    - r-base
+    - r-mass
+    - r-rcpp
+    - r-rcpparmadillo
+
+tests:
+  - script:
+      - R -e "library('NPrior')"
+
+about:
+  license: GPL-3.0-or-later
+  summary: |
+    We develop a unified and flexible Bayesian shrinkage procedure called "Neuronized Priors".
+  homepage: https://github.com/rabbitinasubmarine/NPrior
