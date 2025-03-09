@@ -10,7 +10,7 @@ source:
   sha256: cf3c8dce5a6ca5f9cd9c5951239d7e827488250dbc3410028d067132a8c9b282
 
 build:
-  number: 0
+  number: 1
   noarch: python
 
 requirements:
@@ -21,6 +21,7 @@ requirements:
     - deepdish
     - deeplift
     - h5py
+    - kundajelab-shap
     - numpy <1.24
     - pandas
     - psutil
@@ -28,7 +29,6 @@ requirements:
     - pyfaidx
     - python
     - scipy
-    - shap
     - tensorflow
     - tensorflow-probability
     - tf-keras
