@@ -1,0 +1,43 @@
+context:
+  version: 0.1.0.9002
+
+package:
+  name: r-rcbc
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/dirkschumacher/rcbc/archive/a5c736d32825831bc6df8e27198ec551c8872f68.tar.gz
+  sha256: c405cc2fdb8840c63f85adac250b7add59278c9e15cdc14c5dff400dbc179a14
+
+build:
+  number: 0
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+  script:
+    - R CMD INSTALL --preclean --build .
+
+requirements:
+  host:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - coin-or-cbc
+    - pkg-config
+    - r-base
+    - r-assertthat
+    - r-matrix
+  run:
+    - r-base
+    - r-assertthat
+    - r-matrix
+
+tests:
+  - script:
+      - R -e "library('rcbc')"
+
+about:
+  license: GPL-3.0-or-later
+  license_file: LICENSE
+  summary: An R interface to the CBC solver for mixed-integer linear programs.
+  homepage: https://github.com/dirkschumacher/rcbc
