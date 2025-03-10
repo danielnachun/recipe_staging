@@ -1,0 +1,42 @@
+context:
+  name: product-key-memory
+  version: 0.2.11
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/lucidrains/product-key-memory/archive/${{ version }}.tar.gz
+  sha256: b1f90ae55510a7059fc596458d7c00baad73b9289473ba5f1f95dbea7dcef4aa
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+    - colt5-attention >=0.10.14
+    - einops >=0.6
+    - pytorch
+
+tests:
+  - python:
+      imports:
+        - product_key_memory
+      pip_check: true
+
+about:
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/lucidrains/product-key-memory
+
+extra:
+  recipe-maintainers:
+    - danielnachun
