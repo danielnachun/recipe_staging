@@ -16,6 +16,8 @@ requirements:
   build:
     - ${{ compiler('c') }}
     - make
+    - if: linux
+      then: binutils
 
 tests:
   - script:
