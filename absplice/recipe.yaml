@@ -1,0 +1,62 @@
+context:
+  version: 1.0.0
+
+package:
+  name: absplice
+  version: ${{ version }}
+
+source:
+  url: https://github.com/gagneurlab/absplice/archive/v${{ version }}.tar.gz
+  sha256: 51e1a57fadffda4a6eb5c90aaa3c9c06def5bfdf1b0b9212ca26b9687ff8292a
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - click
+    - cython
+    - cyvcf2
+    - deepdiff
+    - htslib
+    - interpret
+    - interpret-core
+    - kipoiseq
+    - mmsplice
+    - numpy >=1.23,<1.24
+    - pandas
+    - pyarrow
+    - pyfaidx
+    - pyranges
+    - pytest-runner
+    - python
+    - scikit-learn
+    - scipy
+    - seaborn
+    - splicemap
+    - tensorflow
+    - tqdm
+
+tests:
+  - python:
+      imports:
+        - absplice
+      pip_check: false
+
+about:
+  summary: Invoke py.test as distutils command with dependency resolution
+  license: MIT
+  license_file:
+    - MIT.txt
+    - CC_BY_NC_4_0.txt
+  homepage: https://github.com/gagneurlab/absplice
+
+extra:
+  recipe-maintainers:
+    - danielnachun
