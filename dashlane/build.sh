@@ -2,6 +2,9 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+yarn
+yarn build
+
 # Patch package.json to skip some unneeded dependencies
 mv package.json package.json.bak
 jq 'del(.packageManager)' package.json.bak |
@@ -21,6 +24,9 @@ npm install -ddd \
     --global \
     --build-from-source \
     ${PKG_NAME}-${PKG_VERSION}.tgz
+
+mv package.json package.json.bak
+jq 'del(.devDepenencies)' package.json.bak > package.json
 
 # Create license report for dependencies
 pnpm install

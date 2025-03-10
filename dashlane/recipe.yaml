@@ -19,6 +19,7 @@ requirements:
     - jq
     - make
     - python
+    - yarn
   host:
     - nodejs
     - pnpm
