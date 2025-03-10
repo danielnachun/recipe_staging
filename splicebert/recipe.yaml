@@ -22,8 +22,6 @@ requirements:
     - python
     - pytorch
     - transformers
-    - if: linux
-      then: flash-attn
 
 tests:
   - python:
