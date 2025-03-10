@@ -1,5 +1,3 @@
-schema_version: 1
-
 context:
   name: cyvcf2
   version: 0.30.28
@@ -33,7 +31,7 @@ requirements:
       then: binutils
     - make
   host:
-    - python=3.11
+    - python
     - cython
     - pip
     - setuptools
@@ -42,9 +40,10 @@ requirements:
     - zlib
     - htslib >=1.10
     - openssl
-    - numpy>=1.24
+    - numpy>=1.23,<1.24
+    - liblzma-devel
   run:
-    - python=3.11
+    - python
     - coloredlogs
     - click
     - ${{ pin_compatible('numpy') }}
@@ -70,4 +69,3 @@ extra:
   identifiers:
     - doi:10.1093/bioinformatics/btx057
     - biotools:cyvcf2
-
