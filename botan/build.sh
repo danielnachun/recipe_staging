@@ -4,8 +4,8 @@ set -o xtrace -o nounset -o pipefail -o errexit
 
 extra_args=""
 if [[ ${target_platform} =~ .*linux.* ]]; then
-    extra_args+="--cc='gcc'"
-    extra_args+="--without-os-features=getrandom,getentropy"
+    extra_args+="--cc='gcc' "
+    extra_args+="--without-os-features=getrandom,getentropy "
 fi
 
 ./configure.py \
