@@ -52,9 +52,9 @@ tests:
 about:
   summary: Invoke py.test as distutils command with dependency resolution
   license: MIT
-  # license_file:
-  #   - license/MIT.txt
-  #   - license/CC_BY_NC_4_0.txt
+  license_file:
+    - MIT.txt
+    - CC_BY_NC_4_0.txt
   homepage: https://github.com/gagneurlab/absplice
 
 extra:
