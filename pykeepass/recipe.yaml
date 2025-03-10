@@ -1,0 +1,43 @@
+context:
+  name: pykeepass
+  version: 4.1.1.post1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/pykeepass-${{ version }}.tar.gz
+  sha256: 28f4927454ebe507ef7294d3ec6b5a72ee3a5c97fcc21b1080b8ddc09f2097dd
+
+build:
+  number: 0
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python =3.9
+    - setuptools >=59.0.0
+    - pip
+  run:
+    - python >=3.9
+    - pyotp >=2.9.0
+    - construct >=2.10.53
+    - argon2_cffi >=18.1.0
+    - pycryptodomex >=3.6.2
+    - lxml
+
+tests:
+  - python:
+      imports:
+        - pykeepass
+      pip_check: true
+
+about:
+  summary: Python library to interact with keepass databases (supports KDBX3 and KDBX4)
+  license: GPL-3.0
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
