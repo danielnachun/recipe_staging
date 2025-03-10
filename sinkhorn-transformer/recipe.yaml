@@ -1,0 +1,42 @@
+context:
+  version: 0.11.4
+
+package:
+  name: sinkhorn-transformer
+  version: ${{ version }}
+
+source:
+  url: https://github.com/lucidrains/sinkhorn-transformer/archive/${{ version }}.tar.gz
+  sha256: 2342bd71d3ba85b9828b526a203774473ba8567eca241589250b2af10e0ec847
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+    - axial-positional-embedding >=0.1.0
+    - local-attention
+    - product-key-memory
+    - pytorch
+
+tests:
+  - python:
+      imports:
+        - sinkhorn_transformer
+      pip_check: true
+
+about:
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/lucidrains/sinkhorn-transformer
+
+extra:
+  recipe-maintainers:
+    - danielnachun
