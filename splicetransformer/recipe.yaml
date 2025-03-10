@@ -18,6 +18,7 @@ requirements:
     - python
     - sed
   run:
+    - axial-positional-embedding
     - numpy
     - pandas
     - pyensembl
@@ -25,6 +26,7 @@ requirements:
     - python >=3.9
     - pytorch
     - pyvcf3
+    - sinkhorn-transformer
     - tqdm
 
 tests:
