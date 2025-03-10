@@ -14,6 +14,11 @@ build:
   noarch: generic
 
 requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - make
+    - python
   host:
     - nodejs
     - pnpm
