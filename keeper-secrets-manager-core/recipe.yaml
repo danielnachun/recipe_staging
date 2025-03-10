@@ -1,0 +1,43 @@
+context:
+  name: keeper-secrets-manager-core
+  version: 16.6.6
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/keeper_secrets_manager_core-${{ version }}.tar.gz
+  sha256: bda9e733908b34edbac956825fc062e6934894f210d49b0bba1679d167d7be80
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python =3.9
+    - pip
+    - setuptools
+  run:
+    - python >=3.9
+    - requests
+    - cryptography >=39.0.1
+    - importlib-metadata
+
+tests:
+  - python:
+      imports:
+        - keeper_secrets_manager_core
+      pip_check: true
+
+about:
+  summary: Keeper Secrets Manager for Python 3
+  license: MIT
+  license_file: LICENSE.txt
+  homepage: https://github.com/Keeper-Security/secrets-manager
+
+extra:
+  recipe-maintainers:
+    - danielnachun
