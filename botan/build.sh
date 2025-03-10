@@ -4,6 +4,7 @@ set -o xtrace -o nounset -o pipefail -o errexit
 
 ./configure.py \
     --prefix=${PREFIX} \
+    --cc="gcc" \
     --with-bzip \
     --with-lzma \
     --with-zlib \
