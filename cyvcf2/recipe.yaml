@@ -41,7 +41,7 @@ requirements:
     - htslib >=1.10
     - openssl
     - numpy>=1.23,<1.24
-    - lzma-devel
+    - liblzma-devel
   run:
     - python
     - coloredlogs
