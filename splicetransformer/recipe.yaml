@@ -1,0 +1,41 @@
+context:
+  version: 1.0.0
+
+package:
+  name: splicetransformer
+  version: ${{ version }}
+
+source:
+  url: https://github.com/ShenLab-Genomics/SpliceTransformer/archive/refs/tags/release1.tar.gz
+  sha256: 2f99268161e06f19bd109c5316c65ec9f8adc1c6bf28af2e289450d96fefc3a4
+
+build:
+  noarch: python
+  number: 0
+
+requirements:
+  build:
+    - sed
+  run:
+    - numpy
+    - pandas
+    - pyensembl
+    - pyfaidx
+    - python >=3.9
+    - pytorch
+    - pyvcf
+    - tqdm
+
+tests:
+  - script:
+      - sptransformer.py -h
+
+about:
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: SpliceTransformer(SpTransformer) is a deep learning tool to predict tissue specific splicing site from pre-mRNA sequence
+  homepage: https://github.com/jasonbhn/Watershed-SV
+
+extra:
+  recipe-maintainers:
+    - danielnachun
