@@ -52,7 +52,7 @@ tests:
 about:
   summary: Invoke py.test as distutils command with dependency resolution
   license: MIT
-  # license_file: PLEASE_ADD_LICENSE_FILE
+  license_file: MIT.txt
   homepage: https://github.com/gagneurlab/splicemap
 
 extra:
