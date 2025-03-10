@@ -9,7 +9,7 @@ jq 'del(.packageManager)' package.json.bak |
 
 if [[ ${target_platform} =~ .*linux.* ]]; then
     mv package.json package.json.bak
-    jq 'del(.nativeDependencies.node-mac-auth)' package.json > package.json
+    jq 'del(.nativeDependencies."node-mac-auth")' package.json > package.json
 fi
 
 npm install
