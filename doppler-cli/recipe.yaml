@@ -2,7 +2,7 @@ context:
   version: 3.72.0
 
 package:
-  name: golines
+  name: doppler-cli
   version: ${{ version }}
 
 source:
