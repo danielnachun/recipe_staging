@@ -1,0 +1,66 @@
+context:
+  name: keepercommander
+  version: 17.0.8
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/keepercommander-${{ version }}.tar.gz
+  sha256: e3c082c02132b22e0e20d44b7c6440a0663941e5e3b405cedc13745fccd80a3f
+
+build:
+  noarch: python
+  number: 0
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - keeper = keepercommander.__main__:main
+
+requirements:
+  host:
+    - python
+    - setuptools
+    - setuptools-scm
+    - pip
+  run:
+    - python
+    - asciitree
+    - bcrypt
+    - colorama
+    - cryptography >=38.0.3
+    - fido2
+    - keeper-secrets-manager-core >=16.2.0
+    - prompt_toolkit
+    - protobuf >=3.18.0
+    - pycryptodomex >=3.7.2
+    - pyperclip
+    - pysocks
+    - requests >=2.30.0
+    - setuptools
+    - tabulate
+    - websockets
+    - aiortc
+    - pydantic >=2.6.4
+
+tests:
+  - python:
+      imports:
+        - keepercommander
+      pip_check: true
+  - requirements:
+      run:
+        - pip
+    script: |
+      keeper --help 2>&1 | grep -q "usage: keeper"
+
+about:
+  summary: Keeper Commander for Python 3
+  license: MIT
+  license_file: LICENSE
+  homepage: https://keepersecurity.com/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
