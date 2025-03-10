@@ -1,0 +1,42 @@
+context:
+  version: 1.0.0
+
+package:
+  name: splicebert
+  version: ${{ version }}
+
+source:
+  url: https://github.com/chenkenbio/SpliceBERT/archive/dc1d8781f6f167c70421c3f8b809772637031d98.tar.gz
+  sha256: b683bc7a0e708c4816c7161b551d38ff0ebaef880902817f38c889679d9e5e7d
+
+build:
+  number: 0
+  noarch: python
+
+requirements:
+  host:
+    - pip
+    - python
+    - setuptools
+  run:
+    - python
+    - pytorch
+    - transformers
+    - if: linux
+      then: flash-attn
+
+tests:
+  - python:
+      imports:
+        - splicebert.splicebert_model
+      pip_check: false
+
+about:
+  summary: Primary RNA sequence model
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/chenkenbio/SpliceBERT
+
+extra:
+  recipe-maintainers:
+    - danielnachun
