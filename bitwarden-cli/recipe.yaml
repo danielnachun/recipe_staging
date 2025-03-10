@@ -1,0 +1,39 @@
+context:
+  version: 2025.1.3
+
+package:
+  name: bitwarden-cli
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/@bitwarden/cli/-/cli-${{ version }}.tgz
+  sha256: 6e94530020eb0c8c2acb7508afa06886bec3c31cb7af1e9ecd44d193ca1a625f
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - bw --help
+
+about:
+  license: GPL-3.0-or-later OR LicenseRef-Bitwarden-1.0
+  license_file:
+    - LICENSE_BITWARDEN.txt
+    - LICENSE_GPL.txt
+  summary: A secure and free password manager for all of your devices.
+  homepage: https://bitwarden.com
+  repository: https://github.com/bitwarden/clients
+
+extra:
+  recipe-maintainers:
+    - danielnachun
