@@ -1,0 +1,47 @@
+context:
+  name: argon2_cffi_bindings
+  version: 21.2.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/argon2-cffi-bindings-${{ version }}.tar.gz
+  sha256: bb89ceffa6c791807d1305ceb77dbfacc5aa499891d2c55661c6459651fc39e3
+
+build:
+  number: 0
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+  host:
+    - python
+    - setuptools >=45
+    - setuptools-scm >=6.2
+    - wheel
+    - cffi >=1.0.1
+    - pip
+  run:
+    - python
+    - cffi >=1.0.1
+
+tests:
+  - python:
+      imports:
+        - _argon2_cffi_bindings
+      pip_check: true
+
+about:
+  summary: Low-level CFFI bindings for Argon2
+  license: Apache-2.0 AND MIT
+  license_file:
+    - LICENSE
+    - extras/libargon2/LICENSE
+  homepage: https://github.com/hynek/argon2-cffi-bindings
+
+extra:
+  recipe-maintainers:
+    - danielnachun
