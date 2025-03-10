@@ -1,0 +1,44 @@
+context:
+  name: pylibsrtp
+  version: 0.11.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/pylibsrtp-${{ version }}.tar.gz
+  sha256: 5a8d19b1448baebde5ae3cedfa51f10e8ada3d9d99f43046ced0ecf1c105b8ec
+
+build:
+  number: 0
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+  host:
+    - libsrtp
+    - python
+    - cffi >=1.0.0
+    - setuptools
+    - wheel
+    - pip
+  run:
+    - python
+    - cffi >=1.0.0
+
+tests:
+  - python:
+      imports:
+        - pylibsrtp
+      pip_check: true
+
+about:
+  summary: Python wrapper around the libsrtp library
+  license: BSD-3-Clause
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
