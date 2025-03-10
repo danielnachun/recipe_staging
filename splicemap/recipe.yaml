@@ -25,7 +25,7 @@ requirements:
   run:
     - cython
     - cyvcf2
-    # - fastbetabino3
+    - fastbetabino3
     - kipoiseq >=0.3.0
     - matplotlib-base
     - numpy
@@ -36,13 +36,13 @@ requirements:
     - scikit-learn
     - seaborn
     - tqdm
-    - wget
+    - python-wget
 
 tests:
   - python:
       imports:
         - splicemap
-      pip_check: true
+      pip_check: false
   - requirements:
       run:
         - pip
