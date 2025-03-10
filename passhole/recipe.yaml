@@ -1,0 +1,57 @@
+context:
+  name: passhole
+  version: 1.10.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/passhole-${{ version }}.tar.gz
+  sha256: de937186a9a4c3cb4ed30541b999ee6bae0726b129c9e35200a88032c338a156
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - passhole = passhole.passhole:main
+      - ph = passhole.passhole:main
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+    - pynput
+    - pykeepass >=4.0.3
+    - pykeepass_cache
+    - colorama
+    - future
+    - pyotp
+    - qrcode
+
+tests:
+  - python:
+      imports:
+        - passhole
+      pip_check: true
+  - requirements:
+      run:
+        - pip
+    script:
+      - passhole --help
+      - ph --help
+
+about:
+  summary: CLI KeePass client with dmenu support
+  license: GPL-3.0
+  license_file: LICENSE
+  homepage: https://github.com/evidlo/passhole
+
+extra:
+  recipe-maintainers:
+    - danielnachun
