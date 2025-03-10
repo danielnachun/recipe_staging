@@ -15,6 +15,7 @@ build:
 
 requirements:
   build:
+    - python
     - sed
   run:
     - numpy
@@ -23,7 +24,7 @@ requirements:
     - pyfaidx
     - python >=3.9
     - pytorch
-    - pyvcf
+    - pyvcf3
     - tqdm
 
 tests:
