@@ -1,0 +1,47 @@
+context:
+  version: 1.0.0
+
+package:
+  name: fastbetabino3
+  version: ${{ version }}
+
+source:
+  url: https://github.com/lfiaschi/fastbetabinO/archive/ed0ebff2986ce9f3b062afaae4d9efd32cd322d4.tar.gz
+  sha256: e7aa1f06d691c6e14ceb4aaad68b09d531667e8d3d9ab141def070a76d93867f
+
+build:
+  number: 0
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+  host:
+    - cython
+    - pip
+    - python
+    - setuptools
+    - if: osx
+      then: llvm-openmp
+    - if: linux
+      then: libgomp
+  run:
+    - python
+    - scipy
+
+tests:
+  - python:
+      imports:
+        - fastbetabino
+      pip_check: false
+
+about:
+  summary: Superfast betabinomial fit implemented in Cython
+  license: MIT
+  license_file: LICENCE.txt
+  homepage: https://github.com/lfiaschi/fastbetabino
+
+extra:
+  recipe-maintainers:
+    - danielnachun
