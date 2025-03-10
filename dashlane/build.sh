@@ -2,10 +2,15 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-# Patch package.json to skip unneeded prepare step
+# Patch package.json to skip some unneeded dependencies
 mv package.json package.json.bak
 jq 'del(.packageManager)' package.json.bak |
     jq 'del(.dependencies.zlib)' > package.json
+
+if [[ ${target_platform} =~ .*linux.* ]]; then
+    mv package.json package.json.bak
+    jq 'del(.nativeDependencies.node-mac-auth)' package.json > package.json
+fi
 
 npm install
 npm run build
