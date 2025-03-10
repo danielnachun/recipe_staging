@@ -1,0 +1,60 @@
+context:
+  version: 1.0.0
+
+package:
+  name: splicemap
+  version: ${{ version }}
+
+source:
+  url: https://github.com/gagneurlab/splicemap/archive/v${{ version }}.tar.gz
+  sha256: f2a9414a3acb2726a7ec56ddc503b4a446f83f3dd3747c704e8936a1c4bc9b75
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - splicemap_download = splicemap.main:splicemap_download
+
+requirements:
+  host:
+    - python
+    - setuptools
+    - pip
+  run:
+    - cython
+    - cyvcf2
+    - fastbetabino3
+    - kipoiseq >=0.3.0
+    - matplotlib-base
+    - numpy
+    - pandas
+    - pyranges >=0.0.71
+    - pytest-runner
+    - python
+    - scikit-learn
+    - seaborn
+    - tqdm
+    - python-wget
+
+tests:
+  - python:
+      imports:
+        - splicemap
+      pip_check: false
+  - requirements:
+      run:
+        - pip
+    script:
+      - splicemap_download --help
+
+about:
+  summary: Invoke py.test as distutils command with dependency resolution
+  license: MIT
+  license_file: MIT.txt
+  homepage: https://github.com/gagneurlab/splicemap
+
+extra:
+  recipe-maintainers:
+    - danielnachun
