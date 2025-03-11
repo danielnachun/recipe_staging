@@ -11,7 +11,7 @@ source:
 
 build:
   number: 0
-  skip: not osx or x86_64
+  skip: not x86_64
 
 requirements:
   build:
