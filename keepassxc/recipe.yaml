@@ -1,0 +1,59 @@
+context:
+  version: 2.7.10
+
+package:
+  name: keepassxc
+  version: ${{ version }}
+
+source:
+  url: https://github.com/keepassxreboot/keepassxc/archive/${{ version }}.tar.gz
+  sha256: f400ac149b3770269e18d421c39f957afa4229cfff227ff7855d24952ba6739f
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - asciidoctor
+    - cmake
+    - make
+    - pkg-config
+  host:
+    - argon
+    - botan
+    - libqrencode
+    - minizip
+    - qt-main
+    - zlib
+    - if: linux
+      then:
+        - mesalib
+        - xorg-xorgproto
+        - xorg-libxtst
+  run:
+    - argon
+    - botan
+  ignore_run_exports:
+    from_package:
+      - mesalib
+      - xorg-libxtst
+
+tests:
+  - script:
+      - keepassxc-cli --help
+
+about:
+  license: GPL-2.0-only OR GPL-3.0-only OR LGPL-2.1-only
+  license_file:
+    - LICENSE.GPL-2
+    - LICENSE.GPL-3
+    - LICENSE.LGPL-2.1
+  summary: KeePassXC is a cross-platform community-driven port of the Windows application “Keepass Password Safe”.
+  homepage: https://keepassxc.org/
+  repository: https://github.com/keepassxreboot/keepassxc
+
+extra:
+  recipe-maintainers:
+    - danielnachun
