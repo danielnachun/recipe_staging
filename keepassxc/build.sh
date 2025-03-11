@@ -3,7 +3,7 @@
 set -o xtrace -o nounset -o pipefail -o errexit
 
 if [[ ${target_platform} =~ .*linux.* ]]; then
-    export CFLAGS="${CFLAGS} -I/usr/include"
+    export CXXFLAGS="${CXXFLAGS} -I/usr/include"
 fi
 
 cmake -S . -B build \
