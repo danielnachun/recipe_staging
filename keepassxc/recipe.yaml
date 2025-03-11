@@ -31,12 +31,14 @@ requirements:
       then:
         - mesalib
         - xorg-xorgproto
+        - xorg-libxtst
   run:
     - argon
     - botan
   ignore_run_exports:
     from_package:
       - mesalib
+      - xorg-libxtst
 
 tests:
   - script:
