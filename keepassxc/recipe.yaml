@@ -33,6 +33,7 @@ requirements:
         - mesalib
         - pcsclite
         - xorg-libxtst
+        - xorg-xorgproto
   run:
     - argon
     - botan
