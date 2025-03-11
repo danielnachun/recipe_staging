@@ -2,6 +2,10 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+if [[ ${target_platform} =~ .*linux.* ]]; then
+    export CFLAGS="${CFLAGS} -I/usr/include"
+fi
+
 cmake -S . -B build \
     -DKEEPASSXC_BUILD_TYPE=Release \
     -DCMAKE_BUILD_TYPE=Release \
