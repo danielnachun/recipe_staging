@@ -2,17 +2,13 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-if [[ ${target_platform} =~ .*linux.* ]]; then
-    export CXXFLAGS="${CXXFLAGS} -I/usr/include"
-fi
-
 cmake -S . -B build \
     -DKEEPASSXC_BUILD_TYPE=Release \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_VERBOSE_MAKEFILE=ON \
     -Wno-dev \
     -DBUILD_TESTING=OFF \
-    -DWITH_GUI_TESTS=ON \
+    -DWITH_GUI_TESTS=OFF \
     -DWITH_XC_UPDATECHECK=OFF \
     ${CMAKE_ARGS}
 

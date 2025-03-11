@@ -29,6 +29,7 @@ requirements:
     - if: linux
       then:
         - libusb
+        - mesalib
         - pcsclite
         - xorg-libxtst
   run:
