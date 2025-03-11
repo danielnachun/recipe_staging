@@ -1,51 +1,46 @@
-schema_version: 1
-
 context:
-  name: qsv
-  version: 0.128.0
+  version: 3.2.0
 
 package:
-  name: ${{ name|lower }}
+  name: qsv
   version: ${{ version }}
 
 source:
-  url: https://github.com/jqnatividad/${{ name }}/archive/refs/tags/${{ version }}.tar.gz
-  sha256: c3a6787406d5e7fcbca0f8d2a0727b198ef582d22c4aeef467b56c2384d02d3a
+  url: https://github.com/jqnatividad/qsv/archive/${{ version }}.tar.gz
+  sha256: 43e425522083c57de1ee7060463d476b20ba9db05f4237791cb5fceda0c77aa5
 
 build:
   number: 0
+  skip: not osx or x86_64
 
 requirements:
   build:
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
+    - ${{ compiler('rust') }}
     - cargo-bundle-licenses
-    - clangdev
-    - if: osx
-      then: libiconv
+    - cmake
+    - make
     - pkg-config
-    - python
-    - rust
   host:
-    - if: osx
-      then: libiconv
-    - openssl
+    - libclang
     - python
-  run:
-    - openssl
+    - if: linux
+      then: wayland
     - if: osx
       then: libiconv
+  run:
     - python
 
 tests:
-  - python:
-      pip_check: false
   - script:
-      - ${{ name }} --help
+      - qsv --help
 
 about:
   license: MIT
-  license_file: LICENSE-MIT
+  license_file:
+    - LICENSE-MIT
+    - THIRDPARTY.yml
   summary: Ultra-fast CSV data-wrangling toolkit
   homepage: https://github.com/jqnatividad/${{ name }}
   repository: https://github.com/jqnatividad/${{ name }}
@@ -53,4 +48,3 @@ about:
 extra:
   recipe-maintainers:
     - danielnachun
-
