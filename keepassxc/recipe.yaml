@@ -19,6 +19,7 @@ requirements:
     - asciidoctor
     - cmake
     - make
+    - pkg-config
   host:
     - argon
     - botan
