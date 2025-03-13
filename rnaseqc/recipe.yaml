@@ -27,7 +27,7 @@ requirements:
     - make
     - sed
   host:
-    - boost-cpp
+    - libboost-devel
     - bzip2
     - htslib
     - jsoncpp
@@ -36,12 +36,10 @@ requirements:
     - zlib
   run:
     - seqlib
-    - bwa_seqlib
-    - fermi-lite_seqlib
 
 tests:
-  - script:
-      - rnaseqc --help || true
+  - script: |
+      rnaseqc --help 2>&1 | grep -q 'rnaseqc \[gtf\] \[bam\] \[output\]'
 
 about:
   license: BSD-3-Clause
