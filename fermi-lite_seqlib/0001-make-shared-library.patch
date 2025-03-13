@@ -1,17 +1,29 @@
-From 110a6fa6752c16ae18527926f6c661f17c874066 Mon Sep 17 00:00:00 2001
-From: danielnachun <daniel.nachun@gmail.com>
-Date: Wed, 6 Mar 2024 18:03:28 -0800
+From 3dcfd517307248c732d4a7b5214a0c5e9e071f7d Mon Sep 17 00:00:00 2001
+From: Daniel Nachun <daniel.nachun@gmail.com>
+Date: Thu, 13 Mar 2025 14:33:01 -0700
 Subject: [PATCH] make shared library
 
 ---
- Makefile | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ Makefile | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
 
 diff --git a/Makefile b/Makefile
-index edda713..8d06ea3 100644
+index 4929693..61b4023 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -16,11 +16,11 @@ LIBS=		-lm -lz -lpthread
+@@ -8,6 +8,11 @@ OBJS=		kthread.o misc.o \
+ 			unitig.o mag.o bubble.o f_ksw.o
+ PROG=		fml-asm
+ LIBS=		-lm -lz -lpthread
++ifeq ($(shell uname -s),Linux)
++	LFLAGS = -shared
++else
++	LFLAGS = -dynamiclib -Wl,-install_name,@rpath/libfml.dylib
++endif
+ 
+ .SUFFIXES:.c .o
+ 
+@@ -16,11 +21,11 @@ LIBS=		-lm -lz -lpthread
  
  all:$(PROG)
  
@@ -22,10 +34,10 @@ index edda713..8d06ea3 100644
 -libfml.a:$(OBJS)
 -		$(AR) -csru $@ $(OBJS)
 +libfml$(SHLIB_EXT):$(OBJS)
-+		$(CC) $(CFLAGS) -shared -o $@ -lz $(OBJS)
++		$(CC) $(CFLAGS) $(LFLAGS) -o $@ -lz $(OBJS)
  
  clean:
  		rm -fr gmon.out *.o ext/*.o a.out $(PROG) *~ *.a *.dSYM session*
 -- 
-2.43.0
+2.47.1
 
