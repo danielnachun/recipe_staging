@@ -7,8 +7,8 @@ package:
   version: ${{ version }}
 
 source:
-  - url: https://github.com/getzlab/rnaseqc/archive/v${{ version }}.tar.gz
-    sha256: 544e7e68fb6c589fe9abb9df89b9641df68a28c3a1ecca516a375b11b484a6e6
+  - url: https://github.com/getzlab/rnaseqc/archive/162c8afce9006cda84d3b8001c0100fb6a348cc9.tar.gz
+    sha256: 698156045705e31f7edb6d568f3ff02636ee832ce00be735369a664b667f933a
     patches:
       - 0001-use-dynamic-linking.patch
   - url: https://github.com/samtools/htslib/archive/1.19.1.tar.gz
@@ -16,7 +16,7 @@ source:
     target_directory: htslib
 
 build:
-  number: 5
+  number: 6
 
 requirements:
   build:
@@ -27,7 +27,7 @@ requirements:
     - make
     - sed
   host:
-    - boost-cpp
+    - libboost-devel
     - bzip2
     - htslib
     - jsoncpp
@@ -38,8 +38,8 @@ requirements:
     - seqlib
 
 tests:
-  - script:
-      - rnaseqc --help || true
+  - script: |
+      rnaseqc --help 2>&1 | grep -q 'rnaseqc \[gtf\] \[bam\] \[output\]'
 
 about:
   license: BSD-3-Clause
