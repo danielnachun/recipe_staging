@@ -27,7 +27,7 @@ requirements:
 
 tests:
   - script:
-      # - "fml-asm 2>&1 | grep -q \"Usage: fml-asm \\[options\\]\""
+      - "fml-asm 2>&1 | grep -q \"Usage: fml-asm \\[options\\]\""
       - test -f ${PREFIX}/lib/libfml${SHLIB_EXT}
 
 about:
