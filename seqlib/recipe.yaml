@@ -41,7 +41,7 @@ requirements:
 tests:
   - script:
       - test -f ${PREFIX}/lib/libseqlib${SHLIB_EXT}
-      # - seqtools
+      - seqtools
 
 about:
   license: Apache-2.0
