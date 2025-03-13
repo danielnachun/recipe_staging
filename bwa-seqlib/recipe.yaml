@@ -24,9 +24,6 @@ requirements:
     - if: "target_platform == \"osx-arm64\""
       then: simde
     - zlib
-  run_exports:
-    weak:
-      - bwa_seqlib =${{ version }}
 
 tests:
   - script:
