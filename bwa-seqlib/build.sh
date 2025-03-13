@@ -14,6 +14,6 @@ mkdir -p ${PREFIX}/lib
 mkdir -p ${PREFIX}/include/bwa
 
 install -m 755 bwa ${PREFIX}/bin
-install -m 644 libbwa${SHLIB_EXT} ${PREFIX}/lib
+install -m 644 libbwa.dylib ${PREFIX}/lib
 cp -R *.h ${PREFIX}/include/bwa
 cp -R *.c ${PREFIX}/include/bwa

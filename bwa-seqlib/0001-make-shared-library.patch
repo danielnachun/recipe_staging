@@ -1,17 +1,29 @@
-From e294d691f67b0dd26ec73e0a5f63d38d88eb2eb8 Mon Sep 17 00:00:00 2001
-From: danielnachun <daniel.nachun@gmail.com>
-Date: Wed, 6 Mar 2024 17:50:40 -0800
+From ec5b0112dd451c66c43c744a35602829be1e72ea Mon Sep 17 00:00:00 2001
+From: Daniel Nachun <daniel.nachun@gmail.com>
+Date: Thu, 13 Mar 2025 14:21:57 -0700
 Subject: [PATCH] make shared library
 
 ---
- Makefile | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ Makefile | 13 +++++++++----
+ 1 file changed, 9 insertions(+), 4 deletions(-)
 
 diff --git a/Makefile b/Makefile
-index 7151435..2eaef5b 100644
+index 478aec8..1741e31 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -26,14 +26,14 @@ endif
+@@ -19,6 +19,11 @@ SUBDIRS=	.
+ ifeq ($(shell uname -s),Linux)
+ 	LIBS += -lrt
+ endif
++ifeq ($(shell uname -s),Linux)
++	LFLAGS = -shared
++else
++	LFLAGS = -dynamiclib -Wl,-install_name,@rpath/libbwa.dylib
++endif
+ 
+ .SUFFIXES:.c .o .cc
+ 
+@@ -27,14 +32,14 @@ endif
  
  all:$(PROG)
  
@@ -26,10 +38,10 @@ index 7151435..2eaef5b 100644
 -libbwa.a:$(LOBJS)
 -		$(AR) -csru $@ $(LOBJS)
 +libbwa$(SHLIB_EXT):$(LOBJS)
-+		$(CC) $(CFLAGS) $(DFLAGS) -shared -o $@ -lz $(LOBJS)
++		$(CC) $(CFLAGS) $(DFLAGS) $(LFLAGS) -o $@ -lz $(LOBJS)
  
  clean:
  		rm -f gmon.out *.o a.out $(PROG) *~ *.a
 -- 
-2.43.0
+2.47.1
 
