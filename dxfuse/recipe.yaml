@@ -10,11 +10,12 @@ source:
   sha256: 1efd94fd461841e6c782dd1f246c8dacdbd1b28cba7b14797846b826eaab74a9
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
-    - ${{ compiler('go-nocgo') }}
+    - ${{ compiler('go-cgo') }}
+    - ${{ compiler('c') }}
     - go-licenses
 
 tests:
