@@ -31,8 +31,7 @@ tests:
       summarize_splice_site_usage_CU.pl 2>&1 | grep -q "summarize usage of each splice sites"
       tag2profile_CU.pl 2>&1 | grep -q "Count tag numbers in sliding window or particular regions or each nucleotide position"
       tagoverlap_CU.pl 2>&1 | grep -q "Find tags overlap with particular regions"
-      # tsu_add_splice_site_usage_CU.pl 2>&1 | grep -q "convert canonical transcripts file to bed format"
-      tsu_add_splice_site_usage_CU.pl
+      tsu_add_splice_site_usage_CU.pl 2>&1 | grep -q "convert canonical transcripts file to bed format"
 
 about:
   license: LicenseRef-UNKNOWN
