@@ -14,6 +14,8 @@ build:
   noarch: generic
 
 requirements:
+  build:
+    - sed
   run:
     - czplib
     - perl>=5.32
