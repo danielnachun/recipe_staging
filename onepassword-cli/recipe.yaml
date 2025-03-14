@@ -1,0 +1,55 @@
+context:
+  version: 2.30.3
+
+package:
+  name: onepassword-cli
+  version: ${{ version }}
+
+source:
+  - if: osx
+    then:
+      - if: arm64
+        then:
+          url: https://cache.agilebits.com/dist/1P/op2/pkg/v${{ version }}/op_darwin_arm64_v${{ version }}.zip
+          sha256: 0472133a09a0596119543c0ee7def0b3c08646354432516a18dbfe831d536c88
+      - if: x86_64
+        then:
+          url: https://cache.agilebits.com/dist/1P/op2/pkg/v${{ version }}/op_darwin_amd64_v${{ version }}.zip
+          sha256: 79fa39079b038bfefa8dafbc9e6cd1540ad869532ddbb6cf0a0b829edc7f4d48
+  - if: linux
+    then:
+      - if: aarch64
+        then:
+          url: https://cache.agilebits.com/dist/1P/op2/pkg/v${{ version }}/op_linux_arm64_v${{ version }}.zip
+          sha256: 39bd361b2cd4819ea757583624eeda33f6062ba5ccfc2b90ad0764aed94cd1c4
+      - if: x86_64
+        then:
+          url: https://cache.agilebits.com/dist/1P/op2/pkg/v${{ version }}/op_linux_amd64_v${{ version }}.zip
+          sha256: a16307ebcecb40fd091d7a6ff4f0c380c3c0897c4f4616de2c5d285e57d5ee28
+  - if: win
+    then:
+      url: https://cache.agilebits.com/dist/1P/op2/pkg/v${{ version }}/op_windows_amd64_v${{ version }}.zip
+      sha256: 3191456f345aab7435252284a5196fc94ecaf7f7ca3715338f01b17e50af1386
+
+build:
+  dynamic_linking:
+    binary_relocation: false
+  number: 0
+  script:
+    - if: unix
+      then: |
+        mkdir -p ${PREFIX}/bin
+        install -m 755 op ${PREFIX}/bin
+
+tests:
+  - script:
+      - op --help
+
+about:
+  license: LicenseRef-Proprietary
+  summary: CLI for 1Password password manager
+  homepage: https://1password.com
+
+extra:
+  recipe-maintainers:
+    - danielnachun
