@@ -1,0 +1,42 @@
+context:
+  version: 1.1.2
+
+package:
+  name: quantas
+  version: ${{ version }}
+
+source:
+  url: https://github.com/rfeng2023/quantas/archive/aa3a60ca530537b6e19f5f6c21dccd40f36de8ea.tar.gz
+  sha256: a2e73e262fe3f866823843109b204560e08aa792dc3b289eb6db5e6b12d12c86
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  run:
+    - czplib
+    - perl>=5.32
+    - perl-carp
+    - perl-data-dumper
+    - perl-getopt-long
+
+tests:
+  - script: |
+      gen_splicing_matrix_CU.pl 2>&1 | grep -q "Usage gen_splicing_matrix_CU.pl"
+      mappingStats_CU.pl 2>&1 | grep -q "Returns mapping stats assuming existence of basename.sam\[.gz\] and basename.bed."
+      sam2bed_CU.pl 2>&1 | grep -q "Convert OLego SAM format to BED format (for both paired-end and single-end data)"
+      summarize_splice_site_usage_CU.pl 2>&1 | grep -q "summarize usage of each splice sites"
+      tag2profile_CU.pl 2>&1 | grep -q "Count tag numbers in sliding window or particular regions or each nucleotide position"
+      tagoverlap_CU.pl 2>&1 | grep -q "Find tags overlap with particular regions"
+      tsu_add_splice_site_usage_CU.pl 2>&1 | grep -q "convert canonical transcripts file to bed format"
+
+about:
+  license: LicenseRef-UNKNOWN
+  summary: Tools for inference of gene transcript structure and quantification of gene expression and alternate splicing
+  homepage: https://github.com/rfeng2023/quantas
+  repository: https://github.com/rfeng2023/quantas
+
+extra:
+  recipe-maintainers:
+    - danielnachun
