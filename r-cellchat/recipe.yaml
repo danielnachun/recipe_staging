@@ -1,19 +1,16 @@
-schema_version: 1
-
 context:
-  version: 1.5.0
+  version: 2.1.2
 
 package:
   name: r-cellchat
   version: ${{ version|replace("-", "_") }}
 
 source:
-  url: https://github.com/sqjin/CellChat/archive/refs/tags/v${{ version }}.tar.gz
-  sha256: c9e31327cbbcf1fec5e6d8a0dfe011ded8e543557107e93dd4a417c4c137d1c6
+  url: https://github.com/jinworks/CellChat/archive/913be350ff6f16c6afb2282d6088c442cb4eafe2.tar.gz
+  sha256: 4c23b375037001b2955ab4e035bdc71918108b635cfe0e61a8eeaabee329e620
 
 build:
   number: 0
-  merge_build_and_host_envs: ${{ true if win }}
   dynamic_linking:
     rpaths:
       - lib/R/lib/
@@ -22,12 +19,14 @@ build:
 requirements:
   build:
     - ${{ compiler('cxx') }}
+    - ${{ compiler('c') }}
     - make
   host:
     - bioconductor-biocgenerics
     - bioconductor-biocneighbors
     - bioconductor-complexheatmap
-    - r-base=4.3
+    - r-base
+    - r-bslib
     - r-circlize
     - r-colorspace
     - r-cowplot
@@ -43,9 +42,10 @@ requirements:
     - r-irlba
     - r-magrittr
     - r-matrix
-    - r-nmf=0.24.0
+    - r-nmf
     - r-patchwork
     - r-pbapply
+    - r-plotly
     - r-plyr
     - r-rcolorbrewer
     - r-rcpp
@@ -55,6 +55,7 @@ requirements:
     - r-rspectra
     - r-rtsne
     - r-shape
+    - r-shiny
     - r-scales
     - r-sna
     - r-stringr
@@ -63,7 +64,8 @@ requirements:
     - bioconductor-biocgenerics
     - bioconductor-biocneighbors
     - bioconductor-complexheatmap
-    - r-base>=4.3
+    - r-base
+    - r-bslib
     - r-circlize
     - r-colorspace
     - r-cowplot
@@ -79,9 +81,10 @@ requirements:
     - r-irlba
     - r-magrittr
     - r-matrix
-    - r-nmf=0.24.0
+    - r-nmf
     - r-patchwork
     - r-pbapply
+    - r-plotly
     - r-plyr
     - r-rcolorbrewer
     - r-rcpp
@@ -91,6 +94,7 @@ requirements:
     - r-rspectra
     - r-rtsne
     - r-shape
+    - r-shiny
     - r-scales
     - r-sna
     - r-stringr
@@ -98,12 +102,14 @@ requirements:
 
 tests:
   - script:
-      - "$R -e \"library('CellChat')\""
+      - R -e "library('CellChat')"
 
 about:
   license: GPL-3.0-or-later
-  summary: an open source R tool that infers, visualizes and analyzes the cell-cell communication networks from scRNA-seq and spatial imaging data.
-  license_file:
-    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-3
-  homepage: https://www.nature.com/articles/s41467-019-11052-9
+  summary: R toolkit for inference, visualization and analysis of cell-cell communication from single-cell and spatially resolved transcriptomics
+  license_file: LICENSE
+  homepage: https://github.com/jinworks/CellChat
 
+extra:
+  maintainers:
+    - danielnachun
