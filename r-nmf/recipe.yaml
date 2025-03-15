@@ -1,23 +1,16 @@
-schema_version: 1
-
 context:
-  version: 0.24.0
-  posix: "'m2-' if win else ''"
-  native: "'m2w64-' if win else ''"
+  version: 0.28
 
 package:
   name: r-nmf
   version: ${{ version|replace("-", "_") }}
 
 source:
-  url:
-    - ${{ cran_mirror }}/src/contrib/NMF_${{ version }}.tar.gz
-    - ${{ cran_mirror }}/src/contrib/Archive/NMF/NMF_${{ version }}.tar.gz
-  sha256: 481811d35b3bbc07e9a60e2f853b05ef26581b43be9c6c4bab81151b8dcadd93
+  url: https://cloud.r-project.org//src/contrib/NMF_${{ version }}.tar.gz
+  sha256: 77dfe7b323ee5e5f8801851d1d4356932e2ffc810a7ac7faf5542cbfd92eeefb
 
 build:
   number: 0
-  merge_build_and_host_envs: ${{ true if win }}
   dynamic_linking:
     rpaths:
       - lib/R/lib/
@@ -25,25 +18,10 @@ build:
 
 requirements:
   build:
-    - if: not win
-      then: ${{ compiler('c') }}
-    - if: win
-      then: ${{ compiler('m2w64_c') }}
-    - if: not win
-      then: ${{ compiler('cxx') }}
-    - if: win
-      then: ${{ compiler('m2w64_cxx') }}
-    - if: win
-      then: ${{ posix }}filesystem
-    - ${{ posix }}make
-    - if: win
-      then: ${{ posix }}sed
-    - if: win
-      then: ${{ posix }}coreutils
-    - if: win
-      then: ${{ posix }}zip
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
   host:
-    - r-base=4.3
+    - r-base
     - bioconductor-biobase
     - r-biocmanager
     - r-rcolorbrewer
@@ -60,9 +38,7 @@ requirements:
     - r-rngtools >=1.2.3
     - r-stringr >=1.0.0
   run:
-    - if: win
-      then: ${{native}}gcc-libs
-    - r-base>=4.3
+    - r-base
     - bioconductor-biobase
     - r-biocmanager
     - r-rcolorbrewer
@@ -81,20 +57,14 @@ requirements:
 
 tests:
   - script:
-      - if: not win
-        then: "$R -e \"library('NMF')\""
-      - if: win
-        then: "\"%R%\" -e \"library('NMF')\""
+      - R -e "library('NMF')"
 
 about:
-  license: GPL-2.0
+  license: GPL-2.0-or-later
   summary: |
     Provides a framework to perform Non-negative Matrix Factorization (NMF). The package
     implements a set of already published algorithms and seeding methods, and provides
     a framework to test, develop and plug new/custom algorithms. Most of the built-in
     algorithms have been optimized in C++, and the main interface function provides
     an easy way of performing parallel computations on multicore machines.
-  license_file:
-    - ${{ env.get("PREFIX") }}/lib/R/share/licenses/GPL-2
   homepage: http://renozao.github.io/NMF/
-
