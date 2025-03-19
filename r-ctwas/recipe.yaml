@@ -1,16 +1,13 @@
-schema_version: 1
-
 context:
-  version: 0.1.29
-  name: ctwas
+  version: 0.4.21
 
 package:
-  name: r-${{ name }}
+  name: r-ctwas
   version: ${{ version }}
 
 source:
-  url: https://github.com/xinhe-lab/ctwas/archive/fc23c51993408af2d1abd45f164916d05d995005.zip
-  sha256: acd2d3c5e35cdf9c7c70bf94c26eaac2c1fb7b7f34fa44cd5f6f662d71a08567
+  url: https://github.com/xinhe-lab/multigroup_ctwas/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: fcc3187f8d7225016862619e0e80491b3aabef21960bf2b9d4704370368bf9c8
 
 build:
   number: 0
@@ -21,44 +18,59 @@ build:
       - lib/
 
 requirements:
-  build:
-    - if: build_platform != target_platform
-      then: cross-r-base ${{ r_base }}
   host:
-    - r-base=4.2
+    - bioconductor-ensembldb
+    - bioconductor-annotationfilter
+    - r-base
+    - r-cowplot
+    - r-crayon
     - r-data.table
-    - r-pgenlibr
-    - r-matrix
-    - r-doparallel
-    - r-foreach
+    - r-dplyr
+    - r-ggplot2
+    - r-ggrepel
+    - r-locuszoomr
     - r-logging
-    - r-rfast
+    - r-magrittr
+    - r-matrix
+    - r-mixsqp
+    - r-pgenlibr
+    - r-r.utils
     - r-readr
+    - r-rlang
     - r-rsqlite
+    - r-tidyr
   run:
-    - r-base>=4.2
+    - bioconductor-ensembldb
+    - bioconductor-annotationfilter
+    - r-base
+    - r-cowplot
+    - r-crayon
     - r-data.table
-    - r-pgenlibr
-    - r-matrix
-    - r-doparallel
-    - r-foreach
+    - r-dplyr
+    - r-ggplot2
+    - r-ggrepel
+    - r-locuszoomr
     - r-logging
-    - r-rfast
+    - r-magrittr
+    - r-matrix
+    - r-mixsqp
+    - r-pgenlibr
+    - r-r.utils
     - r-readr
+    - r-rlang
     - r-rsqlite
+    - r-tidyr
 
 tests:
   - script:
-      - if: not win
-        then: "$R -e \"library('ctwas')\""
+      - R -e "library('ctwas')"
 
 about:
   license: MIT
   license_file: LICENSE
   summary: Identify causal genes in TWAS analysis
-  homepage: https://github.com/xinhe-lab/ctwas
+  homepage: https://github.com/xinhe-lab/multigroup_ctwas
 
 extra:
   recipe-maintainers:
     - danielnachun
-
