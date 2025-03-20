@@ -1,0 +1,49 @@
+context:
+  version: 0.4.0
+
+package:
+  name: scikit-misc
+  version: ${{ version }}
+
+source:
+  url: https://github.com/has2k1/scikit-misc/archive/v${{ version }}.tar.gz
+  sha256: 17513e5f694d7fa4c09f8aec93864251411314351b3be38219fb64c687378a0a
+
+build:
+  number: 0
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('fortran') }}
+    - pkg-config
+  host:
+    - openblas
+    - python=3.12
+    - meson-python >=0.15.0
+    - cython >=3.0.8
+    - setuptools
+    - wheel
+    - numpy >=2.0
+    - pip
+  run:
+    - python=3.12
+    - numpy >=1.23.5
+
+tests:
+  - python:
+      imports:
+        - skmisc
+      pip_check: true
+
+about:
+  summary: Miscellaneous tools for scientific computing.
+  license: MIT AND BSD-3-Clause
+  license_file:
+    - LICENSE
+    - skmisc/loess/LICENSE.txt
+
+extra:
+  recipe-maintainers:
+    - danielnachun
