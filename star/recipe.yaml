@@ -13,7 +13,6 @@ source:
     # Fixing shared lib issues
     - patches/0001-do-not-enforce-avx2.patch
     - patches/0002-donotuse_own_htslib.patch
-    - patches/0003-create-simd-dispatch.patch
 
 build:
   number: 1
@@ -25,6 +24,8 @@ requirements:
     - make
     - vim
   host:
+    - if: osx
+      then: llvm-openmp
     - htslib
     - zlib
 
