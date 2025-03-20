@@ -12,7 +12,7 @@ source:
     - 0001-don-t-use-JAR-paths.patch
 
 build:
-  number: 0
+  number: 1
   noarch: python
 
 requirements:
