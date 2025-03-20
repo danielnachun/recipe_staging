@@ -15,7 +15,7 @@ fi
 
 if [ "$(arch)" == "x86_64" ]; then
     for SIMD in ${AMD64_SIMD_LEVELS[@]}; do
-        make -j "$(nproc)" CXXFLAGSextra="-m$SIMD" STAR STARlong CXX="${CXXFLAGS} ${CXXFLAGS}"
+        make -j${CPU_COUNT} CXXFLAGSextra="-m$SIMD" STAR STARlong CXX="${CXX} ${CXXFLAGS}"
         cp STAR $PREFIX/bin/STAR-$SIMD
         cp STARlong $PREFIX/bin/STARlong-$SIMD
         make clean
@@ -26,7 +26,7 @@ if [ "$(arch)" == "x86_64" ]; then
     cp ${RECIPE_DIR}/simd-dispatch.sh $PREFIX/bin/STAR
     cp ${RECIPE_DIR}/simd-dispatch.sh $PREFIX/bin/STARlong
 else
-    make -j "$(nproc)" STAR STARlong CXX="${CXX} ${CXXFLAGS}"
+    make -j${CPU_COUNT} STAR STARlong CXX="${CXX} ${CXXFLAGS}"
     cp STAR $PREFIX/bin/STAR
     cp STARlong $PREFIX/bin/STARlong
 fi
