@@ -1,5 +1,3 @@
-schema_version: 1
-
 context:
   name: ldstore
   version: 0.1.9
@@ -13,19 +11,20 @@ source:
   sha256: 0a28be5e750c2fe7867c064c62729d9d172d4459f2cc5900cd0e2466c24b8d26
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: ${{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
-    - numpy =1.24.*
+    - numpy
     - pandas
     - pip
     - python
+    - setuptools
     - zstd
   run:
-    - numpy =1.24.*
+    - numpy
     - pandas
     - python
     - zstd
@@ -44,4 +43,3 @@ about:
 extra:
   recipe-maintainers:
     - danielnachun
-
