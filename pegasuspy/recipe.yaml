@@ -25,6 +25,7 @@ requirements:
     - setuptools_scm
     - pip
   run:
+    - cython
     - python=3.12
     - numpy
     - pandas >=1.2.0
