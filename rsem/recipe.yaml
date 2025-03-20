@@ -27,6 +27,7 @@ requirements:
   host:
     - libboost-devel
     - htslib
+    - perl
     - zlib
   run:
     - samtools
