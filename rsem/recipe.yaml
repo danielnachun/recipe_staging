@@ -33,6 +33,7 @@ requirements:
 
 tests:
   - script: |
+      rsem-prepare-reference
       rsem-prepare-reference 2>&1 | grep -q reference_name
       rsem-bam2wig foo bar foobar 2>&1 | grep -q "Failed to open file"
 
