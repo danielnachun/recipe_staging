@@ -10,10 +10,12 @@ source:
   sha256: 4d9c2f54761923ef803a5ad2e8fdfa0f0c88b901bcf01364935fb8b6b3ab21ab
 
 build:
-  number: 0
+  number: 1
   noarch: python
 
 requirements:
+  build:
+    - sed
   run:
     - bx-python
     - numpy
