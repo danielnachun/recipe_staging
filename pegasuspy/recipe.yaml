@@ -1,0 +1,88 @@
+context:
+  version: 1.10.0
+
+package:
+  name: pegasuspy
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/p/pegasuspy/pegasuspy-${{ version }}.tar.gz
+  sha256: 1419cdb4da138402190912bceba427f99f5fb9949731ddd8706109924c6ee4c2
+
+build:
+  number: 0
+  script: ${{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv
+  python:
+    entry_points:
+      - pegasus = pegasus.__main__:main
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+  host:
+    - python=3.12
+    - cython
+    - setuptools_scm
+    - pip
+  run:
+    - cython
+    - python=3.12
+    - numpy
+    - pandas >=1.2.0
+    - anndata >=0.7.1
+    - loompy >=3
+    - docopt
+    - scipy >=1.7
+    - pegasusio >=0.9.1
+    - psutil
+    - threadpoolctl
+    - adjusttext
+    - demuxem
+    - hnswlib
+    - harmony-pytorch
+    - joblib >=0.14
+    - lightgbm >=2.2.1
+    - louvain >=0.7.0
+    - leidenalg >=0.8.0
+    - matplotlib-base >=3.7.0
+    - natsort
+    - numba
+    - pybind11
+    - python-igraph >=0.8.0
+    - scikit-learn >=0.23.2
+    - scikit-misc
+    - seaborn >=0.13.0
+    - statsmodels
+    - pyfit-sne >=1.1.1
+    - umap-learn >=0.5.2
+    - xlsxwriter
+    - wordcloud
+    - forceatlas2-python
+    - tbb
+
+tests:
+  - python:
+      imports:
+        - pegasus
+        - pegasus.commands
+        - pegasus.cylib.cfisher
+        - pegasus.cylib.fast_utils
+        - pegasus.cylib.de_utils
+  - script:
+      - pegasus --help
+
+about:
+  license: BSD-3-Clause
+  license_file: LICENSE
+  summary: An efficient Python analysis tool which scales to transcriptomes of millions of single cells.
+  description: |
+    Pegasus is a tool for analyzing transcriptomes of millions of single cells.
+    It is a command line tool, a python package and a base for Cloud-based analysis workflows.
+  homepage: https://github.com/lilab-bcb/pegasus
+  repository: https://github.com/lilab-bcb/pegasus
+  documentation: https://pegasus.readthedocs.io
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+    - yihming
