@@ -1,5 +1,3 @@
-schema_version: 1
-
 context:
   version: 2.7.11b
   sha256: 3f65305e4112bd154c7e22b333dcdaafc681f4a895048fa30fa7ae56cac408e7
@@ -15,10 +13,9 @@ source:
     # Fixing shared lib issues
     - patches/0001-do-not-enforce-avx2.patch
     - patches/0002-donotuse_own_htslib.patch
-    - patches/0003-create-simd-dispatch.patch
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -27,13 +24,10 @@ requirements:
     - make
     - vim
   host:
+    - if: osx
+      then: llvm-openmp
     - htslib
     - zlib
-  run:
-    - htslib
-    - zlib
-  run_exports:
-    - ${{ pin_subpackage('star', upper_bound="x") }}
 
 tests:
   - script:
@@ -53,4 +47,3 @@ extra:
     - usegalaxy-eu:rna_star
   recipe-maintainers:
     - mjsteinbaugh
-
