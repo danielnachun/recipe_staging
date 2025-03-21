@@ -19,6 +19,8 @@ requirements:
     - ${{ compiler('c') }}
     - make
     - autoconf
+    - perl=5.32
+    - python
   host:
     - nodejs >=16.4.1
     - openmpi
@@ -30,7 +32,6 @@ requirements:
     - libxslt
     - libxml2
     - expat
-    - perl=5.32
   run:
     - python >=3.7
     - perl>=5.32
