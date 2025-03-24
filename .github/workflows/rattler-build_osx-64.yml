@@ -34,7 +34,7 @@ jobs:
 
       - name: Get changed directories
         id: changed-directories
-        uses: tj-actions/changed-files@v45
+        uses: tj-actions/changed-files@v46
         with: 
           base_sha: ${{ steps.last_successful_commit_pull_request.outputs.base }}
           dir_names: true
