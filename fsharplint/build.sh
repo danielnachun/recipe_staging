@@ -3,26 +3,41 @@
 set -o xtrace -o nounset -o pipefail -o errexit
 
 mkdir -p ${PREFIX}/bin
-mkdir -p ${PREFIX}/libexec/${PKG_NAME}
+mkdir -p ${PREFIX}/libexec/fsharplint
+ln -sf ${DOTNET_ROOT}/dotnet ${PREFIX}/bin
 
 rm -rf global.json
 rm -rf paket.lock
-sed -i 's/net5.0/net7.0/g' src/FSharpLint.Console/FSharpLint.Console.fsproj
-sed -i 's/net5.0/net7.0/g' src/FSharpLint.Core/FSharpLint.Core.fsproj
-sed -i 's/net5.0/net7.0/g' tests/FSharpLint.Benchmarks/FSharpLint.Benchmarks.fsproj
-sed -i 's/net5.0/net7.0/g' tests/FSharpLint.FunctionalTest/FSharpLint.FunctionalTest.fsproj
-sed -i 's/net5.0/net7.0/g' tests/FSharpLint.Core.Tests/FSharpLint.Core.Tests.fsproj
-sed -i 's/net5.0/net7.0/g' tests/FSharpLint.Console.Tests/FSharpLint.Console.Tests.fsproj
-sed -i 's/net5.0/net7.0/g' paket.dependencies
-sed -i 's/~> 0.53.0//' paket.dependencies
-mv .config/dotnet-tools.json .config/dotnet-tools.json.bak
-jq '.tools.paket.version = "7.2.1"' .config/dotnet-tools.json.bak > .config/dotnet-tools.json
+rm -rf .paket
+rm -rf .config/dotnet-tools.json
+framework_version="$(dotnet --version | sed -e 's/\..*//g').0"
 
-dotnet tool restore
-dotnet paket install
-dotnet publish --no-self-contained src/FSharpLint.Console/FSharpLint.Console.fsproj --output ${PREFIX}/libexec/${PKG_NAME} --framework net7.0
+# Use .net 8.0 instead of 6.0
+sed -i "s/net6.0/net${framework_version}/g" src/FSharpLint.Console/FSharpLint.Console.fsproj
+sed -i "s/net6.0/net${framework_version}/g" src/FSharpLint.Core/FSharpLint.Core.fsproj
+sed -i "s/net6.0/net${framework_version}/g" tests/FSharpLint.Benchmarks/FSharpLint.Benchmarks.fsproj
+sed -i "s/net6.0/net${framework_version}/g" tests/FSharpLint.FunctionalTest/FSharpLint.FunctionalTest.fsproj
+sed -i "s/net6.0/net${framework_version}/g" tests/FSharpLint.Core.Tests/FSharpLint.Core.Tests.fsproj
+sed -i "s/net6.0/net${framework_version}/g" tests/FSharpLint.Console.Tests/FSharpLint.Console.Tests.fsproj
+sed -i "s/net6.0/net${framework_version}/g" paket.dependencies
+
+# Apply fix from https://github.com/fsprojects/FSharpLint/pull/716 for .NET 8.0 support
+sed -i 's/getRemainingGlobSeqForMatches pathSegment/getRemainingGlobSeqForMatches (pathSegment:string)/' src/FSharpLint.Core/Application/Configuration.fs
+
+paket install
+dotnet publish --no-self-contained src/FSharpLint.Console/FSharpLint.Console.fsproj --output ${PREFIX}/libexec/fsharplint --framework net${framework_version}
+rm -rf ${PREFIX}/libexec/fsharplint/dotnet-fsharplint
 
 tee ${PREFIX}/bin/dotnet-fsharplint << EOF
 #!/bin/sh
-DOTNET_ROOT=${DOTNET_ROOT} exec ${PREFIX}/libexec/${PKG_NAME}/dotnet-fsharplint "\$@"
+exec \${DOTNET_ROOT}/dotnet exec \${CONDA_PREFIX}/libexec/fsharplint/dotnet-fsharplint.dll "\$@"
 EOF
+chmod +x ${PREFIX}/bin/dotnet-fsharplint
+
+# Download dependency licenses with dotnet-project-licenses
+tee ignored_packages.json << EOF
+["SemanticVersioning", "FSharp.Control.Reactive"]
+EOF
+dotnet-project-licenses --input src/FSharpLint.Console/FSharpLint.Console.fsproj -t -d license-files -ignore ignored_packages.json
+
+rm ${PREFIX}/bin/dotnet
