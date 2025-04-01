@@ -19,6 +19,8 @@ requirements:
     - ${{ compiler('cxx') }}
     # - ${{ stdlib('c') }}
     - cargo-bundle-licenses
+    - cmake
+    - make
 
 tests:
   - script:
