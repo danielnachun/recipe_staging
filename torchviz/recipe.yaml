@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  version: 0.0.3
+
+package:
+  name: torchviz
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/t/torchviz/torchviz-${{ version }}.tar.gz
+  sha256: 2e95f2fea7a31ec9549f2d6bbf446d75aeb6a9880fcf13e7dd843fdcdb4a3725
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+    - pytorch
+    - python-graphviz
+
+tests:
+  - python:
+      imports:
+        - torchviz
+      pip_check: true
+
+about:
+  summary: A small package to create visualizations of PyTorch execution graphs
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/pytorch/pytorchviz
+
+extra:
+  recipe-maintainers:
+    - danielnachun
