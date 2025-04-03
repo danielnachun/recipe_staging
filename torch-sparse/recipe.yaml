@@ -1,0 +1,52 @@
+context:
+  version: 0.6.18
+
+package:
+  name: torch-sparse
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/t/torch-sparse/torch_sparse-${{ version }}.tar.gz
+  sha256: 2f14c510a6e93f404c6ea357210615b3c15a71731f9dbd86f25434e34fb5a741
+
+build:
+  number: 0
+  script: |
+    export CFLAGS="${CFLAGS} -Wno-invalid-specialization"
+    ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - ${{ compiler('c') }}
+  host:
+    - python
+    - pytorch
+    - pip
+    - setuptools
+  run:
+    - python
+    - scipy
+    - torch-scatter
+
+tests:
+  - python:
+      imports:
+        - torch_sparse
+  - requirements:
+      run:
+        - pip
+    script:
+      - pip check
+
+about:
+  summary: PyTorch Extension Library of Optimized Autograd Sparse Matrix Operations
+  license: Apache-2.0 AND MIT
+  license_file:
+    - LICENSE
+    - third_party/parallel-hashmap/LICENSE
+  homepage: https://github.com/rusty1s/pytorch_sparse
+
+extra:
+  recipe-maintainers:
+    - danielnachun
