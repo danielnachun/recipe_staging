@@ -1,0 +1,45 @@
+context:
+  version: 2.0.0
+
+package:
+  name: r-minque
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://cloud.r-project.org/src/contrib/minque_${{ version }}.tar.gz
+  sha256: 48d727c13fa724517f951c56abc0455e8d6d2ffb90111311012e8e28c46b9f5d
+
+build:
+  number: 0
+  noarch: generic
+  script: R CMD INSTALL --build . ${R_ARGS}
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  host:
+    - r-base
+  run:
+    - r-base
+
+tests:
+  - script:
+      - R -e "library('minque')"
+
+about:
+  license: GPL-3.0-or-later
+  summary: |
+    'This package offers three important components: (1) to construct a use-defined linear::
+    mixed model, (2) to employ one of linear mixed model approaches: minimum norm quadratic
+    - unbiased estimation (MINQUE) (Rao, 1971) for variance component estimation and random
+    - effect prediction; and (3) to employ a jackknife resampling technique to conduct
+    - various statistical tests. In addition, this package provides the function for model
+    - or data evaluations.This R package offers fast computations for large data sets
+    - "analyses for various irregular data structures.'"
+  homepage: https://CRAN.R-project.org/package=minque
+
+extra:
+  recipe-maintainers:
+    - danielnachun
