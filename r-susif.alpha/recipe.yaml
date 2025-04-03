@@ -1,31 +1,22 @@
-schema_version: 1
-
 context:
-  version: 0.2.0
+  version: 0.3.0
 
 package:
   name: r-fsusier
   version: ${{ version|replace("-", "_") }}
 
 source:
-  url: https://github.com/stephenslab/fsusieR/archive/refs/tags/${{ version }}.tar.gz
-  sha256: 817fc91771ee2cbdb7fa134a3dea0eb52065bd2a1dd9d853a9d2c211201bb3d0
+  url: https://github.com/stephenslab/fsusieR/archive/${{ version }}.tar.gz
+  sha256: 51bd520aae7ecff8f8dcfae58e8c4df6196539ee93bde08d366d7f1abe6d2c6c
 
 build:
-  number: 0
   noarch: generic
-  merge_build_and_host_envs: ${{ true if win }}
-  dynamic_linking:
-    rpaths:
-      - lib/R/lib/
-      - lib/
+  number: 0
+  script: R CMD INSTALL --build . ${R_ARGS}
 
 requirements:
-  build:
-    - if: build_platform != target_platform
-      then: cross-r-base ${{ r_base }}
   host:
-    - r-base=4.2
+    - r-base
     - r-ashr
     - r-wavethresh
     - r-mixsqp
@@ -33,8 +24,11 @@ requirements:
     - r-ggplot2
     - r-gridextra
     - r-laplacesdemon
+    - r-rfast
+    - r-cowplot
+    - r-smashr
   run:
-    - r-base>=4.2
+    - r-base
     - r-ashr
     - r-wavethresh
     - r-mixsqp
@@ -42,21 +36,19 @@ requirements:
     - r-ggplot2
     - r-gridextra
     - r-laplacesdemon
+    - r-rfast
+    - r-cowplot
+    - r-smashr
 
 tests:
-  - script:
-      - if: not win
-        then: "$R -e \"library('fsusieR')\""
-      - if: win
-        then: "\"%R%\" -e \"library('fsusieR')\""
+  - script: R -e "library('fsusieR')"
 
 about:
   license: GPL-3.0-or-later
   license_file: LICENSE
-  summary: "Draft package for \"Sum of Single Functions\" method."
+  summary: Draft package for "Sum of Single Functions" method.
   homepage: https://github.com/stephenslab/fsusieR
 
 extra:
   recipe-maintainers:
     - danielnachun
-
