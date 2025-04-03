@@ -1,0 +1,48 @@
+context:
+  version: 1.2.2
+
+package:
+  name: torch-spline-conv
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/t/torch-spline-conv/torch_spline_conv-${{ version }}.tar.gz
+  sha256: ed45a81da29f774665dbdd4709d7e534cdf16d2e7006dbd06957f35bd09661b2
+
+build:
+  number: 0
+  script:  |
+    export CXXFLAGS="${CXXFLAGS} -Wno-invalid-specialization"
+    ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - ${{ compiler('c') }}
+  host:
+    - python
+    - pytorch
+    - pip
+    - setuptools
+  run:
+    - python
+
+tests:
+  - python:
+      imports:
+        - torch_spline_conv
+  - requirements:
+      run:
+        - pip
+    script:
+      - pip check
+
+about:
+  summary: Implementation of the Spline-Based Convolution Operator of SplineCNN in PyTorch
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/rusty1s/pytorch_spline_conv
+
+extra:
+  recipe-maintainers:
+    - danielnachun
