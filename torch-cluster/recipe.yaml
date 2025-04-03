@@ -1,0 +1,49 @@
+context:
+  version: 1.6.3
+
+package:
+  name: torch-cluster
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/t/torch-cluster/torch_cluster-${{ version }}.tar.gz
+  sha256: 78d5a930a5bbd0d8788df8c6d66addd68d6dd292fe3edb401e3dacba26308152
+
+build:
+  number: 0
+  script: |
+    export CXXFLAGS="${CXXFLAGS} -Wno-invalid-specialization"
+    ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - ${{ compiler('c') }}
+  host:
+    - python
+    - pytorch
+    - pip
+    - setuptools
+  run:
+    - python
+    - scipy
+
+tests:
+  - python:
+      imports:
+        - torch_cluster
+  - requirements:
+      run:
+        - pip
+    script:
+      - pip check
+
+about:
+  summary: PyTorch Extension Library of Optimized Graph Cluster Algorithms
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/rusty1s/pytorch_cluster
+
+extra:
+  recipe-maintainers:
+    - danielnachun
