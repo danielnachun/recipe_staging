@@ -1,0 +1,46 @@
+context:
+  version: 1.2-7
+
+package:
+  name: r-fsusier
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/stephenslab/smashr/archive/v${{ version }}.tar.gz
+  sha256: 3964f85b0a19bf032b0a7771672885e49e60575127186e3e278b942ae8a10fa8
+
+build:
+  number: 0
+  script: R CMD INSTALL --build . ${R_ARGS}
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+  host:
+    - r-ashr
+    - r-base
+    - r-catools
+    - r-data.table
+    - r-rcpp
+    - r-wavethresh
+  run:
+    - r-ashr
+    - r-base
+    - r-catools
+    - r-data.table
+    - r-rcpp
+    - r-wavethresh
+
+tests:
+  - script: R -e "library('smashr')"
+
+about:
+  license: GPL-3.0-or-later
+  license_file: LICENSE
+  summary: An R package for smoothing & signal denoising using adaptive shrinkage.
+  homepage: https://github.com/stephenslab/smashr
+
+extra:
+  recipe-maintainers:
+    - danielnachun
