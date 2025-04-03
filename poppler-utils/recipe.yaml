@@ -1,0 +1,41 @@
+context:
+  version: 0.1.0
+
+package:
+  name: poppler-utils
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/p/poppler-utils/poppler-utils-${{ version }}.tar.gz
+  sha256: e97a92dcfde57b21a90c3070694e58f8eea155515ae8e624266a052d0776a349
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - setuptools >=40.6.0
+    - wheel
+    - pip
+  run:
+    - python
+    - click >=7.0
+
+tests:
+  - python:
+      imports:
+        - poppler
+      pip_check: true
+
+about:
+  summary: Precompiled command-line utilities (based on Poppler) for manipulating PDF files and converting them to other formats.
+  license: GPL-2.0-only
+  license_file: LICENSE
+  homepage: https://github.com/vinayak-mehta/poppler-utils
+
+extra:
+  recipe-maintainers:
+    - danielnachun
