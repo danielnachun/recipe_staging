@@ -1,0 +1,38 @@
+context:
+  version: 0.1.5
+
+package:
+  name: activate-virtualenv
+  version: ${{ version }}
+
+source:
+  url: https://github.com/usernein/activate-virtualenv/archive/6d8701c92d6f0fac7f6502c3566ea0fcd1cf9547.tar.gz
+  sha256: 8a4bcae05318cb4a8bcb5f64e3e6430e84353b7bf8f82fb9bcde8cb341b1bb19
+
+build:
+  noarch: python
+  number: 0
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python >=3.9
+    - hatchling
+    - pip
+  run:
+    - python >=3.9
+
+tests:
+  - python:
+      imports:
+        - activate_virtualenv
+      pip_check: true
+
+about:
+  homepage: https://github.com/usernein/activate-virtualenv
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
