@@ -6,8 +6,7 @@ package:
   version: ${{ version|replace("-", "_") }}
 
 source:
-  url:
-    - https://cloud.r-project.org/src/contrib/GMMAT_${{ version }}.tar.gz
+  url: https://cloud.r-project.org/src/contrib/GMMAT_${{ version }}.tar.gz
   sha256: be68948d61ddc4f18f46f0beed099fd55bdd54fdac446327d77526636b602b94
 
 build:
