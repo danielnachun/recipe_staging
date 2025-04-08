@@ -1,0 +1,41 @@
+context:
+  version: 6.1.1
+
+package:
+  name: virtualenvwrapper
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/v/virtualenvwrapper/virtualenvwrapper-${{ version }}.tar.gz
+  sha256: 112e7ea34a9a3ce90aaea54182f0d3afef4d1a913eeb75e98a263b4978cd73c6
+
+build:
+  noarch: generic
+  number: 0
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python >=3.8
+    - setuptools
+    - setuptools-scm >=6.2
+    - pip
+  run:
+    - python >=3.8
+    - virtualenv
+    - virtualenv-clone
+    - stevedore
+
+tests:
+  - python:
+      imports:
+        - virtualenvwrapper
+      pip_check: true
+
+about:
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
