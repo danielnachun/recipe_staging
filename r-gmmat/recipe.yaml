@@ -32,6 +32,7 @@ requirements:
     - r-matrix
     - r-rcpp
     - r-rcpparmadillo
+    - zlib
   run:
     - r-base
     - bioconductor-seqarray
