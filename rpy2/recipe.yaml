@@ -1,0 +1,62 @@
+context:
+  version: 3.5.17
+
+package:
+  name: rpy2
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/r/rpy2/rpy2-${{ version }}.tar.gz
+  sha256: dbff08c30f3d79161922623858a5b3b68a3fba8ee1747d6af41bc4ba68f3d582
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+  host:
+    - python
+    - setuptools
+    - pip
+    - r-base
+    - jinja2
+    - pytz
+    - simplegeneric
+    - tzlocal
+    - cffi >=1.10.0,!=1.13.0
+    - zlib
+    - liblzma-devel
+  run:
+    - ipython
+    - python
+    - r-base
+    - jinja2
+    - pytz
+    - simplegeneric
+    - tzlocal
+    - cffi >=1.10.0,!=1.13.0
+
+tests:
+  - python:
+      imports:
+        - rpy2
+        - rpy2.rlike
+        - rpy2.ipython
+        - rpy2.rinterface
+        - rpy2.robjects
+        - rpy2.robjects.lib
+
+about:
+  license: GPL-2.0-or-later
+  license_file: gpl-2.0.txt
+  summary: Python interface to the R language (embedded R)
+  homepage: https://github.com/rpy2/rpy2
+  documentation: https://rpy2.github.io/
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+    - ceholden
+    - ocefpaf
