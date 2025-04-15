@@ -1,0 +1,29 @@
+From 922c4f0530921dd7d08f088c857d9bf44ea8ef59 Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Sat, 30 Mar 2024 12:24:41 -0700
+Subject: [PATCH 3/3] fix plink paths
+
+---
+ submods/Pgenlib/CMakeLists.txt | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/submods/Pgenlib/CMakeLists.txt b/submods/Pgenlib/CMakeLists.txt
+index f1cd90b..7371d0c 100644
+--- a/submods/Pgenlib/CMakeLists.txt
++++ b/submods/Pgenlib/CMakeLists.txt
+@@ -2,8 +2,11 @@ SET(CMAKE_INCLUDE_CURRENT_DIR ON)
+ file(GLOB SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
+ ## don't add other PLINK GPL v3 codes, may have license issue
+ file(GLOB SOURCES_PLINK "${CMAKE_CURRENT_SOURCE_DIR}/../plink-ng/2.0/pgenlib*.cc")
+-list(APPEND SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/../plink-ng/2.0/plink2_base.cc")
++file(GLOB SOURCES_PLINK_INCLUDE "${CMAKE_CURRENT_SOURCE_DIR}/../plink-ng/2.0/include/pgenlib*.cc")
++list(APPEND SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/../plink-ng/2.0/include/plink2_base.cc")
+ list(APPEND SOURCES "${SOURCES_PLINK}")
++list(APPEND SOURCES "${SOURCES_PLINK_INCLUDE}")
+ include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../plink-ng/2.0")
++include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../plink-ng/2.0/include")
+ 
+ add_library(Pgenlib STATIC ${SOURCES})
+-- 
+2.44.0
+
