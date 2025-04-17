@@ -1,6 +1,6 @@
 context:
   name: yabai
-  version: 7.1.6
+  version: 7.1.14
 
 package:
   name: ${{ name|lower }}
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://github.com/koekeishiya/yabai/archive/v${{ version }}.tar.gz
-  sha256:  5d4d13b4b5a04f8192d47c357959f4e2f55997f36445940048ec9bcc88afb803
+  sha256: aa87dd555090af0e48a2b61a47b6cae0e006b3efc5dcee946fcf861f8aadade6
 
 build:
   number: 0
