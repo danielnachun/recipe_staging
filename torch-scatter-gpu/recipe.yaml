@@ -23,17 +23,17 @@ requirements:
     - ${{ compiler('cxx') }}
     - ${{ compiler('cuda') }}
   host:
-    - libcublas-dev <12.8
-    - libcurand-dev <10.3.9
-    - libcusparse-dev <12.5.9
-    - libcusolver-dev <11.7.2
+    - libcublas-dev >=12.6,<12.8
+    - libcurand-dev >=10.3.7,<10.3.9
+    - libcusparse-dev >=12.5.8,<12.5.9
+    - libcusolver-dev >=11.7.1,<11.7.2
     - python
-    - pytorch-gpu <2.6
+    - pytorch-gpu >=2.5,<2.6
     - pip
     - setuptools
   run:
     - python
-    - pytorch-gpu <2.6
+    - pytorch-gpu >=2.5,<2.6
 
 tests:
   - python:
