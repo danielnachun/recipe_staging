@@ -31,12 +31,13 @@ requirements:
     - wheel
     - pip
   run:
-    - pydantic
-    - packaging
-    - pytorch-gpu >=2.5,<2.6
     - cudnn
     - cuda-runtime
+    - importlib-metadata
+    - pydantic
     - python
+    - packaging
+    - pytorch-gpu >=2.5,<2.6
 
 tests:
   - python:
