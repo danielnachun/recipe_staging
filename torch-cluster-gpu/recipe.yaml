@@ -1,0 +1,58 @@
+context:
+  version: 1.6.3
+
+package:
+  name: torch-cluster-gpu
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/t/torch-cluster/torch_cluster-${{ version }}.tar.gz
+  sha256: 78d5a930a5bbd0d8788df8c6d66addd68d6dd292fe3edb401e3dacba26308152
+
+build:
+  number: 0
+  script: |
+    export TORCH_CUDA_ARCH_LIST="5.0;5.2;5.3;6.0;6.1;6.2;7.0;7.2;7.5;8.0;8.6;8.7;8.9;9.0;9.0a+PTX"
+    export CXXFLAGS="${CXXFLAGS} -Wno-invalid-specialization"
+    export FORCE_ONLY_CUDA=1
+    ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  skip: not linux
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - ${{ compiler('c') }}
+    - ${{ compiler('cuda') }}
+  host:
+    - libcublas-dev >=12.6,<12.8
+    - libcurand-dev >=10.3.7,<10.3.9
+    - libcusparse-dev >=12.5.4,<12.5.7
+    - libcusolver-dev >=11.7.1,<11.7.2
+    - python
+    - pytorch-gpu >=2.5,<2.6
+    - pip
+    - setuptools
+  run:
+    - scipy
+    - python
+    - pytorch-gpu >=2.5,<2.6
+
+tests:
+  - python:
+      imports:
+        - torch_cluster
+  - requirements:
+      run:
+        - pip
+    script:
+      - pip check
+
+about:
+  summary: PyTorch Extension Library of Optimized Graph Cluster Algorithms
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/rusty1s/pytorch_cluster
+
+extra:
+  recipe-maintainers:
+    - danielnachun
