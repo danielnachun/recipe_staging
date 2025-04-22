@@ -1,0 +1,61 @@
+context:
+  version: 0.6.18
+
+package:
+  name: torch-sparse
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/t/torch-sparse/torch_sparse-${{ version }}.tar.gz
+  sha256: 2f14c510a6e93f404c6ea357210615b3c15a71731f9dbd86f25434e34fb5a741
+
+build:
+  number: 0
+  skip: not linux
+  script: |
+    export TORCH_CUDA_ARCH_LIST="5.0;5.2;5.3;6.0;6.1;6.2;7.0;7.2;7.5;8.0;8.6;8.7;8.9;9.0;9.0a+PTX"
+    export CFLAGS="${CFLAGS} -Wno-invalid-specialization"
+    export FORCE_ONLY_CUDA=1
+    ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - ${{ compiler('c') }}
+    - ${{ compiler('cuda') }}
+  host:
+    - libcublas-dev >=12.6,<12.8
+    - libcurand-dev >=10.3.7,<10.3.9
+    - libcusparse-dev >=12.5.4,<12.5.7
+    - libcusolver-dev >=11.7.1,<11.7.2
+    - python
+    - pytorch-gpu >=2.5,<2.6
+    - pip
+    - setuptools
+  run:
+    - python
+    - scipy
+    - torch-scatter
+    - pytorch-gpu >=2.5,<2.6
+
+tests:
+  - python:
+      imports:
+        - torch_sparse
+  - requirements:
+      run:
+        - pip
+    script:
+      - pip check
+
+about:
+  summary: PyTorch Extension Library of Optimized Autograd Sparse Matrix Operations
+  license: Apache-2.0 AND MIT
+  license_file:
+    - LICENSE
+    - third_party/parallel-hashmap/LICENSE
+  homepage: https://github.com/rusty1s/pytorch_sparse
+
+extra:
+  recipe-maintainers:
+    - danielnachun
