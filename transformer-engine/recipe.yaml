@@ -22,18 +22,18 @@ requirements:
     - ninja
     - cmake
   host:
-    - cuda-libraries-dev
+    - cuda-libraries-dev >=12.6,<12.8
     - cuda-nvtx-dev
     - cudnn
     - python
-    - pytorch-gpu <2.6
+    - pytorch-gpu >=2.5,<2.6
     - pybind11
     - wheel
     - pip
   run:
     - pydantic
     - python-packaging
-    - pytorch-gpu <2.6
+    - pytorch-gpu >=2.5,<2.6
     - cudnn
     - cuda-runtime
     - python
