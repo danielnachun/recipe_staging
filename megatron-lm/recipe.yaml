@@ -1,0 +1,59 @@
+context:
+  version: 0.11.0
+
+package:
+  name: megatron-lm
+  version: ${{ version }}
+
+source:
+  url: https://github.com/NVIDIA/Megatron-LM/archive/v${{ version }}.tar.gz
+  sha256: 21dec41af316b94ee6e4e56bd4442a41df38cb9e97d5dbffc0b76a11fedfdeef
+
+build:
+  number: 0
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+  host:
+    - python
+    - setuptools
+    - pybind11
+    - pip
+  run:
+    - einops
+    - flask-restful
+    - nltk
+    - pytest
+    - pytest-asyncio
+    - pytest-cov
+    - pytest-mock
+    - pytest-random-order
+    - packaging
+    - python
+    - pytorch
+    - sentencepiece
+    - tensorstore
+    - tiktoken
+    - wandb
+    - wrapt
+    - zarr
+
+tests:
+  - python:
+      imports:
+        - megatron.core
+      pip_check: false
+
+about:
+  summary: Megatron Core - a library for efficient and scalable training of transformer based models
+  license: MIT AND Apache-2.0
+  license_file:
+    - LICENSE
+    - tools/copyright.sh
+
+extra:
+  recipe-maintainers:
+    - danielnachun
