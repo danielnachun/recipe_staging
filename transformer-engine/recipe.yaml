@@ -1,5 +1,5 @@
 context:
-  name: TransformerEngine
+  name: transformer-engine-pytorch
   version: 2.1
 
 package:
@@ -7,22 +7,11 @@ package:
   version: ${{ version }}
 
 source:
-  # url: https://github.com/NVIDIA/TransformerEngine/archive/v${{ version }}.tar.gz
-  # sha256: c262667fe847a2d2223fd17d41660235a9393147fa8eb55b2936b82dd64fb5b2
   git: https://github.com/NVIDIA/TransformerEngine.git
   tag: v${{ version }}
 
 build:
   number: 0
-  noarch: python
-  script: |
-    export NVTE_FRAMEWORK="pytorch"
-    ln -sf ${BUILD_PREFIX}/targets/x86_64-linux/nvvm ${PREFIX}/targets/x86_64-linux
-    ln -sf ${BUILD_PREFIX}/targets/x86_64-linux/include/fatbinary_section.h ${PREFIX}/targets/x86_64-linux/include
-    sed -i "s?cmake_flags = \[\"-DCMAKE_CUDA_ARCHITECTURES={}\"?cmake_flags = [\"-DCMAKE_CXX_FLAGS=${CXXFLAGS}\", \"-DCMAKE_CUDA_FLAGS=-isystem ${PREFIX}/include\", \"-DCMAKE_BUILD_WITH_INSTALL_RPATH=ON\", \"-DCMAKE_CUDA_ARCHITECTURES={}\"?" setup.py
-    ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-    rm -rf ${PREFIX}/targets/x86_64-linux/nvvm
-    rm -rf ${PREFIX}/targets/x86_64-linux/include/fatbinary_section.h
 
 requirements:
   build:
@@ -35,7 +24,7 @@ requirements:
     - cuda-libraries-dev
     - cuda-nvtx-dev
     - cudnn
-    - python 3.12.*
+    - python
     - pytorch-gpu <2.6
     - pybind11
     - wheel
@@ -46,7 +35,7 @@ requirements:
     - pytorch-gpu <2.6
     - cudnn
     - cuda-runtime
-    - python 3.12.*
+    - python
 
 tests:
   - python:
