@@ -2,7 +2,7 @@ context:
   version: 2.1.2
 
 package:
-  name: torch-scatter
+  name: torch-scatter-gpu
   version: ${{ version }}
 
 source:
