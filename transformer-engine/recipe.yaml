@@ -32,7 +32,7 @@ requirements:
     - pip
   run:
     - pydantic
-    - python-packaging
+    - packaging
     - pytorch-gpu >=2.5,<2.6
     - cudnn
     - cuda-runtime
