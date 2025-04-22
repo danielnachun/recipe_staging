@@ -23,7 +23,6 @@ requirements:
     - ${{ compiler('cxx') }}
     - ${{ compiler('cuda') }}
   host:
-    - cuda-version >=12.6,<12.8
     - libcublas-dev >=12.6,<12.8
     - libcurand-dev >=10.3.7,<10.3.9
     - libcusparse-dev >=12.5.4,<12.5.7
