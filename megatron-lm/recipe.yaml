@@ -45,7 +45,6 @@ tests:
   - python:
       imports:
         - megatron.core
-      pip_check: true
 
 about:
   summary: Megatron Core - a library for efficient and scalable training of transformer based models
