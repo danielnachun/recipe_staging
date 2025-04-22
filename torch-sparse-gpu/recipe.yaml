@@ -2,7 +2,7 @@ context:
   version: 0.6.18
 
 package:
-  name: torch-sparse
+  name: torch-sparse-gpu
   version: ${{ version }}
 
 source:
@@ -35,7 +35,7 @@ requirements:
   run:
     - python
     - scipy
-    - torch-scatter
+    - torch-scatter-gpu
     - pytorch-gpu >=2.5,<2.6
 
 tests:
