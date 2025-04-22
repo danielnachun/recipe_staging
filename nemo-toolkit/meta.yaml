@@ -1,0 +1,57 @@
+{% set name = "NeMo" %}
+{% set version = "2.2.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/NVIDIA/NeMo/archive/v{{ version }}.tar.gz
+  sha256: 73d8835a209a4f8750a465de9a6eb029717f13ef01767949817fd3b806fd1359
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python >=3.10
+    - setuptools >=61.0
+    - pip
+  run:
+    - python >=3.10
+    - huggingface_hub >=0.24
+    - numba ==0.61.0
+    - numpy >=1.22
+    - onnx >=1.7.0
+    - protobuf ==3.20.3
+    - python-dateutil
+    - ruamel.yaml
+    - scikit-learn
+    - setuptools >=70.0.0
+    - tensorboard
+    - text-unidecode
+    - pytorch
+    - tqdm >=4.41.0
+    - wget
+    - wrapt
+
+test:
+  imports:
+    - examples
+    - nemo
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://github.com/nvidia/nemo
+  summary: NeMo - a toolkit for Conversational AI
+  license: Apache-2.0
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
