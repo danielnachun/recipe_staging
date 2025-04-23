@@ -1,0 +1,36 @@
+context:
+  version: "0.2.2"
+
+package:
+  name: echtvar
+  version: ${{ version }}
+
+source:
+  url: https://github.com/brentp/echtvar/archive/v${{ version }}.tar.gz
+  sha256: 6ca8070d6e5c13addc65064124c1a202321ce2a6779c462d5e849b8cc06abd7f
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - cargo-bundle-licenses
+
+tests:
+  - script:
+      - echtvar --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Using all the bits for echt rapid variant annotation and filtering
+  homepage: https://github.com/brentp/echtvar
+  repository: https://github.com/brentp/echtvar
+
+extra:
+  recipe-maintainers:
+    - danieLnachun
