@@ -1,0 +1,35 @@
+context:
+  version: 1.0
+
+package:
+  name: ipafinder
+  version: ${{ version }}
+
+source:
+  url: https://github.com/ZhaozzReal/IPAFinder/archive/a2574e5c1f94f6b71857ff4b4ec891e6a3731238.tar.gz
+  sha256: 8dc06c76d04c5a33245d64d59d8d7ce241ddfba12c96ffb5015d6a119c675c12
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  run:
+    - htseq
+    - numpy >1.24
+    - python >=3.9
+    - scipy
+
+tests:
+  - script:
+    - IPAFinder_DetectIPA --help
+    - IPAFinder_GetAnno --help
+
+about:
+  repository: https://github.com/ZhaozzReal/IPAFinder
+  summary: Systematic analyses of intronic polyadenylation from standard RNAseq data
+  homepage: https://github.com/ZhaozzReal/IPAFinder
+
+extra:
+  recipe-maintainers:
+    - danielnachun
