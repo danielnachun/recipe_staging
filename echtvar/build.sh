@@ -4,6 +4,8 @@ set -o xtrace -o nounset -o pipefail -o errexit
 
 export CARGO_PROFILE_RELEASE_STRIP=symbols
 export CARGO_PROFILE_RELEASE_LTO=fat
+export OPENSSL_DIR=${PREFIX}
+export OPENSSL_NO_VENDOR=1
 
 sed -i 's/, features = \["x86_ssse3", "x86_sse41"\]//' Cargo.toml
 

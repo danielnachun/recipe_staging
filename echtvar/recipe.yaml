@@ -21,6 +21,8 @@ requirements:
     - cmake
     - make
     - sed
+  host:
+    - openssl
 
 tests:
   - script:
