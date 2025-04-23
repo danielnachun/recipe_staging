@@ -1,0 +1,54 @@
+context:
+  name: transformer-engine-pytorch
+  version: 2.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  git: https://github.com/NVIDIA/TransformerEngine.git
+  tag: v${{ version }}
+
+build:
+  number: 0
+  skip: not linux
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - ${{ compiler('cuda') }}
+    - ninja
+    - cmake
+  host:
+    - cuda-libraries-dev >=12.6,<12.8
+    - cuda-nvtx-dev
+    - cudnn
+    - python
+    - pytorch-gpu >=2.5,<2.6
+    - pybind11
+    - wheel
+    - pip
+  run:
+    - cudnn
+    - cuda-runtime
+    - importlib-metadata
+    - pydantic
+    - python
+    - packaging
+    - pytorch-gpu >=2.5,<2.6
+
+tests:
+  - python:
+      imports:
+        - transformer_engine.pytorch
+      pip_check: true
+
+about:
+  license: Apache-2.0
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
