@@ -1,0 +1,39 @@
+context:
+  version: 0.1
+
+package:
+  name: nvidia-dlfw-inspect
+  version: ${{ version }}
+
+source:
+  url: https://github.com/NVIDIA/nvidia-dlfw-inspect/archive/v${{ version }}.tar.gz
+  sha256: c8fcc6514c6672afd3986fbaf5cce4eb5849d3408b6b900aaec78bf4c4c60d90
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python =3.9
+    - setuptools
+    - wheel
+    - pip
+  run:
+    - python >=3.9
+
+tests:
+  - python:
+      imports:
+        - nvdlfw_inspect
+      pip_check: true
+
+about:
+  license: Apache-2.0
+  license_file: LICENSE
+  homepage: https://github.com/NVIDIA/nvidia-dlfw-inspect
+
+extra:
+  recipe-maintainers:
+    - danielnachun
