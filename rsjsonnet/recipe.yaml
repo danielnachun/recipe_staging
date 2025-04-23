@@ -1,0 +1,37 @@
+context:
+  version: 0.3.0
+
+package:
+  name: rsjsonnet
+  version: ${{ version }}
+
+source:
+  url: https://github.com/eduardosm/rsjsonnet/archive/v${{ version }}.tar.gz
+  sha256: 3bf6bd8501fd08230b4dfc7e47d7a93e033ce1ca3a7f4f78db61bc422a16a511
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - cargo-bundle-licenses
+
+tests:
+  - script: |
+      rsjsonnet --help 2>&1 | grep -q "Usage: rsjsonnet"
+
+about:
+  license: Apache-2.0 OR MIT
+  license_file:
+    - LICENSE-APACHE
+    - LICENSE-MIT
+    - THIRDPARTY.yml
+  summary: A Rust implementation of the Jsonnet language
+  homepage: https://github.com/eduardosm/rsjsonnet
+  repository: https://github.com/eduardosm/rsjsonnet
+
+extra:
+  recipe-maintainers:
+    - danielnachun
