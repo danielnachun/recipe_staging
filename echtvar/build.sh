@@ -7,7 +7,9 @@ export CARGO_PROFILE_RELEASE_LTO=fat
 export OPENSSL_DIR=${PREFIX}
 export OPENSSL_NO_VENDOR=1
 
-sed -i 's/, features = \["x86_ssse3", "x86_sse41"\]//' Cargo.toml
+if [[ ${target_platform} == "osx-arm64" ]]; then
+    sed -i 's/, features = \["x86_ssse3", "x86_sse41"\]//' Cargo.toml
+fi
 
 cargo-bundle-licenses \
     --format yaml \
