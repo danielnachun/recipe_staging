@@ -1,0 +1,62 @@
+context:
+  name: HTSeq
+  version: 2.0.5
+  sha256: 2519675246dd1639115a76c9aacf19ab5bc5bed2f3598bf89cd97be5c0d066b3
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
+  sha256: ${{ sha256 }}
+
+build:
+  number: 3
+  script: |
+    sed -i 's/numpy.int_t/numpy.int64_t/g' src/HTSeq/_HTSeq.pyx
+    ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - sed
+  host:
+    - python
+    - setuptools
+    - pip
+    - cython
+    - numpy <2
+    - wheel
+    - pysam >=0.15.1
+    - swig >=3.0.8
+  run:
+    - python
+    - numpy <2
+    - matplotlib-base >=1.4
+    - pysam >=0.15.1
+    - scipy >=1.5.0
+    - pandas >=1.1.0
+
+tests:
+  - python:
+      imports:
+        - HTSeq._HTSeq_internal
+        - HTSeq.StepVector
+        - HTSeq._version
+        - HTSeq.scripts.count
+        - HTSeq.scripts.qa
+  - script:
+      - htseq-count -h
+      - htseq-qa -h
+
+about:
+  license: GPL-3.0-only
+  license_file: LICENSE
+  summary: HTSeq is a Python library to facilitate processing and analysis of data from high-throughput sequencing (HTS) experiments.
+  homepage: https://github.com/htseq/htseq
+
+extra:
+  recipe-maintainers:
+    - danielnachun
