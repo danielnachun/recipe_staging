@@ -1,0 +1,44 @@
+context:
+  version: 2.2.0
+
+package:
+  name: libcdio
+  version: ${{ version }}
+
+source:
+  url: https://github.com/libcdio/libcdio/archive/2.2.0.tar.gz
+  sha256: df007a9b9667797e027e573822cc865e5e106352f8a6fbca67ee8e9e7a1e5b51
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - autoconf
+    - automake
+    - make
+    - gettext-tools
+  host:
+    - libintl-devel
+    - libtool
+    - ncurses
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libcdio${SHLIB_EXT}
+      - test -f ${PREFIX}/lib/libcdio++${SHLIB_EXT}
+      - test -f ${PREFIX}/lib/libiso9660${SHLIB_EXT}
+      - test -f ${PREFIX}/lib/libiso9660++${SHLIB_EXT}
+      - test -f ${PREFIX}/lib/libudf${SHLIB_EXT}
+
+about:
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  summary: GNU Compact Disc Input and Control Library
+  homepage: https://www.gnu.org/software/libcdio/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
