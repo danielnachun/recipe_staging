@@ -1,0 +1,41 @@
+context:
+  version: 2.0.3
+
+package:
+  name: libmng
+  version: ${{ version }}
+
+source:
+  url: https://downloads.sourceforge.net/project/libmng/libmng-devel/${{ version }}/libmng-${{ version }}.tar.gz
+  sha256: cf112a1fb02f5b1c0fce5cab11ea8243852c139e669c44014125874b14b7dfaa
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - autoconf
+    - automake
+    - gettext-tools
+    - make
+  host:
+    - lcms2
+    - libintl-devel
+    - libjpeg-turbo
+    - libtool
+    - zlib
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libmng${SHLIB_EXT}
+
+about:
+  license: Zlib
+  license_file: LICENSE
+  summary: MNG/JNG reference library
+  homepage: https://sourceforge.net/projects/libmng/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
