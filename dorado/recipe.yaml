@@ -22,7 +22,7 @@ requirements:
         - ${{ compiler('cuda') }}
     - autoconf
     - automake
-    - cmake
+    - cmake <4
     - make
     - sed
   host:
