@@ -26,6 +26,9 @@ requirements:
     - make
     - sed
   host:
+    - if: linux
+      then:
+        - cuda-libraries-dev
     - hdf5
     - openssl
     - pytorch
