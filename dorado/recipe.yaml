@@ -1,0 +1,48 @@
+context:
+  version: 0.9.0
+
+package:
+  name: dorado
+  version: ${{ version }}
+
+source:
+  git: https://github.com/nanoporetech/dorado
+  tag: v${{ version }}
+
+build:
+  number: 0
+  skip: win
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - if: linux
+      then:
+        - ${{ compiler('cuda') }}
+    - autoconf
+    - automake
+    - cmake
+    - make
+    - sed
+  host:
+    - hdf5
+    - openssl
+    - pytorch
+    - zlib
+    - zstd
+
+tests:
+  - script:
+      - dorado --help
+
+about:
+  license: LicenseRef-Other
+  license_file: LICENCE.txt
+  summary: Oxford Nanopore's Basecaller
+  homepage: https://github.com/nanoporetech/dorado
+  repository: https://github.com/nanoporetech/dorado
+
+extra:
+  recipe-maintainers:
+    - danielnachun
