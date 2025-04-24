@@ -1,0 +1,40 @@
+context:
+  version: 1.31.1
+
+package:
+  name: faac
+  version: ${{ version }}
+
+source:
+  url: https://github.com/knik0/faac/archive/refs/tags/faac-${{ version }}.tar.gz
+  sha256: 3191bf1b131f1213221ed86f65c2dfabf22d41f6b3771e7e65b6d29478433527
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - autoconf
+    - automake
+    - make
+    - gettext-tools
+  host:
+    - if: osx
+      then:
+        - libintl-devel
+    - libtool
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libfaac${SHLIB_EXT}
+
+about:
+  license: GPL-2.0-or-later
+  license_file: COPYING
+  summary: Freeware Advanced Audio Coder faac mirror
+  homepage: https://www.audiocoding.com/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
