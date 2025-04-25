@@ -27,9 +27,8 @@ tests:
       - test -f ${PREFIX}/lib/libzix-0${SHLIB_EXT}
 
 about:
-  license: 0BSD OR ISC
-  license_file: 
-    - LICENSES/
+  license: ISC
+  license_file: COPYING
   summary: A lightweight C99 portability and data structure library
   homepage: https://gitlab.com/drobilla/zix
   repository: https://gitlab.com/drobilla/zix
