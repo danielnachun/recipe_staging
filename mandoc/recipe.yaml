@@ -1,0 +1,36 @@
+context:
+  version: 1.14.6
+
+package:
+  name: mandoc
+  version: ${{ version }}
+
+source:
+  url: https://mdocml.bsd.lv/snapshots/mandoc-${{ version }}.tar.gz
+  sha256: 8bf0d570f01e70a6e124884088870cbed7537f36328d512909eb10cd53179d9c
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+  host:
+    - zlib
+  run:
+    - less
+
+tests:
+  - script:
+      - mandoc
+
+about:
+  license: ISC
+  license_file: LICENSE
+  summary: A suite of tools compiling mdoc from the OpenBSD project
+  homepage: https://mdocml.bsd.lv
+
+extra:
+  recipe-maintainers:
+    - danielnachun
