@@ -1,0 +1,35 @@
+context:
+  version: 2.0.2.3
+
+package:
+  name: libldac
+  version: ${{ version }}
+
+source:
+  git: https://github.com/EHfive/ldacBT
+  tag: v${{ version }}
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - cmake
+    - make
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libldacBT_abr${SHLIB_EXT}
+      - test -f ${PREFIX}/lib/libldacBT_enc${SHLIB_EXT}
+
+about:
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: LDAC Bluetooth encoder library
+  homepage: https://github.com/ehfive/ldacbt
+  repository: https://github.com/ehfive/ldacbt
+
+extra:
+  recipe-maintainers:
+    - danielnachun
