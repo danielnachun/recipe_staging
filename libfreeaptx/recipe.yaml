@@ -1,0 +1,32 @@
+context:
+  version: 0.2.2
+
+package:
+  name: libfreeaptx
+  version: ${{ version }}
+
+source:
+  url: https://github.com/regularhunter/libfreeaptx/archive/${{ version }}.tar.gz
+  sha256: 5ab5ebddf3f2eb7ce47a505b87460b00fc1ede99c70010796d3575ab31ea80bf
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libfreeaptx${SHLIB_EXT}
+
+about:
+  license: LGPL-2.1-or-later
+  license_file: COPYING
+  summary: Open Source aptX codec library
+  homepage: https://github.com/regularhunter/libfreeaptx
+
+extra:
+  recipe-maintainers:
+    - danielnachun
