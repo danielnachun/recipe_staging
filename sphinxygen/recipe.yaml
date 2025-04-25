@@ -1,0 +1,46 @@
+context:
+  version: 1.0.10
+
+package:
+  name: sphinxygen
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/s/sphinxygen/sphinxygen-${{ version }}.tar.gz
+  sha256: 4b5eeb1ff47d43ee1ddae9327c2b49bab1e49363538c569bc544705284f3695d
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - sphinxygen = sphinxygen.sphinxygen:main
+
+requirements:
+  host:
+    - python
+    - setuptools >=61.2
+    - pip
+  run:
+    - python
+
+tests:
+  - python:
+      imports:
+        - sphinxygen
+      pip_check: true
+  - requirements:
+      run:
+        - pip
+    script:
+      - sphinxygen --help
+
+about:
+  summary: A script to generate Sphinx ReST from Doxygen XML
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
