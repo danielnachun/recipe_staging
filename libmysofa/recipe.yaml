@@ -17,9 +17,9 @@ requirements:
     - ${{ compiler('c') }}
     - ${{ compiler('cxxt ') }}
     - cmake
+    - cunit
     - make
   host:
-    - cunit
     - zlib
 
 tests:
