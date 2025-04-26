@@ -1,0 +1,41 @@
+context:
+  version: 1.3.4
+
+package:
+  name: libbluray
+  version: ${{ version }}
+
+source:
+  url: https://download.videolan.org/videolan/libbluray/${{ version }}/libbluray-${{ version }}.tar.bz2
+  sha256: 478ffd68a0f5dde8ef6ca989b7f035b5a0a22c599142e5cd3ff7b03bbebe5f2b
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - autoconf
+    - automake
+    - make
+    - pkgconf
+  host:
+    - expat
+    - fontconfig
+    - freetype
+    - libtool
+    - libxml2
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libbluray${SHLIB_EXT}
+
+about:
+  license: LGPL-2.1-only
+  license_file: COPYING
+  summary: Program providing model for GNU coding standards and practices
+  homepage: https://www.gnu.org/software/hello/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
