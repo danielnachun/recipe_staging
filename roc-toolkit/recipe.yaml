@@ -25,6 +25,7 @@ requirements:
         - libunwind
         - pulseaudio
     - cpputest
+    - dr_wav
     - gengetopt
     - hedley
     - libuv
