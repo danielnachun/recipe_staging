@@ -2,7 +2,7 @@ context:
   version: 2.1
 
 package:
-  name: serd
+  name: webrtc-audio-processing
   version: ${{ version }}
 
 source:
