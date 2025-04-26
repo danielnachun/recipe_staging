@@ -1,0 +1,58 @@
+context:
+  version: 0.24.26
+
+package:
+  name: lilv
+  version: ${{ version }}
+
+source:
+  url: https://download.drobilla.net/lilv-${{ version }}.tar.xz
+  sha256: 22feed30bc0f952384a25c2f6f4b04e6d43836408798ed65a8a934c055d5d8ac
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - doxygen
+    - meson
+    - ninja
+    - pkg-config
+    - sphinx
+    - sphinx-lv2-theme
+    - sphinxygen
+    - swig
+  host:
+    - libsndfile
+    - lv2
+    - serd
+    - sord
+    - sratom
+    - zix
+  run:
+    - lv2
+    - serd
+    - sord
+    - sratom
+    - zix
+
+tests:
+  - script:
+      - lv2apply --help
+      - lv2bench --help
+      - lv2info --help
+      - lv2ls --help
+      - test -f ${PREFIX}/lib/liblilv-0${SHLIB_EXT}
+
+about:
+  license: ISC
+  license_file: COPYING
+  summary: A C library interface to the LV2 plug-in standard
+  homepage: https://drobilla.net/software/lilv.html
+  repository: https://drobilla.net/software/lilv.html
+
+extra:
+  recipe-maintainers:
+    - danielnachun
