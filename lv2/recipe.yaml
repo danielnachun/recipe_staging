@@ -1,0 +1,60 @@
+context:
+  version: 1.18.10
+
+package:
+  name: lv2
+  version: ${{ version }}
+
+source:
+  url: https://lv2plug.in/spec/lv2-${{ version }}.tar.xz
+  sha256: 78c51bcf21b54e58bb6329accbb4dae03b2ed79b520f9a01e734bd9de530953f
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - asciidoc
+    - black
+    - codespell
+    - doxygen
+    - flake8
+    - meson
+    - ninja
+    - lxml
+    - markdown
+    - rdflib
+    - pygments
+    - pylint
+  run:
+    - serd
+    - sord
+    - libsamplerate
+    - libsndfile
+    - lxml
+    - markdown
+    - pygments
+    - rdflib
+
+tests:
+  - script:
+      - lv2_validate
+      - lv2specgen.py --help
+      - test -f ${PREFIX}/lib/lv2/eg-amp.lv2/amp${SHLIB_EXT}
+      - test -f ${PREFIX}/lib/lv2/eg-fifths.lv2/fifths${SHLIB_EXT}
+      - test -f ${PREFIX}/lib/lv2/eg-metro.lv2/metro${SHLIB_EXT}
+      - test -f ${PREFIX}/lib/lv2/eg-midigate.lv2/midigate${SHLIB_EXT}
+      - test -f ${PREFIX}/lib/lv2/eg-scope.lv2/examploscope${SHLIB_EXT}
+
+about:
+  license: ISC
+  license_file: COPYING
+  summary: Plugin standard for audio systems
+  homepage: https://lv2plug.in/
+  repository: https://lv2plug.in/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
