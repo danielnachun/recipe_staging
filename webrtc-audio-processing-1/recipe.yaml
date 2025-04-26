@@ -1,0 +1,37 @@
+context:
+  version: 2.1
+
+package:
+  name: serd
+  version: ${{ version }}
+
+source:
+  url: http://freedesktop.org/software/pulseaudio/webrtc-audio-processing/webrtc-audio-processing-${{ version }}.tar.xz
+  sha256: ae9302824b2038d394f10213cab05312c564a038434269f11dbf68f511f9f9fe
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - meson
+    - ninja
+    - pkg-config
+  host:
+    - libabseil
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libwebrtc-audio-processing-2${SHLIB_EXT}
+
+about:
+  license: BSD-3-Clause
+  license_file: COPYING
+  summary: AudioProcessing library based on Google's implementation of WebRTC
+  homepage: https://freedesktop.org/software/pulseaudio/webrtc-audio-processing/
+  repository: https://gitlab.freedesktop.org/pulseaudio
+
+extra:
+  recipe-maintainers:
+    - danielnachun
