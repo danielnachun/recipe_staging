@@ -1,0 +1,36 @@
+context:
+  version: 1.4.2.12
+
+package:
+  name: openfec
+  version: ${{ version }}
+
+source:
+  url: https://github.com/roc-streaming/openfec/archive/v${{ version }}.tar.gz
+  sha256: 3397f58c8fff945ece8ea19e7859040c98a5c6497e5d791397794094e15e5873
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - cmake
+    - make
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libopenfec${SHLIB_EXT}
+
+about:
+  license: CECILL-2.0 OR CECILL-C
+  license_file:
+    - LICENCE_CeCILL-C_V1-en.txt
+    - Licence_CeCILL_V2-en.txt
+  summary: Unofficial OpenFEC fork with various bugfixes.
+  homepage: https://github.com/roc-streaming/openfec
+  repository: https://github.com/roc-streaming/openfec
+
+extra:
+  recipe-maintainers:
+    - danielnachun
