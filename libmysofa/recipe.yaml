@@ -15,11 +15,11 @@ build:
 requirements:
   build:
     - ${{ compiler('c') }}
-    - ${{ compiler('cxx') }}
+    - ${{ compiler('cxxt ') }}
     - cmake
     - make
-    - cunit
   host:
+    - cunit
     - zlib
 
 tests:
