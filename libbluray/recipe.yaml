@@ -18,7 +18,7 @@ requirements:
     - autoconf
     - automake
     - make
-    - pkgconf
+    - pkg-config
   host:
     - expat
     - fontconfig
