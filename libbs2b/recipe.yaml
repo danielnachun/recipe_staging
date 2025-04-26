@@ -1,0 +1,40 @@
+context:
+  version: 3.1.0
+
+package:
+  name: libbs2b
+  version: ${{ version }}
+
+source:
+  url: https://downloads.sourceforge.net/sourceforge/bs2b/libbs2b/${{ version }}/libbs2b-${{ version }}.tar.gz
+  sha256: 6aaafd81aae3898ee40148dd1349aab348db9bfae9767d0e66e0b07ddd4b2528
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - autoconf
+    - automake
+    - make
+    - pkg-config
+    - sed
+  host:
+    - libsndfile
+    - libtool
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libbs2b${SHLIB_EXT}
+
+about:
+  license: MIT
+  license_file: COPYING
+  summary: Bauer stereophonic-to-binaural DSP effect library
+  homepage: http://bs2b.sourceforge.net
+
+extra:
+  recipe-maintainers:
+    - danielnachun
