@@ -1,0 +1,38 @@
+context:
+  version: 6.1.3
+
+package:
+  name: libdvdread
+  version: ${{ version }}
+
+source:
+  url: https://download.videolan.org/pub/videolan/libdvdread/${{ version }}/libdvdread-${{ version }}.tar.bz2
+  sha256: ce35454997a208cbe50e91232f0e73fb1ac3471965813a13b8730a8f18a15369
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - autoconf
+    - automake
+    - make
+    - pkg-config
+  host:
+    - libtool
+    - libdvdcss
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libdvdread${SHLIB_EXT}
+
+about:
+  license: GPL-2.0-or-later
+  license_file: COPYING
+  summary: Library for reading DVD video disks
+  homepage: https://www.videolan.org/developers/libdvdnav.html
+
+extra:
+  recipe-maintainers:
+    - danielnachun
