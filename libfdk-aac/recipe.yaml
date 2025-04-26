@@ -1,0 +1,37 @@
+context:
+  version: 2.0.3
+
+package:
+  name: fdk-aac
+  version: ${{ version }}
+
+source:
+  url: https://downloads.sourceforge.net/project/opencore-amr/fdk-aac/fdk-aac-${{ version }}.tar.gz
+  sha256: 829b6b89eef382409cda6857fd82af84fabb63417b08ede9ea7a553f811cb79e
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - autoconf
+    - automake
+    - make
+  host:
+    - libtool
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libfdk-aac${SHLIB_EXT}
+
+about:
+  license: Apache-2.0
+  license_file: NOTICE
+  summary: Standalone library of the Fraunhofer FDK AAC code from Android
+  homepage: https://sourceforge.net/projects/opencore-amr/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
