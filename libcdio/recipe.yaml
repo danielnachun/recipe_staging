@@ -19,6 +19,7 @@ requirements:
     - autoconf
     - automake
     - make
+    - texinfo
   host:
     - libtool
     - ncurses
