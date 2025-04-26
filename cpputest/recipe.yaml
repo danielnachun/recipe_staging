@@ -1,0 +1,50 @@
+context:
+  version: 4.0
+
+package:
+  name: cpputest
+  version: ${{ version }}
+
+source:
+  url: https://github.com/cpputest/cpputest/releases/download/v${{ version }}/cpputest-${{ version }}.tar.gz
+  sha256: 21c692105db15299b5529af81a11a7ad80397f92c122bd7bf1e4a4b0e85654f7
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - make
+
+tests:
+  - script:
+      - ./run_test.sh
+    files:
+      recipe:
+        - run_test.sh
+        - test/
+    requirements:
+      run:
+        - ${{ compiler('cxx') }}
+        - cmake
+        - make
+
+about:
+  license: BSD-3-Clause
+  license_file: COPYING.txt
+  summary: Unit testing and mocking framework for C/C++
+  description: |
+    CppUTest is a C /C++ based unit xUnit test framework for unit testing
+    and for test-driving your code. It is written in C++ but is used in C
+    and C++ projects and frequently used in embedded systems but it works
+    for any C/C++ project.
+  homepage: https://github.com/cpputest/cpputest
+  repository: https://github.com/cpputest/cpputest/
+  documentation: http://cpputest.github.io/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
