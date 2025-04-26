@@ -1,0 +1,40 @@
+context:
+  version: 10.2+2.0.2
+
+package:
+  name: libcdio-paranoia
+  version: ${{ version }}
+
+source:
+  url: https://github.com/libcdio/libcdio-paranoia/archive/release-${{ version }}.tar.gz
+  sha256: fe35208811f3edfcb79ae7b4ad1984f3188aea42c4c8ba4d009efafb36734a8b
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - autoconf
+    - automake
+    - make
+    - pkg-config
+  host:
+    - libcdio
+    - libtool
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libcdio_cdda${SHLIB_EXT}
+      - test -f ${PREFIX}/lib/libcdio_paranoia${SHLIB_EXT}
+
+about:
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  summary: Compact Disc Digital Audio (CDDA) extraction tool using libcdio for CDROM access
+  homepage: https://www.gnu.org/software/libcdio/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
