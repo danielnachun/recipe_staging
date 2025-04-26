@@ -2,14 +2,15 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-scons CC=${CC} CXX=${CXX} \
-    --prefix=${PREFIX} \
+ln -sf ${CC} ${BUILD_PREFIX}/bin/gcc
+ln -sf ${CXX} ${BUILD_PREFIX}/bin/g++
+
+scons --prefix=${PREFIX} \
     --libdir=${PREFIX}/lib \
     --enable-examples \
     --enable-tests
 
-scons CC=${CC} CXX=${CXX} \
-    --prefix=${PREFIX} \
+scons --prefix=${PREFIX} \
     --libdir=${PREFIX}/lib \
     --enable-examples \
     --enable-tests \
