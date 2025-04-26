@@ -1,0 +1,44 @@
+context:
+  version: 0.16.18
+
+package:
+  name: sord
+  version: ${{ version }}
+
+source:
+  url: https://download.drobilla.net/sord-${{ version }}.tar.xz
+  sha256: 4f398b635894491a4774b1498959805a08e11734c324f13d572dea695b13d3b3
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - doxygen
+    - meson
+    - ninja
+    - sphinx
+  host:
+    - pcre2
+    - serd
+    - zix
+  run:
+    - serd
+    - zix
+
+tests:
+  - script:
+      - sordi -h
+      - test -f ${PREFIX}/lib/libsord-0${SHLIB_EXT}
+
+about:
+  license: ISC
+  license_file: COPYING
+  summary: A lightweight C library for storing RDF in memory
+  homepage: https://drobilla.net/software/sord.html
+  repository: https://drobilla.net/software/sord.html
+
+extra:
+  recipe-maintainers:
+    - danielnachun
