@@ -2,17 +2,15 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-scons --prefix=${PREFIX} \
+scons CC=${CC} CXX=${CXX} \
+    --prefix=${PREFIX} \
     --libdir=${PREFIX}/lib \
     --enable-examples \
-    --enable-tests \
-    CC=${CC} \
-    CXX=${CXX}
+    --enable-tests
 
-scons --prefix=${PREFIX} \
+scons CC=${CC} CXX=${CXX} \
+    --prefix=${PREFIX} \
     --libdir=${PREFIX}/lib \
     --enable-examples \
     --enable-tests \
     install
-    CC=${CC} \
-    CXX=${CXX}
