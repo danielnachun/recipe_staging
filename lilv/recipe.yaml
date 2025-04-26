@@ -28,11 +28,13 @@ requirements:
     - serd
     - sord
     - sratom
+    - zix
   run:
     - lv2
     - serd
     - sord
     - sratom
+    - zix
 
 tests:
   - script:
