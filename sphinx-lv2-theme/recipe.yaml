@@ -1,0 +1,40 @@
+context:
+  version: 1.4.2
+
+package:
+  name: sphinx-lv2-theme
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/s/sphinx-lv2-theme/sphinx_lv2_theme-${{ version }}.tar.gz
+  sha256: 4a099ae20c427179c0cf081f01d5366a554778480d89c2d77a033467e06e7c38
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+    - sphinx
+
+tests:
+  - python:
+      imports:
+        - sphinx_lv2_theme
+      pip_check: true
+
+about:
+  summary: A minimal static theme for Sphinx
+  license: MIT
+  license_file: LICENSE
+  homepage: https://gitlab.com/lv2/sphinx_lv2_theme
+
+extra:
+  recipe-maintainers:
+    - danielnachun
