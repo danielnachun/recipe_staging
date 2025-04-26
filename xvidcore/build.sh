@@ -8,4 +8,8 @@ autoreconf --force --verbose --install
 make
 make install
 
-ln -f ${PREFIX}/lib/libxvidcore.4${SHLIB_EXT} ${PREFIX}/lib/libxvidcore${SHLIB_EXT}
+if [[ ${target_platform} =~ .*osx.* ]]; then
+    ln -f ${PREFIX}/lib/libxvidcore.4${SHLIB_EXT} ${PREFIX}/lib/libxvidcore${SHLIB_EXT}
+else
+    ln -f ${PREFIX}/lib/libxvidcore${SHLIB_EXT}.4 ${PREFIX}/lib/libxvidcore${SHLIB_EXT}
+fi
