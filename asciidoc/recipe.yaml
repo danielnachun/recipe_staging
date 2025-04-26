@@ -1,0 +1,49 @@
+context:
+  version: 10.2.1
+
+package:
+  name: asciidoc
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/a/asciidoc/asciidoc-${{ version }}.tar.gz
+  sha256: d9f13c285981b3c7eb660d02ca0a2779981e88d48105de81bb40445e60dddb83
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - asciidoc=asciidoc.asciidoc:cli
+      - a2x=asciidoc.a2x:cli
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+
+tests:
+  - python:
+      imports:
+        - asciidoc
+      pip_check: true
+  - requirements:
+      run:
+        - pip
+    script:
+      - asciidoc --help
+      - a2x --help
+
+about:
+  summary: AsciiDoc is a text document format for writing things.
+  license: GPL-2.0-only
+  license_file: LICENSE
+  homepage: https://github.com/asciidoc/asciidoc-py3
+
+extra:
+  recipe-maintainers:
+    - danielnachun
