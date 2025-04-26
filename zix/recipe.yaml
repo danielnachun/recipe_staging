@@ -1,0 +1,39 @@
+context:
+  version: 0.6.2
+
+package:
+  name: zix
+  version: ${{ version }}
+
+source:
+  url: https://download.drobilla.net/zix-${{ version }}.tar.xz
+  sha256: 4bc771abf4fcf399ea969a1da6b375f0117784f8fd0e2db356a859f635f616a7
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - meson
+    - ninja
+    - doxygen
+    - sphinx
+    - sphinx-lv2-theme
+    - sphinxygen
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libzix-0${SHLIB_EXT}
+
+about:
+  license: ISC
+  license_file: COPYING
+  summary: A lightweight C99 portability and data structure library
+  homepage: https://gitlab.com/drobilla/zix
+  repository: https://gitlab.com/drobilla/zix
+
+extra:
+  recipe-maintainers:
+    - danielnachun
