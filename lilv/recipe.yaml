@@ -18,6 +18,7 @@ requirements:
     - doxygen
     - meson
     - ninja
+    - pkg-config
     - sphinx
     - sphinx-lv2-theme
     - sphinxygen
