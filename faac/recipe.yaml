@@ -18,11 +18,7 @@ requirements:
     - autoconf
     - automake
     - make
-    - gettext-tools
   host:
-    - if: osx
-      then:
-        - libintl-devel
     - libtool
 
 tests:
