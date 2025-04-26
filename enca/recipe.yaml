@@ -1,0 +1,41 @@
+context:
+  version: 1.19
+
+package:
+  name: enca
+  version: ${{ version }}
+
+source:
+  url: https://dl.cihar.com/enca/enca-${{ version }}.tar.xz
+  sha256: 3a487eca40b41021e2e4b7a6440b97d822e6532db5464471f572ecf77295e8b8
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - autoconf
+    - automake
+    - gettext-tools
+    - make
+    - recode
+  host:
+    - libtool
+
+tests:
+  - script:
+      - enca --help
+      - enconv --help
+      - test -f ${PREFIX}/lib/libenca${SHLIB_EXT}
+
+about:
+  license: GPL-2.0-or-later
+  license_file: COPYING
+  summary: Charset analyser and converter
+  homepage: https://cihar.com/software/enca/
+  repository: https://github.com/nijel/enca
+
+extra:
+  recipe-maintainers:
+    - danielnachun
