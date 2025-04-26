@@ -1,0 +1,50 @@
+context:
+  version: 0.4.0
+
+package:
+  name: roc-toolkit
+  version: ${{ version }}
+
+source:
+  url: https://github.com/roc-streaming/roc-toolkit/archive/v${{ version }}.tar.gz
+  sha256: 60501dfdc8c0de385898dbd1eb8239d93ef962667ddb064ad796b887a41a1a46
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - scons
+  host:
+    - if: linux
+      then:
+        - alsa-lib
+        - libunwind
+        - pulseaudio
+    - cpputest
+    - gengetopt
+    - libuv
+    - openfec
+    - openssl
+    - ragel
+    - sox
+    - speexdsp
+  run:
+    - openfec
+    - speexdsp
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libroc${SHLIB_EXT}
+
+about:
+  license: MPL-2.0
+  license_file: LICENSE
+  summary: Real-time audio streaming over the network
+  homepage: https://github.com/roc-streaming/roc-toolkit/
+  repository: https://github.com/roc-streaming/roc-toolkit/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
