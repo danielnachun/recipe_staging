@@ -26,7 +26,7 @@ requirements:
 
 tests:
   - script:
-      - smh --help
+      - smh
 
 about:
   license: MIT
