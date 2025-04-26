@@ -26,6 +26,7 @@ requirements:
         - pulseaudio
     - cpputest
     - gengetopt
+    - hedley
     - libuv
     - openfec
     - openssl
