@@ -1,0 +1,37 @@
+context:
+  version: 0.5.1
+
+package:
+  name: libmpeg2
+  version: ${{ version }}
+
+source:
+  url: https://libmpeg2.sourceforge.io/files/libmpeg2-${{ version }}.tar.gz
+  sha256: dee22e893cb5fc2b2b6ebd60b88478ab8556cb3b93f9a0d7ce8f3b61851871d4
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - autoconf
+    - automake
+    - make
+  host:
+    - libtool
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libmpeg2${SHLIB_EXT}
+      - test -f ${PREFIX}/lib/libmpeg2convert${SHLIB_EXT}
+
+about:
+  license: GPL-2.0-or-later
+  license_file: COPYING
+  summary: Library to decode mpeg-2 and mpeg-1 video streams
+  homepage: https://libmpeg2.sourceforge.io/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
