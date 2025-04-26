@@ -1,0 +1,42 @@
+context:
+  version: 0.1.0.1
+
+package:
+  name: stan
+  version: ${{ version }}
+
+source:
+  url: https://github.com/kowainik/stan/archive/v${{ version }}.tar.gz
+  sha256: d32d61c19e3b16b007ac8a34be4ab7fa3611b04111fb285e994dc4e3113d617d
+
+build:
+  number: 0
+  skip: not unix
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cabal-install
+    - cabal-plan
+    - ghc
+  host:
+    - if: osx
+      then: libiconv
+
+tests:
+  - script:
+      - stan --help
+
+about:
+  license: MPL-2.0
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: Haskell STatic ANalyser
+  homepage: https://kowainik.github.io/projects/stan
+  repository: https://github.com/kowainik/stan
+
+extra:
+  recipe-maintainers:
+    - danielnachun
