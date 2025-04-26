@@ -1,0 +1,29 @@
+context:
+  version: 0.13.17
+
+package:
+  name: dr_wav
+  version: ${{ version }}
+
+source:
+  url: https://github.com/mackron/dr_libs/archive/wav-${{ version }}.tar.gz
+  sha256: 6a06744f9e961e8417f1ce9ee0d884cc8f00108d1a08845ced7f8696847ff8ec
+
+build:
+  noarch: generic
+  number: 0
+
+tests:
+  - script:
+      - test -f ${PREFIX}/include/dr_wav.h
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: Audio decoding libraries for C/C++, each in a single source file - WAV component.
+  homepage: https://github.com/mackron/dr_libs
+  repository: https://github.com/mackron/dr_libs
+
+extra:
+  recipe-maintainers:
+    - danielnachun
