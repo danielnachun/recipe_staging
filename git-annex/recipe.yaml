@@ -23,6 +23,7 @@ requirements:
   host:
     - if: osx
       then: libiconv
+    - libmagic
 
 tests:
   - script:
