@@ -1,0 +1,42 @@
+context:
+  version: 10.20250416
+
+package:
+  name: git-annex
+  version: ${{ version }}
+
+source:
+  url: https://git.kitenet.net/index.cgi/git-annex.git/snapshot/git-annex-${{ version }}.tar.gz
+  sha256: 5745a1f243bf0a3bb64771bb267a7c6f8e1c7ac7d800af35918b1b64a8a07ca1
+
+build:
+  number: 0
+  skip: not unix
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cabal-install
+    - cabal-plan
+    - ghc
+  host:
+    - if: osx
+      then: libiconv
+
+tests:
+  - script:
+      - git-annex --help
+
+about:
+  license: AGPL-3.0-only
+  license_file:
+    - COPYRIGHT
+    - license-files/
+  summary: A tool for managing large files with git
+  homepage: https://git-annex.branchable.com
+  repository: https://git.kitenet.net/index.cgi/git-annex.git
+
+extra:
+  recipe-maintainers:
+    - danielnachun
