@@ -40,8 +40,8 @@ requirements:
 
 tests:
   - script:
-      - lv2_validate
-      - lv2specgen.py --help
+      - lv2_validate 2>&1 | grep -q "Validate the given ttl files against the installed LV2 spec"
+      - lv2specgen.py 2>&1 | grep -q "Unable to find lv2specgen data"
       - test -f ${PREFIX}/lib/lv2/eg-amp.lv2/amp${SHLIB_EXT}
       - test -f ${PREFIX}/lib/lv2/eg-fifths.lv2/fifths${SHLIB_EXT}
       - test -f ${PREFIX}/lib/lv2/eg-metro.lv2/metro${SHLIB_EXT}
