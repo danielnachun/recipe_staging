@@ -1,0 +1,51 @@
+context:
+  version: 2025.04.21.00
+
+package:
+  name: fizz
+  version: ${{ version }}
+
+source:
+  url: https://github.com/facebookincubator/fizz/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: 4ff23f65bad9154f9b8e6ba3e84d74d8300ec3240188a53f5c2a5a49ec8c9dfb
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - make
+    - gtest
+  host:
+    - double-conversion
+    - fmt
+    - folly
+    - gflags
+    - glog
+    - liblzma-devel
+    - libsodium
+    - openssl
+    - zlib
+    - zstd
+  run_exports:
+    - ${{ pin_subpackage('fizz', upper_bound='x.x.x.x') }}
+
+tests:
+  - script:
+      - fizz client
+      - test -f ${PREFIX}/lib/libfizz${SHLIB_EXT}
+      - test -f ${PREFIX}/lib/libfizz_test_support${SHLIB_EXT}
+
+about:
+  license: BSD-3-Clause
+  license_file: LICENSE
+  summary: C++14 implementation of the TLS-1.3 standard
+  homepage: https://github.com/facebookincubator/fizz
+  repository: https://github.com/facebookincubator/fizz
+
+extra:
+  recipe-maintainers:
+    - danielnachun
