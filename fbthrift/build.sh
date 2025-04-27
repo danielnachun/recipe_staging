@@ -9,16 +9,15 @@ sed -i 's/compiler_base/shared/g' thrift/shared/CMakeLists.txt
 sed -i 's/TARGETS thrift1/TARGETS thrift1\nshared/' thrift/compiler/CMakeLists.txt
 sed -i 's?whisker/dsl.cc?whisker/dsl.cc\nwhisker/detail/string.cc?' thrift/compiler/CMakeLists.txt
 
-cmake -S . -B build \
+cmake -S . -B . \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_VERBOSE_MAKEFILE=ON \
     -Wno-dev \
-    -Denable_tests=OFF \
     -DBUILD_SHARED_LIBS=ON \
     -DCMAKE_CXX_STANDARD=20 \
     -Dthriftpy3=OFF \
     -Dthriftpy=OFF \
     ${CMAKE_ARGS}
 
-cmake --build build -j${CPU_COUNT}
-cmake --install build
+cmake --build . -j${CPU_COUNT}
+cmake --install .
