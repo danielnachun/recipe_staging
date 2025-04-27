@@ -1,0 +1,44 @@
+context:
+  version: 2025-03-04
+
+package:
+  name: hell
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/chrisdone/hell/archive/${{ version }}.tar.gz
+  sha256: db98069ad13357013188e18754d7b7e20b28ce2d815f8a440001e649212c82ab
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cabal-install
+    - cabal-plan
+    - ghc
+  host:
+    - if: osx
+      then: libiconv
+  run:
+    - if: osx
+      then: libiconv
+
+tests:
+  - script:
+      - hell --help
+
+about:
+  license: BSD-3-Clause
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: Haskell-based shell scripting language
+  homepage: https://chrisdone.github.io/hell/
+  repository: https://github.com/chrisdone/hell
+
+extra:
+  recipe-maintainers:
+    - danielnachun
