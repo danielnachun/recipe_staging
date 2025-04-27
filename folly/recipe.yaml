@@ -1,0 +1,59 @@
+context:
+  version: 2025.04.21.00
+
+package:
+  name: folly
+  version: ${{ version }}
+
+source:
+  url: https://github.com/facebook/folly/archive/v${{ version }}.tar.gz
+  sha256: 3ddb836b7d437180bceb2d530f168f497a64263d39a30e20b6293df398d6df40
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - make
+    - gtest
+  host:
+    - if: linux
+      then:
+        - libaio
+        - liburing
+        - libunwind
+    - bzip2
+    - double-conversion
+    - fast_float
+    - fmt
+    - gflags
+    - glog
+    - libboost-devel
+    - libevent
+    - liblzma-devel
+    - libsodium
+    - lz4
+    - openssl
+    - snappy
+    - zlib
+    - zstd
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libfolly${SHLIB_EXT}
+      - test -f ${PREFIX}/lib/libfolly_test_util${SHLIB_EXT}
+      - test -f ${PREFIX}/lib/libfollybenchmark${SHLIB_EXT}
+
+about:
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: An open-source C++ library developed and used at Facebook
+  homepage: https://github.com/facebook/folly
+  repository: https://github.com/facebook/folly
+
+extra:
+  recipe-maintainers:
+    - danielnachun
