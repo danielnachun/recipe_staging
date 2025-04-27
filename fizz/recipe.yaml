@@ -19,13 +19,13 @@ requirements:
     - cmake
     - make
     - gtest
-    - gmock
   host:
     - double-conversion
     - fmt
     - folly
     - gflags
     - glog
+    - gmock
     - liblzma-devel
     - libsodium
     - openssl
