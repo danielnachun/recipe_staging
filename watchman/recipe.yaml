@@ -21,6 +21,7 @@ requirements:
     - make
     - gtest
   host:
+    - cpptoml
     - libboost-devel
     - double-conversion
     - edencommon
@@ -30,9 +31,11 @@ requirements:
     - fmt
     - folly
     - glog
+    - liblzma-devel
     - mvfst
     - openssl
     - pcre2
+    - zlib
 
 tests:
   - script:
