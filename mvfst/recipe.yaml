@@ -36,8 +36,8 @@ requirements:
 
 tests:
   - script:
-      - test -f ${PREFIX}/lib/libmvfst_client.a
-      - test -f ${PREFIX}/lib/libmvfst_server.a
+      - test -f ${PREFIX}/lib/libmvfst_client${SHLIB_EXT}
+      - test -f ${PREFIX}/lib/libmvfst_server${SHLIB_EXT}
 
 about:
   license: MIT
