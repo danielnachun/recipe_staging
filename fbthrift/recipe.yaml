@@ -19,6 +19,7 @@ requirements:
     - cmake
     - make
     - gtest
+    - sed
   host:
     - double-conversion
     - fizz
