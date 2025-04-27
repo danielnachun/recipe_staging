@@ -1,0 +1,52 @@
+context:
+  version: 2025.04.21.00
+
+package:
+  name: fbthrift
+  version: ${{ version }}
+
+source:
+  url: https://github.com/facebook/fbthrift/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: 9a05a49230aa1d0aecb04d50cc0af5e259c3c5337e7e881457dcc7e58a4767e8
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - make
+    - gtest
+  host:
+    - double-conversion
+    - fizz
+    - fmt
+    - folly
+    - gflags
+    - glog
+    - libboost-devel
+    - liblzma-devel
+    - mvfst
+    - openssl
+    - xxhash
+    - wangle
+    - zlib
+  run_exports:
+    - ${{ pin_subpackage('fbthrift', upper_bound='x.x.x.x') }}
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libthrift-core${SHLIB_EXT}
+
+about:
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Facebook's branch of Apache Thrift, including a new C++ server
+  homepage: https://github.com/facebook/fbthrift
+  repository: https://github.com/facebook/fbthrift
+
+extra:
+  recipe-maintainers:
+    - danielnachun
