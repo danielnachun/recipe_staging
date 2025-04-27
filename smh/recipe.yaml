@@ -1,0 +1,42 @@
+context:
+  version: 0.2.1
+
+package:
+  name: smh
+  version: ${{ version }}
+
+source:
+  url: https://github.com/DanRyba253/smh/archive/v${{ version }}.tar.gz
+  sha256: 34422dab247ef4d624159c3918da73e9300a2530da40c9c27af95e705821f95f
+
+build:
+  number: 0
+  skip: not unix
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cabal-install
+    - cabal-plan
+    - ghc
+  host:
+    - if: osx
+      then: libiconv
+
+tests:
+  - script: |
+      smh 2>&1 | grep -q "usage: smh <command> \[input\]"
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: String manipulation tool written in haskell
+  homepage: https://github.com/DanRyba253/smh
+  repository: https://github.com/DanRyba253/smh
+
+extra:
+  recipe-maintainers:
+    - danielnachun
