@@ -2,10 +2,11 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-export CXXFLAGS="${CXXFLAGS} -DGLOG_USE_GLOG_EXPORT"
+export CXXFLAGS="${CXXFLAGS} -DGLOG_USE_GLOG_EXPORT -D_LIBCPP_HAS_NO_ASAN"
 export RUSTUP_TOOLCHAIN=stable
 
 cmake -S . -B build \
+    -DPython3_EXECUTABLE=${PYTHON} \
     -DUSE_SYS_PYTHON=ON \
     -DENABLE_EDEN_SUPPORT=ON \
     -DCMAKE_BUILD_TYPE=Release \
@@ -17,4 +18,8 @@ cmake -S . -B build \
     ${CMAKE_ARGS}
 
 cmake --build build -j${CPU_COUNT}
+cp build/watchman/cli/**/release/watchmanctl build/watchman/cli/release
+install -m 644 build/libeden_config_thrift.dylib ${PREFIX}/lib
+install -m 644 build/libeden_service_thrift.dylib ${PREFIX}/lib
+install -m 644 build/libstreamingeden_thrift.dylib ${PREFIX}/lib
 cmake --install build
