@@ -3,7 +3,9 @@
 set -o xtrace -o nounset -o pipefail -o errexit
 
 export CXXFLAGS="${CXXFLAGS} -DGLOG_USE_GLOG_EXPORT -D_LIBCPP_HAS_NO_ASAN"
-export LDFLAGS="${LDFLAGS} -Wl,-undefined,dynamic_lookup -Wl,-dead_strip_dylibs"
+if [[ ${target_platform} =~ .*linux.* ]]; then
+    export LDFLAGS="${LDFLAGS} -Wl,-undefined,dynamic_lookup -Wl,-dead_strip_dylibs"
+fi
 
 sed -i 's/compiler_base/shared/g' thrift/shared/CMakeLists.txt
 sed -i 's/TARGETS thrift1/TARGETS thrift1\nshared/' thrift/compiler/CMakeLists.txt
