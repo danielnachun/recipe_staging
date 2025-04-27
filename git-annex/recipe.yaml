@@ -25,6 +25,7 @@ requirements:
     - if: osx
       then: libiconv
     - libmagic
+    - zlib
 
 tests:
   - script:
