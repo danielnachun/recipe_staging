@@ -1,0 +1,50 @@
+context:
+  version: 2025.04.21.00
+
+package:
+  name: watchman
+  version: ${{ version }}
+
+source:
+  url: https://github.com/facebook/watchman/archive/v${{ version }}.tar.gz
+  sha256: 775b8876067d9a94fbd9ed7b0d52991d56ab58c03b6b433b7067d454ce02d15f
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - ${{ compiler('rust') }}
+    - cmake
+    - make
+    - gtest
+  host:
+    - libboost-devel
+    - double-conversion
+    - edencommon
+    - fb303
+    - fbthrift
+    - fizz
+    - fmt
+    - folly
+    - glog
+    - mvfst
+    - openssl
+    - pcre2
+
+tests:
+  - script:
+      - watchman --help
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: Watches files and records, or triggers actions, when they change
+  homepage: https://github.com/facebook/watchman
+  repository: https://github.com/facebook/watchman
+
+extra:
+  recipe-maintainers:
+    - danielnachun
