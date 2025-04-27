@@ -1,0 +1,51 @@
+context:
+  version: 2025.04.21.00
+
+package:
+  name: mvfst
+  version: ${{ version }}
+
+source:
+  url: https://github.com/facebook/mvfst/archive/v${{ version }}.tar.gz
+  sha256: c36c2e49a3c6dbd9ca576f83c6976ceb03c75c137d95bf94b5558dc7844ce48e
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - make
+    - gtest
+  host:
+    - libboost-devel
+    - double-conversion
+    - fizz
+    - fmt
+    - folly
+    - gflags
+    - glog
+    - liblzma-devel
+    - libsodium
+    - openssl
+    - zlib
+  run_exports:
+    - ${{ pin_subpackage('mvfst', upper_bound='x.x.x.x') }}
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libmvfst_client.a
+      - test -f ${PREFIX}/lib/libmvfst_server.a
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: An implementation of the QUIC transport protocol.
+  homepage: https://github.com/facebook/mvfst
+  repository: https://github.com/facebook/mvfst
+
+extra:
+  recipe-maintainers:
+    - danielnachun
