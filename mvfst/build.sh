@@ -7,7 +7,7 @@ export CXXFLAGS="${CXXFLAGS} -DGLOG_USE_GLOG_EXPORT"
 if [[ ${target_platform} =~ .*osx.* ]]; then
     export LDFLAGS="${LDFLAGS} -Wl,-undefined,dynamic_lookup -Wl,-dead_strip_dylibs"
 fi
-sed -i 's?#include <linux/ipv6.h>??' quic/xsk/XskSender.h
+sed -i '/add_subdirectory(xsk)/d' quic/CMakeLists.txt
 
 cmake -S . -B build \
     -DCMAKE_BUILD_TYPE=Release \
