@@ -19,6 +19,7 @@ requirements:
     - cmake
     - make
     - gtest
+    - sed
   host:
     - libboost-devel
     - double-conversion
