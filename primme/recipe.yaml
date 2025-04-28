@@ -1,0 +1,35 @@
+context:
+  version: 3.2.3
+
+package:
+  name: primme
+  version: ${{ version }}
+
+source:
+  url: https://github.com/primme/primme/archive/v${{ version }}.tar.gz
+  sha256: 272fc4952ef9958b79a12de098384ff88995b7bcb1082958cd37aab05773a8a4
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+  host:
+    - python
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libprimme${SHLIB_EXT}
+
+about:
+  license: BSD-3-Clause
+  license_file: COPYING.txt
+  summary: PReconditioned Iterative MultiMethod Eigensolver for solving symmetric/Hermitian eigenvalue problems and singular value problems
+  homepage: http://www.cs.wm.edu/~andreas/software/
+  repository: https://github.com/primme/primme
+
+extra:
+  recipe-maintainers:
+    - danielnachun
