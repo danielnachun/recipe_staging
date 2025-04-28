@@ -1,0 +1,37 @@
+context:
+  version: 4.03.0
+
+package:
+  name: alglib
+  version: ${{ version }}
+
+source:
+  url: http://www.alglib.net/translator/re/alglib-${{ version }}.cpp.gpl.tgz
+  sha256: 93bfd4f53ab6343f3ea9df2d1d93fd1aad68909177b4c35e8f7584ffa3640582
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - make
+  run_exports:
+    - ${{ pin_subpackage('alglib') }}
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libalglib${SHLIB_EXT}
+
+about:
+  license: GPL-3.0-or-later
+  license_file: gpl3.txt
+  summary: A cross-platform numerical analysis and data processing library - Free Version
+  homepage: http://www.alglib.net/
+  repository: https://github.com/hjkuijf/ALGLIB
+
+extra:
+  recipe-maintainers:
+    - danielnachun
