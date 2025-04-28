@@ -16,6 +16,6 @@ autoreconf --force --install --verbose
     --with-postgres \
     --with-pdal=${PREFIX}/include/pdal \
     --with-bzlib \
-    --with-zstd
+    --with-zstd || cat config.log
 make
 make install

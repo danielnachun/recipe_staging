@@ -17,6 +17,7 @@ requirements:
     - ${{ compiler('c') }}
     - autoconf
     - automake
+    - bison
     - flex
     - make
     - pkg-config
@@ -30,10 +31,10 @@ requirements:
     - geos
     - libnetcdf
     - libgdal-core
+    - libpdal-core
     - libpng
     - libtool
     - numpy
-    - pdal
     - pillow
     - postgresql
     - proj
