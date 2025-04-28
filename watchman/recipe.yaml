@@ -41,6 +41,7 @@ requirements:
 
 tests:
   - script: |
+      watchman --help
       watchman --help 2>&1 | grep -q "Usage: watchman \[opts_2\] command"
 
 about:
