@@ -1,0 +1,29 @@
+context:
+  version: 0.8.0
+
+package:
+  name: hnswlib-cpp
+  version: ${{ version }}
+
+source:
+  url: https://github.com/nmslib/hnswlib/archive/v${{ version }}.tar.gz
+  sha256: cf61d7dd8dc9bfba7f4abe0ed26698e90ac9f49a0badb2e1b0f3ba89b72cf3bb
+
+build:
+  noarch: generic
+  number: 0
+
+tests:
+  - script:
+      - test -f ${PREFIX}/include/hnswlib/hnswlib.h
+
+about:
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Header-only C++/python library for fast approximate nearest neighbors
+  homepage: https://github.com/nmslib/hnswlib
+  repository: https://github.com/nmslib/hnswlib
+
+extra:
+  recipe-maintainers:
+    - danielnachun
