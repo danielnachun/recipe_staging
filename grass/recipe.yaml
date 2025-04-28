@@ -17,6 +17,7 @@ requirements:
     - ${{ compiler('c') }}
     - autoconf
     - automake
+    - flex
     - make
     - pkg-config
   host:
@@ -29,10 +30,10 @@ requirements:
     - geos
     - libnetcdf
     - libgdal-core
-    - libpdal-core
     - libpng
     - libtool
     - numpy
+    - pdal
     - pillow
     - postgresql
     - proj

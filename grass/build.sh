@@ -7,7 +7,6 @@ autoreconf --force --install --verbose
     --disable-dependency-tracking \
     --prefix=${PREFIX} \
     --with-freetype-includes=${PREFIX}/include/freetype2 \
-    --without-widgets \
     --without-opengl \
     --with-readline \
     --with-pthread \
