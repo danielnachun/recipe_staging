@@ -1,0 +1,34 @@
+context:
+  version: 5.0
+
+package:
+  name: ncompress
+  version: ${{ version }}
+
+source:
+  url: https://github.com/vapier/ncompress/archive/v${{ version }}.tar.gz
+  sha256: 96ec931d06ab827fccad377839bfb91955274568392ddecf809e443443aead46
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+
+tests:
+  - script:
+      - compress.lzw -h
+      - uncompress.lzw -h
+
+about:
+  license: Unlicense
+  license_file: UNLICENSE
+  summary: A fast, simple LZW file compressor
+  homepage: https://vapier.github.io/ncompress/
+  repository: https://github.com/vapier/ncompress
+
+extra:
+  recipe-maintainers:
+    - danielnachun
