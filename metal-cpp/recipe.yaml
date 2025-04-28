@@ -1,0 +1,29 @@
+context:
+  version: 2.1.4
+
+package:
+  name: metal-cpp
+  version: ${{ version }}
+
+source:
+  url: https://github.com/brunocodutra/metal/archive/v${{ version }}.tar.gz
+  sha256: 66140e89e424d89bc24bd296884a51487a72c04faf0d0254f3f5950648ffbba1
+
+build:
+  noarch: generic
+  number: 0
+
+tests:
+  - script:
+      - test -f ${PREFIX}/include/metal.hpp
+
+about:
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Header-only C++/python library for fast approximate nearest neighbors
+  homepage: https://brunocodutra.github.io/metal/
+  repository: https://github.com/brunocodutra/metal
+
+extra:
+  recipe-maintainers:
+    - danielnachun
