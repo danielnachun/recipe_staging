@@ -1,0 +1,61 @@
+context:
+  version: 2025.04.21.00
+
+package:
+  name: proxygen
+  version: ${{ version }}
+
+source:
+  url: https://github.com/facebook/proxygen/archive/v${{ version }}.tar.gz
+  sha256: 32ba920d6bd258aaa08f6cfa2890a0dc32651e331a716d73d39da51dbbff90ad
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - make
+    - gperf
+    - gtest
+  host:
+    - double-conversion
+    - fizz
+    - fmt
+    - folly
+    - gflags
+    - glog
+    - gmock
+    - libboost-devel
+    - liblzma-devel
+    - mvfst
+    - openssl
+    - python
+    - wangle
+    - zlib
+    - zstd
+  run_exports:
+    - ${{ pin_subpackage('proxygen', upper_bound='x.x.x.x') }}
+
+tests:
+  - script:
+      - hq --help 2>&1 | grep -q "qs_conn_id_version"
+      - test -f ${PREFIX}/lib/liblibhttperf2${SHLIB_EXT}
+      - test -f ${PREFIX}/lib/libproxygen${SHLIB_EXT}
+      - test -f ${PREFIX}/lib/libproxygencurl${SHLIB_EXT}
+      - test -f ${PREFIX}/lib/libproxygendeviousbaton${SHLIB_EXT}
+      - test -f ${PREFIX}/lib/libproxygenhqloggerhelper${SHLIB_EXT}
+      - test -f ${PREFIX}/lib/libproxygenhttpserver${SHLIB_EXT}
+
+about:
+  license: BSD-3-Clause
+  license_file: LICENSE
+  summary: A collection of C++ HTTP libraries including an easy to use HTTP server
+  homepage: https://github.com/facebook/proxygen
+  repository: https://github.com/facebook/proxygen
+
+extra:
+  recipe-maintainers:
+    - danielnachun
