@@ -2,7 +2,7 @@ context:
   version: 60
 
 package:
-  name: serd
+  name: inih
   version: ${{ version }}
 
 source:
