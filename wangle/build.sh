@@ -14,3 +14,5 @@ cmake -S wangle -B build \
 
 cmake --build build -j${CPU_COUNT}
 cmake --install build
+
+sed -i "s?${CONDA_BUILD_SYSROOT}/usr/lib/librt.so?rt?" ${PREFIX}/lib/cmake/wangle/wangle-targets.cmake
