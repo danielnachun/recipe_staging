@@ -13,11 +13,6 @@ build:
   noarch: generic
   number: 0
 
-requirements:
-  build:
-    - cmake
-    - make
-
 tests:
   - script:
       - test -f ${PREFIX}/include/hnswlib/hnswlib.h
