@@ -1,0 +1,37 @@
+context:
+  version: 0.8.1
+
+package:
+  name: curlpp
+  version: ${{ version }}
+
+source:
+  url: https://github.com/jpbarrette/curlpp/archive/v${{ version }}.tar.gz
+  sha256: 97e3819bdcffc3e4047b6ac57ca14e04af85380bd93afe314bee9dd5c7f46a0a
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - make
+  host:
+    - libcurl
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libcurlpp${SHLIB_EXT}
+
+about:
+  license: MIT
+  license_file: doc/LICENSE
+  summary: C++ wrapper around libcURL
+  homepage: http://www.curlpp.org/
+  repository: https://github.com/jpbarrette/curlpp
+
+extra:
+  recipe-maintainers:
+    - danielnachun
