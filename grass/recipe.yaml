@@ -42,6 +42,9 @@ requirements:
     - readline
     - zlib
     - zstd
+    - if: linux
+      then:
+        - xorg-xorgproto
     - if: osx
       then:
         - libintl-devel
