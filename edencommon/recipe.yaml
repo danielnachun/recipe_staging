@@ -1,0 +1,51 @@
+context:
+  version: 2025.04.21.00
+
+package:
+  name: edencommon
+  version: ${{ version }}
+
+source:
+  url: https://github.com/facebookexperimental/edencommon/archive/v${{ version }}.tar.gz
+  sha256: edb9af6ae21aa673971d4c5899c907c29553c65b42c84e0b739fa62916cf07cd
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - make
+    - gtest
+    - sed
+  host:
+    - libboost-devel
+    - mvfst
+    - fb303
+    - fmt
+    - folly
+    - glog
+    - liblzma-devel
+    - zlib
+  run_exports:
+    - ${{ pin_subpackage('edencommon', upper_bound='x.x.x.x') }}
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libedencommon_os${SHLIB_EXT}
+      - test -f ${PREFIX}/lib/libedencommon_telemetry${SHLIB_EXT}
+      - test -f ${PREFIX}/lib/libedencommon_testharness${SHLIB_EXT}
+      - test -f ${PREFIX}/lib/libedencommon_utils${SHLIB_EXT}
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: Shared library for Watchman and Eden projects
+  homepage: https://github.com/facebookexperimental/edencommon
+  repository: https://github.com/facebookexperimental/edencommon
+
+extra:
+  recipe-maintainers:
+    - danielnachun
