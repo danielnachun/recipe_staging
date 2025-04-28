@@ -3,7 +3,9 @@
 set -o xtrace -o nounset -o pipefail -o errexit
 
 export CXXFLAGS="${CXXFLAGS} -DGLOG_USE_GLOG_EXPORT"
-export LDFLAGS="${LDFLAGS} -Wl,-dead_strip_dylibs"
+if [[ ${target_platform} =~ .*osx.* ]]; then
+    export LDFLAGS="${LDFLAGS} -Wl,-dead_strip_dylibs"
+fi
 
 cmake -S . -B build \
     -DCMAKE_BUILD_TYPE=Release \
