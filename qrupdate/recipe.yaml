@@ -1,0 +1,42 @@
+context:
+  version: 1.1.5
+
+package:
+  name: qrupdate
+  version: ${{ version }}
+
+source:
+  url: https://github.com/mpimd-csc/qrupdate-ng/archive/v${{ version }}.tar.gz
+  sha256: 912426f7cb9436bb3490c3102a64d9a2c3883d700268a26d4d738b7607903757
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('fortran') }}
+    - cmake
+    - make
+  host:
+    - if: linux
+      then:
+        - libblas
+        - liblapack
+  run_exports:
+    - ${{ pin_subpackage('qrupdate', upper_bound = "x.x") }}
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libqrupdate${SHLIB_EXT}
+
+about:
+  license: GPL-3.0-or-later
+  license_file: LICENSE
+  summary: Fortran library for fast updates of QR and Cholesky decompositions
+  homepage: https://github.com/kspalaiologos/bzip3
+  repository: https://github.com/kspalaiologos/bzip3
+
+extra:
+  recipe-maintainers:
+    - danielnachun
