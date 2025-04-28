@@ -2,3 +2,8 @@ MACOSX_DEPLOYMENT_TARGET:
   - 11.0
 MACOSX_SDK_VERSION:
   - 11.0
+python:
+  - 3.9
+  - 3.10
+  - 3.11
+  - 3.12

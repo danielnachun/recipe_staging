@@ -19,7 +19,7 @@ cmake -S . -B build \
 
 cmake --build build -j${CPU_COUNT}
 cp build/watchman/cli/**/release/watchmanctl build/watchman/cli/release
-install -m 644 build/libeden_config_thrift.dylib ${PREFIX}/lib
-install -m 644 build/libeden_service_thrift.dylib ${PREFIX}/lib
-install -m 644 build/libstreamingeden_thrift.dylib ${PREFIX}/lib
+install -m 644 build/libeden_config_thrift${SHLIB_EXT} ${PREFIX}/lib
+install -m 644 build/libeden_service_thrift${SHLIB_EXT} ${PREFIX}/lib
+install -m 644 build/libstreamingeden_thrift${SHLIB_EXT} ${PREFIX}/lib
 cmake --install build
