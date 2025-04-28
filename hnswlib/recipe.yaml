@@ -2,7 +2,7 @@ context:
   version: 0.8.0
 
 package:
-  name: hnswlib
+  name: hnswlib-cpp
   version: ${{ version }}
 
 source:
