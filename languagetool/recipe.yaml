@@ -6,8 +6,8 @@ package:
   version: ${{ version }}
 
 source:
-  url: https://github.com/languagetool-org/languagetool/archive/v${{ version }}.tar.gz
-  sha256: 4eb77f988f2ad75bd3b4ab4cd9565bea08e57f53e7cb17f71ff0e8f8c6b77580
+  git: https://github.com/languagetool-org/languagetool.git
+  tag: v${{ version }}
 
 build:
   number: 0
