@@ -19,6 +19,7 @@ requirements:
     - cmake
     - doxygen
     - make
+    - sed
   host:
     - eigen
     - geant4
