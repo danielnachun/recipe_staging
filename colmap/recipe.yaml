@@ -1,0 +1,53 @@
+context:
+  version: 3.11.1
+
+package:
+  name: colmap
+  version: ${{ version }}
+
+source:
+  url: https://github.com/colmap/colmap/archive/${{ version }}.tar.gz
+  sha256: d2c20729ab5b1198e17725b720128f304f4cfae5c0a8c20d75c0e9c5bdee5860
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - make
+    - if: osx
+      then: llvm-openmp
+  host:
+    - cgal
+    - ceres-solver
+    - eigen
+    - freeimage
+    - flann
+    - glog
+    - libboost-devel
+    - lz4-c
+    - metis
+    - poselib
+    - sqlite
+    - if: osx
+      then: llvm-openmp
+    - if: linux
+      then: libgomp
+
+tests:
+  - script:
+      - colmap --help
+
+about:
+  license: BSD-3-Clause
+  license_file: LICENSE
+  summary: COLMAP - Structure-from-Motion and Multi-View Stereo
+  homepage: https://colmap.github.io/
+  repository: https://github.com/colmap/colmap
+
+extra:
+  recipe-maintainers:
+    - danielnachun
