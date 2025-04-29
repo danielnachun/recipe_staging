@@ -17,7 +17,11 @@ requirements:
     - ${{ compiler('rust') }}
     - ${{ compiler('c') }}
     - cargo-bundle-licenses
+    - pkg-config
   host:
+    - if: linux
+      then:
+        - alsa-lib
     - openssl
 
 tests:
