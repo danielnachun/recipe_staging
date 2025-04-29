@@ -35,7 +35,9 @@ requirements:
     - if: osx
       then: llvm-openmp
     - if: linux
-      then: libgomp
+      then:
+        - libgomp
+        - mesalib
 
 tests:
   - script:
