@@ -1,0 +1,38 @@
+context:
+  version: 00-02
+
+package:
+  name: sio
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/iLCSoft/SIO/archive/v${{ version }}.tar.gz
+  sha256: 416c93402e7314b7aadedba8e7f9e0d4b0b4f4e34ce26285b04cebb505ecfab2
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - doxygen
+    - make
+  host:
+    - zlib
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libsio${SHLIB_EXT}
+
+about:
+  license: BSD-3-Clause
+  license_file: LICENCE
+  summary: Simple IO package
+  homepage: https://github.com/iLCSoft/SIO
+  repository: https://github.com/iLCSoft/SIO
+
+extra:
+  recipe-maintainers:
+    - danielnachun
