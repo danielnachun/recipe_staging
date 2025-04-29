@@ -1,0 +1,40 @@
+context:
+  version: 0.13.0
+
+package:
+  name: covfie
+  version: ${{ version }}
+
+source:
+  url: https://github.com/acts-project/covfie/archive/v${{ version }}.tar.gz
+  sha256: e9cd0546c7bc9539f440273bbad303c97215ccd87403cedb4aa387a313938d57
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - make
+  ignore_run_exports:
+    from_package:
+      - libcxx
+      - libstdcxx
+
+tests:
+  - script:
+      - test -d ${PREFIX}/include/covfie
+
+about:
+  license: MPL-2.0 AND CC-BY-4.0 AND CC0-1.0
+  license_file: LICENSES/
+  summary: A library for storing interpolatable vector fields on co-processors
+  homepage: https://github.com/acts-project/covfie
+  repository: https://github.com/acts-project/covfie
+
+extra:
+  recipe-maintainers:
+    - danielnachun
