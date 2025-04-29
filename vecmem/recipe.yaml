@@ -1,0 +1,37 @@
+context:
+  version: 1.15.0
+
+package:
+  name: vecmem
+  version: ${{ version }}
+
+source:
+  url: https://github.com/acts-project/vecmem/archive/v${{ version }}.tar.gz
+  sha256: 53e03599efd5a22284b62e10338b69345d8188182a12fefe228005069d1ddd74
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - make
+    - gtest
+    - sed
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libvecmem_core${SHLIB_EXT}
+
+about:
+  license: MPL-2.0
+  license_file: LICENSE
+  summary: Vectorised data model base and helper classes.
+  homepage: https://github.com/acts-project/vecmem
+  repository: https://github.com/acts-project/vecmem
+
+extra:
+  recipe-maintainers:
+    - danielnachun
