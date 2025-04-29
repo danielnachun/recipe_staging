@@ -1,0 +1,36 @@
+context:
+  version: 2025.4
+
+package:
+  name: halloy
+  version: ${{ version }}
+
+source:
+  url: https://github.com/squidowl/halloy/archive/${{ version }}.tar.gz
+  sha256: f19f01f0e31739bfbafaaf63e7d01e9d1de2813127715f6243a1bcb4e041a8c1
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - cargo-bundle-licenses
+
+tests:
+  - script:
+      - halloy --version
+
+about:
+  license: GPL-3.0-or-later
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: IRC application written in Rust
+  homepage: https://halloy.chat/
+  repository: https://github.com/squidowl/halloy
+
+extra:
+  recipe-maintainers:
+    - danielnachun
