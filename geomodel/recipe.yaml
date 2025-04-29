@@ -1,0 +1,50 @@
+context:
+  version: 6.10.0
+
+package:
+  name: geomodel
+  version: ${{ version }}
+
+source:
+  url: https://gitlab.cern.ch/GeoModelDev/GeoModel/-/archive/${{ version }}/GeoModel-${{ version }}.tar.gz
+  sha256: dc1da241aaf66e0ec289f5ff00b6b7166e59bbd4c69ca7b8cb2257cbeac0107a
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - doxygen
+    - make
+  host:
+    - eigen
+    - geant4
+    - hdf5
+    - nlohmann_json
+    - sqlite
+    - xerces-c
+  run_exports:
+    - ${{ pin_subpackage('geomodel') }}
+
+tests:
+  - script:
+      - gm2gdml
+      - gmcat
+      - gmclash
+      - gmgeantino
+      - gmmasscalc
+      - gmstatistics
+
+about:
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: A user-friendly C++ Toolkit for HEP Detector Description
+  homepage: https://gitlab.cern.ch/GeoModelDev/GeoModel
+  repository: https://gitlab.cern.ch/GeoModelDev/GeoModel
+
+extra:
+  recipe-maintainers:
+    - danielnachun
