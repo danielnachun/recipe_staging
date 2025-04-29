@@ -1,0 +1,36 @@
+context:
+  version: 0.6.4
+
+package:
+  name: fastor
+  version: ${{ version }}
+
+source:
+  url: https://github.com/romeric/Fastor/archive/V${{ version }}.tar.gz
+  sha256: c97a3b9dbb92413be90689af9d942cddee12a74733cf42f1a8014965553a11f8
+
+build:
+  number: 0
+  skip: not x86_64
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - make
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libfastor${SHLIB_EXT}
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: A lightweight high performance tensor algebra framework for modern C++
+  homepage: https://github.com/romeric/Fastor
+  repository: https://github.com/romeric/Fastor
+
+extra:
+  recipe-maintainers:
+    - danielnachun
