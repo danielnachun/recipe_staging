@@ -1,0 +1,42 @@
+context:
+  version: 1.2.0
+
+package:
+  name: alpaka
+  version: ${{ version }}
+
+source:
+  url: https://github.com/alpaka-group/alpaka/archive/${{ version }}.tar.gz
+  sha256: 069ea68ac950b17cffb3a3e790973aa5115f07ab23c0247a167e815b3c6e6fa2
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - make
+  host:
+    - libboost-devel
+  ignore_run_exports:
+    from_package:
+      - libcxx
+      - libstdcxx
+
+tests:
+  - script:
+      - test -d ${PREFIX}/include/alpaka
+
+about:
+  license: MPL-2.0
+  license_file: LICENSE
+  summary: Abstraction Library for Parallel Kernel Acceleration
+  homepage: https://alpaka.readthedocs.io/
+  repository: https://github.com/alpaka-group/alpaka
+
+extra:
+  recipe-maintainers:
+    - danielnachun
