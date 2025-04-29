@@ -1,0 +1,38 @@
+context:
+  version: 6.6
+
+package:
+  name: languagetool
+  version: ${{ version }}
+
+source:
+  url: https://github.com/languagetool-org/languagetool/archive/v${{ version }}.tar.gz
+  sha256: 4eb77f988f2ad75bd3b4ab4cd9565bea08e57f53e7cb17f71ff0e8f8c6b77580
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - maven
+    - openjdk =17
+  run:
+    - openjdk
+
+tests:
+  - script: |
+      languagetool --help 2>&1 | grep -q "Usage: java -jar languagetool-commandline.jar"
+
+about:
+  license: LGPL-2.1-or-later
+  license_file:
+    - COPYING.txt
+    - LanguageTool-${{ version }}/third-party-licenses/
+  summary: Style and Grammar Checker for 25+ Languages
+  homepage: https://languagetool.org/
+  repository: https://github.com/languagetool-org/languagetool
+
+extra:
+  recipe-maintainers:
+    - danielnachun
