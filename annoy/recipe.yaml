@@ -1,0 +1,36 @@
+context:
+  version: 1.17.2
+
+package:
+  name: annoy
+  version: ${{ version }}
+
+source:
+  url: https://github.com/spotify/annoy/archive/v${{ version }}.tar.gz
+  sha256: ad3518f36bdd5ea54576dfe1c765c93d5c737342f269aada2cd7ff1bc0d0cd93
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - make
+
+tests:
+  - script:
+      - test -f ${PREFIX}/include/annoy/annoylib.h
+
+about:
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Approximate Nearest Neighbors in C++/Python optimized for memory usage and loading/saving to disk
+  homepage: https://github.com/spotify/annoy
+  repository: https://github.com/spotify/annoy
+
+extra:
+  recipe-maintainers:
+    - danielnachun
