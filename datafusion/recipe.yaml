@@ -1,0 +1,36 @@
+context:
+  version: 47.0.0
+
+package:
+  name: datafusion-cli
+  version: ${{ version }}
+
+source:
+  url: https://github.com/apache/datafusion/archive/${{ version }}.tar.gz
+  sha256: 47d4ddba6708bca75e93c9e2955c3c518086dcc0e0deb10f6d285be14ad0a729
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - cargo-bundle-licenses
+
+tests:
+  - script:
+      - datafusion-cli --help
+
+about:
+  license: Apache-2.0
+  license_file:
+    - LICENSE.txt
+    - THIRDPARTY.yml
+  summary: Apache DataFusion SQL Query Engine
+  homepage: https://datafusion.apache.org/
+  repository: https://github.com/apache/datafusion
+
+extra:
+  recipe-maintainers:
+    - danielnachun
