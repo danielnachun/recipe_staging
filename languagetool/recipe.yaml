@@ -17,6 +17,7 @@ requirements:
   build:
     - maven
     - openjdk =17
+    - unzip
   run:
     - openjdk
 
