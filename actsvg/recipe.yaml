@@ -1,0 +1,36 @@
+context:
+  version: 0.4.51
+
+package:
+  name: actsvg
+  version: ${{ version }}
+
+source:
+  url: https://github.com/acts-project/actsvg/archive/v${{ version }}.tar.gz
+  sha256: 4057cc3f8fbb1cd8598ef7dd3862245893e71962b0babd630c17fac3a323fa58
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - make
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libactsvg_core${SHLIB_EXT}
+      - test -f ${PREFIX}/lib/libactsvg_meta${SHLIB_EXT}
+
+about:
+  license: MPL-2.0
+  license_file: LICENSE
+  summary: An SVG based C++20 plotting library for ACTS detectors and surfaces
+  homepage: https://github.com/acts-project/actsvg
+  repository: https://github.com/acts-project/actsvg
+
+extra:
+  recipe-maintainers:
+    - danielnachun
