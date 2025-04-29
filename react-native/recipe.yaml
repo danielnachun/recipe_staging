@@ -1,0 +1,39 @@
+context:
+  version: 18.0.0
+
+package:
+  name: react-native-community-cli
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/@react-native-community/cli/-/cli-${{ version }}.tgz
+  sha256: 528001b44952993b70107d12232d3e077e78fea8efbc2843c23fe6258bc1c207
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  host:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - rnc-cli --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: React Native CLI
+  homepage: https://github.com/react-native-community/
+  repository: https://github.com/react-native-community/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
