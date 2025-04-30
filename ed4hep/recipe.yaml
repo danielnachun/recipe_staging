@@ -1,0 +1,46 @@
+context:
+  version: 00-99-01
+
+package:
+  name: ed4hep
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/key4hep/EDM4hep/archive/v${{ version }}.tar.gz
+  sha256: 84d990f09dbd0ad2198596c0c51238a4b15391f51febfb15dd3d191dc7aae9f4
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - make
+  host:
+    - catch2
+    - nlohmann_json
+    - podio
+    - root
+    - sio
+  run:
+    - podio
+    - root
+    - sio
+
+tests:
+  - script:
+      - edm4hep2json --help
+      - test -f ${PREFIX}/lib/libedm4hep${SHLIB_EXT}
+
+about:
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Generic event data model for HEP collider experiments
+  homepage: https://github.com/key4hep/EDM4hep
+  repository: https://github.com/key4hep/EDM4hep
+
+extra:
+  recipe-maintainers:
+    - danielnachun
