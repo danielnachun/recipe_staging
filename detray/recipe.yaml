@@ -1,0 +1,53 @@
+context:
+  version: 0.95.0
+
+package:
+  name: detray
+  version: ${{ version }}
+
+source:
+  url: https://github.com/acts-project/detray/archive/v${{ version }}.tar.gz
+  sha256: 86cc981eb0105143b971acea3544b9a668326e1027f317d77cf76918f766e7c4
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - make
+    - gtest
+  host:
+    - actsvg
+    - algebra-plugins
+    - covfie
+    - eigen
+    - libboost-devel
+    - nlohmann_json
+    - root
+    - vecmem
+  ignore_run_exports:
+    from_package:
+      - actsvg
+      - eigen
+      - libcxx
+      - libstdcxx
+      - nlohmann_json
+
+tests:
+  - script:
+      - test -d ${PREFIX}/include/detray
+
+about:
+  license: MPL-2.0
+  license_file: LICENSE
+  summary: Test library for detector surface intersection
+  homepage: https://github.com/acts-project/detray
+  repository: https://github.com/acts-project/detray
+
+extra:
+  recipe-maintainers:
+    - danielnachun
