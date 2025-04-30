@@ -1,0 +1,38 @@
+context:
+  version: 02-22-05
+
+package:
+  name: lcio
+  version: ${{ version|replace('-', '_') }}
+
+source:
+  url: https://github.com/iLCSoft/LCIO/archive/v${{ version }}.tar.gz
+  sha256: a756521a2419f8d25d4a4f1bab0008e16c9947020d015f2f6ce457ab0a0429bf
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - make
+  host:
+    - root
+    - sio
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/liblcio${SHLIB_EXT}
+
+about:
+  license: BSD-3-Clause
+  license_file: LICENCE
+  summary: Linear Collider I/O
+  homepage: https://github.com/iLCSoft/LCIO
+  repository: https://github.com/iLCSoft/LCIO
+
+extra:
+  recipe-maintainers:
+    - danielnachun
