@@ -23,13 +23,13 @@ requirements:
     - libboost-devel
     - root
   ignore_run_exports:
-    from_package: 
+    from_package:
       - libcxx
       - libstdcxx
 
 tests:
   - script:
-      - bzip3 --help
+      - test -f ${PREFIX}/include/dfe
 
 about:
   license: MIT
