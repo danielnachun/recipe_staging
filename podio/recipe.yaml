@@ -1,0 +1,40 @@
+context:
+  version: 01-02
+
+package:
+  name: podio
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/AIDASoft/podio/archive/v${{ version }}.tar.gz
+  sha256: bc97ba09ce908e55d4c5faa78d9739dde7daefd9337ae98351813b13708d0685
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - make
+  host:
+    - python
+    - fmt
+    - root
+    - sio
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libpodio${SHLIB_EXT}
+
+about:
+  license: Apache-2.0
+  license_file: NOTICE
+  summary: PODIO, or plain-old-data I/O, is a C++ library to support the creation and handling of data models in particle physics.
+  homepage: https://key4hep.web.cern.ch/podio/index.html
+  repository: https://github.com/AIDASoft/podio
+
+extra:
+  recipe-maintainers:
+    - danielnachun
