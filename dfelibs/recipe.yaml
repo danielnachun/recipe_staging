@@ -1,0 +1,43 @@
+context:
+  version: 20231012
+
+package:
+  name: dfelibs
+  version: ${{ version }}
+
+source:
+  url: https://github.com/acts-project/dfelibs/archive/v${{ version }}.tar.gz
+  sha256: 7127069858c2e3ce663e66f45e3f7e02ede8bbca23d90f6c89f43f5b05c44dcb
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - make
+  host:
+    - libboost-devel
+    - root
+  ignore_run_exports:
+    from_package:
+      - libcxx
+      - libstdcxx
+
+tests:
+  - script:
+      - test -d ${PREFIX}/include/dfe
+
+about:
+  license: MIT
+  license_file: LICENSE.md
+  summary: Dr. Fred Edison's incredible useful C++14 libraries
+  homepage: https://github.com/acts-project/dfelib
+  repository: https://github.com/acts-project/dfelibs
+
+extra:
+  recipe-maintainers:
+    - danielnachun
