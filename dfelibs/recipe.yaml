@@ -29,7 +29,7 @@ requirements:
 
 tests:
   - script:
-      - test -f ${PREFIX}/include/dfe
+      - test -d ${PREFIX}/include/dfe
 
 about:
   license: MIT
