@@ -1,0 +1,51 @@
+context:
+  version: 0.27.0
+
+package:
+  name: algebra-plugins
+  version: ${{ version }}
+
+source:
+  url: https://github.com/acts-project/algebra-plugins/archive/v${{ version }}.tar.gz
+  sha256: c2081b399b7f4e004bebd5bf8250ed9596b113002fe445bca7fdac24d2c5932c
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - make
+    - gtest
+  host:
+    - benchmark
+    - eigen
+    - fastor
+    - root
+    - vecmem
+  ignore_run_exports:
+    from_package:
+      - benchmark
+      - eigen
+      - fastor
+      - libcxx
+      - libstdcxx
+      - vecmem
+
+tests:
+  - script:
+      - test -d ${PREFIX}/include/algebra
+
+about:
+  license: MPL-2.0
+  license_file: LICENSE
+  summary: Algebra plugins with for detray and traccc
+  homepage: https://github.com/acts-project/algebra-plugins
+  repository: https://github.com/acts-project/algebra-plugins
+
+extra:
+  recipe-maintainers:
+    - danielnachun
