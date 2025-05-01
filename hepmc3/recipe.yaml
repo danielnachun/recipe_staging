@@ -1,0 +1,39 @@
+context:
+  version: 3.3.1
+
+package:
+  name: hepmc3
+  version: ${{ version }}
+
+source:
+  url: https://gitlab.cern.ch/hepmc/HepMC3/-/archive/${{ version }}/HepMC3-${{ version }}.tar.gz
+  sha256: 08240160b0f28dc3293aa4d61ce65e2d67cd597acf6faca439f2e46625f7e793
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - make
+  host:
+    - libprotobuf
+    - python
+    - root
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libHepMC3${SHLIB_EXT}
+
+about:
+  license: GPL-3.0-or-later
+  license_file: LICENCE
+  summary: HepMC3 is a new version of the HepMC event record.
+  homepage: https://hepmc.web.cern.ch/hepmc/
+  repository: https://gitlab.cern.ch/hepmc/HepMC3
+
+extra:
+  recipe-maintainers:
+    - danielnachun
