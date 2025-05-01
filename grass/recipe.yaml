@@ -20,6 +20,7 @@ requirements:
     - automake
     - bison
     - flex
+    - gettext-tools
     - make
     - pkg-config
   host:
