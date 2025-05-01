@@ -30,7 +30,6 @@ requirements:
     - fontconfig
     - freetype
     - geos
-    - libiconv
     - libnetcdf
     - libgdal-core
     - libpdal-core
