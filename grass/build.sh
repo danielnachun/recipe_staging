@@ -5,6 +5,7 @@ set -o xtrace -o nounset -o pipefail -o errexit
 export CFLAGS="${CFLAGS} -Wno-implicit-function-declaration -Wno-int-conversion"
 if [[ ${target_platform} =~ .*linux.* ]]; then
     export LDFLAGS="${LDFLAGS} -liconv"
+    export LDFLAGS="${LDFLAGS/-Wl,--as-needed/}"
 fi
 
 autoreconf --force --install --verbose
