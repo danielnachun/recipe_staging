@@ -1,0 +1,66 @@
+context:
+  version: 8.4.1
+
+package:
+  name: grass
+  version: ${{ version }}
+
+source:
+  url: https://github.com/OSGeo/grass/archive/${{ version }}.tar.gz
+  sha256: 611e82dd919cd0e5c1a511e7efbc5c769e22ac6c613c3c4a2633c5d4b07c7e31
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - autoconf
+    - automake
+    - bison
+    - flex
+    - gettext-tools
+    - make
+    - pkg-config
+  host:
+    - bzip2
+    - cairo
+    - expat
+    - fftw
+    - fontconfig
+    - freetype
+    - geos
+    - libnetcdf
+    - libgdal-core
+    - libpdal-core
+    - libpng
+    - libtool
+    - numpy
+    - pillow
+    - postgresql
+    - proj
+    - readline
+    - zlib
+    - zstd
+    - if: linux
+      then:
+        - xorg-xorgproto
+    - if: osx
+      then:
+        - libintl-devel
+
+tests:
+  - script:
+      - grass --help
+
+about:
+  license: GPL-2.0-or-later
+  license_file: COPYING
+  summary: GRASS - free and open-source geospatial processing engine
+  homepage: https://grass.osgeo.org/
+  repository: https://github.com/OSGeo/grass
+
+extra:
+  recipe-maintainers:
+    - danielnachun
