@@ -33,8 +33,6 @@ requirements:
   ignore_run_exports:
     from_package:
       - zlib
-      - zstd
-      - zziplib
 
 tests:
   - script:
