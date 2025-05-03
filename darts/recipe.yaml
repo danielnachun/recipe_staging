@@ -6,7 +6,7 @@ package:
   version: ${{ version }}
 
 source:
-  url: http://chasen.org/~taku/software/darts/src/darts-${{ version }}.tar.gz
+  url: https://chasen.org/~taku/software/darts/src/darts-${{ version }}.tar.gz
   sha256: 0dfc0b82f0a05d93b92acf849368e54bf93f1de8ffb31ba0a21e45ab9e269285
 
 build:
