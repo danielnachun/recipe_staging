@@ -1,0 +1,39 @@
+context:
+  version: 0.32
+
+package:
+  name: darts-cpp
+  version: ${{ version }}
+
+source:
+  path: darts-${{ version }}.tar.gz
+  sha256: 0dfc0b82f0a05d93b92acf849368e54bf93f1de8ffb31ba0a21e45ab9e269285
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - make
+  host:
+    - zlib
+  ignore_run_exports:
+    from_package:
+      - zlib
+
+tests:
+  - script:
+      - darts 2>&1 | grep -q "darts Index"
+      - test -f ${PREFIX}/include/darts.h
+
+about:
+  license: LGPL-2.1-or-later
+  license_file: COPYING
+  summary: C++ Template Library for implementation of Double-Array
+  homepage: http://chasen.org/~taku/software/darts/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
