@@ -1,0 +1,48 @@
+context:
+  version: 3.4.0
+
+package:
+  name: tarantool
+  version: ${{ version }}
+
+source:
+  url: https://github.com/tarantool/tarantool/archive/${{ version }}.tar.gz
+  sha256: 1116c5984c87c2193f3981b53669c8cbb4ffd1b158de880be3c5ff27a35db400
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - make
+  host:
+    - icu
+    - libcurl
+    - msgpuck
+    - openssl
+    - readline
+    - yaml
+    - zlib
+    - zstd
+    - zziplib
+    - if: osx
+      then:
+        - libiconv
+
+tests:
+  - script:
+      - taranatool --help
+
+about:
+  license: BSD-2-Clause
+  license_file: LICENSE
+  summary: Get your data in RAM. Get compute close to data. Enjoy the performance.
+  homepage: https://www.tarantool.io/
+  repository: https://github.com/tarantool/tarantoo
+
+extra:
+  recipe-maintainers:
+    - danielnachun
