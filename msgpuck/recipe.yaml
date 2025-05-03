@@ -19,6 +19,7 @@ requirements:
     - cmake <4
     - doxygen
     - make
+    - sed
 
 tests:
   - script:
