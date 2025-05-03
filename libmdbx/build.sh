@@ -2,7 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-sed -i 's/0x04000000/0x3100000/' src/api-env.c
+sed -i 's/0x04000000/0x3100000/' mdbx.c
 
 cmake -S . -B build \
     -DCMAKE_BUILD_TYPE=Release \
