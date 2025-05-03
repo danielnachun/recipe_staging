@@ -1,0 +1,42 @@
+{% set name = "pandas_drf_tools" %}
+{% set version = "0.1.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/pandas_drf_tools-{{ version }}.tar.gz
+  sha256: 9236f1317b0343e3c8731b7c0bc14c6ff02b064b030acd51bd6c7763157308c6
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python
+    - pip
+  run:
+    - python
+    - pandas >=0.18.1
+    - djangorestframework >=3.4.6
+
+test:
+  imports:
+    - pandas_drf_tools
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://github.com/abarto/pandas-drf-tools
+  summary: A set of tools to make Pandas easy to use with Django REST Framework projects
+  license: BSD-3-Clause
+  license_file: LICENSE.txt
+
+extra:
+  recipe-maintainers:
+    - danielnachun
