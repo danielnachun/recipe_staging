@@ -1,0 +1,37 @@
+context:
+  version: 2.0
+
+package:
+  name: msgpuck
+  version: ${{ version }}
+
+source:
+  url: https://github.com/tarantool/msgpuck/archive/${{ version }}.tar.gz
+  sha256: 01e6aa55d4d52a5b19f7ce9a9845506d9ab3f5abcf844a75e880b8378150a63d
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake <4
+    - doxygen
+    - make
+    - sed
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libmsgpuck${SHLIB_EXT}
+
+about:
+  license: BSD-2-Clause
+  license_file: LICENSE
+  summary: Lightweight MessagePack library
+  homepage: https://github.com/tarantool/msgpuck
+  repository: https://github.com/tarantool/msgpuck
+
+extra:
+  recipe-maintainers:
+    - danielnachun
