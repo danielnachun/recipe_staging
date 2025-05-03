@@ -1,0 +1,39 @@
+context:
+  version: 0.2.6
+
+package:
+  name: marisa
+  version: ${{ version }}
+
+source:
+  url: https://github.com/s-yata/marisa-trie/archive/v${{ version }}.tar.gz
+  sha256: 1063a27c789e75afa2ee6f1716cc6a5486631dcfcb7f4d56d6485d2462e566de
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - autoconf
+    - automake
+    - make
+  host:
+    - libtool
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libmarisa${SHLIB_EXT}
+
+about:
+  license: BSD-2-Clause AND LGPL-2.1-or-later
+  license_file: COPYING.md
+  summary: |
+    MARISA: Matching Algorithm with Recursively Implemented StorAge
+  homepage: https://github.com/s-yata/marisa-trie
+  repository: https://github.com/s-yata/marisa-trie
+
+extra:
+  recipe-maintainers:
+    - danielnachun
