@@ -1,0 +1,36 @@
+context:
+  version: 0.13.6
+
+package:
+  name: libmdbx
+  version: ${{ version }}
+
+source:
+  url: https://libmdbx.dqdkfa.ru/release/libmdbx-amalgamated-${{ version }}.tar.xz
+  sha256: 57db987de6f7ccc66a66ae28a7bda9f9fbb48ac5fb9279bcca92fd5de13075d1
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - make
+    - sed
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libmdbx${SHLIB_EXT}
+
+about:
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: One of the fastest embeddable key-value ACID database without WAL
+  homepage: https://libmdbx.dqdkfa.ru/
+  repository: https://github.com/erthink/libmdbx
+
+extra:
+  recipe-maintainers:
+    - danielnachun
