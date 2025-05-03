@@ -1,0 +1,44 @@
+context:
+  version: 5.0.0
+
+package:
+  name: med
+  version: ${{ version }}
+
+source:
+  url: https://github.com/chennes/med/archive/v${{ version }}.tar.gz
+  sha256: 8701f142087b87e8b74958fd0432498eadf28011b20ad05cf56bf911be081888
+  patches:
+    - hdf5-1.14.patch
+    - med-swig-4.3.0.patch
+    - med-py3.13.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - ${{ compiler('fortran') }}
+    - cmake
+    - make
+    - swig
+  host:
+    - hdf5
+    - python
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/libmed${SHLIB_EXT}
+
+about:
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  summary: Library for reading and writing MED files
+  homepage: https://github.com/chennes/med
+  repository: https://github.com/chennes/med
+
+extra:
+  recipe-maintainers:
+    - danielnachun
