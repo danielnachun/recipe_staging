@@ -1,0 +1,42 @@
+context:
+  version: 1.2.71
+
+package:
+  name: cloudscraper
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/c/cloudscraper/cloudscraper-${{ version }}.tar.gz
+  sha256: 429c6e8aa6916d5bad5c8a5eac50f3ea53c9ac22616f6cb21b18dcc71517d0d3
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+    - requests >=2.9.2
+    - requests-toolbelt >=0.9.1
+    - pyparsing >=2.4.7
+
+tests:
+  - python:
+      imports:
+        - cloudscraper
+      pip_check: true
+
+about:
+  summary: "A Python module to bypass Cloudflare's anti-bot page."
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/venomous/cloudscraper
+
+extra:
+  recipe-maintainers:
+    - danielnachun
