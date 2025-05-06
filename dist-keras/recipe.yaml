@@ -1,0 +1,43 @@
+context:
+  version: 0.2.1
+
+package:
+  name: dist-keras
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/d/dist-keras/dist-keras-${{ version }}.tar.gz
+  sha256: 2ad78a34e120f3742403ea32baad0bb8f64f491c2f525b40fd3ff4fa95f24d8c
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+    - theano
+    - tensorflow
+    - keras
+    - flask
+
+tests:
+  - python:
+      imports:
+        - distkeras
+      pip_check: true
+
+about:
+  summary: Distributed Deep learning with Apache Spark with Keras.
+  license: GPL-3.0-or-later
+  license_file: LICENSE
+  homepage: https://github.com/JoeriHermans/dist-keras
+
+extra:
+  recipe-maintainers:
+    - danielnachun
