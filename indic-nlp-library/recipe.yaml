@@ -1,0 +1,47 @@
+context:
+  version: 0.92
+
+package:
+  name: indic-nlp-library
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/i/indic-nlp-library/indic_nlp_library-${{ version }}.tar.gz
+  sha256: 5e83e54a1016873cbd7417e5376c12ca87411151760ad92809b2af8824982d73
+
+build:
+  number: 0
+  noarch: python
+  script:  |
+    cp ${RECIPE_DIR}/requirements.txt ${SRC_DIR}
+    echo ${PKG_VERSION} > indicnlp/version.txt
+    ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+    - sphinx-argparse
+    - sphinx_rtd_theme
+    - morfessor
+    - pandas
+    - numpy
+
+tests:
+  - python:
+      imports:
+        - indicnlp
+      pip_check: false
+
+about:
+  summary: The goal of the Indic NLP Library is to build Python based libraries for common text processing and Natural Language Processing in Indian languages.
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/anoopkunchukuttan/indic_nlp_library
+
+extra:
+  recipe-maintainers:
+    - danielnachun
