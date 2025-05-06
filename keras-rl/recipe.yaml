@@ -1,0 +1,41 @@
+context:
+  version: 0.4.2
+
+package:
+  name: keras-rl
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/k/keras-rl/keras-rl-${{ version }}.tar.gz
+  sha256: 7bbbb24c8f4560a03f59fb062a5003da102de033bc8cd7d06b69b4c1b48ec054
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+    - keras >=2.0.7
+
+tests:
+  - python:
+      imports:
+        - rl
+        - utils
+      pip_check: true
+
+about:
+  summary: Deep Reinforcement Learning for Keras
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/keras-rl/keras-rl
+
+extra:
+  recipe-maintainers:
+    - danielnachun
