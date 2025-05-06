@@ -1,0 +1,47 @@
+context:
+  version: 0.2.0
+
+package:
+  name: mglearn
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/m/mglearn/mglearn-${{ version }}.tar.gz
+  sha256: e4303ca7b543908878f2371271345dd84a7f1d6729d937bce2046f49aec2ebb9
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+    - numpy
+    - matplotlib-base
+    - scikit-learn
+    - pandas
+    - pillow
+    - cycler
+    - imageio
+    - joblib
+
+tests:
+  - python:
+      imports:
+        - mglearn
+      pip_check: true
+
+about:
+  summary: Helper functions for the book Introduction to machine learning with Python
+  license: BSD-2-Clause
+  license_file: LICENSE
+  homepage: https://github.com/amueller/introduction_to_ml_with_python
+
+extra:
+  recipe-maintainers:
+    - danielnachun
