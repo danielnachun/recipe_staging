@@ -1,0 +1,38 @@
+context:
+  version: 1.2.2
+
+package:
+  name: jupyter-c-kernel
+  version: ${{ version }}
+
+source:
+  url: https://github.com/brendan-rius/jupyter-c-kernel/archive/${{ version }}.tar.gz
+  sha256: ed4a2660df0efcd6d614b41b8f7036ab7e057bd147459b68b08ad1df8b9ed459
+
+build:
+  noarch: python
+  number: 0
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+
+tests:
+  - python:
+      imports:
+        - jupyter_c_kernel
+      pip_check: true
+
+about:
+  license: MIT
+  license_file: LICENSE.txt
+  homepage: https://github.com/brendanrius/jupyter-c-kernel/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
