@@ -1,0 +1,46 @@
+context:
+  version: 0.4.1
+
+package:
+  name: gnews
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/g/gnews/gnews-${{ version }}.tar.gz
+  sha256: 7ae2922fda1146dad25af29a1ad0dd7b569d9dbabd67b84821ef47e143d15d3b
+
+build:
+  number: 0
+  noarch: python
+  script: |
+    cp ${RECIPE_DIR}/requirements.txt ${SRC_DIR}
+    ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+    - feedparser >=6.0.2,<6.1.dev0
+    - beautifulsoup4 <5,>=4.9.3
+    - dnspython
+    - requests
+
+tests:
+  - python:
+      imports:
+        - gnews
+      pip_check: true
+
+about:
+  summary: Provide an API to search for articles on Google News and returns a usable JSON response.
+  license: MIT
+  license_file: LICENSE.txt
+  homepage: https://github.com/ranahaani/GNews/
+  repository: https://github.com/ranahaani/GNews/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
