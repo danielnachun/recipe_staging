@@ -1,0 +1,49 @@
+context:
+  version: 1.0.1
+
+package:
+  name: envdir
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/e/envdir/envdir-${{ version }}.tar.gz
+  sha256: ede06bacc4da4a74bff86b0aca7a9c174f60750ff8ff78e2dc6b183df02a566b
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - envdir=envdir:run
+      - envshell=envdir:shell
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+
+tests:
+  - python:
+      imports:
+        - envdir
+      pip_check: true
+  - requirements:
+      run:
+        - pip
+    script:
+      - envdir --help
+      - envshell --help
+
+about:
+  summary: "A Python port of daemontools' envdir."
+  license: MIT
+  license_file: LICENSE
+  homepage: https://envdir.readthedocs.io/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
