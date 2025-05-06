@@ -1,0 +1,43 @@
+context:
+  version: 2.0.1
+
+package:
+  name: keras-tqdm
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/k/keras-tqdm/keras_tqdm-${{ version }}.tar.gz
+  sha256: d5deb3bd201a66285fb796f240e6fb52ecb76fe6253bb72d6bb832abebe59f47
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+    - keras
+    - tensorflow
+    - tqdm
+
+tests:
+  - python:
+      imports:
+        - keras_tqdm
+      pip_check: true
+
+about:
+  summary: Keras models with TQDM progress bars in Jupyter notebooks
+  license: MIT
+  license_file: LICENSE.txt
+  homepage: https://github.com/bstriner/keras-tqdm
+  documentation: https://pythonhosted.org/keras-tqdm/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
