@@ -1,0 +1,42 @@
+context:
+  version: 1.0.5
+
+package:
+  name: keras-pickle-wrapper
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/k/keras-pickle-wrapper/keras-pickle-wrapper-${{ version }}.tar.gz
+  sha256: edf53a71bcf5f14f3653cfa9986a9ad638f9758340c699dd1cc993b7d6927cb0
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+    - keras
+    - h5py
+    - tensorflow
+
+tests:
+  - python:
+      imports:
+        - keras_pickle_wrapper
+      pip_check: true
+
+about:
+  summary: A small library that wraps Keras models to pickle them.
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/wwoods/keras_pickle_wrapper
+
+extra:
+  recipe-maintainers:
+    - danielnachun
