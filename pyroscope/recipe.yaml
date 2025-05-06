@@ -1,0 +1,35 @@
+context:
+  version: 1.13.2
+
+package:
+  name: pyroscope
+  version: ${{ version }}
+
+source:
+  url: https://github.com/grafana/pyroscope/archive/v${{ version }}.tar.gz
+  sha256: e9cbc70ef1c139a44463f9b0162a53bf4b3088976906e5b74da7f9f05d4f48aa
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('go-nocgo') }}
+    - go-licenses
+
+tests:
+  - script:
+      - pyroscope --help
+
+about:
+  license: AGPL-3.0-or-later
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: Continuous Profiling Platform. Debug performance issues down to a single line of code
+  homepage: https://grafana.com/oss/pyroscope
+  repository: https://github.com/grafana/pyroscope
+
+extra:
+  recipe-maintainers:
+    - danielnachun
