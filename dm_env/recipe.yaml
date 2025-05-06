@@ -1,0 +1,40 @@
+context:
+  version: 1.6
+
+package:
+  name: dm_env
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/d/dm_env/dm-env-${{ version }}.tar.gz
+  sha256: a436eb1c654c39e0c986a516cee218bea7140b510fceff63f97eb4fcff3d93de
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python =3.9
+    - pip
+  run:
+    - python >=3.9
+    - absl-py
+    - dm-tree
+    - numpy
+
+tests:
+  - python:
+      imports:
+        - dm_env
+      pip_check: true
+
+about:
+  summary: A Python interface for Reinforcement Learning environments.
+  license: Apache-2.0
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
