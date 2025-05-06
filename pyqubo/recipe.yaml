@@ -1,0 +1,52 @@
+context:
+  version: 1.5.0
+
+package:
+  name: pyqubo
+  version: ${{ version }}
+
+source:
+  url: https://github.com/recruit-communications/pyqubo/archive/${{ version }}.tar.gz
+  sha256: 36bab674674644743c9fc28853d00717e38431de677c9ff3505554d42060ff06
+
+build:
+  number: 0
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+  host:
+    - python
+    - cmake >=3.20
+    - setuptools >=56.0.0
+    - wheel >=0.36.2
+    - ninja
+    - pip
+  run:
+    - python
+    - numpy >=1.17.3
+    - dimod >=0.9.14,<0.13
+    - dwave-neal >=0.5.7
+    - deprecated >=1.2.12
+    - six >=1.15.0
+
+tests:
+  - python:
+      imports:
+        - pyqubo
+  - requirements:
+      run:
+        - pip
+    script:
+      - pip check
+
+about:
+  license: Apache-2.0
+  license_file: LICENSE
+  homepage: https://github.com/recruit-communications/pyqubo
+
+extra:
+  recipe-maintainers:
+    - danielnachun
