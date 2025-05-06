@@ -1,0 +1,51 @@
+context:
+  version: 2.1.2
+
+package:
+  name: gaiaxpy
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/g/gaiaxpy/gaiaxpy-${{ version }}.tar.gz
+  sha256: e61f418e391ab340cad098f56575d835c404ae8ca6f5c9f714fd62cebd943a0c
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - setuptools
+    - wheel
+    - pip
+  run:
+    - python
+    - aenum
+    - astropy
+    - astroquery
+    - fastavro
+    - python-hdfs
+    - matplotlib-base
+    - numpy >1.23
+    - packaging
+    - pandas >=1.5.0
+    - scipy
+    - tqdm >=4.64.0
+
+tests:
+  - python:
+      imports:
+        - gaiaxpy
+      pip_check: true
+
+about:
+  summary: Utilities to handle BP/RP (XP) Gaia low-resolution spectra as delivered via the archive
+  license: BSD-3-Clause
+  license_file: LICENCE
+  homepage: https://gaia-dpci.github.io/GaiaXPy-website/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
