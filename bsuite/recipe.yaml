@@ -1,0 +1,48 @@
+context:
+  version: 0.3.5
+
+package:
+  name: bsuite
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/b/bsuite/bsuite-${{ version }}.tar.gz
+  sha256: 6a4f4c72f5e5ecdcf9b6851a3da45a25e93d96eaf18908885b6d3d1a76448d7d
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python =3.9
+    - pip
+    - setuptools
+  run:
+    - dm_env
+    - frozendict
+    - gym
+    - matplotlib-base
+    - scikit-image
+    - six
+    - pandas
+    - plotnine
+    - termcolor
+    - python >=3.9
+
+tests:
+  - python:
+      imports:
+        - bsuite
+      pip_check: true
+
+about:
+  summary: Core RL Behaviour Suite. A collection of reinforcement learning experiments.
+  license: Apache-2.0
+  license_file: LICENSE
+  homepage: https://github.com/deepmind/bsuite
+
+extra:
+  recipe-maintainers:
+    - danielnachun
