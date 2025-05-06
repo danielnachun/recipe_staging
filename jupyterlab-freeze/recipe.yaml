@@ -1,0 +1,44 @@
+context:
+  version: 0.1.2
+
+package:
+  name: jupyterlab-freeze
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/j/jupyterlab-freeze/jupyterlab_freeze-${{ version }}.tar.gz
+  sha256: 2db851b064a9ee33acc834e7979afdbcb72116faa245371ec3e5ee4e822d38ad
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python >=3.8
+    - hatch-jupyter-builder
+    - hatchling >=1.5.0
+    - jupyterlab >=4.0.0,<5
+    - hatch-nodejs-version >=0.3.2
+    - pip
+  run:
+    - python >=3.8
+
+tests:
+  - python:
+      imports:
+        - jupyterlab_freeze
+      pip_check: true
+
+about:
+  summary: Jupyter freeze extension for jupyterlab!
+  license: BSD-3-Clause
+  license_file:
+    - LICENSE
+    - NOTICE
+    - LICENSE-3rdparty.csv
+
+extra:
+  recipe-maintainers:
+    - danielnachun
