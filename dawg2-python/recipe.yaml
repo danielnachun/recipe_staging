@@ -1,0 +1,39 @@
+context:
+  version: 0.9.0
+
+package:
+  name: dawg2-python
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/d/dawg2-python/dawg2_python-${{ version }}.tar.gz
+  sha256: adea0312acd1a958659e8448ce6899046c0858d0b6c8949a51eebdeb5a113e4a
+
+build:
+  noarch: python
+  number: 0
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - poetry-core
+    - pip
+  run:
+    - python
+    - typing_extensions >=4.0
+
+tests:
+  - python:
+      imports:
+        - dawg_python
+      pip_check: true
+
+about:
+  summary: Pure-python reader for DAWGs (DAFSAs) created by dawgdic C++ library or DAWG Python extension.
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
