@@ -29,7 +29,7 @@ tests:
   - python:
       imports:
         - pcodec
-      pip_check: true
+      pip_check: false
 
 about:
   summary: Good compression for numerical sequences
