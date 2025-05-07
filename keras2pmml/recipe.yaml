@@ -1,0 +1,43 @@
+context:
+  version: 0.1.0
+
+package:
+  name: keras2pmml
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/k/keras2pmml/keras2pmml-${{ version }}.tar.gz
+  sha256: 2af5a5a5824b0bdcb864eb83a7e7dd2d7a6ae1cad73c7b8f5dc4d1b6f06db3df
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+    - theano
+    - keras
+    - scikit-learn
+    - tensorflow
+
+tests:
+  - python:
+      imports:
+        - keras2pmml
+      pip_check: true
+
+about:
+  summary: Simple exporter of Keras models into PMML
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/vaclavcadek/keras2pmml
+
+extra:
+  recipe-maintainers:
+    - danielnachun
