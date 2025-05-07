@@ -1,0 +1,43 @@
+context:
+  version: 0.8.0
+
+package:
+  name: pyheif
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/p/pyheif/pyheif-${{ version }}.tar.gz
+  sha256: e9b4c11ebad482fc25a0804ce295b44b660cbf7829a228f56b071f325f9e0de4
+
+build:
+  number: 0
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+  host:
+    - python >=3.6
+    - cffi >=1.0.0
+    - libheif
+    - pip
+    - setuptools
+  run:
+    - python >=3.6
+    - cffi >=1.0.0
+
+tests:
+  - python:
+      imports:
+        - pyheif
+      pip_check: true
+
+about:
+  summary: Python interface to libheif library
+  license: Apache-2.0
+  license_file: LICENSE
+  homepage: https://github.com/carsales/pyheif
+
+extra:
+  recipe-maintainers:
+    - danielnachun
