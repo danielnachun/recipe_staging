@@ -1,0 +1,43 @@
+context:
+  version: 1.0.5
+
+package:
+  name: keras-diagram
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/k/keras-diagram/keras_diagram-${{ version }}.tar.gz
+  sha256: cdc0b6e49a6d513b70a0b50edac3d90b40d0a6d6a2c3acd4b808e0cea406adcd
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - pypandoc <1.8
+    - pip
+    - setuptools
+  run:
+    - keras
+    - numpy
+    - python
+    - tensorflow <2.13
+
+tests:
+  - python:
+      imports:
+        - keras_diagram
+      pip_check: true
+
+about:
+  summary: Keras models as ASCII diagrams
+  license: MIT
+  license_file: LICENSE
+  homepage: http://github.com/brianlow/keras_diagram
+
+extra:
+  recipe-maintainers:
+    - danielnachun
