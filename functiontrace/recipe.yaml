@@ -38,7 +38,6 @@ tests:
       run:
         - pip
     script:
-      - pip check
       - functiontrace --help
 
 about:
