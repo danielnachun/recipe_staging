@@ -33,6 +33,7 @@ tests:
   - python:
       imports:
         - functiontrace
+      pip_check: false
   - requirements:
       run:
         - pip
