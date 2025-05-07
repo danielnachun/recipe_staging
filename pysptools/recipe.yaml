@@ -1,0 +1,41 @@
+context:
+  version: 0.15.0
+
+package:
+  name: pysptools
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/p/pysptools/pysptools-${{ version }}.tar.gz
+  sha256: 923c4e1af97c490d7d9ad86d04fdf8918b63106023493e6a4cf54323e244b05e
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+
+tests:
+  - python:
+      imports:
+        - pysptools
+      pip_check: true
+
+about:
+  summary: A hyperspectral imaging tools box
+  license: Apache-2.0
+  license_file:
+    - pysptools/NOTICE.txt
+    - pysptools/LICENSE.txt
+  homepage: https://pysptools.sourceforge.io
+
+extra:
+  recipe-maintainers:
+    - danielnachun
