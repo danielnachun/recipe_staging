@@ -1,0 +1,43 @@
+context:
+  version: 0.3.3
+
+package:
+  name: pcodec
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/p/pcodec/pcodec-${{ version }}.tar.gz
+  sha256: 759505b08db98a28ef8964b23044cc73b137df133d5b07225a6c8ee9540286bf
+
+build:
+  number: 0
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('rust') }}
+  host:
+    - python
+    - maturin >=1.0,<2.0
+    - pip
+  run:
+    - python
+    - numpy
+
+tests:
+  - python:
+      imports:
+        - pcodec
+      pip_check: false
+
+about:
+  summary: Good compression for numerical sequences
+  license: Apache-2.0
+  license_file: LICENSE
+  homepage: https://github.com/mwlon/pcodec
+  repository: https://github.com/mwlon/pcodec
+
+extra:
+  recipe-maintainers:
+    - danielnachun
