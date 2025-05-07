@@ -1,0 +1,52 @@
+context:
+  version: 3.4.0
+
+package:
+  name: stempy
+  version: ${{ version }}
+
+source:
+  git: https://github.com/OpenChemistry/stempy.git
+  tag: ${{ version }}
+
+build:
+  number: 0
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - make
+  host:
+    - eigen
+    - h5py
+    - python
+    - setuptools
+    - wheel
+    - scikit-build
+    - setuptools-scm
+    - pip
+  run:
+    - deprecation
+    - h5py
+    - numpy
+    - python
+
+tests:
+  - python:
+      imports:
+        - stempy
+      pip_check: true
+
+about:
+  license: MIT AND BSD-3-Clause AND Unlicense
+  license_file:
+    - LICENSE
+    - thirdparty/ThreadPool/COPYING
+    - thirdparty/least-squares-cpp/LICENSE.txt
+
+extra:
+  recipe-maintainers:
+    - danielnachun
