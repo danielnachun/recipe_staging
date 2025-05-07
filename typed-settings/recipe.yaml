@@ -1,0 +1,39 @@
+context:
+  version: 24.6.0
+
+package:
+  name: typed-settings
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/t/typed-settings/typed_settings-${{ version }}.tar.gz
+  sha256: 9a5595de33f80452a2038e018bc45508fffc238a8752f08f5c03dc8e7bc0d1e2
+
+build:
+  number: 0
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - hatchling
+    - hatch-vcs
+    - pip
+  run:
+    - python
+    - tomli >=2
+
+tests:
+  - python:
+      imports:
+        - typed_settings
+      pip_check: true
+
+about:
+  summary: Typed settings based on attrs classes
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
