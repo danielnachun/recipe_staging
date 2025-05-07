@@ -1,0 +1,39 @@
+context:
+  version: 0.1.2
+
+package:
+  name: keras-toolbox
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/k/keras-toolbox/keras-toolbox-${{ version }}.tar.gz
+  sha256: 1b856689328d433825cd5c71091716bb1ab8856f7db6231063a4a8381a10d564
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+
+tests:
+  - python:
+      imports:
+        - kerastoolbox
+      pip_check: true
+
+about:
+  summary: Everyday toolbox for Keras
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/hadim/keras-toolbox
+
+extra:
+  recipe-maintainers:
+    - danielnachun
