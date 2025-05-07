@@ -18,7 +18,7 @@ requirements:
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
     - cmake >=3.20
-    - ninja
+    - make
   host:
     - python
     - setuptools >=56.0.0
