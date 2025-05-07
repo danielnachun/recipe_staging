@@ -1,0 +1,42 @@
+context:
+  version: 0.1.3
+
+package:
+  name: stata-setup
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/s/stata-setup/stata_setup-${{ version }}.tar.gz
+  sha256: feaa49fd2f3b6994ded705c495c93b61f563e3836389bed3dae7a66234b5f562
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+    - numpy
+    - pandas
+    - ipython
+
+tests:
+  - python:
+      imports:
+        - stata_setup
+      pip_check: true
+
+about:
+  summary: A module for configuring and initializing Stata within Python
+  license: Apache-2.0
+  license_file: LICENSE
+  homepage: https://www.stata.com/python/pystata
+
+extra:
+  recipe-maintainers:
+    - danielnachun
