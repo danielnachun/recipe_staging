@@ -1,0 +1,50 @@
+context:
+  version: 0.4.0
+
+package:
+  name: functiontrace
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/f/functiontrace/functiontrace-${{ version }}.tar.gz
+  sha256: c4f30b57414f61c35fa58eb2340b0b14e6ceff469757127cdc62f3136d143293
+
+build:
+  number: 0
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - functiontrace = functiontrace:main
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('rust') }}
+  host:
+    - python
+    - setuptools
+    - toml
+    - setuptools-rust
+    - pip
+  run:
+    - python
+
+tests:
+  - python:
+      imports:
+        - functiontrace
+      pip_check: false
+  - requirements:
+      run:
+        - pip
+    script:
+      - functiontrace --help
+
+about:
+  summary: "A profiling tool that traces your application's execution"
+  license: MIT
+  license_file: mpack/LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
