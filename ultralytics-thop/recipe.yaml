@@ -1,0 +1,42 @@
+context:
+  version: 2.0.14
+
+package:
+  name: ultralytics-thop
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/u/ultralytics-thop/ultralytics_thop-${{ version }}.tar.gz
+  sha256: 38ebfdbd3cd8dafdc3d26ec3a7d4f604fbeed5e69a74e61a48060b39736c945c
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python =3.9
+    - setuptools >=70.0.0
+    - wheel
+    - pip
+  run:
+    - python >=3.9
+    - numpy
+    - pytorch
+
+tests:
+  - python:
+      imports:
+        - thop
+      pip_check: true
+
+about:
+  summary: Ultralytics THOP package for fast computation of PyTorch model FLOPs and parameters.
+  license: AGPL-3.0-only
+  license_file: LICENSE
+  repository: https://github.com/ultralytics/thop
+
+extra:
+  recipe-maintainers:
+    - danielnachun
