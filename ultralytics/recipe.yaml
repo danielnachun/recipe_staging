@@ -1,0 +1,65 @@
+context:
+  version: 8.3.126
+
+package:
+  name: ultralytics
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/u/ultralytics/ultralytics-${{ version }}.tar.gz
+  sha256: efbeb5f53b82085a556d2a9ff1f443e5f6058cc67547d129ab756fcc5176580c
+
+build:
+  noarch: python
+  number: 0
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - yolo = ultralytics.cfg:entrypoint
+      - ultralytics = ultralytics.cfg:entrypoint
+
+requirements:
+  host:
+    - python >=3.8
+    - setuptools >=70.0.0
+    - wheel
+    - pip
+  run:
+    - python >=3.8
+    - numpy >=1.23.0
+    - matplotlib-base >=3.3.0
+    - opencv >=4.6.0
+    - pillow >=7.1.2
+    - pyyaml >=5.3.1
+    - requests >=2.23.0
+    - scipy >=1.4.1
+    - pytorch >=1.8.0
+    - torchvision >=0.9.0
+    - tqdm >=4.64.0
+    - psutil
+    - py-cpuinfo
+    - pandas >=1.1.4
+    - seaborn >=0.11.0
+    - ultralytics-thop >=2.0.0
+
+tests:
+  - python:
+      imports:
+        - ultralytics
+      pip_check: true
+  - requirements:
+      run:
+        - pip
+    script:
+      - yolo --help
+      - ultralytics --help
+
+about:
+  summary: Ultralytics YOLO 🚀 for SOTA object detection, multi-object tracking, instance segmentation, pose estimation and image classification.
+  license: AGPL-3.0-only
+  license_file: LICENSE
+  repository: https://github.com/ultralytics/ultralytics
+
+extra:
+  recipe-maintainers:
+    - danielnachun
