@@ -1,0 +1,41 @@
+context:
+  version: 25.08.00a
+
+package:
+  name: rapids-dask-dependency
+  version: ${{ version }}
+
+source:
+  url: https://github.com/rapidsai/rapids-dask-dependency/archive/v${{ version }}.tar.gz
+  sha256: 6b8aabf3118af708d5355efe7e77c91879b3297bf392472010d7fe146e3cd9e5
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - setuptools
+    - wheel
+    - pip
+  run:
+    - python
+    - dask-core ==2025.2.0
+    - distributed ==2025.2.0
+
+tests:
+  - python:
+      imports:
+        - rapids_dask_dependency
+      pip_check: true
+
+about:
+  summary: Dask and Distributed version pinning for RAPIDS
+  license: Apache-2.0
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
