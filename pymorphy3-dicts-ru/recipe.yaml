@@ -1,0 +1,39 @@
+context:
+  version: 2.4.417150.4580142
+
+package:
+  name: pymorphy3-dicts-ru
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/p/pymorphy3-dicts-ru/pymorphy3-dicts-ru-${{ version }}.tar.gz
+  sha256: 39ab379d4ca905bafed50f5afc3a3de6f9643605776fbcabc4d3088d4ed382b0
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+
+tests:
+  - python:
+      imports:
+        - pymorphy3_dicts_ru
+      pip_check: true
+
+about:
+  summary: Russian dictionaries for pymorphy2
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/no-plagiarism/pymorphy3-dicts
+
+extra:
+  recipe-maintainers:
+    - danielnachun
