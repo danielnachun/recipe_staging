@@ -1,0 +1,47 @@
+context:
+  version: 2.0.6
+
+package:
+  name: spdlog-python
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/s/spdlog/spdlog-${{ version }}.tar.gz
+  sha256: 9791cf17f1fd23168c0a0803170b3cbf863d7e819adeeb25e224f242e3f9ecef
+
+build:
+  number: 0
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - ${{ compiler('c') }}
+  host:
+    - python
+    - pybind11 >=2.2
+    - wheel
+    - pytest-runner
+    - pip
+  run:
+    - python
+    - pybind11 >=2.2
+
+tests:
+  - python:
+      imports:
+        - spdlog
+  - requirements:
+      run:
+        - pip
+    script:
+      - pip check
+
+about:
+  summary: python wrapper around C++ spdlog logging library (https://github.com/bodgergely/spdlog-python)
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
