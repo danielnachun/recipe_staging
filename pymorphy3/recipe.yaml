@@ -22,6 +22,7 @@ requirements:
     - pip
     - setuptools
   run:
+    - click
     - python
     - dawg2-python >=0.8.0
     - pymorphy3-dicts-ru
