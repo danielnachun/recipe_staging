@@ -1,0 +1,48 @@
+context:
+  version: 0.38
+
+package:
+  name: vprof
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/v/vprof/vprof-${{ version }}.tar.gz
+  sha256: 7f1000912eeb7a450c7c94d3cc96739af45ad0ff01d5abcc0b09a175d40ffadb
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - vprof = vprof.__main__:main
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+    - psutil >=3
+
+tests:
+  - python:
+      imports:
+        - vprof
+      pip_check: true
+  - requirements:
+      run:
+        - pip
+    script:
+      - vprof --help
+
+about:
+  summary: Visual profiler for Python
+  license: BSD-2-Clause
+  license_file: LICENSE
+  homepage: http://github.com/nvdv/vprof
+
+extra:
+  recipe-maintainers:
+    - danielnachun
