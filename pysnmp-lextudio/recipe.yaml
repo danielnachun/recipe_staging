@@ -1,0 +1,43 @@
+context:
+  version: 6.3.0
+
+package:
+  name: pysnmp-lextudio
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/p/pysnmp-lextudio/pysnmp_lextudio-${{ version }}.tar.gz
+  sha256: e946c9a80b48af4cfe3c8281eecb396be48cfa47c14107696aff6d10d7fa5be1
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - poetry-core
+    - pip
+  run:
+    - python
+    - pyasn1 >=0.4.8,!=0.5.0,<0.6.1
+    - pysnmpcrypto >=0.0.4,<0.0.5
+    - pysmi-lextudio >=1.3.0,<2.0.0
+    - pytest-cov >=4.0.0,<5.0.0
+
+tests:
+  - python:
+      imports:
+        - pysnmp
+      pip_check: true
+
+about:
+  summary: Python SNMP library
+  license: BSD-2-Clause
+  license_file: LICENSE.rst
+  homepage: https://github.com/lextudio/pysnmp
+
+extra:
+  recipe-maintainers:
+    - danielnachun
