@@ -1,0 +1,58 @@
+context:
+  version: 1.1.1
+
+package:
+  name: snmpsim-lextudio
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/s/snmpsim-lextudio/snmpsim_lextudio-${{ version }}.tar.gz
+  sha256: 55d71a27de878b6c4338e363d6f6a989cad0ae7f265ac187d6c617feb7ea840a
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - snmpsim-manage-records = snmpsim.commands.rec2rec:main
+      - snmpsim-record-mibs = snmpsim.commands.mib2rec:main
+      - snmpsim-record-traffic = snmpsim.commands.pcap2rec:main
+      - snmpsim-record-commands = snmpsim.commands.cmd2rec:main
+      - snmpsim-command-responder = snmpsim.commands.responder:main
+      - snmpsim-command-responder-lite = snmpsim.commands.responder_lite:main
+
+requirements:
+  host:
+    - python
+    - poetry-core
+    - pip
+  run:
+    - python
+    - pysnmp-lextudio >=6.1.0,<7.0.0
+
+tests:
+  - python:
+      imports:
+        - snmpsim
+      pip_check: true
+  - requirements:
+      run:
+        - pip
+    script: |
+      snmpsim-manage-records --help
+      snmpsim-record-mibs --help
+      snmpsim-record-traffic --help
+      snmpsim-record-commands --help
+      snmpsim-command-responder --help 2>&1 | grep -q "usage: snmpsim-command-responder"
+      snmpsim-command-responder-lite --help
+
+about:
+  summary: "SNMP Simulator is a tool that acts as multitude of SNMP Agents built into real physical devices, from SNMP Manager's point of view. Simulator builds and uses a database of physical devices' SNMP footprints to respond like their original counterparts do."
+  license: BSD-2-Clause
+  license_file: LICENSE.txt
+  homepage: https://github.com/lextudio/snmpsim
+
+extra:
+  recipe-maintainers:
+    - danielnachun
