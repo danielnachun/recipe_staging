@@ -1,0 +1,57 @@
+context:
+  version: 0.9.3.1
+
+package:
+  name: newspaper4k
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/n/newspaper4k/newspaper4k-${{ version }}.tar.gz
+  sha256: fc237ae6a7b65d5ac4df224f962b2d7368c991fdf63b5176e439a1b74a2992e0
+
+build:
+  noarch: python
+  number: 0
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - poetry-core
+    - pip
+  run:
+    - python >=3.8.0,<4.0.0
+    - beautifulsoup4 >=4.9.3
+    - pillow >=4.0.0
+    - pyyaml >=5.1
+    - lxml >=4.2.0
+    - lxml-html-clean
+    - nltk >=3.6.6
+    - requests >=2.26.0
+    - feedparser >=6.0.0
+    - tldextract >=2.0.1
+    - python-dateutil >=2.6.1
+    - numpy >=1.25
+    - pandas >=2.1.0
+    - tinysegmenter >=0.4
+    - pythainlp >=2.3.2
+    - jieba >=0.42.1
+    - indic-nlp-library >=0.90
+    - cloudscraper >=1.2.0
+    - gnews >=0.3.6
+
+tests:
+  - python:
+      imports:
+        - newspaper
+      pip_check: false
+
+about:
+  summary: Simplified python article discovery & extraction.
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/AndyTheFactory/newspaper4k
+
+extra:
+  recipe-maintainers:
+    - danielnachun
