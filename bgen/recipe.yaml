@@ -24,6 +24,7 @@ requirements:
     - packaging
     - pip
     - python
+    - setuptools
     - zlib
   run:
     - cython
