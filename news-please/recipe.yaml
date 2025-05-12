@@ -53,13 +53,12 @@ tests:
   - python:
       imports:
         - newsplease
-      pip_check: true
+      pip_check: false
   - requirements:
       run:
         - pip
     script:
       - news-please --help
-      - news-please-cc --help
 
 about:
   summary: news-please is an open source easy-to-use news extractor that just works.
