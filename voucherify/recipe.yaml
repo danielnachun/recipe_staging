@@ -1,0 +1,44 @@
+context:
+  version: 5.0.3
+
+package:
+  name: voucherify
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/v/voucherify/voucherify-${{ version }}.tar.gz
+  sha256: 92b14c22ef2708a5be46b60efe624123022a00a97810b012584880a14bcef432
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - setuptools
+    - poetry-core
+    - pip
+  run:
+    - python >=3.7.0,<4.0.0
+    - urllib3 >=1.25.3
+    - python-dateutil >=2.8.2
+    - pydantic >=2
+    - typing_extensions >=4.7.1
+
+tests:
+  - python:
+      imports:
+        - voucherify
+      pip_check: false
+
+about:
+  summary: Voucherify API
+  license: MIT
+  license_file: LICENSE
+  homepage: https://voucherify.io/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
