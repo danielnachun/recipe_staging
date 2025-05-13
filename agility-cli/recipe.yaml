@@ -1,0 +1,39 @@
+context:
+  version: 0.0.20
+
+package:
+  name: agility-cli
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/@agility/cli/-/cli-${{ version }}.tgz
+  sha256: b04a93d77f53edb9960a9a222d943ece588b94379a707674b16a9c14f13f6407
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - agility --help
+
+about:
+  license: MIT
+  license_file:
+    - license.txt
+    - third-party-licenses.txt
+  summary: Agility CLI for working with your content.
+  homepage: https://github.com/agility/agility-cli
+  repository: https://github.com/agility/agility-cli
+
+extra:
+  recipe-maintainers:
+    - danielnachun
