@@ -1,0 +1,44 @@
+context:
+  version: 21.3.0
+
+package:
+  name: netlify-cli
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/netlify-cli/-/netlify-cli-${{ version }}.tgz
+  sha256: 75a8ec9e3a25aa4fb6bdf3272eeaa2170e2877ed468601304c9ef05342fde322
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - make
+    - pnpm
+    - pnpm-licenses
+    - python
+  host:
+    - nodejs
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ntl --help
+      - netlify --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Netlify Command Line Interface
+  homepage: http://cli.netlify.com/
+  repository: https://github.com/netlify/cli
+
+extra:
+  recipe-maintainers:
+    - danielnachun
