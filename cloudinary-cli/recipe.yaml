@@ -1,0 +1,59 @@
+context:
+  version: 1.13.0
+
+package:
+  name: cloudinary-cli
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/c/cloudinary-cli/cloudinary_cli-${{ version }}.tar.gz
+  sha256: 6e67ee28216fa0a82b4fcea0fe9d6d732d911bb497cedf66038044cae414d9cd
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - cld=cloudinary_cli.cli:main
+      - cloudinary=cloudinary_cli.cli:main
+
+requirements:
+  host:
+    - python
+    - pytest-runner
+    - pip
+    - setuptools
+  run:
+    - python
+    - cloudinary >=1.42.2
+    - pygments
+    - jinja2
+    - click
+    - click-log
+    - requests
+    - docstring_parser
+    - urllib3 >=2.2.2
+    - zipp >=3.19.1
+
+tests:
+  - python:
+      imports:
+        - cloudinary_cli
+      pip_check: true
+  - requirements:
+      run:
+        - pip
+    script:
+      - cld --help
+      - cloudinary --help
+
+about:
+  summary: A command line interface for Cloudinary with full API support
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/cloudinary/cloudinary-cli
+
+extra:
+  recipe-maintainers:
+    - danielnachun
