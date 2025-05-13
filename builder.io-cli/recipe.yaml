@@ -1,0 +1,39 @@
+context:
+  version: 1.2.10
+
+package:
+  name: builder.io-cli
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/@builder.io/cli/-/cli-${{ version }}.tgz
+  sha256: 60e6c7432112d1338b588196de321b1ace3e7e9c6670d04c864646634b1791ca
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - builder --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Visual Development for React, Vue, Svelte, Qwik, and more
+  homepage: https://builder.io/
+  repository: https://github.com/BuilderIO/builder
+
+extra:
+  recipe-maintainers:
+    - danielnachun
