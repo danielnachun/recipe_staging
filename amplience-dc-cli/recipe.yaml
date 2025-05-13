@@ -1,0 +1,39 @@
+context:
+  version: 0.23.0
+
+package:
+  name: amplience-dc-cli
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/@amplience/dc-cli/-/dc-cli-${{ version }}.tgz
+  sha256: db804cc47ff64ace480f41db2b15376e59d77744288f8d8a7705e78273394b16
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - dc-cli --help
+
+about:
+  license: Apache-2.0
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Command line interface for Amplience Dynamic Content service.
+  homepage: https://github.com/amplience/dc-cli
+  repository: https://github.com/amplience/dc-cli
+
+extra:
+  recipe-maintainers:
+    - danielnachun
