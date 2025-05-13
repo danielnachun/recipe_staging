@@ -1,0 +1,40 @@
+context:
+  version: 2.6.11
+
+package:
+  name: contentful-merge
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/contentful-merge/-/contentful-merge-${{ version }}.tgz
+  sha256: 95cde983939029cd9c22aed69603c102649747719b47f95b64de171bd07af953
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - jq
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - contentful-merge --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Contentful CLI to diff and merge entries across environments
+  homepage: https://github.com/contentful/contentful-merge
+  repository: https://github.com/contentful/contentful-merge
+
+extra:
+  recipe-maintainers:
+    - danielnachun
