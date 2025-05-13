@@ -14,10 +14,14 @@ build:
   noarch: generic
 
 requirements:
-  host:
-    - nodejs
+  build:
+    - ${{ compiler('c') }}
+    - make
     - pnpm
     - pnpm-licenses
+    - python
+  host:
+    - nodejs
   run:
     - nodejs
 
