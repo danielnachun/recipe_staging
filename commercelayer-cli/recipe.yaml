@@ -1,0 +1,39 @@
+context:
+  version: 6.5.4
+
+package:
+  name: commercelayer-cli
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/@commercelayer/cli/-/cli-${{ version }}.tgz
+  sha256: 4852d87c293c6c9aefeddd80e78ee18234f53a715052df4605d7da35dfe69a25
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - commercelayer --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: The official Commerce Layer CLI
+  homepage: https://github.com/commercelayer/commercelayer-cli
+  repository: https://github.com/commercelayer/commercelayer-cli
+
+extra:
+  recipe-maintainers:
+    - danielnachun
