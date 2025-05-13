@@ -1,0 +1,39 @@
+context:
+  version: 3.36.1
+
+package:
+  name: storyblok
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/storyblok/-/storyblok-${{ version }}.tgz
+  sha256: 80201f0a6ab96900e35d2558dd1be7589ec9e5fdf58c3183c75257c2919cc460
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - storyblok --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: A simple CLI to start Storyblok from your command line.
+  homepage: https://github.com/storyblok/storyblok-cli
+  repository: https://github.com/storyblok/storyblok-cli
+
+extra:
+  recipe-maintainers:
+    - danielnachun
