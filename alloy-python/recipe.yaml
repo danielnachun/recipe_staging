@@ -1,0 +1,40 @@
+context:
+  version: 1.0.0
+
+package:
+  name: alloy-python
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/a/alloy-python/alloy_python-${{ version }}.tar.gz
+  sha256: d731c2c30943f73a695993c24c9b27d6821cf788d3d31bbd7acaef3885629627
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+    - requests
+
+tests:
+  - python:
+      imports:
+        - alloy_python
+      pip_check: true
+
+about:
+  summary: A lightweight Python wrapper for the Alloy API
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/alloy-automation/alloy-python
+
+extra:
+  recipe-maintainers:
+    - danielnachun
