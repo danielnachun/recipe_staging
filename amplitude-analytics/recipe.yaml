@@ -1,0 +1,40 @@
+context:
+  version: 1.1.5
+
+package:
+  name: amplitude-analytics
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/a/amplitude-analytics/amplitude_analytics-${{ version }}.tar.gz
+  sha256: 2836fcf88d75506a1f266a5582253fdf592e14fafaf5783017baeec2118369d4
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+
+tests:
+  - python:
+      imports:
+        - amplitude
+      pip_check: true
+
+about:
+  summary: The official Amplitude backend Python SDK for server-side instrumentation.
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/amplitude/Amplitude-Python
+  repository: https://github.com/amplitude/Amplitude-Python
+
+extra:
+  recipe-maintainers:
+    - danielnachun
