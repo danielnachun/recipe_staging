@@ -15,6 +15,7 @@ pnpm-licenses generate-disclaimer --prod --output-file=third-party-licenses.txt
 
 rm -rf ${PREFIX}/lib/node_modules/netlify-cli/node_modules/sharp/build
 rm -rf ${PREFIX}/lib/node_modules/netlify-cli/node_modules/@parcel/watcher/build
+rm -rf ${PREFIX}/lib/node_modules/netlify-cli/node_modules/unix-dgram/build
 
 tee ${PREFIX}/bin/netlify.cmd << EOF
 call %CONDA_PREFIX%\bin\node %CONDA_PREFIX%\bin\netlify %*
