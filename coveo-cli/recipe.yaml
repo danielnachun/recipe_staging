@@ -1,0 +1,39 @@
+context:
+  version: 3.2.13
+
+package:
+  name: coveo-cli
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/@coveo/cli/-/cli-${{ version }}.tgz
+  sha256: 491d992c199e39e81ff96e78efe86216051d64ae7c3759db4d30a99b9cd65e66
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - coveo --help
+
+about:
+  license: Apache-2.0
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: A command-line interface to interact with the Coveo platform
+  homepage: https://github.com/coveo/cli
+  repository: https://github.com/coveo/cli
+
+extra:
+  recipe-maintainers:
+    - danielnachun
