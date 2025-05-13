@@ -1,0 +1,35 @@
+context:
+  version: 1.3.6
+
+package:
+  name: ketch-cli
+  version: ${{ version }}
+
+source:
+  url: https://github.com/ketch-com/ketch-cli/archive/v${{ version }}.tar.gz
+  sha256: f5b0259dd3ce6251a4794bdf05a9266de54daf39469f8984d09371a09d45a824
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('go-nocgo') }}
+    - go-licenses
+
+tests:
+  - script:
+      - ketch-cli --help
+
+about:
+  license: Apache-2.0
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: Ketch command line interface
+  homepage: https://github.com/ketch-com/ketch-cli
+  repository: https://github.com/ketch-com/ketch-cli
+
+extra:
+  recipe-maintainers:
+    - danielnachun
