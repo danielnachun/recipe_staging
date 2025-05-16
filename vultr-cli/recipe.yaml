@@ -1,0 +1,35 @@
+context:
+  version: 3.4.0
+
+package:
+  name: vultr-cli
+  version: ${{ version }}
+
+source:
+  url: https://github.com/vultr/vultr-cli/archive/v${{ version }}.tar.gz
+  sha256: 966161efc0f65c6f836503dfba9a3e2240ad6e54c76d83817fc99532808cf049
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('go-nocgo') }}
+    - go-licenses
+
+tests:
+  - script:
+      - vultr-cli --help
+
+about:
+  license: Apache-2.0
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: Official command line tool for Vultr services
+  homepage: https://github.com/vultr/vulr-cli
+  repository: https://github.com/vultr/vulr-cli
+
+extra:
+  recipe-maintainers:
+    - danielnachun
