@@ -1,0 +1,35 @@
+context:
+  version: 3.1.2
+
+package:
+  name: chamber
+  version: ${{ version }}
+
+source:
+  url: https://github.com/segmentio/chamber/archive/v${{ version }}.tar.gz
+  sha256: cda68ed5f795d717d2debb4704739daad5f68fd3c2d1300b4c37160d05e1f5bb
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('go-nocgo') }}
+    - go-licenses
+
+tests:
+  - script:
+      - chamber --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: CLI for managing secrets
+  homepage: https://github.com/segmentio/chamber
+  repository: https://github.com/segmentio/chamber
+
+extra:
+  recipe-maintainers:
+    - danielnachun
