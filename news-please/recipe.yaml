@@ -1,0 +1,71 @@
+context:
+  version: 1.6.14
+
+package:
+  name: news-please
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/n/news-please/news_please-${{ version }}.tar.gz
+  sha256: 24ba0462a0a748643c8b8eb033102c23308d54fa3f4dd8384db0e6c846784fc8
+
+build:
+  noarch: python
+  number: 0
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - news-please = newsplease.__main__:main
+      - news-please-cc = newsplease.examples.commoncrawl:main
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+    - scrapy >=1.1.0
+    - pymysql >=0.7.9
+    - psycopg2-binary >=2.8.4
+    - hjson-py >=1.5.8
+    - elasticsearch >=2.4
+    - readability-lxml >=0.6.2
+    - langdetect >=1.0.7
+    - python-dateutil >=2.4.0
+    - plac >=0.9.6
+    - dotmap >=1.2.17
+    - pydispatcher >=2.0.5
+    - warcio >=1.3.3
+    - ago >=0.0.9
+    - six >=1.10.0
+    - lxml >=3.3.5
+    - hurry.filesize >=0.9
+    - faust-cchardet >=2.1.18
+    - boto3
+    - bs4
+    - redis-py
+    - newspaper4k >=0.9.3.1
+    - lxml-html-clean >=0.1.1
+    - typing_extensions >=4.7.0
+
+tests:
+  - python:
+      imports:
+        - newsplease
+      pip_check: false
+  - requirements:
+      run:
+        - pip
+    script:
+      - news-please --help
+
+about:
+  summary: news-please is an open source easy-to-use news extractor that just works.
+  license: Apache-2.0
+  license_file: LICENSE.txt
+  homepage: https://github.com/fhamborg/news-please
+
+extra:
+  recipe-maintainers:
+    - danielnachun
