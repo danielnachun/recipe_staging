@@ -1,0 +1,41 @@
+context:
+  version: 2.0.1
+
+package:
+  name: contentstack
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/c/contentstack/contentstack-${{ version }}.tar.gz
+  sha256: 996d698ec9f917c92be5f14faad52be7b2d54f6297297f2df70324a0beb8513a
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+    - requests >=2.20.0,<3.0
+    - python-dateutil
+
+tests:
+  - python:
+      imports:
+        - contentstack
+      pip_check: true
+
+about:
+  summary: Contentstack is a headless CMS with an API-first approach.
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/contentstack/contentstack-python
+
+extra:
+  recipe-maintainers:
+    - danielnachun
