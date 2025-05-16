@@ -1,0 +1,39 @@
+context:
+  version: 3.8.8
+
+package:
+  name: contentful-cli
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/contentful-cli/-/contentful-cli-${{ version }}.tgz
+  sha256: de28b9aaaea30c79543d867ac1f55f3638ecdf51ecef6a79d9c7ba3ed1cf6fdc
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - contentful --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: The official Contentful command line interface.
+  homepage: https://www.contentful.com/developers/docs/tutorials/cli
+  repository: https://github.com/contentful/contentful-cli
+
+extra:
+  recipe-maintainers:
+    - danielnachun
