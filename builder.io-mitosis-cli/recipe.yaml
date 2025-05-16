@@ -1,0 +1,39 @@
+context:
+  version: 0.10.0
+
+package:
+  name: builder.io-mitosis-cli
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/@builder.io/mitosis-cli/-/mitosis-cli-${{ version }}.tgz
+  sha256: be01e9948fe33ee088aca94cc13a73eef1af2ef83a3df96e96447282ef1f2649
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - mitosis --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Write components once, run everywhere.
+  homepage: https://mitosis.builder.io/
+  repository: https://github.com/BuilderIO/mitosis
+
+extra:
+  recipe-maintainers:
+    - danielnachun
