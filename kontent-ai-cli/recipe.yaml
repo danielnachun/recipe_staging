@@ -1,0 +1,40 @@
+context:
+  version: 0.8.2
+
+package:
+  name: kontent-ai-cli
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/@kontent-ai/cli/-/cli-${{ version }}.tgz
+  sha256: db33d733997c80696619ce4a405548e379410b51c027e41fae1aed6529a8d153
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - jq
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - kontent --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Command line interface tool that can be used for generating and runningKontent.ai migration scripts
+  homepage: https://github.com/kontent-ai/cli
+  repository: https://github.com/kontent-ai/cli
+
+extra:
+  recipe-maintainers:
+    - danielnachun
