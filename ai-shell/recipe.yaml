@@ -1,0 +1,39 @@
+context:
+  version: 1.0.12
+
+package:
+  name: builder.io-ai-shell
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/@builder.io/ai-shell/-/ai-shell-${{ version }}.tgz
+  sha256: 56ae33dc46a2525eb9ed3f553758ca6bd697f6d4f135332ef122680f6f87fcc1
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - ai-shell --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: A CLI that converts natural language to shell commands.
+  homepage: https://github.com/BuilderIO/ai-shell
+  repository: https://github.com/BuilderIO/ai-shell
+
+extra:
+  recipe-maintainers:
+    - danielnachun
