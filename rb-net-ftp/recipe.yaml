@@ -1,0 +1,40 @@
+context:
+  version: 0.3.8
+
+package:
+  name: rb-net-ftp
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/net-ftp-${{ version }}.gem
+  sha256: 28d63e407a7edb9739c320a4faaec515e43e963815248d06418aba322478874f
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies net-ftp-${{ version }}.gem
+    - gem unpack net-ftp-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-net-protocol
+    - rb-time
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r 'net/ftp' -e 'exit 0'
+
+about:
+  license: BSD-2-Clause
+  license_file: net-ftp-${{ version }}/COPYING
+  summary: Support for the File Transfer Protocol.
+  homepage: https://rubygems.org/gems/net-ftp
+  repository: https://github.com/ruby/net-ftp
+
+extra:
+  recipe-maintainers:
+    - danielnachun
