@@ -1,0 +1,41 @@
+context:
+  version: 2.13.1
+
+package:
+  name: rb-faraday
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/faraday-${{ version }}.gem
+  sha256: cc531eb5467e7d74d4517630fa96f1a7003647cbf20a9a3e067d098941217b75
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies faraday-${{ version }}.gem
+    - gem unpack faraday-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-faraday-net_http
+    - rb-json
+    - rb-logger
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r faraday -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: faraday-${{ version }}/LICENSE.md
+  summary: HTTP/REST API client library.
+  homepage: https://rubygems.org/gems/faraday
+  repository: https://github.com/lostisland/faraday
+
+extra:
+  recipe-maintainers:
+    - danielnachun
