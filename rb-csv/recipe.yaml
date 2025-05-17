@@ -1,23 +1,21 @@
-schema_version: 1
-
 context:
   name: csv
-  version: 3.2.7
+  version: 3.3.4
 
 package:
-  name: rb-${{ name|lower }}
+  name: rb-csv
   version: ${{ version }}
 
 source:
-  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
-  sha256: aab338791beb5d2306880202c9667651fff07b2cc74cc484a743d3b17c8e4064
+  url: https://rubygems.org/downloads/csv-${{ version }}.gem
+  sha256: e96ecd5a8c3494aa5b596282249daba5c6033203c199248e6146e36d2a78d8cd
 
 build:
-  number: 1
+  number: 0
   noarch: generic
   script:
-    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
-    - gem unpack ${{ name }}-${{ version }}.gem
+    - gem install -N -l -V --ignore-dependencies csv-${{ version }}.gem
+    - gem unpack csv-${{ version }}.gem
 
 requirements:
   host:
@@ -27,16 +25,15 @@ requirements:
 
 tests:
   - script:
-      - ruby -r ${{ name }} -e 'exit 0'
+      - ruby -r csv -e 'exit 0'
 
 about:
   license: BSD-2-Clause
-  license_file: ${{ name }}-${{ version }}/LICENSE.txt
+  license_file: csv-${{ version }}/LICENSE.txt
   summary: The CSV library provides a complete interface to CSV files and data.
-  homepage: https://rubygems.org/gems/${{ name }}
-  repository: https://github.com/ruby/${{ name }}
+  homepage: https://rubygems.org/gems/csv
+  repository: https://github.com/ruby/csv
 
 extra:
   recipe-maintainers:
     - danielnachun
-
