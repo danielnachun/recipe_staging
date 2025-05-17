@@ -1,0 +1,38 @@
+context:
+  version: 2.7.2
+
+package:
+  name: rb-zeitwerk
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/zeitwerk-${{ version }}.gem
+  sha256: 842e067cb11eb923d747249badfb5fcdc9652d6f20a1f06453317920fdcd4673
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies zeitwerk-${{ version }}.gem
+    - gem unpack zeitwerk-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r zeitwerk -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: zeitwerk-${{ version }}/MIT-LICENSE
+  summary: Efficient and thread-safe code loader for Ruby
+  homepage: https://rubygems.org/gems/zeitwerk
+  repository: https://github.com/fxn/zeitwerk
+
+extra:
+  recipe-maintainers:
+    - danielnachun
