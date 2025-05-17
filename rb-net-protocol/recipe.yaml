@@ -1,0 +1,39 @@
+context:
+  version: 0.2.2
+
+package:
+  name: rb-net-protocol
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/net-protocol-${{ version }}.gem
+  sha256: aa73e0cba6a125369de9837b8d8ef82a61849360eba0521900e2c3713aa162a8
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies net-protocol-${{ version }}.gem
+    - gem unpack net-protocol-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-timeout
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r 'net/protocol' -e 'exit 0'
+
+about:
+  license: BSD-2-Clause
+  license_file: net-protocol-${{ version }}/LICENSE.txt
+  summary: The abstract interface for net-* client.
+  homepage: https://rubygems.org/gems/net-protocol
+  repository: https://github.com/ruby/net-protocol
+
+extra:
+  recipe-maintainers:
+    - danielnachun
