@@ -1,32 +1,29 @@
-schema_version: 1
-
 context:
-  name: google-protobuf
   version: 4.27.3
 
 package:
-  name: rb-${{ name|lower }}
+  name: rb-google-protobuf
   version: ${{ version }}
 
 source:
-  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  url: https://rubygems.org/downloads/google-protobuf-${{ version }}.gem
   sha256: e780c9e9a70ff13d919dc1284d74d446134150263a44c05126e122cd0737c017
 
 build:
   number: 0
   script:
-    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
-    - gem unpack ${{ name }}-${{ version }}.gem
+    - gem install -N -l -V --ignore-dependencies google-protobuf-${{ version }}.gem
+    - gem unpack google-protobuf-${{ version }}.gem
 
 requirements:
   build:
     - ${{ compiler('c') }}
     - make
   host:
-    - ruby=3.3
+    - ruby
   run:
     - rb-bigdecimal
-    - ruby=3.3
+    - ruby
 
 tests:
   - script:
@@ -36,10 +33,9 @@ about:
   license: BSD-3-Clause
   license_file: LICENSE
   summary: "Protocol Buffers are Google's data interchange format."
-  homepage: https://rubygems.org/gems/${{ name }}
+  homepage: https://rubygems.org/gems/google-protobuf
   repository: https://github.com/protocolbuffers/protobuf/tree/main/ruby
 
 extra:
   recipe-maintainers:
     - danielnachun
-
