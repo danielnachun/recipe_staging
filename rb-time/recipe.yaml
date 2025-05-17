@@ -1,0 +1,39 @@
+context:
+  version: 0.4.1
+
+package:
+  name: rb-time
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/time-${{ version }}.gem
+  sha256: 035f360508a4a4dbabcbbcd3886566b9abd432de89136795d2ff7aec5bcdea61
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies time-${{ version }}.gem
+    - gem unpack time-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-date
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r time -e 'exit 0'
+
+about:
+  license: BSD-2-Clause
+  license_file: time-${{ version }}/COPYING
+  summary: Extends the Time class with methods for parsing and conversion.
+  homepage: https://rubygems.org/gems/time
+  repository: https://github.com/ruby/time
+
+extra:
+  recipe-maintainers:
+    - danielnachun
