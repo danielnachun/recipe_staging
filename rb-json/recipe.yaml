@@ -1,44 +1,40 @@
-schema_version: 1
-
 context:
-  name: json
   version: 2.6.3
 
 package:
-  name: rb-${{ name|lower }}
+  name: rb-json
   version: ${{ version }}
 
 source:
-  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  url: https://rubygems.org/downloads/json-${{ version }}.gem
   sha256: 86aaea16adf346a2b22743d88f8dcceeb1038843989ab93cda44b5176c845459
 
 build:
-  number: 2
+  number: 3
   script:
-    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
-    - gem unpack ${{ name }}-${{ version }}.gem
+    - gem install -N -l -V --ignore-dependencies json-${{ version }}.gem
+    - gem unpack json-${{ version }}.gem
 
 requirements:
   build:
     - ${{ compiler('c') }}
     - make
   host:
-    - ruby=3.3
+    - ruby
   run:
-    - ruby=3.3
+    - ruby
 
 tests:
   - script:
-      - ruby -r ${{ name }} -e 'exit 0'
+      - ruby -r json -e 'exit 0'
 
 about:
   license: Ruby
-  license_file: ${{ name }}-${{ version }}/LICENSE
+  license_file: json-${{ version }}/LICENSE
   summary: This is a JSON implementation as a Ruby extension in C.
-  homepage: https://rubygems.org/gems/${{ name }}
-  repository: https://github.com/flori/${{ name }}
+  homepage: https://rubygems.org/gems/json
+  repository: https://github.com/flori/json
 
 extra:
   recipe-maintainers:
     - danielnachun
-
