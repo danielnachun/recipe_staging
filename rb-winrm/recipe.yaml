@@ -1,0 +1,47 @@
+context:
+  version: 2.3.9
+
+package:
+  name: rb-winrm
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/winrm-${{ version }}.gem
+  sha256: ef6b767c5772d06e186300b506ea5e65afb849904a551f8482a5cfc2a1be5d06
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies winrm-${{ version }}.gem
+    - gem unpack winrm-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-builder
+    - rb-erubi
+    - rb-gssapi
+    - rb-gyoku
+    - rb-httpclient
+    - rb-logging
+    - rb-nori
+    - rb-rexml
+    - rb-rubyntlm
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r winrm -e 'exit 0'
+
+about:
+  license: Apache-2.0
+  license_file: winrm-${{ version }}/LICENSE
+  summary: New wave Internationalization support for Ruby.
+  homepage: https://rubygems.org/gems/winrm
+  repository: https://github.com/WinRb/WinRM
+
+extra:
+  recipe-maintainers:
+    - danielnachun
