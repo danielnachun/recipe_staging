@@ -1,0 +1,41 @@
+context:
+  version: 0.2.0
+
+package:
+  name: rb-wdm
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/wdm-${{ version }}.gem
+  sha256: c46d9dcb6d375199ca07465bc67669ee8f041aeaa55dd7dafe6de4dd97b27647
+
+build:
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies wdm-${{ version }}.gem
+    - gem unpack wdm-${{ version }}.gem
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+  host:
+    - ruby
+  run:
+    - ruby
+
+tests:
+  - script:
+      - if: win
+        then: ruby -r wdm -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: wdm-${{ version }}/LICENSE
+  summary: Windows Directory Monitor (WDM) is a library which can be used to monitor directories for changes.
+  homepage: https://rubygems.org/gems/wdm
+  repository: https://github.com/Maher4Ever/wdm
+
+extra:
+  recipe-maintainers:
+    - danielnachun
