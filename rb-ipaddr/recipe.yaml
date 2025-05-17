@@ -1,0 +1,38 @@
+context:
+  version: 1.2.7
+
+package:
+  name: rb-ipaddr
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/ipaddr-${{ version }}.gem
+  sha256: cb7f4087fdbf14bcedc23ac471b8ac521648b3a5b4b5be3a4378066636e6af72
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies ipaddr-${{ version }}.gem
+    - gem unpack ipaddr-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r ipaddr -e 'exit 0'
+
+about:
+  license: BSD-2-Clause
+  license_file: ipaddr-${{ version }}/LICENSE.txt
+  summary: A class to manipulate an IP address
+  homepage: https://rubygems.org/gems/ipaddr
+  repository: https://github.com/ruby/ipaddr
+
+extra:
+  recipe-maintainers:
+    - danielnachun
