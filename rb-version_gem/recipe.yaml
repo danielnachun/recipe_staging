@@ -1,0 +1,38 @@
+context:
+  version: 1.1.8
+
+package:
+  name: rb-version_gem
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/version_gem-${{ version }}.gem
+  sha256: a964767ecbe36551b9ff2e59099548c27569f2f7f94bdb09f609d76393a8e008
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies version_gem-${{ version }}.gem
+    - gem unpack version_gem-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r version_gem -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: version_gem-${{ version }}/LICENSE.txt
+  summary: Versions are good. Versions are cool. Versions will win.
+  homepage: https://rubygems.org/gems/version_gem
+  repository: https://gitlab.com/oauth-xx/version_gem
+
+extra:
+  recipe-maintainers:
+    - danielnachun
