@@ -1,0 +1,38 @@
+context:
+  version: 3.2.8
+
+package:
+  name: rb-dalli
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/dalli-${{ version }}.gem
+  sha256: 2e63595084d91fae2655514a02c5d4fc0f16c0799893794abe23bf628bebaaa5
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies dalli-${{ version }}.gem
+    - gem unpack dalli-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r dalli -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: dalli-${{ version }}/LICENSE
+  summary: High performance memcached client for Ruby
+  homepage: https://rubygems.org/gems/dalli
+  repository: https://github.com/petergoldstein/dalli
+
+extra:
+  recipe-maintainers:
+    - danielnachun
