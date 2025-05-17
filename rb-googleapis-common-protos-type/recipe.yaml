@@ -1,0 +1,39 @@
+context:
+  version: 1.20.0
+
+package:
+  name: rb-googleapis-common-protos-types
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/googleapis-common-protos-types-${{ version }}.gem
+  sha256: 5e374b06bcfc7e13556e7c0d87b99f1fa3d42de6396a1de3d8fc13aefb4dd07f
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies googleapis-common-protos-types-${{ version }}.gem
+    - gem unpack googleapis-common-protos-types-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-google-protobuf
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r 'googleapis/common/protos/types/version' -e 'exit 0'
+
+about:
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Common protocol buffer types used by Google APIs
+  homepage: https://rubygems.org/gems/googleapis-common-protos-types
+  repository: https://github.com/googleapis/common-protos-ruby
+
+extra:
+  recipe-maintainers:
+    - danielnachun
