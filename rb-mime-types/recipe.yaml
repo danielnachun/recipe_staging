@@ -1,0 +1,40 @@
+context:
+  version: 3.7.0
+
+package:
+  name: rb-mime-types
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/mime-types-${{ version }}.gem
+  sha256: dcebf61c246f08e15a4de34e386ebe8233791e868564a470c3fe77c00eed5e56
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies mime-types-${{ version }}.gem
+    - gem unpack mime-types-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-logger
+    - rb-mime-types-data
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r mime-types -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: mime-types-${{ version }}/LICENCE.md
+  summary: The mime-types library provides a library and registry for information about MIME content type definitions.
+  homepage: https://rubygems.org/gems/mime-types
+  repository: https://github.com/mime-types/ruby-mime-types/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
