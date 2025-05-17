@@ -1,0 +1,42 @@
+context:
+  version: 0.7.9
+
+package:
+  name: rb-charlock_holmes
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/charlock_holmes-${{ version }}.gem
+  sha256: b49e8a11ce1921e2c5b65511bb864ae51720ce9bd1c336ccf0e89e6c8ae62db0
+
+build:
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies charlock_holmes-${{ version }}.gem
+    - gem unpack charlock_holmes-${{ version }}.gem
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - make
+  host:
+    - icu
+    - ruby
+  run:
+    - ruby
+
+tests:
+  - script:
+      - ruby -r charlock_holmes -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: charlock_holmes provides binary and text detection as well as text transcoding using libicu
+  homepage: https://rubygems.org/gems/charlock_holmes
+  repository: https://github.com/brianmario/charlock_holmes
+
+extra:
+  recipe-maintainers:
+    - danielnachun
