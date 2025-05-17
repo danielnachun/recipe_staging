@@ -1,0 +1,41 @@
+context:
+  version: 2.4.0
+
+package:
+  name: rb-logging
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/logging-${{ version }}.gem
+  sha256: ba8893a3c211b836f4131bb93b3eb3137a0c3b1fcd0ec3d570e324d8bdc00ccb
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies logging-${{ version }}.gem
+    - gem unpack logging-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-little-plugger
+    - rb-multi_json
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r logging -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: logging-${{ version }}/LICENSE
+  summary: |
+    **Logging** is a flexible logging library for use in Ruby programs based on the design of Java's log4j library.
+  homepage: https://rubygems.org/gems/logging
+  repository: https://github.com/TwP/logging
+
+extra:
+  recipe-maintainers:
+    - danielnachun
