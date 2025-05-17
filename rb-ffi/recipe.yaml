@@ -1,22 +1,19 @@
-schema_version: 1
-
 context:
-  name: ffi
   version: 1.17.0
 
 package:
-  name: rb-${{ name|lower }}
+  name: rb-ffi
   version: ${{ version }}
 
 source:
-  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  url: https://rubygems.org/downloads/ffi-${{ version }}.gem
   sha256: 51630e43425078311c056ca75f961bb3bda1641ab36e44ad4c455e0b0e4a231c
 
 build:
   number: 0
   script:
-    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem -- --enable-system-libffi
-    - gem unpack ${{ name }}-${{ version }}.gem
+    - gem install -N -l -V --ignore-dependencies ffi-${{ version }}.gem -- --enable-system-libffi
+    - gem unpack ffi-${{ version }}.gem
 
 requirements:
   build:
@@ -24,23 +21,21 @@ requirements:
     - make
   host:
     - libffi
-    - ruby=3.2
+    - ruby
   run:
-    - libffi
-    - ruby=3.2
+    - ruby
 
 tests:
   - script:
-      - ruby -r ${{ name }} -e 'exit 0'
+      - ruby -r ffi -e 'exit 0'
 
 about:
   license: BSD-3-Clause
-  license_file: ${{ name }}-${{ version }}/COPYING
+  license_file: ffi-${{ version }}/COPYING
   summary: Ruby FFI library
-  homepage: https://rubygems.org/gems/${{ name }}
-  repository: https://github.com/ffi/${{ name }}
+  homepage: https://rubygems.org/gems/ffi
+  repository: https://github.com/ffi/ffi
 
 extra:
   recipe-maintainers:
     - danielnachun
-
