@@ -1,0 +1,39 @@
+context:
+  version: 0.16.0
+
+package:
+  name: rb-ethon
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/ethon-${{ version }}.gem
+  sha256: bba0da1cea8ac3e1f5cdd7cb1cb5fc78d7ac562c33736f18f0c3eb2b63053d9e
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies ethon-${{ version }}.gem
+    - gem unpack ethon-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-ffi
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r ethon -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: ethon-${{ version }}/LICENSE
+  summary: Very lightweight libcurl wrapper.
+  homepage: https://rubygems.org/gems/ethon
+  repository: https://github.com/typhoeus/ethon
+
+extra:
+  recipe-maintainers:
+    - danielnachun
