@@ -1,0 +1,45 @@
+context:
+  version: 2.0.10
+
+package:
+  name: rb-oauth2
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/oauth2-${{ version }}.gem
+  sha256: 8f132679598d21885d4bcc68d7e7e6ef0a29f9a782abca00d67d884280dc3a42
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies oauth2-${{ version }}.gem
+    - gem unpack oauth2-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-faraday
+    - rb-jwt
+    - rb-logger
+    - rb-multi_xml
+    - rb-rack
+    - rb-snaky_hash
+    - rb-version_gem
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r oauth2 -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: oauth2-${{ version }}/LICENSE.txt
+  summary: Ruby wrapper for the OAuth 2.0 protocol
+  homepage: https://rubygems.org/gems/oauth2
+  repository: https://gitlab.com/oauth-xx/oauth2
+
+extra:
+  recipe-maintainers:
+    - danielnachun
