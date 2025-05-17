@@ -1,0 +1,40 @@
+context:
+  version: 1.4.0
+
+package:
+  name: rb-gyoku
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/gyoku-${{ version }}.gem
+  sha256: 389d887384c777f271cb9377bb642f20bbe0c633d1ef5af78569d4db53c1a2cd
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies gyoku-${{ version }}.gem
+    - gem unpack gyoku-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-builder
+    - rb-rexml
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r gyoku -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: gyoku-${{ version }}/MIT-LICENSE
+  summary: Gyoku translates Ruby Hashes to XML
+  homepage: https://rubygems.org/gems/gyoku
+  repository: https://github.com/savonrb/gyoku
+
+extra:
+  recipe-maintainers:
+    - danielnachun
