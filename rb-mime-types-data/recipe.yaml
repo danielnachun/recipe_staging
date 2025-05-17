@@ -1,0 +1,38 @@
+context:
+  version: 3.2025.0514
+
+package:
+  name: rb-mime-types-data
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/mime-types-data-${{ version }}.gem
+  sha256: 92e56b4da4fa24c423cda582a4a69baa0083bb5272d62e6516c874af5877d352
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies mime-types-data-${{ version }}.gem
+    - gem unpack mime-types-data-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r mime-types-data -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: mime-types-data-${{ version }}/LICENCE.md
+  summary: mime-types-data provides a registry for information about MIME media type definitions.
+  homepage: https://rubygems.org/gems/mime-types-data
+  repository: https://github.com/mime-types/mime-types-data/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
