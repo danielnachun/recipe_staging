@@ -1,15 +1,12 @@
-schema_version: 1
-
 context:
-  name: rb-fsevent
   version: 0.11.2
 
 package:
-  name: ${{ name|lower }}
+  name: rb-rb-fsevent
   version: ${{ version }}
 
 source:
-  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  url: https://rubygems.org/downloads/rb-fsevent-${{ version }}.gem
   sha256: 43900b972e7301d6570f64b850a5aa67833ee7d87b458ee92805d56b7318aefe
 
 build:
@@ -18,27 +15,26 @@ build:
 requirements:
   build:
     - if: osx
-      then: ${{ compiler('c') }}
-    - if: osx
-      then: make
+      then:
+        - ${{ compiler('c') }}
+        - make
     - sed
   host:
-    - ruby=3.2
+    - ruby
   run:
-    - ruby=3.2
+    - ruby
 
 tests:
   - script:
-      - ruby -r ${{ name }} -e 'exit 0'
+      - ruby -r rb-fsevent -e 'exit 0'
 
 about:
   license: MIT
-  license_file: ${{ name }}-${{ version }}/LICENSE.txt
-  summary: FSEvents API with Signals catching (without RubyCocoa)
-  homepage: https://rubygems.org/gems/${{ name }}
-  repository: https://github.com/guard/${{ name }}
+  license_file: rb-fsevent-${{ version }}/LICENSE.txt
+  summary: rb-fsevents API with Signals catching (without RubyCocoa)
+  homepage: https://rubygems.org/gems/rb-fsevent
+  repository: https://github.com/guard/rb-fsevent
 
 extra:
   recipe-maintainers:
     - danielnachun
-
