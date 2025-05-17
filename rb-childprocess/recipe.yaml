@@ -1,0 +1,39 @@
+context:
+  version: 5.1.0
+
+package:
+  name: rb-childprocess
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/childprocess-${{ version }}.gem
+  sha256: 9a8d484be2fd4096a0e90a0cd3e449a05bc3aa33f8ac9e4d6dcef6ac1455b6ec
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies childprocess-${{ version }}.gem
+    - gem unpack childprocess-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r childprocess -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: childprocess-${{ version }}/LICENSE
+  summary: |
+    This gem aims at being a simple and reliable solution for controlling external programs running in the background on any Ruby / OS combination.
+  homepage: https://rubygems.org/gems/childprocess
+  repository: https://github.com/enkessler/childprocess
+
+extra:
+  recipe-maintainers:
+    - danielnachun
