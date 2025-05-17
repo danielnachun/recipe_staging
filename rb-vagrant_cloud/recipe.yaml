@@ -1,0 +1,42 @@
+context:
+  version: 3.1.3
+
+package:
+  name: rb-vagrant_cloud
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/vagrant_cloud-${{ version }}.gem
+  sha256: dbef5f0a9cf43299e74870658b1820f9c1f0fdc951d17e24f15f24a6b1b99525
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies vagrant_cloud-${{ version }}.gem
+    - gem unpack vagrant_cloud-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-excon
+    - rb-log4r
+    - rb-oauth2
+    - rb-rexml
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r vagrant_cloud -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: vagrant_cloud-${{ version }}/LICENSE
+  summary: Ruby library for the HashiCorp Vagrant Cloud API
+  homepage: https://rubygems.org/gems/vagrant_cloud
+  repository: https://github.com/hashicorp/vagrant_cloud
+
+extra:
+  recipe-maintainers:
+    - danielnachun
