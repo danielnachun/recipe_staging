@@ -23,6 +23,7 @@ requirements:
   host:
     - icu
     - ruby
+    - zlib
   run:
     - ruby
 
