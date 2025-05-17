@@ -1,0 +1,39 @@
+context:
+  version: 8.0.2
+
+package:
+  name: rb-activemodel
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/activemodel-${{ version }}.gem
+  sha256: 0ae1fb7fa1fae0699ba041a9e97702df42ea3b13f2d39f2d0fde51fca5f0656c
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies activemodel-${{ version }}.gem
+    - gem unpack activemodel-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-activesupport
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r active_model -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: activemodel-${{ version }}/MIT-LICENSE
+  summary: A toolkit for building modeling frameworks like Active Record.
+  homepage: https://rubygems.org/gems/activemodel
+  repository: https://github.com/rails/rails
+
+extra:
+  recipe-maintainers:
+    - danielnachun
