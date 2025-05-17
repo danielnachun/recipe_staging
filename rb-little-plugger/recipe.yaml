@@ -1,0 +1,38 @@
+context:
+  version: 1.1.4
+
+package:
+  name: rb-little-plugger
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/little-plugger-${{ version }}.gem
+  sha256: d5f347c00d9d648040ef7c17d6eb09d3d0719adf19ca30d1a3b6fb26d0a631bb
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies little-plugger-${{ version }}.gem
+    - gem unpack little-plugger-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r little-plugger -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: LittlePlugger is a module that provides Gem based plugin management.
+  homepage: https://rubygems.org/gems/little-plugger
+  repository: https://github.com/TwP/little-plugger
+
+extra:
+  recipe-maintainers:
+    - danielnachun
