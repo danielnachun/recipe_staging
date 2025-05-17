@@ -1,0 +1,38 @@
+context:
+  version: 1.2.5
+
+package:
+  name: rb-excon
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/excon-${{ version }}.gem
+  sha256: ca040bb61bc0059968f34a17115a00d2db8562e3c0c5c5c7432072b551c85a9d
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies excon-${{ version }}.gem
+    - gem unpack excon-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-logger
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r excon -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: excon-${{ version }}/LICENSE.md
+  summary: Usable, fast, simple HTTP 1.1 for Ruby
+  homepage: https://rubygems.org/gems/excon
+
+extra:
+  recipe-maintainers:
+    - danielnachun
