@@ -1,0 +1,38 @@
+context:
+  version: 0.11.0
+
+package:
+  name: rb-netrc
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/netrc-${{ version }}.gem
+  sha256: de1ce33da8c99ab1d97871726cba75151113f117146becbe45aa85cb3dabee3f
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies netrc-${{ version }}.gem
+    - gem unpack netrc-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r netrc -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: netrc-${{ version }}/LICENSE.md
+  summary: This library can read and update netrc files, preserving formatting including comments and whitespace.
+  homepage: https://rubygems.org/gems/netrc
+  repository: https://github.com/geemus/netrc
+
+extra:
+  recipe-maintainers:
+    - danielnachun
