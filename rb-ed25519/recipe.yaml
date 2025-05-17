@@ -1,0 +1,40 @@
+context:
+  version: 1.4.0
+
+package:
+  name: rb-ed25519
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/ed25519-${{ version }}.gem
+  sha256: 16e97f5198689a154247169f3453ef4cfd3f7a47481fde0ae33206cdfdcac506
+
+build:
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies ed25519-${{ version }}.gem
+    - gem unpack ed25519-${{ version }}.gem
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+  host:
+    - ruby
+  run:
+    - ruby
+
+tests:
+  - script:
+      - ruby -r ed25519 -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: ed25519-${{ version }}/LICENSE
+  summary: New wave Internationalization support for Ruby.
+  homepage: https://rubygems.org/gems/ed25519
+  repository: https://github.com/RubyCrypto/ed25519
+
+extra:
+  recipe-maintainers:
+    - danielnachun
