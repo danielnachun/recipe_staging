@@ -1,0 +1,38 @@
+context:
+  version: 1.4.1
+
+package:
+  name: rb-net-http-digest_auth
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/net-http-digest_auth-${{ version }}.gem
+  sha256: 4b8ad50ed8d180a58db5d6c49449b987dd0466fe01e24037945bc007562a08db
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies net-http-digest_auth-${{ version }}.gem
+    - gem unpack net-http-digest_auth-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r 'net/http/digest_auth' -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: An implementation of RFC 2617 - Digest Access Authentication.
+  homepage: https://rubygems.org/gems/net-http-digest_auth
+  repository: https://github.com/drbrain/net-http-digest_auth
+
+extra:
+  recipe-maintainers:
+    - danielnachun
