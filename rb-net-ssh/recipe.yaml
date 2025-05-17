@@ -1,0 +1,39 @@
+context:
+  version: 7.3.0
+
+package:
+  name: rb-net-ssh
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/net-ssh-${{ version }}.gem
+  sha256: 172076c4b30ce56fb25a03961b0c4da14e1246426401b0f89cba1a3b54bf3ef0
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies net-ssh-${{ version }}.gem
+    - gem unpack net-ssh-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r 'net/ssh' -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: net-ssh-${{ version }}/LICENSE.txt
+  summary: |
+    Net::SSH: a pure-Ruby implementation of the SSH2 client protocol.
+  homepage: https://rubygems.org/gems/net-ssh
+  repository: https://github.com/net-ssh/net-ssh
+
+extra:
+  recipe-maintainers:
+    - danielnachun
