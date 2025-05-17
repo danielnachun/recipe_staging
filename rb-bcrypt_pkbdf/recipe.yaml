@@ -1,0 +1,40 @@
+context:
+  version: 1.1.1
+
+package:
+  name: rb-bcrypt_pbkdf
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/bcrypt_pbkdf-${{ version }}.gem
+  sha256: 2f9077dde837d1f0dd2eb0f9e5327c6871c68ebc8eba88870fb6b7956e1e2b13
+
+build:
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies bcrypt_pbkdf-${{ version }}.gem
+    - gem unpack bcrypt_pbkdf-${{ version }}.gem
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+  host:
+    - ruby
+  run:
+    - ruby
+
+tests:
+  - script:
+      - ruby -r bcrypt_pbkdf -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: bcrypt_pbkdf-${{ version }}/COPYING
+  summary: This gem implements bcrypt_pbkdf (a variant of PBKDF2 with bcrypt-based PRF)
+  homepage: https://rubygems.org/gems/bcrypt_pbkdf
+  repository: https://github.com/net-ssh/bcrypt_pbkdf-ruby
+
+extra:
+  recipe-maintainers:
+    - danielnachun
