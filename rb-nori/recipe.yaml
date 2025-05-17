@@ -1,0 +1,39 @@
+context:
+  version: 2.7.1
+
+package:
+  name: rb-nori
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/nori-${{ version }}.gem
+  sha256: 6166cd336959854762073e2fbae888593809cac1b3e904f4fb009313d7226861
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies nori-${{ version }}.gem
+    - gem unpack nori-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-bigdecimal
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r nori -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: nori-${{ version }}/LICENSE
+  summary: XML to Hash translator
+  homepage: https://rubygems.org/gems/nori
+  repository: https://github.com/savonrb/nori
+
+extra:
+  recipe-maintainers:
+    - danielnachun
