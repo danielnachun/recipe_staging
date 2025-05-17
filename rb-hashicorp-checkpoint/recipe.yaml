@@ -1,0 +1,38 @@
+context:
+  version: 0.1.6
+
+package:
+  name: rb-hashicorp-checkpoint
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/hashicorp-checkpoint-${{ version }}.gem
+  sha256: 928cea744b2eb0a05c7e97429e0fcb1a0ef8e0b02824271c61ff9cb2c9fe340c
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies hashicorp-checkpoint-${{ version }}.gem
+    - gem unpack hashicorp-checkpoint-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r checkpoint -e 'exit 0'
+
+about:
+  license: MPL-2.0
+  license_file: hashicorp-checkpoint-${{ version }}/LICENSE
+  summary: Internal HashiCorp service to check version information
+  homepage: https://rubygems.org/gems/hashicorp-checkpoint
+  repository: https://github.com/hashicorp/ruby-checkpoint
+
+extra:
+  recipe-maintainers:
+    - danielnachun
