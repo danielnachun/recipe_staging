@@ -1,0 +1,38 @@
+context:
+  version: 4.10.1
+
+package:
+  name: rb-slop
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/slop-${{ version }}.gem
+  sha256: 844322b5ffcf17ed4815fdb173b04a20dd82b4fd93e3744c88c8fafea696d9c7
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies slop-${{ version }}.gem
+    - gem unpack slop-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r slop -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: slop-${{ version }}/LICENSE
+  summary: A DSL for gathering options and parsing command line flags
+  homepage: https://rubygems.org/gems/slop
+  repository: https://github.com/leejarvis/slop
+
+extra:
+  recipe-maintainers:
+    - danielnachun
