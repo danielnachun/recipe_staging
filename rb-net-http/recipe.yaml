@@ -1,0 +1,39 @@
+context:
+  version: 0.6.0
+
+package:
+  name: rb-net-http
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/net-http-${{ version }}.gem
+  sha256: 9621b20c137898af9d890556848c93603716cab516dc2c89b01a38b894e259fb
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies net-http-${{ version }}.gem
+    - gem unpack net-http-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-uri
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r 'net/http' -e 'exit 0'
+
+about:
+  license: BSD-2-Clause
+  license_file: net-http-${{ version }}/COPYING
+  summary: HTTP client api for Ruby.
+  homepage: https://rubygems.org/gems/net-http
+  repository: https://github.com/ruby/net-http
+
+extra:
+  recipe-maintainers:
+    - danielnachun
