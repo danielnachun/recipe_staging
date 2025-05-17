@@ -1,0 +1,38 @@
+context:
+  version: 3.0.2
+
+package:
+  name: rb-ruby_rncryptor
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/ruby_rncryptor-${{ version }}.gem
+  sha256: 94f61720aa1c326befaf330f1aa982cbef7d2487d430ebeb2d93913ec9c26c53
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies ruby_rncryptor-${{ version }}.gem
+    - gem unpack ruby_rncryptor-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r ruby_rncryptor -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: LICENSE.txt
+  summary: Encrypt and Decrypt the RNCryptor format.
+  homepage: https://rubygems.org/gems/ruby_rncryptor
+  repository: https://github.com/RNCryptor/ruby_rncryptor
+
+extra:
+  recipe-maintainers:
+    - danielnachun
