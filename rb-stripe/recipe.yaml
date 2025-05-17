@@ -1,0 +1,38 @@
+context:
+  version: 15.1.0
+
+package:
+  name: rb-stripe
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/stripe-${{ version }}.gem
+  sha256: 72ec4bacf753f93978e98cb72723f54d643a993eaa6b72a247ec759f1db0480b
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies stripe-${{ version }}.gem
+    - gem unpack stripe-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r stripe -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: stripe-${{ version }}/LICENSE
+  summary: Stripe is the easiest way to accept payments online. See https://stripe.com for details.
+  homepage: https://rubygems.org/gems/stripe
+  repository: https://github.com/stripe/stripe-ruby
+
+extra:
+  recipe-maintainers:
+    - danielnachun
