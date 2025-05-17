@@ -1,0 +1,39 @@
+context:
+  version: 0.7.2
+
+package:
+  name: rb-multi_xml
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/multi_xml-${{ version }}.gem
+  sha256: 307a96dc48613badb7b2fc174fd4e62d7c7b619bc36ea33bfd0c49f64f5787ce
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies multi_xml-${{ version }}.gem
+    - gem unpack multi_xml-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-bigdecimal
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r multi_xml -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: multi_xml-${{ version }}/LICENSE.md
+  summary: Provides swappable XML backends utilizing LibXML, Nokogiri, Ox, or REXML.
+  homepage: https://rubygems.org/gems/multi_xml
+  repository: https://github.com/sferik/multi_xml
+
+extra:
+  recipe-maintainers:
+    - danielnachun
