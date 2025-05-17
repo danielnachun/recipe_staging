@@ -1,0 +1,38 @@
+context:
+  version: 0.6.20240107
+
+package:
+  name: rb-domain_name
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/domain_name-${{ version }}.gem
+  sha256: 5f693b2215708476517479bf2b3802e49068ad82167bcd2286f899536a17d933
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies domain_name-${{ version }}.gem
+    - gem unpack domain_name-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r domain_name -e 'exit 0'
+
+about:
+  license: BSD-2-Clause AND BSD-3-Clause
+  license_file: domain_name-${{ version }}/LICENSE.txt
+  summary: This is a Domain Name manipulation library for Ruby.
+  homepage: https://rubygems.org/gems/domain_name
+  repository: https://github.com/knu/ruby-domain_name
+
+extra:
+  recipe-maintainers:
+    - danielnachun
