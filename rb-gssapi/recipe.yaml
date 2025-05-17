@@ -21,6 +21,7 @@ requirements:
     - ruby =3.2
   run:
     - rb-ffi
+    - krb5
     - ruby >=3.2
 
 tests:
