@@ -1,0 +1,41 @@
+context:
+  version: 2.0.1
+
+package:
+  name: rb-snaky_hash
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/snaky_hash-${{ version }}.gem
+  sha256: 1ac87ec157fcfe7a460e821e0cd48ae1e6f5e3e082ab520f03f31a9259dbdc31
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies snaky_hash-${{ version }}.gem
+    - gem unpack snaky_hash-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-hashie
+    - rb-version_gem
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r snaky_hash -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: snaky_hash-${{ version }}/LICENSE.txt
+  summary: |
+    A Hashie::Mash joint to make #snakelife better
+  homepage: https://rubygems.org/gems/snaky_hash
+  repository: https://gitlab.com/oauth-xx/snaky_hash
+
+extra:
+  recipe-maintainers:
+    - danielnachun
