@@ -1,0 +1,40 @@
+context:
+  version: 3.4.1
+
+package:
+  name: rb-date
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/date-${{ version }}.gem
+  sha256: bf268e14ef7158009bfeaec40b5fa3c7271906e88b196d958a89d4b408abe64f
+
+build:
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies date-${{ version }}.gem
+    - gem unpack date-${{ version }}.gem
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+  host:
+    - ruby
+  run:
+    - ruby
+
+tests:
+  - script:
+      - ruby -r date -e 'exit 0'
+
+about:
+  license: BSD-2-Clause
+  license_file: LICENSE
+  summary: A subclass of Object includes Comparable module for handling dates.
+  homepage: https://rubygems.org/gems/date
+  repository: https://github.com/ruby/date
+
+extra:
+  recipe-maintainers:
+    - danielnachun
