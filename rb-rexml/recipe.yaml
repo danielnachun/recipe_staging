@@ -1,23 +1,21 @@
-schema_version: 1
-
 context:
   name: rexml
-  version: 3.2.5
+  version: 3.4.1
 
 package:
-  name: rb-${{ name|lower }}
+  name: rb-rexml
   version: ${{ version }}
 
 source:
-  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
-  sha256: a33c3bf95fda7983ec7f05054f3a985af41dbc25a0339843bd2479e93cabb123
+  url: https://rubygems.org/downloads/rexml-${{ version }}.gem
+  sha256: c74527a9a0a04b4ec31dbe0dc4ed6004b960af943d8db42e539edde3a871abca
 
 build:
-  number: 1
+  number: 0
   noarch: generic
   script:
-    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
-    - gem unpack ${{ name }}-${{ version }}.gem
+    - gem install -N -l -V --ignore-dependencies rexml-${{ version }}.gem
+    - gem unpack rexml-${{ version }}.gem
 
 requirements:
   host:
@@ -27,16 +25,15 @@ requirements:
 
 tests:
   - script:
-      - ruby -r ${{ name }} -e 'exit 0'
+      - ruby -r rexml -e 'exit 0'
 
 about:
   license: BSD-2-Clause
-  license_file: ${{ name }}-${{ version }}/LICENSE.txt
+  license_file: rexml-${{ version }}/LICENSE.txt
   summary: An XML toolkit for Ruby
-  homepage: https://rubygems.org/gems/${{ name }}
-  repository: https://github.com/ruby/${{ name }}
+  homepage: https://rubygems.org/gems/rexml
+  repository: https://github.com/ruby/rexml
 
 extra:
   recipe-maintainers:
     - danielnachun
-
