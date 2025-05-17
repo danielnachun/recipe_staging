@@ -1,0 +1,39 @@
+context:
+  version: 1.3.1
+
+package:
+  name: rb-gssapi
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/gssapi-${{ version }}.gem
+  sha256: c51cf30842ee39bd93ce7fc33e20405ff8a04cda9dec6092071b61258284aee1
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies gssapi-${{ version }}.gem
+    - gem unpack gssapi-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-ffi
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r gssapi -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: gssapi-${{ version }}/COPYING
+  summary: A FFI wrapper around the system GSSAPI library.
+  homepage: https://rubygems.org/gems/gssapi
+  repository: https://github.com/zenchild/gssapi
+
+extra:
+  recipe-maintainers:
+    - danielnachun
