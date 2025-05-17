@@ -1,23 +1,20 @@
-schema_version: 1
-
 context:
-  name: activesupport
-  version: 7.2.1
+  version: 8.0.2
 
 package:
-  name: rb-${{ name|lower }}
+  name: rb-activesupport
   version: ${{ version }}
 
 source:
-  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
-  sha256: 7557fa077a592a4f36f7ddacf4d9d71c34aff69ed20236b8a61c22d567da8c24
+  url: https://rubygems.org/downloads/activesupport-${{ version }}.gem
+  sha256: 8565cddba31b900cdc17682fd66ecd020441e3eef320a9930285394e8c07a45e
 
 build:
   number: 0
   noarch: generic
   script:
-    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
-    - gem unpack ${{ name }}-${{ version }}.gem
+    - gem install -N -l -V --ignore-dependencies activesupport-${{ version }}.gem
+    - gem unpack activesupport-${{ version }}.gem
 
 requirements:
   host:
@@ -41,9 +38,9 @@ tests:
 
 about:
   license: MIT
-  license_file: ${{ name }}-${{ version }}/MIT-LICENSE
+  license_file: activesupport-${{ version }}/MIT-LICENSE
   summary: A toolkit of support libraries and Ruby core extensions extracted from the Rails framework.
-  homepage: https://rubygems.org/gems/${{ name }}
+  homepage: https://rubygems.org/gems/activesupport
   repository: https://github.com/rails/rails
 
 extra:
