@@ -1,0 +1,39 @@
+context:
+  version: 4.1.0
+
+package:
+  name: rb-net-scp
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/net-scp-${{ version }}.gem
+  sha256: a99b0b92a1e5d360b0de4ffbf2dc0c91531502d3d4f56c28b0139a7c093d1a5d
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies net-scp-${{ version }}.gem
+    - gem unpack net-scp-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-net-ssh
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r 'net/scp' -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: net-scp-${{ version }}/LICENSE.txt
+  summary: A pure Ruby implementation of the SCP client protocol
+  homepage: https://rubygems.org/gems/net-scp
+  repository: https://github.com/net-ssh/net-scp
+
+extra:
+  recipe-maintainers:
+    - danielnachun
