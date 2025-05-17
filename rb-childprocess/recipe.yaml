@@ -2,7 +2,7 @@ context:
   version: 5.1.0
 
 package:
-  name: childprocess
+  name: rb-childprocess
   version: ${{ version }}
 
 source:
