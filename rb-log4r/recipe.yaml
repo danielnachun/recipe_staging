@@ -1,0 +1,38 @@
+context:
+  version: 1.1.10
+
+package:
+  name: rb-log4r
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/log4r-${{ version }}.gem
+  sha256: 9b452928c964b7c54c09aeb25ff045b5a722b387b16c9ce37cb1baec00062966
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies log4r-${{ version }}.gem
+    - gem unpack log4r-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r log4r -e 'exit 0'
+
+about:
+  license: BSD-2-Clause
+  license_file: LICENSE
+  summary: New wave Internationalization support for Ruby.
+  homepage: https://rubygems.org/gems/log4r
+  repository: https://github.com/colbygk/log4r
+
+extra:
+  recipe-maintainers:
+    - danielnachun
