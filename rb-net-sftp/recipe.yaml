@@ -1,0 +1,39 @@
+context:
+  version: 4.0.0
+
+package:
+  name: rb-net-sftp
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/net-sftp-${{ version }}.gem
+  sha256: 65bb91c859c2f93b09826757af11b69af931a3a9155050f50d1b06d384526364
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies net-sftp-${{ version }}.gem
+    - gem unpack net-sftp-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-net-ssh
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r 'net/sftp' -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: net-sftp-${{ version }}/LICENSE.txt
+  summary: A pure Ruby implementation of the SFTP client protocol
+  homepage: https://rubygems.org/gems/net-sftp
+  repository: https://github.com/net-ssh/net-sftp
+
+extra:
+  recipe-maintainers:
+    - danielnachun
