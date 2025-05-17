@@ -1,0 +1,38 @@
+context:
+  version: 3.1.14
+
+package:
+  name: rb-rack
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/rack-${{ version }}.gem
+  sha256: 84613c2a8df193bb6711d9c14ecc6d5a65a7cb4312379a65e793562608944b44
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies rack-${{ version }}.gem
+    - gem unpack rack-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r rack -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: rack-${{ version }}/MIT-LICENSE
+  summary: Rack provides a minimal, modular and adaptable interface for developing web applications in Ruby.
+  homepage: https://rubygems.org/gems/rack
+  repository: https://github.com/rack/rack
+
+extra:
+  recipe-maintainers:
+    - danielnachun
