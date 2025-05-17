@@ -1,0 +1,39 @@
+context:
+  version: 0.6.5
+
+package:
+  name: rb-rubyntlm
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/rubyntlm-${{ version }}.gem
+  sha256: 47013402b99ae29ee93f930af51edaec8c6008556f4be25705a422b4430314f5
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies rubyntlm-${{ version }}.gem
+    - gem unpack rubyntlm-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-base64
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r rubyntlm -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: rubyntlm-${{ version }}/LICENSE
+  summary: Ruby/NTLM provides message creator and parser for the NTLM authentication.
+  homepage: https://rubygems.org/gems/rubyntlm
+  repository: https://github.com/winrb/rubyntlm
+
+extra:
+  recipe-maintainers:
+    - danielnachun
