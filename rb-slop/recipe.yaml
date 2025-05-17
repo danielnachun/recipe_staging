@@ -29,7 +29,7 @@ tests:
 about:
   license: MIT
   license_file: slop-${{ version }}/LICENSE
-  summary: New wave Internationalization support for Ruby.
+  summary: A DSL for gathering options and parsing command line flags
   homepage: https://rubygems.org/gems/slop
   repository: https://github.com/leejarvis/slop
 
