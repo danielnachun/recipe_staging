@@ -1,0 +1,38 @@
+context:
+  version: 0.6.1
+
+package:
+  name: rb-ostruct
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/ostruct-${{ version }}.gem
+  sha256: 09a3fb7ecc1fa4039f25418cc05ae9c82bd520472c5c6a6f515f03e4988cb817
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies ostruct-${{ version }}.gem
+    - gem unpack ostruct-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r ostruct -e 'exit 0'
+
+about:
+  license: BSD-2-Clause
+  license_file: ostruct-${{ version }}/COPYING
+  summary: Class to build custom data structures, similar to a Hash.
+  homepage: https://rubygems.org/gems/ostruct
+  repository: https://github.com/ruby/ostruct
+
+extra:
+  recipe-maintainers:
+    - danielnachun
