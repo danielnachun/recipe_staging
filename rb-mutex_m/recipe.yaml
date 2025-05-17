@@ -1,0 +1,39 @@
+context:
+  version: 0.3.0
+
+package:
+  name: rb-mutex_m
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/mutex_m-${{ version }}.gem
+  sha256: cfcb04ac16b69c4813777022fdceda24e9f798e48092a2b817eb4c0a782b0751
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies mutex_m-${{ version }}.gem
+    - gem unpack mutex_m-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r mutex_m -e 'exit 0'
+
+about:
+  license: BSD-2-Clause
+  license_file: mutex_m-${{ version }}/COPYING
+  summary: Mixin to extend objects to be handled like a Mutex.
+  homepage: https://rubygems.org/gems/mutex_m
+  repository: https://github.com/ruby/mutex_m
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+
