@@ -1,0 +1,40 @@
+context:
+  version: 2.4.1
+
+package:
+  name: rb-multipart-post
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/multipart-post-${{ version }}.gem
+  sha256: 9872d03a8e552020ca096adadbf5e3cb1cd1cdd6acd3c161136b8a5737cdb4a8
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies multipart-post-${{ version }}.gem
+    - gem unpack multipart-post-${{ version }}.gem
+
+requirements:
+  host:
+    - rb-concurrent-ruby
+    - ruby >=3.2
+  run:
+    - rb-concurrent-ruby
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r 'multipart/post' -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: multipart-post-${{ version }}/license.md
+  summary: A multipart form post accessory for Net::HTTP.
+  homepage: https://rubygems.org/gems/multipart-post
+  repository: https://github.com/socketry/multipart-post
+
+extra:
+  recipe-maintainers:
+    - danielnachun
