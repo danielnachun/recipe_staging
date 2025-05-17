@@ -1,0 +1,41 @@
+context:
+  version: 1.2.3
+
+package:
+  name: rb-winrm-elevated
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/winrm-elevated-${{ version }}.gem
+  sha256: ed733dd163ced9b6acc6a01d331f539946b59e40adbcd63941f62a8c6254b4d2
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies winrm-elevated-${{ version }}.gem
+    - gem unpack winrm-elevated-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-erubi
+    - rb-winrm
+    - rb-winrm-fs
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r winrm-elevated -e 'exit 0'
+
+about:
+  license: Apache-2.0
+  license_file: winrm-elevated-${{ version }}/LICENSE
+  summary: Ruby library for running commands via WinRM as elevated through a scheduled task
+  homepage: https://rubygems.org/gems/winrm-elevated
+  repository: https://github.com/WinRb/winrm-elevated
+
+extra:
+  recipe-maintainers:
+    - danielnachun
