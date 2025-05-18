@@ -27,7 +27,6 @@ requirements:
     - libxslt
     - rb-mini_portile2
     - ruby
-    - zlib
   run:
     - rb-mini_portile2
     - rb-racc
