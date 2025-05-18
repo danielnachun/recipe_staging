@@ -1,0 +1,43 @@
+context:
+  version: 1.1.7
+
+package:
+  name: rb-em-http-request
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/em-http-request-${{ version }}.gem
+  sha256: 16fbc72b2a6e20c804c564ac5d12e98668c6fcef8c3b1dd2387dff505f2efdab
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies em-http-request-${{ version }}.gem
+    - gem unpack em-http-request-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-addressable
+    - rb-cookiejar
+    - rb-em-socksify
+    - rb-eventmachine
+    - rb-http_parser.rb
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r em-http-request -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: EventMachine based, async HTTP Request client
+  homepage: https://rubygems.org/gems/em-http-request
+  repository: https://github.com/igrigorik/em-http-request
+
+extra:
+  recipe-maintainers:
+    - danielnachun
