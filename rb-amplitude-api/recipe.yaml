@@ -1,0 +1,39 @@
+context:
+  version: 0.4.2
+
+package:
+  name: rb-amplitude-api
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/amplitude-api-${{ version }}.gem
+  sha256: 8ab2fd0fa1379b3f94ef8d2e19d52e8f27fecd6be4cea1b8e4f5dd1c106884b0
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies amplitude-api-${{ version }}.gem
+    - gem unpack amplitude-api-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-faraday
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r amplitude-api -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: amplitude-api-${{ version }}/LICENSE
+  summary: Provides an integration for sending events to Amplitude
+  homepage: https://rubygems.org/gems/amplitude-api
+  repository: https://github.com/toothrot/amplitude-api
+
+extra:
+  recipe-maintainers:
+    - danielnachun
