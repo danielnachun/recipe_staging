@@ -1,0 +1,40 @@
+context:
+  version: 0.3.3
+
+package:
+  name: rb-em-socksify
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/em-socksify-${{ version }}.gem
+  sha256: 7d8d08a7a8acc1263173433a6b5540edd80a8a36e35a066b650c929a3a3974ed
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies em-socksify-${{ version }}.gem
+    - gem unpack em-socksify-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-base64
+    - rb-eventmachine
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r em-socksify -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: Transparent proxy support for any EventMachine protocol
+  homepage: https://rubygems.org/gems/em-socksify
+  repository: https://github.com/igrigorik/em-socksify
+
+extra:
+  recipe-maintainers:
+    - danielnachun
