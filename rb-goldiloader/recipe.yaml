@@ -1,0 +1,40 @@
+context:
+  version: 5.4.0
+
+package:
+  name: rb-goldiloader
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/goldiloader-${{ version }}.gem
+  sha256: 277a86ff424b963bc9d98d8f4d10bb7eea0eb010d3209893dea7092302350b73
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies goldiloader-${{ version }}.gem
+    - gem unpack goldiloader-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-activerecord
+    - rb-activesupport
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r goldiloader -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: goldiloader-${{ version }}/LICENSE.txt
+  summary: Automatically eager loads Rails associations as associations are traversed
+  homepage: https://rubygems.org/gems/goldiloader
+  repository: https://github.com/salsify/goldiloader/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
