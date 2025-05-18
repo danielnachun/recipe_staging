@@ -1,44 +1,40 @@
-schema_version: 1
-
 context:
-  name: racc
   version: 1.8.1
 
 package:
-  name: rb-${{ name|lower }}
+  name: rb-racc
   version: ${{ version }}
 
 source:
-  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  url: https://rubygems.org/downloads/racc-${{ version }}.gem
   sha256: 4a7f6929691dbec8b5209a0b373bc2614882b55fc5d2e447a21aaa691303d62f
 
 build:
   number: 0
   script:
-    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
-    - gem unpack ${{ name }}-${{ version }}.gem
+    - gem install -N -l -V --ignore-dependencies racc-${{ version }}.gem
+    - gem unpack racc-${{ version }}.gem
 
 requirements:
   build:
     - ${{ compiler('c') }}
     - make
   host:
-    - ruby=3.3
+    - ruby
   run:
-    - ruby=3.3
+    - ruby
 
 tests:
   - script:
-      - ruby -r ${{ name }} -e 'exit 0'
+      - ruby -r racc -e 'exit 0'
 
 about:
   license: BSD-2-Clause
-  license_file: ${{ name }}-${{ version}}/COPYING
+  license_file: racc-${{ version}}/COPYING
   summary: Racc is a LALR(1) parser generator.
-  homepage: https://rubygems.org/gems/${{ name }}
-  repository: https://github.com/ruby/${{ name }}
+  homepage: https://rubygems.org/gems/racc
+  repository: https://github.com/ruby/racc
 
 extra:
   recipe-maintainers:
     - danielnachun
-
