@@ -29,6 +29,7 @@ requirements:
     - if: linux
       then:
         - cuda-libraries-dev
+        - nvtx-c
     - hdf5
     - openssl
     - pytorch
