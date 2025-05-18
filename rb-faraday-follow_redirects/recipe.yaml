@@ -1,0 +1,39 @@
+context:
+  version: 0.3.0
+
+package:
+  name: rb-faraday-follow_redirects
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/faraday-follow_redirects-${{ version }}.gem
+  sha256: d92d975635e2c7fe525dd494fcd4b9bb7f0a4a0ec0d5f4c15c729530fdb807f9
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies faraday-follow_redirects-${{ version }}.gem
+    - gem unpack faraday-follow_redirects-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-faraday
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r 'faraday/follow_redirects' -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: faraday-follow_redirects-${{ version }}/LICENSE.md
+  summary: Faraday 2.x compatible extraction of FaradayMiddleware::FollowRedirects.
+  homepage: https://rubygems.org/gems/faraday-follow_redirects
+  repository: https://github.com/tisba/faraday-follow-redirects
+
+extra:
+  recipe-maintainers:
+    - danielnachun
