@@ -1,44 +1,40 @@
-schema_version: 1
-
 context:
-  name: http_parser.rb
   version: 0.8.0
 
 package:
-  name: rb-${{ name|lower }}
+  name: rb-http_parser.rb
   version: ${{ version }}
 
 source:
-  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  url: https://rubygems.org/downloads/http_parser.rb-${{ version }}.gem
   sha256: 5a0932f1fa82ce08a8516a2685d5a86031c000560f89946913c555a0697544be
 
 build:
   number: 0
   script:
-    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
-    - gem unpack ${{ name }}-${{ version }}.gem
+    - gem install -N -l -V --ignore-dependencies http_parser.rb-${{ version }}.gem
+    - gem unpack http_parser.rb-${{ version }}.gem
 
 requirements:
   build:
     - ${{ compiler('c') }}
     - make
   host:
-    - ruby=3.3
+    - ruby
   run:
-    - ruby=3.3
+    - ruby
 
 tests:
   - script:
-      - ruby -r ${{ name }} -e 'exit 0'
+      - ruby -r http_parser.rb -e 'exit 0'
 
 about:
   license: MIT
-  license_file: ${{ name }}-${{ version }}/LICENSE-MIT
+  license_file: http_parser.rb-${{ version }}/LICENSE-MIT
   summary: Ruby bindings to https://github.com/joyent/http-parser and https://github.com/http-parser/http-parser.java
-  homepage: https://rubygems.org/gems/${{ name }}
-  repository: https://github.com/tmm1/${{ name }}
+  homepage: https://rubygems.org/gems/http_parser.rb
+  repository: https://github.com/tmm1/http_parser.rb
 
 extra:
   recipe-maintainers:
     - danielnachun
-
