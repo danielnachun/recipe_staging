@@ -1,0 +1,44 @@
+context:
+  version: 1.72.0
+
+package:
+  name: rb-grpc
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/grpc-${{ version }}.gem
+  sha256: 56fa0da2f4f96471f59430a9ef08a612cc77649e8fa118c83ae7d0bb619bea09
+
+build:
+  number: 0
+  script:
+    - gem install -N -l -V --ignore-dependencies grpc-${{ version }}.gem
+    - gem unpack grpc-${{ version }}.gem
+    - rm -rf ${PREFIX}/share/rubygems/gems/grpc-${PKG_VERSION}/src/ruby/ext/grpc/objs
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - make
+  host:
+    - ruby
+  run:
+    - rb-google-protobuf
+    - rb-googleapis-common-protos-types
+    - ruby
+
+tests:
+  - script:
+      - ruby -r grpc -e 'exit 0'
+
+about:
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Send RPCs from Ruby using GRPC
+  homepage: https://rubygems.org/gems/grpc
+  repository: https://github.com/grpc/grpc
+
+extra:
+  recipe-maintainers:
+    - danielnachun
