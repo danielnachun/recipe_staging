@@ -12,6 +12,7 @@ source:
 build:
   number: 0
   script:
+    - export PKG_CONFIG_PATH=${PREFIX}/lib/pkgconfig
     - gem install -N -l -V --ignore-dependencies charlock_holmes-${{ version }}.gem
     - gem unpack charlock_holmes-${{ version }}.gem
 
