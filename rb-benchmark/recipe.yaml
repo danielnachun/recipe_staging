@@ -1,23 +1,21 @@
-schema_version: 1
-
 context:
   name: benchmark
-  version: 0.2.1
+  version: 0.4.0
 
 package:
-  name: rb-${{ name|lower }}
+  name: rb-benchmark
   version: ${{ version }}
 
 source:
-  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
-  sha256: b14e2020c9cb2790c6f94e620be61f0de092dd2a8c326cb7c4b0fcd1a980f204
+  url: https://rubygems.org/downloads/benchmark-${{ version }}.gem
+  sha256: 0f12f8c495545e3710c3e4f0480f63f06b4c842cc94cec7f33a956f5180e874a
 
 build:
-  number: 1
+  number: 0
   noarch: generic
   script:
-    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
-    - gem unpack ${{ name }}-${{ version }}.gem
+    - gem install -N -l -V --ignore-dependencies benchmark-${{ version }}.gem
+    - gem unpack benchmark-${{ version }}.gem
 
 requirements:
   host:
@@ -27,16 +25,15 @@ requirements:
 
 tests:
   - script:
-      - ruby -r ${{ name }} -e 'exit 0'
+      - ruby -r benchmark -e 'exit 0'
 
 about:
   license: BSD-2-Clause
-  license_file: ${{ name }}-${{ version }}/LICENSE.txt
+  license_file: benchmark-${{ version }}/COPYING
   summary: a performance benchmarking library
-  homepage: https://rubygems.org/gems/${{ name }}
-  repository: https://github.com/ruby/${{ name }}
+  homepage: https://rubygems.org/gems/benchmark
+  repository: https://github.com/ruby/benchmark
 
 extra:
   recipe-maintainers:
     - danielnachun
-
