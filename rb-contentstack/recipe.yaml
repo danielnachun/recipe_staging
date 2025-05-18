@@ -1,0 +1,42 @@
+context:
+  version: 0.8.0
+
+package:
+  name: rb-contentstack
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/contentstack-${{ version }}.gem
+  sha256: aef3d6771977d5e44a471ff45fa39dcc7f3d245ec9bf6e41a748bcf028986371
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies contentstack-${{ version }}.gem
+    - gem unpack contentstack-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-activesupport
+    - rb-benchmark
+    - rb-contentstack_utils
+    - rb-uri
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r contentstack -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: contentstack-${{ version }}/LICENSE.txt
+  summary: Contentstack Ruby client for the Content Delivery API
+  homepage: https://rubygems.org/gems/contentstack
+  repository: https://github.com/contentstack/contentstack-ruby
+
+extra:
+  recipe-maintainers:
+    - danielnachun
