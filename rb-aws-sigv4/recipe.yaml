@@ -1,0 +1,39 @@
+context:
+  version: 1.11.0
+
+package:
+  name: rb-aws-sigv4
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/aws-sigv4-${{ version }}.gem
+  sha256: 50a8796991a862324442036ad7a395920572b84bb6cd29b945e5e1800e8da1db
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies aws-sigv4-${{ version }}.gem
+    - gem unpack aws-sigv4-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-aws-eventstream
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r aws-sigv4 -e 'exit 0'
+
+about:
+  license: Apache-2.0
+  license_file: aws-sigv4-${{ version }}/LICENSE.txt
+  summary: Amazon Web Services Signature Version 4 signing library.
+  homepage: https://rubygems.org/gems/aws-sigv4
+  repository: https://github.com/aws/aws-sdk-ruby
+
+extra:
+  recipe-maintainers:
+    - danielnachun
