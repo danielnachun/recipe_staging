@@ -12,9 +12,9 @@ source:
 build:
   number: 0
   script:
+    - unset CFLAGS
     - gem install -N -l -V --bindir ${PREFIX}/bin --ignore-dependencies vagrant-${{ version }}.gem
     - gem unpack vagrant-${{ version }}.gem
-    - exit 1
 
 requirements:
   build:
