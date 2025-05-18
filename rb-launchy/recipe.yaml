@@ -1,0 +1,41 @@
+context:
+  version: 3.1.1
+
+package:
+  name: rb-launchy
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/launchy-${{ version }}.gem
+  sha256: 72b847b5cc961589dde2c395af0108c86ff0119f42d4648d25b5440ebb10059e
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies launchy-${{ version }}.gem
+    - gem unpack launchy-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-addressable
+    - rb-childprocess
+    - rb-logger
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r launchy -e 'exit 0'
+
+about:
+  license: ISC
+  license_file: launchy-${{ version }}/LICENSE.txt
+  summary: Launchy is helper class for launching cross-platform applications in a fire and forget manner.
+  homepage: https://rubygems.org/gems/launchy
+  repository: https://github.com/copiousfreetime/launchy
+
+extra:
+  recipe-maintainers:
+    - danielnachun
