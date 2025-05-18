@@ -1,0 +1,38 @@
+context:
+  version: 0.3.4
+
+package:
+  name: rb-cookiejar
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/cookiejar-${{ version }}.gem
+  sha256: 11b16acfc4baf7a0f463c21a6212005e04e25f5554d4d9f24d97f3492dfda0df
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies cookiejar-${{ version }}.gem
+    - gem unpack cookiejar-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r cookiejar -e 'exit 0'
+
+about:
+  license: BSD-2-Clause
+  license_file: cookiejar-${{ version }}/LICENSE
+  summary: Allows for parsing and returning cookies in Ruby HTTP client code
+  homepage: https://rubygems.org/gems/cookiejar
+  repository: https://github.com/dwaite/cookiejar
+
+extra:
+  recipe-maintainers:
+    - danielnachun
