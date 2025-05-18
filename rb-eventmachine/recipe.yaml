@@ -1,22 +1,20 @@
-schema_version: 1
-
 context:
   name: eventmachine
   version: 1.2.7
 
 package:
-  name: rb-${{ name|lower }}
+  name: rb-eventmachine
   version: ${{ version }}
 
 source:
-  url: https://rubygems.org/downloads/${{ name }}-${{ version }}.gem
+  url: https://rubygems.org/downloads/eventmachine-${{ version }}.gem
   sha256: 994016e42aa041477ba9cff45cbe50de2047f25dd418eba003e84f0d16560972
 
 build:
-  number: 0
+  number: 1
   script:
-    - gem install -N -l -V --ignore-dependencies ${{ name }}-${{ version }}.gem
-    - gem unpack ${{ name }}-${{ version }}.gem
+    - gem install -N -l -V --ignore-dependencies eventmachine-${{ version }}.gem
+    - gem unpack eventmachine-${{ version }}.gem
 
 requirements:
   build:
@@ -25,20 +23,20 @@ requirements:
     - make
   host:
     - openssl
-    - ruby=3.3
+    - ruby
   run:
-    - ruby=3.3
+    - ruby
 
 tests:
   - script:
-      - ruby -r ${{ name }} -e 'exit 0'
+      - ruby -r eventmachine -e 'exit 0'
 
 about:
   license: GPL-2.0-or-later
-  license_file: ${{ name }}-${{ version }}/LICENSE
+  license_file: eventmachine-${{ version }}/LICENSE
   summary: EventMachine implements a fast, single-threaded engine for arbitrary network communications.
-  homepage: https://rubygems.org/gems/${{ name }}
-  repository: https://github.com/eventmachine/${{ name }}
+  homepage: https://rubygems.org/gems/eventmachine
+  repository: https://github.com/eventmachine/eventmachine
 
 extra:
   recipe-maintainers:
