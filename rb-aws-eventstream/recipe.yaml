@@ -1,0 +1,38 @@
+context:
+  version: 1.3.2
+
+package:
+  name: rb-aws-eventstream
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/aws-eventstream-${{ version }}.gem
+  sha256: 7e2c3a55ca70d7861d5d3c98e47daa463ed539c349caba22b48305b8919572d7
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies aws-eventstream-${{ version }}.gem
+    - gem unpack aws-eventstream-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r aws-eventstream -e 'exit 0'
+
+about:
+  license: Apache-2.0
+  license_file: aws-eventstream-${{ version }}/LICENSE.txt
+  summary: Amazon Web Services event stream library.
+  homepage: https://rubygems.org/gems/aws-eventstream
+  repository: https://github.com/aws/aws-sdk-ruby
+
+extra:
+  recipe-maintainers:
+    - danielnachun
