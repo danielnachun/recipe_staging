@@ -1,0 +1,39 @@
+context:
+  version: 8.0.3
+
+package:
+  name: rb-voucherify
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/voucherify-${{ version }}.gem
+  sha256: 03ee9fc9cef63a3ff16074211833f6ebf20e7d95a9282b56673e23bf77e92f35
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies voucherify-${{ version }}.gem
+    - gem unpack voucherify-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-typhoeus
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r VoucherifySdk -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: voucherify-${{ version }}/LICENSE
+  summary: Ruby SDK for Voucherify.
+  homepage: https://rubygems.org/gems/voucherify
+  repository: https://github.com/voucherifyio/voucherify-ruby-sdk
+
+extra:
+  recipe-maintainers:
+    - danielnachun
