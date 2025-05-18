@@ -1,0 +1,39 @@
+context:
+  version: 1.0.8
+
+package:
+  name: rb-http-cookie
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/http-cookie-${{ version }}.gem
+  sha256: b14fe0445cf24bf9ae098633e9b8d42e4c07c3c1f700672b09fbfe32ffd41aa6
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies http-cookie-${{ version }}.gem
+    - gem unpack http-cookie-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-domain_name
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r http-cookie -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: http-cookie-${{ version }}/LICENSE.txt
+  summary: HTTP::Cookie is a Ruby library to handle HTTP Cookies based on RFC 6265. 
+  homepage: https://rubygems.org/gems/http-cookie
+  repository: https://github.com/sparklemotion/http-cookie
+
+extra:
+  recipe-maintainers:
+    - danielnachun
