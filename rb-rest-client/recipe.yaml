@@ -1,0 +1,43 @@
+context:
+  version: 2.1.0
+
+package:
+  name: rb-rest-client
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/rest-client-${{ version }}.gem
+  sha256: 35a6400bdb14fae28596618e312776c158f7ebbb0ccad752ff4fa142bf2747e3
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies rest-client-${{ version }}.gem
+    - gem unpack rest-client-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-http-accept <2
+    - rb-http-cookie
+    - rb-mime-types
+    - rb-netrc
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r rest-client -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: rest-client-${{ version }}/LICENSE
+  summary: |
+    A simple HTTP and REST client for Ruby, inspired by the Sinatra microframework style of specifying actions: get, put, post, delete.
+  homepage: https://rubygems.org/gems/rest-client
+  repository: https://github.com/rest-client/rest-client
+
+extra:
+  recipe-maintainers:
+    - danielnachun
