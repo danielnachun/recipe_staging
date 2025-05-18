@@ -1,0 +1,38 @@
+context:
+  version: 2.2.1
+
+package:
+  name: rb-http-accept
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/http-accept-${{ version }}.gem
+  sha256: f8481ded20f782e43555f5c6b20222449fff4e5322462721c79c056b89ad500f
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies http-accept-${{ version }}.gem
+    - gem unpack http-accept-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r 'http/accept' -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: http-accept-${{ version }}/license.md
+  summary: Parse Accept and Accept-Language HTTP headers.
+  homepage: https://rubygems.org/gems/http-accept
+  repository: https://github.com/socketry/http-accept
+
+extra:
+  recipe-maintainers:
+    - danielnachun
