@@ -1,0 +1,39 @@
+context:
+  version: 10.2.0
+
+package:
+  name: rb-adyen-ruby-api-library
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/adyen-ruby-api-library-${{ version }}.gem
+  sha256: 8755f7fcf8c23bde1cc0616fb23adfe898f28fe0c8ef5d7b6ae3ee408c88f603
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies adyen-ruby-api-library-${{ version }}.gem
+    - gem unpack adyen-ruby-api-library-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-faraday
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r adyen-ruby-api-library -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: adyen-ruby-api-library-${{ version }}/LICENSE
+  summary: Official Adyen API Library for Ruby.
+  homepage: https://rubygems.org/gems/adyen-ruby-api-library
+  repository: https://github.com/Adyen/adyen-ruby-api-library
+
+extra:
+  recipe-maintainers:
+    - danielnachun
