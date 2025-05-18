@@ -1,0 +1,41 @@
+context:
+  version: 8.0.2
+
+package:
+  name: rb-activerecord
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/activerecord-${{ version }}.gem
+  sha256: 793470b92c44e4198d0262ac60086b7822f0ea585079ad67e32a6e4c86f2d90a
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies activerecord-${{ version }}.gem
+    - gem unpack activerecord-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-activemodel
+    - rb-activesupport
+    - rb-timeout
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r active_record -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: activerecord-${{ version }}/MIT-LICENSE
+  summary: Databases on Rails.
+  homepage: https://rubygems.org/gems/activerecord
+  repository: https://github.com/rails/rails
+
+extra:
+  recipe-maintainers:
+    - danielnachun
