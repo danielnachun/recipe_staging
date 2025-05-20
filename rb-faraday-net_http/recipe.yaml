@@ -1,0 +1,39 @@
+context:
+  version: 3.4.0
+
+package:
+  name: rb-faraday-net_http
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/faraday-net_http-${{ version }}.gem
+  sha256: a1f1e4cd6a2cf21599c8221595e27582d9936819977bbd4089a601f24c64e54a
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies faraday-net_http-${{ version }}.gem
+    - gem unpack faraday-net_http-${{ version }}.gem
+
+requirements:
+  host:
+    - ruby =3.2
+  run:
+    - rb-net-http
+    - ruby >=3.2
+
+# tests:
+#   - script:
+#       - ruby -r 'faraday/net_http' -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: faraday-net_http-${{ version }}/LICENSE.md
+  summary: Faraday adapter for Net::HTTP
+  homepage: https://rubygems.org/gems/faraday-net_http
+  repository: https://github.com/lostisland/faraday-net_http
+
+extra:
+  recipe-maintainers:
+    - danielnachun
