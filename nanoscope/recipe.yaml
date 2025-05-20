@@ -1,0 +1,50 @@
+context:
+  version: 0.2
+
+package:
+  name: nanoscope
+  version: ${{ version }}
+
+source:
+  url: https://github.com/bartosovic-lab/nanoscope/archive/6c48aa316b4ea652398c0fbcad7554995359fb2b.tar.gz
+  sha256: 8199c9088f5f746f602a29bc0a1a75e4c7fec17057459f025f8b046424c7b9bc
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - sed
+  run:
+    - bioconductor-rtracklayer
+    - levenshtein
+    - pysam
+    - pyyaml
+    - python
+    - r-argparse
+    - r-base
+    - r-ggplot2
+    - r-funr
+    - r-mclust
+    - r-patchwork
+    - regex
+
+tests:
+  - script:
+    - debarcode --help
+    - filter_cellranger_gtf_file --help
+    - pick_cells --help
+    - test -f ${PREFIX}/bin/remove_LA_duplicates
+    - test -f ${PREFIX}/bin/remove_LA_duplicates
+
+about:
+  summary: Analysis pipeline for single-cell nano-CUT&Tag data
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/bartosovic-lab/nanoscope
+  repository: https://github.com/bartosovic-lab/nanoscope
+
+extra:
+  recipe-maintainers:
+    - danielnachun
