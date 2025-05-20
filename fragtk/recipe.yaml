@@ -1,0 +1,39 @@
+context:
+  version: 1.5
+
+package:
+  name: fragtk
+  version: ${{ version }}
+
+source:
+  url: https://github.com/stuart-lab/fragtk/archive/${{ version }}.tar.gz
+  sha256: 98cae73c5872822eeb3d0ddd2b121def6d6c6f9e788c7b1a93f974d3b9028501
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cargo-bundle-licenses
+    - cmake
+    - make
+
+tests:
+  - script:
+      - fragtk --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Fragment file toolkit
+  homepage: https://crates.io/crates/fragtk
+  repository: https://github.com/stuart-lab/fragtk
+
+extra:
+  recipe-maintainers:
+    - danielnachun
