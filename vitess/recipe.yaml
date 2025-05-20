@@ -1,0 +1,46 @@
+context:
+  version: 22.0.0
+
+package:
+  name: vitess
+  version: ${{ version }}
+
+source:
+  url: https://github.com/vitessio/vitess/archive/v${{ version }}.tar.gz
+  sha256: 578203a3235ee9a316856b9bfa46c7029563776e38b120a12694fac80d8c789e
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('go-nocgo') }}
+    - go-licenses
+
+tests:
+  - script:
+    - mysqlctl --help
+    - mysqlctld --help
+    - vtorc --help
+    - vtadmin --help
+    - vtctl --help
+    - vtctld --help
+    - vtctlclient --help
+    - vtctldclient --help
+    - vtgate --help
+    - vttablet --help
+    - vtbackup --help
+    - vtexplain --help
+
+about:
+  license: Apache-2.0
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: Vitess is a database clustering system for horizontal scaling of MySQL.
+  homepage: https://github.com/vitessio/vitess
+  repository: https://github.com/vitessio/vitess
+
+extra:
+  recipe-maintainers:
+    - danielnachun
