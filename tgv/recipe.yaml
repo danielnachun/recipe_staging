@@ -1,0 +1,36 @@
+context:
+  version: 0.0.5
+
+package:
+  name: tgv
+  version: ${{ version }}
+
+source:
+  url: https://github.com/zeqianli/tgv/archive/v${{ version }}.tar.gz
+  sha256: 0f6cc79d7d2c6a51818adba1918f631fff7eaca29047400ba5a92fa4e3d5d939
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - cargo-bundle-licenses
+
+tests:
+  - script:
+      - tgv --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE.md
+    - THIRDPARTY.yml
+  summary: Explore 5,000+ genomes in the terminal.
+  homepage: https://github.com/zeqianli/tgv
+  repository: https://github.com/zeqianli/tgv
+
+extra:
+  recipe-maintainers:
+    - danielnachun
