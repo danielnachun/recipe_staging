@@ -6,7 +6,7 @@ export CARGO_PROFILE_RELEASE_STRIP=symbols
 export CARGO_PROFILE_RELEASE_LTO=fat
 export OPENSSL_DIR=${PREFIX}
 export OPENSSL_NO_VENDOR=1
-export LIBCLANG_PATH=${PREFIX}
+export LIBCLANG_PATH=${PREFIX}/lib
 
 cargo-bundle-licenses \
     --format yaml \
