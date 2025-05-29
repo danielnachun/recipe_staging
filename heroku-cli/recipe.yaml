@@ -1,0 +1,39 @@
+context:
+  version: 10.8.0
+
+package:
+  name: heroku
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/heroku/-/heroku-${{ version }}.tgz
+  sha256: f3de9b210fa9cee0b2d4fea815b6540e151de2ea84238a12b4606734c635179a
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - nodejs
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs
+
+tests:
+  - script:
+      - heroku --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: CLI to interact with Heroku
+  homepage: https://cli.heroku.com
+  repository: https://github.com/heroku/cli
+
+extra:
+  recipe-maintainers:
+    - danielnachun
