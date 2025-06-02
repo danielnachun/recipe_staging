@@ -20,12 +20,19 @@ requirements:
     - htseq
     - numpy >1.24
     - python >=3.9
+    - rpy2
     - scipy
 
 tests:
   - script:
     - IPAFinder_DetectIPA --help
     - IPAFinder_GetAnno --help
+    - IPAFinder_PS_FDR --help
+    - IPAFinder_PS_FET --help
+    - IPAFinder_DetectIPA_population --help
+    - IPAFinder_MergeIPA --help
+    - IPAFinder_Population --help
+    - IPAFinder_QuanIPA --help
 
 about:
   repository: https://github.com/ZhaozzReal/IPAFinder
