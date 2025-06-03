@@ -1,0 +1,39 @@
+context:
+  version: 1.2.3
+
+package:
+  name: silence-tensorflow
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/s/silence-tensorflow/silence_tensorflow-${{ version }}.tar.gz
+  sha256: 4c55a32951af577e68e47e48675199b49944fd0fe042a026c069148bbef1d293
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+
+tests:
+  - python:
+      imports:
+        - silence_tensorflow
+      pip_check: true
+
+about:
+  summary: Simple python package to shut up Tensorflow warnings and logs.
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/LucaCappelletti94/silence_tensorflow
+
+extra:
+  recipe-maintainers:
+    - danielnachun
