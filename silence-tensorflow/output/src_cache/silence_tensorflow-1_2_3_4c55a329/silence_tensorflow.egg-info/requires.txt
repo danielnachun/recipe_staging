@@ -1,0 +1,6 @@
+
+[test]
+tensorflow
+validate_version_code
+pytest
+pytest-readme
