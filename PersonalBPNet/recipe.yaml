@@ -1,0 +1,51 @@
+context:
+  version: 0.6.0
+
+package:
+  name: personalbpnet
+  version: ${{ version }}
+
+source:
+  url: https://github.com/adamyhe/PersonalBPNet/archive/v${{ version }}-alpha.tar.gz
+  sha256: 1c579ec4aa75c6ba70f78f525e3184c957fe9e0e42bbc393c8d7c29649e65cd1
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - clipnet = personal_bpnet.cli_clipnet:cli
+      - pausenet = personal_bpnet.cli_pausenet:cli
+
+requirements:
+  host:
+    - python =3.9
+    - setuptools >=42
+    - wheel
+    - pip
+  run:
+    - python >=3.9
+    - bpnet-lite >=0.8.1
+    - pyfastx
+
+tests:
+  - python:
+      imports:
+        - personal_bpnet
+      pip_check: false
+  - requirements:
+      run:
+        - pip
+    script:
+      - clipnet --help
+      - pausenet --help
+
+about:
+  summary: "A small modification to bpnetlite's BPNet to accomodate large validation datasets."
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
