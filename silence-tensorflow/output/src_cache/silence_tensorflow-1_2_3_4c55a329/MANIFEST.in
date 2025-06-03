@@ -1,2 +1,0 @@
-include LICENSE
-include silence_tensorflow/py.typed
