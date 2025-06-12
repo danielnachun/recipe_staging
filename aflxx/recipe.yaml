@@ -2,7 +2,7 @@ context:
   version: 4.32c
 
 package:
-  name: afflib
+  name: aflxx
   version: ${{ version }}
 
 source:
@@ -21,6 +21,9 @@ requirements:
     - llvmdev
     - make
     - sed
+    - if: linux
+      then:
+        - binutils
   host:
     - cmocka
     - gmp
