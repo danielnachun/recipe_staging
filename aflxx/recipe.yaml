@@ -18,6 +18,7 @@ requirements:
     - ${{ compiler('cxx') }}
     - ${{ compiler('rust') }}
     - coreutils
+    - cpio
     - llvmdev
     - make
     - sed
@@ -27,6 +28,7 @@ requirements:
   host:
     - cmocka
     - gmp
+    - libcapstone
     - python
     - zlib
   run:
