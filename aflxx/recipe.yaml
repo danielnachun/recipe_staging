@@ -23,6 +23,7 @@ requirements:
     - sed
   host:
     - cmocka
+    - gmp
     - python
     - zlib
   run:
