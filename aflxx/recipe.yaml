@@ -28,7 +28,7 @@ requirements:
 
 tests:
   - script:
-      - afl-c++ -h
+      - afl-clang++ -h
 
 about:
   license: Apache-2.0
