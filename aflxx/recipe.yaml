@@ -21,6 +21,7 @@ requirements:
     - make
     - sed
   host:
+    - cmocka
     - python
     - zlib
   run:
