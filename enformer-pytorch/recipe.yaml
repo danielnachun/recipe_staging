@@ -1,16 +1,13 @@
-schema_version: 1
-
 context:
-  name: enformer-pytorch
-  version: 0.8.8
+  version: 0.8.10
 
 package:
-  name: ${{ name|lower }}
+  name: enformer-pytorch
   version: ${{ version }}
 
 source:
-  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/enformer-pytorch-${{ version }}.tar.gz
-  sha256: 84f05980b38323bdcc4a37d6e54fbf6a81843491e056f3d379bc3a51ba57696a
+  url: https://pypi.org/packages/source/e/enformer-pytorch/enformer_pytorch-${{ version }}.tar.gz
+  sha256: 9422258764149b6e25e3190a9df087b8d5af00b6ca90eb29dbd0045cac475485
 
 build:
   number: 0
@@ -21,6 +18,7 @@ requirements:
   host:
     - python
     - pip
+    - setuptools
   run:
     - python
     - discrete-key-value-bottleneck-pytorch >=0.0.8
@@ -48,4 +46,3 @@ about:
 extra:
   recipe-maintainers:
     - danielnachun
-
