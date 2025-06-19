@@ -1,0 +1,58 @@
+context:
+  version: 0.1.1
+
+package:
+  name: clipnet
+  version: ${{ version }}
+
+source:
+  url: https://github.com/Danko-Lab/clipnet/archive/ede8a8e6b9a7f6c21a1aa7561ba8e254aa346059.tar.gz
+  sha256: 7213eca1f3f3d2ff49aa12a10a472629f44e67a61d983614c92c4e667163d842
+
+build:
+  number: 0
+  noarch: python
+  python:
+    entry_points:
+      - clipnet = clipnet.cli:cli
+  script: 
+    - sed -i 's/import .utils/import utils/' clipnet/_calculate_activator_interaction.py
+    - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python =3.9
+    - setuptools >=61.0
+    - pip
+    - sed
+  run:
+    - gputil
+    - h5py
+    - joblib
+    - matplotlib-base
+    - numpy >=1.26,<2
+    - pyfastx
+    - python >=3.9
+    - scipy
+    - seqlogo
+    - shap >=0.44,<0.45
+    - tensorflow >=2.14,<2.15
+    - silence-tensorflow
+    - tqdm
+
+tests:
+  - python:
+      imports:
+        - clipnet
+      pip_check: false
+  - script:
+      - clipnet --help
+
+about:
+  summary: A deep learning approach to predicting transcription initiation from sequence at single nucleotide resolution
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
