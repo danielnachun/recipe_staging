@@ -1,0 +1,60 @@
+context:
+  name: savemoney
+  version: 0.3.7
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/savemoney-${{ version }}.tar.gz
+  sha256: dbcfccf7b581c8a7b100490216d86f1d87eb4c672f08e00b0748e7ef7a000d57
+
+build:
+  number: 0
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - ${{ compiler('c') }}
+  host:
+    - python
+    - cython
+    - numpy
+    - pip
+    - setuptools
+  run:
+    - python
+    - pandas >=1.5.3
+    - parasail-python >=1.3.4
+    - pillow >=9.4.0
+    - pulp >=2.7.0
+    - scipy >=1.11.4
+    - snapgene-reader >=0.1.20
+    - tqdm >=4.66.1
+    - biopython >=1.83
+    - cython >=3.0.7
+    - matplotlib-base >=3.7.1
+    - pyspoa >=0.2.1
+    - ${{ pin_compatible('numpy') }}
+
+tests:
+  - python:
+      imports:
+        - savemoney
+  - requirements:
+      run:
+        - pip
+    script:
+      - pip check
+
+about:
+  summary: Simple Algorithm for Very Efficient Multiplexing of Oxford Nanopore Experiments for You!
+  license: CC-BY-NC-SA-4.0
+  license_file: LICENSE
+  homepage: https://github.com/MasaakiU/MultiplexNanopore
+
+extra:
+  recipe-maintainers:
+    - danielnachun
