@@ -10,7 +10,7 @@ source:
   sha256: 6c651f08f090487287053ba42f37c5ad6f2aba403503e4fee5eafd9a27999945
 
 build:
-  number: 5
+  number: 0
   noarch: generic
   dynamic_linking:
     rpaths:
@@ -37,7 +37,7 @@ requirements:
 
 tests:
   - script:
-      - R -e "library('metap')
+      - R -e "library('metap')"
 
 about:
   license: GPL-2.0-only
