@@ -1,0 +1,51 @@
+context:
+  version: 0.8.1
+
+package:
+  name: bpnet-lite
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/b/bpnet-lite/bpnet_lite-${{ version }}.tar.gz
+  sha256: 59f35123585a27a2998d97f81e1d0473713c0c5359b0e70eb8af670dd172bb98
+
+build:
+  noarch: python
+  number: 0
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+    - numpy >=1.14.2
+    - scipy >=1.0.0
+    - pandas >=1.3.3
+    - pytorch >=1.9.0
+    - h5py >=3.7.0
+    - tqdm >=4.64.1
+    - seaborn >=0.11.2
+    - modisco-lite >=2.0.0
+    - tangermeme >=0.2.0
+
+tests:
+  - python:
+      imports:
+        - bpnetlite
+      pip_check: false
+  - script:
+      - bpnet --help
+      - chrombpnet --help
+
+about:
+  summary: bpnet-lite is a minimal implementation of BPNet, a neural network aimed at interpreting regulatory activity of the genome.
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/jmschrei/bpnet-lite
+
+extra:
+  recipe-maintainers:
+    - danielnachun
