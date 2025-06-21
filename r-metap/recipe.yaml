@@ -1,0 +1,51 @@
+context:
+  version: 1.12
+
+package:
+  name: r-metap
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://cran.r-project.org/src/contrib/metap_${{ version }}.tar.gz
+  sha256: 6c651f08f090487287053ba42f37c5ad6f2aba403503e4fee5eafd9a27999945
+
+build:
+  number: 0
+  noarch: generic
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  host:
+    - r-base
+    - r-mathjaxr
+    - r-mutoss
+    - r-qqconf
+    - r-rdpack
+    - r-tfisher
+    - r-lattice
+  run:
+    - r-base
+    - r-mathjaxr
+    - r-mutoss
+    - r-qqconf
+    - r-rdpack
+    - r-tfisher
+    - r-lattice
+
+tests:
+  - script:
+      - R -e "library('metap')"
+
+about:
+  license: GPL-2.0-only
+  summary: |
+    The canonical way to perform meta-analysis involves using effect sizes. When they are not available this package provides a number of methods for meta-analysis of significance values including the methods of Edgington, Fisher, Lancaster, Stouffer, Tippett, and Wilkinson; a number of data-sets to replicate published
+    results; and a routine for graphical display.
+  homepage: http://www.dewey.myzen.co.uk/meta/meta.html
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
