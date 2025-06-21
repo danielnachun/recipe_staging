@@ -1,0 +1,35 @@
+context:
+  version: 1.2
+
+package:
+  name: gmato
+  version: ${{ version }}
+
+source:
+  url: https://downloads.sourceforge.net/project/gmato/GMAToV${{ version }}/gmatoV${{ version }}Build20130106.zip
+  sha256: 84bcd4991cb5a056194fb94331c66ef353dd597845e0fec28e08f68680bdb323
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  build:
+    - sed
+  run:
+    - perl
+
+tests:
+  - script:
+      - gmat.pl
+
+about:
+  license: MIT
+  license_file: license.txt
+  summary: |
+    GMATO : Microsatellite Analyzing Tool for Huge Genome at any size
+  homepage: https://sourceforge.net/projects/gmato/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
