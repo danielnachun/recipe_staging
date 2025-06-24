@@ -37,7 +37,6 @@ requirements:
     - cython >=3.0.7
     - matplotlib-base >=3.7.1
     - pyspoa >=0.2.1
-    - ${{ pin_compatible('numpy') }}
 
 tests:
   - python:
