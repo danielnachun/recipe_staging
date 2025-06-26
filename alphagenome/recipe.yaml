@@ -1,0 +1,61 @@
+schema_version: 1
+
+context:
+  name: alphagenome
+  version: 0.0.1
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/google-deepmind/alphagenome/archive/v${{ version }}.tar.gz
+  sha256: 58041de4704a036694d048a85e05bbb56ba3663e2fc1cc076764762a463c2682
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python >=3.10
+    - hatchling
+    - grpcio-tools <=1.67.1
+    - importlib-resources
+    - pip
+  run:
+    - python >=3.10
+    - absl-py
+    - anndata
+    - grpcio >=1.67.1
+    - immutabledict
+    - intervaltree
+    - jaxtyping
+    - matplotlib-base
+    - ml_dtypes
+    - numpy
+    - pandas
+    - protobuf >=5.28.3
+    - pyarrow
+    - scipy
+    - seaborn
+    - tqdm
+    - typeguard
+    - typing_extensions
+    - zstandard
+
+tests:
+  - python:
+      imports:
+        - alphagenome
+      pip_check: true
+
+about:
+  summary: A Python SDK for interacting and visualizing genomic models.
+  license: Apache-2.0
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
