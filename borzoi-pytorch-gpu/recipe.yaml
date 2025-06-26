@@ -22,7 +22,7 @@ requirements:
     - setuptools
   run:
     - anndata
-    - cudatoolkit
+    - cuda-toolkit
     - python
     - enformer-pytorch
     - flash-attn
