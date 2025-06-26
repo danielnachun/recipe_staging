@@ -1,0 +1,51 @@
+context:
+  version: 0.4.1
+
+package:
+  name: borzoi-pytorch-gpu
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/b/borzoi-pytorch/borzoi-pytorch-${{ version }}.tar.gz
+  sha256: abcb4e45b6d618df61cd3f022dba5b5f30cd5153499a04d028c609ae9d7f27b9
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  skip: not linux
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - anndata
+    - cudatoolkit
+    - python
+    - enformer-pytorch
+    - flash-attn
+    - einops >=0.5
+    - numpy >=1.14.2
+    - pytorch >=2.1.0
+    - transformers >=4.34.1
+    - jupyter >=1.0.0
+    - intervaltree >=3.1.0,<3.2.dev0
+    - pandas
+
+tests:
+  - python:
+      imports:
+        - borzoi_pytorch
+      pip_check: true
+
+about:
+  summary: The Borzoi model from Linder et al., but in Pytorch
+  license: Apache-2.0
+  license_file: LICENSE
+  homepage: https://github.com/johahi/borzoi-pytorch
+
+extra:
+  recipe-maintainers:
+    - danielnachun
