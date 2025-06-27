@@ -10,7 +10,7 @@ source:
   sha256: 9422258764149b6e25e3190a9df087b8d5af00b6ca90eb29dbd0045cac475485
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
@@ -23,7 +23,7 @@ requirements:
     - python
     - discrete-key-value-bottleneck-pytorch >=0.0.8
     - einops >=0.3
-    - numpy
+    - numpy >=2.0,<2.3
     - pytorch >=1.6
     - torchmetrics
     - polars
