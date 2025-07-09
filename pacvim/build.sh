@@ -2,9 +2,6 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-sed -i 's/CFLAGS =/CFLAGS +=/' Makefile
-export CFLAGS=${CXXFLAGS}
-
 make install PREFIX=${PREFIX} \
-    CXX="${CXX}" \
+    CXX="${CXX} ${CXXFLAGS}" \
     LFLAGS="${LDFLAGS} -lncurses"

@@ -17,13 +17,12 @@ requirements:
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
     - make
-    - sed
   host:
     - ncurses
 
 tests:
-  - script:
-      - pacvim --help
+  - script: |
+      pacvim --help 2>&1 | grep -q "Error opening terminal: unknown."
 
 about:
   license: LGPL-3.0-or-later
