@@ -1,0 +1,37 @@
+context:
+  version: 1.1.1
+
+package:
+  name: pacvim
+  version: ${{ version }}
+
+source:
+  url: https://github.com/jmoon018/PacVim/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: c869c5450fbafdfe8ba8a8a9bba3718775926f276f0552052dcfa090d21acb28
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - make
+  host:
+    - ncurses
+
+tests:
+  - script:
+      - pacvim --help
+
+about:
+  license: LGPL-3.0-or-later
+  license_file:
+    - COPYING
+    - COPYING.LESSER
+  summary: Learn vim commands via a game
+  homepage: https://github.com/jmoon018/PacVim
+
+extra:
+  recipe-maintainers:
+    - danielnachun
