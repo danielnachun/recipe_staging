@@ -26,9 +26,7 @@ tests:
 
 about:
   license: LGPL-3.0-or-later
-  license_file:
-    - COPYING
-    - COPYING.LESSER
+  license_file: COPYING
   summary: Learn vim commands via a game
   homepage: https://github.com/jmoon018/PacVim
 
