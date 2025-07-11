@@ -1,0 +1,39 @@
+context:
+  version: 11.4.3
+
+package:
+  name: cdxgen
+  version: ${{ version }}
+
+source:
+  url: https://registry.npmjs.org/@cyclonedx/cdxgen/-/cdxgen-${{ version }}.tgz
+  sha256: a6fb6d13e1e64b9a3dc7a5660f68ad480290534258c980e673fdb0916f7e0e25
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - nodejs <24
+    - pnpm
+    - pnpm-licenses
+  run:
+    - nodejs <24
+
+tests:
+  - script:
+      - cdxgen --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - third-party-licenses.txt
+  summary: Creates CycloneDX Software Bill of Materials (SBOM) from source or container image
+  homepage: http://github.com/cyclonedx/cdxgen
+  repository: http://github.com/cyclonedx/cdxgen
+
+extra:
+  recipe-maintainers:
+    - danielnachun
