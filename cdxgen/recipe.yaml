@@ -15,11 +15,11 @@ build:
 
 requirements:
   host:
-    - nodejs
+    - nodejs <24
     - pnpm
     - pnpm-licenses
   run:
-    - nodejs
+    - nodejs <24
 
 tests:
   - script:
