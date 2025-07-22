@@ -1,16 +1,13 @@
-schema_version: 1
-
 context:
-  name: alphagenome
-  version: 0.0.1
+  version: 0.1.0
 
 package:
-  name: ${{ name|lower }}
+  name: alphagenome
   version: ${{ version }}
 
 source:
-  url: https://github.com/google-deepmind/alphagenome/archive/v${{ version }}.tar.gz
-  sha256: 58041de4704a036694d048a85e05bbb56ba3663e2fc1cc076764762a463c2682
+  url: https://pypi.org/packages/source/a/alphagenome/alphagenome-${{ version }}.tar.gz
+  sha256: ff6370d1c3c0e6fdd1c81e03bb2b16356ca7ccb97f64f1d24163221581f05bc4
 
 build:
   number: 0
@@ -19,13 +16,13 @@ build:
 
 requirements:
   host:
-    - python >=3.10
+    - python
     - hatchling
     - grpcio-tools <=1.67.1
     - importlib-resources
     - pip
   run:
-    - python >=3.10
+    - python
     - absl-py
     - anndata
     - grpcio >=1.67.1
