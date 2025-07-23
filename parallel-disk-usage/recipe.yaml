@@ -1,0 +1,37 @@
+context:
+  version: 0.13.1
+
+package:
+  name: parallel-disk-usage
+  version: ${{ version }}
+
+source:
+  url: https://github.com/KSXGitHub/parallel-disk-usage/archive/refs/tags/${{ version }}.tar.gz
+  sha256: 9f22e20764a434b3cb39a8f92b7e11bea851cca99077e15de165a8a25342cde6
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - cargo-auditable
+    - cargo-bundle-licenses
+
+tests:
+  - script:
+      - pdu --help
+
+about:
+  license: Apache-2.0
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Highly parallelized, blazing fast directory tree analyzer
+  homepage: https://github.com/KSXGitHub/parallel-disk-usage
+  repository: https://github.com/KSXGitHub/parallel-disk-usage
+
+extra:
+  recipe-maintainers:
+    - danielnachun
