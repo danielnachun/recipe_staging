@@ -1,0 +1,58 @@
+context:
+  version: 0.1.0
+
+package:
+  name: alphagenome
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/a/alphagenome/alphagenome-${{ version }}.tar.gz
+  sha256: ff6370d1c3c0e6fdd1c81e03bb2b16356ca7ccb97f64f1d24163221581f05bc4
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - hatchling
+    - grpcio-tools <=1.67.1
+    - importlib-resources
+    - pip
+  run:
+    - python
+    - absl-py
+    - anndata
+    - grpcio >=1.67.1
+    - immutabledict
+    - intervaltree
+    - jaxtyping
+    - matplotlib-base
+    - ml_dtypes
+    - numpy
+    - pandas
+    - protobuf >=5.28.3
+    - pyarrow
+    - scipy
+    - seaborn
+    - tqdm
+    - typeguard
+    - typing_extensions
+    - zstandard
+
+tests:
+  - python:
+      imports:
+        - alphagenome
+      pip_check: true
+
+about:
+  summary: A Python SDK for interacting and visualizing genomic models.
+  license: Apache-2.0
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
