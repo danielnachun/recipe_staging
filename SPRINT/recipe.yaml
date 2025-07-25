@@ -1,0 +1,47 @@
+context:
+  name: SPRINT
+  version: 0.1.8
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/jumphone/SPRINT/archive/${{ version }}.tar.gz
+  sha256: 0c6a4357af330583c93aa3e441f572bb88d727dc3c49b17d47ad3f6056c0d4c8
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - sprint=sprint:main
+
+requirements:
+  host:
+    - python <3
+    - pip
+    - setuptools
+  run:
+    - python <3
+
+tests:
+  - python:
+      imports:
+        - sprint
+      pip_check: true
+  - requirements:
+      run:
+        - pip
+    script:
+      - sprint --help
+
+about:
+  license: MIT
+  license_file: LICENSE
+  homepage: http://sprint.tianlab.cn
+
+extra:
+  recipe-maintainers:
+    - danielnachun
