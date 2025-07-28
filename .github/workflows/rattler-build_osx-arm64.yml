@@ -24,7 +24,7 @@ jobs:
 
       - name: Get branch name
         id: branch-name
-        uses: tj-actions/branch-names@v8
+        uses: tj-actions/branch-names@v9
 
       - name: Get SHA of last commit to main branch
         uses: nrwl/nx-set-shas@v4
