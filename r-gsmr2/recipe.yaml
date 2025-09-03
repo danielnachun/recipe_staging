@@ -1,0 +1,38 @@
+context:
+  version: 1.1.2
+
+package:
+  name: r-gsmr2
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/JianYang-Lab/gsmr2/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: c2190fab6356371b1076794093610c68151ddcebfb97f6233881559295a9b67e
+
+build:
+  noarch: generic
+  number: 0
+  script: R CMD INSTALL --build . ${R_ARGS}
+
+requirements:
+  host:
+    - r-base
+    - r-markdown
+    - r-survey >=4.4
+  run:
+    - r-base
+    - r-markdown
+    - r-survey >=4.4
+
+tests:
+  - script: R -e "library('gsmr2')"
+
+about:
+  license: GPL-2.0-or-later
+  license_file: LICENSE
+  summary: gsmr2 - a tool for causal inference between complex traits
+  homepage: https://yanglab.westlake.edu.cn/software/gsmr/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
