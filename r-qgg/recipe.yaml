@@ -10,9 +10,11 @@ source:
   sha256: dff06a1f4684622a4e60f617758254d25210f5081d814bc143906cea8b297a19
 
 build:
-  number: 3
+  number: 4
   script:
-    content: R CMD INSTALL --build .
+    content: |
+      sed -i 's/-lheapt_w//g' ${PREFIX}/lib/R/etc/Makeconf
+      R CMD INSTALL --build .
   dynamic_linking:
     rpaths:
       - lib/R/lib/
@@ -21,7 +23,6 @@ build:
 requirements:
   build:
     - ${{ compiler('c') }}
-    - ${{ compiler('fortran') }}
     - ${{ compiler('cxx') }}
     - autoconf
   host:
