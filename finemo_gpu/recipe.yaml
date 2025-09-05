@@ -1,0 +1,55 @@
+context:
+  version: 0.30
+
+package:
+  name: finemo_gpu
+  version: ${{ version }}
+
+source:
+  url: https://github.com/austintwang/finemo_gpu/archive/13242f646af351edcefc6faca427301cd29349c6.tar.gz
+  sha256: 15eec1c73e2c1b531f8f90484867d78148fa091bf9c89659f7964229941ee9de
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+    - pytorch
+    - numpy
+    - scipy
+    - polars
+    - matplotlib-base
+    - h5py
+    - hdf5plugin
+    - tqdm
+    - jinja2
+    - pybigwig
+    - pyfaidx
+
+tests:
+  - python:
+      imports:
+        - finemo
+  - requirements:
+      run:
+        - pip
+    script:
+      - finemo --help
+      - pip check
+
+about:
+  summary: Fi-NeMo (Finding Neural network Motifs) is a GPU-accelerated hit caller for identifying occurrences of TFMoDISCo motifs.
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/austintwang/finemo_gpu
+
+extra:
+  recipe-maintainers:
+    - danielnachun
