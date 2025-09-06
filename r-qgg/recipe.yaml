@@ -25,6 +25,7 @@ requirements:
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
     - autoconf
+    - sed
   host:
     - r-mass
     - r-mcmcpack
