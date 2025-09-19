@@ -30,7 +30,7 @@ requirements:
     - keras >=2.0.4,<=2.2.4
     - descartes
     - shapely
-    - gtfparse >=1.0.7
+    - gtfparse >=1.0.7,<=2.1.0
     - tensorflow
 
 tests:
