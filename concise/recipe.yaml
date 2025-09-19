@@ -1,0 +1,50 @@
+context:
+  version: 0.6.9
+
+package:
+  name: concise
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/c/concise/concise-${{ version }}.tar.gz
+  sha256: 9da41e0a80f1d15aae1b3c2738deaf393bca073a0069abc502e3c55fc69985e5
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python
+    - numpy
+    - pip
+    - setuptools
+  run:
+    - python
+    - numpy
+    - pandas
+    - scipy
+    - scikit-learn >=0.18
+    - matplotlib-base
+    - keras >=2.0.4,<=2.2.4
+    - descartes
+    - shapely
+    - gtfparse >=1.0.7,<=1.2.1
+    - tensorflow
+
+tests:
+  - python:
+      imports:
+        - concise
+      pip_check: true
+
+about:
+  summary: CONCISE (COnvolutional Neural for CIS-regulatory Elements)
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/gagneurlab/concise
+
+extra:
+  recipe-maintainers:
+    - danielnachun
