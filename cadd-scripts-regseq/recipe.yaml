@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/kircherlab/CADD-scripts/archive//v${{ version }}.tar.gz
-  sha256: 46f06c31adc7bdde612c60120f892f2a622494b02812fc047e0d3cee6bd25a0f
+  sha256: bcb62fdd2d77e10d4e39555f7dda1be6a5c64ac89c36f8d598570be951a0a3e1
 
 build:
   number: 0
