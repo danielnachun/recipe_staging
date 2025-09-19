@@ -2,7 +2,7 @@ context:
   version: 1.7.2
 
 package:
-  name: cadd-scripts-minimal
+  name: cadd-scripts
   version: ${{ version }}
 
 source:
