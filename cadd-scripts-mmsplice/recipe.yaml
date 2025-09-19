@@ -24,6 +24,7 @@ requirements:
     - importlib-metadata
     - mmsplice
     - pandas
+    - pyranges <0.1
     - numpy
     - tqdm
     - tensorflow <2
