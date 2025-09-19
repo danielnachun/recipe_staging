@@ -21,7 +21,6 @@ requirements:
     - pip
     - setuptools
   run:
-    - polars <=0.14.23
     - python
     - numpy
     - pandas
@@ -31,7 +30,7 @@ requirements:
     - keras >=2.0.4,<=2.2.4
     - descartes
     - shapely
-    - gtfparse >=1.0.7
+    - gtfparse >=1.0.7,<=1.2.1
     - tensorflow
 
 tests:
