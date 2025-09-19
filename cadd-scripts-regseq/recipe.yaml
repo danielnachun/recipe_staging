@@ -1,8 +1,6 @@
-schema_version: 1
-
 context:
-  name: regseq
-  version: 1.7
+  name: cadd-scripts-regseq
+  version: 1.7.2
 
 package:
   name: ${{ name|lower }}
@@ -21,7 +19,6 @@ requirements:
     - sed
   host:
     - python
-    - pip
   run:
     - python >=3.9
     - click

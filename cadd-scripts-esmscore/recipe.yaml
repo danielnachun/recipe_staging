@@ -2,7 +2,7 @@ context:
   version: 1.7.2
 
 package:
-  name: cadd-scripts-minimal
+  name: cadd-scripts-esmscore
   version: ${{ version }}
 
 source:
@@ -19,24 +19,18 @@ requirements:
   host:
     - python
   run:
-    - configparser
-    - joblib
-    - numpy >=1.24
-    - pandas
-    - pysam
+    - biopython
+    - click
+    - esm
     - python >=3.9
-    - pyvcf3
-    - scikit-learn
+    - numpy >=1.24
+    - pytorch
 
 tests:
   - script:
-      - VCF2vepVCF.py --help
-      - annotateVEPvcf.py --help
-      - appendPHREDscore.py --help
-      - extract_scored.py --help
-      - max_line_hierarchy.py --help
-      - predictSKmodel.py --help
-      - trackTransformation.py --help
+      - esmScore_frameshift_av.py --help
+      - esmScore_inFrame_av.py --help
+      - esmScore_missense_av_fast.py --help
 
 about:
   license: MIT
