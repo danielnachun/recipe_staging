@@ -25,6 +25,7 @@ requirements:
     - pandas
     - numpy
     - tqdm
+    - tensorflow <2
 
 tests:
   - script:
