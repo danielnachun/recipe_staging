@@ -21,6 +21,7 @@ requirements:
   run:
     - python
     - concise
+    - importlib-metadata
     - mmsplice
     - pandas
     - numpy
