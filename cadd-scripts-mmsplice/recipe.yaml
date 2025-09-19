@@ -27,8 +27,6 @@ requirements:
     - tqdm
 
 tests:
-  - python:
-      pip_check: false
   - script:
       - MMSplice.py --help
 

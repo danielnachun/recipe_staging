@@ -29,8 +29,6 @@ requirements:
     - pybedtools
 
 tests:
-  - python:
-      pip_check: false
   - script:
       - predictVariants.py --help
 
