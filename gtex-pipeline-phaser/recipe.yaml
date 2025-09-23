@@ -1,0 +1,35 @@
+context:
+  version: gtex_v10
+
+package:
+  name: gtex-pipeline-phaser
+  version: ${{ version }}
+
+source:
+  url: https://github.com/broadinstitute/gtex-pipeline/archive/${{ version }}.tar.gz
+  sha256: 4d9c2f54761923ef803a5ad2e8fdfa0f0c88b901bcf01364935fb8b6b3ab21ab
+
+build:
+  number: 1
+  noarch: python
+
+requirements:
+  build:
+    - sed
+  run:
+    - python <3
+    - pandas
+
+tests:
+  - script:
+      - phaser_wrapper.py -h
+
+about:
+  license: LicenseRef-OTHER
+  summary: GTEx & TOPMed data production and analysis pipelines - phASER wrapper
+  homepage: https://github.com/broadinstitute/gtex-pipeline
+  repository: https://github.com/broadinstitute/gtex-pipeline
+
+extra:
+  recipe-maintainers:
+    - danielnachun
