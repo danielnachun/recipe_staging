@@ -2,6 +2,8 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+sed -i 's/! npm install --unsafe-perm --omit=dev/false/' postinstall.sh
+
 # Create package archive and install globally
 npm pack --ignore-scripts
 npm install -ddd \

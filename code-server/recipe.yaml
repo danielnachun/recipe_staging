@@ -1,14 +1,13 @@
 context:
-  name: code-server
-  version: 4.97.2
+  version: 4.104.2
 
 package:
-  name: ${{ name|lower }}
+  name: code-server
   version: ${{ version }}
 
 source:
   url: https://registry.npmjs.org/code-server/-/code-server-${{ version }}.tgz
-  sha256: a15200dfd610541c582e77754d8589fa8a1c1b9f78e11654f6b2b7886ae98964
+  sha256: 7dee94db07a592743d7ec158e47281b1f35b5b5982f3e4288f252254bd4a3dde
 
 build:
   number: 0
@@ -19,13 +18,14 @@ requirements:
     - ${{ compiler('cxx') }}
     - make
     - python
+    - sed
   host:
     - krb5
-    - nodejs=20
+    - nodejs=22
     - pnpm
     - pnpm-licenses
   run:
-    - nodejs=20
+    - nodejs=22
 
 tests:
   - script:
