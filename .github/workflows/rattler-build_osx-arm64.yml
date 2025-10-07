@@ -67,6 +67,7 @@ jobs:
           mkdir /tmp/rattler-build
           for dir in ${{ needs.setup.outputs.changed_directories }}; do
             cp -R ${dir} /tmp/recipes
+            cat .github/variants.yaml >> /tmp/recipes/${dir}/variants.yaml
           done
 
       - name: Build conda packages

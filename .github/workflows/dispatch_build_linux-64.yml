@@ -43,6 +43,7 @@ jobs:
           mkdir /tmp/recipes
           mkdir /tmp/rattler-build
           cp -R ${{ github.event.inputs.package }} /tmp/recipes
+          cat .github/variants.yaml >> /tmp/recipes/${{ github.event.inputs.package }}/variants.yaml
 
       - name: Setup up docker buildx
         uses: docker/setup-buildx-action@v3
