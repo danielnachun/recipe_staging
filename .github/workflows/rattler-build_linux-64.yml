@@ -67,6 +67,7 @@ jobs:
           for dir in ${{ needs.setup.outputs.changed_directories }}; do
             cp -r ${dir} /tmp/recipes
           done
+          cat .github/variants.yaml >> /tmp/recipes/variants.yaml
 
       - name: Setup up docker buildx
         uses: docker/setup-buildx-action@v3

@@ -36,6 +36,7 @@ jobs:
           mkdir /tmp/recipes
           mkdir /tmp/rattler-build
           cp -R ${{ github.event.inputs.package }} /tmp/recipes
+          cat .github/variants.yaml >> /tmp/recipes/variants.yaml
 
       - name: Build conda packages
         shell: pixi exec --spec rattler-build -- bash -e {0}

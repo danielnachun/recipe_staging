@@ -1,0 +1,56 @@
+context:
+  version: 2.1.0
+
+package:
+  name: r-l0learn
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - https://cloud.r-project.org//src/contrib/L0Learn_${{ version }}.tar.gz
+  sha256: 801c8f1775749d23efbae0e38a30a9f97f0b2d885ba0360a55953f5c71161914
+
+build:
+  number: 0
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - ${{ compiler('cxx') }}
+    - make
+  host:
+    - r-base
+    - r-ggplot2
+    - r-mass
+    - r-matrix
+    - r-rcpp
+    - r-rcpparmadillo
+    - r-reshape2
+  run:
+    - r-base
+    - r-ggplot2
+    - r-mass
+    - r-matrix
+    - r-rcpp
+    - r-rcpparmadillo
+    - r-reshape2
+
+tests:
+    - script:
+      - R -e "library('L0Learn')"
+
+about:
+  license: MIT
+  summary: Highly optimized toolkit for approximately solving L0-regularized learning problems (a.k.a. best subset selection). The algorithms are based on coordinate descent and local combinatorial search.
+  license_file:
+    - LICENSE
+  homepage: https://github.com/hazimehh/L0Learn
+
+extra:
+  recipe-maintainers:
+    - danielnachun
