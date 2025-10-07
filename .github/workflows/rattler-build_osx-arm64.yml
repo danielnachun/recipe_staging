@@ -67,8 +67,8 @@ jobs:
           mkdir /tmp/rattler-build
           for dir in ${{ needs.setup.outputs.changed_directories }}; do
             cp -R ${dir} /tmp/recipes
+            cat .github/variants.yaml >> /tmp/recipes/${dir}/variants.yaml
           done
-          cat .github/variants.yaml >> /tmp/recipes/variants.yaml
 
       - name: Build conda packages
         shell: pixi exec --spec rattler-build -- bash -e {0}

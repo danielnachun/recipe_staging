@@ -66,8 +66,8 @@ jobs:
           mkdir /tmp/rattler-build
           for dir in ${{ needs.setup.outputs.changed_directories }}; do
             cp -r ${dir} /tmp/recipes
+            cat .github/variants.yaml >> /tmp/recipes/${dir}/variants.yaml
           done
-          cat .github/variants.yaml >> /tmp/recipes/variants.yaml
 
       - name: Setup up docker buildx
         uses: docker/setup-buildx-action@v3
