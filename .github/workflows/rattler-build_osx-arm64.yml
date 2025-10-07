@@ -71,7 +71,7 @@ jobs:
           done
 
       - name: Build conda packages
-        shell: pixi exec --spec rattler-build -- bash -e {0}
+        shell: pixi exec --spec rattler-build=0.47.0 -- bash -e {0}
         run: |
           rattler-build build -c dnachun -c conda-forge -c bioconda \
             --output-dir /tmp/rattler-build --recipe-dir /tmp/recipes
