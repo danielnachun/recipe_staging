@@ -3,6 +3,8 @@ MACOSX_DEPLOYMENT_TARGET:
 c_stdlib_version:
   - if: linux
     then: 2.17
+  - if: osx
+    then: 11.0
 c_stdlib:
   - if: linux
     then: sysroot
