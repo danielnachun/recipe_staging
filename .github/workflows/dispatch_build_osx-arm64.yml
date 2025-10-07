@@ -39,12 +39,12 @@ jobs:
           cat .github/variants.yaml >> /tmp/recipes/${{ github.event.inputs.package }}/variants.yaml
 
       - name: Build conda packages
-        shell: pixi exec --spec rattler-build -- bash -e {0}
+        shell: pixi exec --spec rattler-build=0.47.0 -- bash -e {0}
         run: |
           rattler-build build -c dnachun -c conda-forge -c bioconda \
             --output-dir /tmp/rattler-build --recipe-dir /tmp/recipes
 
       - name: Upload package
         if: ${{ github.event.inputs.upload == 'true' }}
-        shell: pixi exec --spec rattler-build -- bash -e {0}
+        shell: pixi exec --spec rattler-build=0.47.0 -- bash -e {0}
         run: rattler-build upload anaconda --force /tmp/rattler-build/osx-arm64/*.conda
