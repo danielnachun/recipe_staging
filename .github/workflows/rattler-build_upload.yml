@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: ["linux-64", "osx-arm64"]
+        platform: ["linux-64", "linux-aarch64", "osx-arm64"]
     env:
       ANACONDA_API_KEY: ${{ secrets.ANACONDA_API_TOKEN }}
       ANACONDA_OWNER: ${{ vars.ANACONDA_OWNER }}
