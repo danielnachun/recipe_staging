@@ -1,0 +1,37 @@
+context:
+  version: 0.7.1
+
+package:
+  name: air
+  version: ${{ version }}
+
+source:
+  url: https://github.com/posit-dev/air/archive/refs/tags/${{ version }}.tar.gz
+  sha256: 627e29874b9e911a87cfd9086aef60445443c0fa886b014544c6e295a7051576
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - cargo-bundle-licenses
+
+tests:
+  - script:
+      - air --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: R formatter and language server
+  homepage: https://posit-dev.github.io/air/
+  repository: https://github.com/posit-dev/air
+
+extra:
+  recipe-maintainers:
+    - danielnachun
