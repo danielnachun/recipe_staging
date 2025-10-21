@@ -33,6 +33,7 @@ requirements:
     - r-rcpp
     - r-rcpparmadillo
     - r-rcppparallel
+    - r-ggplot2 <4
   run:
     - libopenblas >=0.3.29
     - r-base
@@ -45,6 +46,7 @@ requirements:
     - r-rcpp
     - r-rcpparmadillo
     - r-rcppparallel
+    - r-ggplot2 <4
 
 tests:
   - script:
