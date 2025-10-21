@@ -21,6 +21,7 @@ requirements:
     - ${{ compiler('c') }}
     - ${{ stdlib('c') }}
     - ${{ compiler('cxx') }}
+    - sed
   host:
     - r-base
     - r-ebnm
