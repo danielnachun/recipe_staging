@@ -1,18 +1,16 @@
 context:
   version: 0.3.36
-  name: mr.mash.alpha
 
 package:
-  name: r-${{ name }}
+  name: r-mr.mash.alpha
   version: ${{ version|replace("-", "_") }}
 
 source:
-  url: https://github.com/stephenslab/${{ name }}/archive/v${{ version }}.tar.gz
+  url: https://github.com/stephenslab/mr.mash.alpha/archive/v${{ version }}.tar.gz
   sha256: 9ce26c4869528a955681a589a7702fd945afd8f3de9515d7b560d2c10efb2688
 
 build:
-  number: 1
-  merge_build_and_host_envs: ${{ true if win }}
+  number: 2
   dynamic_linking:
     rpaths:
       - lib/R/lib/
@@ -21,9 +19,8 @@ build:
 requirements:
   build:
     - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
     - ${{ compiler('cxx') }}
-    - if: build_platform != target_platform
-      then: cross-r-base ${{ r_base }}
   host:
     - r-base
     - r-ebnm
@@ -58,7 +55,7 @@ about:
   summary: |
     Provides an implementation of methods for multivariate
     multiple regression with adaptive shrinkage priors.
-  homepage: https://github.com/stephenslab/${{ name }}
+  homepage: https://github.com/stephenslab/mr.mash.alpha
 
 extra:
   recipe-maintainers:
