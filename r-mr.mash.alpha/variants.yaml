@@ -1,3 +1,7 @@
+cxx_compiler_version:
+  - if: osx
+    then:
+      - 20
 r_base:
   - 4.3
   - 4.4
