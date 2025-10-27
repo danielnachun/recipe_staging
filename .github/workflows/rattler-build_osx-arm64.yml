@@ -77,7 +77,7 @@ jobs:
             --output-dir /tmp/rattler-build --recipe-dir /tmp/recipes
 
       - name: Upload packages to GitHub Actions
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: rattler-build_${{github.event.pull_request.head.sha}}_osx-arm64
           path: /tmp/rattler-build/osx-arm64
