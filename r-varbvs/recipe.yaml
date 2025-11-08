@@ -1,0 +1,56 @@
+context:
+  version: 2.6-10
+
+package:
+  name: r-varbvs
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url:
+    - https://cran.r-project.org/src/contrib/varbvs_${{ version }}.tar.gz
+  sha256: eea04a66c0419b9a0ba1a2d26efa0b446b43951298c9d988d063905f4351566a
+
+build:
+  number: 0
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - ${{ compiler('cxx') }}
+    - make
+  host:
+    - r-base
+    - r-matrix
+    - r-rcpp
+    - r-lattice
+    - r-latticeextra
+    - r-nor1mix
+  run:
+    - r-base
+    - r-matrix
+    - r-rcpp
+    - r-lattice
+    - r-latticeextra
+    - r-nor1mix
+
+tests:
+  - script:
+      - R -e "library('varbvs')"
+
+about:
+  license: GPL-3.0-or-later
+  summary: |
+    Fast algorithms for fitting Bayesian variable selection models and computing Bayes
+    factors, in which the outcome (or response variable) is modeled using a linear regression
+    or a logistic regression. The algorithms are based on the variational approximations
+    described in "Scalable variational inference for Bayesian variable selection in
+    regression, and its accuracy in genetic association studies" (P. Carbonetto & M.
+    Stephens, 2012, <DOI:10.1214/12-BA703>). This software has been applied to large
+    data sets with over a million variables and thousands of samples.
+  homepage: https://github.com/pcarbo/varbvs
+
