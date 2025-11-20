@@ -1,14 +1,13 @@
 context:
-  name: yabai
-  version: 7.1.14
+  version: 7.1.16
 
 package:
-  name: ${{ name|lower }}
+  name: yabai
   version: ${{ version }}
 
 source:
   url: https://github.com/koekeishiya/yabai/archive/v${{ version }}.tar.gz
-  sha256: aa87dd555090af0e48a2b61a47b6cae0e006b3efc5dcee946fcf861f8aadade6
+  sha256: 9822f62dbfba6a64d9eec8da1b56139ceeb408ad503cc5ef197d32a68281cf60
 
 build:
   number: 0
@@ -17,6 +16,7 @@ build:
 requirements:
   build:
     - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
     - make
 
 tests:
