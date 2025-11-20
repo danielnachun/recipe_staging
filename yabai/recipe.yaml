@@ -1,9 +1,8 @@
 context:
-  name: yabai
-  version: 7.1.14
+  version: 7.1.16
 
 package:
-  name: ${{ name|lower }}
+  name: yabai
   version: ${{ version }}
 
 source:
