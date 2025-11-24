@@ -17,7 +17,7 @@ jobs:
       ANACONDA_OWNER: ${{ vars.ANACONDA_OWNER }}
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Download packages
         id: download-packages
