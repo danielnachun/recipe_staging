@@ -1,0 +1,52 @@
+schema_version: 1
+
+context:
+  version: 0.1.1
+
+package:
+  name: r-dsdp
+  version: ${{ version }}
+
+source:
+  url:
+    - https://cloud.r-project.org/src/contrib/dsdp_${{ version }}.tar.gz
+  sha256: 68f73a87cdfd3dd178a7159ada929f075cf196c978285411c6fca4cd3ff60c58
+
+build:
+  number: 0
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('fortran') }}
+    - make
+  host:
+    - r-base
+    - r-ggplot2
+    - r-rlang
+  run:
+    - r-base
+    - r-ggplot2
+    - r-rlang
+
+tests:
+  - script:
+      - R -e "library('dsdp')"
+
+about:
+  license: MIT
+  summary: |
+    The models of probability density functions are Gaussian or exponential distributions
+    with polynomial correction terms. Using a maximum likelihood method, 'dsdp' computes
+    parameters of Gaussian or exponential distributions together with degrees of polynomials
+    by a grid search, and coefficient of polynomials by a variant of semidefinite programming.
+    It adopts Akaike Information Criterion for model selection. See a vignette for a
+    tutorial and more on our 'Github' repository <https://github.com/tsuchiya-lab/dsdp/>.
+  license_file:
+    - LICENSE
+  homepage: https://tsuchiya-lab.github.io/dsdp/
+
