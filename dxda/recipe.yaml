@@ -2,6 +2,7 @@ schema_version: 1
 
 context:
   version: 0.6.2
+  python_min: 3.10
 
 package:
   name: dxda
@@ -18,10 +19,17 @@ requirements:
   build:
     - ${{ compiler('go-nocgo') }}
     - go-licenses
+  run:
+    - python >=${{ python_min }}
+    - dxpy
 
 tests:
   - script:
       - dx-download-agent --help
+      - create_manifest.py --help
+      - filter_manifest.py --help
+      - ls_manifest.py --help
+      - split_manifest.py --help
 
 about:
   license: Apache-2.0
