@@ -1,0 +1,37 @@
+schema_version: 1
+
+context:
+  version: 0.6.2
+
+package:
+  name: dxda
+  version: ${{ version }}
+
+source:
+  url: https://github.com/dnanexus/dxda/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: 4b85a1567a860a7e228f43ef9eeda93a711a59256f3ad9738f0a64c226eb01da
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('go-nocgo') }}
+    - go-licenses
+
+tests:
+  - script:
+      - dx-download-agent --help
+
+about:
+  license: Apache-2.0
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: CLI tool to manage the download of large quantities of files from DNAnexus
+  homepage: https://github.com/dnanexus/dxda
+  repository: https://github.com/dnanexus/dxda
+
+extra:
+  recipe-maintainers:
+    - danielnachun
