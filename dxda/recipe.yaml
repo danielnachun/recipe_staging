@@ -19,6 +19,7 @@ requirements:
   build:
     - ${{ compiler('go-nocgo') }}
     - go-licenses
+    - sed
   run:
     - python >=${{ python_min }}
     - dxpy
