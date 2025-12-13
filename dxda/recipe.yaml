@@ -17,7 +17,9 @@ build:
 
 requirements:
   build:
-    - ${{ compiler('go-nocgo') }}
+    - ${{ compiler('go-cgo') }}
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
     - go-licenses
     - sed
   run:
