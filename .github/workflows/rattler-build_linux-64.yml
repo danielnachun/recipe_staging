@@ -110,7 +110,7 @@ jobs:
             --output-dir /tmp/rattler-build --recipe-dir /tmp/recipes
 
       - name: Upload artifacts to GitHub Actions
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: rattler-build_${{github.event.pull_request.head.sha}}_linux-64
           path: |
