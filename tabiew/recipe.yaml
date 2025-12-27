@@ -1,0 +1,37 @@
+context:
+  version: 0.11.1
+
+package:
+  name: tabiew
+  version: ${{ version }}
+
+source:
+  url: https://github.com/shshemi/tabiew/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: da3b74987f318471aa9701a80deb69837be82df9c9308f4380abfb26df2abf79
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - cargo-bundle-licenses
+
+tests:
+  - script:
+      - tw --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: A lightweight TUI application to view and query tabular data files, such as CSV, TSV, and parquet.
+  homepage: https://github.com/shshemi/tabiew
+  repository: https://github.com/shshemi/tabiew
+
+extra:
+  recipe-maintainers:
+    - danielnachun
