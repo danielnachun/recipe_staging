@@ -1,0 +1,37 @@
+context:
+  version: 0.3.0
+
+package:
+  name: brush
+  version: ${{ version }}
+
+source:
+  url: https://github.com/reubeno/brush/archive/refs/tags/brush-shell-v${{ version }}.tar.gz
+  sha256: a0dac5cf7e9d8bced9bf28ed400955750ed6b7320d1154522a14f4a74e75a056
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - cargo-bundle-licenses
+
+tests:
+  - script:
+      - brush --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: bash/POSIX-compatible shell implemented in Rust
+  homepage: https://github.com/reubeno/brush
+  repository: https://github.com/reubeno/brush
+
+extra:
+  recipe-maintainers:
+    - danielnachun
