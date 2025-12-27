@@ -1,0 +1,37 @@
+context:
+  version: 0.27.0
+
+package:
+  name: pik
+  version: ${{ version }}
+
+source:
+  url: https://github.com/jacek-kurlit/pik/archive/refs/tags/${{ version }}.tar.gz
+  sha256: 929b4f11a7dbf75787e4c01d0331cf707458f7b53625a003a6d58b581241ca26
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - cargo-bundle-licenses
+
+tests:
+  - script:
+      - pik --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Process Interactive Kill
+  homepage: https://github.com/jacek-kurlit/pik
+  repository: https://github.com/jacek-kurlit/pik
+
+extra:
+  recipe-maintainers:
+    - danielnachun
