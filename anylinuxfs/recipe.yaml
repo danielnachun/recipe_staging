@@ -1,0 +1,39 @@
+context:
+  version: 0.9.2
+
+package:
+  name: anylinuxfs
+  version: ${{ version }}
+
+source:
+  url: https://github.com/nohajc/anylinuxfs/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: 148105cc9c35b2737ddc1e2d4cf17595ce2687a443ae543d5b20934b0da5302d
+
+build:
+  number: 0
+  skip: not osx
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - cargo-bundle-licenses
+
+tests:
+  - script:
+      - anylinuxfs --help
+
+about:
+  license: GPL-3.0-or-later
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: |
+    macOS: mount any linux-supported filesystem read/write using NFS and a microVM
+  homepage: https://github.com/nohajc/anylinuxfs
+  repository: https://github.com/nohajc/anylinuxfs
+
+extra:
+  recipe-maintainers:
+    - danielnachun
