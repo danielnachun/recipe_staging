@@ -1,0 +1,38 @@
+context:
+  version: 2025.12.0
+
+package:
+  name: gfold
+  version: ${{ version }}
+
+source:
+  url: https://github.com/nickgerace/gfold/archive/refs/tags/${{ version }}.tar.gz
+  sha256: cead84f83c6bd333f5c11a714db2f187150c5d7b5d1b29cd6441172195728f45
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - cargo-bundle-licenses
+    - mold
+
+tests:
+  - script:
+      - gfold --help
+
+about:
+  license: Apache-2.0
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: CLI tool to help keep track of your Git repositories, written in Rust
+  homepage: https://github.com/nickgerace/gfold
+  repository: https://github.com/nickgerace/gfold
+
+extra:
+  recipe-maintainers:
+    - danielnachun
