@@ -1,0 +1,38 @@
+context:
+  version: 1.2.0
+
+package:
+  name: dipc
+  version: ${{ version }}
+
+source:
+  url: https://github.com/doprz/dipc/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: 3cc4e46cb6531b4b903d2c1a209c19667acac34d91caff5967600ed51c4bebc0
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - cargo-bundle-licenses
+
+tests:
+  - script:
+      - dipc --help
+
+about:
+  license: Apache-2.0 OR MIT
+  license_file:
+    - LICENSE-APACHE
+    - LICENSE-MIT
+    - THIRDPARTY.yml
+  summary: Convert your favorite images and wallpapers with your favorite color palettes/themes
+  homepage: https://github.com/doprz/dipc
+  repository: https://github.com/doprz/dipc
+
+extra:
+  recipe-maintainers:
+    - danielnachun
