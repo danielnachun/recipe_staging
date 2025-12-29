@@ -19,6 +19,9 @@ requirements:
     - ${{ compiler('cxx') }}
     - ${{ stdlib('c') }}
     - cargo-bundle-licenses
+    - pkg-config
+  host:
+    - openssl
 
 tests:
   - script:
