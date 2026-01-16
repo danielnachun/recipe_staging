@@ -1,0 +1,116 @@
+From 0b18dab38a9404abca5b1ec151b12041ec862071 Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Mon, 25 Mar 2024 15:29:53 -0700
+Subject: [PATCH] devendor dependencies
+
+---
+ applications/bed/starch/src/starchcat.c       |  2 +-
+ .../src/data/starch/starchFileHelpers.c       |  2 +-
+ system.mk/Makefile.darwin                     | 24 +------------------
+ system.mk/Makefile.linux                      | 21 +---------------
+ 4 files changed, 4 insertions(+), 45 deletions(-)
+
+diff --git a/applications/bed/starch/src/starchcat.c b/applications/bed/starch/src/starchcat.c
+index b5affd0..1c296f8 100644
+--- a/applications/bed/starch/src/starchcat.c
++++ b/applications/bed/starch/src/starchcat.c
+@@ -6178,7 +6178,7 @@ STARCHCAT2_setupGzipOutputStream(z_stream *zStream)
+ 
+     /* cf. http://www.zlib.net/manual.html for level information */
+ #ifdef __cplusplus
+-    zError = deflateInit2cpp(zStreamPtr, STARCH_Z_COMPRESSION_LEVEL, Z_DEFLATED, STARCH_Z_WINDOW_BITS, STARCH_Z_MEMORY_LEVEL, Z_DEFAULT_STRATEGY);
++    zError = deflateInit2(zStreamPtr, STARCH_Z_COMPRESSION_LEVEL, Z_DEFLATED, STARCH_Z_WINDOW_BITS, STARCH_Z_MEMORY_LEVEL, Z_DEFAULT_STRATEGY);
+ #else
+     zError = deflateInit2(zStreamPtr, STARCH_Z_COMPRESSION_LEVEL, Z_DEFLATED, STARCH_Z_WINDOW_BITS, STARCH_Z_MEMORY_LEVEL, Z_DEFAULT_STRATEGY);
+ #endif
+diff --git a/interfaces/src/data/starch/starchFileHelpers.c b/interfaces/src/data/starch/starchFileHelpers.c
+index a224047..bea3a2b 100644
+--- a/interfaces/src/data/starch/starchFileHelpers.c
++++ b/interfaces/src/data/starch/starchFileHelpers.c
+@@ -194,7 +194,7 @@ STARCH_gzip_deflate(FILE *source, FILE *dest, int level)
+     /* deflateInit2 allows creation of archive with gzip header, i.e. a gzip file */
+     /* cf. http://www.zlib.net/manual.html */
+ #ifdef __cplusplus
+-    ret = deflateInit2cpp(&strm, level, Z_DEFLATED, (15+16), 8, Z_DEFAULT_STRATEGY);
++    ret = deflateInit2(&strm, level, Z_DEFLATED, (15+16), 8, Z_DEFAULT_STRATEGY);
+ #else
+     ret = deflateInit2(&strm, level, Z_DEFLATED, (15+16), 8, Z_DEFAULT_STRATEGY);
+ #endif
+diff --git a/system.mk/Makefile.darwin b/system.mk/Makefile.darwin
+index 3a325db..52bcd7c 100644
+--- a/system.mk/Makefile.darwin
++++ b/system.mk/Makefile.darwin
+@@ -24,7 +24,7 @@ ifeq ($(BUILD_ARCH),)
+ BUILD_ARCH := x86_64
+ endif
+ 
+-default: support
++default: 
+ 	$(MAKE) build -f $(SELF)
+ 
+ SUBDIRS = bedextract/src bedmap/src bedops/src closestfeats/src conversion/src sort-bed/src starch/src
+@@ -80,25 +80,3 @@ mkdirs:
+ 	mkdir -p ${APPDIR}/bedextract/bin
+ 	mkdir -p ${APPDIR}/starch/bin
+ 	mkdir -p ${APPDIR}/conversion/bin
+-
+-
+-#
+-# third-party libraries
+-#
+-support_intel: jansson_support_c bzip2_support_c zlib_support_intel_c
+-
+-support: | mkdirs
+-	$(MAKE) support_intel -f $(SELF)
+-
+-jansson_support_c:
+-	bzcat ${WHICHJANSSON}.tar.bz2 | tar -x -C ${PARTY3}/darwin_intel_${BUILD_ARCH}/
+-	cd ${PARTY3}/darwin_intel_${BUILD_ARCH}/${JANSSONVERSION} && export MACOSX_DEPLOYMENT_TARGET=${MIN_OSX_VERSION} && export ARCH=${BUILD_ARCH} && export CC=${CC} && export CXX=${CXX} && ./configure --prefix=${WDIR}/${PARTY3}/darwin_intel_${BUILD_ARCH}/${JANSSONVERSION} CFLAGS="-arch ${BUILD_ARCH}" --build="${BUILD_ARCH}" && $(MAKE) && $(MAKE) install && cd ../ && rm -f jansson && ln -sf ${JANSSONVERSION} jansson && cd ${WDIR}
+-
+-bzip2_support_c:
+-	bzcat ${WHICHBZIP2}.tar.bz2 | tar -x -C ${PARTY3}/darwin_intel_${BUILD_ARCH}/
+-	cd ${PARTY3}/darwin_intel_${BUILD_ARCH}/${BZIP2VERSION} && export MACOSX_DEPLOYMENT_TARGET=${MIN_OSX_VERSION} && export ARCH=${BUILD_ARCH} && export CC=${CC} && export CXX=${CXX} && $(MAKE) -f Makefile.darwin_${BUILD_ARCH} libbz2.a && cd ../ && rm -f bzip2 && ln -sf ${BZIP2VERSION} bzip2 && cd ${WDIR}
+-
+-zlib_support_intel_c:
+-	bzcat ${WHICHZLIB}.tar.bz2 | tar -x -C ${PARTY3}/darwin_intel_${BUILD_ARCH}/
+-	cd ${PARTY3}/darwin_intel_${BUILD_ARCH}/${ZLIBVERSION} && export MACOSX_DEPLOYMENT_TARGET=${MIN_OSX_VERSION} && export ARCH=${BUILD_ARCH} && export CC=${CC} && export CXX=${CXX} && ./configure --static --archs="-arch ${BUILD_ARCH}" && $(MAKE) && cd ../ && rm -f zlib && ln -sf ${ZLIBVERSION} zlib && cd ${WDIR}
+-
+diff --git a/system.mk/Makefile.linux b/system.mk/Makefile.linux
+index d120bdd..37f0fda 100644
+--- a/system.mk/Makefile.linux
++++ b/system.mk/Makefile.linux
+@@ -17,7 +17,7 @@ SELF                  = ${WDIR}/system.mk/Makefile.linux
+ BINDIR                = bin
+ BINDIR_MODULE         = modules
+ 
+-default: support
++default: 
+ 	$(MAKE) build -f $(SELF)
+ 
+ SUBDIRS = ${APPDIR}/bedextract/src ${APPDIR}/bedmap/src ${APPDIR}/bedops/src ${APPDIR}/closestfeats/src ${APPDIR}/conversion/src ${APPDIR}/sort-bed/src ${APPDIR}/starch/src 
+@@ -56,22 +56,3 @@ clean_gprof:
+ clean_postfix:
+ 	rm -rf ${BINDIR}
+ 	rm -rf ${BINDIR_MODULE}
+-
+-#
+-# third-party libraries
+-#
+-LIBS = $(addprefix $(PARTY3)/, jansson/lib/libjansson.a bzip2/libbz2.a zlib/libz.a)
+-
+-support: $(LIBS)
+-
+-${PARTY3}/jansson/lib/libjansson.a: $(WHICHJANSSON).tar.bz2
+-	bzcat $^ | tar -x -C ${PARTY3}
+-	cd ${PARTY3}/${JANSSONVERSION} && ./configure --prefix=${WDIR}/${PARTY3}/${JANSSONVERSION} && $(MAKE) && $(MAKE) install && cd ${WDIR} && rm -f jansson && ln -sf ${JANSSONVERSION} ${PARTY3}/jansson
+-
+-$(PARTY3)/bzip2/libbz2.a: $(WHICHBZIP2).tar.bz2
+-	bzcat $^ | tar -x -C ${PARTY3}
+-	cd ${PARTY3}/${BZIP2VERSION} && $(MAKE) libbz2.a && cd ${WDIR} && rm -f bzip2 && ln -sf ${BZIP2VERSION} ${PARTY3}/bzip2
+-
+-${PARTY3}/zlib/libz.a: $(WHICHZLIB).tar.bz2
+-	bzcat $^ | tar -x -C ${PARTY3}
+-	cd ${PARTY3}/${ZLIBVERSION} && ./configure --static && $(MAKE) && cd ${WDIR} && rm -f zlib && ln -sf ${ZLIBVERSION} ${PARTY3}/zlib
+-- 
+2.44.0
+
