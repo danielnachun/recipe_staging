@@ -1,0 +1,25 @@
+From 8c4fe04c2f39cb94a4e55feb840e22b3c8ed13b6 Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Fri, 29 Mar 2024 19:35:57 -0700
+Subject: [PATCH] fix openmp pragma
+
+---
+ src/Geno.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/Geno.cpp b/src/Geno.cpp
+index f6eb66c..adbd4e4 100644
+--- a/src/Geno.cpp
++++ b/src/Geno.cpp
+@@ -2948,7 +2948,7 @@ void Geno::bgen2bed(const vector<uint32_t> &raw_marker_index){
+         }
+         //LOGGER.i(0, "MIDDLE: " + to_string(index) + "NUM_thread: " + to_string(omp_get_max_threads()));
+ 
+-        #pragma omp ordered
++        //#pragma omp ordered
+         save_bed(buf, num_marker);
+         delete[] buf;
+         delete[] dec_data;
+-- 
+2.44.0
+
