@@ -1,0 +1,35 @@
+package:
+  name: leafcutter2
+  version: 0.0.1
+
+source:
+  url: https://github.com/leafcutter2/leafcutter2/archive/0c879a3a928ac7358f0b6361305abd6fc24a2676.tar.gz
+  sha256: e039667a3e51d64d78cd317bb3f2fab6d6b43985b6ab3a8ad54d26440000809a
+
+build:
+  number: 0
+  noarch: python
+
+requirements:
+  build:
+    - sed
+  run:
+    - argparse-dataclass
+    - bedparse
+    - biopython
+    - numpy >=2.1
+    - pandas
+    - pickleshare
+    - pyfastx
+    - pysam
+    - python
+
+tests:
+  - script:
+      - leafcutter2 --help
+      - leafcutter_make_clusters --help
+
+about:
+  license: LicenseRef-Other
+  summary: LeafCutter2 is a tool for clustering, functional characterization and quantification of splice junction read counts.
+  homepage: https://github.com/leafcutter2/leafcutter2
