@@ -11,7 +11,7 @@ source:
   sha256: 801c8f1775749d23efbae0e38a30a9f97f0b2d885ba0360a55953f5c71161914
 
 build:
-  number: 0
+  number: 1
   dynamic_linking:
     rpaths:
       - lib/R/lib/
