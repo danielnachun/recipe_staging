@@ -13,6 +13,7 @@ build:
 requirements:
   build:
     - sed
+    - python =3.10
   run:
     - argparse-dataclass
     - bedparse
@@ -22,7 +23,7 @@ requirements:
     - pickleshare
     - pyfastx
     - pysam
-    - python
+    - python >=3.10
 
 tests:
   - script:
