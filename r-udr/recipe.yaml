@@ -1,23 +1,22 @@
 context:
-  version: 0.3.154
+  version: 0.3.158
 
 package:
   name: r-udr
   version: ${{ version }}
 
 source:
-  url: https://github.com/stephenslab/udr/archive/${{ version }}.tar.gz
-  sha256: 35daedc9be9d8b1015962f24a530d2a3e8ae62a4f5947c8c3eae69b8ea1bfde2
+  url: https://github.com/stephenslab/udr/archive/refs/tags/v0.3-158.tar.gz
+  sha256: 0ddfa84d87d55b6bcf142ca32d2e81b2eec43d841dc820b8a07731c74fa8167a
 
 build:
-  number: 1
-  merge_build_and_host_envs: ${{ true if win }}
-  dynamic_linking:
-    rpaths:
-      - lib/R/lib/
-      - lib/
+  number: 2
 
 requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - make
   host:
     - r-base
     - r-mvtnorm
