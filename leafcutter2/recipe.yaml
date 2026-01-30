@@ -1,6 +1,6 @@
 package:
   name: leafcutter2
-  version: 0.0.1
+  version: 1.0.0
 
 source:
   url: https://github.com/leafcutter2/leafcutter2/archive/0c879a3a928ac7358f0b6361305abd6fc24a2676.tar.gz
