@@ -1,0 +1,40 @@
+context:
+  version: 0.9.0
+
+package:
+  name: soju
+  version: ${{ version }}
+
+source:
+  url: https://codeberg.org/emersion/soju/releases/download/v${{ version }}/soju-${{ version }}.tar.gz
+  sha256: 6476addbf74bd13146b567f78b60956413bcb1376edcc24957ae2bff09cab7ba
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('go-cgo') }}
+    - go-licenses
+
+tests:
+  - script:
+      - soju --help
+      - sojuctl --help
+      - sojudb --help
+
+about:
+  license: AGPL-3.0-or-later
+  license_file:
+    - LICENSE
+    - license-files_soju/
+    - license-files_sojuctl/
+    - license-files_sojudb/
+  summary: A user-friendly IRC bouncer
+  homepage: https://soju.im/
+  repository: https://codeberg.org/emersion/soju
+
+extra:
+  recipe-maintainers:
+    - danielnachun
