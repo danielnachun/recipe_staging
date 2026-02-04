@@ -1,0 +1,45 @@
+schema_version: 1
+
+context:
+  version: 3.4.1
+
+package:
+  name: oncokb-annotator
+  version: ${{ version }}
+
+source:
+  url: https://github.com/oncokb/oncokb-annotator/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: a1215d39dba5380dfe3439b573e2dda49fb7746fb274b10df4c1cc515f4abd48
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  build:
+    - sed
+  run:
+    - python
+    - requests
+    - urllib3
+    - kiwisolver
+    - matplotlib-base
+
+tests:
+  - script:
+      - AnnotatorCore.py -h
+      - ClinicalDataAnnotator.py -h
+      - CnaAnnotator.py -h
+      - FusionAnnotator.py -h
+      - GenerateReadMe.py -h
+      - MafAnnotator.py -h
+      - OncoKBPlots.py -h
+      - StructuralVariantAnnotator.py -h
+
+about:
+  summary: Annotates variants in MAF with OncoKB annotation.
+  homepage: https://github.com/oncokb/oncokb-annotator
+
+extra:
+  recipe-maintainers:
+    - danielnachun
