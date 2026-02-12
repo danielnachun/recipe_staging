@@ -6,4 +6,4 @@ go mod init fusera
 go mod tidy -e
 rm -rf vendor
 go build -o=${PREFIX}/bin/${PKG_NAME} -ldflags="-s -w"
-go-licenses save . --save_path=license-files
+go-licenses save . --save_path=license-files --ignore github.com/jacobsa/fuse --ignore github.com/jmespath/go-jmespath
