@@ -1,0 +1,36 @@
+context:
+  version: 0.1.1
+
+package:
+  name: count_somatic
+  version: ${{ version }}
+
+source:
+  url: https://github.com/weinstockj/count_somatic/archive/aff16f00e56182fbc53b8634bf3da15f55c59c80.tar.gz
+  sha256: 09c48b1d8373db109e0282550e6d6ed61b89508642dfdcf0b386ccbe306ba255
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - cargo-bundle-licenses
+  host:
+    - openssl
+
+tests:
+  - script:
+      - count_somatic --help
+
+about:
+  license: LicenseRef-Unknown
+  summary: A Rust program for counting somatic variants from VCF/BCF files, with support for Illumina Dragen and Graphtyper BCF/VCFs.
+  homepage: https://github.com/weinstockj/count_somatic
+  repository: https://github.com/weinstockj/count_somatic
+
+extra:
+  recipe-maintainers:
+    - danielnachun
