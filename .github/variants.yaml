@@ -10,3 +10,21 @@ c_stdlib:
     then: sysroot
   - if: osx
     then: macosx_deployment_target
+libblas:
+  - 3.9.* *netlib
+libcblas:
+  - 3.9.* *netlib
+liblapack:
+  - 3.9.* *netlib
+liblapacke:
+  - 3.9.* *netlib
+blas_impl:
+  - openblas
+  - if: x86_64
+    then:
+      - mkl
+      - blis
+openblas:
+  - 0.3.*
+mkl:
+  - '2025'
