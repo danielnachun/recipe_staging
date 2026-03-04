@@ -1,16 +1,16 @@
 context:
-  version: 0.3.36
+  version: 0.3.44
 
 package:
-  name: r-mr.mash.alpha
+  name: r-mr.mashr
   version: ${{ version|replace("-", "_") }}
 
 source:
-  url: https://github.com/stephenslab/mr.mash.alpha/archive/v${{ version }}.tar.gz
-  sha256: 9ce26c4869528a955681a589a7702fd945afd8f3de9515d7b560d2c10efb2688
+  url: https://cran.r-project.org/src/contrib/mr.mashr_${{ version }}.tar.gz
+  sha256: 2bb6c46610636e3a30fa39286624080cf32d55475a3ae64d210e325d589b17cc
 
 build:
-  number: 2
+  number: 0
   dynamic_linking:
     rpaths:
       - lib/R/lib/
@@ -21,36 +21,32 @@ requirements:
     - ${{ compiler('c') }}
     - ${{ stdlib('c') }}
     - ${{ compiler('cxx') }}
-    - sed
   host:
+    - libblas
+    - liblapack
     - r-base
     - r-ebnm
     - r-flashier
     - r-mashr
-    - r-mbsp
     - r-matrixstats
     - r-mvtnorm
     - r-rcpp
     - r-rcpparmadillo
     - r-rcppparallel
-    - r-ggplot2 <4
   run:
-    - libopenblas >=0.3.29
     - r-base
     - r-ebnm
     - r-flashier
     - r-mashr
-    - r-mbsp
     - r-matrixstats
     - r-mvtnorm
     - r-rcpp
     - r-rcpparmadillo
     - r-rcppparallel
-    - r-ggplot2 <4
 
 tests:
   - script:
-      - R -e "library('mr.mash.alpha')"
+      - R -e "library('mr.mashr')"
 
 about:
   license: LicenseRef-Other
