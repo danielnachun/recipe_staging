@@ -29,7 +29,7 @@ jobs:
         uses: jlumbroso/free-disk-space@v1.3.1
 
       - name: Setup up docker buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
 
       - name: Build and export docker containers
         if: ${{ github.event.inputs.centos7 == 'false' }}
