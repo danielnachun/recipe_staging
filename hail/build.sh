@@ -10,7 +10,6 @@ export SCALA_VERSION=2.12
 ./mill hail[].assembly
 cp out/hail/${SCALA_VERSION}/assembly.dest/out.jar python/hail/backend/hail-all-spark.jar
 
-mkdir -p build/deploy
 mkdir -p build/deploy/src
 cp ../README.md build/deploy/
 

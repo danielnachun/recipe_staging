@@ -13,7 +13,7 @@ source:
 
 build:
   number: 0
-  # skip: not linux or aarch64
+  skip: not linux or aarch64
 
 requirements:
   build:
