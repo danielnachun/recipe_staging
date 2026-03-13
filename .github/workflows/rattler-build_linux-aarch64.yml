@@ -74,7 +74,7 @@ jobs:
 
       - name: Build and export docker containers
         if: ${{ !contains(github.event.pull_request.labels.*.name, 'centos7') }}
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           load: true
           file: .github/rattler-build_container.df
@@ -82,7 +82,7 @@ jobs:
 
       - name: Build and export docker containers
         if: contains(github.event.pull_request.labels.*.name, 'centos7')
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           load: true
           file: .github/rattler-build_centos7_container.df
