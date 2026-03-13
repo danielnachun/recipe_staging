@@ -1,0 +1,110 @@
+schema_version: 1
+
+context:
+  version: "0.2.137"
+
+package:
+  name: hail
+  version: ${{ version }}
+
+source:
+  url: https://github.com/hail-is/hail/archive/refs/tags/${{ version }}.tar.gz
+  sha256: 45f935df582fb3146f593a03023b5ccff6b5bc0d1f0d1ca9a477ac36b785f61f
+
+build:
+  number: 0
+  # skip: not linux or aarch64
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - make
+    - rsync
+  host:
+    - python-build
+    - libblas
+    - liblapack
+    - python <3.14
+    - pyspark
+    - openjdk
+    - lz4
+    - pytest-runner
+    - pip
+    - setuptools
+  run:
+    - python <3.14
+    - openjdk
+    - pyspark
+    - avro <1.12
+    - numpy >=2
+    - pandas <3
+    - plotly <6
+    - bokeh <3.5
+    - decorator <5
+    - deprecated <1.3
+    - parsimonious
+    - requests
+    - scipy
+    - typing-extensions
+    - aiodns <3
+    - aiohttp
+    - azure-identity
+    - azure-mgmt-storage <21
+    - azure-storage-blob
+    - boto3
+    - botocore
+    - dill
+    - dictdiffer
+    - frozenlist
+    - google-auth
+    - google-auth-oauthlib <1
+    - humanize
+    - janus <1.1
+    - jproperties
+    - msal
+    - nest-asyncio
+    - orjson
+    - pyjwt
+    - rich <13
+    - typer
+    - python-json-logger
+    - pyyaml
+    - setuptools
+    - sortedcontainers
+    - tabulate
+    - uvloop <0.22.0
+    - aiohttp-session
+    - aiohttp-jinja2
+    - aiomysql
+    # - google-cloud-profiler
+    - kubernetes_asyncio
+    - packaging
+    - prometheus-async
+    - prometheus_client
+    - pymysql
+    - jinja2
+    - libsass
+    - google-cloud-sdk
+
+tests:
+  - python:
+      imports:
+        - hail
+        - hailtop.batch
+      pip_check: false
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: |
+    Hail is Python-based data analysis tool for working with genomic data.
+  homepage: https://hail.is
+  repository: https://github.com/hail-is/hail
+
+extra:
+  skip-lints:
+    - uses_vcs_url
+  recipe-maintainers:
+    - raivivek
