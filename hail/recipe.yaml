@@ -22,6 +22,7 @@ requirements:
     - ${{ compiler('cxx') }}
     - ${{ compiler('c') }}
     - ${{ stdlib('c') }}
+    - curl
     - make
     - rsync
   host:
