@@ -5,6 +5,9 @@ set -o xtrace -o nounset -o pipefail -o errexit
 cd hail
 make -C c prebuilt
 
+export LANG=C.UTF-8
+export LC_ALL=C.UTF-8
+
 tee python/hailtop/version.py << EOF
 __pip_version__ = "placeholder"
 __revision__ = "placeholder"
