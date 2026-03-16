@@ -14,6 +14,12 @@ __revision__ = "placeholder"
 __version__ = "${PKG_VERSION}"
 EOF
 
+tee python/hail/version.py << EOF
+__pip_version__ = "placeholder"
+__revision__ = "placeholder"
+__version__ = "${PKG_VERSION}"
+EOF
+
 tee python/hail/docs/_static/hail_version.js << EOF
 hail_pip_version = "placeholder";
 hail_version = "${PKG_VERSION}";
