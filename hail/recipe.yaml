@@ -31,14 +31,14 @@ requirements:
     - liblapack
     - python <3.14
     - pyspark
-    - openjdk
+    - openjdk =11
     - lz4
     - pytest-runner
     - pip
     - setuptools
   run:
     - python <3.14
-    - openjdk
+    - openjdk =11
     - pyspark
     - avro <1.12
     - numpy >=2
