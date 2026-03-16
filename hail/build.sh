@@ -9,19 +9,19 @@ export LANG=C.UTF-8
 export LC_ALL=C.UTF-8
 
 tee python/hailtop/version.py << EOF
-__pip_version__ = "placeholder"
-__revision__ = "placeholder"
+__pip_version__ = "0.0"
+__revision__ = "0.0"
 __version__ = "${PKG_VERSION}"
 EOF
 
 tee python/hail/version.py << EOF
-__pip_version__ = "placeholder"
-__revision__ = "placeholder"
+__pip_version__ = "0.0"
+__revision__ = "0.0"
 __version__ = "${PKG_VERSION}"
 EOF
 
 tee python/hail/docs/_static/hail_version.js << EOF
-hail_pip_version = "placeholder";
+hail_pip_version = "0.0";
 hail_version = "${PKG_VERSION}";
 EOF
 
