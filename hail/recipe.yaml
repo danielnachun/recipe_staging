@@ -25,6 +25,7 @@ requirements:
     - curl
     - make
     - rsync
+    - sed
   host:
     - python-build
     - libblas

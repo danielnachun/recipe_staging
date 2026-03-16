@@ -9,21 +9,23 @@ export LANG=C.UTF-8
 export LC_ALL=C.UTF-8
 
 tee python/hailtop/version.py << EOF
-__pip_version__ = "0.0"
-__revision__ = "0.0"
+__pip_version__ = "${PKG_VERSION}"
+__revision__ = "aaaaaaaaaaaa"
 __version__ = "${PKG_VERSION}"
 EOF
 
 tee python/hail/version.py << EOF
-__pip_version__ = "0.0"
-__revision__ = "0.0"
+__pip_version__ = "${PKG_VERSION}"
+__revision__ = "aaaaaaaaaaaa"
 __version__ = "${PKG_VERSION}"
 EOF
 
 tee python/hail/docs/_static/hail_version.js << EOF
-hail_pip_version = "0.0";
+hail_pip_version = "${PKG_VERSION}";
 hail_version = "${PKG_VERSION}";
 EOF
+
+sed -i 's/+ "-" + HAIL_REVISION.substring(0, 12)//' hail/src/is/hail/package.scala
 
 export SCALA_VERSION=2.12
 ./mill hail[].assembly
