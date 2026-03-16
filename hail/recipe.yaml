@@ -30,7 +30,7 @@ requirements:
     - libblas
     - liblapack
     - python <3.14
-    - pyspark
+    - pyspark <4
     - openjdk =11
     - lz4
     - pytest-runner
@@ -39,9 +39,9 @@ requirements:
   run:
     - python <3.14
     - openjdk =11
-    - pyspark
+    - pyspark <4
     - avro <1.12
-    - numpy >=2
+    - numpy
     - pandas <3
     - plotly <6
     - bokeh <3.5
