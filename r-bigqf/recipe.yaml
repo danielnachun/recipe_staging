@@ -1,0 +1,56 @@
+schema_version: 1
+
+context:
+  version: "1.6"
+
+package:
+  name: r-bigqf
+  version: ${{ version }}
+
+source:
+  url:
+    - https://cloud.r-project.org/src/contrib/bigQF_${{ version }}.tar.gz
+  sha256: 5e13946fc1dc799006ff6e86be18b6ba9a4a9b2393bfdada9c608c5d380b1907
+
+build:
+  number: 0
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+  host:
+    - r-base
+    - r-compquadform
+    - r-matrix
+    - r-coxme
+    - r-svd
+  run:
+    - r-base
+    - r-compquadform
+    - r-matrix
+    - r-coxme
+    - r-svd
+
+tests:
+  - script:
+      - R -e "library('bigQF')"
+
+about:
+  license: GPL-2.0-only
+  summary: A computationally-efficient leading-eigenvalue approximation to tail probabilities
+    and quantiles of large quadratic forms, in particular for the Sequence Kernel Association
+    Test (SKAT) used in genomics <doi:10.1002/gepi.22136>. Also provides stochastic
+    singular value decomposition for dense or sparse matrices.
+
+
+  homepage: https://github.com/tslumley/bigQF
+
+extra:
+  recipe-maintainers:
+    - danielnachun
+
