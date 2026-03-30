@@ -9,7 +9,7 @@ package:
 
 source:
   url: https://github.com/secastel/phaser/archive/aa1f8ec5fe1cc676e37cfa6f6a0bce6b09070301.tar.gz
-  sha256: 7552f15723130a55a83d1b76fbb5303bf78d1a0d443aea776e0626fd74de3a4a
+  sha256: f3723b8dcb712c565537d4c50010486a6ffcda92e3f97ef44e7976075a96867c
 
 build:
   number: 3
