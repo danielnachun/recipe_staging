@@ -21,7 +21,7 @@ requirements:
     - sed
   host:
     - cython
-    - python
+    - python =3.13
     - pip
     - setuptools
   run:
@@ -30,7 +30,7 @@ requirements:
     - numpy
     - pandas
     - pysam
-    - python
+    - python =3.13
     # - pyvcf
     - scipy
     - samtools
