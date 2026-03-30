@@ -22,6 +22,8 @@ requirements:
   host:
     - cython
     - python
+    - pip
+    - setuptools
   run:
     - bcftools
     - intervaltree
