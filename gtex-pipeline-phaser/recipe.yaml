@@ -10,15 +10,16 @@ source:
   sha256: 4d9c2f54761923ef803a5ad2e8fdfa0f0c88b901bcf01364935fb8b6b3ab21ab
 
 build:
-  number: 1
+  number: 2
   noarch: python
 
 requirements:
   build:
     - sed
   run:
-    - python <3
+    - python
     - pandas
+    - phaser
 
 tests:
   - script:
