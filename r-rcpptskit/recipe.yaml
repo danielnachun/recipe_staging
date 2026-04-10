@@ -1,0 +1,51 @@
+schema_version: 1
+
+context:
+  version: 0.2.0
+
+package:
+  name: r-rcpptskit
+  version: ${{ version }}
+
+source:
+  url:
+    - https://cloud.r-project.org//src/contrib/RcppTskit_${{ version }}.tar.gz
+  sha256: 591462aad23c02f194dd9409e86a3241ac68a0b420b8d7b1732ccbb325bf0a47
+
+build:
+  number: 0
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - ${{ stdlib('c') }}
+  host:
+    - r-base
+    - r-r6
+    - r-rcpp
+    - r-reticulate
+  run:
+    - r-base
+    - r-r6
+    - r-rcpp
+    - r-reticulate
+
+tests:
+  - script:
+      - R -e "library('RcppTskit')"
+
+about:
+  license: MIT
+  summary: |
+    'Tskit' enables efficient storage, manipulation, and analysis of ancestral recombination graphs (ARGs) using succinct tree sequence encoding. The tree sequence encoding of an ARG is described in Wong et al. (2024) <doi:10.1093/genetics/iyae100>, while ‘tskit' project is described in Jeffrey et al. (2026) <doi:10.48550/arXiv.2602.09649>. See also <https://tskit.dev> for project news, documentation, and tutorials. ’Tskit' provides 'Python', 'C', and 'Rust' application programming interfaces (APIs). The 'Python' API can be called from 'R' via the 'reticulate' package to load and analyse tree sequences as described at <https://tskit.dev/tutorials/tskitr.html>. 'RcppTskit' provides 'R' access to the 'tskit C' API for cases where the 'reticulate' option is not optimal; for example, high-performance or low-level work with tree sequences. Currently, 'RcppTskit' provides a limited set of 'R' functions because the 'Python' API and 'reticulate' already covers most needs.
+  homepage: http://www.spatstat.org
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
+    - danielnachun
