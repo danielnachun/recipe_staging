@@ -1,0 +1,55 @@
+schema_version: 1
+
+context:
+  version: "1.3.5"
+
+package:
+  name: knockpy
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/k/knockpy/knockpy-${{ version }}.tar.gz
+  sha256: 381dea1c19ea9cbe3e6350819b85d5b8e5d6225c466f3c4868e3fb64de87af1a
+
+build:
+  number: 0
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+  host:
+    - python
+    - cython >=0.29.21
+    - numpy >=1.19.0
+    - setuptools
+    - scipy
+    - wheel
+    - pip
+  run:
+    - python
+    - jlc-choldate >=0.4
+    - cvxpy >=1.0.25
+    - networkx >=2.4
+    - numpy >=2.0
+    - scikit-learn >=0.22
+    - scipy >=1.5.2
+    - tqdm >=4.36.1
+
+tests:
+  - python:
+      imports:
+        - knockpy
+      pip_check: true
+
+about:
+  summary: Knockoffs for variable selection
+  license: MIT
+  license_file: LICENSE.txt
+  homepage: https://pypi.org/project/knockpy/
+  documentation: https://amspector100.github.io/knockpy
+
+extra:
+  recipe-maintainers:
+    - danielnachun
