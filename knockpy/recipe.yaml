@@ -20,7 +20,7 @@ requirements:
     - ${{ compiler('c') }}
     - ${{ stdlib('c') }}
   host:
-    - python
+    - python <3.13
     - cython >=0.29.21
     - numpy >=1.19.0
     - setuptools
@@ -28,7 +28,7 @@ requirements:
     - wheel
     - pip
   run:
-    - python
+    - python <3.13
     - jlc-choldate >=0.4
     - cvxpy >=1.0.25
     - networkx >=2.4
