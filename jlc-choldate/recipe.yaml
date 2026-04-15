@@ -1,0 +1,52 @@
+schema_version: 1
+
+context:
+  version: "0.4"
+
+package:
+  name: jlc-choldate
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/j/jlc-choldate/jlc_choldate-${{ version }}.tar.gz
+  sha256: 89608af446ac65aa4f8a07b0246eed1866f35dcfac9447981e48a82ae8f9bd8f
+
+build:
+  number: 0
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+  host:
+    - python
+    - cython
+    - numpy
+    - setuptools
+    - pip
+  run:
+    - python
+    - cython
+    - ${{ pin_compatible('numpy') }}
+
+tests:
+  - python:
+      imports:
+        - choldate
+  - requirements:
+      run:
+        - pip
+        - python
+    script:
+      - pip check
+
+about:
+  summary: Somewhat fast updating and downdating of Cholesky factors in Python
+  license: BSD-3-Clause
+  license_file: LICENSE.txt
+  homepage: https://pypi.org/project/jlc-choldate/
+
+extra:
+  recipe-maintainers:
+    - danielnachun
