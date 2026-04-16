@@ -1,0 +1,58 @@
+schema_version: 1
+
+context:
+  version: "0.26.6.15"
+
+package:
+  name: r-rexpokit
+  version: ${{ version }}
+
+source:
+  url:
+    - https://cloud.r-project.org/src/contrib/rexpokit_${{ version }}.tar.gz
+  sha256: dc346617076d85709d7f0df11e076feb5b4b7fd31bec24e5fe8d64a7bb8e210e
+
+build:
+  number: 0
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - ${{ compiler('fortran') }}
+    - ${{ stdlib('c') }}
+  host:
+    - r-base
+    - r-matrix
+    - r-rcpp >=0.11.0
+  run:
+    - r-base
+    - r-matrix
+    - r-rcpp >=0.11.0
+
+tests:
+  - script:
+      - R -e "library('rexpokit')"
+
+about:
+  license: GPL-2.0-only
+  summary: 'Wraps some of the matrix exponentiation utilities from EXPOKIT (<http://www.maths.uq.edu.au/expokit/>),
+    a FORTRAN library that is widely recommended for matrix exponentiation (Sidje RB,
+    1998. "Expokit: A Software Package for Computing Matrix Exponentials." ACM Trans.
+    Math. Softw. 24(1): 130-156).  EXPOKIT includes functions for exponentiating both
+    small, dense matrices, and large, sparse matrices (in sparse matrices, most of the
+    cells have value 0). Rapid matrix exponentiation is useful in phylogenetics when
+    we have a large number of states (as we do when we are inferring the history of
+    transitions between the possible geographic ranges of a species), but is probably
+    useful in other ways as well. NOTE: In case FORTRAN checks temporarily get rexpokit
+    archived on CRAN, see archived binaries at GitHub in: nmatzke/Matzke_R_binaries
+    (binaries install without compilation of source code).'
+  homepage: http://phylo.wikidot.com/rexpokit
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
