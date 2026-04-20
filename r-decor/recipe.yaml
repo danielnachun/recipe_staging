@@ -1,0 +1,48 @@
+schema_version: 1
+
+context:
+  version: "1.0.2"
+
+package:
+  name: r-decor
+  version: ${{ version }}
+
+source:
+  url:
+    - https://cloud.r-project.org//src/contrib/decor_${{ version }}.tar.gz
+  sha256: 2e6c0cf3804253298c43c7cc64e389cf0ef2bebdca18753a487b9861e54671f6
+
+build:
+  number: 0
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - make
+  host:
+    - r-base
+    - r-tibble
+    - r-vctrs >=0.5.0
+  run:
+    - r-base
+    - r-tibble
+    - r-vctrs >=0.5.0
+
+tests:
+  - script:
+      - R -e "library('decor')"
+
+about:
+  license: MIT
+  summary: Retrieves code comment decorations for C++ languages of the form '\\ [[xyz]]', which
+    are used for automated wrapping of C++ functions.
+  homepage: https://github.com/r-lib/decor
+
+extra:
+  recipe-maintainers:
+    - conda-forge/r
