@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  version: "1.0"
+
+package:
+  name: einshape
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/e/einshape/einshape-${{ version }}.tar.gz
+  sha256: 53538d75dd099f4ead4a4f786fafdcb0b729bb587e0b3afeca25ceef18c9ac14
+
+build:
+  number: 0
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  noarch: python
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+  run:
+    - python
+    - absl-py
+    - numpy
+
+tests:
+  - python:
+      imports:
+        - einshape
+      pip_check: true
+
+about:
+  summary: DSL-based reshaping library for JAX and other frameworks
+  license: Apache-2.0
+  license_file: LICENSE
+  homepage: https://github.com/deepmind/einshape
+
+extra:
+  recipe-maintainers:
+    - danielnachun
