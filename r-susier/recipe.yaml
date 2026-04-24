@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: 0.15.53
+  version: 0.16.0
 
 package:
   name: r-susier
@@ -9,10 +9,10 @@ package:
 
 source:
   url: https://github.com/stephenslab/susieR/archive/refs/tags/${{ version }}.tar.gz
-  sha256: 72bcf7a8aa626310decc9c5e59af5b28fc0306b4ce82dd4e63120151e5a0eb50
+  sha256: d5d4fc82dcd36b8a21eb635adee8ff01781121ac651add5dcb1b8998be261394
 
 build:
-  number: 1
+  number: 0
 
 requirements:
   build:
@@ -22,26 +22,26 @@ requirements:
     - make
   host:
     - r-base
-    - r-rcpp
-    - r-rcpparmadillo
-    - r-l0learn
-    - r-glmnet
-    - r-matrix
+    - r-cpp11
+    - r-cpp11armadillo
     - r-crayon
     - r-ggplot2
+    - r-glmnet
+    - r-l0learn
+    - r-matrix
     - r-matrixstats
     - r-mixsqp
     - r-reshape
     - r-rfast
   run:
     - r-base
-    - r-rcpp
-    - r-rcpparmadillo
-    - r-l0learn
-    - r-glmnet
-    - r-matrix
+    - r-cpp11
+    - r-cpp11armadillo
     - r-crayon
     - r-ggplot2
+    - r-glmnet
+    - r-l0learn
+    - r-matrix
     - r-matrixstats
     - r-mixsqp
     - r-reshape
