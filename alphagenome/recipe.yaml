@@ -1,13 +1,15 @@
+schema_version: 1
+
 context:
-  version: 0.1.0
+  version: "0.6.1"
 
 package:
   name: alphagenome
   version: ${{ version }}
 
 source:
-  url: https://pypi.org/packages/source/a/alphagenome/alphagenome-${{ version }}.tar.gz
-  sha256: ff6370d1c3c0e6fdd1c81e03bb2b16356ca7ccb97f64f1d24163221581f05bc4
+  url: https://github.com/google-deepmind/alphagenome/archive/v${{ version }}.tar.gz
+  sha256: 8aa4db613b3168560cfce1c05a2d30b1bacc0eee297952d2730dd1520fb70346
 
 build:
   number: 0
@@ -16,16 +18,16 @@ build:
 
 requirements:
   host:
-    - python
+    - python =${{ python_min }}
     - hatchling
     - grpcio-tools <=1.67.1
     - importlib-resources
     - pip
   run:
-    - python
+    - python >=${{ python_min }}
     - absl-py
     - anndata
-    - grpcio >=1.67.1
+    - grpcio
     - immutabledict
     - intervaltree
     - jaxtyping
@@ -33,7 +35,7 @@ requirements:
     - ml_dtypes
     - numpy
     - pandas
-    - protobuf >=5.28.3
+    - protobuf
     - pyarrow
     - scipy
     - seaborn
