@@ -1,0 +1,61 @@
+schema_version: 1
+
+context:
+  version: "0.2.0"
+  python_min: 3.11
+
+package:
+  name: alphagenome_research
+  version: ${{ version }}
+
+source:
+  url: https://github.com/google-deepmind/alphagenome_research/archive/v${{ version }}.tar.gz
+  sha256: a695581eb007cb48ba80296d9164bf2851e1b4104b9979b4d0c260edf5f2a291
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python =${{ python_min }}
+    - hatchling
+    - pip
+  run:
+    - python >=${{ python_min }}
+    - absl-py
+    - alphagenome
+    - anndata
+    - chex
+    - dm-haiku
+    - einshape
+    - etils
+    - huggingface_hub
+    - jax
+    - jaxtyping
+    - kagglehub
+    - numpy
+    - optax
+    - orbax-checkpoint
+    - pandas
+    - pybigwig
+    - pyarrow
+    - pyfaidx
+    - pyranges
+    - tensorflow
+
+tests:
+  - python:
+      imports:
+        - alphagenome_research
+      pip_check: false
+
+about:
+  summary: AlphaGenome Research.
+  license: Apache-2.0
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
