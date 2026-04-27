@@ -1,0 +1,41 @@
+context:
+  version: 2.3.0
+
+package:
+  name: espanso
+  version: ${{ version }}
+
+source:
+  url: https://github.com/espanso/espanso/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: 32b315a813114b28ef3ee74c5d2ce0bfc2f75a0bd9a4141c7465cd0b00fdf34c
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - ${{ stdlib('c') }}
+    - cargo-bundle-licenses
+    - pkg-config
+  host:
+    - openssl
+
+tests:
+  - script:
+      - espanso --help
+
+about:
+  license: GPL-3.0-or-later
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: A Privacy-first, Cross-platform Text Expander written in Rust
+  homepage: https://github.com/espanso/espanso
+  repository: https://github.com/espanso/espanso
+
+extra:
+  recipe-maintainers:
+    - danielnachun
