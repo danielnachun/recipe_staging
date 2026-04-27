@@ -1,0 +1,41 @@
+schema_version: 1
+
+context:
+  version: 2.0.0
+
+package:
+  name: fusera
+  version: ${{ version }}
+
+source:
+  url: https://github.com/mitre/fusera/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: a742f63dbb836e72acb687da25bafd944da6c1716f54fb52a3fc615ab02cc06d
+
+build:
+  number: 0
+  skip: not linux
+
+requirements:
+  build:
+    - ${{ compiler('go-cgo') }}
+    - ${{ compiler('c') }}
+    - go-licenses
+  host:
+    - libfuse
+
+tests:
+  - script:
+      - fusera --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - license-files/
+  summary: A FUSE interface to the NCBI Sequence Read Archive (SRA)
+  homepage: https://github.com/mitre/fusera
+  repository: https://github.com/mitre/fusera
+
+extra:
+  recipe-maintainers:
+    - danielnachun
