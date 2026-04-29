@@ -20,10 +20,10 @@ export LD_LIBRARY_PATH="${PREFIX}/lib"
 sed -i.bak 's/ check_lib/    print $conf_LIBS;\
 check_lib/g' Makefile.PL
 # Make sure this goes in site
-perl Makefile.PL INSTALLDIRS=site LDFLAGS="$LDFLAGS" CCFLAGS="${CFLAGS}" LIBS="-L${PREFIX}/lib -lxml2 -lz -llzma -liconv -licui18n -licuuc -licudata -lm -ldl" INC="-I$PREFIX/include/libxml2 -I$PREFIX/include"
-make
+perl Makefile.PL INSTALLDIRS=site LDFLAGS="$LDFLAGS" CCFLAGS="${CFLAGS}" LIBS="-L${PREFIX}/lib -lxml2 -lz -llzma -liconv -licui18n -licuuc -licudata -lm -ldl" INC="-I$PREFIX/include/libxml2 -I$PREFIX/include" CC=${CC}
+make CC=${CC}
 #make test
-make install
+make install CC=${CC}
 
 cp ${PREFIX}/man/man1/perlartistic.1 ${SRC_DIR}
 cp ${PREFIX}/man/man1/perlgpl.1 ${SRC_DIR}

@@ -12,10 +12,10 @@ source:
 build:
   number: 0
   script: |
-    perl Makefile.PL INSTALLDIRS=site
-    make
-    make test
-    make install
+    perl Makefile.PL INSTALLDIRS=site CC=${CC}
+    make CC=${CC}
+    make test CC=${CC}
+    make install CC=${CC}
     cp ${PREFIX}/man/man1/perlartistic.1 ${SRC_DIR}
     cp ${PREFIX}/man/man1/perlgpl.1 ${SRC_DIR}
 
