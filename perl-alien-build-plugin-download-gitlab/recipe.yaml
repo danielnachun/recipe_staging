@@ -20,6 +20,8 @@ build:
     - make install
 
 requirements:
+  build:
+    - make
   host:
     - perl
     - perl-alien-build
