@@ -1,0 +1,45 @@
+schema_version: 1
+
+context:
+  version: "0.01"
+
+package:
+  name: perl-alien-build-plugin-download-gitlab
+  version: ${{ version }}
+
+source:
+  url: https://cpan.metacpan.org/authors/id/P/PL/PLICEASE/Alien-Build-Plugin-Download-GitLab-${{ version }}.tar.gz
+  sha256: c1f089c8ea152a789909d48a83dbfcf2626f773daf30431c8622582b26aba902
+build:
+  number: 0
+  noarch: generic
+  script:
+    - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
+    - make
+    - make test
+    - make install
+
+requirements:
+  build:
+    - make
+  host:
+    - perl
+    - perl-alien-build
+    - perl-uri
+    - perl-path-tiny
+    - perl-test2-suite
+  run:
+    - perl
+    - perl-alien-build
+    - perl-uri
+    - perl-path-tiny
+
+tests:
+  - perl:
+      uses:
+        - Alien::Build::Plugin::Download::GitLab
+
+about:
+  license: Artistic-1.0-Perl OR GPL-1.0-or-later
+  summary: Alien::Build plugin to download from GitLab
+  homepage: https://metacpan.org/pod/Alien::Build::Plugin::Download::GitLab
