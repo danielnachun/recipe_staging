@@ -17,10 +17,10 @@ fi
 # If it has Build.PL use that, otherwise use Makefile.PL
 export LD_LIBRARY_PATH="${PREFIX}/lib"
 # Disable check_lib, it incorrectly tries -lnsl, which perl is not actually compiled againt
-sed -i.bak 's/ check_lib/    print $conf_LIBS;\
-check_lib/g' Makefile.PL
+# sed -i.bak 's/ check_lib/    print $conf_LIBS;\
+# check_lib/g' Makefile.PL
 # Make sure this goes in site
-perl Makefile.PL INSTALLDIRS=site LDFLAGS="$LDFLAGS" CCFLAGS="${CFLAGS}" LIBS="-L${PREFIX}/lib -lxml2 -lz -llzma -liconv -licui18n -licuuc -licudata -lm -ldl" INC="-I$PREFIX/include/libxml2 -I$PREFIX/include" CC=${CC}
+perl Makefile.PL INSTALLDIRS=site LDFLAGS="$LDFLAGS" CCFLAGS="${CFLAGS}" LIBS="-L${PREFIX}/lib -lxml2 -lz -llzma -liconv -licui18n -licuuc -licudata -lm -ldl" INC="-I$PREFIX/include/libxml2 -I$PREFIX/include -I${CONDA_BUILD_SYSROOT}/usr/include" CC=${CC}
 make CC=${CC}
 #make test
 make install CC=${CC}
