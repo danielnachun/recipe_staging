@@ -23,9 +23,7 @@ requirements:
     - perl-xml-namespacesupport
     - perl-alien-build
     - perl-alien-libxml2
-    - liblzma-devel
     - libxml2-devel
-    - zlib
   run:
     - perl>=5.32
     - perl-xml-sax
