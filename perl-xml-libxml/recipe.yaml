@@ -24,7 +24,7 @@ requirements:
     - perl-alien-build
     - perl-alien-libxml2
     - liblzma-devel
-    - libxml2
+    - libxml2-devel
     - zlib
   run:
     - perl>=5.32
