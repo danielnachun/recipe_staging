@@ -1,5 +1,5 @@
 context:
-  version: 2.0207
+  version: 2.0210
 
 package:
   name: perl-xml-libxml
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://cpan.metacpan.org/authors/id/S/SH/SHLOMIF/XML-LibXML-${{ version }}.tar.gz
-  sha256: 903436c9859875bef5593243aae85ced329ad0fb4b57bbf45975e32547c50c15
+  sha256: a29bf3f00ab9c9ee04218154e0afc8f799bf23674eb99c1a9ed4de1f4059a48d
 
 build:
   number: 0
@@ -15,6 +15,7 @@ build:
 requirements:
   build:
     - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
     - make
   host:
     - perl=5.32
@@ -30,6 +31,7 @@ requirements:
     - perl-xml-sax
     - perl-xml-namespacesupport
     - perl-alien-libxml2
+    - ${{ pin_compatible("libxml2", lower_bound="x.x", upper_bound="x.x") }}
 
 tests:
   - perl:
