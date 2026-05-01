@@ -1,41 +1,37 @@
 schema_version: 1
 
 context:
-  name: fastenloc
-  version: 2.0
+  version: 3.2
 
 package:
-  name: ${{ name|lower }}
+  name: fastenloc
   version: ${{ version }}
 
 source:
-  url: https://github.com/xqwen/${{ name }}/archive/refs/tags/v${{ version }}.tar.gz
-  sha256: e6273addff0e48ce24f8f7e67833d6ee8fe1c84e4e595109b583986ff7376e1d
+  url: https://github.com/xqwen/fastenloc/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: d107e269764c28cd2cfec5218e560bc82694735d344978f4638fec9dbfe37757
 
 build:
-  number: 3
+  number: 0
 
 requirements:
   build:
     - ${{ compiler('cxx') }}
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
     - make
   host:
-    - blas
-    - boost-cpp =1.84
+    - libblas
+    - liblapack
     - gsl
-    - zlib
-  run:
     - if: linux
-      then: _openmp_mutex
-    - if: osx
-      then: llvm-openmp
-    - libboost =1.84
-    - libopenblas
-    - libzlib
+      then: libgomp
+      else: llvm-openmp
+    - zlib
 
 tests:
-  - script:
-      - fastenloc 2>&1 | grep -q "Usage: "fastenloc -eqtl eqtl_file -gwas gwas_file\""
+  - script: |
+      fastenloc 2>&1 | grep -q 'Error: number of total GWAS variants is unspecified'
 
 about:
   license: GPL-3.0-or-later
@@ -45,4 +41,3 @@ about:
 extra:
   recipe-maintainers:
     - danielnachun
-
