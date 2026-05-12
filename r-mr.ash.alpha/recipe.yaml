@@ -23,11 +23,19 @@ requirements:
     - ${{ compiler('cxx') }}
     - sed
   host:
+    - if: linux
+      then: libgomp
+      else: llvm-openmp
+    - libblas
+    - liblapack
     - r-base
     - r-matrix
     - r-rcpp
     - r-rcpparmadillo
   run:
+    - if: linux
+      then: libgomp
+      else: llvm-openmp
     - r-base
     - r-matrix
     - r-rcpp
