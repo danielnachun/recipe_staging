@@ -1,0 +1,36 @@
+context:
+  version: "0.1.1"
+
+package:
+  name: htstools
+  version: ${{ version }}
+
+source:
+  url: https://github.com/mskcc/htstools/archive/refs/tags/snp_pileup_${{ version }}.tar.gz
+  sha256: 24b21f47d8d915e932efda235ff7ebc6cbd6f1786721a48d6b4074db7dec3316
+
+build:
+  number: 0
+  skip: win
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - ${{ compiler('cxx') }}
+    - make
+  host:
+    - if: osx
+      then: argp-standalone
+    - htslib
+
+tests:
+  - script:
+      - dnafrags --help
+      - ppflag-fixer --help
+      - snp-pileup --help
+
+about:
+  license: LicenseRef-Other
+  summary: Contains three tools (dnafrags, ppflag-fixer, snp-pileup) written by Alex Studer to process bam files for downstream copy number analysis.
+  homepage: https://github.com/mskcc/htstools
