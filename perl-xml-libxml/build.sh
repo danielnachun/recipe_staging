@@ -20,9 +20,9 @@ fi
 # sed -i.bak 's/ check_lib/    print $conf_LIBS;\
 # check_lib/g' Makefile.PL
 # Make sure this goes in site
-perl Makefile.PL INSTALLDIRS=site OTHERLDFLAGS="--sysroot=${CONDA_BUILD_SYSROOT}" CCFLAGS="${CFLAGS}" LIBS="-L${PREFIX}/lib -lxml2" INC="-I$PREFIX/include/libxml2 -I$PREFIX/include -I${CONDA_BUILD_SYSROOT}/usr/include" CC=${CC} LD=${CC}
+perl Makefile.PL INSTALLDIRS=site CCFLAGS="${CFLAGS}" LIBS="-L${PREFIX}/lib -lxml2" INC="-I$PREFIX/include/libxml2 -I$PREFIX/include -I${CONDA_BUILD_SYSROOT}/usr/include" CC=${CC} LD=${CC}
 # perl Makefile.PL INSTALLDIRS=site CC=${CC} LD=${CC}
-make CC=${CC} LD=${CC}
+make CC=${CC} LD=${CC} OTHERLDFLAGS="--sysroot=${CONDA_BUILD_SYSROOT}"
 #make test
 make install CC=${CC} LD=${CC}
 
