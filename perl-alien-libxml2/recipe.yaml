@@ -1,5 +1,5 @@
 context:
-  version: 0.17
+  version: 0.20
 
 package:
   name: perl-alien-libxml2
@@ -7,33 +7,36 @@ package:
 
 source:
   url: https://cpan.metacpan.org/authors/id/P/PL/PLICEASE/Alien-Libxml2-${{ version }}.tar.gz
-  sha256: 73b45244f0b5c36e5332c33569b82a1ab2c33e263f1d00785d2003bcaec68db3
+  sha256: 56aae7b339bbeb02f77c5801f57a821be5791b51f43bf7f9062bb3bfa444c328
 
 build:
   number: 0
   script: |
-    perl Makefile.PL INSTALLDIRS=site
-    make
-    make test
-    make install
+    perl Makefile.PL INSTALLDIRS=site CC=${CC}
+    make CC=${CC}
+    make test CC=${CC}
+    make install CC=${CC}
     cp ${PREFIX}/man/man1/perlartistic.1 ${SRC_DIR}
     cp ${PREFIX}/man/man1/perlgpl.1 ${SRC_DIR}
 
 requirements:
   build:
     - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
     - make
     - pkg-config
   host:
     - liblzma-devel
-    - libxml2
+    - libxml2-devel
     - perl=5.32
     - perl-alien-build
+    - perl-alien-build-plugin-download-gitlab
     - perl-test2-suite
     - zlib
   run:
     - perl=5.32
     - perl-alien-build
+    - perl-alien-build-plugin-download-gitlab
 
 tests:
   - perl:

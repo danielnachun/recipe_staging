@@ -1,5 +1,5 @@
 context:
-  version: 2.53
+  version: 2.84
 
 package:
   name: perl-alien-build
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://cpan.metacpan.org/authors/id/P/PL/PLICEASE/Alien-Build-${{ version }}.tar.gz
-  sha256: fcc4391eb099b5e8c87b526fa6ebaf0b5eccee66f63653f786026120a42a0f5c
+  sha256: 8e891fd3acbac39dd8fdc01376b9abff931e625be41e0910ca30ad59363b4477
 
 build:
   number: 0
@@ -22,6 +22,7 @@ build:
 requirements:
   build:
     - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
     - make
     - if: not win
       then:
