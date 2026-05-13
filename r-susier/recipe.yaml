@@ -1,15 +1,15 @@
 schema_version: 1
 
 context:
-  version: 0.16.0
+  version: 0.16.1
 
 package:
   name: r-susier
-  version: ${{ version|replace("-", "_") }}
+  version: ${{ version }}
 
 source:
   url: https://github.com/stephenslab/susieR/archive/refs/tags/${{ version }}.tar.gz
-  sha256: d5d4fc82dcd36b8a21eb635adee8ff01781121ac651add5dcb1b8998be261394
+  sha256: b01e859f335cad108d0a82978a1977f3fcea74cfdf71fb33d3ded8fa0304f9f1
 
 build:
   number: 0
