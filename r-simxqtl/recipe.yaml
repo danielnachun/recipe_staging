@@ -1,0 +1,46 @@
+context:
+  version: 0.1.0
+
+package:
+  name: r-simxqtl
+  version: ${{ version }}
+
+source:
+  url: https://github.com/StatFunGen/simxQTL/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: 5ddf23b3c2ea59d9de5e30f8c9f555661a5920149f0d75625df120d01756276a
+
+build:
+  noarch: generic
+  number: 0
+  script: R CMD INSTALL --build . ${R_ARGS}
+
+requirements:
+  host:
+    - r-base
+    - r-bedmatrix
+    - r-data.table
+    - r-mass
+    - r-matrix
+    - r-mvtnorm
+    - r-purrr
+    - r-susier
+    - r-tibble
+  run:
+    - r-base
+    - r-bedmatrix
+    - r-data.table
+    - r-mass
+    - r-matrix
+    - r-mvtnorm
+    - r-purrr
+    - r-susier
+    - r-tibble
+
+tests:
+  - script: R -e "library('simxQTL')"
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: In house simulation R package to support investigations of various QTL association methods
+  homepage: https://github.com/StatFunGen/simxQTL
