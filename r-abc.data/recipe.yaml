@@ -1,0 +1,35 @@
+schema_version: 1
+
+context:
+  version: "1.1"
+
+package:
+  name: r-abc.data
+  version: ${{ version }}
+
+source:
+  url: https://cloud.r-project.org//src/contrib/abc.data_${{ version }}.tar.gz
+  sha256: 48d685cf81a6053cce981791570abd27773454d7ff7586c2a563dab7a1cdb07d
+
+build:
+  number: 0
+  noarch: generic
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  host:
+    - r-base
+  run:
+    - r-base
+
+tests:
+  - script:
+      - R -e "library('abc.data')"
+
+about:
+  license: GPL-3.0-or-later
+  summary: Contains data which are used by functions of the 'abc' package.
+  homepage: https://CRAN.R-project.org/package=abc.data
