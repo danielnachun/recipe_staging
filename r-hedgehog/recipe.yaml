@@ -1,0 +1,45 @@
+schema_version: 1
+
+context:
+  version: "0.2"
+
+package:
+  name: r-hedgehog
+  version: ${{ version }}
+
+source:
+  url:
+    - https://cloud.r-project.org//src/contrib/hedgehog_${{ version }}.tar.gz
+  sha256: 9ee7623ac2772692bfe342971bc1f9677824e44ee00e21ad38dbb56a323b2e00
+
+build:
+  number: 0
+  noarch: generic
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  host:
+    - r-base
+    - r-rlang >=0.1.6
+    - r-testthat
+  run:
+    - r-base
+    - r-rlang >=0.1.6
+    - r-testthat
+
+tests:
+  - script:
+      - R -e "library('hedgehog')"
+
+about:
+  license: MIT
+  summary: Hedgehog will eat all your bugs. 'Hedgehog' is a property-based testing package in
+    the spirit of 'QuickCheck'. With 'Hedgehog', one can test properties of their programs
+    against randomly generated input, providing far superior test coverage compared
+    to unit testing. One of the key benefits of 'Hedgehog' is integrated shrinking of
+    counterexamples, which allows one to quickly find the cause of bugs, given salient
+    examples when incorrect behaviour occurs.
+  homepage: https://github.com/hedgehogqa
