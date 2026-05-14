@@ -1,0 +1,49 @@
+schema_version: 1
+
+context:
+  version: "2.2.2"
+
+package:
+  name: r-abc
+  version: ${{ version }}
+
+source:
+  url:
+    - https://cloud.r-project.org//src/contrib/abc_${{ version }}.tar.gz
+  sha256: bc9419f41cb70e6e7eec3f53a17810dd89ff78c0792b2dd769e2e57d852f4195
+
+build:
+  number: 0
+  noarch: generic
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  host:
+    - r-base
+    - r-mass
+    - r-abc.data
+    - r-locfit
+    - r-nnet
+    - r-quantreg
+  run:
+    - r-base
+    - r-mass
+    - r-abc.data
+    - r-locfit
+    - r-nnet
+    - r-quantreg
+
+tests:
+  - script:
+      - R -e "library('abc')"
+
+about:
+  license: GPL-3.0-or-later
+  summary: Implements several ABC algorithms for performing parameter estimation, model selection,
+    and goodness-of-fit. Cross-validation tools are also available for measuring the
+    accuracy of ABC estimates, and to calculate the misclassification probabilities
+    of different models.
+  homepage: https://CRAN.R-project.org/package=abc
