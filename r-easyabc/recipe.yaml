@@ -1,0 +1,56 @@
+schema_version: 1
+
+context:
+  version: "1.6"
+
+package:
+  name: r-easyabc
+  version: ${{ version }}
+
+source:
+  url: https://cloud.r-project.org//src/contrib/EasyABC_${{ version }}.tar.gz
+  sha256: 6c52d7d3cd7c54a6a8d9ad4f5155010d288a48a747a14fd944b3c67678222590
+
+build:
+  number: 0
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - ${{ compiler('cxx') }}
+    - make
+  host:
+    - r-base
+    - r-mass
+    - r-rcpp
+    - r-abc
+    - r-lhs
+    - r-mnormt
+    - r-pls
+    - r-tensora
+  run:
+    - r-base
+    - r-mass
+    - r-rcpp
+    - r-abc
+    - r-lhs
+    - r-mnormt
+    - r-pls
+    - r-tensora
+
+tests:
+  - script:
+      - R -e "library('EasyABC')"
+
+about:
+  license: GPL-3.0-or-later
+  summary: Enables launching a series of simulations of a computer code from the R session, and
+    to retrieve the simulation outputs in an appropriate format for post-processing
+    treatments. Five sequential sampling schemes and three coupled-to-MCMC schemes are
+    implemented.
+  homepage: https://lisc.pages-forge.inrae.fr/easyabc/
