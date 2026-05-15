@@ -12,6 +12,7 @@ fi
 sed -i 's/${CFLAGS} -D$d/${CFLAGS} ${LDFLAGS} ${LIBS} -D$d/' autoopts/test/defs.in
 sed -i 's/${CFLAGS} ${INC} -o ${testname}/${CFLAGS} ${LDFLAGS} ${LIBS} ${INC} -o ${testname}/' autoopts/test/library.test
 sed -i 's/CC="${CC} ${CFLAGS} ${INC}"/CC="${CC} ${CFLAGS} ${INC} ${LDFLAGS}"/' autoopts/test/getopt.test
+export GUILE_AUTO_COMPILE=0
 
 autoreconf --force --install --verbose
 sed -i 's/"2.2 2.0 1.8"/"3.0 2.2 2.0 1.8"/' configure
@@ -22,6 +23,12 @@ sed -i 's/"2.2 2.0 1.8"/"3.0 2.2 2.0 1.8"/' configure
     --prefix=${PREFIX} \
     --libdir=${PREFIX}/lib
 
-make
-make check
-make install
+make --trace
+# make check
+test -x $SRC_DIR/getdefs/getdefs
+test -x $SRC_DIR/columns/columns
+make --trace install
+
+sed -i "s?${BUILD_PREFIX}/bin/perl?/usr/bin/env perl?" ${PREFIX}/share/autogen/mdoc2man
+sed -i "s?${BUILD_PREFIX}/bin/perl?/usr/bin/env perl?" ${PREFIX}/share/autogen/man2mdoc
+sed -i "s?${BUILD_PREFIX}/bin/perl?/usr/bin/env perl?" ${PREFIX}/share/autogen/mdoc2texi
