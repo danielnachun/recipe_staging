@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: 0.2.1
+  version: 0.3.0
 
 package:
   name: r-mvsusier
@@ -9,7 +9,7 @@ package:
 
 source:
   url: https://github.com/stephenslab/mvsusieR/archive/${{ version }}.tar.gz
-  sha256: 18266ba28946b4e73132634315552b864fb589cf929f856d621653c649b081f7
+  sha256: 7b1e1ea7ffb144d9841c6f84457125dcc7abc8769b0ad229aa7d3af98cce8139
 
 build:
   number: 0
