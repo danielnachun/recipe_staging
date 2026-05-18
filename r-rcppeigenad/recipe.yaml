@@ -1,0 +1,57 @@
+schema_version: 1
+
+context:
+  version: "1.1.0"
+
+package:
+  name: r-rcppeigenad
+  version: ${{ version }}
+
+source:
+  url:
+    - https://cloud.r-project.org//src/contrib/RcppEigenAD_${{ version }}.tar.gz
+  sha256: 08fd3fe79a2ded5de918970f290d184a3019a2b10bb77bba6f76d93b91779098
+
+build:
+  number: 0
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - ${{ compiler('cxx') }}
+    - make
+  host:
+    - r-base
+    - r-bh
+    - r-rcpp >=0.12.12
+    - r-rcppeigen
+    - r-rdpack
+    - r-functional
+    - r-memoise
+    - r-readr
+  run:
+    - r-base
+    - r-bh
+    - r-rcpp >=0.12.12
+    - r-rcppeigen
+    - r-rdpack
+    - r-functional
+    - r-memoise
+    - r-readr
+
+tests:
+  - script:
+      - R -e "library('RcppEigenAD')"
+
+about:
+  license: GPL-2.0-only
+  summary: Compiles 'C++' code using 'Rcpp' <doi:10.18637/jss.v040.i08>, 'Eigen' <doi:10.18637/jss.v052.i05>
+    and 'CppAD' to produce first and second order partial derivatives. Also provides
+    an implementation of Faa' di Bruno's formula to combine the partial derivatives
+    of composed functions.
+  homepage: https://CRAN.R-project.org/package=RcppEigenAD
