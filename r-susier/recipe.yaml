@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: 0.16.1
+  version: 0.16.2
 
 package:
   name: r-susier
@@ -9,7 +9,7 @@ package:
 
 source:
   url: https://github.com/stephenslab/susieR/archive/refs/tags/${{ version }}.tar.gz
-  sha256: b01e859f335cad108d0a82978a1977f3fcea74cfdf71fb33d3ded8fa0304f9f1
+  sha256: 1f944493782ea3f81c19ca33fd76b1d945966cb8d6e538399692f6e84e50b8fd
 
 build:
   number: 0
