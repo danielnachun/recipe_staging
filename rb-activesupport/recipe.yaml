@@ -1,5 +1,5 @@
 context:
-  version: 8.0.2
+  version: 7.0.8.7
 
 package:
   name: rb-activesupport
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://rubygems.org/downloads/activesupport-${{ version }}.gem
-  sha256: 8565cddba31b900cdc17682fd66ecd020441e3eef320a9930285394e8c07a45e
+  sha256: df4702375de924aae81709c831605317c5417f0bd9e502a0373ff84a067204ff
 
 build:
   number: 0
@@ -20,15 +20,9 @@ requirements:
   host:
     - ruby=3.2
   run:
-    - rb-base64
-    - rb-bigdecimal
     - rb-concurrent-ruby
-    - rb-connection_pool
-    - rb-drb
     - rb-i18n
-    - rb-logger
     - rb-minitest
-    - rb-securerandom
     - rb-tzinfo
     - ruby>=3.2
 
@@ -46,4 +40,3 @@ about:
 extra:
   recipe-maintainers:
     - danielnachun
-
