@@ -6,11 +6,13 @@ libunwind:
 #     max_pin:
 #       - if: linux
 #         then: "x.x"
-c_compiler:
-  - clang
+# c_compiler:
+#   - clang
 c_compiler_version:
-  - 19
-cxx_compiler:
-  - clangxx
+  - if: linux
+    then: 14
+# cxx_compiler:
+#   - clangxx
 cxx_compiler_version:
-  - 19
+  - if: linux
+    then: 14
