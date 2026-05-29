@@ -13,4 +13,4 @@ pin_run_as_build:
     libunwind:
       max_pin:
         - if: linux
-          then: x.x
+          then: "x.x"
