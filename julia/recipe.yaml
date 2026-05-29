@@ -28,7 +28,7 @@ build:
 requirements:
   build:
     - curl
-    - llvm-dev
+    - llvmdev
     - make
     - perl
     - python
