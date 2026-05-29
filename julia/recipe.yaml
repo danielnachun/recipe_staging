@@ -10,7 +10,6 @@ package:
 source:
   url: https://github.com/JuliaLang/julia/releases/download/v${{ version }}/julia-${{ version }}-full.tar.gz
   sha256: 891d16bb91c8a94d5a6355a82c17fa3c2458eb89160d428443a0b2a1b841ea52
-  file_name: julia-${{ version }}-full.tar.gz
   patches:
     - patches/julia-hardcoded-libs.patch
     - if: linux

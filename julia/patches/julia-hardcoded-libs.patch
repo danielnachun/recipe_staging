@@ -1,6 +1,6 @@
-diff -u -r a/julia-1.12.1/stdlib/LibGit2_jll/src/LibGit2_jll.jl b/julia-1.12.1/stdlib/LibGit2_jll/src/LibGit2_jll.jl
---- a/julia-1.12.1/stdlib/LibGit2_jll/src/LibGit2_jll.jl	2025-09-28 03:13:13.000000000 +0000
-+++ b/julia-1.12.1/stdlib/LibGit2_jll/src/LibGit2_jll.jl	2025-10-30 16:19:25.291100020 +0000
+diff --git a/stdlib/LibGit2_jll/src/LibGit2_jll.jl b/stdlib/LibGit2_jll/src/LibGit2_jll.jl
+--- a/stdlib/LibGit2_jll/src/LibGit2_jll.jl
++++ b/stdlib/LibGit2_jll/src/LibGit2_jll.jl
 @@ -24,9 +24,9 @@
  if Sys.iswindows()
      const libgit2 = "libgit2.dll"
@@ -11,11 +11,11 @@ diff -u -r a/julia-1.12.1/stdlib/LibGit2_jll/src/LibGit2_jll.jl b/julia-1.12.1/s
 -    const libgit2 = "libgit2.so.1.9"
 +    const libgit2 = "libgit2.so"
  end
- 
+
  function __init__()
-diff -u -r a/julia-1.12.1/stdlib/LibSSH2_jll/src/LibSSH2_jll.jl b/julia-1.12.1/stdlib/LibSSH2_jll/src/LibSSH2_jll.jl
---- a/julia-1.12.1/stdlib/LibSSH2_jll/src/LibSSH2_jll.jl	2025-09-28 03:13:13.000000000 +0000
-+++ b/julia-1.12.1/stdlib/LibSSH2_jll/src/LibSSH2_jll.jl	2025-10-30 16:19:51.004254965 +0000
+diff --git a/stdlib/LibSSH2_jll/src/LibSSH2_jll.jl b/stdlib/LibSSH2_jll/src/LibSSH2_jll.jl
+--- a/stdlib/LibSSH2_jll/src/LibSSH2_jll.jl
++++ b/stdlib/LibSSH2_jll/src/LibSSH2_jll.jl
 @@ -24,9 +24,9 @@
  if Sys.iswindows()
      const libssh2 = "libssh2.dll"
@@ -26,11 +26,11 @@ diff -u -r a/julia-1.12.1/stdlib/LibSSH2_jll/src/LibSSH2_jll.jl b/julia-1.12.1/s
 -    const libssh2 = "libssh2.so.1"
 +    const libssh2 = "libssh2.so"
  end
- 
+
  function __init__()
-diff -u -r a/julia-1.12.1/stdlib/OpenLibm_jll/src/OpenLibm_jll.jl b/julia-1.12.1/stdlib/OpenLibm_jll/src/OpenLibm_jll.jl
---- a/julia-1.12.1/stdlib/OpenLibm_jll/src/OpenLibm_jll.jl	2025-07-09 23:06:32.000000000 +0000
-+++ b/julia-1.12.1/stdlib/OpenLibm_jll/src/OpenLibm_jll.jl	2025-10-30 16:20:53.489634344 +0000
+diff --git a/stdlib/OpenLibm_jll/src/OpenLibm_jll.jl b/stdlib/OpenLibm_jll/src/OpenLibm_jll.jl
+--- a/stdlib/OpenLibm_jll/src/OpenLibm_jll.jl
++++ b/stdlib/OpenLibm_jll/src/OpenLibm_jll.jl
 @@ -19,9 +19,9 @@
  if Sys.iswindows()
      const libopenlibm = "libopenlibm.dll"
@@ -41,11 +41,11 @@ diff -u -r a/julia-1.12.1/stdlib/OpenLibm_jll/src/OpenLibm_jll.jl b/julia-1.12.1
 -    const libopenlibm = "libopenlibm.so.4"
 +    const libopenlibm = "libopenlibm.so"
  end
- 
+
  function __init__()
-diff -u -r a/julia-1.12.1/stdlib/nghttp2_jll/src/nghttp2_jll.jl b/julia-1.12.1/stdlib/nghttp2_jll/src/nghttp2_jll.jl
---- a/julia-1.12.1/stdlib/nghttp2_jll/src/nghttp2_jll.jl	2025-07-09 23:06:32.000000000 +0000
-+++ b/julia-1.12.1/stdlib/nghttp2_jll/src/nghttp2_jll.jl	2025-10-30 16:21:26.834836643 +0000
+diff --git a/stdlib/nghttp2_jll/src/nghttp2_jll.jl b/stdlib/nghttp2_jll/src/nghttp2_jll.jl
+--- a/stdlib/nghttp2_jll/src/nghttp2_jll.jl
++++ b/stdlib/nghttp2_jll/src/nghttp2_jll.jl
 @@ -19,9 +19,9 @@
  if Sys.iswindows()
      const libnghttp2 = "libnghttp2-14.dll"
@@ -56,5 +56,5 @@ diff -u -r a/julia-1.12.1/stdlib/nghttp2_jll/src/nghttp2_jll.jl b/julia-1.12.1/s
 -    const libnghttp2 = "libnghttp2.so.14"
 +    const libnghttp2 = "libnghttp2.so"
  end
- 
+
  function __init__()
