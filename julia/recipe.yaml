@@ -27,6 +27,7 @@ build:
 
 requirements:
   build:
+    - curl
     - make
     - perl
     - python
@@ -34,6 +35,9 @@ requirements:
     - ${{ compiler('c') }}
     - ${{ stdlib("c") }}
     - ${{ compiler('cxx') }}
+    - if: linux
+      then:
+        - binutils
   host:
     - openblas-ilp64
     - if: linux
