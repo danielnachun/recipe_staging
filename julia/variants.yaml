@@ -2,10 +2,10 @@ libunwind:
   - if: linux
     then: 1.6
 pin_run_as_build:
-    libunwind:
-      max_pin:
-        - if: linux
-          then: "x.x"
+  libunwind:
+    max_pin:
+      - if: linux
+        then: "x.x"
 c_compiler:
   - clang
 c_compiler_version:
