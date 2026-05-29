@@ -1,0 +1,37 @@
+context:
+  version: 1.20.0
+
+package:
+  name: rust-parallel
+  version: ${{ version }}
+
+source:
+  url: https://github.com/aaronriekenberg/rust-parallel/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: b9acd592f6ad4e033452c339b2c8c437bda86235822105fd53c8d7f3070feed9
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - cargo-bundle-licenses
+
+tests:
+  - script:
+      - rust-parallel --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Fast command line app in rust/tokio to run commands in parallel.
+  homepage: https://github.com/aaronriekenberg/rust-parallel
+  repository: https://github.com/aaronriekenberg/rust-parallel
+
+extra:
+  recipe-maintainers:
+    - danielnachun
