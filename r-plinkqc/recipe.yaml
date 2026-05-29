@@ -1,5 +1,5 @@
 context:
-  version: 0.3.4
+  version: 1.1.0
 
 package:
   name: r-plinkqc
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://cloud.r-project.org/src/contrib/plinkQC_${{ version }}.tar.gz
-  sha256: be9d6ebdc55d7798448821ca26e413569d2d00bc1f0b0bfcfad08de1f871af50
+  sha256: cce233d3bb6195b42983de52dad94c242553b25def5a46999f77f76756bee9a8
 
 build:
   number: 0
@@ -30,7 +30,9 @@ requirements:
     - r-ggrepel
     - r-igraph >=1.2.4
     - r-optparse
+    - r-randomforest
     - r-sys
+    - r-tidyr
   run:
     - r-base
     - r-r.utils
@@ -43,7 +45,9 @@ requirements:
     - r-ggrepel
     - r-igraph >=1.2.4
     - r-optparse
+    - r-randomforest
     - r-sys
+    - r-tidyr
 
 tests:
   - script:
