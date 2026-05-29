@@ -31,7 +31,7 @@ requirements:
     - llvmdev
     - make
     - perl
-    - python
+    - python 3.14
     - ${{ compiler('fortran') }}
     - ${{ compiler('c') }}
     - ${{ stdlib("c") }}
