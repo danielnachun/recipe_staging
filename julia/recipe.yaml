@@ -1,58 +1,50 @@
 schema_version: 1
 
 context:
-  name: julia
-  version: 1.10.4
-  sha256: f32e5277f5d82a63824882cdebfac158199bb84814c3c019a3fecc3601586191
+  version: "1.12.1"
 
 package:
-  name: ${{ name|lower }}
+  name: julia
   version: ${{ version }}
 
 source:
   url: https://github.com/JuliaLang/julia/releases/download/v${{ version }}/julia-${{ version }}-full.tar.gz
-  sha256: ${{ sha256 }}
-  file_name: julia-${{ version }}-full.tar.gz
+  sha256: 891d16bb91c8a94d5a6355a82c17fa3c2458eb89160d428443a0b2a1b841ea52
   patches:
-    ## from https://github.com/archlinux/svntogit-community/tree/packages/julia/trunk
     - patches/julia-hardcoded-libs.patch
-    ## issues with this precompile test, see https://github.com/JuliaLang/julia/issues/43535
-    - if: linux
-      then: patches/disable-testing-Baz.baz.patch
     - if: linux
       then: patches/julia-libunwind-1.6.patch
-    # 1.10.3 links suitesparse cuda libs, patch should not be needed for 1.10.4
-    - patches/suitesparse-no-cuda.patch
-    # suitesparse soname version is hardcoded
-    - patches/suitesparse-soname.patch
-    ## these gmp tests return DivideError rather than OutOfMemoryError on cf ci
     - patches/disable-some-gmp-tests.patch
-    ## for some reason, this new change results in weird printouts in cf ci
     - patches/disable-some-cmdlineargs-test.patch
+    - patches/bf16_darwin.patch
+    - patches/repl-precompile.patch
 
 build:
-  number: 1
+  number: 2
   skip: win
   dynamic_linking:
     binary_relocation: false
 
 requirements:
   build:
+    - curl
+    - llvmdev
     - make
-    - perl=5.32
-    - python 3
-    - if: linux
-      then: binutils
+    - perl
+    - python =3.14
     - ${{ compiler('fortran') }}
     - ${{ compiler('c') }}
+    - ${{ stdlib("c") }}
     - ${{ compiler('cxx') }}
+    - if: linux
+      then:
+        - binutils
   host:
     - openblas-ilp64
     - if: linux
       then: patchelf
     - openlibm
     - gmp
-    - curl
     - if: not osx
       then: libgit2
     - libssh2
@@ -60,8 +52,6 @@ requirements:
       then: libosxunwind
     - if: linux
       then: libunwind
-    - if: not osx
-      then: mbedtls
     - mpfr
     - arpack
     - suitesparse
@@ -86,10 +76,7 @@ requirements:
     - if: not osx
       then: libgit2
     - libssh2
-    - if: not osx
-      then: mbedtls
     - mpfr
-    - git
     - libutf8proc
     - libnghttp2
     - zlib
@@ -100,9 +87,17 @@ tests:
       run:
         - perl
     script:
-      - "julia -e 'using InteractiveUtils; InteractiveUtils.versioninfo()'"
+      - julia -e 'using InteractiveUtils; InteractiveUtils.versioninfo()'
       - echo $CONDA_JL_HOME
       - echo $CONDA_JL_CONDA_EXE
+      - echo $CI
+      # - CI=false julia -e 'Base.runtests(["subarray", "core", "compiler", "worlds", "keywordargs", "numbers", "subtype", "char", "strings", "triplequote", "unicode", "intrinsics", "dict", "hashing", "iobuffer", "staged", "offsetarray", "arrayops", "tuple", "reduce", "reducedim", "abstractarray", "intfuncs", "simdloop", "vecelement", "rational", "copy", "math", "fastmath", "functional", "iterators", "operators", "ordering", "path", "ccall", "parse", "gmp", "sorting", "spawn", "backtrace", "exceptions", "file", "read", "version", "namedtuple", "mpfr", "broadcast", "complex", "floatapprox", "reflection", "regex", "float16", "combinatorics", "sysinfo", "env", "rounding", "ranges", "mod2pi", "euler", "show", "client", "errorshow", "sets", "goto", "llvmcall", "llvmcall2", "ryu", "some", "meta", "stacktraces", "docs", "misc", "stress", "binaryplatforms", "atexit", "enums", "int", "interpreter", "checked", "bitset", "floatfuncs", "precompile", "boundscheck", "error", "ambiguous", "cartesian", "osutils", "channels", "iostream", "secretbuffer", "specificity", "reinterpretarray", "syntax", "corelogging", "missing", "asyncmap", "smallarrayshrink", "download", "opaque_closure", "filesystem"]; ncores=ceil(Int, Sys.CPU_THREADS))'
+      # - CI=false julia --project -e 'delete!(ENV, "JULIA_PROJECT"); delete!(ENV, "JULIA_LOAD_PATH"); Base.runtests(["loading", "cmdlineargs"])'
+      # - CI=false julia -e 'import Pkg;Pkg.add("LibSSH2_jll")'
+      # - CI=false julia -e 'import Pkg;Pkg.add("Sundials")'
+      # - echo $JULIA_CONDAPKG_BACKEND
+      # - CI=false julia -e 'import Pkg; Pkg.add("CondaPkg"); using CondaPkg; CondaPkg.add_channel("conda-forge"); CondaPkg.status(); CondaPkg.current_packages()'
+      # - CI=false julia -e 'import Pkg; Pkg.add("CondaPkg"); using CondaPkg; CondaPkg.add_channel("conda-forge"); print(CondaPkg.conda_cmd())'
 
 about:
   license: MIT
@@ -125,4 +120,3 @@ extra:
     - abhi18av
     - mkitti
     - ngam
-
