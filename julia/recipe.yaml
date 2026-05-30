@@ -56,6 +56,7 @@ requirements:
     - arpack
     - suitesparse
     - pcre2
+    - git
     - libutf8proc
     - libnghttp2
     - zlib
@@ -76,7 +77,6 @@ requirements:
       then: libgit2
     - libssh2
     - mpfr
-    - git
     - libutf8proc
     - libnghttp2
     - zlib
