@@ -1,0 +1,37 @@
+context:
+  version: 1.0-10
+
+package:
+  name: r-mvquad
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://cloud.r-project.org/src/contrib/mvQuad_${{ version }}.tar.gz
+  sha256: 083a7736fd86c2c9007a7ba7eddade172593890ee08f453ed612418e870f2e80
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - r-base
+    - r-data.table
+    - r-statmod
+  run:
+    - r-base
+    - r-data.table
+    - r-statmod
+
+tests:
+  - script:
+      - R -e "library('mvQuad')"
+
+about:
+  license: GPL-3.0-only
+  summary: Provides methods to construct multivariate grids, which can be used for multivariate
+    quadrature. This grids can be based on different quadrature rules like Newton-Cotes
+    formulas (trapezoidal-, Simpson's- rule, ...) or Gauss quadrature (Gauss-Hermite,
+    Gauss-Legendre, ...). For the construction of the multidimensional grid the product-rule
+    or the combination- technique can be applied.
+  homepage: https://github.com/weiserc/mvQuad/
