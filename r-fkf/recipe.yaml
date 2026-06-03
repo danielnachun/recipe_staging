@@ -1,0 +1,40 @@
+context:
+  version: "0.2.6"
+
+package:
+  name: r-fkf
+  version: ${{ version }}
+
+source:
+  url: https://cloud.r-project.org/src/contrib/FKF_${{ version }}.tar.gz
+  sha256: 737eefb902c051f017a5c2c7d6d350fcb3a49376b5a33edabf0d035f9c796873
+
+build:
+  number: 0
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - make
+  host:
+    - r-base
+  run:
+    - r-base
+
+tests:
+  - script:
+      - R -e "library('FKF')"
+
+about:
+  license: GPL-2.0-only
+  summary: This is a fast and flexible implementation of the Kalman filter and smoother, which
+    can deal with NAs. It is entirely written in C and relies fully on linear algebra
+    subroutines contained in BLAS and LAPACK. Due to the speed of the filter, the fitting
+    of high-dimensional linear state space models to large datasets becomes possible.
+    This package also contains a plot function for the visualization of the state vector
+    and graphical diagnostics of the residuals.
+  homepage: https://waternumbers.github.io/FKF/, https://github.com/waternumbers/FKF
