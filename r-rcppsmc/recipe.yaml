@@ -1,0 +1,45 @@
+context:
+  version: "0.2.9"
+
+package:
+  name: r-rcppsmc
+  version: ${{ version }}
+
+source:
+  url: https://cloud.r-project.org//src/contrib/RcppSMC_${{ version }}.tar.gz
+  sha256: 73476c2d99c5d3385e10f5d1f0f2f8fc117437a622d7eb94c5f1e46971f93d3a
+
+build:
+  number: 0
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - make
+  host:
+    - r-base
+    - r-fkf
+    - r-rcpp >=0.11.0
+    - r-rcpparmadillo
+  run:
+    - r-base
+    - r-fkf
+    - r-rcpp >=0.11.0
+    - r-rcpparmadillo
+
+tests:
+  - script:
+      - R -e "library('RcppSMC')"
+
+about:
+  license: GPL-2.0-only
+  summary: R access to the Sequential Monte Carlo Template Classes by Johansen <doi:10.18637/jss.v030.i06>
+    is provided. At present, four additional examples have been added, and the first
+    example from the JSS paper has been extended. Further integration and extensions
+    are planned.
+  homepage: https://github.com/rcppsmc/rcppsmc, https://dirk.eddelbuettel.com/code/rcpp.smc.html
