@@ -1,0 +1,36 @@
+schema_version: 1
+
+context:
+  version: "0.8.2"
+
+package:
+  name: r-sparsegrid
+  version: ${{ version }}
+
+source:
+  url: https://cloud.r-project.org/src/contrib/SparseGrid_${{ version }}.tar.gz
+  sha256: 1d84ae83db2a390b111589a10570d55b378c2dd3310d3bc588a94ab8845cfd14
+
+build:
+  number: 0
+  noarch: generic
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  host:
+    - r-base
+  run:
+    - r-base
+
+tests:
+  - script:
+      - R -e "library('SparseGrid')"
+
+about:
+  license: GPL-3.0-only
+  summary: SparseGrid is a package to create sparse grids for numerical integration, based on
+    code from www.sparse-grids.de
+  homepage: https://CRAN.R-project.org/package=SparseGrid
