@@ -1,0 +1,40 @@
+schema_version: 1
+
+context:
+  version: "1.0.9"
+
+package:
+  name: r-colocboost
+  version: ${{ version }}
+
+source:
+  url: https://cran.r-project.org/src/contrib/colocboost_${{ version }}.tar.gz
+  sha256: 33506b0b1a5efa8cf74c2d84e2791360aa1a1a2914567eb6180b5775923b391e
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - r-base
+    - r-rfast
+    - r-matrixstats
+  run:
+    - r-base
+    - r-rfast
+    - r-matrixstats
+
+tests:
+  - script:
+      - R -e "library('colocboost')"
+
+about:
+  license: MIT
+  summary: A multi-task learning approach to variable selection regression with highly correlated
+    predictors and sparse effects, based on frequentist statistical inference. It provides
+    statistical evidence to identify which subsets of predictors have non-zero effects
+    on which subsets of response variables, motivated and designed for colocalization
+    analysis across genome-wide association studies (GWAS) and quantitative trait loci
+    (QTL) studies. The ColocBoost model is described in Cao et. al. (2025) <doi:10.1101/2025.04.17.25326042>.
+  homepage: https://github.com/StatFunGen/colocboost
