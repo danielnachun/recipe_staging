@@ -29,6 +29,7 @@ requirements:
     - if: osx
       then: llvm-openmp
       else: libgomp
+    - zlib
   run:
     - if: osx
       then: llvm-openmp
