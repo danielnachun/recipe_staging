@@ -1,0 +1,45 @@
+schema_version: 1
+
+context:
+  name: mca_wgs
+  version: 2.12.1
+
+package:
+  name: ${{ name }}
+  version: 1.0
+
+source:
+  url: https://github.com/tangdavid/mCAs_WGS/archive/e05519107a56e2193495730ee7f0814ff9dab133.tar.gz
+  sha256: a7132b6115fafff4243a5354a324bada445374217aec00bad46232b0069b2792
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - ${{ compiler('cxx') }}
+    - make
+  host:
+    - eigen
+    - htslib
+    - libboost-devel
+    - libdeflate
+    - if: osx
+      then: llvm-openmp
+      else: libgomp
+  run:
+    - if: osx
+      then: llvm-openmp
+      else: libgomp
+
+tests:
+  - script:
+      - mCAs_WGS --help
+
+about:
+  license: GPL-3.0-or-later
+  license_file: LICENSE
+  summary: A pipeline for detecting mosaic chromosomal alterations (mCAs) from whole genome sequencing (WGS) data.
+  homepage: https://github.com/tangdavid/mCAs_WGS
