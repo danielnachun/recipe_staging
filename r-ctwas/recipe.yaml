@@ -1,5 +1,5 @@
 context:
-  version: 0.4.21
+  version: 0.6.0
 
 package:
   name: r-ctwas
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/xinhe-lab/multigroup_ctwas/archive/refs/tags/v${{ version }}.tar.gz
-  sha256: fcc3187f8d7225016862619e0e80491b3aabef21960bf2b9d4704370368bf9c8
+  sha256: 775962a606736d325abd9ac6b1856546134a051c946450e8c6e8b23f44be033e
 
 build:
   number: 0
@@ -21,6 +21,7 @@ requirements:
   host:
     - bioconductor-ensembldb
     - bioconductor-annotationfilter
+    - r-amr
     - r-base
     - r-cowplot
     - r-crayon
@@ -42,6 +43,7 @@ requirements:
   run:
     - bioconductor-ensembldb
     - bioconductor-annotationfilter
+    - r-amr
     - r-base
     - r-cowplot
     - r-crayon
