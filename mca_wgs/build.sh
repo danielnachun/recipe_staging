@@ -6,6 +6,8 @@ export CXXFLAGS="${CXXFLAGS} -O3 -fopenmp -Wall -Wextra -Wno-sign-compare -Wno-u
 export LDFLAGS="${LDFLAGS} -O3 -fopenmp"
 
 rm -rf obj/*.o
+rm -rf bin/*
+
 make CXX=${CXX} all \
     CXXFLAGS="${CXXFLAGS}" \
     LDFLAGS="${LDFLAGS}" \
