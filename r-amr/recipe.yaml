@@ -1,0 +1,36 @@
+schema_version: 1
+
+context:
+  version: "3.0.1"
+
+package:
+  name: r-amr
+  version: ${{ version }}
+
+source:
+  url: https://cloud.r-project.org//src/contrib/AMR_${{ version }}.tar.gz
+  sha256: 62512746bb839f40668ad82d01dd1cabe6deb9a58c4a06043f796d5fd841a640
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - r-base
+  run:
+    - r-base
+
+tests:
+  - script:
+      - R -e "library('AMR')"
+
+about:
+  license: GPL-2.0-only
+  summary: Functions to simplify and standardise antimicrobial resistance (AMR) data analysis
+    and to work with microbial and antimicrobial properties by using evidence-based
+    methods, as described in <doi:10.18637/jss.v104.i03>.
+  license_file:
+    - LICENSE
+  homepage: https://amr-for-r.org
+
