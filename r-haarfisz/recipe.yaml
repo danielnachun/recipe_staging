@@ -1,0 +1,40 @@
+schema_version: 1
+
+context:
+  version: "4.5.4"
+
+package:
+  name: r-haarfisz
+  version: ${{ version }}
+
+source:
+  url: https://cloud.r-project.org//src/contrib/haarfisz_${{ version }}.tar.gz
+  sha256: 4e227cbf8940aaea6277a3693591c62266eecc8ad72c772421cd2dcbf5fd00b0
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - r-base
+    - r-wavethresh
+  run:
+    - r-base
+    - r-wavethresh
+
+tests:
+  - script:
+      - R -e "library('haarfisz')"
+
+about:
+  license: GPL-2.0-only
+  summary: 'A Haar-Fisz algorithm for Poisson intensity estimation. Will denoise Poisson distributed
+    sequences where underlying intensity is not constant. Uses the multiscale variance-stabilization
+    method called the Haar-Fisz transform. Contains functions to carry out the forward
+    and inverse Haar-Fisz transform and denoising on near-Gaussian sequences. Can also
+    carry out cycle-spinning. Main reference: Fryzlewicz, P. and Nason, G.P. (2004)
+    "A Haar-Fisz algorithm for Poisson intensity estimation." Journal of Computational
+    and Graphical Statistics, 13, 621-638. <doi:10.1198/106186004X2697>.'
+  homepage: https://CRAN.R-project.org/package=haarfisz
+
