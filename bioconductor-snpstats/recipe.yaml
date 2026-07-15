@@ -1,7 +1,7 @@
 context:
-  version: 1.56.0
+  version: 1.60.0
   name: snpStats
-  bioc: 3.20
+  bioc: 3.22
 
 package:
   name: bioconductor-${{ name|lower }}
@@ -13,7 +13,7 @@ source:
     - https://bioconductor.org/packages/${{ bioc }}/bioc/src/contrib/Archive/${{ name }}/${{ name }}_${{ version }}.tar.gz
     - https://bioarchive.galaxyproject.org/${{ name }}_${{ version }}.tar.gz
     - https://depot.galaxyproject.org/software/bioconductor-${{ name|lower }}/bioconductor-${{ name|lower }}_${{ version }}_src_all.tar.gz
-  md5: b473e5e0c8c7fa0ebc3353eb23acede3
+  md5: edcd52705c16690e1b44b50918b5adc4
 
 build:
   number: 0
@@ -24,24 +24,21 @@ build:
 
 requirements:
   host:
-    - bioconductor-biocgenerics >=0.52.0,<0.53.0
-    - bioconductor-zlibbioc >=1.52.0,<1.53.0
-    - r-base=4.4
+    - bioconductor-biocgenerics >=0.56.0,<0.57.0
+    - r-base=4.5
     - r-matrix
     - r-survival
     - libblas
     - liblapack
     - zlib
   run:
-    - bioconductor-biocgenerics >=0.52.0,<0.53.0
-    - bioconductor-zlibbioc >=1.52.0,<1.53.0
-    - r-base=4.4
+    - bioconductor-biocgenerics >=0.56.0,<0.57.0
+    - r-base=4.5
     - r-matrix
     - r-survival
   build:
     - ${{ compiler('c') }}
     - make
-  run_exports: ${{ pin_subpackage("bioconductor-snpstats", upper_bound="x.x") }}
 
 tests:
   - script:
