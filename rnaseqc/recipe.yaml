@@ -16,7 +16,7 @@ source:
     target_directory: htslib
 
 build:
-  number: 6
+  number: 7
 
 requirements:
   build:
