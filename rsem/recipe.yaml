@@ -13,7 +13,7 @@ source:
     - 02_fix_makefile.patch  # de-vendor samtools and allow overriding *FLAGS
 
 build:
-  number: 8
+  number: 9
   dynamic_linking:
     rpaths:
       - lib/R/lib/
