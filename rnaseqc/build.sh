@@ -2,6 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+sed -i 's/-lboost_system//g' Makefile
 sed -i 's/realloc(b->data, len)/(unsigned char*)realloc(b->data, len)/' htslib/cram/cram_io.h
 
 make CXX="${CXX} -std=c++14" \
