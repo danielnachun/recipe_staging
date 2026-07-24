@@ -1,7 +1,7 @@
 context:
-  version: 2.18.0
+  version: 2.22.4
   name: PCAtools
-  bioc: 3.20
+  bioc: 3.22
 
 package:
   name: bioconductor-${{ name|lower }}
@@ -13,7 +13,7 @@ source:
     - https://bioconductor.org/packages/${{ bioc }}/bioc/src/contrib/Archive/${{ name }}/${{ name }}_${{ version }}.tar.gz
     - https://bioarchive.galaxyproject.org/${{ name }}_${{ version }}.tar.gz
     - https://depot.galaxyproject.org/software/bioconductor-${{ name|lower }}/bioconductor-${{ name|lower }}_${{ version }}_src_all.tar.gz
-  md5: 2b1d8c22e21a62e7c04162fb6a6a24b5
+  md5: 7625619640819a66b83e0ec90445d8b2
 
 build:
   number: 0
@@ -24,12 +24,12 @@ build:
 
 requirements:
   host:
-    - bioconductor-beachmat >=2.22.0,<2.23.0
-    - bioconductor-biocparallel >=1.40.0,<1.41.0
-    - bioconductor-biocsingular >=1.22.0,<1.23.0
-    - bioconductor-delayedarray >=0.32.0,<0.33.0
-    - bioconductor-delayedmatrixstats >=1.28.0,<1.29.0
-    - r-base=4.4
+    - bioconductor-beachmat
+    - bioconductor-biocparallel
+    - bioconductor-biocsingular
+    - bioconductor-delayedarray
+    - bioconductor-delayedmatrixstats
+    - r-base=4.5
     - r-bh
     - r-cowplot
     - r-dqrng
@@ -42,12 +42,12 @@ requirements:
     - libblas
     - liblapack
   run:
-    - bioconductor-beachmat >=2.22.0,<2.23.0
-    - bioconductor-biocparallel >=1.40.0,<1.41.0
-    - bioconductor-biocsingular >=1.22.0,<1.23.0
-    - bioconductor-delayedarray >=0.32.0,<0.33.0
-    - bioconductor-delayedmatrixstats >=1.28.0,<1.29.0
-    - r-base=4.4
+    - bioconductor-beachmat
+    - bioconductor-biocparallel
+    - bioconductor-biocsingular
+    - bioconductor-delayedarray
+    - bioconductor-delayedmatrixstats
+    - r-base=4.5
     - r-bh
     - r-cowplot
     - r-dqrng
@@ -61,7 +61,6 @@ requirements:
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
     - make
-  run_exports: ${{ pin_subpackage("bioconductor-pcatools", upper_bound="x.x") }}
 
 tests:
   - script:
