@@ -1,0 +1,54 @@
+From 16c2df42a31867c26d25d01681ebab0c70a45e66 Mon Sep 17 00:00:00 2001
+From: Daniel Nachun <daniel.nachun@gmail.com>
+Date: Fri, 24 Jul 2026 12:00:00 -0700
+Subject: [PATCH] Include C++ standard headers before SWIG extern "C" blocks
+
+SWIG 2.0.1 generates the R glue with the R headers included inside
+extern "C" blocks.  On modern libc++ toolchains those R headers pull in
+C++ standard-library templates through libc++'s C-compatibility headers
+(<cstddef>, <stdlib.h>, <stdexcept>, ...), which are ill-formed under C
+linkage and break the build.  Include the relevant C++ standard headers
+at global scope up front so the later includes are no-ops via their
+include guards.
+---
+ src/peerR_wrap.cpp | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+
+diff --git a/src/peerR_wrap.cpp b/src/peerR_wrap.cpp
+index 254d7df..8c74898 100644
+--- a/src/peerR_wrap.cpp
++++ b/src/peerR_wrap.cpp
+@@ -10,6 +10,30 @@
+ 
+ #define SWIGR
+ 
++/* --- Portability fix for modern libc++ toolchains ---
++ * SWIG 2.0.1 wraps the R header #includes further down in extern "C".
++ * On modern libc++ those R headers transitively pull in C++ standard
++ * library templates (via <cstddef>, <stdlib.h>, <stdexcept>, ...), which
++ * are illegal under C linkage.  Pulling these headers in here at global
++ * scope makes the later in-extern-"C" includes no-ops via include guards. */
++#ifdef __cplusplus
++#include <cstddef>
++#include <cstdlib>
++#include <cstdio>
++#include <cstring>
++#include <cmath>
++#include <cassert>
++#include <cstdint>
++#include <climits>
++#include <cfloat>
++#include <ctime>
++#include <cwchar>
++#include <string>
++#include <stdexcept>
++#include <limits>
++#include <new>
++#endif
++
+ 
+ #ifdef __cplusplus
+ /* SwigValueWrapper is described in swig.swg */
+-- 
+2.53.0
+
