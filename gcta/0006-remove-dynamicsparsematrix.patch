@@ -1,0 +1,32 @@
+From 45915a3b33fbc751d7742295de4fdd9f3f82d7ad Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Thu, 23 Jul 2026 12:05:00 -0700
+Subject: [PATCH] remove unused DynamicSparseMatrix typedefs
+
+Eigen removed the unsupported DynamicSparseMatrix class in newer
+versions. GCTA's eigenDynSparseMat typedef is never used anywhere, so
+drop the two dead typedef lines rather than depend on the removed type.
+---
+ main/gcta.h | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/main/gcta.h b/main/gcta.h
+index 0a99d32..4dbbf79 100644
+--- a/main/gcta.h
++++ b/main/gcta.h
+@@ -51,12 +51,10 @@ using namespace std;
+ typedef DiagonalMatrix<float, Dynamic, Dynamic> eigenDiagMat;
+ typedef MatrixXf eigenMatrix;
+ typedef VectorXf eigenVector;
+-typedef DynamicSparseMatrix<float> eigenDynSparseMat;
+ #else
+ typedef DiagonalMatrix<double, Dynamic, Dynamic> eigenDiagMat;
+ typedef MatrixXd eigenMatrix;
+ typedef VectorXd eigenVector;
+-typedef DynamicSparseMatrix<double> eigenDynSparseMat;
+ #endif
+ 
+ class gcta {
+-- 
+2.53.0
+

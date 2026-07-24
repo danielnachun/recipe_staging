@@ -5,7 +5,8 @@ Subject: [PATCH 2/2] fix lapack call
 
 ---
  include/Matrix.hpp | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ src/StatLib.cpp    | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/include/Matrix.hpp b/include/Matrix.hpp
 index b203774..97dd9a1 100644
@@ -29,6 +30,23 @@ index b203774..97dd9a1 100644
  #endif
          //LOGGER << "  LLT inverse time: " << LOGGER.tp("LLT_INV") << std::endl;
          if(info == 0){
+diff --git a/src/StatLib.cpp b/src/StatLib.cpp
+index be56fb3..c22f3d1 100644
+--- a/src/StatLib.cpp
++++ b/src/StatLib.cpp
+@@ -115,10 +115,10 @@ namespace StatLib{
+         char t = 'N';
+ #if GCTA_CPU_x86
+         dormqr(&side, &t, &n, &n, &n, X, &lda, tau, c, 
+-                &lda, work, &lwork, &info);
++                &lda, work, &lwork, &info, 1, 1);
+ #else
+         dormqr_(&side, &t, &n, &n, &n, X, &lda, tau, c, 
+-                &lda, work, &lwork, &info);
++                &lda, work, &lwork, &info, 1, 1);
+ #endif
+         if(info != 0){
+             return false;
 -- 
 2.44.0
 

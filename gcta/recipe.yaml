@@ -1,0 +1,57 @@
+schema_version: 1
+
+context:
+  version: "1.94.1"
+
+package:
+  name: gcta
+  version: ${{ version }}
+
+source:
+  - git: https://github.com/jianyangqt/gcta
+    rev: refs/tags/v${{ version }}
+    patches:
+      - 0001-fix-openmp-pragma.patch
+      - 0002-add-missing-include.patch
+      - 0003-fix-lapack-call.patch
+      - 0005-port-pgenreader-to-new-pgenlib.patch
+      - 0006-remove-dynamicsparsematrix.patch
+      - 0007-fix-lapack-call-mkl.patch
+      - 0004-fix-plink-paths.patch
+  - url: https://www.cog-genomics.org/static/bin/plink2_src_240318.zip
+    sha256: badb51fb122e6c3c448c140066e46f0ac1ae2ae5d36af26769e7b4127164ae6c
+    target_directory: plink2
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - make
+    - sed
+  host:
+    - libboost-devel
+    - eigen
+    - gsl
+    - if: osx
+      then: openblas
+      else: mkl-devel
+    - if: osx
+      then: llvm-openmp
+      else: libgomp
+    - simde
+    - spectralib
+    - zlib
+    - zstd
+
+tests:
+  - script:
+      - gcta | grep "Analysis started"
+
+about:
+  license: GPL-3.0-only
+  summary: GCTA (Genome-wide Complex Trait Analysis) estimates the proportion of phenotypic variance explained by all genome-wide SNPs for complex traits.
+  homepage: https://yanglab.westlake.edu.cn/software/gcta
