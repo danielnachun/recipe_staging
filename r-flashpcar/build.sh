@@ -2,5 +2,5 @@
 
 export DISABLE_AUTOBREW=1
 
-# shellcheck disable=SC2086
-${R} CMD INSTALL --build flashpcaR ${R_ARGS}
+sed -i 's/CXX_STD = CXX11/CXX_STD = CXX14/' flashpcaR/src/Makevars
+R CMD INSTALL --build flashpcaR ${R_ARGS}
