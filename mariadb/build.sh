@@ -5,6 +5,9 @@ set -o xtrace -o nounset -o pipefail -o errexit
 # TODO: add basedir to script
 # sed -i "s|basedir"
 
+export CFLAGS="${CFLAGS} -D__NO_STRING_INLINES"
+export CXXFLAGS="${CXXFLAGS} -D__NO_STRING_INLINES"
+
 cmake -S . -B build -G Ninja \
 	-DMYSQL_DATADIR="${PREFIX}/var/mysql" \
 	-DINSTALL_INCLUDEDIR=include/mysql \
