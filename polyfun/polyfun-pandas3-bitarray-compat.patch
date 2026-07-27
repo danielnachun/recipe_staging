@@ -12,7 +12,7 @@ index 28e6ea1..04c9e66 100644
          Y = np.zeros(X.shape)
          for j in range(0, b):
 diff --git a/ldsc_polyfun/parse.py b/ldsc_polyfun/parse.py
-index 2e8a6c6..0c6ffea 100644
+index 2e8a6c6..83a7b4e 100644
 --- a/ldsc_polyfun/parse.py
 +++ b/ldsc_polyfun/parse.py
 @@ -27,7 +27,7 @@ def read_csv(fh, **kwargs):
@@ -24,6 +24,15 @@ index 2e8a6c6..0c6ffea 100644
      
      return df
      
+@@ -152,7 +152,7 @@ def ldscore_fromlist(flist, num=None):
+                 assert series_eq(y.index, ldscore_array[0].index) and series_eq(y.SNP, ldscore_array[0].SNP)
+             
+             # keep SNP and CHR column from only the first file
+-            y = y.drop(columns=['SNP', 'CHR'], axis=1)
++            y = y.drop(columns=['SNP', 'CHR'])
+ 
+         new_col_dict = {c: c + '_' + str(fh_i) for c in y.columns if c not in ['SNP', 'CHR']}
+         y.rename(columns=new_col_dict, inplace=True)
 @@ -367,7 +367,7 @@ def __ID_List_Factory__(colnames, keepcol, fname_end, header=None, usecols=None)
  
              comp = get_compression(fname)
