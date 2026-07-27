@@ -37,13 +37,13 @@ requirements:
     - fmt
     - krb5
     - libcurl
-    - libxml2
+    - libxml2-devel
     - lz4-c
     - lzo
     - openssl
     - pcre2
     - snappy
-    - xz
+    - liblzma-devel
     - zlib
     - zstd
     - if: unix
