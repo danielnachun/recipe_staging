@@ -1,0 +1,18 @@
+diff --git a/polyfun_utils.py b/polyfun_utils.py
+index 1f2f522..c2444bd 100644
+--- a/polyfun_utils.py
++++ b/polyfun_utils.py
+@@ -44,7 +44,12 @@ class TqdmHandler(logging.StreamHandler):
+         
+ 
+ def check_package_versions():
+-    from pkg_resources import parse_version
++    # setuptools >=82 removed pkg_resources; prefer packaging (present on modern
++    # envs and setuptools 81 alike), falling back to pkg_resources on old envs.
++    try:
++        from packaging.version import parse as parse_version
++    except ImportError:
++        from pkg_resources import parse_version
+     if parse_version(pd.__version__) < parse_version('0.25.0'):
+         raise ValueError('your pandas version is too old --- please update pandas')
+         

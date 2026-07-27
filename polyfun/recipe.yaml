@@ -8,8 +8,11 @@ package:
   version: ${{ version }}
 
 source:
-  url: https://github.com/omerwe/polyfun/archive/de889bde9ce3d46326fc5ea568b623450f349569.zip
-  sha256: d686393960542b1f3b35652b571ed074afd8a6473ced3b955c5662eb028300bd
+  url: https://github.com/omerwe/polyfun/archive/8b17b4ec87fde11f8d216c049c08d1420cd25de6.zip
+  sha256: 35c379625881bca77d503297745e466a511fde00f5f6d337e5124156d5b03244
+  patches:
+    - polyfun-pandas3-bitarray-compat.patch
+    - polyfun-pkg_resources-removal.patch
 
 build:
   number: 2
@@ -29,7 +32,7 @@ requirements:
     - pandas-plink
     - pip
     - pyarrow>=3.0
-    - python>=3.12,<3.13
+    - python
     - r-ckmeans.1d.dp
     - r-expm
     - r-lattice
@@ -40,7 +43,7 @@ requirements:
     - rpy2>=3.5.9
     - scikit-learn
     - scipy
-    - setuptools<82
+    - setuptools
     - snappy
     - tqdm
     - xarray
