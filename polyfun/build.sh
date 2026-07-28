@@ -15,6 +15,7 @@ tee ${PREFIX}/bin/${bin_name} << EOF
 #!/bin/sh
 exec python3 ${PREFIX}/libexec/${PKG_NAME}/${bin_name} "\$@"
 EOF
+chmod +x ${PREFIX}/bin/${bin_name}
 }
 
 mkdir -p ${PREFIX}/bin

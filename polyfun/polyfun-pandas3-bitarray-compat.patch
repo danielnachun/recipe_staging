@@ -1,0 +1,105 @@
+diff --git a/ldsc_polyfun/ldscore.py b/ldsc_polyfun/ldscore.py
+index 28e6ea1..04c9e66 100644
+--- a/ldsc_polyfun/ldscore.py
++++ b/ldsc_polyfun/ldscore.py
+@@ -399,7 +399,7 @@ class PlinkBEDFile(__GenotypeArrayInMemory__):
+         n = self.n
+         nru = self.nru
+         slice = self.geno[2*c*nru:2*(c+b)*nru]
+-        X = np.array(slice.decode(self._bedcode), dtype="float64").reshape((b, nru)).T
++        X = np.array(list(slice.decode(self._bedcode)), dtype="float64").reshape((b, nru)).T
+         X = X[0:n, :]
+         Y = np.zeros(X.shape)
+         for j in range(0, b):
+diff --git a/ldsc_polyfun/parse.py b/ldsc_polyfun/parse.py
+index 2e8a6c6..83a7b4e 100644
+--- a/ldsc_polyfun/parse.py
++++ b/ldsc_polyfun/parse.py
+@@ -27,7 +27,7 @@ def read_csv(fh, **kwargs):
+         if 'usecols' in kwargs.keys():
+             df = df[kwargs['usecols']]
+     else:        
+-        df = pd.read_csv(fh, delim_whitespace=True, na_values='.', **kwargs)
++        df = pd.read_csv(fh, sep=r'\s+', na_values='.', **kwargs)
+     
+     return df
+     
+@@ -152,7 +152,7 @@ def ldscore_fromlist(flist, num=None):
+                 assert series_eq(y.index, ldscore_array[0].index) and series_eq(y.SNP, ldscore_array[0].SNP)
+             
+             # keep SNP and CHR column from only the first file
+-            y = y.drop(columns=['SNP', 'CHR'], axis=1)
++            y = y.drop(columns=['SNP', 'CHR'])
+ 
+         new_col_dict = {c: c + '_' + str(fh_i) for c in y.columns if c not in ['SNP', 'CHR']}
+         y.rename(columns=new_col_dict, inplace=True)
+@@ -367,7 +367,7 @@ def __ID_List_Factory__(colnames, keepcol, fname_end, header=None, usecols=None)
+ 
+             comp = get_compression(fname)
+             self.df = pd.read_csv(fname, header=self.__header__, usecols=self.__usecols__,
+-                                  delim_whitespace=True, compression=comp)
++                                  sep=r'\s+', compression=comp)
+ 
+             if self.__colnames__:
+                 self.df.columns = self.__colnames__
+diff --git a/polypred.py b/polypred.py
+index b449554..eeed69a 100644
+--- a/polypred.py
++++ b/polypred.py
+@@ -71,7 +71,7 @@ def compute_prs_for_file(args,
+     df_bim = pd.read_csv(plink_file_prefix+'.bim',
+                            header=None,
+                            names=['CHR', 'SNP', 'CM', 'BP', 'A1', 'A2'],
+-                           delim_whitespace=True)
++                           sep=r'\s+')
+     df_bim = set_snpid_index(df_bim)
+     
+     #keep only relevant SNPs
+@@ -118,9 +118,9 @@ def compute_prs_for_file(args,
+     #read results
+     if ranges_file is None:
+         if plink_file.endswith('.bed'):
+-            df_prs = pd.read_csv(outfile_prs_temp+'.profile', delim_whitespace=True)
++            df_prs = pd.read_csv(outfile_prs_temp+'.profile', sep=r'\s+')
+         elif plink_file.endswith('.pgen'):
+-            df_prs = pd.read_csv(outfile_prs_temp+'.sscore', delim_whitespace=True)
++            df_prs = pd.read_csv(outfile_prs_temp+'.sscore', sep=r'\s+')
+             df_prs.rename(columns={'#IID':'IID', 'SCORE1_SUM':'SCORESUM'}, inplace=True)
+             df_prs['FID'] = df_prs['IID']
+         else:
+@@ -134,7 +134,7 @@ def compute_prs_for_file(args,
+         elif plink_file.endswith('.pgen'): jk_files = glob(outfile_prs_temp+'.*.sscore')
+         else: raise ValueError('neither --bed nor --pgen specified')
+         for jk_file in jk_files:
+-            df_jk = pd.read_csv(jk_file, delim_whitespace=True)
++            df_jk = pd.read_csv(jk_file, sep=r'\s+')
+             df_jk.rename(columns={'#IID':'IID', 'SCORE1_SUM':'SCORESUM'}, inplace=True)
+             df_jk['FID'] = df_jk['IID']
+             df_jk.set_index('IID', inplace=True, drop=True)
+@@ -171,7 +171,7 @@ def load_betas_files(betas_file, verbose=True):
+     except (ArrowIOError, ArrowInvalid):
+         if betas_file.endswith('.parquet'):
+             raise IOError('corrupt parquet file: %s'%(betas_file))
+-        df_betas = pd.read_csv(betas_file, delim_whitespace=True)
++        df_betas = pd.read_csv(betas_file, sep=r'\s+')
+     if verbose:
+         logging.info('done in %0.2f seconds'%(time.time() - t0))
+ 
+@@ -292,7 +292,7 @@ def compute_prs(args):
+     if args.estimate_mixweights:    
+     
+         #read phenotypes
+-        df_pheno = pd.read_csv(args.pheno, names=['FID', 'IID', 'PHENO'], index_col='IID', delim_whitespace=True)
++        df_pheno = pd.read_csv(args.pheno, names=['FID', 'IID', 'PHENO'], index_col='IID', sep=r'\s+')
+         
+         #make sure that we didn't include a header line
+         try:
+@@ -356,7 +356,7 @@ def compute_prs(args):
+         #if there's more than one beta, take the linear combination
+         else:            
+             mixweights_file = args.mixweights_prefix +'.mixweights'
+-            s_mixweights = pd.read_csv(mixweights_file, delim_whitespace=True).squeeze()
++            s_mixweights = pd.read_csv(mixweights_file, sep=r'\s+').squeeze()
+             if np.any(s_mixweights.index[:-1] != args.betas.split(',')):
+                 raise ValueError('The provided betas file do not match the mix weights file')
+             assert s_mixweights.index[-1] == 'intercept'            
