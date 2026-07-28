@@ -38,8 +38,7 @@ index be56fb3..c22f3d1 100644
          char t = 'N';
  #if GCTA_CPU_x86
          dormqr(&side, &t, &n, &n, &n, X, &lda, tau, c, 
--                &lda, work, &lwork, &info);
-+                &lda, work, &lwork, &info, 1, 1);
+                 &lda, work, &lwork, &info);
  #else
          dormqr_(&side, &t, &n, &n, &n, X, &lda, tau, c, 
 -                &lda, work, &lwork, &info);

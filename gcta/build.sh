@@ -17,13 +17,19 @@ sed -i '/link_directories(\/usr\/local\/lib)/d' CMakeLists.txt
 rm -rf submods/plink-ng/2.0
 mv plink2 submods/plink-ng/2.0
 
-if [[ ${target_platform} == "osx-arm64" ]]; then
-    sed -i 's/"aarch64"/"arm64"/' CMakelists.txt
+# BLAS selection is by architecture: x86_64 uses MKL (GCTA_CPU_x86 -> mkl.h),
+# ARM uses OpenBLAS + the conda simde headers (GCTA_CPU_x86 undefined -> cblas.h/lapack.h)
+if [[ ${target_platform} == *-64 ]]; then
+    export MKLROOT="${PREFIX}"
+else
     export OPENBLAS="${PREFIX}"
     export CXXFLAGS="${CXXFLAGS} -DIGNORE_BUNDLED_SIMDE"
     export CFLAGS="${CFLAGS} -DIGNORE_BUNDLED_SIMDE"
-else
-    export MKLROOT="${PREFIX}"
+fi
+
+# On osx-arm64 uname reports "arm64"; on linux-aarch64 CMake correctly detects "aarch64"
+if [[ ${target_platform} == "osx-arm64" ]]; then
+    sed -i 's/"aarch64"/"arm64"/' CMakelists.txt
 fi
 
 cmake -S . -B build ${CMAKE_ARGS} -DCMAKE_POLICY_VERSION_MINIMUM=3.5
