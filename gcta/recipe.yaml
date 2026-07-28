@@ -36,9 +36,9 @@ requirements:
     - libboost-devel
     - eigen
     - gsl
-    - if: osx
-      then: openblas
-      else: mkl-devel
+    - if: x86_64
+      then: mkl-devel
+      else: openblas
     - if: osx
       then: llvm-openmp
       else: libgomp
