@@ -1,0 +1,39 @@
+From af4c5cd9b701ccf0a30298156dec33fbfa03dcd7 Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Thu, 23 Jul 2026 12:10:00 -0700
+Subject: [PATCH] fix lapack call in mkl.cpp
+
+Same reference-LAPACK Fortran string-length fix as 0003 (which covered
+Matrix.hpp and StatLib.cpp): the non-x86 branch calls dpotrf_/dpotri_
+against conda's lapack.h, which requires the hidden string-length arg
+for the uplo char parameter. The x86 branch uses MKL (mkl.h) and is
+left unchanged.
+---
+ main/mkl.cpp | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/main/mkl.cpp b/main/mkl.cpp
+index b1e3cb5..3a0e5f6 100644
+--- a/main/mkl.cpp
++++ b/main/mkl.cpp
+@@ -365,7 +365,7 @@ bool gcta::comput_inverse_logdet_LDLT_mkl(eigenMatrix &Vi, double &logdet)
+ #if GCTA_CPU_x86
+     dpotrf(&uplo, &int_n, Vi_mkl, &int_n, &info);
+ #else
+-    dpotrf_(&uplo, &int_n, Vi_mkl, &int_n, &info);
++    dpotrf_(&uplo, &int_n, Vi_mkl, &int_n, &info, 1);
+ #endif
+     //LOGGER << "Finished decompose" << endl;
+     //spotrf( &uplo, &n, Vi_mkl, &n, &info );
+@@ -386,7 +386,7 @@ bool gcta::comput_inverse_logdet_LDLT_mkl(eigenMatrix &Vi, double &logdet)
+ #if GCTA_CPU_x86
+         dpotri(&uplo, &int_n, Vi_mkl, &int_n, &info);
+ #else
+-        dpotri_(&uplo, &int_n, Vi_mkl, &int_n, &info);
++        dpotri_(&uplo, &int_n, Vi_mkl, &int_n, &info, 1);
+ #endif
+         //LOGGER << "Inverse finished" << endl;
+         //spotri( &uplo, &n, Vi_mkl, &n, &info );
+-- 
+2.53.0
+

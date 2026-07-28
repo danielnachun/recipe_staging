@@ -24,6 +24,8 @@ blas_impl:
     then:
       - mkl
       - blis
+gsl:
+  - 2.7
 openblas:
   - 0.3.*
 mkl:
