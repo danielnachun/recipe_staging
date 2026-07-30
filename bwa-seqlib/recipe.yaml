@@ -21,7 +21,7 @@ requirements:
     - make
     - sed
   host:
-    - if: "target_platform == \"osx-arm64\""
+    - if: aarch64 or arm64
       then: simde
     - zlib
 
