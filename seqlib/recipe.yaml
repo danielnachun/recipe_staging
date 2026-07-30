@@ -13,11 +13,11 @@ source:
     - 0002-devendor-htslib.patch
 
 build:
-  number: 2
+  number: 3
 
 requirements:
   build:
-    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
     - autoconf
