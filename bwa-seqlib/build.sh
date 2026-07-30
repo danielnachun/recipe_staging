@@ -3,7 +3,7 @@
 set -o xtrace -o nounset -o pipefail -o errexit
 
 export CFLAGS="${CFLAGS} -fcommon"
-if [[ ${target_platform} == "osx-arm64" ]]; then
+if [[ ${target_platform} != "linux-64" ]]; then
     sed -i 's?emmintrin.h?simde/x86/sse2.h?' ksw.c
     export CFLAGS="${CFLAGS} -DSIMDE_ENABLE_NATIVE_ALIASES"
 fi
