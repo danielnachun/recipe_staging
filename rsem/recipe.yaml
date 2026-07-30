@@ -22,6 +22,7 @@ build:
 requirements:
   build:
     - make
+    - ${{ stdlib('c') }}
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
   host:
