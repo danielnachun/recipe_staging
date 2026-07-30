@@ -30,10 +30,10 @@ requirements:
   run:
     - r-base=4.4
   build:
+    - ${{ stdlib('c') }}
     - ${{ compiler('c') }}
     - automake
     - make
-  run_exports: ${{ pin_subpackage("bioconductor-preprocesscore", upper_bound="x.x") }}
 
 tests:
   - script:
