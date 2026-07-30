@@ -1,11 +1,10 @@
 schema_version: 1
 
 context:
-  name: gregor
   version: 1.4.0
 
 package:
-  name: ${{ name }}
+  name: gregor
   version: ${{ version }}
 
 source:
@@ -14,7 +13,7 @@ source:
   file_name: GREGOR.v${{ version }}.tar.gz
 
 build:
-  number: 0
+  number: 1
   noarch: generic
 
 requirements:
@@ -48,8 +47,8 @@ tests:
 about:
   license: GPL-3.0-or-later AND MIT
   license_file:
-    - Copyrights/COPYING
-    - Copyrights/LICENSE.txt
+    - GREGOR/Copyrights/COPYING
+    - GREGOR/Copyrights/LICENSE.txt
   summary: GREGOR (Genomic Regulatory Elements and Gwas Overlap algoRithm) is a tool to test for enrichment of an input list of trait-associated index SNPs in experimentally annotated regulatory domains.
   homepage: https://csg.sph.umich.edu/GREGOR/
 
