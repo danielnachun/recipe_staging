@@ -1,9 +1,8 @@
 context:
-  name: seqlib
   version: 1.2.0
 
 package:
-  name: ${{ name|lower }}
+  name: seqlib
   version: ${{ version }}
 
 source:
@@ -19,6 +18,7 @@ build:
 requirements:
   build:
     - ${{ compiler('c') }}
+    - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
     - autoconf
     - automake
@@ -31,7 +31,7 @@ requirements:
     - htslib
     - libtool
     - liblzma-devel
-    - if: "target_platform == \"osx-arm64\""
+    - if: aarch64 or arm64
       then: simde
     - zlib
   run:
