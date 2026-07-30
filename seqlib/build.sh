@@ -2,7 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-if [[ ${target_platform} == "osx-arm64" ]]; then
+if [[ ${target_platform} != "linux-64" ]]; then
     sed -i "s?emmintrin.h?simde/x86/sse2.h?" SeqLib/ssw.h
     sed -i "s?emmintrin.h?simde/x86/sse2.h?" src/ssw.c
     export CFLAGS="${CFLAGS} -DSIMDE_ENABLE_NATIVE_ALIASES"
