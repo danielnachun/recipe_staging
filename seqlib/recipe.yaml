@@ -13,7 +13,7 @@ source:
     - 0002-devendor-htslib.patch
 
 build:
-  number: 2
+  number: 3
 
 requirements:
   build:
