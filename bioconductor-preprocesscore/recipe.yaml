@@ -1,7 +1,7 @@
 context:
-  version: 1.68.0
+  version: 1.72.0
   name: preprocessCore
-  bioc: 3.20
+  bioc: 3.22
 
 package:
   name: bioconductor-${{ name|lower }}
@@ -13,7 +13,7 @@ source:
     - https://bioconductor.org/packages/${{ bioc }}/bioc/src/contrib/Archive/${{ name }}/${{ name }}_${{ version }}.tar.gz
     - https://bioarchive.galaxyproject.org/${{ name }}_${{ version }}.tar.gz
     - https://depot.galaxyproject.org/software/bioconductor-${{ name|lower }}/bioconductor-${{ name|lower }}_${{ version }}_src_all.tar.gz
-  md5: 61afd1d17c726fe857064bd7d1e9da07
+  md5: c288c12d10a9a8b02904140e08aa97bd
 
 build:
   number: 0
@@ -24,11 +24,11 @@ build:
 
 requirements:
   host:
-    - r-base=4.4
+    - r-base=4.5
     - libblas
     - liblapack
   run:
-    - r-base=4.4
+    - r-base=4.5
   build:
     - ${{ stdlib('c') }}
     - ${{ compiler('c') }}
