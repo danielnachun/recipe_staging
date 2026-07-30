@@ -1,27 +1,27 @@
 context:
-  name: fermi-lite_seqlib
   version: 0.1
 
 package:
-  name: ${{ name|lower }}
+  name: fermi-lite_seqlib
   version: ${{ version }}
 
 source:
-  url: https://github.com/walaj/fermi-lite/archive/5bc90f8d70e2b66184eccbd223a3be714c914365.zip
-  sha256: 0744ec15fc006b8934b93270a5334d0cdf257980dcb7d01ed305e476a05300aa
+  url: https://github.com/walaj/fermi-lite/archive/5bc90f8d70e2b66184eccbd223a3be714c914365.tar.gz
+  sha256: 58c066239929f48383044fde68ba164bdd15edb2ff0603cdcd6c3fe095171008
   patches:
     - 0001-make-shared-library.patch
 
 build:
-  number: 1
+  number: 2
 
 requirements:
   build:
+    - ${{ stdlib('c') }}
     - ${{ compiler('c') }}
     - make
     - sed
   host:
-    - if: "target_platform == \"osx-arm64\""
+    - if: arm64 or aarch64
       then: simde
     - zlib
 
