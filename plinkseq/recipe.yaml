@@ -1,0 +1,42 @@
+schema_version: 1
+
+context:
+  version: "0.10"
+
+package:
+  name: plinkseq
+  version: ${{ version }}
+
+source:
+  git: https://bitbucket.org/statgen/plinkseq.git
+  rev: 5d071291075ccbc4798b087b759e7455cfb4a825
+  patches:
+    - 0001-build-fixes.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - if: linux
+      then: binutils
+    - if: linux
+      then: gcc
+    - make
+    - sed
+  host:
+    - libprotobuf
+    - sqlite
+    - zlib
+
+tests:
+  - script:
+      - pseq -h
+
+about:
+  license: LicenseRef-OTHER
+  summary: PLINK/SEQ is an open-source C/C++ library for working with human genetic variation data.
+  homepage: https://zzz.bwh.harvard.edu/plinkseq/index.shtml
+  repository: https://bitbucket.org/statgen/plinkseq.git

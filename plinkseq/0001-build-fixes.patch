@@ -1,0 +1,846 @@
+From b802d22538059a04f065d7834291c8f3b3547f8e Mon Sep 17 00:00:00 2001
+From: danielnachun <daniel.nachun@gmail.com>
+Date: Wed, 10 Apr 2024 16:40:58 -0700
+Subject: [PATCH] build fixes
+
+---
+ Makefile                                      | 29 +++++---------
+ config_rules.Makefile                         |  4 +-
+ .../plinkseq/sources/include/plinkseq/glm.h   |  2 +-
+ .../plinkseq/sources/include/plinkseq/mask.h  |  1 +
+ .../plinkseq/sources/include/plinkseq/vardb.h |  2 +-
+ sources/plinkseq/sources/lib/em.cpp           |  1 +
+ sources/plinkseq/sources/lib/helper.cpp       |  1 +
+ sources/plinkseq/sources/lib/inddb.cpp        |  2 +
+ sources/plinkseq/sources/lib/locdb.cpp        |  7 ++++
+ sources/plinkseq/sources/lib/mask.cpp         | 40 +++++++++++++++++++
+ sources/plinkseq/sources/lib/matdb.cpp        |  7 +++-
+ sources/plinkseq/sources/lib/matrix.proto     | 12 +++---
+ sources/plinkseq/sources/lib/netdb.cpp        |  1 +
+ sources/plinkseq/sources/lib/r8lib.cpp        |  2 +-
+ sources/plinkseq/sources/lib/refdb.cpp        |  4 ++
+ sources/plinkseq/sources/lib/seqdb.cpp        |  3 ++
+ sources/plinkseq/sources/lib/statistics.cpp   |  3 ++
+ sources/plinkseq/sources/lib/vardb.cpp        |  4 ++
+ sources/plinkseq/sources/lib/varmeta.cpp      |  1 +
+ sources/plinkseq/sources/lib/vcfiterate.cpp   |  1 +
+ sources/pseq/sources/lib/func.cpp             |  4 ++
+ sources/pseq/sources/lib/glm-tests.cpp        |  1 +
+ sources/pseq/sources/lib/ibs.cpp              |  1 +
+ sources/pseq/sources/lib/varfunc.cpp          |  1 +
+ 24 files changed, 103 insertions(+), 31 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index dc9cb64..b699ed0 100644
+--- a/Makefile
++++ b/Makefile
+@@ -36,13 +36,6 @@ ZIP_INCLUDES = config_rules.Makefile config_defs.Makefile
+ #Static Libraries
+ ########################
+ 
+-# protobuf
+-PROTOBUF_LIB_BASE_DIR =./sources/ext
+-PROTOBUF_LIB_DIR=$(PROTOBUF_LIB_BASE_DIR)/$(BLD_LIB_DIR)/
+-PROTOBUF_LIBS =libprotobuf.a
+-PROTOBUF_INC =$(PROTOBUF_LIB_BASE_DIR)/$(INC_DIR)/
+-PROTOBUF_LIB_FULL_PATH =$(PROTOBUF_LIB_DIR)$(PROTOBUF_LIBS)
+-
+ # plinkseq library:
+ PLINKSEQ_LIB_BASE_DIR =./sources/plinkseq
+ PLINKSEQ_LIB_DIR =$(PLINKSEQ_LIB_BASE_DIR)/$(BLD_LIB_DIR)/
+@@ -90,20 +83,20 @@ PDAS_LIB_FULL_PATH =$(PDAS_LIB_DIR)$(PDAS_LIBS)
+ ########################
+ 
+ #For example: -L./
+-LIB_LINK_DIRS =$(PLINKSEQ_LIB_DIR) $(PSEQ_LIB_DIR) $(UTIL_LIB_DIR) $(MONGOOSE_LIB_DIR) $(BROWSER_LIB_DIR) $(PDAS_LIB_DIR) $(PROTOBUF_LIB_DIR)
++LIB_LINK_DIRS =$(PLINKSEQ_LIB_DIR) $(PSEQ_LIB_DIR) $(UTIL_LIB_DIR) $(MONGOOSE_LIB_DIR) $(BROWSER_LIB_DIR) $(PDAS_LIB_DIR)
+ LIB_LINK_FLAGS =$(LIB_LINK_DIRS:%=-L%)
+ 
+ #For example: -I./
+-LIB_INCLUDE_DIRS += $(PLINKSEQ_INC) $(PSEQ_INC) $(UTIL_INC) $(MONGOOSE_INC) $(BROWSER_INC) $(PDAS_INC) $(PROTOBUF_INC)
++LIB_INCLUDE_DIRS += $(PLINKSEQ_INC) $(PSEQ_INC) $(UTIL_INC) $(MONGOOSE_INC) $(BROWSER_INC) $(PDAS_INC)
+ 
+ #All directories with relevant libraries' makefiles
+-LIB_MAKE_DIRS =$(PLINKSEQ_LIB_BASE_DIR) $(PSEQ_LIB_BASE_DIR) $(UTIL_LIB_BASE_DIR) $(MONGOOSE_LIB_BASE_DIR) $(BROWSER_LIB_BASE_DIR) $(PDAS_LIB_BASE_DIR) $(PROTOBUF_LIB_BASE_DIR)
++LIB_MAKE_DIRS =$(PLINKSEQ_LIB_BASE_DIR) $(PSEQ_LIB_BASE_DIR) $(UTIL_LIB_BASE_DIR) $(MONGOOSE_LIB_BASE_DIR) $(BROWSER_LIB_BASE_DIR) $(PDAS_LIB_BASE_DIR)
+ 
+ 
+ #For example: ./sources/hmm++/build/lib/libhmm++.a
+-PSEQ_EXEC_LIB_DEPENDS =$(PSEQ_LIB_FULL_PATH) $(PLINKSEQ_LIB_FULL_PATH) $(PROTOBUF_LIB_FULL_PATH)
++PSEQ_EXEC_LIB_DEPENDS =$(PSEQ_LIB_FULL_PATH) $(PLINKSEQ_LIB_FULL_PATH)
+ PSEQ_EXEC_LIB_DEPENDS_NO_PATH =$(notdir $(PSEQ_EXEC_LIB_DEPENDS))
+-PSEQ_EXEC_LIB_LINKS =-lpthread -lz
++PSEQ_EXEC_LIB_LINKS =-lprotobuf -labsl_log_internal_message -labsl_log_internal_check_op -lsqlite3 -lpthread -lz
+ 
+ 
+ #For example: ./sources/hmm++/build/lib/libhmm++.a
+@@ -122,9 +115,9 @@ MM_EXEC_LIB_DEPENDS_NO_PATH =$(notdir $(MM_EXEC_LIB_DEPENDS))
+ MM_EXEC_LIB_LINKS =
+ 
+ # smp
+-SMP_EXEC_LIB_DEPENDS =$(UTIL_LIB_FULL_PATH) $(PLINKSEQ_LIB_FULL_PATH)  $(PROTOBUF_LIB_FULL_PATH)
++SMP_EXEC_LIB_DEPENDS =$(UTIL_LIB_FULL_PATH) $(PLINKSEQ_LIB_FULL_PATH)
+ SMP_EXEC_LIB_DEPENDS_NO_PATH =$(notdir $(SMP_EXEC_LIB_DEPENDS))
+-SMP_EXEC_LIB_LINKS =-lz -lpthread
++SMP_EXEC_LIB_LINKS =-lprotobuf -labsl_log_internal_message -labsl_log_internal_check_op -lsqlite3 -lz -lpthread
+ 
+ # tab2vcf
+ TAB2VCF_EXEC_LIB_DEPENDS =$(UTIL_LIB_FULL_PATH) 
+@@ -137,14 +130,14 @@ MONGOOSE_EXEC_LIB_DEPENDS_NO_PATH =$(notdir $(MONGOOSE_EXEC_LIB_DEPENDS))
+ MONGOOSE_EXEC_LIB_LINKS =-lpthread -ldl
+ 
+ # browser
+-BROWSER_EXEC_LIB_DEPENDS = $(BROWSER_LIB_FULL_PATH) $(PLINKSEQ_LIB_FULL_PATH)  $(PROTOBUF_LIB_FULL_PATH)
++BROWSER_EXEC_LIB_DEPENDS = $(BROWSER_LIB_FULL_PATH) $(PLINKSEQ_LIB_FULL_PATH)
+ BROWSER_EXEC_LIB_DEPENDS_NO_PATH =$(notdir $(BROWSER_EXEC_LIB_DEPENDS))
+-BROWSER_EXEC_LIB_LINKS =-lz -lpthread -ldl
++BROWSER_EXEC_LIB_LINKS =-lprotobuf -labsl_log_internal_message -labsl_log_internal_check_op -lsqlite3 -lz -lpthread -ldl
+ 
+ # pdas
+-PDAS_EXEC_LIB_DEPENDS = $(PDAS_LIB_FULL_PATH) $(PLINKSEQ_LIB_FULL_PATH) $(PROTOBUF_LIB_FULL_PATH)
++PDAS_EXEC_LIB_DEPENDS = $(PDAS_LIB_FULL_PATH) $(PLINKSEQ_LIB_FULL_PATH)
+ PDAS_EXEC_LIB_DEPENDS_NO_PATH =$(notdir $(PDAS_EXEC_LIB_DEPENDS))
+-PDAS_EXEC_LIB_LINKS =-lz -lpthread -ldl 
++PDAS_EXEC_LIB_LINKS =-lprotobuf -labsl_log_internal_message -labsl_log_internal_check_op -lsqlite3 -lz -lpthread -ldl 
+ 
+ ##########################################
+ #Compiler, Compilation flags:
+diff --git a/config_rules.Makefile b/config_rules.Makefile
+index a848474..e8e468c 100644
+--- a/config_rules.Makefile
++++ b/config_rules.Makefile
+@@ -21,8 +21,8 @@ $(BLD_DIR)/%.o: $(SRC_DIR)/%.c $(ENSURE_BUILD_DIRS_PREREQS)
+ 
+ #explicit rules for making libraries and files:
+ $(LIB_FULL_PATH): $(LIB_OBJECTS_FULL_PATH) $(ENSURE_BUILD_DIRS_PREREQS)
+-	ar rv $@ $?
+-	ranlib $@
++	$(AR) rv $@ $?
++	$(RANLIB) $@
+ 
+ 
+ #depend rules:
+diff --git a/sources/plinkseq/sources/include/plinkseq/glm.h b/sources/plinkseq/sources/include/plinkseq/glm.h
+index 64a62a4..499ef5c 100644
+--- a/sources/plinkseq/sources/include/plinkseq/glm.h
++++ b/sources/plinkseq/sources/include/plinkseq/glm.h
+@@ -41,7 +41,7 @@ class GLM {
+   
+   // look at results
+   bool valid() const;
+-  bool valid(const bool b) { all_valid = b; };
++  bool valid(const bool b) { all_valid = b; return true; };
+   
+   Data::Vector<double> beta() const;
+   Data::Vector<double> se() const;
+diff --git a/sources/plinkseq/sources/include/plinkseq/mask.h b/sources/plinkseq/sources/include/plinkseq/mask.h
+index 37b1abc..eacf456 100644
+--- a/sources/plinkseq/sources/include/plinkseq/mask.h
++++ b/sources/plinkseq/sources/include/plinkseq/mask.h
+@@ -2148,6 +2148,7 @@ class Mask {
+       hard_call = true; 
+       hard_call_label = l;
+       hard_call_threshold = x ; 
++      return true;
+     }
+     
+     void revise_hard_call( Genotype & g );
+diff --git a/sources/plinkseq/sources/include/plinkseq/vardb.h b/sources/plinkseq/sources/include/plinkseq/vardb.h
+index 93e0280..e33c315 100644
+--- a/sources/plinkseq/sources/include/plinkseq/vardb.h
++++ b/sources/plinkseq/sources/include/plinkseq/vardb.h
+@@ -326,7 +326,7 @@ class VarDBase {
+   std::string file_tag( uint64_t );
+   uint64_t file_tag( const std::string & );
+   
+-  bool compression( const bool b ) { using_compression=b; }
++  bool compression( const bool b ) { using_compression=b; return true; }
+ 
+   //
+   // Misc.
+diff --git a/sources/plinkseq/sources/lib/em.cpp b/sources/plinkseq/sources/lib/em.cpp
+index 3d0d53d..3c8b3fd 100644
+--- a/sources/plinkseq/sources/lib/em.cpp
++++ b/sources/plinkseq/sources/lib/em.cpp
+@@ -181,6 +181,7 @@ int EM::estimate()
+ 
+   //  std::cerr << "iter = " << iter << "\n";
+ 
++  return 0;
+ }
+ 
+ 
+diff --git a/sources/plinkseq/sources/lib/helper.cpp b/sources/plinkseq/sources/lib/helper.cpp
+index b70bc90..799df52 100644
+--- a/sources/plinkseq/sources/lib/helper.cpp
++++ b/sources/plinkseq/sources/lib/helper.cpp
+@@ -257,6 +257,7 @@ double Helper::str2dbl(const std::string & s)
+ bool Helper::str2uint64_t(const char * c , uint64_t & i)
+ {
+     
++  return false;
+ }
+ 
+ bool Helper::str2int(const char * c , int & i)
+diff --git a/sources/plinkseq/sources/lib/inddb.cpp b/sources/plinkseq/sources/lib/inddb.cpp
+index b5e52b5..b95968b 100644
+--- a/sources/plinkseq/sources/lib/inddb.cpp
++++ b/sources/plinkseq/sources/lib/inddb.cpp
+@@ -241,6 +241,7 @@ bool IndDBase::index()
+   sql.query("CREATE INDEX IF NOT EXISTS ind1 ON individuals(name); ");
+   sql.query("CREATE INDEX IF NOT EXISTS phe1 ON phenotypes(indiv_id); ");
+   sql.query("CREATE INDEX IF NOT EXISTS phe2 ON phenotypes(pheno_id); ");
++  return false;
+ }
+ 
+ bool IndDBase::drop_index()
+@@ -248,6 +249,7 @@ bool IndDBase::drop_index()
+   sql.query("DROP INDEX IF EXISTS ind1;");
+   sql.query("DROP INDEX IF EXISTS phe1;");
+   sql.query("DROP INDEX IF EXISTS phe2;");
++  return false;
+ }
+ 
+ 
+diff --git a/sources/plinkseq/sources/lib/locdb.cpp b/sources/plinkseq/sources/lib/locdb.cpp
+index 0ab91b5..d75225b 100644
+--- a/sources/plinkseq/sources/lib/locdb.cpp
++++ b/sources/plinkseq/sources/lib/locdb.cpp
+@@ -250,6 +250,7 @@ bool LocDBase::dettach()
+ {
+   release();
+   sql.close();
++  return false;
+ }
+ 
+ 
+@@ -509,6 +510,7 @@ bool LocDBase::init()
+     sql.prepare(" SELECT loc_id FROM loci WHERE group_id == :group_id AND name == :name AND chr == :chr AND bp1 = :bp1 AND bp2 = :bp2 ; " );
+ 
+ 
++  return false;
+ }
+ 
+ bool LocDBase::release()
+@@ -586,6 +588,7 @@ bool LocDBase::release()
+ 
+   sql.finalise(stmt_loc_lookup_id_group_and_range ); 
+ 
++  return false;
+ }
+ 
+ 
+@@ -709,6 +712,7 @@ bool LocDBase::clear_overlaps(uint64_t id1)
+ 	       " WHERE loc_id1 IN ( SELECT loc_id FROM loci WHERE group_id == " + Helper::int2str(id1) + " ) "
+ 	       "    OR loc_id2 IN ( SELECT loc_id FROM loci WHERE group_id == " + Helper::int2str(id1) + " ) ; " );
+ 
++  return false;
+ }
+ 
+ bool LocDBase::clear_overlaps(uint64_t id1, uint64_t id2)
+@@ -721,6 +725,7 @@ bool LocDBase::clear_overlaps(uint64_t id1, uint64_t id2)
+ 	       "                    WHERE group_id == " + Helper::int2str(id1) + " "
+ 	       "                       OR group_id == " + Helper::int2str(id2) + " ) " );
+ 
++  return false;
+ }
+ 
+ 
+@@ -2577,6 +2582,7 @@ uint64_t LocDBase::extract(uint64_t group1_id , uint64_t group2_id, const std::s
+ uint64_t LocDBase::merge(uint64_t grp1_id, uint64_t grp2_id , const std::string & name )
+ {
+     //
++  return 0;
+ }
+    
+ uint64_t LocDBase::rename( uint64_t grp_id, uint64_t alias_id , const std::string & name )
+@@ -2612,6 +2618,7 @@ uint64_t LocDBase::rename( uint64_t grp_id, uint64_t alias_id , const std::strin
+ //     sql.commit();
+ 
+ //    return new_group_id;
++  return 0;
+ }
+ 
+ std::set<GroupInfo> LocDBase::group_information()
+diff --git a/sources/plinkseq/sources/lib/mask.cpp b/sources/plinkseq/sources/lib/mask.cpp
+index c729a8a..b6b219c 100644
+--- a/sources/plinkseq/sources/lib/mask.cpp
++++ b/sources/plinkseq/sources/lib/mask.cpp
+@@ -3265,51 +3265,61 @@ bool Mask::pheno_screen( Individual * person ) const
+ int Mask::meta_set( const std::string & key )
+ {
+   meta_is_set.insert( key );
++  return 0;
+ }
+ 
+ int Mask::meta_not_set( const std::string & key )
+ {
+   meta_is_not_set.insert( key );
++  return 0;
+ }
+ 
+ int Mask::meta_equals( const std::string & key , int value )
+ {
+   meta_eq[key] = value;
++  return 0;
+ }
+ 
+ int Mask::meta_not_equals( const std::string & key , int value )
+ {
+   meta_ne[key] = value;
++  return 0;
+ }
+ 
+ int Mask::meta_equals( const std::string & key , const std::string & value )
+ {
+   meta_has_text[key].insert( value );
++  return 0;
+ }
+ 
+ int Mask::meta_not_equals( const std::string & key , const std::string & value )
+ {
+   meta_has_not_text[key].insert( value );
++  return 0;
+ }
+ 
+ int Mask::meta_greater( const std::string & key , double value )
+ {
+   meta_gt[key] = value;
++  return 0;
+ }
+ 
+ int Mask::meta_greater_equal( const std::string & key , double value )
+ {
+   meta_ge[key] = value;
++  return 0;
+ }
+ 
+ int Mask::meta_less( const std::string & key , double value )
+ {
+   meta_lt[key] = value;
++  return 0;
+ }
+ 
+ int Mask::meta_less_equal( const std::string & key , double value )
+ {
+   meta_le[key] = value;
++  return 0;
+ }
+ 
+ 
+@@ -3317,51 +3327,61 @@ int Mask::meta_less_equal( const std::string & key , double value )
+ int Mask::req_meta_set( const std::string & key )
+ {
+   req_meta_is_set.insert( key );
++  return 0;
+ }
+ 
+ int Mask::req_meta_not_set( const std::string & key )
+ {
+   req_meta_is_not_set.insert( key );
++  return 0;
+ }
+ 
+ int Mask::req_meta_equals( const std::string & key , int value )
+ {
+   req_meta_eq[key] = value;
++  return 0;
+ }
+ 
+ int Mask::req_meta_not_equals( const std::string & key , int value )
+ {
+   req_meta_ne[key] = value;
++  return 0;
+ }
+ 
+ int Mask::req_meta_equals( const std::string & key , const std::string & value )
+ {
+   req_meta_has_text[key].insert( value );
++  return 0;
+ }
+ 
+ int Mask::req_meta_not_equals( const std::string & key , const std::string & value )
+ {
+   req_meta_has_not_text[key].insert( value );
++  return 0;
+ }
+ 
+ int Mask::req_meta_greater( const std::string & key , double value )
+ {
+   req_meta_gt[key] = value;
++  return 0;
+ }
+ 
+ int Mask::req_meta_greater_equal( const std::string & key , double value )
+ {
+   req_meta_ge[key] = value;
++  return 0;
+ }
+ 
+ int Mask::req_meta_less( const std::string & key , double value )
+ {
+   req_meta_lt[key] = value;
++  return 0;
+ }
+ 
+ int Mask::req_meta_less_equal( const std::string & key , double value )
+ {
+   req_meta_le[key] = value;
++  return 0;
+ }
+ 
+ 
+@@ -3790,51 +3810,61 @@ bool Mask::eval( SampleVariant & svar )
+ int Mask::geno_set( const std::string & key )
+ {
+   geno_is_set.insert( key );
++  return 0;
+ }
+ 
+ int Mask::geno_not_set( const std::string & key )
+ {
+   geno_is_not_set.insert( key );
++  return 0;
+ }
+ 
+ int Mask::geno_equals( const std::string & key , int value )
+ {
+   geno_eq[key] = value;
++  return 0;
+ }
+ 
+ int Mask::geno_not_equals( const std::string & key , int value )
+ {
+   geno_ne[key] = value;
++  return 0;
+ }
+ 
+ int Mask::geno_equals( const std::string & key , const std::string & value )
+ {
+   geno_has_text[key] = value;
++  return 0;
+ }
+ 
+ int Mask::geno_not_equals( const std::string & key , const std::string & value )
+ {
+   geno_has_not_text[key] = value;
++  return 0;
+ }
+ 
+ int Mask::geno_greater( const std::string & key , double value )
+ {
+   geno_gt[key] = value;
++  return 0;
+ }
+ 
+ int Mask::geno_greater_equal( const std::string & key , double value )
+ {
+   geno_ge[key] = value;
++  return 0;
+ }
+ 
+ int Mask::geno_less( const std::string & key , double value )
+ {
+   geno_lt[key] = value;
++  return 0;
+ }
+ 
+ int Mask::geno_less_equal( const std::string & key , double value )
+ {
+   geno_le[key] = value;
++  return 0;
+ }
+ 
+ 
+@@ -3842,51 +3872,61 @@ int Mask::geno_less_equal( const std::string & key , double value )
+ int Mask::req_geno_set( const std::string & key )
+ {
+   req_geno_is_set.insert( key );
++  return 0;
+ }
+ 
+ int Mask::req_geno_not_set( const std::string & key )
+ {
+   req_geno_is_not_set.insert( key );
++  return 0;
+ }
+ 
+ int Mask::req_geno_equals( const std::string & key , int value )
+ {
+   req_geno_eq[key] = value;
++  return 0;
+ }
+ 
+ int Mask::req_geno_not_equals( const std::string & key , int value )
+ {
+   req_geno_ne[key] = value;
++  return 0;
+ }
+ 
+ int Mask::req_geno_equals( const std::string & key , const std::string & value )
+ {
+   req_geno_has_text[key] = value;
++  return 0;
+ }
+ 
+ int Mask::req_geno_not_equals( const std::string & key , const std::string & value )
+ {
+   req_geno_has_not_text[key] = value;
++  return 0;
+ }
+ 
+ int Mask::req_geno_greater( const std::string & key , double value )
+ {
+   req_geno_gt[key] = value;
++  return 0;
+ }
+ 
+ int Mask::req_geno_greater_equal( const std::string & key , double value )
+ {
+   req_geno_ge[key] = value;
++  return 0;
+ }
+ 
+ int Mask::req_geno_less( const std::string & key , double value )
+ {
+   req_geno_lt[key] = value;
++  return 0;
+ }
+ 
+ int Mask::req_geno_less_equal( const std::string & key , double value )
+ {
+   req_geno_le[key] = value;
++  return 0;
+ }
+ 
+ 
+diff --git a/sources/plinkseq/sources/lib/matdb.cpp b/sources/plinkseq/sources/lib/matdb.cpp
+index 4e79c0a..e178003 100644
+--- a/sources/plinkseq/sources/lib/matdb.cpp
++++ b/sources/plinkseq/sources/lib/matdb.cpp
+@@ -87,6 +87,7 @@ bool MatDBase::init()
+   // stmt_lookup_column = sql.prepare( "SELECT col_id , myuncompress( data ) FROM columns WHERE mat_id == :mat_id ORDER BY col_id ; " );
+ 
+   stmt_dump_matrix_names = sql.prepare( "SELECT name , nrow , ncol , dclass FROM matrices ORDER BY name ; " );
++  return false;
+ }
+ 
+ 
+@@ -97,6 +98,7 @@ bool MatDBase::release()
+   sql.finalise( stmt_insert_column );
+   sql.finalise( stmt_lookup_column );
+   sql.finalise( stmt_dump_matrix_names );
++  return false;
+ }
+ 
+ 
+@@ -107,6 +109,7 @@ bool MatDBase::dettach()
+       release();
+       sql.close();  
+     }
++  return false;
+ }
+ 
+ 
+@@ -131,7 +134,7 @@ blob MatDBase::make_blob( const Data::Vector<double> & x , int col )
+   // if not symmetric, col == -1 
+   // else is col number (0..ncol-1)
+ 
+-  double_t pbCol;
++  Double_t pbCol;
+ 
+   const int upr = col == -1 ? x.size() : ( col + 1 ) ; 
+     
+@@ -149,7 +152,7 @@ Data::Vector<double> MatDBase::read_blob( blob & b , int nrow )
+   // if matrix is symmetric, take nrow from'r'
+   // otherwise, r==0, so just read what is here
+ 
+-  double_t pbCol;  
++  Double_t pbCol;  
+   pbCol.ParseFromString( b.get_string() );
+   
+   const int nrow_stored = pbCol.data_size();      
+diff --git a/sources/plinkseq/sources/lib/matrix.proto b/sources/plinkseq/sources/lib/matrix.proto
+index 59bf51f..475d866 100644
+--- a/sources/plinkseq/sources/lib/matrix.proto
++++ b/sources/plinkseq/sources/lib/matrix.proto
+@@ -1,13 +1,13 @@
+ 
+-message double_t {
++message Double_t {
+ 	repeated double data     = 1 [packed=true];
+ }
+ 
+-message int_t {
++message Int_t {
+ 	repeated int32  data     = 1 [packed=true];
+ }
+ 
+-message bool_t {
++message Bool_t {
+ 	repeated bool  data     = 1 [packed=true];
+ }
+ 
+@@ -23,9 +23,9 @@ message MatrixBuffer {
+ 	required  int32    nrow   = 4 ;
+   	required  int32    ncol   = 5 ;
+ 
+-	repeated double_t  d_double = 6;
+-	repeated int_t     d_int    = 7;
+-	repeated bool_t    d_bool   = 8;
++	repeated Double_t  d_double = 6;
++	repeated Int_t     d_int    = 7;
++	repeated Bool_t    d_bool   = 8;
+    
+ }
+ 
+diff --git a/sources/plinkseq/sources/lib/netdb.cpp b/sources/plinkseq/sources/lib/netdb.cpp
+index 717ab6b..40a1674 100644
+--- a/sources/plinkseq/sources/lib/netdb.cpp
++++ b/sources/plinkseq/sources/lib/netdb.cpp
+@@ -126,6 +126,7 @@ bool NetDBase::detach() {
+ 	sql.finalise(stmt_insert_edge);
+ 	sql.finalise(stmt_fetch_connections);
+ 	sql.close();
++  return false;
+ }
+ 
+ void NetDBase::drop_index() {
+diff --git a/sources/plinkseq/sources/lib/r8lib.cpp b/sources/plinkseq/sources/lib/r8lib.cpp
+index 2d5276f..7662233 100644
+--- a/sources/plinkseq/sources/lib/r8lib.cpp
++++ b/sources/plinkseq/sources/lib/r8lib.cpp
+@@ -31828,7 +31828,7 @@ void r8vec_index_sorted_range ( int n, double r[], int indx[], double r_lo,
+   if ( r_hi < r[indx[*i_hi]] )
+   {
+     *i_hi = *i_hi - 1;
+-    if ( i_hi < 0 )
++    if ( *i_hi < 0 )
+     {
+       *i_lo = *i_hi + 1;
+     }
+diff --git a/sources/plinkseq/sources/lib/refdb.cpp b/sources/plinkseq/sources/lib/refdb.cpp
+index 4ab8f52..388e2af 100644
+--- a/sources/plinkseq/sources/lib/refdb.cpp
++++ b/sources/plinkseq/sources/lib/refdb.cpp
+@@ -230,6 +230,7 @@ bool RefDBase::init()
+ 
+ 
+ 
++  return false;
+ }
+ 
+ 
+@@ -263,6 +264,7 @@ bool RefDBase::release()
+   sql.finalise( stmt_update_group_count );
+   sql.finalise( stmt_fetch_group_count );
+   
++  return false;
+ }
+ 
+ 
+@@ -427,6 +429,7 @@ bool RefDBase::insert( int file_id , const Variant & v )
+ 
+   refInsertion( rv );
+   
++  return false;
+ }
+ 
+ 
+@@ -454,6 +457,7 @@ bool RefDBase::refInsertion(const RefVariant & rv)
+     uint64_t id = sql.last_insert_rowid();
+     sql.reset( stmt_insert );
+             
++  return false;
+ }
+ 
+ 
+diff --git a/sources/plinkseq/sources/lib/seqdb.cpp b/sources/plinkseq/sources/lib/seqdb.cpp
+index c949f2b..f8f35e8 100644
+--- a/sources/plinkseq/sources/lib/seqdb.cpp
++++ b/sources/plinkseq/sources/lib/seqdb.cpp
+@@ -117,6 +117,7 @@ bool SeqDBase::init()
+       sql.prepare( "INSERT OR REPLACE INTO meta ( key , value ) values (:key,:value) ; " );
+     
+ 
++  return false;
+ }
+ 
+ 
+@@ -172,6 +173,7 @@ bool SeqDBase::release()
+ {    
+   sql.finalise( stmt_lookup );
+   sql.finalise( stmt_insert );
++  return false;
+ }
+ 
+ bool SeqDBase::dettach()
+@@ -181,6 +183,7 @@ bool SeqDBase::dettach()
+       release();
+       sql.close();  
+     }
++  return false;
+ }
+ 
+ 
+diff --git a/sources/plinkseq/sources/lib/statistics.cpp b/sources/plinkseq/sources/lib/statistics.cpp
+index 6f0a686..622d6cf 100644
+--- a/sources/plinkseq/sources/lib/statistics.cpp
++++ b/sources/plinkseq/sources/lib/statistics.cpp
+@@ -50,6 +50,7 @@ Data::Vector<double> Statistics::row_sums( const Data::Matrix<double> & a )
+   for (int i=0;i<a.dim1();i++)
+     for (int j=0;j<a.dim2();j++)
+       r[i] += a(i,j);   // avoid making temporary vector from row
++  return r;
+ }
+ 
+ Data::Vector<double> Statistics::col_sums( const Data::Matrix<double> & a)
+@@ -57,6 +58,7 @@ Data::Vector<double> Statistics::col_sums( const Data::Matrix<double> & a)
+   Data::Vector<double> r( a.dim2() );
+   for (int i=0;i<a.dim2();i++)
+     r[i] = sum( a.col(i) ); // use fast column reference  
++  return r;
+ }
+ 
+ 
+@@ -1908,6 +1910,7 @@ double Statistics::factln(int n)
+ double Statistics::beta( double x , double a1 , double a2 )
+ {
+   Helper::halt("not implemented beta()");
++  return 0;
+ }
+ 
+ 
+diff --git a/sources/plinkseq/sources/lib/vardb.cpp b/sources/plinkseq/sources/lib/vardb.cpp
+index 03f6462..5676975 100644
+--- a/sources/plinkseq/sources/lib/vardb.cpp
++++ b/sources/plinkseq/sources/lib/vardb.cpp
+@@ -823,6 +823,7 @@ bool VarDBase::index()
+   
+   release();
+   init();
++  return false;
+ }
+ 
+ bool VarDBase::drop_index()
+@@ -838,6 +839,7 @@ bool VarDBase::drop_index()
+   sql.query( "DROP INDEX IF EXISTS filetags; " );
+   sql.query( "DROP INDEX IF EXISTS bcfIdx; " );
+   sql.query( "DROP INDEX IF EXISTS bcfDict; ");
++  return false;
+ }
+ 
+ bool VarDBase::set_index()
+@@ -846,6 +848,7 @@ bool VarDBase::set_index()
+   sql.query( "CREATE INDEX IF NOT EXISTS sset_idx ON superset_data( superset_id ) ; ");    
+   sql.query( "CREATE INDEX IF NOT EXISTS set_name ON sets( name ) ; ");
+   sql.query( "CREATE INDEX IF NOT EXISTS sset_name ON supersets( name ) ; ");  
++  return false;
+ }
+ 
+ bool VarDBase::drop_set_index()
+@@ -854,6 +857,7 @@ bool VarDBase::drop_set_index()
+   sql.query( "DROP INDEX IF EXISTS sset_idx; ");
+   sql.query( "DROP INDEX IF EXISTS set_name; ");
+   sql.query( "DROP INDEX IF EXISTS sset_name; ");
++  return false;
+ }
+ 
+ 
+diff --git a/sources/plinkseq/sources/lib/varmeta.cpp b/sources/plinkseq/sources/lib/varmeta.cpp
+index 2506320..5f9d7fe 100644
+--- a/sources/plinkseq/sources/lib/varmeta.cpp
++++ b/sources/plinkseq/sources/lib/varmeta.cpp
+@@ -162,6 +162,7 @@ int VarDBase::loader_indep_meta( const std::string & filename , int f , const st
+   
+   sql.commit();
+ 
++  return 0;
+ }
+ 
+ 
+diff --git a/sources/plinkseq/sources/lib/vcfiterate.cpp b/sources/plinkseq/sources/lib/vcfiterate.cpp
+index a604533..d0b6720 100644
+--- a/sources/plinkseq/sources/lib/vcfiterate.cpp
++++ b/sources/plinkseq/sources/lib/vcfiterate.cpp
+@@ -65,6 +65,7 @@ bool VarDBase::vcf_iterate_read_header( Mask & mask )
+     }
+   
+   
++  return false;
+ }
+ 
+ 
+diff --git a/sources/pseq/sources/lib/func.cpp b/sources/pseq/sources/lib/func.cpp
+index 29f7b0d..676e0f0 100644
+--- a/sources/pseq/sources/lib/func.cpp
++++ b/sources/pseq/sources/lib/func.cpp
+@@ -197,6 +197,7 @@ bool Pseq::new_project( std::string project , Pseq::Util::Options & args )
+   
+   P.close();
+   
++  return false;
+ }
+ 
+ bool Pseq::set_project( std::string project )
+@@ -477,6 +478,7 @@ bool Pseq::VarDB::write_haps(Mask & m , const std::string & rt )
+   IterationReport report = g.vardb.iterate( f_write_haps , &filemap , m );
+   
+   std::cerr << "done... now, for each chromosome, concatenate, e.g:\n  cat " << rt << "-*-chr1 > all-chr1.haps\n";
++  return false;
+ }
+ 
+ 
+@@ -1078,6 +1080,7 @@ bool Pseq::RefDB::summary( bool ugly )
+ bool Pseq::RefDB::attach( std::string db )
+ {
+   g.refdb.attach( db );
++  return false;
+ }
+       
+ 
+@@ -2164,4 +2167,5 @@ bool Pseq::IndDB::dump_phenotypes( const std::vector<std::string> & pheno , bool
+ 	  }
+       pout << "\n";
+     }
++  return false;
+ }
+diff --git a/sources/pseq/sources/lib/glm-tests.cpp b/sources/pseq/sources/lib/glm-tests.cpp
+index 7777d36..4060c90 100644
+--- a/sources/pseq/sources/lib/glm-tests.cpp
++++ b/sources/pseq/sources/lib/glm-tests.cpp
+@@ -690,6 +690,7 @@ bool Pseq::IndDB::make_residuals( const std::vector<std::string> & covars )
+   if ( ! g.phmap.attach_qt_phenotype( pheno_name  , mask , resid , g.indmap ) ) 
+     Helper::halt( "no individuals with valud residual phenotype set" );
+ 
++  return false;
+ }
+ 
+ 
+diff --git a/sources/pseq/sources/lib/ibs.cpp b/sources/pseq/sources/lib/ibs.cpp
+index 2ecafa6..4834c17 100644
+--- a/sources/pseq/sources/lib/ibs.cpp
++++ b/sources/pseq/sources/lib/ibs.cpp
+@@ -54,6 +54,7 @@ bool Pseq::IBS::calculate( Mask & m )
+ 	  }
+     }
+ 
++  return false;
+ }
+ 
+ 
+diff --git a/sources/pseq/sources/lib/varfunc.cpp b/sources/pseq/sources/lib/varfunc.cpp
+index a9874e3..21d8ebf 100644
+--- a/sources/pseq/sources/lib/varfunc.cpp
++++ b/sources/pseq/sources/lib/varfunc.cpp
+@@ -373,6 +373,7 @@ bool Pseq::VarDB::check_concordance( Mask & m )
+   g.vardb.iterate( f_conc , &aux , m );
+ 
+   aux.report();  
++  return false;
+ }
+ 
+ 
+-- 
+2.53.0
+
