@@ -31,9 +31,6 @@ ln -sf ${PREFIX}/include/sqlite3.h sources/plinkseq/sources/include/plinkseq
 # plinkseq predates C++20, but its member function named 'requires' collides with
 # the C++20 keyword (newer GCC defaults to C++20+); pin C++17 (also required by protobuf/absl).
 export CXXFLAGS="$(echo ${CXXFLAGS} | sed 's/-O2/-O0/g') -Wno-register -std=gnu++17"
-if [[ ${target_platform} =~ .*osx.* ]]; then
-    export CXXFLAGS="${CXXFLAGS} -fno-strict-return"
-fi
 make CXX="${CXX}" AR="${AR}" RANLIB="${RANLIB}" CXXFLAGS="${CXXFLAGS}" STATIC_FLAG="${LDFLAGS}"
 
 mkdir -p ${PREFIX}/bin
