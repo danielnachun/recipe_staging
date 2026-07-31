@@ -1,14 +1,15 @@
-From f8fa6d46dfa527d7ef699ed135822e865a79a44a Mon Sep 17 00:00:00 2001
+From dc6fc310e93956a68a263c1f60edde6ad539cdca Mon Sep 17 00:00:00 2001
 From: danielnachun <daniel.nachun@gmail.com>
 Date: Wed, 10 Apr 2024 16:40:58 -0700
 Subject: [PATCH] build fixes
 
 ---
  Makefile                                  | 29 +++++++++--------------
+ config_rules.Makefile                     |  4 ++--
  sources/plinkseq/sources/lib/matdb.cpp    |  4 ++--
  sources/plinkseq/sources/lib/matrix.proto | 12 +++++-----
  sources/plinkseq/sources/lib/r8lib.cpp    |  2 +-
- 4 files changed, 20 insertions(+), 27 deletions(-)
+ 5 files changed, 22 insertions(+), 29 deletions(-)
 
 diff --git a/Makefile b/Makefile
 index dc9cb64..b699ed0 100644
@@ -85,6 +86,21 @@ index dc9cb64..b699ed0 100644
  
  ##########################################
  #Compiler, Compilation flags:
+diff --git a/config_rules.Makefile b/config_rules.Makefile
+index a848474..e8e468c 100644
+--- a/config_rules.Makefile
++++ b/config_rules.Makefile
+@@ -21,8 +21,8 @@ $(BLD_DIR)/%.o: $(SRC_DIR)/%.c $(ENSURE_BUILD_DIRS_PREREQS)
+ 
+ #explicit rules for making libraries and files:
+ $(LIB_FULL_PATH): $(LIB_OBJECTS_FULL_PATH) $(ENSURE_BUILD_DIRS_PREREQS)
+-	ar rv $@ $?
+-	ranlib $@
++	$(AR) rv $@ $?
++	$(RANLIB) $@
+ 
+ 
+ #depend rules:
 diff --git a/sources/plinkseq/sources/lib/matdb.cpp b/sources/plinkseq/sources/lib/matdb.cpp
 index 4e79c0a..f4492de 100644
 --- a/sources/plinkseq/sources/lib/matdb.cpp
@@ -155,5 +171,5 @@ index 2d5276f..7662233 100644
        *i_lo = *i_hi + 1;
      }
 -- 
-2.44.0
+2.53.0
 

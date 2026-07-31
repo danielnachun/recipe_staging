@@ -27,7 +27,7 @@ requirements:
     - make
     - sed
   host:
-    - protobuf
+    - libprotobuf
     - sqlite
     - zlib
 
@@ -36,7 +36,7 @@ tests:
       - pseq -h
 
 about:
-  license: OTHER
+  license: LicenseRef-OTHER
   summary: PLINK/SEQ is an open-source C/C++ library for working with human genetic variation data.
   homepage: https://zzz.bwh.harvard.edu/plinkseq/index.shtml
-  repository: https://bitbucket.org/statgen/${{ name }}.git
+  repository: https://bitbucket.org/statgen/plinkseq.git

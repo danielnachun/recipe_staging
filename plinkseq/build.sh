@@ -29,7 +29,7 @@ ln -sf ${PREFIX}/include/sqlite3.h sources/plinkseq/sources/include/plinkseq
 #sed -i 's/$(PROTOBUF_LIB_FULL_PATH)//g' Makefile
 #sed -i 's/-lz/-lprotobuf -labsl_log_internal_message -labsl_log_internal_check_op -lsqlite3 -lz /g' Makefile
 export CXXFLAGS=$(echo ${CXXFLAGS} | sed 's/-O2/-O0/g')
-make CXX="${CXX}" CXXFLAGS="${CXXFLAGS} -Wno-register" STATIC_FLAG="${LDFLAGS}"
+make CXX="${CXX}" AR="${AR}" RANLIB="${RANLIB}" CXXFLAGS="${CXXFLAGS} -Wno-register -fno-strict-return" STATIC_FLAG="${LDFLAGS}"
 
 mkdir -p ${PREFIX}/bin
 install -m 755 build/execs/behead ${PREFIX}/bin
