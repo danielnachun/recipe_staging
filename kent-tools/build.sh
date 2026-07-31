@@ -8,6 +8,8 @@ sed -i 's/ld/${LD}/g' hg/lib/straw/makefile
 sed -i "s|-I../../../inc|-I../../../inc -I${PREFIX}/include|g" hg/lib/straw/makefile
 sed -i 's?\${PREFIX}/lib/libssl.a \${PREFIX}/lib/libcrypto.a?-lcrypto -lssl?g' inc/common.mk
 
+sed -i 's/${CONDA_BUILD},1/${CONDA_BUILD},0/' inc/common.mk
+
 # Set LD_LIBRARY_PATH because setting RPATH wtih LDFLAGS causes segfault
 export LD_LIBRARY_PATH="${PREFIX}/lib"
 
