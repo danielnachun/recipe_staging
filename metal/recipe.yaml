@@ -1,11 +1,10 @@
 schema_version: 1
 
 context:
-  name: metal
   version: 2020-05-05
 
 package:
-  name: ${{ name|lower }}
+  name: metal
   version: ${{ version | replace("-", "_") }}
 
 source:
@@ -13,10 +12,12 @@ source:
   sha256: 0ffa2419ca2ab43766e7e6e8c97822c8ce1f5b6233fb5f992d1b1be1955fede7
 
 build:
-  number: 1
+  number: 2
 
 requirements:
   build:
+    - ${{ stdlib('c') }}
+    - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
     - cmake
     - make
@@ -38,4 +39,3 @@ about:
 extra:
   recipe-maintainers:
     - danielnachun
-
