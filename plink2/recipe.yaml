@@ -1,42 +1,47 @@
 schema_version: 1
 
+context:
+  version: 2.0.0-a.7.1
+
 package:
   name: plink2
-  version: 2.00a6
+  version: ${{ version|replace("-", "_") }}
 
 source:
-  url: https://www.cog-genomics.org/static/bin/plink2_src_240318.zip
-  sha256: badb51fb122e6c3c448c140066e46f0ac1ae2ae5d36af26769e7b4127164ae6c
+  url: https://github.com/chrchang/plink-ng/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: 19344fa5ed9fac92241c23d5e2b5f73059c8880f8216b590187b7ea5caf79551
 
 build:
   number: 0
 
 requirements:
   build:
+    - ${{ stdlib('c') }}
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
     - make
     - sed
   host:
-    - if: linux
+    - if: x86_64
       then: mkl-devel
+      else:
+        - liblapack
+        - liblapacke
+        - openblas
     - simde
     - zlib
     - zstd
   run:
-    - if: linux
+    - if: x86_64
       then: mkl
-  run_exports:
-    - ${{ pin_subpackage('plink2', upper_bound=None) }}
 
 tests:
   - script:
-      - "plink2 --help | grep \"PLINK v2.00a6\""
+      - plink2 --help | grep "PLINK "
 
 about:
-  license: GPL-3.0
+  license: GPL-3.0-or-later
   license_file: LICENSE
   summary: Whole genome association analysis toolset
   description: Whole genome association analysis toolset, designed to perform a range of basic, large-scale analyses in a computationally efficient manner.
   homepage: https://www.cog-genomics.org/plink2
-
