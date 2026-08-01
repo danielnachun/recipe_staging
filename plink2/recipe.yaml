@@ -26,6 +26,7 @@ requirements:
       then: mkl-devel
       else:
         - liblapack
+        - liblapacke
         - openblas
     - simde
     - zlib
