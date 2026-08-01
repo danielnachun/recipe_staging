@@ -30,6 +30,7 @@ requirements:
     - libcurl
     - libiconv
     - libpng
+    - liblzma-devel
     - mariadb >=11
     - openssl
     - if: linux
