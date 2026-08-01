@@ -2,26 +2,23 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-if [ "$(uname)" = "Darwin" ]; then
-  # LDFLAGS fix: https://github.com/AnacondaRecipes/intel_repack-feedstock/issues/8
-  export LDFLAGS="-Wl,-pie -Wl,-headerpad_max_install_names -Wl,-rpath,$PREFIX/lib -L$PREFIX/lib"
-else
-  export LDFLAGS="-L$PREFIX/lib"
-  export MKL_THREADING_LAYER="GNU"
+# Select the BLAS/LAPACK backend: Intel MKL on linux-64 (where the mkl
+# package is available), OpenBLAS everywhere else. CMakeLists.txt uses MKL
+# only when MKLROOT is passed with a non-empty value.
+if [[ ${target_platform} == "linux-64" ]]; then
+    export MKL_THREADING_LAYER="GNU"
+    CMAKE_ARGS="${CMAKE_ARGS} -DMKLROOT=${PREFIX}"
 fi
-# https://bioconda.github.io/troubleshooting.html#zlib-errors
-export CFLAGS="-I$PREFIX/include"
-export CPATH=${PREFIX}/include
 
-cmake \
+# The CMakeLists patch references ${CMAKE_PREFIX_PATH}/include for the devendored
+# headers, but rattler-build locates host packages via CMAKE_FIND_ROOT_PATH and
+# leaves CMAKE_PREFIX_PATH unset. Point it at the host prefix so that resolves to
+# $PREFIX/include (host headers also arrive via the -isystem flag the patched
+# CMakeLists now preserves by appending to, not overwriting, CMAKE_CXX_FLAGS).
+cmake -S "${SRC_DIR}" -B build \
   -DBUILD_SHARED_LIBS:BOOL=ON \
-  -DCMAKE_PREFIX_PATH:PATH=${PREFIX} \
-  -DCMAKE_INSTALL_PREFIX:PATH=${PREFIX} \
   -DCMAKE_BUILD_TYPE="Release" \
-  -S "${SRC_DIR}" \
-  -B build
+  -DCMAKE_PREFIX_PATH="${PREFIX}" \
+  ${CMAKE_ARGS}
 
 cmake --build build --target install -j "${CPU_COUNT}"
-
-#make  -C build -j1 regenie
-#make  -C build install

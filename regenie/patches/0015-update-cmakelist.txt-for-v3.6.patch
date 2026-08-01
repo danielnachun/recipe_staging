@@ -1,14 +1,20 @@
-From eac9852f500ba04d75e7f4ad178f365ce690bfa9 Mon Sep 17 00:00:00 2001
+From 4bb77f6d16ddaf796aadc50cf475df99c61de91c Mon Sep 17 00:00:00 2001
 From: Joelle Mbatchou <joelle.mbatchou@regeneron.com>
 Date: Tue, 3 Sep 2024 12:29:13 -0400
 Subject: [PATCH] update cmakelist file for v3.6
 
+Devendor BGEN/zstd/db/sqlite3/Boost dependencies, select the BLAS backend at
+configure time (Intel MKL when MKLROOT is set, otherwise OpenBLAS), append to
+(instead of overwrite) CMAKE_CXX_FLAGS so the conda compiler flags and host
+include path (-isystem $PREFIX/include) are preserved, and build as C++14
+(devendored Boost >=1.88 needs the C++14 std::*_t aliases, while the bundled
+bgen "db" headers still use std::auto_ptr, removed in C++17).
 ---
- CMakeLists.txt | 241 ++++++++++++++++++++-----------------------------
- 1 file changed, 97 insertions(+), 144 deletions(-)
+ CMakeLists.txt | 259 +++++++++++++++++++++----------------------------
+ 1 file changed, 112 insertions(+), 147 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index b874c33..b3b9950 100755
+index b874c33..cf45115 100755
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -1,11 +1,3 @@
@@ -23,7 +29,16 @@ index b874c33..b3b9950 100755
  cmake_minimum_required(VERSION 3.13)
  
  # detect OS architecture
-@@ -33,57 +25,16 @@ set(CMAKE_CXX_EXTENSIONS OFF)  # Ensures -std=c++11
+@@ -26,64 +18,23 @@ include(CMakePackageConfigHelpers)
+ include(GNUInstallDirs)
+ 
+ # specify the C++ standard
+-set(CMAKE_CXX_STANDARD 11)
++set(CMAKE_CXX_STANDARD 14)
+ set(CMAKE_CXX_STANDARD_REQUIRED ON)
+-set(CMAKE_CXX_EXTENSIONS OFF)  # Ensures -std=c++11
++set(CMAKE_CXX_EXTENSIONS OFF)  # Ensures -std=c++14
+ 
  ######################################
  ######## check input variables
  
@@ -86,11 +101,9 @@ index b874c33..b3b9950 100755
  ######################################
  ######## set flags and required libraries
  
-@@ -92,9 +43,10 @@ set(Boost_USE_STATIC_LIBS    ${BUILD_STATIC})
- set(Boost_USE_DEBUG_LIBS     OFF)
+@@ -93,8 +44,8 @@ set(Boost_USE_DEBUG_LIBS     OFF)
  set(Boost_USE_MULTITHREADED  ON)
  set(Boost_USE_STATIC_RUNTIME OFF)
-+set(MKLROOT "${CMAKE_PREFIX_PATH}")
  
 -# list each file specifically
 -add_executable(regenie
@@ -99,15 +112,16 @@ index b874c33..b3b9950 100755
    ${CMAKE_SOURCE_DIR}/src/Data.cpp
    ${CMAKE_SOURCE_DIR}/src/Files.cpp
    ${CMAKE_SOURCE_DIR}/src/Geno.cpp
-@@ -116,32 +68,54 @@ add_executable(regenie
+@@ -116,32 +67,54 @@ add_executable(regenie
    ${CMAKE_SOURCE_DIR}/src/cox_score.cpp
    ${CMAKE_SOURCE_DIR}/src/cox_firth.cpp
    )
 -target_include_directories(regenie PRIVATE ${CMAKE_SOURCE_DIR}/src)
 +target_include_directories(regenie PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src ${CMAKE_PREFIX_PATH}/include)
  
- set(CMAKE_CXX_FLAGS "-O3 -Wall -pedantic -ffast-math -Wno-unused-local-typedefs -Wno-deprecated-declarations -Wno-long-long -Wno-c11-extensions -fPIC")
+-set(CMAKE_CXX_FLAGS "-O3 -Wall -pedantic -ffast-math -Wno-unused-local-typedefs -Wno-deprecated-declarations -Wno-long-long -Wno-c11-extensions -fPIC")
 -add_definitions(-DVERSION_NUMBER="${RG_VERSION}")
++set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wall -pedantic -ffast-math -Wno-unused-local-typedefs -Wno-deprecated-declarations -Wno-long-long -Wno-c11-extensions -fPIC")
  
 +find_package(OpenMP REQUIRED)
 +target_link_libraries(regenie OpenMP::OpenMP_CXX)
@@ -127,7 +141,15 @@ index b874c33..b3b9950 100755
 -target_include_directories(regenie PRIVATE ${EXTERN_LIBS_PATH}/)
 +set(EXTERN_LIBS_PATH "${CMAKE_CURRENT_SOURCE_DIR}/external_libs")
 +target_include_directories(regenie PUBLIC ${EXTERN_LIBS_PATH}/)
-+
+ 
+-# BGEN library and its dependencies
+-find_library(ZSTD_LIBRARY libzstd.a HINTS "${BGEN_PATH}/build/3rd_party/zstd-1.1.0" REQUIRED)
+-find_library(DB_LIBRARY libdb.a HINTS "${BGEN_PATH}/build/db" REQUIRED)
+-find_library(SQLITE3_LIBRARY libsqlite3.a HINTS "${BGEN_PATH}/build/3rd_party/sqlite3" REQUIRED)
+-find_library(Boost_LIBRARY libboost.a HINTS "${BGEN_PATH}/build/3rd_party/boost_1_55_0" REQUIRED)
+-find_library(BGEN_LIBRARY libbgen.a HINTS "${BGEN_PATH}/build" REQUIRED)
+-target_link_libraries(regenie PRIVATE ${ZSTD_LIBRARY} ${BGEN_LIBRARY} ${DB_LIBRARY} ${SQLITE3_LIBRARY} ${Boost_LIBRARY})
+-target_include_directories(regenie PRIVATE ${BGEN_PATH} ${BGEN_PATH}/genfile/include/ ${BGEN_PATH}/3rd_party/boost_1_55_0/ ${BGEN_PATH}/3rd_party/zstd-1.1.0/lib ${BGEN_PATH}/db/include/ ${BGEN_PATH}/3rd_party/sqlite3)
 +# for BGEN (choose static if present first)
 +find_library(ZSTD_LIBRARY zstd REQUIRED)
 +find_library(DB_LIBRARY 
@@ -152,15 +174,7 @@ index b874c33..b3b9950 100755
 +  $<INSTALL_INTERFACE:${BOOST_INCLUDEDIR}>
 +  )
 +add_definitions(${Boost_DEFINITIONS})
- 
--# BGEN library and its dependencies
--find_library(ZSTD_LIBRARY libzstd.a HINTS "${BGEN_PATH}/build/3rd_party/zstd-1.1.0" REQUIRED)
--find_library(DB_LIBRARY libdb.a HINTS "${BGEN_PATH}/build/db" REQUIRED)
--find_library(SQLITE3_LIBRARY libsqlite3.a HINTS "${BGEN_PATH}/build/3rd_party/sqlite3" REQUIRED)
--find_library(Boost_LIBRARY libboost.a HINTS "${BGEN_PATH}/build/3rd_party/boost_1_55_0" REQUIRED)
--find_library(BGEN_LIBRARY libbgen.a HINTS "${BGEN_PATH}/build" REQUIRED)
--target_link_libraries(regenie PRIVATE ${ZSTD_LIBRARY} ${BGEN_LIBRARY} ${DB_LIBRARY} ${SQLITE3_LIBRARY} ${Boost_LIBRARY})
--target_include_directories(regenie PRIVATE ${BGEN_PATH} ${BGEN_PATH}/genfile/include/ ${BGEN_PATH}/3rd_party/boost_1_55_0/ ${BGEN_PATH}/3rd_party/zstd-1.1.0/lib ${BGEN_PATH}/db/include/ ${BGEN_PATH}/3rd_party/sqlite3)
++
 +# Boost IO
 +if(Boost_iostreams_FOUND) 
 +  add_definitions(-DHAS_BOOST_IOSTREAM)
@@ -170,7 +184,7 @@ index b874c33..b3b9950 100755
  
  # MVTNorm library
  set(MVTN_PATH "${EXTERN_LIBS_PATH}/mvtnorm")
-@@ -150,7 +124,7 @@ add_custom_target(
+@@ -150,7 +123,7 @@ add_custom_target(
     COMMAND make
     WORKING_DIRECTORY ${MVTN_PATH}
  )
@@ -179,7 +193,7 @@ index b874c33..b3b9950 100755
  add_dependencies(regenie libMvtnorm)
  
  # QF library
-@@ -160,7 +134,7 @@ add_custom_target(
+@@ -160,7 +133,7 @@ add_custom_target(
     COMMAND make
     WORKING_DIRECTORY ${QF_PATH}
  )
@@ -188,7 +202,7 @@ index b874c33..b3b9950 100755
  add_dependencies(regenie libqf)
  
  # Quadpack library
-@@ -170,7 +144,7 @@ add_custom_target(
+@@ -170,7 +143,7 @@ add_custom_target(
     COMMAND make
     WORKING_DIRECTORY ${QUAD_PATH}
  )
@@ -197,7 +211,7 @@ index b874c33..b3b9950 100755
  add_dependencies(regenie libquad)
  
  # PGEN library
-@@ -180,12 +154,12 @@ add_custom_target(
+@@ -180,12 +153,12 @@ add_custom_target(
     COMMAND make
     WORKING_DIRECTORY ${PGEN_PATH}
  )
@@ -213,12 +227,14 @@ index b874c33..b3b9950 100755
    set(REMETA_PATH "${EXTERN_LIBS_PATH}/remeta")
    add_custom_target(
       remeta
-@@ -209,91 +183,70 @@ if(EXISTS ${HTSLIB_PATH})
+@@ -208,92 +181,84 @@ if(EXISTS ${HTSLIB_PATH})
+   )
  endif()
  
- # Intel MKL
+-# Intel MKL
 -if(EXISTS ${MKLROOT})
-+if(DEFINED MKLROOT) 
++# BLAS/LAPACK backend: use Intel MKL when MKLROOT is provided, else OpenBLAS
++if(DEFINED MKLROOT AND NOT "${MKLROOT}" STREQUAL "")
    add_definitions(-DWITH_MKL -DEIGEN_USE_BLAS -DEIGEN_USE_LAPACKE)
 -  target_include_directories(regenie PRIVATE ${MKLROOT}/include/)
 -  if(${BUILD_STATIC}) # specify static libs
@@ -264,7 +280,8 @@ index b874c33..b3b9950 100755
 -    target_link_libraries(regenie PRIVATE "-Wl,--no-as-needed" ${MKL_LP64_LIB} ${MKL_THREAD_LIB} ${MKL_CORE_LIB} -lgomp)
 +      REQUIRED
 +      )
-+  endif()
+   endif()
+-elseif(EXISTS ${OPENBLAS_ROOT}) # OpenBLAS
 +  find_library(MKL_CORE_LIB mkl_core 
 +    HINTS "${MKLROOT}/lib/intel64" 
 +    "${MKLROOT}/lib" 
@@ -276,14 +293,25 @@ index b874c33..b3b9950 100755
 +    target_link_libraries(regenie "-Wl,--start-group" ${MKL_LP64_LIB} ${MKL_THREAD_LIB} ${MKL_CORE_LIB} "-Wl,--end-group" -lgomp)
 +  else() # use dynamic libs
 +    target_link_libraries(regenie "-Wl,--no-as-needed" ${MKL_LP64_LIB} ${MKL_THREAD_LIB} ${MKL_CORE_LIB} -lgomp)
-   endif()
--elseif(EXISTS ${OPENBLAS_ROOT}) # OpenBLAS
--  add_definitions(-DWITH_OPENBLAS -DEIGEN_USE_BLAS -DEIGEN_USE_LAPACKE)
++  endif()
++  message( STATUS "Will compile with Intel MKL library")
++else() # OpenBLAS (bundles BLAS + LAPACK + LAPACKE)
+   add_definitions(-DWITH_OPENBLAS -DEIGEN_USE_BLAS -DEIGEN_USE_LAPACKE)
 -  target_include_directories(regenie PRIVATE ${OPENBLAS_ROOT}/include/)
 -  find_library(LAPACK_LIB lapack REQUIRED)
 -  find_library(BLAS_LIB openblas HINTS "${OPENBLAS_ROOT}/lib/" REQUIRED)
 -  target_link_libraries(regenie PRIVATE ${LAPACK_LIB} -llapacke ${BLAS_LIB})
-+  message( STATUS "Will compile with Intel MKL library")
++  find_library(BLAS_LIB openblas REQUIRED)
++  target_link_libraries(regenie ${BLAS_LIB})
++  find_library(LAPACK_LIB lapack)
++  if(LAPACK_LIB)
++    target_link_libraries(regenie ${LAPACK_LIB})
++  endif()
++  find_library(LAPACKE_LIB lapacke)
++  if(LAPACKE_LIB)
++    target_link_libraries(regenie ${LAPACKE_LIB})
++  endif()
++  message( STATUS "Will compile with OpenBLAS library")
  endif()
  
  # cxxopts (header-only)
@@ -351,5 +379,5 @@ index b874c33..b3b9950 100755
 +set(CPACK_PACKAGE_VERSION_PATCH ${PROJECT_VERSION_PATCH})
 +include(CPack)
 -- 
-2.34.1
+2.53.0
 

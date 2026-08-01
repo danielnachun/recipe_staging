@@ -1,0 +1,28 @@
+From 0114f2735f8b8ad079ca5acc76eadb5958042248 Mon Sep 17 00:00:00 2001
+From: Daniel Nachun <daniel.nachun@gmail.com>
+Date: Tue, 3 Sep 2024 12:29:13 -0400
+Subject: [PATCH] use boost::filesystem::path::extension member function
+
+The free function boost::filesystem::extension() was removed in Boost 1.87+;
+use the path::extension() member instead so regenie builds against the
+devendored system Boost.
+---
+ src/Files.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/Files.cpp b/src/Files.cpp
+index 2fe7ebd..9ce7ff9 100644
+--- a/src/Files.cpp
++++ b/src/Files.cpp
+@@ -141,7 +141,7 @@ void Files::closeFile(){
+ bool Files::isGzipped(std::string const& filename, bool const& check_file) {
+ 
+   // require all gzipped file to end in .gz
+-  if( fs::extension(filename) != ".gz" )
++  if( fs::path(filename).extension().string() != ".gz" )
+     return false;
+ 
+   // open file and check first 2 bytes (should equal 0x1f8b)
+-- 
+2.53.0
+
