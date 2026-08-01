@@ -20,6 +20,7 @@ requirements:
     - if: linux
       then: gcc
     - cmake
+    - make
     - sed
   host:
     - cython
