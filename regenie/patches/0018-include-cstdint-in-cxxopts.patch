@@ -1,0 +1,27 @@
+From 805df84c7424110547f9bf4b6cbe36586b322b5c Mon Sep 17 00:00:00 2001
+From: Daniel Nachun <daniel.nachun@gmail.com>
+Date: Tue, 3 Sep 2024 12:29:13 -0400
+Subject: [PATCH] include <cstdint> in bundled cxxopts
+
+cxxopts.hpp uses uint8_t but relies on it being pulled in transitively. GCC 16
+/ newer libstdc++ no longer does so, breaking the Linux build with 'uint8_t
+does not name a type'. Include <cstdint> explicitly.
+---
+ external_libs/cxxopts/include/cxxopts.hpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/external_libs/cxxopts/include/cxxopts.hpp b/external_libs/cxxopts/include/cxxopts.hpp
+index a335917..c5d4eab 100644
+--- a/external_libs/cxxopts/include/cxxopts.hpp
++++ b/external_libs/cxxopts/include/cxxopts.hpp
+@@ -26,6 +26,7 @@ THE SOFTWARE.
+ #define CXXOPTS_HPP_INCLUDED
+ 
+ #include <cctype>
++#include <cstdint>
+ #include <cstring>
+ #include <exception>
+ #include <iostream>
+-- 
+2.53.0
+

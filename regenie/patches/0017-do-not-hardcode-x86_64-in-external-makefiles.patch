@@ -1,0 +1,101 @@
+From c418e5368d486cd16223127a4ca8d038aa47cf97 Mon Sep 17 00:00:00 2001
+From: Daniel Nachun <daniel.nachun@gmail.com>
+Date: Tue, 3 Sep 2024 12:29:13 -0400
+Subject: [PATCH] do not hard-code -arch x86_64 in bundled external_libs
+ Makefiles
+
+The mvtnorm/qf/quadpack/pgenlib/remeta Makefiles force '-arch x86_64' on macOS.
+On Apple Silicon clang++ cross-compiles to x86_64 while the arm64-only
+gfortran/cc ignore it, producing mixed-arch objects that break ranlib and the
+final link. Drop the forced arch so each library builds for the target arch.
+---
+ external_libs/mvtnorm/Makefile  | 5 -----
+ external_libs/pgenlib/Makefile  | 5 -----
+ external_libs/qf/Makefile       | 5 -----
+ external_libs/quadpack/Makefile | 5 -----
+ external_libs/remeta/Makefile   | 5 -----
+ 5 files changed, 25 deletions(-)
+
+diff --git a/external_libs/mvtnorm/Makefile b/external_libs/mvtnorm/Makefile
+index ac3d389..9ebc17e 100644
+--- a/external_libs/mvtnorm/Makefile
++++ b/external_libs/mvtnorm/Makefile
+@@ -4,11 +4,6 @@ CXX  ?= g++
+ CC   ?= gcc
+ FC   ?= gfortran
+ 
+-UNAME_S := $(shell uname -s)
+-ifeq ($(UNAME_S),Darwin)
+- FLAG += -arch x86_64
+-endif
+-
+ libMvtnorm.a: mvtnorm.o mvt.o randomF77.o
+ 	${AR} rcs $@ $^ 
+ 
+diff --git a/external_libs/pgenlib/Makefile b/external_libs/pgenlib/Makefile
+index 262d920..205e6ec 100644
+--- a/external_libs/pgenlib/Makefile
++++ b/external_libs/pgenlib/Makefile
+@@ -6,11 +6,6 @@ CXX        ?= g++
+ CXXFLAGS    = -O3 -Wall -std=c++11
+ CFLAGS      = 
+ 
+-UNAME_S := $(shell uname -s)
+-ifeq ($(UNAME_S),Darwin)
+- CXXFLAGS += -arch x86_64
+-endif
+-
+ OBJECTS       = $(patsubst %.cc,%.o,$(wildcard ./include/*.cc)) $(patsubst %.cpp,%.o,$(wildcard *.cpp))  $(patsubst %.cc,%.o,$(wildcard *.cc))
+ INC           =  -I./simde/ -I./include/
+ 
+diff --git a/external_libs/qf/Makefile b/external_libs/qf/Makefile
+index 3d0341a..b456353 100644
+--- a/external_libs/qf/Makefile
++++ b/external_libs/qf/Makefile
+@@ -2,11 +2,6 @@ AR       ?= ar
+ CXX      ?= g++
+ CXXFLAGS  = -O2 -DNDEBUG -fPIC
+ 
+-UNAME_S := $(shell uname -s)
+-ifeq ($(UNAME_S),Darwin)
+- CXXFLAGS += -arch x86_64
+-endif
+-
+ qf.a: qfc.o
+ 	${AR} rcs $@ $^ 
+ 
+diff --git a/external_libs/quadpack/Makefile b/external_libs/quadpack/Makefile
+index e160de3..336ea40 100644
+--- a/external_libs/quadpack/Makefile
++++ b/external_libs/quadpack/Makefile
+@@ -2,11 +2,6 @@ FLAG=-O2 -DNDEBUG -fPIC -std=legacy
+ AR   ?= ar
+ FC   ?= gfortran
+ 
+-UNAME_S := $(shell uname -s)
+-ifeq ($(UNAME_S),Darwin)
+- FLAG += -arch x86_64
+-endif
+-
+ OBJECTS = $(patsubst %.f,%.o,$(wildcard ./*.f))
+ 
+ libquad.a: ${OBJECTS}
+diff --git a/external_libs/remeta/Makefile b/external_libs/remeta/Makefile
+index 543c5c7..b2c25ff 100644
+--- a/external_libs/remeta/Makefile
++++ b/external_libs/remeta/Makefile
+@@ -11,11 +11,6 @@ ifneq ($(strip $(HTSLIB_PATH)),) # defined externally
+ 	CXXFLAGS   += -DWITH_HTSLIB
+ endif
+ 
+-UNAME_S := $(shell uname -s)
+-ifeq ($(UNAME_S),Darwin)
+-	CXXFLAGS += -arch x86_64
+-endif
+-
+ OBJECTS       = bgz_writer.o regenie_ld_matrix_writer.o
+ 
+ remeta.a: ${OBJECTS}
+-- 
+2.53.0
+
