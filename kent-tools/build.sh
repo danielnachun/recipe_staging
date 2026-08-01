@@ -11,6 +11,7 @@ sed -i "s/= ar/= ${AR}/" submodules/htslib/Makefile
 sed -i "s/= ranlib/= ${RANLIB}/" submodules/htslib/Makefile
 sed -i "s/= gcc/= ${CC}/" submodules/htslib/Makefile
 sed -i "s?-fvisibility=hidden?-fvisibility=hidden ${LDFLAGS} ${CFLAGS}?" submodules/htslib/Makefile
+sed -i 's?/opt/homebrew?/ignore?' inc/common.mk
 
 sed -i 's/${CONDA_BUILD},1/${CONDA_BUILD},0/' inc/common.mk
 

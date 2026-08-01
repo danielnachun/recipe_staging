@@ -26,7 +26,7 @@ requirements:
     - sed
   host:
     - bzip2
-    - htslib
+    - freetype
     - libcurl
     - libiconv
     - libpng
