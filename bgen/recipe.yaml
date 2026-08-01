@@ -19,6 +19,7 @@ requirements:
     - ${{ compiler('cxx') }}
     - if: linux
       then: gcc
+    - cmake
     - sed
   host:
     - cython
