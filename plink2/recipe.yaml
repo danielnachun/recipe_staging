@@ -22,7 +22,7 @@ requirements:
     - make
     - sed
   host:
-    - if: linux
+    - if: x86_64
       then: mkl-devel
     - simde
     - zlib
