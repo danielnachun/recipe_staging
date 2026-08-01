@@ -24,7 +24,9 @@ requirements:
   host:
     - if: x86_64
       then: mkl-devel
-      else: openblas
+      else:
+        - liblapack
+        - openblas
     - simde
     - zlib
     - zstd
