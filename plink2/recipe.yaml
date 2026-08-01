@@ -32,7 +32,7 @@ requirements:
     - zlib
     - zstd
   run:
-    - if: linux
+    - if: x86_64
       then: mkl
 
 tests:
