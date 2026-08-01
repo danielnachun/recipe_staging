@@ -7,6 +7,10 @@ sed -i 's/DESTDIR=${HOME}\/bin//g' parasol/makefile
 sed -i 's/ld/${LD}/g' hg/lib/straw/makefile
 sed -i "s|-I../../../inc|-I../../../inc -I${PREFIX}/include|g" hg/lib/straw/makefile
 sed -i 's?\${PREFIX}/lib/libssl.a \${PREFIX}/lib/libcrypto.a?-lcrypto -lssl?g' inc/common.mk
+sed -i "s/= ar/= ${AR}/" submodules/htslib/Makefile
+sed -i "s/= ranlib/= ${RANLIB}/" submodules/htslib/Makefile
+sed -i "s/= gcc/= ${CC}/" submodules/htslib/Makefile
+sed -i "s/-fvisibility=hidden/-fvisibility=hidden ${LDFLAGS}/" submodules/htslib/Makefile
 
 sed -i 's/${CONDA_BUILD},1/${CONDA_BUILD},0/' inc/common.mk
 

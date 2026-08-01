@@ -20,9 +20,7 @@ requirements:
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
     - if: linux
-      then:
-        - binutils
-        - gcc
+      then: binutils
     - make
     - rsync
     - sed
