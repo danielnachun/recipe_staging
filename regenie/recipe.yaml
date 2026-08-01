@@ -1,0 +1,58 @@
+schema_version: 1
+
+context:
+  version: "4.1.2"
+
+package:
+  name: regenie
+  version: ${{ version }}
+
+source:
+  url: https://github.com/rgcgithub/regenie/archive/v${{ version }}.tar.gz
+  sha256: 9b78c2fe9b16f231d7f8402acd2b9c617f0264215b63a0b7056eeff6fdcd2a9f
+  patches:
+    # Fixing postrelease issues
+    - patches/0015-update-cmakelist.txt-for-v3.6.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ stdlib('c') }}
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - ${{ compiler('fortran') }}
+    - if: linux
+      then: binutils >=2.33.1
+    - cmake >=3.13
+    - make
+  host:
+    - bgenix
+    - libboost-devel
+    - if: osx
+      then: llvm-openmp
+    - if: linux
+      then: libgomp
+    - liblapack
+    - if: linux and x86_64
+      then:
+        - mkl
+        - mkl-include
+    - zlib
+    - zstd
+  run:
+    - mkl
+
+tests:
+  - script:
+      - regenie --help
+      - regenie --version
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: Regenie is a C++ program for whole genome regression modelling of large genome-wide association studies (GWAS).
+  homepage: https://rgcgithub.github.io/regenie/
+  repository: https://github.com/rgcgithub/regenie
+  documentation: https://rgcgithub.github.io/regenie/options/
