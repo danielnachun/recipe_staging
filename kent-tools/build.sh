@@ -10,7 +10,7 @@ sed -i 's?\${PREFIX}/lib/libssl.a \${PREFIX}/lib/libcrypto.a?-lcrypto -lssl?g' i
 sed -i "s/= ar/= ${AR}/" submodules/htslib/Makefile
 sed -i "s/= ranlib/= ${RANLIB}/" submodules/htslib/Makefile
 sed -i "s/= gcc/= ${CC}/" submodules/htslib/Makefile
-sed -i "s/-fvisibility=hidden/-fvisibility=hidden ${LDFLAGS}/" submodules/htslib/Makefile
+sed -i "s?-fvisibility=hidden?-fvisibility=hidden ${LDFLAGS}?" submodules/htslib/Makefile
 
 sed -i 's/${CONDA_BUILD},1/${CONDA_BUILD},0/' inc/common.mk
 
