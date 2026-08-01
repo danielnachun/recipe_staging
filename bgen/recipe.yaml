@@ -1,5 +1,5 @@
 context:
-  version: 1.2.10
+  version: 1.9.11
 
 package:
   name: bgen-py
@@ -7,13 +7,14 @@ package:
 
 source:
   url: https://pypi.io/packages/source/b/bgen/bgen-${{ version }}.tar.gz
-  sha256: 10acc957670f5d05b58922d4b922496a8cc333414b3c07923bf113c4684e2964
+  sha256: d4e10a721ff7000612665432df8006bda103a2fe54e4576c7705dd27f69aa4a9
 
 build:
   number: 0
 
 requirements:
   build:
+    - ${{ stdlib('c') }}
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
     - if: linux
@@ -41,8 +42,3 @@ about:
   license_file:
   summary: Package for loading data from bgen files
   homepage: https://github.com/jeremymcrae/bgen
-
-extra:
-  recipe-maintainers:
-    - danielnachun
-
