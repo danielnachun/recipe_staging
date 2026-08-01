@@ -14,6 +14,7 @@ source:
     - patches/0015-update-cmakelist.txt-for-v3.6.patch
     - patches/0016-use-boost-filesystem-path-extension.patch
     - patches/0017-do-not-hardcode-x86_64-in-external-makefiles.patch
+    - patches/0018-include-cstdint-in-cxxopts.patch
 
 build:
   number: 0
