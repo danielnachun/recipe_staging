@@ -15,13 +15,14 @@ source:
     target_directory: kent-335_base
 
 build:
-  number: 6
+  number: 7
 
 requirements:
   build:
     - if: linux
       then: binutils
     - make
+    - ${{ stdlib('c') }}
     - ${{ compiler('c') }}
   host:
     - zlib
@@ -38,12 +39,11 @@ requirements:
     - mysql
 
 tests:
-  - python:
-      imports:
+  - perl:
+      uses:
         - Bio::DB::BigFile
 
 about:
   license: Apache-2.0
   summary: Low-level interface to BigWig & BigBed files
   homepage: https://metacpan.org/pod/Bio::DB::BigFile
-
