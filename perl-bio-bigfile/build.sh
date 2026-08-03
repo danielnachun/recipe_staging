@@ -1,5 +1,6 @@
 #!/bin/bash
 
+export CC=${BUILD_PREFIX}/bin/${CC}
 export LD=$CC
 
 INCLUDES="-L$PREFIX/lib -I$PREFIX/include"
