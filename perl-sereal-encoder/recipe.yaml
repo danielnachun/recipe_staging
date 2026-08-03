@@ -1,11 +1,10 @@
 schema_version: 1
 
 context:
-  name: perl-sereal-encoder
   version: 5.004
 
 package:
-  name: ${{ name }}
+  name: perl-sereal-encoder
   version: ${{ version }}
 
 source:
@@ -13,7 +12,7 @@ source:
   sha256: 5e5a86ccd32dae34ed80932ecbe5c68e29752b5de0e9b0a793ab7eb2ca55cb1b
 
 build:
-  number: 0
+  number: 1
   script:
     env:
       export PERL_MM_USE_DEFAULT: 1
@@ -25,10 +24,11 @@ build:
 
 requirements:
   build:
+    - ${{ stdlib('c') }}
     - ${{ compiler('c') }}
     - make
   host:
-    - perl >=5.32
+    - perl =5.32
     - perl-devel-checklib
     - perl-sereal-decoder
     - perl-test-deep
@@ -36,26 +36,23 @@ requirements:
     - perl-test-longstring
     - perl-test-warn
   run:
-    - perl >=5.32
+    - perl =5.32
     - perl-devel-checklib
     - perl-sereal-decoder
   ignore_run_exports:
-    - perl-test-warn
-    - perl-test-deep
-    - perl-test-differences
-    - perl-test-longstring
+    from_package:
+      - perl-test-warn
+      - perl-test-deep
+      - perl-test-differences
+      - perl-test-longstring
 
 tests:
-  - python:
-      imports:
+  - perl:
+      uses:
         - Sereal::Encoder
         - Sereal::Encoder::Constants
 
 about:
-  license: perl_5
+  license: Artistic-1.0-Perl
   summary: Fast, compact, powerful binary serialization
   homepage: http://metacpan.org/pod/Sereal-Encoder
-
-maintainers:
-  - danielnachun
-
