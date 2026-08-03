@@ -2,6 +2,8 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
+export CC=${BUILD_PREFIX}/bin/${CC}
+
 export PERL_MM_USE_DEFAULT=1
 perl Makefile.PL INSTALLDIRS=site
 make
