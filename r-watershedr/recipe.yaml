@@ -2,10 +2,9 @@ schema_version: 1
 
 context:
   version: 1.0.0
-  name: watershedr
 
 package:
-  name: r-${{ name }}
+  name: watershedr
   version: ${{ version }}
 
 source:
@@ -13,8 +12,7 @@ source:
   sha256: 8f68f41fed17d8c750c783b063d62670c81e5ea963d40d263e18eb33d21f8071
 
 build:
-  number: 0
-  skip: win
+  number: 1
   dynamic_linking:
     rpaths:
       - lib/R/lib/
@@ -22,17 +20,17 @@ build:
 
 requirements:
   build:
-    - if: build_platform != target_platform
-      then: cross-r-base ${{ r_base }}
+    - ${{ stdlib('c') }}
+    - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
   host:
-    - r-base=4.2
+    - r-base
     - r-lbfgs
     - r-prroc
     - r-rcpp
     - r-rcurl
   run:
-    - r-base>=4.2
+    - r-base
     - r-lbfgs
     - r-prroc
     - r-rcpp
@@ -40,15 +38,9 @@ requirements:
 
 tests:
   - script:
-      - if: not win
-        then: "$R -e \"library('WatershedR')\""
+      - R -e "library('WatershedR')"
 
 about:
   license: MIT
   summary: Unsupervised probabilistic framework for identifying functional effects of rare variants
   homepage: https://github.com/nicolerg/WatershedR
-
-extra:
-  recipe-maintainers:
-    - danielnachun
-
