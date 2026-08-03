@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: 5.004
+  version: 5.009
 
 package:
   name: perl-sereal-encoder
@@ -9,10 +9,10 @@ package:
 
 source:
   url: https://cpan.metacpan.org/authors/id/Y/YV/YVES/Sereal-Encoder-${{ version }}.tar.gz
-  sha256: 5e5a86ccd32dae34ed80932ecbe5c68e29752b5de0e9b0a793ab7eb2ca55cb1b
+  sha256: 6c0976f89c7d3b1d27415901b38881009a5db6e60ad976a76dcb47ba32598037
 
 build:
-  number: 1
+  number: 0
   script:
     env:
       PERL_MM_USE_DEFAULT: 1
