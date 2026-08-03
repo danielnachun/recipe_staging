@@ -12,10 +12,11 @@ source:
   sha256: 12a6bc1f579513cac8b9167cce4e363655cc8eba26b7d9fe1170dfe95e044f42
 
 build:
-  number: 10
+  number: 11
 
 requirements:
   build:
+    - ${{ stdlib('c') }}
     - ${{ compiler('c') }}
   host:
     - zlib
@@ -28,8 +29,8 @@ requirements:
     - perl-bioperl-core
 
 tests:
-  - python:
-      imports:
+  - perl:
+      uses:
         - Bio::DB::HTS
         - Bio::DB::HTS::AlignWrapper
         - Bio::DB::HTS::Alignment
@@ -51,4 +52,3 @@ about:
   license: Apache-2.0
   summary: Read files using HTSlib including BAM/CRAM, Tabix and BCF database files
   homepage: https://metacpan.org/pod/Bio::DB::HTS
-
