@@ -1,11 +1,10 @@
 schema_version: 1
 
 context:
-  name: perl-list-moreutils-xs
   version: 0.430
 
 package:
-  name: ${{ name }}
+  name: perl-list-moreutils-xs
   version: ${{ version }}
 
 source:
@@ -13,27 +12,24 @@ source:
   sha256: e8ce46d57c179eecd8758293e9400ff300aaf20fefe0a9d15b9fe2302b9cb242
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
+    - ${{ stdlib('c') }}
     - ${{ compiler('c') }}
     - make
   host:
     - perl=5.32
   run:
-    - perl>=5.32
+    - perl=5.32
 
 tests:
-  - python:
-      imports:
+  - perl:
+      uses:
         - List::MoreUtils::XS
 
 about:
   license: Apache-2.0
   summary: Provide the stuff missing in List::Util in XS
   homepage: https://metacpan.org/release/List-MoreUtils-XS
-
-maintainers:
-  - danielnachun
-
