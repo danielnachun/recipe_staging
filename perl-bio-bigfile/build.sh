@@ -3,11 +3,11 @@
 export CC=${BUILD_PREFIX}/bin/${CC}
 export LD=$CC
 
-INCLUDES="-L$PREFIX/lib -I$PREFIX/include"
-LIBS="-L$PREFIX/lib"
-LDFLAGS="$LDFLAGS"
-CFLAGS="$CFLAGS $INCLUDES"
-CPPFLAGS=$CFLAGS
+export INCLUDES="-L$PREFIX/lib -I$PREFIX/include"
+export LIBS="-L$PREFIX/lib"
+export LDFLAGS="$LDFLAGS"
+export CFLAGS="$CFLAGS $INCLUDES -std=gnu17"
+export CPPFLAGS=$CFLAGS
 
 # Compiling the kent source tree
 export MACHTYPE=$(uname -m)
