@@ -15,8 +15,9 @@ build:
   number: 1
   script:
     env:
-      export PERL_MM_USE_DEFAULT: 1
+      PERL_MM_USE_DEFAULT: 1
     content:
+      - export CC=${BUILD_PREFIX}/bin/${CC}
       - perl Makefile.PL INSTALLDIRS=site
       - make
       - make test
