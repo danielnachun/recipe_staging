@@ -1,11 +1,10 @@
 schema_version: 1
 
 context:
-  name: perl-devel-checklib
   version: 1.16
 
 package:
-  name: ${{ name }}
+  name: perl-devel-checklib
   version: ${{ version }}
 
 source:
@@ -13,7 +12,7 @@ source:
   sha256: 869d38c258e646dcef676609f0dd7ca90f085f56cf6fd7001b019a5d5b831fca
 
 build:
-  number: 0
+  number: 1
   script:
     - perl Makefile.PL INSTALLDIRS=site NO_PERLLOCAL=1 NO_PACKLIST=1
     - make
@@ -22,28 +21,25 @@ build:
 
 requirements:
   build:
+    - ${{ stdlib('c') }}
     - ${{ compiler('c') }}
     - make
   host:
-    - perl >=5.32
+    - perl =5.32
     - perl-capture-tiny
   run:
-    - perl >=5.32
+    - perl =5.32
     - perl-capture-tiny
 
 tests:
-  - python:
-      imports:
-        - Devel::CheckLib
-  - requirements:
+  - script:
+      - perl -pe "use Devel::CheckLib"
+    requirements:
       run:
+        - ${{ stdlib('c') }}
         - ${{ compiler('c') }}
 
 about:
-  license: perl_5
+  license: Artistic-1.0-Perl
   summary: check that a library is available
   homepage: http://metacpan.org/pod/Devel-CheckLib
-
-maintainers:
-  - danielnachun
-
