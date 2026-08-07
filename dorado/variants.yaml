@@ -1,0 +1,8 @@
+MACOSX_SDK_VERSION:
+  - 11.0
+MACOSX_DEPLOYMENT_VERSION:
+  - 11.0
+cuda_compiler:
+  - cuda-nvcc
+cuda_compiler_version:
+  - 12.6
