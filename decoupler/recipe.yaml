@@ -1,0 +1,50 @@
+context:
+  version: 1.9.2
+
+package:
+  name: decoupler
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/d/decoupler/decoupler-${{ version }}.tar.gz
+  sha256: 9b3f75673311635fd30228273f953cc2b3d3886bcebff83abadfc9200951a7f9
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python =3.10
+    - poetry-core
+    - pip
+  run:
+    - python >=3.10
+    - tqdm >=4.66.4,<5.0.0
+    - typing_extensions >=4.12.2,<5.0.0
+    - numba >=0.61.0
+    - numpy >=2
+    - pandas >=2.2.2,<3.0.0
+    - liana >=1.5.0,<2.0.0
+    - scikit-learn >=1.5.0,<2.0.0
+    - python-igraph >=0.11.5,<0.12.0
+    - adjusttext >=1.1.1,<2.0.0
+    - pydeseq2 >=0.4.0,<0.5.0
+    - marsilea >=0.4.5,<0.5.0
+    - pybiomart >=0.2.0,<0.3.0
+
+tests:
+  - python:
+      imports:
+        - decoupler
+      pip_check: false
+
+about:
+  summary: Ensemble of methods to infer biological activities from omics data
+  license: GPL-3.0-only
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - danielnachun
