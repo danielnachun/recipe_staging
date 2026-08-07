@@ -1,0 +1,39 @@
+context:
+  version: 0.4.6
+
+package:
+  name: systeroid
+  version: ${{ version }}
+
+source:
+  url: https://github.com/orhun/systeroid/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: 756b341dc86553ce8df583d55e6d01517bf52721a556713a4fb6056c0f823f3b
+
+build:
+  number: 0
+  skip: win
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - cargo-bundle-licenses
+
+tests:
+  - script:
+      - systeroid --help
+
+about:
+  license: Apache-2.0 OR MIT
+  license_file:
+    - LICENSE-APACHE
+    - LICENSE-MIT
+    - THIRDPARTY.yml
+  summary: A more powerful alternative to sysctl(8) with a terminal user interface 
+  homepage: https://github.com/orhun/systeroid
+  repository: https://github.com/orhun/systeroid
+
+extra:
+  recipe-maintainers:
+    - danielnachun
