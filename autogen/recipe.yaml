@@ -1,21 +1,18 @@
-schema_version: 1
-
 context:
-  name: autogen
   version: 5.18.16
 
 package:
-  name: ${{ name|lower }}
+  name: autogen
   version: ${{ version }}
 
 source:
-  url: https://ftp.gnu.org/gnu/${{ name }}/rel${{ version }}/${{ name }}-${{ version }}.tar.xz
+  url: https://ftp.gnu.org/gnu/autogen/rel${{ version }}/autogen-${{ version }}.tar.xz
   sha256: f8a13466b48faa3ba99fe17a069e71c9ab006d9b1cfabe699f8c60a47d5bb49a
   patches:
     - 0001-allow-newer-Guile.patch
 
 build:
-  number: 2
+  number: 3
 
 requirements:
   build:
@@ -23,9 +20,11 @@ requirements:
     - autoconf
     - automake
     - coreutils
+    - gettext-tools
     - make
     - pkg-config
     - sed
+    - xz-tools
   host:
     - guile
     - libtool
@@ -36,7 +35,7 @@ requirements:
 
 tests:
   - script:
-      - ${{ name }} -v
+      - autogen -v
 
 about:
   license: GPL-3.0-or-later
@@ -48,4 +47,3 @@ about:
 extra:
   recipe-maintainers:
     - danielnachun
-
