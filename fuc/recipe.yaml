@@ -1,0 +1,38 @@
+context:
+  version: 3.1.1
+
+package:
+  name: fuc
+  version: ${{ version }}
+
+source:
+  url: https://github.com/SUPERCILEX/fuc/archive/refs/tags/${{ version }}.tar.gz
+  sha256: a26265c85d1f13fec555606a8aaa5b978d84e637de2b3cf321dd85c843339f93
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - cargo-bundle-licenses
+
+tests:
+  - script:
+      - cpz --help
+      - rmz --help
+
+about:
+  license: Apache-2.0
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  summary: Modern, performance focused unix commands
+  homepage: https://github.com/SUPERCILEX/fuc
+  repository: https://github.com/SUPERCILEX/fuc
+
+extra:
+  recipe-maintainers:
+    - danielnachun
