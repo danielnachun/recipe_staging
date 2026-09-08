@@ -1,0 +1,36 @@
+schema_version: 1
+
+context:
+  version: 0.1
+
+package:
+  name: r-hspe
+  version: ${{ version }}
+
+source:
+  url: https://github.com/gjhunt/hspe/archive/b943377ce1580a26b308274e8d86f71791ac00af.tar.gz
+  sha256: b0fb23c8c77bad45ba86f526b8c50a2442b71a0e314cea1ef29e24059b8045c5
+
+build:
+  number: 0
+  noarch: generic
+  script: R CMD INSTALL --build lib_hspe
+
+requirements:
+  host:
+    - r-base
+    - r-deoptimr
+    - r-nloptr
+  run:
+    - r-base
+    - r-deoptimr
+    - r-nloptr
+
+tests:
+  - script:
+      - R -e "library('hspe')"
+
+about:
+  summary: Hybrid-scale cell-type deconvolution
+  license: GPL-3.0-or-later
+  homepage: https://github.com/gjhunt/hspe
