@@ -36,7 +36,7 @@ jobs:
 
       - name: Free Disk Space (Ubuntu)
         if: ${{ github.event.inputs.free_disk_space == 'true' }}
-        uses: jlumbroso/free-disk-space@v1.3.1
+        uses: jlumbroso/free-disk-space@v2.0.0
 
       - name: Set up working directories
         run: |
