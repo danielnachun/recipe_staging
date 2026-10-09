@@ -1,36 +1,56 @@
+context:
+  version: 1.0.1
+
 package:
   name: leafcutter2
-  version: 1.0.0
+  version: ${{ version }}
 
 source:
-  url: https://github.com/leafcutter2/leafcutter2/archive/0c879a3a928ac7358f0b6361305abd6fc24a2676.tar.gz
-  sha256: e039667a3e51d64d78cd317bb3f2fab6d6b43985b6ab3a8ad54d26440000809a
+  url: https://github.com/leafcutter2/leafcutter2/archive/LeafCutter2-v${{ version }}.tar.gz
+  sha256: 590c9775bb602958fe4e594f6807912a80a636aa23dc5125ee51724a9871a6e3
 
 build:
   number: 0
   noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - leafcutter2 = leafcutter2.cli:leafcutter2_cli
+      - leafcutter2-make-clusters = leafcutter2.cli:make_clusters_cli
+      - leafcutter2-transcript-tools = leafcutter2.cli:transcript_tools_cli
+      - leafcutter2-star2junc = leafcutter2.cli:star2junc_cli
 
 requirements:
-  build:
-    - sed
-    - python =3.10
+  host:
+    - python =3.11
+    - setuptools >=61
+    - pip
   run:
-    - argparse-dataclass
-    - bedparse
-    - biopython
-    - numpy >=2.1
+    - python >=3.11
+    - numpy
     - pandas
-    - pickleshare
+    - biopython
     - pyfastx
-    - pysam
-    - python >=3.10
+    - bedparse
+    - argparse-dataclass
+    - setuptools
 
 tests:
-  - script:
+  - python:
+      imports:
+        - leafcutter2
+      pip_check: false
+  - requirements:
+      run:
+        - pip
+        - python
+    script:
       - leafcutter2 --help
-      - leafcutter_make_clusters --help
+      - leafcutter2-make-clusters --help
+      - leafcutter2-transcript-tools --help
+      - leafcutter2-star2junc --help
 
 about:
-  license: LicenseRef-Other
-  summary: LeafCutter2 is a tool for clustering, functional characterization and quantification of splice junction read counts.
+  summary: Splicing quantification and classification from RNA-seq junction files
+  license: MIT
   homepage: https://github.com/leafcutter2/leafcutter2
