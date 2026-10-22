@@ -1,6 +1,6 @@
 diff --git a/test/gmp.jl b/test/gmp.jl
---- test/gmp.jl
-+++ test/gmp.jl
+--- a/test/gmp.jl
++++ b/test/gmp.jl
 @@ -10,13 +10,8 @@
  @testset "basics" begin
      @test BigInt <: Signed
