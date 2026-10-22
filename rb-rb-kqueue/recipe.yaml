@@ -1,0 +1,40 @@
+context:
+  version: 0.2.8
+
+package:
+  name: rb-rb-kqueue
+  version: ${{ version }}
+
+source:
+  url: https://rubygems.org/downloads/rb-kqueue-${{ version }}.gem
+  sha256: af2f3175b012e2554ea4ae2a720ecae64a9bb3c0f2e894c674ef2d5a6b0bf86e
+
+build:
+  number: 0
+  noarch: generic
+  script:
+    - gem install -N -l -V --ignore-dependencies rb-kqueue-${{ version }}.gem
+    - gem unpack rb-kqueue-${{ version }}.gem
+
+requirements:
+  host:
+    - rb-ffi
+    - ruby =3.2
+  run:
+    - rb-ffi
+    - ruby >=3.2
+
+tests:
+  - script:
+      - ruby -r rb-kqueue -e 'exit 0'
+
+about:
+  license: MIT
+  license_file: rb-kqueue-${{ version }}/MIT-LICENSE
+  summary: A Ruby wrapper for BSD's kqueue, using FFI
+  homepage: https://rubygems.org/gems/rb-kqueue
+  repository: https://github.com/mat813/rb-kqueue
+
+extra:
+  recipe-maintainers:
+    - danielnachun
