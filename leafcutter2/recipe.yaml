@@ -10,7 +10,7 @@ source:
   sha256: 590c9775bb602958fe4e594f6807912a80a636aa23dc5125ee51724a9871a6e3
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   python:
@@ -33,7 +33,7 @@ requirements:
     - pyfastx
     - bedparse
     - argparse-dataclass
-    - setuptools
+    - setuptools <81
 
 tests:
   - python:
