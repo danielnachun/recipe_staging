@@ -18,6 +18,7 @@ requirements:
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
     - make
+    - sed
   host:
     - r-base
     - r-mvtnorm
