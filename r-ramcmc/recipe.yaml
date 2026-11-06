@@ -1,0 +1,48 @@
+schema_version: 1
+
+context:
+  version: "0.1.2"
+
+package:
+  name: r-ramcmc
+  version: ${{ version }}
+
+source:
+  url: https://cloud.r-project.org/src/contrib/ramcmc_${{ version }}.tar.gz
+  sha256: bf5fb880c5e4bde3a738505cead52cc3c528fb542657fbefa7e5eb05024099a8
+
+build:
+  number: 0
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - ${{ stdlib('c') }}
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - make
+  host:
+    - r-base
+    - r-rcpp >=0.12.8
+    - r-rcpparmadillo
+  run:
+    - r-base
+    - r-rcpp >=0.12.8
+    - r-rcpparmadillo
+
+tests:
+  - script:
+      - R -e "library('ramcmc')"
+
+about:
+  license: GPL-2.0-only
+  summary: Function for adapting the shape of the random walk Metropolis proposal as specified
+    by robust adaptive Metropolis algorithm by Vihola (2012) <doi:10.1007/s11222-011-9269-5>.
+    The package also includes fast functions for rank-one Cholesky update and downdate.
+    These functions can be used directly from R or the corresponding C++ header files
+    can be easily linked to other R packages.
+  homepage: https://CRAN.R-project.org/package=ramcmc
+
