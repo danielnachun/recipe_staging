@@ -1,0 +1,45 @@
+schema_version: 1
+
+context:
+  version: "1.5"
+
+package:
+  name: r-adaptmcmc
+  version: ${{ version }}
+
+source:
+  url: https://cloud.r-project.org/src/contrib/adaptMCMC_${{ version }}.tar.gz
+  sha256: 8e3cfb614486e0dc75ea026d7a078d2ed241ee43bbce9fac78616561d318dcc6
+
+build:
+  number: 0
+  noarch: generic
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  host:
+    - r-base
+    - r-matrix
+    - r-coda
+    - r-ramcmc
+  run:
+    - r-base
+    - r-matrix
+    - r-coda
+    - r-ramcmc
+
+tests:
+  - script:
+      - R -e "library('adaptMCMC')"
+
+about:
+  license: GPL-2.0-only
+  summary: Enables sampling from arbitrary distributions if the log density is known up to a
+    constant; a common situation in the context of Bayesian inference. The implemented
+    sampling algorithm was proposed by Vihola (2012) <DOI:10.1007/s11222-011-9269-5>
+    and achieves often a high efficiency by tuning the proposal distributions to a user
+    defined acceptance rate.
+  homepage: https://github.com/scheidan/adaptMCMC
