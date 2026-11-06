@@ -1,0 +1,37 @@
+context:
+  version: 0.1.8
+
+package:
+  name: ff
+  version: ${{ version }}
+
+source:
+  url: https://github.com/vishaltelangre/ff/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: ee1ba83535302bab1858c331762b7f267371c816457ea814d20b96e1c83a79b9
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - cargo-bundle-licenses
+
+tests:
+  - script:
+      - ff --help
+
+about:
+  license: MIT
+  license_file:
+    - LICENSE-MIT
+    - THIRDPARTY.yml
+  summary: Find files (ff) by name, fast!
+  homepage: https://github.com/vishaltelangre/ff
+  repository: https://github.com/vishaltelangre/ff
+
+extra:
+  recipe-maintainers:
+    - danielnachun
