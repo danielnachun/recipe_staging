@@ -46,7 +46,7 @@ jobs:
   build_packages:
     needs: setup
     if: needs.setup.outputs.any_changed == 'true'
-    runs-on: macos-14
+    runs-on: macos-latest
     strategy:
       fail-fast: false
 
@@ -71,7 +71,7 @@ jobs:
           done
 
       - name: Build conda packages
-        shell: pixi exec --spec rattler-build=0.47.0 -- bash -e {0}
+        shell: pixi exec --spec rattler-build -- bash -e {0}
         run: |
           rattler-build build -c dnachun -c conda-forge -c bioconda \
             --output-dir /tmp/rattler-build --recipe-dir /tmp/recipes
