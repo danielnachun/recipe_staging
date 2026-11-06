@@ -1,0 +1,58 @@
+schema_version: 1
+
+context:
+  version: "0.1.1"
+
+package:
+  name: r-sparsevb
+  version: ${{ version }}
+
+source:
+  url:
+    - https://cloud.r-project.org/src/contrib/sparsevb_${{ version }}.tar.gz
+  sha256: 79f562228d60ac683f01f4e85d9adb65a69c358d2cb43d5b5b5d88ea5b3543d8
+
+build:
+  number: 0
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - ${{ stdlib('c') }}
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - make
+  host:
+    - r-base
+    - r-rcpp >=1.0.5
+    - r-rcpparmadillo
+    - r-rcppensmallen
+    - r-glmnet >=4.0_2
+    - r-selectiveinference >=1.2.5
+  run:
+    - r-base
+    - r-rcpp >=1.0.5
+    - r-rcpparmadillo
+    - r-rcppensmallen
+    - r-glmnet >=4.0_2
+    - r-selectiveinference >=1.2.5
+
+tests:
+  - script:
+      - R -e "library('sparsevb')"
+
+about:
+  license: GPL-3.0-only
+  summary: Implements variational Bayesian algorithms to perform scalable variable selection
+    for sparse, high-dimensional linear and logistic regression models. Features include
+    a novel prioritized updating scheme, which uses a preliminary estimator of the variational
+    means during initialization to generate an updating order prioritizing large, more
+    relevant, coefficients. Sparsity is induced via spike-and-slab priors with either
+    Laplace or Gaussian slabs. By default, the heavier-tailed Laplace density is used.
+    Formal derivations of the algorithms and asymptotic consistency results may be found
+    in Kolyan Ray and Botond Szabo (JASA 2020) and Kolyan Ray, Botond Szabo, and Gabriel
+    Clara (NeurIPS 2020).
+  homepage: https://CRAN.R-project.org/package=sparsevb
