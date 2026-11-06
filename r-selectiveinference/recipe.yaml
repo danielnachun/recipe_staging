@@ -1,0 +1,54 @@
+schema_version: 1
+
+context:
+  version: "1.2.5"
+
+package:
+  name: r-selectiveinference
+  version: ${{ version }}
+
+source:
+  url:
+    - https://cloud.r-project.org/src/contrib/selectiveInference_${{ version }}.tar.gz
+  sha256: 7096ae1729a85f8969481547ce675aa23b821c10f63b1cb30e8a5157dbbe7f1e
+
+build:
+  number: 0
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - ${{ stdlib('c') }}
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - make
+  host:
+    - r-base
+    - r-mass
+    - r-rcpp
+    - r-adaptmcmc
+    - r-glmnet
+    - r-intervals
+    - r-survival
+  run:
+    - r-base
+    - r-mass
+    - r-rcpp
+    - r-adaptmcmc
+    - r-glmnet
+    - r-intervals
+    - r-survival
+
+tests:
+  - script:
+      - R -e "library('selectiveInference')"
+
+about:
+  license: GPL-2.0-only
+  summary: New tools for post-selection inference, for use with forward stepwise regression,
+    least angle regression, the lasso, and the many means problem. The lasso function
+    implements Gaussian, logistic and Cox survival models.
+  homepage: https://CRAN.R-project.org/package=selectiveInference
