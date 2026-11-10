@@ -1,0 +1,41 @@
+schema_version: 1
+
+context:
+  version: "0.0.1.4"
+
+package:
+  name: r-ebpm
+  version: ${{ version }}
+
+source:
+  url: https://github.com/DongyueXie/ebpm/archive/588bc9f6da73dcb2baebc3342e11cb2a7150d11b.tar.gz
+  sha256: 26e12b7e80cc8e4c3dbe29c0b108e3ffd26aad81cc695c48e9951397f71e167a
+
+build:
+  number: 0
+  noarch: generic
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  host:
+    - r-base
+    - r-gtools
+    - r-mixsqp
+    - r-matrixstats
+  run:
+    - r-base
+    - r-gtools
+    - r-mixsqp
+    - r-matrixstats
+
+tests:
+  - script:
+      - R -e "library('ebpm')"
+
+about:
+  license: LicenseRef-Other
+  summary: R package to fit the "Empirical Bayes Poisson Means" model.
+  homepage: https://github.com/DongyueXie/ebpm
