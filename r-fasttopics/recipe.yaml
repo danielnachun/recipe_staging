@@ -1,0 +1,93 @@
+schema_version: 1
+
+context:
+  version: 0.7-38
+
+package:
+  name: r-fasttopics
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://cloud.r-project.org/src/contrib/fastTopics_${{ version }}.tar.gz
+  sha256: c5755bc22a3cc5ce32ef8da2c149ab082bae99a41c3c97f3d34bccbcb440bd50
+
+build:
+  number: 0
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - ${{ stdlib('c') }}
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - make
+  host:
+    - r-base
+    - r-matrix
+    - r-rcpp >=1.0.12
+    - r-rcpparmadillo
+    - r-rcppparallel >=5.1.7
+    - r-rhpcblasctl
+    - r-rtsne
+    - r-ashr
+    - r-cowplot
+    - r-dplyr
+    - r-ggplot2 >=3.3.0
+    - r-ggrepel >=0.9.0
+    - r-gtools
+    - r-htmlwidgets
+    - r-irlba
+    - r-pbapply
+    - r-plotly
+    - r-progress
+    - r-quadprog
+    - r-reshape2
+    - r-rlang
+    - r-uwot
+  run:
+    - r-base
+    - r-matrix
+    - r-rcpp >=1.0.12
+    - r-rcpparmadillo
+    - r-rcppparallel >=5.1.7
+    - r-rhpcblasctl
+    - r-rtsne
+    - r-ashr
+    - r-cowplot
+    - r-dplyr
+    - r-ggplot2 >=3.3.0
+    - r-ggrepel >=0.9.0
+    - r-gtools
+    - r-htmlwidgets
+    - r-irlba
+    - r-pbapply
+    - r-plotly
+    - r-progress
+    - r-quadprog
+    - r-reshape2
+    - r-rlang
+    - r-uwot
+
+tests:
+  - script:
+      - R -e "library('fastTopics')"
+
+about:
+  license: BSD-2-Clause
+  summary: Implements fast, scalable optimization algorithms for fitting topic models ("grade
+    of membership" models) and non-negative matrix factorizations to count data. The
+    methods exploit the special relationship between the multinomial topic model (also,
+    "probabilistic latent semantic indexing") and Poisson non-negative matrix factorization.
+    The package provides tools to compare, annotate and visualize model fits, including
+    functions to efficiently create "structure plots" and identify key features in topics.
+    The 'fastTopics' package is a successor to the 'CountClust' package. For more information,
+    see <doi:10.48550/arXiv.2105.13440> and <doi:10.1186/s13059-023-03067-9>. Please
+    also see the GitHub repository for additional vignettes not included in the package
+    on CRAN.
+  license_file:
+    - LICENSE
+  homepage: https://stephenslab.github.io/fastTopics/
+
