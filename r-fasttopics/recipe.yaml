@@ -29,7 +29,7 @@ requirements:
     - r-matrix
     - r-rcpp >=1.0.12
     - r-rcpparmadillo
-    - r-rcppparallel >=5.1.7
+    - r-rcppparallel >=5.1.7,<6.2.1
     - r-rhpcblasctl
     - r-rtsne
     - r-ashr
@@ -52,7 +52,7 @@ requirements:
     - r-matrix
     - r-rcpp >=1.0.12
     - r-rcpparmadillo
-    - r-rcppparallel >=5.1.7
+    - r-rcppparallel >=5.1.7,<6.2.1
     - r-rhpcblasctl
     - r-rtsne
     - r-ashr
@@ -70,6 +70,7 @@ requirements:
     - r-reshape2
     - r-rlang
     - r-uwot
+    - tbb-devel >=2023.0.0,<2023.1.1
 
 tests:
   - script:
