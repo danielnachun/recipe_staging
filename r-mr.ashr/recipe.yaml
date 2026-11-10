@@ -1,0 +1,55 @@
+context:
+  version: 0.1-90
+  name: mr.ashr
+
+package:
+  name: r-mr.ashr
+  version: ${{ version|replace("-", "_") }}
+
+source:
+  url: https://github.com/stephenslab/mr.ash/archive/3d65ce3564905170efee780511543f8c59352922.tar.gz
+  sha256: 8ec6f5d582152cbbfe386d714f70e3566593c798b5aaa3ff391ccc6b7d67fee5
+
+build:
+  number: 0
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - ${{ stdlib('c') }}
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - sed
+  host:
+    - if: linux
+      then: libgomp
+      else: llvm-openmp
+    - libblas
+    - liblapack
+    - r-base
+    - r-glmnet
+    - r-matrix
+    - r-rcpp
+    - r-rcpparmadillo
+  run:
+    - if: linux
+      then: libgomp
+      else: llvm-openmp
+    - r-base
+    - r-glmnet
+    - r-matrix
+    - r-rcpp
+    - r-rcpparmadillo
+
+tests:
+  - script:
+      - R -e "library('mr.ashr')"
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: R package implementing methods for multiple regression with adaptive shrinkage priors ("mr.ash").
+  homepage: https://github.com/stephenslab/mr.ashr
