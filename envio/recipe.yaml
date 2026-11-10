@@ -1,0 +1,42 @@
+context:
+  version: 0.6.1
+
+package:
+  name: envio
+  version: ${{ version }}
+
+source:
+  url: https://github.com/humblepenguinn/envio/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: 24cd7c485226be7f7921a95ae4edaf3cb510c90a339c51e51423c3eb4deee6dc
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('rust') }}
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - cargo-bundle-licenses
+    - pkg-config
+  host:
+    - gpgme
+    - libgpg-error
+
+tests:
+  - script:
+      - envio --help
+
+about:
+  license: Apache-2.0 AND MIT
+  license_file:
+    - LICENSE-APACHE
+    - LICENSE-MIT
+    - THIRDPARTY.yml
+  summary: A secure command-line tool for managing environment variables
+  homepage: https://github.com/humblepenguinn/envio
+  repository: https://github.com/humblepenguinn/envio
+
+extra:
+  recipe-maintainers:
+    - danielnachun
