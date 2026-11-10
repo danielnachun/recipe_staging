@@ -1,0 +1,65 @@
+schema_version: 1
+
+context:
+  version: "0.2.0"
+
+package:
+  name: r-torino
+  version: ${{ version }}
+
+source:
+  url: https://github.com/cfbuenabadn/torino/archive/ef669c0ae642946fbdcf08311b52fa42498c830a.tar.gz
+  sha256: 134fc60ba1fd73b7157fdc346a5f7664f5a2196c3c122d9f9957550f2fc2e6c8
+
+build:
+  number: 0
+  noarch: generic
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  host:
+    - r-ashr
+    - r-base
+    - r-ebnm
+    - r-ebpm
+    - r-fasttopics
+    - r-flashier
+    - r-magrittr
+    - r-matrix
+    - r-matrixstats
+    - r-mixsqp
+    - r-readr
+    - r-rfast
+    - r-smashr
+    - r-smashrgen
+    - r-vebpm
+    - r-wavethresh
+  run:
+    - r-ashr
+    - r-base
+    - r-ebnm
+    - r-ebpm
+    - r-fasttopics
+    - r-flashier
+    - r-magrittr
+    - r-matrix
+    - r-matrixstats
+    - r-mixsqp
+    - r-readr
+    - r-rfast
+    - r-smashr
+    - r-smashrgen
+    - r-vebpm
+    - r-wavethresh
+
+tests:
+  - script:
+      - R -e "library('torino')"
+
+about:
+  license: MIT
+  summary: Reference-free analysis of mRNA isoform variation in large-scale RNA-seq datasets
+  homepage: https://github.com/cfbuenabadn/torino
