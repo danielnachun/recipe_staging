@@ -1,0 +1,39 @@
+schema_version: 1
+
+context:
+  version: "0.5.0"
+
+package:
+  name: r-vebpm
+  version: ${{ version }}
+
+source:
+  url: https://github.com/DongyueXie/vebpm/archive/5a4b464ab1df8c69ccd59c03bb292bf056181f9b.tar.gz
+  sha256: e543137e5892f0f1024eca0be45474260555ba48e7c197d40ff0f03d794e740a
+
+build:
+  number: 0
+  noarch: generic
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  host:
+    - r-base
+    - r-ebnm
+    - r-nloptr
+  run:
+    - r-base
+    - r-ebnm
+    - r-nloptr
+
+tests:
+  - script:
+      - R -e "library('vebpm')"
+
+about:
+  license: MIT
+  summary: Solve Variational Empirical Bayes Poisson Mean problems
+  homepage: https://github.com/DongyueXie/vebpm
