@@ -1,0 +1,36 @@
+context:
+  version: 2.0.2
+
+package:
+  name: librtlsdr
+  version: ${{ version }}
+
+source:
+  url: https://github.com/steve-m/librtlsdr/archive/v${{ version }}.tar.gz
+  sha256: f407de0b6dce19e81694814e363e8890b6ab2c287c8d64c27a03023e5702fb42
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - cmake
+    - make
+  host:
+    - libusb
+
+tests:
+  - script:
+      - test -f ${PREFIX}/lib/librtlsdr${SHLIB_EXT}
+
+about:
+  license: GPL-2.0-or-later
+  license_file: COPYING
+  summary: Use Realtek DVB-T dongles as a cheap SDR
+  homepage: https://osmocom.org/projects/rtl-sdr/wiki
+  repository: https://github.com/steve-m/librtlsdr
+
+extra:
+  recipe-maintainers:
+    - danielnachun
