@@ -20,6 +20,8 @@ build:
       - lib/
 
 requirements:
+  build:
+    - sed
   host:
     - r-ashr
     - r-base
