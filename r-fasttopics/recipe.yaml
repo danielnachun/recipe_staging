@@ -29,7 +29,7 @@ requirements:
     - r-matrix
     - r-rcpp >=1.0.12
     - r-rcpparmadillo
-    - r-rcppparallel >=5.1.7,<6.2.1
+    - r-rcppparallel >=5.1.7,<6
     - r-rhpcblasctl
     - r-rtsne
     - r-ashr
@@ -52,7 +52,7 @@ requirements:
     - r-matrix
     - r-rcpp >=1.0.12
     - r-rcpparmadillo
-    - r-rcppparallel >=5.1.7,<6.2.1
+    - r-rcppparallel >=5.1.7,<6
     - r-rhpcblasctl
     - r-rtsne
     - r-ashr
