@@ -1,0 +1,33 @@
+schema_version: 1
+
+context:
+  version: "0.7"
+
+package:
+  name: r-daarem
+  version: ${{ version }}
+
+source:
+  url: https://cloud.r-project.org/src/contrib/daarem_${{ version }}.tar.gz
+  sha256: fdb8ce15992b1274a63d236b6f34b83f9422114a0b1e94afb42830e788b4a8de
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - r-base
+  run:
+    - r-base
+
+tests:
+  - script:
+      - R -e "library('daarem')"
+
+about:
+  license: GPL-2.0-only
+  summary: Implements the DAAREM method for accelerating the convergence of slow, monotone sequences
+    from smooth, fixed-point iterations such as the EM algorithm. For further details
+    about the DAAREM method, see Henderson, N.C. and Varadhan, R. (2019) <doi:10.1080/10618600.2019.1594835>.
+  homepage: https://doi.org/10.1080/10618600.2019.1594835
