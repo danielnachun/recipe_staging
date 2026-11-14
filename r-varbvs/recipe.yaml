@@ -11,7 +11,7 @@ source:
   sha256: eea04a66c0419b9a0ba1a2d26efa0b446b43951298c9d988d063905f4351566a
 
 build:
-  number: 0
+  number: 1
   dynamic_linking:
     rpaths:
       - lib/R/lib/
@@ -19,8 +19,8 @@ build:
 
 requirements:
   build:
-    - ${{ compiler('c') }}
     - ${{ stdlib('c') }}
+    - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
     - make
   host:
