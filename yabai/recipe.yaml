@@ -6,11 +6,11 @@ package:
   version: ${{ version }}
 
 source:
-  url: https://github.com/ImTheSquid/yabai/archive/3b463fc436829a936095ec6a9facf2de5faab680.tar.gz
-  sha256: 6a1cf091a867ca377a4d02a235b592b1c7f86598c32f0c908da33c6875c82897
+  url: https://github.com/asmvik/yabai/archive/b2dc8b4c892d74738a6e865d73048ed2dc3c9ed1.tar.gz
+  sha256: fbb51123c45cb32ef19d94b50f70345c84f63b2959d9165e27ba4d5d0076d2a7
 
 build:
-  number: 1
+  number: 2
   skip: not osx
 
 requirements:
