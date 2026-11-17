@@ -6,8 +6,8 @@ package:
   version: ${{ version }}
 
 source:
-  url: https://github.com/asmvik/yabai/archive/b2dc8b4c892d74738a6e865d73048ed2dc3c9ed1.tar.gz
-  sha256: fbb51123c45cb32ef19d94b50f70345c84f63b2959d9165e27ba4d5d0076d2a7
+  url: https://github.com/AhsanFazal/yabai/archive/ad8d5adfdc39c76399599ae79a264f2525f6ca5e.tar.gz
+  sha256: 6902004ccb7d734c4473df2b95131c9894c5b07490357b45cc7ed6a99844bd99
 
 build:
   number: 2
