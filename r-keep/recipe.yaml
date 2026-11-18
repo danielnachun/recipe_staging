@@ -1,0 +1,32 @@
+schema_version: 1
+
+context:
+  version: "1.0"
+
+package:
+  name: r-keep
+  version: ${{ version }}
+
+source:
+  url: https://cloud.r-project.org/src/contrib/keep_${{ version }}.tar.gz
+  sha256: 4eaed49d4a5fe470c906435de119e9f4681a5c98302a6c762669279d211c0089
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  host:
+    - r-base
+  run:
+    - r-base
+
+tests:
+  - script:
+      - R -e "library('keep')"
+
+about:
+  license: GPL-3.0-only
+  summary: Provides arrays with flexible control over dimension dropping when subscripting.
+  homepage: https://CRAN.R-project.org/package=keep
+
