@@ -1,0 +1,67 @@
+schema_version: 1
+
+context:
+  version: "0.4.11"
+
+package:
+  name: r-abess
+  version: ${{ version }}
+
+source:
+  url: https://cloud.r-project.org/src/contrib/abess_${{ version }}.tar.gz
+  sha256: 44bf69f7504bbd48630af714e8f400f1138753e307fee1dc14db8fab7fe7a31c
+
+build:
+  number: 0
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  build:
+    - ${{ stdlib('c') }}
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - autoconf
+    - automake
+    - pkg-config
+    - make
+    - sed
+  host:
+    - if: osx
+      then: llvm-openmp
+      else: libgomp
+    - r-base
+    - r-mass
+    - r-matrix
+    - r-rcpp
+    - r-rcppeigen
+    - r-igraph
+  run:
+    - r-base
+    - r-mass
+    - r-matrix
+    - r-rcpp
+    - r-rcppeigen
+    - r-igraph
+
+tests:
+  - script:
+      - R -e "library('abess')"
+
+about:
+  license: GPL-3.0-or-later
+  summary: Extremely efficient toolkit for solving the best subset selection problem <https://www.jmlr.org/papers/v23/21-1060.html>.
+    This package is its R interface. The package implements and generalizes algorithms
+    designed in <doi:10.1073/pnas.2014241117> that exploits a novel sequencing-and-splicing
+    technique to guarantee exact support recovery and globally optimal solution in polynomial
+    times for linear model. It also supports best subset selection for logistic regression,
+    Poisson regression, Cox proportional hazard model, Gamma regression, multiple-response
+    regression, multinomial logistic regression, ordinal regression, Ising model reconstruction
+    <doi:10.1080/01621459.2025.2571245>, (sequential) principal component analysis,
+    and robust principal component analysis. The other valuable features such as the
+    best subset of group selection <doi:10.1287/ijoc.2022.1241> and sure independence
+    screening <doi:10.1111/j.1467-9868.2008.00674.x> are also provided.
+  homepage: https://github.com/abess-team/abess, https://abess-team.github.io/abess/, https://abess.readthedocs.io
+
