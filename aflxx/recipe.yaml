@@ -1,0 +1,49 @@
+context:
+  version: 4.32c
+
+package:
+  name: aflxx
+  version: ${{ version }}
+
+source:
+  url: https://github.com/AFLplusplus/AFLplusplus/archive/v${{ version }}.tar.gz
+  sha256: dc7f59a11ce8cf67a3ed09a5ac78028c6f793b239b21fd83e5b2370cea166926
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - ${{ compiler('rust') }}
+    - coreutils
+    - cpio
+    - llvmdev
+    - make
+    - sed
+    - if: linux
+      then:
+        - binutils
+  host:
+    - cmocka
+    - gmp
+    - libcapstone
+    - python
+    - zlib
+  run:
+    - python
+
+tests:
+  - script:
+      - afl-clang++ 2>&1 | grep -q "Please set the AFL_PATH environment variable."
+
+about:
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: American Fuzzy Lop++
+  homepage: https://github.com/AFLplusplus/AFLplusplus
+
+extra:
+  recipe-maintainers:
+    - danielnachun
